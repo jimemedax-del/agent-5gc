@@ -14,15 +14,20 @@
 
 正式Chart基线为`free5gc-helm v4.2.2`提交`0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c`，应用`patches/free5gc-helm-v4.2.2-single-upf.patch`后再传入受控Values。`tmp/`只是本地验证副本，不进入Git。
 
+MongoDB Values 显式禁用上游默认的 `install-tini` init container，改用镜像原生 entrypoint，避免实验 Pod 在启动时依赖 Debian 软件源。
+
+CHF 保持启用，但 Values 关闭其默认的 CGF FTP CDR 导出。该导出目标不属于本实验环境，连接超时会同步阻塞会话创建并使 AMF 的 PDU Session 请求超时；关闭它不影响 CHF 的 SBI API、订阅策略或本实验的用户面验证。
+
 测试订阅中的身份和密钥仅用于公开实验配置，禁止用于真实网络。任何K3s令牌、SSH密钥、Tailscale Auth Key或访问令牌都不得保存在本目录。
 
 三节点部署时，必须先传入对应的单节点基线文件，再传入放置覆盖文件。例如：
 
 ```bash
 helm upgrade --install free5gc-helm <fixed-chart-path> -n free5gc \
+  --reset-values \
   -f infra/free5gc-single-upf-values.yaml \
   -f infra/free5gc-multinode-placement-values.yaml \
-  --dry-run
+  --atomic --wait --timeout 10m
 ```
 
-在渲染结果明确显示控制面位于VM1、UPF位于VM2且UERANSIM位于VM3之前，不执行真实的`helm upgrade`。`local-path` MongoDB PV不跨节点迁移。
+先使用同一命令加`--dry-run`检查渲染结果，再执行真实升级。`--reset-values`是必须项：Helm 的历史 Values 可能保留旧数组或旧配置。渲染结果应显示控制面位于VM1、UPF位于VM2且UERANSIM位于VM3。`local-path` MongoDB PV不跨节点迁移。

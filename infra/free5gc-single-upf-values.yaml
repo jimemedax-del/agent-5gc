@@ -16,11 +16,28 @@ global:
 deployN3iwf: false
 deployDbPython: false
 
+# The Helm chart enables CHF's CGF FTP export by default.  It targets a
+# WebUI-billing endpoint that is not deployed in this MVP and can block the
+# synchronous charging request long enough for AMF's PDU-session request to
+# time out.  Keep CHF itself enabled; disable only that external CDR export.
+free5gc-chf:
+  chf:
+    cgf:
+      enabled: false
+
 # k3s includes the local-path storage class.
 mongodb:
   persistence:
     storageClass: local-path
     size: 6Gi
+  # The upstream MongoDB subchart defaults to an init container that installs
+  # tini from a Debian mirror at Pod start. Keep the experiment reproducible
+  # when Pod egress is unavailable by using the image's native entrypoint.
+  initContainers: []
+  command: []
+  args: []
+  extraVolumeMounts: []
+  extraVolumes: []
 
 # The upstream SMF subchart defaults to an ULCL graph even when global
 # userPlaneArchitecture is single. Override only its topology; retain v4.2.2 image.

@@ -10,8 +10,9 @@
 - [已验证] VM2 已加载 `gtp5g v0.9.5`，并通过 `/etc/modules-load.d/gtp5g.conf` 配置开机加载。VM3 尚未安装/加载 `gtp5g`，首轮仅承担 UERANSIM 测试角色。
 - [已验证] 从 VM2、VM3 调度的普通 Pod 均能访问 VM1 的 CoreDNS Pod、解析 Kubernetes DNS，并连接 `kubernetes.default.svc` 的 `10.43.0.1:443`。
 - [已验证] Docker Hub 曾在 VM2 被阻断；调整 VPN 后，VM2 与 VM3 访问 `https://registry-1.docker.io/v2/` 均返回预期的 `HTTP 401`，可用于拉取公开镜像。
-- [已验证] 固定提交、受控补丁、单节点基线 Values 与多节点放置覆盖组合后，free5GC 和 UERANSIM Chart 均通过 `helm lint` 与 `helm template`；尚未执行 Helm upgrade。
-- [未迁移] 现有 `free5gc-helm` 与 `ueransim` Release 仍运行在 VM1；尚未执行多节点 Helm upgrade。
+- [已验证] 固定提交、受控补丁、单节点基线 Values 与多节点放置覆盖组合后，free5GC 和 UERANSIM Chart 均通过 `helm lint` 与 `helm template`。
+- [已验证] 已真实完成多节点迁移：控制面 NF 与 MongoDB 位于 VM1，UPF 位于 VM2，gNB/UE 位于 VM3；`free5gc-helm` 为 Revision 11、`ueransim` 为 Revision 3，均为 `deployed`。
+- [已验证] UE 已完成注册、鉴权和 PDU Session，获得 `uesimtun0 (10.60.0.4/16)`；绑定该接口对 `1.1.1.1` 的 10 包测试为 10/10 成功（平均 RTT 270.617 ms）。
 - [边界] Tailscale只用于远程管理。k3s节点间通信优先使用VMware局域网，避免把Kubernetes覆盖网络再次套入Tailscale隧道。
 - [边界] 三台VM位于同一宿主机和虚拟交换网络，天然时延几乎相同；后续必须使用独立VMnet或`tc netem`构造受控的core/edge路径差异。
 
@@ -74,7 +75,10 @@ VM3:
 5. VM3 加入 VM1；节点名固定为 `ran-test`，InternalIP 为 `192.168.244.130`，并授予 RAN 测试和 `edge` 标签。
 6. 在 VM3 调度探针 Pod，跨节点 Ping、DNS 与 Kubernetes Service TCP 连通性均通过。
 7. 加入过程中使用的 join token、临时二进制文件和临时 HTTP 文件服务均已清理，token 未写入仓库。
-8. 已新增多节点放置覆盖文件并完成固定 Chart 提交的渲染预演：控制面/数据库渲染到 VM1，UPF 渲染到 VM2，gNB/UE 渲染到 VM3；未执行真实升级。
+8. 已新增多节点放置覆盖文件并完成固定 Chart 提交的渲染预演：控制面/数据库渲染到 VM1，UPF 渲染到 VM2，gNB/UE 渲染到 VM3。
+9. 已执行真实 Helm 升级：控制面与 MongoDB 固定在 VM1，UPF 在 VM2，UERANSIM gNB/UE 在 VM3。SMF 与 UPF 的 PFCP Association、UE 注册、PDU Session 和数据面均通过。
+10. 迁移中发现 MongoDB 默认 `install-tini` init container 依赖 Debian 软件源，已用 Values 禁用；同时发现 CHF 默认 CGF FTP 导出会阻塞会话创建，已保留 CHF API 但关闭该实验范围外的 CGF 导出。二者均已固化为可复现配置。
+11. UPF Pod 重建后，SMF 曾在启动时缓存旧的 Headless Service Pod IP；重启 SMF 使其重新解析 UPF IP 后恢复。该现象说明当前动态 Pod-IP 方案不具备 UPF 无损迁移能力，后续应以重新建会为验收边界。
 
 ## 实施顺序
 
@@ -83,7 +87,7 @@ VM3:
 3. [部分完成] VM2 已安装并验证 `gtp5g v0.9.5`；VM3 暂不需要该模块，转为 edge-UPF 前再完成安装验证。
 4. [完成] 使用 VM1 的 VMware 局域网地址作为 Server 地址，将 VM2、VM3 加入集群；join token 未进入仓库。
 5. [完成] 设置节点标签，并完成跨节点 Pod、DNS 和 Kubernetes Service 连通性验证。
-6. [完成（仅渲染）] 已创建并渲染多节点覆盖文件：控制面与 MongoDB 固定 VM1、UPF 固定 VM2、UERANSIM 固定 VM3。下一步才是带原子回滚的真实 Helm upgrade 与端到端复验。
+6. [完成] 已使用原子 Helm 升级完成真实多节点部署：控制面与 MongoDB 固定 VM1、UPF 固定 VM2、UERANSIM 固定 VM3；端到端复验通过。
 7. [后续] 完成端到端业务验收后，将 UPF 改放 VM3；此前需先为 VM3 安装 `gtp5g`。
 8. [后续] 跨节点单网络基线稳定后，再增加 Multus、第二 vNIC 和独立 N6 网络。
 
@@ -93,13 +97,13 @@ VM3:
 
 ```text
 集群层：[已通过] 3个Node均Ready，节点IP使用VMware局域网，系统Pod稳定
-放置层：控制面NF在VM1，UPF只在指定的VM2或VM3
-内核层：UPF所在节点已加载gtp5g，另一候选节点也具备该能力
-控制面：NF注册成功，SMF与UPF完成PFCP Association
-接入层：gNB与AMF完成SCTP和NG Setup
-业务层：UE完成鉴权、注册和PDU Session，创建uesimtun0
-用户面：绑定uesimtun0访问测试数据网络成功
-可重复性：UPF放置从core切到edge后，能够重新完成同一套验收
+放置层：[已通过] 控制面NF在VM1，UPF在VM2，UERANSIM在VM3
+内核层：[已通过] VM2已加载gtp5g；VM3转为UPF候选前仍需安装验证
+控制面：[已通过] NF注册成功，SMF与UPF完成PFCP Association
+接入层：[已通过] gNB与AMF完成SCTP和NG Setup
+业务层：[已通过] UE完成鉴权、注册和PDU Session，创建uesimtun0
+用户面：[已通过] 绑定uesimtun0 Ping 1.1.1.1为10/10成功
+可重复性：[后续] UPF放置从core切到edge后，重新完成同一套验收；不以无损迁移作为当前目标
 ```
 
 ## 网络后续工作

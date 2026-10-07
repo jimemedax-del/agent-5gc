@@ -35,6 +35,31 @@ index 46c04b6..b17bbfe 100644
  
      echo "[wrapper] Configuration files prepared in /tmp"
      echo "[wrapper] SMF PFCP config:"
+diff --git a/charts/free5gc/charts/free5gc-chf/templates/chf-configmap.yaml b/charts/free5gc/charts/free5gc-chf/templates/chf-configmap.yaml
+--- a/charts/free5gc/charts/free5gc-chf/templates/chf-configmap.yaml
++++ b/charts/free5gc/charts/free5gc-chf/templates/chf-configmap.yaml
+@@ -50,7 +50,7 @@ data:
+       volumeThresholdRate: 0.8
+ 
+       cgf:
+-        enable: true
++        enable: {{ .cgf.enabled }}
+         hostIPv4: {{ $.Values.global.webui.service.name }}
+         port: {{ $.Values.global.webui.service.port }}
+         listenPort: {{ $.Values.global.cgf.service.port }}
+diff --git a/charts/free5gc/charts/free5gc-chf/values.yaml b/charts/free5gc/charts/free5gc-chf/values.yaml
+--- a/charts/free5gc/charts/free5gc-chf/values.yaml
++++ b/charts/free5gc/charts/free5gc-chf/values.yaml
+@@ -45,6 +45,9 @@ chf:
+   name: chf
+   replicaCount: 1
+   image:
+     name: free5gc/chf
++  cgf:
++    # CDR FTP export is optional; the default preserves upstream behaviour.
++    enabled: true
+   service:
+     type: ClusterIP
 diff --git a/charts/ueransim/templates/gnb/gnb-deployment.yaml b/charts/ueransim/templates/gnb/gnb-deployment.yaml
 index 3601d62..faab83a 100644
 --- a/charts/ueransim/templates/gnb/gnb-deployment.yaml
@@ -67,4 +92,3 @@ index 67850e7..0396134 100644
    name: gnb
    replicaCount: 1
    image:
-
