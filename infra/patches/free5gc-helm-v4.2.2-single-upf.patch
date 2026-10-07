@@ -1,0 +1,70 @@
+diff --git a/charts/free5gc/charts/free5gc-smf/templates/smf-configmap.yaml b/charts/free5gc/charts/free5gc-smf/templates/smf-configmap.yaml
+index 46c04b6..b17bbfe 100644
+--- a/charts/free5gc/charts/free5gc-smf/templates/smf-configmap.yaml
++++ b/charts/free5gc/charts/free5gc-smf/templates/smf-configmap.yaml
+@@ -195,6 +195,24 @@ data:
+     # This ensures SMF's nodeID matches what UPF reports in PFCP responses
+     echo "[wrapper] Resolving UPF Pod IPs from Headless Services..."
+ 
++{{- if eq $.Values.global.userPlaneArchitecture "single" }}
++    # Single-UPF mode: resolve the one deployed UPF.
++    UPF_IP=""
++    for i in 1 2 3 4 5 6 7 8 9 10; do
++      UPF_IP=$(getent hosts {{ $.Release.Name }}-free5gc-upf-upf-service 2>/dev/null | awk '{print $1}' | head -1)
++      if [ -n "$UPF_IP" ]; then
++        break
++      fi
++      echo "[wrapper] Waiting for single UPF DNS resolution... attempt $i"
++      sleep 3
++    done
++    if [ -z "$UPF_IP" ]; then
++      echo "[wrapper] ERROR: single UPF DNS resolution failed"
++      exit 1
++    fi
++    sed -i "s/UPF_SERVICE_NAME/$UPF_IP/g" /tmp/smfcfg.yaml
++    echo "[wrapper] Single UPF Pod IP: $UPF_IP"
++{{- else }}
+     # Resolve headless service names to Pod IPs with extended retry
+     IUPF1_IP=""
+     PSAUPF1_IP=""
+@@ -230,6 +248,7 @@ data:
+     sed -i "s/IUPF1_SERVICE_NAME/$IUPF1_IP/g" /tmp/smfcfg.yaml
+     sed -i "s/PSAUPF1_SERVICE_NAME/$PSAUPF1_IP/g" /tmp/smfcfg.yaml
+     sed -i "s/PSAUPF2_SERVICE_NAME/$PSAUPF2_IP/g" /tmp/smfcfg.yaml
++{{- end }}
+ 
+     echo "[wrapper] Configuration files prepared in /tmp"
+     echo "[wrapper] SMF PFCP config:"
+diff --git a/charts/ueransim/templates/gnb/gnb-deployment.yaml b/charts/ueransim/templates/gnb/gnb-deployment.yaml
+index 3601d62..faab83a 100644
+--- a/charts/ueransim/templates/gnb/gnb-deployment.yaml
++++ b/charts/ueransim/templates/gnb/gnb-deployment.yaml
+@@ -56,6 +56,7 @@ spec:
+         {{- toYaml .imagePullSecrets | nindent 8 }}
+       securityContext:
+         {{- toYaml .podSecurityContext | nindent 8 }}
++{{- if .waitForAmf }}
+       initContainers:
+       - name: wait-amf
+         {{- with $.Values.initcontainers.sctp_test }}
+@@ -65,6 +66,7 @@ spec:
+         command: ["sh", "-c", "until sctp_test -s -H 0.0.0.0 -P 25000 -h {{ .amf.n2if.ipAddress }} -p {{ .amf.n2if.port }}; do echo waiting for the AMF; sleep 2; done;"]
+ {{- else }}
+         command: ["sh", "-c", "until sctp_test -s -H 0.0.0.0 -P 25000 -h {{ $.Values.global.free5gcReleaseName }}-{{ .amf.n2if.serviceName }} -p {{ .amf.n2if.port }}; do echo waiting for the AMF; sleep 2; done;"]
++{{- end }}
+ {{- end }}
+       containers:
+       - image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
+diff --git a/charts/ueransim/values.yaml b/charts/ueransim/values.yaml
+index 67850e7..0396134 100644
+--- a/charts/ueransim/values.yaml
++++ b/charts/ueransim/values.yaml
+@@ -48,6 +48,7 @@ initcontainers:
+ 
+ gnb:
+   enabled: true
++  waitForAmf: true
+   name: gnb
+   replicaCount: 1
+   image:
+

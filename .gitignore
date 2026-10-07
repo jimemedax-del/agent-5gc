@@ -1,0 +1,8 @@
+.ssh/
+.vscode/
+.work/
+tmp/
+*.log
+*.tar
+*.tar.gz
+__pycache__/

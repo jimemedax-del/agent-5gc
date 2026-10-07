@@ -1,0 +1,87 @@
+# free5gc-helm v4.2.2 (commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c)
+# One-node VMware baseline: one UPF, one CNI interface, no Multus.
+global:
+  userPlaneArchitecture: single
+  amf:
+    multus:
+      enabled: false
+  smf:
+    multus:
+      enabled: false
+  upf:
+    multus:
+      enabled: false
+
+# Keep the chart's default required NFs and WebUI for subscriber provisioning.
+deployN3iwf: false
+deployDbPython: false
+
+# k3s includes the local-path storage class.
+mongodb:
+  persistence:
+    storageClass: local-path
+    size: 6Gi
+
+# The upstream SMF subchart defaults to an ULCL graph even when global
+# userPlaneArchitecture is single. Override only its topology; retain v4.2.2 image.
+free5gc-smf:
+  smf:
+    configuration:
+      configuration: |-
+        smfName: SMF
+        snssaiInfos:
+          - sNssai:
+              sst: 1
+              sd: 010203
+            dnnInfos:
+              - dnn: internet
+                dnaiList:
+                  - mec
+                dns:
+                  ipv4: 8.8.8.8
+                  ipv6: 2001:4860:4860::8888
+        plmnList:
+          - mcc: "208"
+            mnc: "93"
+        userplaneInformation:
+          upNodes:
+            gNB1:
+              type: AN
+            UPF:
+              type: UPF
+              nodeID: UPF_SERVICE_NAME
+              sNssaiUpfInfos:
+                - sNssai:
+                    sst: 1
+                    sd: 010203
+                  dnnUpfInfoList:
+                    - dnn: internet
+                      pools:
+                        - cidr: 10.60.0.0/16
+                      dnaiList:
+                        - mec
+              interfaces:
+                - interfaceType: N3
+                  endpoints:
+                    - UPF_SERVICE_NAME
+                  networkInstances:
+                    - internet
+          links:
+            - A: gNB1
+              B: UPF
+        locality: area1
+        t3591:
+          enable: true
+          expireTime: 16s
+          maxRetryTimes: 3
+        t3592:
+          enable: true
+          expireTime: 16s
+          maxRetryTimes: 3
+      ueRoutingInfo: |-
+        UE1:
+          members:
+            - imsi-208930000000001
+          topology:
+            - A: gNB1
+              B: UPF
