@@ -10,6 +10,7 @@
 - [已验证] VM2 已加载 `gtp5g v0.9.5`，并通过 `/etc/modules-load.d/gtp5g.conf` 配置开机加载。VM3 尚未安装/加载 `gtp5g`，首轮仅承担 UERANSIM 测试角色。
 - [已验证] 从 VM2、VM3 调度的普通 Pod 均能访问 VM1 的 CoreDNS Pod、解析 Kubernetes DNS，并连接 `kubernetes.default.svc` 的 `10.43.0.1:443`。
 - [已验证] Docker Hub 曾在 VM2 被阻断；调整 VPN 后，VM2 与 VM3 访问 `https://registry-1.docker.io/v2/` 均返回预期的 `HTTP 401`，可用于拉取公开镜像。
+- [已验证] 固定提交、受控补丁、单节点基线 Values 与多节点放置覆盖组合后，free5GC 和 UERANSIM Chart 均通过 `helm lint` 与 `helm template`；尚未执行 Helm upgrade。
 - [未迁移] 现有 `free5gc-helm` 与 `ueransim` Release 仍运行在 VM1；尚未执行多节点 Helm upgrade。
 - [边界] Tailscale只用于远程管理。k3s节点间通信优先使用VMware局域网，避免把Kubernetes覆盖网络再次套入Tailscale隧道。
 - [边界] 三台VM位于同一宿主机和虚拟交换网络，天然时延几乎相同；后续必须使用独立VMnet或`tc netem`构造受控的core/edge路径差异。
@@ -73,6 +74,7 @@ VM3:
 5. VM3 加入 VM1；节点名固定为 `ran-test`，InternalIP 为 `192.168.244.130`，并授予 RAN 测试和 `edge` 标签。
 6. 在 VM3 调度探针 Pod，跨节点 Ping、DNS 与 Kubernetes Service TCP 连通性均通过。
 7. 加入过程中使用的 join token、临时二进制文件和临时 HTTP 文件服务均已清理，token 未写入仓库。
+8. 已新增多节点放置覆盖文件并完成固定 Chart 提交的渲染预演：控制面/数据库渲染到 VM1，UPF 渲染到 VM2，gNB/UE 渲染到 VM3；未执行真实升级。
 
 ## 实施顺序
 
@@ -81,7 +83,7 @@ VM3:
 3. [部分完成] VM2 已安装并验证 `gtp5g v0.9.5`；VM3 暂不需要该模块，转为 edge-UPF 前再完成安装验证。
 4. [完成] 使用 VM1 的 VMware 局域网地址作为 Server 地址，将 VM2、VM3 加入集群；join token 未进入仓库。
 5. [完成] 设置节点标签，并完成跨节点 Pod、DNS 和 Kubernetes Service 连通性验证。
-6. [下一步] 导出当前 Helm Values，创建并渲染多节点覆盖文件：控制面与 MongoDB 固定 VM1、UPF 固定 VM2、UERANSIM 固定 VM3。
+6. [完成（仅渲染）] 已创建并渲染多节点覆盖文件：控制面与 MongoDB 固定 VM1、UPF 固定 VM2、UERANSIM 固定 VM3。下一步才是带原子回滚的真实 Helm upgrade 与端到端复验。
 7. [后续] 完成端到端业务验收后，将 UPF 改放 VM3；此前需先为 VM3 安装 `gtp5g`。
 8. [后续] 跨节点单网络基线稳定后，再增加 Multus、第二 vNIC 和独立 N6 网络。
 
