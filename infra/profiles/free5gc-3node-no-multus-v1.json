@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "profileId": "free5gc-3node-no-multus-v1",
+  "description": "Verified three-node Single-UPF baseline; no Multus, no HPA, no seamless migration.",
+  "namespace": "free5gc",
+  "platform": "linux/amd64",
+  "coreVersion": "v4.2.2",
+  "ran": {"imageVersion": "v4.0.1", "ueransimVersionObserved": "v3.2.7"},
+  "chart": {
+    "repository": "https://github.com/free5gc/free5gc-helm.git",
+    "commit": "0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c",
+    "patch": "infra/patches/free5gc-helm-v4.2.2-single-upf.patch",
+    "treeSha256LF": "63776c98fd083d8bc570461c82d68446064da103171e3999e295319bdbbeb929"
+  },
+  "releases": [
+    {"name": "free5gc-helm", "chartPath": "charts/free5gc", "values": [
+      "infra/free5gc-single-upf-values.yaml",
+      "infra/free5gc-multinode-placement-values.yaml",
+      "infra/free5gc-upf-nilfix-values.yaml"
+    ]},
+    {"name": "ueransim", "chartPath": "charts/ueransim", "values": [
+      "infra/ueransim-single-node-values.yaml",
+      "infra/ueransim-multinode-placement-values.yaml",
+      "infra/ueransim-iperf3-values.yaml"
+    ]}
+  ],
+  "roles": {
+    "control": {"5gc.free5gc.org/plane": "control"},
+    "user": {"5gc.free5gc.org/plane": "user", "5gc.free5gc.org/gtp5g": "true"},
+    "ran": {"5gc.free5gc.org/role": "ran-test"}
+  },
+  "workloads": {
+    "free5gc-helm-free5gc-amf-amf": {"role": "control", "component": "AMF"},
+    "free5gc-helm-free5gc-ausf-ausf": {"role": "control", "component": "AUSF"},
+    "free5gc-helm-free5gc-chf-chf": {"role": "control", "component": "CHF"},
+    "free5gc-helm-free5gc-nef-nef": {"role": "control", "component": "NEF"},
+    "free5gc-helm-free5gc-nrf-nrf": {"role": "control", "component": "NRF"},
+    "free5gc-helm-free5gc-nssf-nssf": {"role": "control", "component": "NSSF"},
+    "free5gc-helm-free5gc-pcf-pcf": {"role": "control", "component": "PCF"},
+    "free5gc-helm-free5gc-smf-smf": {"role": "control", "component": "SMF"},
+    "free5gc-helm-free5gc-udm-udm": {"role": "control", "component": "UDM"},
+    "free5gc-helm-free5gc-udr-udr": {"role": "control", "component": "UDR"},
+    "free5gc-helm-free5gc-webui-webui": {"role": "control", "component": "WebUI"},
+    "mongodb": {"role": "control", "component": "MongoDB"},
+    "free5gc-helm-free5gc-upf-upf": {"role": "user", "component": "UPF"},
+    "ueransim-gnb": {"role": "ran", "component": "gNB"},
+    "ueransim-ue": {"role": "ran", "component": "UE"}
+  },
+  "images": [
+    {"source": "free5gc/amf:v4.2.2", "digest": "sha256:8fc343349f7b0d55a257ecae328bff4e2d4b6800004ed932c128b2699a3860e7", "role": "control"},
+    {"source": "free5gc/ausf:v4.2.2", "digest": "sha256:ec2752692a10c879cbe9c76d27377794bb26774abbb776e5a59df1f7eded3bf7", "role": "control"},
+    {"source": "free5gc/chf:v4.2.2", "digest": "sha256:22705af4e06ddb8e29d8103cb5b05e637059dbfb397df27f5f0a44843335d846", "role": "control"},
+    {"source": "free5gc/nef:v4.2.2", "digest": "sha256:ad98ab4a9d9aff9733f4dc12a212057abf039f992bdd4736107be28431eb0a90", "role": "control"},
+    {"source": "free5gc/nrf:v4.2.2", "digest": "sha256:0811f4af5038ad9fc366321cbc104910dfb09503a50d08a9184850980419e0d9", "role": "control"},
+    {"source": "free5gc/nssf:v4.2.2", "digest": "sha256:beea02cca34919f86b6711cc901a008701b790cfccf3fd64d712590bb646af87", "role": "control"},
+    {"source": "free5gc/pcf:v4.2.2", "digest": "sha256:b6208c82a02917cb6d620336d1245c00d875254e2c9bd28416c2e250a43453a4", "role": "control"},
+    {"source": "free5gc/smf:v4.2.2", "digest": "sha256:55043e366af867fda567156709c1dcf1ddad8827c2a246a64e0d4f6fea23718f", "role": "control"},
+    {"source": "free5gc/udm:v4.2.2", "digest": "sha256:3c0ea07415976e01352a4d6ca65d29dfb253247548e873decb6f45246da75562", "role": "control"},
+    {"source": "free5gc/udr:v4.2.2", "digest": "sha256:955b91fc7b5082e8732b578fb0df729ed730a8ae4c196304e03f946965a1eb85", "role": "control"},
+    {"source": "free5gc/webui:v4.2.2", "digest": "sha256:170842263d72bcc7a8caa88ac31ebd8c6c5b2828f2159a9198d7c83066b7497d", "role": "control"},
+    {"source": "curlimages/curl:8.7.1", "digest": "sha256:25d29daeb9b14b89e2fa8cc17c70e4b188bca1466086907c2d9a4b56b59d8e21", "role": "control"},
+    {"source": "busybox:1.32.0", "digest": "sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678", "role": "control"},
+    {"source": "bitnamilegacy/mongodb:7.0.9-debian-12-r4", "digest": "sha256:62fb92d0111f8dc0565b7daf8a57279fd09520020b79fd3bc550deb3ae5aee70", "role": "control"},
+    {"source": "docker.io/local/free5gc-upf:v4.2.2-nilfix-20261008@sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3", "digest": "sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3", "role": "user", "pullPolicy": "Never"},
+    {"source": "free5gc/ueransim:v4.0.1", "digest": "sha256:4a6745b0c9f0c60173833f8bef89816324e84636e220917bdc682555a299e8ba", "role": "ran"},
+    {"source": "local/ueransim-iperf3:free5gc-v4.0.1-20261008", "digest": "sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b", "configDigest": "sha256:6c253f1aabb68cd6490a26de33dcd7ad124c503565ad2bb8eee61a3de658adc4", "role": "ran", "pullPolicy": "Never"}
+  ],
+  "subscriber": {"file": "infra/free5gc-test-subscriber-ue1.json", "supi": "imsi-208930000000001", "plmn": "20893", "sst": 1, "sd": "010203", "dnn": "internet", "policy": "operator-provisioned; never reset or overwrite by profile deployment"},
+  "verification": {"tun": "uesimtun0", "targetNodeRole": "control", "pingCount": 5},
+  "fileHashesLF": {
+    "infra/patches/free5gc-helm-v4.2.2-single-upf.patch": "92895154ba31adaf10bc47e531a6599f078e2df4f177ac7282fe8c5e66db7823",
+    "infra/patches/go-upf-v1.2.10-remotesess-nil.patch": "1fcc02bba6f6b0c5779670d2605a75a4188814c16e2d02e0eda12ff338b5645c",
+    "infra/free5gc-single-upf-values.yaml": "2aa8e6abe8f705905eb35dc225be6a1a87d374b5f07f1ac3eb3575503b14fed0",
+    "infra/free5gc-multinode-placement-values.yaml": "0101fe3874a830a89318b7d57c78caf84830b5ee2988ddce688d23ee03e20ede",
+    "infra/free5gc-upf-nilfix-values.yaml": "7da947121018b61f5c36801b3eab8e8b1ef41f6902e7a2d94b6821445bd68363",
+    "infra/ueransim-single-node-values.yaml": "a74f60f385ba807d710797a9aa74256c5ac87cc4bb9751f2bcdaf7a4eec3b264",
+    "infra/ueransim-multinode-placement-values.yaml": "03a5c4db0b8d7fab9d6bbef5bf862f9b86cdb80ead4171dd4434ee02b7f5021b",
+    "infra/ueransim-iperf3-values.yaml": "68718af8d581db5e484b23a2abb6a779890389a93ec13de05c4a2bb9132b8b59",
+    "infra/free5gc-test-subscriber-ue1.json": "46e7906388097a7b3340608275c8eda987d19690f21b97ebe88d835b090f2fe7"
+  }
+}

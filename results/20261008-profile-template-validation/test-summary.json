@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-08",
+  "profileId": "free5gc-3node-no-multus-v1",
+  "command": "python -m unittest discover -s tests -p test_free5gc_profile.py -v",
+  "windows": {"unitTestsPassed": 20, "integrationTestsSkipped": 1},
+  "vm1Linux": {
+    "unitTestsPassed": 20,
+    "integrationTestsPassed": 1,
+    "integrationEnvironment": {
+      "F5GC_INTEGRATION_CHART_SOURCE": "/home/lhm/.work/free5gc-helm-v4.2.2",
+      "F5GC_INTEGRATION_OUT": "/home/lhm/.work/profile-template-validation/repeat"
+    }
+  },
+  "sha256": {
+    "scripts/free5gc-profile.py": "7c7fa6c8ce7b5c62d607a25b286a469accb5157e41fd2d06228e1d20aecf46de",
+    "tests/test_free5gc_profile.py": "37864474059005b17b1ecf5e2e0e4e9eb7ae8bf0c22c66f59e378c65be9a113a",
+    "infra/profiles/free5gc-3node-no-multus-v1.json": "1dbb4825e345ebe09a1de2548e41443dfb9cd366363143008d59af05e8e54ef4"
+  },
+  "liveAuditCommand": "python3 scripts/free5gc-profile.py verify --allow-tag-baseline",
+  "liveBusinessChecksPassed": true,
+  "helmApplyExecuted": false,
+  "limitations": [
+    "existing cluster, releases, subscriber and local image archives required",
+    "full template redeployment not yet tested",
+    "no fresh-VM initialization or cross-release atomic rollback validation",
+    "functional ping only; no throughput or long-term stability test"
+  ]
+}

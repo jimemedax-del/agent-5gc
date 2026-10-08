@@ -1,0 +1,20 @@
+{
+  "cleanCloneAndPatch": true,
+  "repeatRenderIdentical": true,
+  "realHelmPostRendererIdentical": true,
+  "chartCommit": "0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c",
+  "chartTreeSha256LF": "63776c98fd083d8bc570461c82d68446064da103171e3999e295319bdbbeb929",
+  "releases": [
+    {
+      "name": "free5gc-helm",
+      "semanticSha256": "ab06f8e99cd9432ba972879691c5ed5a5b6aee2e300e938452e0e9cf2187b894"
+    },
+    {
+      "name": "ueransim",
+      "semanticSha256": "3b8c9e9a17d9969e522b426e5806aabc2ee83a96037379025fa2af59630000a9"
+    }
+  ],
+  "resources": 66,
+  "workloads": 15,
+  "applied": false
+}

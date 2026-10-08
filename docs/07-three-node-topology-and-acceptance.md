@@ -1,6 +1,6 @@
 # 三节点 Kubernetes 拓扑与阶段验收
 
-> 记录日期：2026-10-07。本文记录三节点集群已完成后的实际状态、验证证据和下一阶段边界。
+> 最后更新：2026-10-08。本文记录三节点集群、受控部署模板及实际验收边界。
 
 ## 当前结论
 
@@ -17,6 +17,47 @@
 - [已测，吞吐未完成] 2026-10-08 已安装 VM1 iperf3 服务与 UE 持久化客户端镜像，UERANSIM 升级到 Revision 4；受控 RTT 300/300 成功、均值 1.354 ms。TCP 压测触发 UPF 1Gi 容器内存限制，服务已恢复，完整吞吐批次暂停；详见[数据面基线](10-controlled-data-plane-baseline.md)。上述 Revision 3 为三节点迁移验收时的版本。
 - [边界] Tailscale只用于远程管理。k3s节点间通信优先使用VMware局域网，避免把Kubernetes覆盖网络再次套入Tailscale隧道。
 - [边界] 三台VM位于同一宿主机和虚拟交换网络，天然时延几乎相同；后续必须使用独立VMnet或`tc netem`构造受控的core/edge路径差异。
+- [已验证] 三节点 Profile 已从干净 Chart 重建；两次渲染一致、实际 Helm post-renderer 检查通过，配置与现有 Release 在镜像锁定后等价；完整模板重部署尚未实测。
+
+## 受控可重复部署模板
+
+固定入口为 [free5gc-3node-no-multus-v1.json](../infra/profiles/free5gc-3node-no-multus-v1.json)，执行工具为 [free5gc-profile.py](../scripts/free5gc-profile.py)。它把当前基线变成“固定输入→检查→重部署→业务验收”，不是自由生成 YAML 的工具。
+
+### 固定内容与前提
+
+- 上游提交、整个修补后 `charts/` 内容及 9 个输入文件均校验 SHA256（统一 LF）；配置变化需人工审核并更新 Profile。
+- 17 个镜像均锁定 Digest，包含 initContainer；15 个工作负载、单副本、Single UPF、无 HPA/Multus。角色标签选出 3 个不同的 Linux amd64 Ready 节点。
+- 控制面和 MongoDB 在 VM1、判空修复 UPF 在 VM2、gNB/UE 在 VM3。UERANSIM 镜像 Tag 为 `v4.0.1`，实际日志版本为 `v3.2.7`，不是原计划的 `v3.3.0`。
+- 需已有三节点 k3s、Helm 3、Python 3.10+、PyYAML、`local-path` 存储，以及现有两个 Release、MongoDB 与匹配的测试订阅。**本入口不是从空白 VM 安装集群或创建订阅的工具。**
+- UPF 宿主须加载 `gtp5g v0.9.5` 并允许转发；SCTP、资源容量与跨节点网络须预先确认。标签检查不替代能力验证。
+- 两个本地镜像不在公共仓库；节点须先导入验证过的镜像归档并建立 Digest 别名，使用 `Never`。`image-commands --role user`（或 `--role ran`）仅打印别名命令，不执行或下载镜像。
+- 不删除 PVC、清空 MongoDB或覆盖订阅；`local-path` 数据仍与原节点绑定，不支持数据库跨节点迁移。重部署前保留快照/数据备份。
+
+### 四步入口（在 VM1 的仓库根目录）
+
+```bash
+export KUBECONFIG=/home/lhm/.kube/config
+chmod +x scripts/free5gc-profile.py
+python3 scripts/free5gc-profile.py render    # 固定 Chart + 补丁 + 清单；不访问集群
+python3 scripts/free5gc-profile.py check     # 渲染 + 节点角色/Ready/平台检查
+python3 scripts/free5gc-profile.py apply --confirm-disruption
+python3 scripts/free5gc-profile.py verify    # Digest、放置、Ready、业务日志、TUN Ping
+```
+
+默认 Chart 和生成报告放在 `.work/free5gc-3node-no-multus-v1/`。可用 `--chart-dir` 指定独立副本、`--out` 保存唯一实验目录；离线时 `--chart-source <已有Chart Git仓库>` 只用于克隆，仍检出固定提交并应用补丁，不修改源目录。
+
+升级前可执行 `compare-current` 比较现有 Helm manifest；只允许镜像 Digest/拉取策略规范化，其他差异一律拒绝。当前仍是原 Tag 部署，可用 `verify --allow-tag-baseline` 核对实际 imageID；这不代表 Digest 模板已部署。正式 `verify` 不接受 Tag。
+
+### 重部署语义与验证结果
+
+`apply` 保存旧 Values/history，依次停止 UE、gNB、UPF，升级核心网并刷新 SMF，再升级 RAN并验收。**会中断旧会话并重新注册、建会话，不是无损迁移。** 每个 Release 使用 `--atomic`，但两个 Release 不是跨 Release 原子事务；业务验收失败时只恢复人工 scale 的副本数，不自动宣称整套回滚成功。旧 Values/history 用于人工恢复，且恢复时仍需匹配 Chart、post-renderer 和镜像缓存。
+
+2026-10-08 证据见 [模板验证结果](../results/20261008-profile-template-validation/)：
+
+- 20 项单元测试及 1 项真实 Helm 集成测试通过；从干净提交应用修正补丁、连续两次渲染及真实 post-renderer 输出均一致。
+- 生成 66 个资源、15 个工作负载；固定模板与当前 Release 经镜像规范化后语义完全一致。
+- 原 Tag 环境的实际镜像 Digest、三节点放置、Pod Ready、gNB/UE 成功日志与 `gtp5g` 均通过检查；TUN Ping VM1 为 5/5 成功，仅作为连通性检查。
+- **本轮未执行 `apply`；模板驱动的完整重部署与空白环境恢复仍未验收。** 当前 Release 维持核心网 Revision 12、UERANSIM Revision 4。下一步在受控维护窗口执行一次完整重部署，再补记证据。
 
 ## 主机清单
 

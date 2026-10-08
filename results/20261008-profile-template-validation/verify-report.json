@@ -1,0 +1,82 @@
+{
+  "workloads": [
+    {
+      "workload": "free5gc-helm-free5gc-amf-amf",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-amf-amf-9f7467b59-qcg5s"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-ausf-ausf",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-ausf-ausf-747649f6f6-h6mr2"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-chf-chf",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-chf-chf-6544cd6848-5k7zs"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-nef-nef",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-nef-nef-f458776bb-8jqxz"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-nrf-nrf",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-nrf-nrf-9d864dc66-l24kj"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-nssf-nssf",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-nssf-nssf-7576df9757-qwlpq"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-pcf-pcf",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-pcf-pcf-d886d6f7f-p76ml"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-smf-smf",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-smf-smf-66f95cf86b-2vjbs"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-udm-udm",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-udm-udm-6b78f656bf-frm4f"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-udr-udr",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-udr-udr-7989f78997-hm6fn"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-webui-webui",
+      "node": "lhm-virtual-machine",
+      "pod": "free5gc-helm-free5gc-webui-webui-849f7697f4-qwjsn"
+    },
+    {
+      "workload": "mongodb",
+      "node": "lhm-virtual-machine",
+      "pod": "mongodb-0"
+    },
+    {
+      "workload": "free5gc-helm-free5gc-upf-upf",
+      "node": "worker-upf",
+      "pod": "free5gc-helm-free5gc-upf-upf-54758dbc5-89mtk"
+    },
+    {
+      "workload": "ueransim-gnb",
+      "node": "ran-test",
+      "pod": "ueransim-gnb-7746d4c977-dxf5x"
+    },
+    {
+      "workload": "ueransim-ue",
+      "node": "ran-test",
+      "pod": "ueransim-ue-594d88c755-5jgk6"
+    }
+  ],
+  "allowTagBaseline": true,
+  "tunnelTarget": "192.168.244.128",
+  "ping": "PING 192.168.244.128 (192.168.244.128) from 10.60.0.1 uesimtun0: 56(84) bytes of data.\n64 bytes from 192.168.244.128: icmp_seq=1 ttl=62 time=1.38 ms\n64 bytes from 192.168.244.128: icmp_seq=2 ttl=62 time=1.10 ms\n64 bytes from 192.168.244.128: icmp_seq=3 ttl=62 time=1.28 ms\n64 bytes from 192.168.244.128: icmp_seq=4 ttl=62 time=1.17 ms\n64 bytes from 192.168.244.128: icmp_seq=5 ttl=62 time=1.09 ms\n\n--- 192.168.244.128 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 802ms\nrtt min/avg/max/mdev = 1.092/1.202/1.382/0.111 ms\n"
+}

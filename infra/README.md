@@ -15,8 +15,14 @@
 | `free5gc-test-subscriber-ue1.json` | 隔离实验环境使用的UE1测试订阅 |
 | `k3s-registries.yaml` | k3s镜像源配置 |
 | `patches/` | 相对于固定上游提交的最小Chart修改 |
+| `profiles/free5gc-3node-no-multus-v1.json` | 当前三节点固定 Profile：输入/Chart 哈希、镜像 Digest、放置角色与验收参数 |
 
 正式Chart基线为`free5gc-helm v4.2.2`提交`0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c`，应用`patches/free5gc-helm-v4.2.2-single-upf.patch`后再传入受控Values。`tmp/`只是本地验证副本，不进入Git。
+
+当前三节点优先使用 `scripts/free5gc-profile.py` 统一入口，避免漏传覆盖配置。
+Profile 锁定全部 17 个镜像（含 initContainer）及 9 个输入，变更需人工审核。
+从干净 Chart 重建、重复渲染、真实 post-renderer 和现有环境对比均已通过；完整重部署尚未执行。
+前提、四步命令和中断/回滚边界见[三节点模板](../docs/07-three-node-topology-and-acceptance.md#受控可重复部署模板)。
 
 MongoDB Values 显式禁用上游默认的 `install-tini` init container，改用镜像原生 entrypoint，避免实验 Pod 在启动时依赖 Debian 软件源。
 
@@ -24,7 +30,7 @@ CHF 保持启用，但 Values 关闭其默认的 CGF FTP CDR 导出。该导出�
 
 测试订阅中的身份和密钥仅用于公开实验配置，禁止用于真实网络。任何K3s令牌、SSH密钥、Tailscale Auth Key或访问令牌都不得保存在本目录。
 
-三节点部署时，必须先传入对应的单节点基线文件，再传入放置覆盖文件。例如：
+以下保留为 Values 组合的历史示例；它不包含完整镜像锁定与 RAN 部署。三节点模板入口已固定全部覆盖文件，不建议用该简化命令替代。基线文件必须在放置覆盖文件之前：
 
 ```bash
 helm upgrade --install free5gc-helm <fixed-chart-path> -n free5gc \

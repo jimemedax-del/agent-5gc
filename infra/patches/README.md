@@ -13,11 +13,18 @@
 1. 在 Single UPF 模式下，让 SMF wrapper 只解析唯一 UPF Service；
 2. 为 UERANSIM gNB 的 `wait-amf` initContainer 增加开关；
 3. 在 UERANSIM 默认 Values 中声明该开关，默认保持上游行为。
+4. 将 CHF 的 CGF 导出开关变为受控 Values（默认仍启用）；本实验通过 Values 关闭 FTP 导出。
 
-应用补丁：
+2026-10-08 从干净提交复建发现旧 CHF Values hunk 上下文不匹配，已改为在
+`chf.replicaCount` 后插入 `cgf` 配置，结果与运行中的 Chart 一致。
+修正版通过 `git apply --check`、正向应用和反向检查；整个 `charts/` 树的内容哈希已写入 Profile。
+未修改线上 Chart 或 Release；不能把旧补丁表述为已通过本次干净复建。
+
+手动应用时仅使用新建的独立 Chart 副本，不在运行副本切换提交：
 
 ```bash
 git -C /path/to/free5gc-helm checkout --detach 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
+git -C /path/to/free5gc-helm apply --check /path/to/infra/patches/free5gc-helm-v4.2.2-single-upf.patch
 git -C /path/to/free5gc-helm apply /path/to/infra/patches/free5gc-helm-v4.2.2-single-upf.patch
 ```
 

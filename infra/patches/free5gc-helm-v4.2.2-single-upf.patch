@@ -50,15 +50,16 @@ diff --git a/charts/free5gc/charts/free5gc-chf/templates/chf-configmap.yaml b/ch
 diff --git a/charts/free5gc/charts/free5gc-chf/values.yaml b/charts/free5gc/charts/free5gc-chf/values.yaml
 --- a/charts/free5gc/charts/free5gc-chf/values.yaml
 +++ b/charts/free5gc/charts/free5gc-chf/values.yaml
-@@ -45,6 +45,9 @@ chf:
+@@ -45,6 +45,9 @@ mongodb:
+ chf:
    name: chf
    replicaCount: 1
-   image:
-     name: free5gc/chf
 +  cgf:
 +    # CDR FTP export is optional; the default preserves upstream behaviour.
 +    enabled: true
-   service:
+   image:
+     name: free5gc/chf
+     tag: v4.2.2
      type: ClusterIP
 diff --git a/charts/ueransim/templates/gnb/gnb-deployment.yaml b/charts/ueransim/templates/gnb/gnb-deployment.yaml
 index 3601d62..faab83a 100644

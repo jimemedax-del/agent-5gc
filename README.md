@@ -1,7 +1,7 @@
 # 基于 Agent 的 5G 核心网 NF 编排：项目总览与当前状态
 
 > 最后更新：2026-10-08
-> 文档状态：三节点功能通过；UPF 空指针补丁已部署并通过回归测试，业务已恢复；高负载测试未通过，暂不继续追查
+> 文档状态：三节点固定部署 Profile 已建立，渲染与现有环境验证通过；完整模板重部署待验收，高负载限制保持归档
 
 ## 项目目标
 
@@ -19,7 +19,7 @@
 
 研究重点不是让大模型自由生成 YAML 或直接控制集群，而是让它理解意图、选择受控部署方案，并由确定性代码负责安全和可执行性。
 
-当前已完成 **Docker Compose、单节点 k3s/Helm 和三节点 NF 放置业务基线**。三节点为 VM1 控制面、VM2 UPF、VM3 UERANSIM，20 轮注册和建会话均成功。受控 RTT 和低负载诊断已完成；UPF 空指针已最小回移植并部署。高负载复测仍因 SMF 重启中止，业务已恢复，不继续深入负载故障，下一步整理已验证的 NF 目录与受控部署 Profile。
+当前已完成 **Docker Compose、单节点 k3s/Helm 和三节点 NF 放置业务基线**。三节点为 VM1 控制面、VM2 UPF、VM3 UERANSIM，20 轮注册和建会话均成功。UPF 空指针补丁已部署；高负载限制保持归档，不继续追查。现已建立固定部署 Profile，下一步执行一次受控重部署验收，而非马上写 Agent。
 
 ## 当前结论
 
@@ -37,6 +37,7 @@
 - [已验证] 上游 PR #97 已最小回移植至当前 UPF；旧代码回归测试复现 Panic，新代码通过。固定 Digest 镜像已部署，注册、会话及 TUN Ping 通过；100 Mbps 复测中 UPF 无 Panic/重启，但 SMF 重启使测试中止，不能宣称高负载通过。此问题作为限制归档，详见数据面测试模块。
 - [待验证] 长时间负载稳定性、Multus、双 UPF 与受控 core/edge 时延差异。
 - [待确认] 导师所说的“NF 挑选”究竟指完整 Profile、NF 实例、NF 类型，还是主要指 NF 放置位置。
+- [已验证] `free5gc-3node-no-multus-v1` 锁定 Chart、配置、17 个镜像 Digest与15个工作负载；20 项单测及 1 项真实 Helm 集成测试通过，模板与当前环境经镜像规范化后等价。完整 `apply` 尚未执行。
 
 ## 已固化的Chart基线
 
@@ -50,7 +51,10 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 + infra/ueransim-single-node-values.yaml
 ```
 
-补丁已在干净上游提交上通过正向检查，并在现有修改副本上通过反向检查。`scripts/`中的自动化工具根据人工部署记录编写，目前标记为`[待验证]`，不能替代已经记录的人工验收证据。
+2026-10-08 修正 CHF 补丁上下文后，干净提交复建及反向检查通过。三节点统一入口为
+[free5gc-profile.py](scripts/free5gc-profile.py)，输入为[固定 Profile](infra/profiles/free5gc-3node-no-multus-v1.json)。
+渲染、重复性、真实 post-renderer 和现有环境核对已验证；模板完整重部署与空白 VM 初始化脚本仍待验收。
+使用方法与边界见[三节点模块](docs/07-three-node-topology-and-acceptance.md#受控可重复部署模板)。
 
 ## 仓库结构
 
@@ -58,7 +62,7 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 |---|---|
 | `docs/` | 业务心智模型、实验基线、研究路线和三节点计划 |
 | `infra/` | 受控Values、测试订阅、镜像源配置和Chart补丁 |
-| `scripts/` | 节点初始化、部署、订阅创建和验收工具（待实机验证） |
+| `scripts/` | 固定 Profile 渲染/检查/重部署/验收入口；初始化脚本待实机验证 |
 | `problem solve.md` | 按问题编号维护的故障、根因、修复和证据 |
 
 临时Chart副本、SSH密钥和镜像归档不会进入Git。可审核的原始测量数据保存在 `results/`，提交前检查敏感信息；`.log` 文件默认忽略。提交规范与后续协作流程见[CONTRIBUTING.md](CONTRIBUTING.md)。
