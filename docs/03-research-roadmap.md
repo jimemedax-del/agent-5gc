@@ -1,6 +1,6 @@
 # 研究路线：基于 Agent 的 5G 核心网 NF 编排
 
-> 最后更新：2026-10-07
+> 最后更新：2026-10-08
 > 状态：研究设计初稿；其中未落地部分均为计划，不代表已实现。
 
 ## 当前研究定位
@@ -30,13 +30,14 @@ Agent 不直接参与 5G 信令，不直接执行 Helm/Kubernetes，不生成任
 
 ## 当前阶段
 
-当前进度：Compose与单节点k3s/Helm基线已完成；Chart已使用固定提交、正式补丁和受控Values固化。三节点Flannel单网络基线是当前实施阶段，Agent尚不进入编码阶段。
+当前进度：Compose、单节点 k3s/Helm 与三节点 Flannel 单网络基线均已完成。首个固定 Profile 已完成受控重部署和严格业务验收；当前进入 NF 目录、受控规划输入和确定性校验设计，Agent 尚不进入编码阶段。
 
 - [已验证] Docker Compose 与单节点 k3s/Helm 的 Single UPF 业务闭环；k3s 环境重启后可自动恢复。
 - [已验证] 第二台独立 Ubuntu VM 从零重建了相同版本的 k3s/Helm/Single UPF 基线，并完成 UE 端到端出网。
-- [已验证] 第三台空白 Ubuntu VM 已创建并完成 SSH 接入；三台 VM 的 VMware 局域网互通正常。
-- [进行中] 固化 Chart 补丁并将现有环境迁移为一台 Server、两台 Agent 的三节点集群。
-- [尚未开始] 多节点 Kubernetes、Go Task 平台集成、规划算法、Agent 工作流。
+- [已验证] 三节点 Kubernetes 已完成：VM1 承载控制面与 MongoDB、VM2 承载带 `gtp5g` 的 UPF、VM3 承载 UERANSIM；20/20 次注册和 PDU Session 成功。
+- [已验证] `free5gc-3node-no-multus-v1` 已锁定 Chart、补丁、受控 Values、17 个镜像 Digest 与 15 个工作负载；一次完整重部署后，核心网 Revision 14、UERANSIM Revision 6，注册、会话和 TUN Ping 均通过。
+- [归档限制] 高负载复测中补丁 UPF 未再 Panic，但 SMF 曾 OOM 重启；完整吞吐和长期稳定性仍待验证，不作为当前主线继续追查。
+- [尚未开始] NF 目录、确定性规划/校验、Go Task 平台集成和 Agent 工作流。
 
 ## 为什么不能停在单 UPF
 
@@ -58,14 +59,15 @@ Agent 不直接参与 5G 信令，不直接执行 Helm/Kubernetes，不生成任
 
 ### 2. Kubernetes 与多节点网络
 
-- [已验证] 固定Single UPF Profile已经部署至单节点k3s，并完成空白VM复现和重启恢复测试。
-- [进行中] 在同宿主机三台VM上建立Server、core/upf与ran-test等逻辑角色。
-- 后续引入 Multus、第二网卡和实际 N6 网络；通过真实拓扑或受控仿真构造 edge/core 路径差异。
+- [已验证] 固定 Single UPF Profile 已部署至单节点 k3s，并完成空白 VM 复现和重启恢复测试。
+- [已验证] 已在同宿主机三台 VM 上完成控制面、UPF 与 RAN/UE 的逻辑角色分离，并通过端到端业务验收。
+- [待验证] 引入 Multus、第二网卡和实际 N6 网络；通过真实拓扑或受控仿真构造可测量的 edge/core 路径差异。
 
 ### 3. NF 目录与确定性规划
 
+- 当前先建立首个固定 Profile 对应的 NF 目录、`NetworkIntent`、`CoreNetworkPlan`、资源/节点能力快照及错误码；该 Profile 是受控基线，不等于已经具备多个可选择 Profile。
 - 固定完整核心网 Profile，不允许 Agent 删除 AMF、SMF、UPF、NRF、AUSF、UDM、UDR 等依赖。
-- 建立 `standard-core-upf` 与 `low-latency-edge-upf` 等受控 Profile。
+- 后续在真实网络差异验证后，再建立 `standard-core-upf` 与 `low-latency-edge-upf` 等多个受控 Profile。
 - 在 Agent 之前实现规则规划器和安全校验器。
 - 将 `placementClass` 映射为平台批准的节点标签、Affinity 和 Helm Values，禁止用户或模型注入任意 YAML。
 

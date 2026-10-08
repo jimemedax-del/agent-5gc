@@ -123,4 +123,4 @@ docker exec upf /free5gc/gtp5g-tunnel list qer
 
 ## 下一步
 
-Compose基线作为业务流程和故障排查对照保留；Kubernetes单节点基线已经完成。下一阶段进入三节点Flannel单网络基线，随后才引入Multus、双网卡和可测量的edge/core路径差异。
+Compose 基线作为业务流程和故障排查对照保留；Kubernetes 单节点基线与三节点 Flannel 单网络基线均已完成，三节点结果见[三节点模块](07-three-node-topology-and-acceptance.md)。后续才引入 Multus、双网卡和可测量的 edge/core 路径差异。

@@ -101,4 +101,4 @@ UE ⇄ gNB ⇄ UPF ⇄ Internet
 
 ## 下一步
 
-当前已经结合PFCP日志和`gtp5g-tunnel`输出观察了PDR、FAR、QER的实际生成。下一步把这条业务链保持为固定验收标准，验证控制面、UPF和UERANSIM分散到不同Kubernetes节点后仍能端到端工作。
+当前已经结合 PFCP 日志和`gtp5g-tunnel`输出观察了 PDR、FAR、QER 的实际生成。这条业务链已作为固定验收标准，并已验证控制面、UPF 和 UERANSIM 分散到不同 Kubernetes 节点后仍能端到端工作，见[三节点模块](07-three-node-topology-and-acceptance.md)。

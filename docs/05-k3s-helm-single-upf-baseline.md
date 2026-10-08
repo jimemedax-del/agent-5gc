@@ -81,4 +81,4 @@ kubectl -n free5gc exec deploy/ueransim-ue -- ping -I uesimtun0 -c 3 -W 4 1.1.1.
 
 ## 下一步
 
-单节点空白VM重建和第一台重启恢复均已验证，Chart修补也已整理为版本化补丁并完成正向/反向检查。下一步进入三节点Flannel单网络基线；跨节点业务稳定后再引入Multus与真实core/edge拓扑。`scripts/`中的自动化工具尚未在空白VM完整运行，不能据此宣称自动化部署已经验证。
+单节点空白 VM 重建和第一台重启恢复均已验证，Chart 修补也已整理为版本化补丁并完成正向/反向检查。三节点 Flannel 单网络基线及固定 Profile 重部署已完成，见[三节点模块](07-three-node-topology-and-acceptance.md)；Multus 与真实 core/edge 拓扑仍待验证。`scripts/`中的空白 VM 初始化脚本尚未在空白 VM 完整运行，不能据此宣称自动化部署已经验证。
