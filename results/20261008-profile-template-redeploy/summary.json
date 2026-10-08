@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-08",
+  "profileId": "free5gc-3node-no-multus-v1",
+  "outcome": "passed",
+  "releases": {
+    "free5gc-helm": 14,
+    "ueransim": 6
+  },
+  "strictVerify": {
+    "allowTagBaseline": false,
+    "workloads": 15,
+    "placement": "passed",
+    "lockedImages": "passed",
+    "ueRegistration": "passed",
+    "pduSession": "passed",
+    "tunPing": {
+      "target": "192.168.244.128",
+      "packets": 5,
+      "lossPercent": 0,
+      "averageRttMs": 1.093
+    }
+  },
+  "profileFixesValidated": [
+    "VM3 local UE image tag-to-digest alias required before imagePullPolicy Never deployment",
+    "restart NRF-dependent NFs after NRF/MongoDB readiness before RAN deployment"
+  ],
+  "notValidated": [
+    "blank-VM cluster initialization",
+    "cross-release transaction rollback",
+    "throughput and long-duration stability"
+  ]
+}

@@ -1,6 +1,6 @@
 # 自动化脚本
 
-> 状态：**完整空白VM自动化待实机验证**；三节点 Profile 的干净复建、重复渲染、真实 Helm post-renderer 和现有环境验收已通过，完整重部署尚未执行。不得将“脚本已编写”表述为“自动化流程已验证”。
+> 状态：**完整空白VM自动化待实机验证**；三节点 Profile 的干净复建、重复渲染、真实 Helm post-renderer、完整重部署及严格业务验收已通过。不得把“已有集群重部署通过”表述为“空白VM自动化已验证”。
 
 这些脚本用于自动复现已经人工验证过的单节点基线，并为三节点集群提供统一入口。当前项目的正式可复现核心是固定上游提交、受控补丁和Values；脚本是辅助工具。
 
@@ -14,7 +14,7 @@
 | `check` | 上述渲染加三角色节点唯一性、架构、Ready、调度条件与存储检查 |
 | `compare-current` | 上述检查加与当前两份 Helm manifest 的全量语义对比（只规范化镜像） |
 | `verify --allow-tag-baseline` | 检查现有 Tag 基线实际 Digest、放置、业务日志和 TUN Ping |
-| `apply --confirm-disruption` | 现有两 Release 受控重部署；停止旧会话、刷新 SMF、部署并验收 |
+| `apply --confirm-disruption` | 现有两 Release 受控重部署；停止旧会话，稳定化 NRF 注册，部署并验收 |
 | `verify` | 严格验收，要求 live spec 使用 Profile Digest |
 | `image-commands --role user` | 仅打印指定角色的 containerd Digest 别名命令 |
 | `post-render` | Helm SDK/CLI 的固定渲染入口，只从 stdin 处理受控清单 |
@@ -22,7 +22,7 @@
 运行示例：`python3 scripts/free5gc-profile.py render`。参数与边界统一维护在
 [三节点模板模块](../docs/07-three-node-topology-and-acceptance.md#受控可重复部署模板)，不在这里复制安装流程。
 该工具不初始化集群、导入镜像、重写订阅或清空数据库，也不全面检测可用容量/网络/内核前提；`check` 不是完整环境准入器。
-当前从干净 Chart 重建和实际 post-renderer 测试通过，但尚未运行 `apply`。
+2026-10-08 已完成一次 `apply`：核心网 Revision 14、UERANSIM Revision 6，严格验收通过。该次发现并修正了两项前提：本地 UE 镜像需要 Digest 别名；核心 NF 在 NRF/MongoDB 就绪后需按依赖顺序重新注册。结果见[三节点模板模块](../docs/07-three-node-topology-and-acceptance.md#重部署语义与验证结果)。
 
 单元测试：`python -m unittest discover -s tests -p test_free5gc_profile.py -v`。
 Linux 真实 Helm 集成测试再设置 `F5GC_INTEGRATION_CHART_SOURCE=<Chart Git仓库>` 与

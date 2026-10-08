@@ -18,6 +18,21 @@ ROOT = Path(__file__).resolve().parent.parent
 PROFILE_ID = 'free5gc-3node-no-multus-v1'
 PROFILE_PATH = ROOT / 'infra' / 'profiles' / f'{PROFILE_ID}.json'
 CONTROLLERS = {'Deployment', 'StatefulSet'}
+# free5GC NF processes attempt NRF registration at startup.  A Pod being Ready
+# only proves the process is running; it does not prove that NRF/MongoDB was
+# already ready when that one-shot registration was attempted.
+NRF_REREGISTRATION_ORDER = (
+    'free5gc-helm-free5gc-ausf-ausf',
+    'free5gc-helm-free5gc-udr-udr',
+    'free5gc-helm-free5gc-udm-udm',
+    'free5gc-helm-free5gc-pcf-pcf',
+    'free5gc-helm-free5gc-nssf-nssf',
+    'free5gc-helm-free5gc-nef-nef',
+    'free5gc-helm-free5gc-chf-chf',
+    'free5gc-helm-free5gc-smf-smf',
+    # AMF is last: it discovers AUSF/UDM/SMF through NRF for UE registration.
+    'free5gc-helm-free5gc-amf-amf',
+)
 
 
 def run(command, timeout=60):
@@ -292,6 +307,14 @@ def verify(profile, allow_tag_baseline=False):
     return {'workloads': checks, 'allowTagBaseline': allow_tag_baseline, 'tunnelTarget': target, 'ping': ping}
 
 
+def stabilize_nrf_registrations(namespace):
+    """Re-register NRF-dependent NFs after a complete core Release upgrade."""
+    for deployment in NRF_REREGISTRATION_ORDER:
+        run(['kubectl', '-n', namespace, 'rollout', 'restart', 'deployment/' + deployment])
+        run(['kubectl', '-n', namespace, 'rollout', 'status', 'deployment/' + deployment,
+             '--timeout=120s'], timeout=130)
+
+
 def apply(args, profile, chart, out):
     if not args.confirm_disruption:
         raise ValueError('apply requires --confirm-disruption; it rebuilds UE sessions')
@@ -322,8 +345,7 @@ def apply(args, profile, chart, out):
                  '--reset-values', *values, '--post-renderer', Path(__file__).resolve(),
                  '--post-renderer-args', 'post-render', '--atomic', '--wait', '--timeout', '10m'], timeout=630)
             if release['name'] == 'free5gc-helm':
-                run(['kubectl', '-n', ns, 'rollout', 'restart', 'deployment/free5gc-helm-free5gc-smf-smf'])
-                run(['kubectl', '-n', ns, 'rollout', 'status', 'deployment/free5gc-helm-free5gc-smf-smf', '--timeout=120s'], timeout=130)
+                stabilize_nrf_registrations(ns)
         for _ in range(12):
             try:
                 result = verify(profile)

@@ -152,6 +152,18 @@ class ProfileTests(unittest.TestCase):
         with patch.object(tool, 'helm_binary', return_value='helm'), patch.object(tool, 'run', return_value=tool.yaml.safe_dump_all(self.docs)):
             self.assertFalse(tool.compare_current(self.profile, documents)['newDigestTemplateDeployed'])
 
+    def test_nrf_reregistration_order(self):
+        with patch.object(tool, 'run') as run:
+            tool.stabilize_nrf_registrations('free5gc')
+        expected = []
+        for deployment in tool.NRF_REREGISTRATION_ORDER:
+            expected.extend([
+                ['kubectl', '-n', 'free5gc', 'rollout', 'restart', 'deployment/' + deployment],
+                ['kubectl', '-n', 'free5gc', 'rollout', 'status', 'deployment/' + deployment, '--timeout=120s'],
+            ])
+        self.assertEqual([call.args[0] for call in run.call_args_list], expected)
+        self.assertEqual(tool.NRF_REREGISTRATION_ORDER[-1], 'free5gc-helm-free5gc-amf-amf')
+
 
 @unittest.skipUnless(os.environ.get('F5GC_INTEGRATION_CHART_SOURCE'), 'requires Linux Helm and Chart Git source')
 class HelmIntegrationTests(unittest.TestCase):

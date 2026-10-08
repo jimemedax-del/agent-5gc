@@ -1,0 +1,51 @@
+{
+  "profileId": "free5gc-3node-no-multus-v1",
+  "profileSha256LF": "1dbb4825e345ebe09a1de2548e41443dfb9cd366363143008d59af05e8e54ef4",
+  "chartCommit": "0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c",
+  "chartTreeSha256LF": "63776c98fd083d8bc570461c82d68446064da103171e3999e295319bdbbeb929",
+  "releases": [
+    {
+      "name": "free5gc-helm",
+      "semanticSha256": "ab06f8e99cd9432ba972879691c5ed5a5b6aee2e300e938452e0e9cf2187b894",
+      "manifest": "/home/lhm/.work/profile-template-validation/apply-20261008-profile-rerun/free5gc-helm.yaml"
+    },
+    {
+      "name": "ueransim",
+      "semanticSha256": "3b8c9e9a17d9969e522b426e5806aabc2ee83a96037379025fa2af59630000a9",
+      "manifest": "/home/lhm/.work/profile-template-validation/apply-20261008-profile-rerun/ueransim.yaml"
+    }
+  ],
+  "resources": 66,
+  "workloads": 15,
+  "cluster": {
+    "roles": {
+      "control": {
+        "node": "lhm-virtual-machine",
+        "internalIP": "192.168.244.128"
+      },
+      "user": {
+        "node": "worker-upf",
+        "internalIP": "192.168.244.129"
+      },
+      "ran": {
+        "node": "ran-test",
+        "internalIP": "192.168.244.130"
+      }
+    },
+    "prerequisitesNotAutoInstalled": [
+      "gtp5g v0.9.5 and allowed ip_forward sysctl",
+      "digest image cache/aliases on each target node",
+      "test subscriber and existing MongoDB data",
+      "node resources, SCTP and network connectivity"
+    ]
+  },
+  "comparison": {
+    "equivalentAfterImageLock": true,
+    "newDigestTemplateDeployed": true
+  },
+  "deployment": {
+    "applied": true,
+    "crossReleaseAtomic": false,
+    "subscriberModified": false
+  }
+}

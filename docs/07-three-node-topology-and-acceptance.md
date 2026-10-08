@@ -17,7 +17,7 @@
 - [已测，吞吐未完成] 2026-10-08 已安装 VM1 iperf3 服务与 UE 持久化客户端镜像，UERANSIM 升级到 Revision 4；受控 RTT 300/300 成功、均值 1.354 ms。TCP 压测触发 UPF 1Gi 容器内存限制，服务已恢复，完整吞吐批次暂停；详见[数据面基线](10-controlled-data-plane-baseline.md)。上述 Revision 3 为三节点迁移验收时的版本。
 - [边界] Tailscale只用于远程管理。k3s节点间通信优先使用VMware局域网，避免把Kubernetes覆盖网络再次套入Tailscale隧道。
 - [边界] 三台VM位于同一宿主机和虚拟交换网络，天然时延几乎相同；后续必须使用独立VMnet或`tc netem`构造受控的core/edge路径差异。
-- [已验证] 三节点 Profile 已从干净 Chart 重建；两次渲染一致、实际 Helm post-renderer 检查通过，配置与现有 Release 在镜像锁定后等价；完整模板重部署尚未实测。
+- [已验证] 三节点 Profile 已从干净 Chart 重建；两次渲染一致、实际 Helm post-renderer 检查通过。2026-10-08 已完成一次完整受控重部署及严格业务验收。
 
 ## 受控可重复部署模板
 
@@ -50,14 +50,15 @@ python3 scripts/free5gc-profile.py verify    # Digest、放置、Ready、业务�
 
 ### 重部署语义与验证结果
 
-`apply` 保存旧 Values/history，依次停止 UE、gNB、UPF，升级核心网并刷新 SMF，再升级 RAN并验收。**会中断旧会话并重新注册、建会话，不是无损迁移。** 每个 Release 使用 `--atomic`，但两个 Release 不是跨 Release 原子事务；业务验收失败时只恢复人工 scale 的副本数，不自动宣称整套回滚成功。旧 Values/history 用于人工恢复，且恢复时仍需匹配 Chart、post-renderer 和镜像缓存。
+`apply` 保存旧 Values/history，依次停止 UE、gNB、UPF，升级核心网；待 NRF/MongoDB 就绪后，按 AUSF→UDR→UDM→PCF→NSSF→NEF→CHF→SMF→AMF 的顺序重启 NF，使其重新注册到 NRF；最后升级 RAN并验收。**会中断旧会话并重新注册、建会话，不是无损迁移。** 每个 Release 使用 `--atomic`，但两个 Release 不是跨 Release 原子事务；业务验收失败时只恢复人工 scale 的副本数，不自动宣称整套回滚成功。旧 Values/history 用于人工恢复，且恢复时仍需匹配 Chart、post-renderer 和镜像缓存。
 
 2026-10-08 证据见 [模板验证结果](../results/20261008-profile-template-validation/)：
 
 - 20 项单元测试及 1 项真实 Helm 集成测试通过；从干净提交应用修正补丁、连续两次渲染及真实 post-renderer 输出均一致。
 - 生成 66 个资源、15 个工作负载；固定模板与当前 Release 经镜像规范化后语义完全一致。
 - 原 Tag 环境的实际镜像 Digest、三节点放置、Pod Ready、gNB/UE 成功日志与 `gtp5g` 均通过检查；TUN Ping VM1 为 5/5 成功，仅作为连通性检查。
-- **本轮未执行 `apply`；模板驱动的完整重部署与空白环境恢复仍未验收。** 当前 Release 维持核心网 Revision 12、UERANSIM Revision 4。下一步在受控维护窗口执行一次完整重部署，再补记证据。
+- 本次首次执行暴露两项可复现前提：VM3 的本地 UE 镜像需先建立 Digest 别名；且 Pod Ready 不等于 NF 已完成 NRF 注册。前者已人工补齐，后者已固化为 `apply` 的稳定化步骤。
+- **2026-10-08 完整 `apply` 已通过。** 核心网为 Revision 14、UERANSIM 为 Revision 6；严格 `verify` 检查到 15 个工作负载均使用锁定 Digest、放置正确、`gtp5g`已加载，UE 注册和 PDU Session 成功。`uesimtun0` 至 VM1 的 5 包 Ping 为 0% 丢包，平均 RTT 1.093 ms。证据见[重部署结果](../results/20261008-profile-template-redeploy/)。空白 VM 初始化路径仍未验收。
 
 ## 主机清单
 

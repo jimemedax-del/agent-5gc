@@ -21,7 +21,7 @@
 
 当前三节点优先使用 `scripts/free5gc-profile.py` 统一入口，避免漏传覆盖配置。
 Profile 锁定全部 17 个镜像（含 initContainer）及 9 个输入，变更需人工审核。
-从干净 Chart 重建、重复渲染、真实 post-renderer 和现有环境对比均已通过；完整重部署尚未执行。
+从干净 Chart 重建、重复渲染、真实 post-renderer、现有环境对比及一次完整重部署均已通过；空白 VM 初始化路径尚未执行。
 前提、四步命令和中断/回滚边界见[三节点模板](../docs/07-three-node-topology-and-acceptance.md#受控可重复部署模板)。
 
 MongoDB Values 显式禁用上游默认的 `install-tini` init container，改用镜像原生 entrypoint，避免实验 Pod 在启动时依赖 Debian 软件源。
