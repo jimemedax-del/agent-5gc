@@ -1,0 +1,8 @@
+Excerpt from the live SMF log query during the TCP 10 Mbps stage.
+Command: kubectl logs -n free5gc deployment/free5gc-helm-free5gc-smf-smf --since=60s --tail=25
+ANSI color sequences removed; this is not a complete SMF log or a report-rate measurement.
+2026-10-08T07:11:34.672501640Z [TRAC][SMF][PduSess] [HandleReports] Request: URRID=2, UpfId=ffe460f3-de7d-48b8-976f-154af0bf4a5c, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T07:11:34.672512658Z [DEBU][SMF][Charging] Processing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T07:11:34.672516333Z [WARN][SMF][PduSess] URR 1 is not in ChargingInfo map!
+2026-10-08T07:11:34.672517765Z [DEBU][SMF][Charging] Processing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T07:11:34.672519843Z [WARN][SMF][PduSess] URR 2 is not in ChargingInfo map!

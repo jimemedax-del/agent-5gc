@@ -1,0 +1,1 @@
+["kubectl", "-n", "free5gc", "exec", "ueransim-ue-594d88c755-rc4sv", "--", "iperf3", "-c", "192.168.244.128", "-B", "10.60.0.1", "-p", "5201", "-t", "30", "-P", "1", "-b", "5M", "-J", "--get-server-output", "--connect-timeout", "5000", "-u", "-l", "1200"]

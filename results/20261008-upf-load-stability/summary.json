@@ -1,0 +1,285 @@
+{
+  "failure": null,
+  "safety_stop": null,
+  "rounds": [
+    {
+      "phase": "tcp-5M",
+      "target_mbps": 5,
+      "started_at": "2026-10-08T07:09:44.292219+00:00",
+      "ended_at": "2026-10-08T07:10:24.456364+00:00",
+      "exit_code": 0,
+      "status": "success",
+      "receiver_mbps": 3.7700238937941175,
+      "retransmits": 0
+    },
+    {
+      "phase": "tcp-10M",
+      "target_mbps": 10,
+      "started_at": "2026-10-08T07:10:54.490970+00:00",
+      "ended_at": "2026-10-08T07:11:34.678430+00:00",
+      "exit_code": 0,
+      "status": "success",
+      "receiver_mbps": 7.514648162430734,
+      "retransmits": 10
+    },
+    {
+      "phase": "tcp-20M",
+      "target_mbps": 20,
+      "started_at": "2026-10-08T07:12:04.714449+00:00",
+      "ended_at": "2026-10-08T07:12:44.908753+00:00",
+      "exit_code": 0,
+      "status": "success",
+      "receiver_mbps": 15.004430614016607,
+      "retransmits": 41
+    },
+    {
+      "phase": "udp-5M",
+      "target_mbps": 5,
+      "started_at": "2026-10-08T07:13:14.945144+00:00",
+      "ended_at": "2026-10-08T07:13:45.177787+00:00",
+      "exit_code": 0,
+      "status": "success",
+      "receiver_mbps": 4.999987166699605,
+      "lost_packets": 0,
+      "packets": 15625,
+      "loss_percent": 0,
+      "jitter_ms": 0.04295478254864203
+    },
+    {
+      "phase": "udp-10M",
+      "target_mbps": 10,
+      "started_at": "2026-10-08T07:14:15.214783+00:00",
+      "ended_at": "2026-10-08T07:14:45.459419+00:00",
+      "exit_code": 0,
+      "status": "success",
+      "receiver_mbps": 9.999967333440043,
+      "lost_packets": 0,
+      "packets": 31250,
+      "loss_percent": 0,
+      "jitter_ms": 0.19834884153825152
+    },
+    {
+      "phase": "udp-20M",
+      "target_mbps": 20,
+      "started_at": "2026-10-08T07:15:15.495152+00:00",
+      "ended_at": "2026-10-08T07:15:45.731827+00:00",
+      "exit_code": 0,
+      "status": "success",
+      "receiver_mbps": 19.99944333992048,
+      "lost_packets": 0,
+      "packets": 62499,
+      "loss_percent": 0,
+      "jitter_ms": 0.9528661095492973
+    }
+  ],
+  "phases": {
+    "idle": {
+      "samples": 55,
+      "memory_start_mib": 9.625,
+      "memory_end_mib": 9.7109375,
+      "memory_peak_mib": 10.453125,
+      "anon_end_mib": 8.640625,
+      "cpu_cores": {
+        "count": 54,
+        "mean": 0.01089876487252865,
+        "p50": 0.010279912763077066,
+        "p95": 0.014382168023894007,
+        "min": 0.009088569495582025,
+        "max": 0.016469522718615275
+      },
+      "oom_kill_end": 0
+    },
+    "tcp-5M": {
+      "samples": 36,
+      "memory_start_mib": 10.078125,
+      "memory_end_mib": 10.21484375,
+      "memory_peak_mib": 11.51171875,
+      "anon_end_mib": 9.09375,
+      "cpu_cores": {
+        "count": 36,
+        "mean": 0.04603609752917596,
+        "p50": 0.05489825369012359,
+        "p95": 0.06553341146379557,
+        "min": 0.010167941448867344,
+        "max": 0.0703392329496229
+      },
+      "oom_kill_end": 0
+    },
+    "cooldown-tcp-5M": {
+      "samples": 28,
+      "memory_start_mib": 10.13671875,
+      "memory_end_mib": 10.0546875,
+      "memory_peak_mib": 10.41796875,
+      "anon_end_mib": 9.09375,
+      "cpu_cores": {
+        "count": 28,
+        "mean": 0.011121366271879653,
+        "p50": 0.010469368274905412,
+        "p95": 0.014621987563410266,
+        "min": 0.009306676290356761,
+        "max": 0.017349209518081443
+      },
+      "oom_kill_end": 0
+    },
+    "tcp-10M": {
+      "samples": 36,
+      "memory_start_mib": 10.53125,
+      "memory_end_mib": 9.546875,
+      "memory_peak_mib": 11.3671875,
+      "anon_end_mib": 8.55078125,
+      "cpu_cores": {
+        "count": 36,
+        "mean": 0.07713512534445728,
+        "p50": 0.09536375044245265,
+        "p95": 0.10469164993582165,
+        "min": 0.00918312281390124,
+        "max": 0.11136439940499777
+      },
+      "oom_kill_end": 0
+    },
+    "cooldown-tcp-10M": {
+      "samples": 27,
+      "memory_start_mib": 9.67578125,
+      "memory_end_mib": 9.70703125,
+      "memory_peak_mib": 9.92578125,
+      "anon_end_mib": 8.68359375,
+      "cpu_cores": {
+        "count": 27,
+        "mean": 0.010998948976867089,
+        "p50": 0.010400669986084342,
+        "p95": 0.014317331696565556,
+        "min": 0.009186342739573028,
+        "max": 0.015058463795805712
+      },
+      "oom_kill_end": 0
+    },
+    "tcp-20M": {
+      "samples": 36,
+      "memory_start_mib": 10.1953125,
+      "memory_end_mib": 16.328125,
+      "memory_peak_mib": 16.53515625,
+      "anon_end_mib": 15.33203125,
+      "cpu_cores": {
+        "count": 36,
+        "mean": 0.14536144954970537,
+        "p50": 0.1820384937987654,
+        "p95": 0.20910021393389588,
+        "min": 0.00944168593573251,
+        "max": 0.21084524216427683
+      },
+      "oom_kill_end": 0
+    },
+    "cooldown-tcp-20M": {
+      "samples": 28,
+      "memory_start_mib": 16.37890625,
+      "memory_end_mib": 16.33203125,
+      "memory_peak_mib": 16.5859375,
+      "anon_end_mib": 15.33203125,
+      "cpu_cores": {
+        "count": 28,
+        "mean": 0.011447167444134019,
+        "p50": 0.010929416602054718,
+        "p95": 0.013933566440772687,
+        "min": 0.009699397932930419,
+        "max": 0.014710553174513483
+      },
+      "oom_kill_end": 0
+    },
+    "udp-5M": {
+      "samples": 27,
+      "memory_start_mib": 16.58984375,
+      "memory_end_mib": 10.66796875,
+      "memory_peak_mib": 16.58984375,
+      "anon_end_mib": 9.5546875,
+      "cpu_cores": {
+        "count": 27,
+        "mean": 0.11270569779170027,
+        "p50": 0.11312134331678962,
+        "p95": 0.11883770910852873,
+        "min": 0.07536038749854992,
+        "max": 0.12601585849529895
+      },
+      "oom_kill_end": 0
+    },
+    "cooldown-udp-5M": {
+      "samples": 27,
+      "memory_start_mib": 10.67578125,
+      "memory_end_mib": 10.60546875,
+      "memory_peak_mib": 10.81640625,
+      "anon_end_mib": 9.55078125,
+      "cpu_cores": {
+        "count": 27,
+        "mean": 0.012966610824279037,
+        "p50": 0.010535123886874834,
+        "p95": 0.0168155619164335,
+        "min": 0.009096551893097845,
+        "max": 0.0625075024539177
+      },
+      "oom_kill_end": 0
+    },
+    "udp-10M": {
+      "samples": 27,
+      "memory_start_mib": 10.59375,
+      "memory_end_mib": 12.10546875,
+      "memory_peak_mib": 12.10546875,
+      "anon_end_mib": 10.796875,
+      "cpu_cores": {
+        "count": 27,
+        "mean": 0.19237078748901332,
+        "p50": 0.19259672937595604,
+        "p95": 0.2664768254967122,
+        "min": 0.013341493274794431,
+        "max": 0.27754708826452906
+      },
+      "oom_kill_end": 0
+    },
+    "cooldown-udp-10M": {
+      "samples": 28,
+      "memory_start_mib": 10.62890625,
+      "memory_end_mib": 10.58984375,
+      "memory_peak_mib": 10.6640625,
+      "anon_end_mib": 9.51953125,
+      "cpu_cores": {
+        "count": 28,
+        "mean": 0.019803228834480914,
+        "p50": 0.010369068329095617,
+        "p95": 0.016903632475223966,
+        "min": 0.009461182581254021,
+        "max": 0.25418884596434616
+      },
+      "oom_kill_end": 0
+    },
+    "udp-20M": {
+      "samples": 27,
+      "memory_start_mib": 10.56640625,
+      "memory_end_mib": 18.5859375,
+      "memory_peak_mib": 19.8203125,
+      "anon_end_mib": 17.18359375,
+      "cpu_cores": {
+        "count": 27,
+        "mean": 0.21941362118280508,
+        "p50": 0.22212908172012638,
+        "p95": 0.24301418960706545,
+        "min": 0.1406820029358757,
+        "max": 0.24425526967484593
+      },
+      "oom_kill_end": 0
+    },
+    "cooldown-udp-20M": {
+      "samples": 27,
+      "memory_start_mib": 20.91796875,
+      "memory_end_mib": 20.78515625,
+      "memory_peak_mib": 20.91796875,
+      "anon_end_mib": 19.703125,
+      "cpu_cores": {
+        "count": 27,
+        "mean": 0.01665504596870414,
+        "p50": 0.010026788874011034,
+        "p95": 0.027171314534524774,
+        "min": 0.009314541978080092,
+        "max": 0.15221605012109155
+      },
+      "oom_kill_end": 0
+    }
+  }
+}

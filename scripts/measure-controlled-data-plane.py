@@ -61,6 +61,204 @@ def quantity(value):
     return float(match[1]) * factors[match[2] or ""] if match else None
 
 
+def parse_cgroup(text):
+    sections = {}
+    section = None
+    for line in text.splitlines():
+        if line.startswith("SECTION "):
+            section = line.split()[1]
+            sections[section] = []
+        elif section:
+            sections[section].append(line)
+    def mapping(name):
+        return {key: int(value) for key, value in
+                (line.split() for line in sections[name] if line.strip())}
+    return {"memory_bytes": int(sections["memory"][0]),
+            "limit_bytes": int(sections["limit"][0]),
+            "memory_stat": mapping("stat"), "cpu_stat": mapping("cpu"),
+            "memory_events": mapping("events")}
+
+
+def stability_test(args):
+    """Bounded diagnostic loads with cgroup sampling and fail-closed cutoff."""
+    directory = Path(args.out_dir)
+    directory.mkdir(parents=True, exist_ok=False)
+    os.environ.setdefault("KUBECONFIG", "/home/lhm/.kube/config")
+    pods = json.loads(require_output(kubectl("get", "pods", "-n", args.namespace, "-o", "json")))
+    def select(label, value):
+        matches = [p for p in pods["items"] if p["metadata"].get("labels", {}).get(label) == value
+                   and not p["metadata"].get("deletionTimestamp")
+                   and p["status"].get("phase") == "Running"]
+        if len(matches) != 1:
+            raise RuntimeError(f"Expected one live {label}={value} Pod")
+        return matches[0]
+    ue, upf = select("component", "ue"), select("nf", "upf")
+    ue_cmd = ["kubectl", "-n", args.namespace, "exec", ue["metadata"]["name"], "--"]
+    ip_text = require_output(run(ue_cmd + ["ip", "-4", "addr", "show", "uesimtun0"]))
+    source_ip = re.search(r"inet ([0-9.]+)/", ip_text)[1]
+    route = require_output(run(ue_cmd + ["ip", "route", "get", args.server, "from", source_ip]))
+    if "dev uesimtun0" not in route:
+        raise RuntimeError("UE source route bypasses tunnel")
+    code, _, _ = run(ue_cmd + ["pgrep", "-x", "iperf3"])
+    if code != 1:
+        raise RuntimeError("UE already has iperf3 or process inspection failed")
+    ping = run(ue_cmd + ["ping", "-I", "uesimtun0", "-c", "3", "-W", "2", args.server])
+    (directory / "preflight-ping.txt").write_text(ping[1] + ping[2])
+    require_output(ping)
+    metadata = {"start_time": now(), "kind": "load-stability-diagnostic",
+                "parameters": vars(args), "ue_pod": ue["metadata"]["name"],
+                "upf_pod": upf["metadata"]["name"], "upf_uid": upf["metadata"]["uid"],
+                "upf_node": upf["spec"]["nodeName"], "source_ip": source_ip, "route": route,
+                "resources": [c.get("resources", {}) for c in upf["spec"]["containers"]],
+                "images": [c["image"] for c in upf["spec"]["containers"]],
+                "upf_initial_status": upf["status"].get("containerStatuses", []),
+                "configuration_changed": False, "warmup_seconds": 0,
+                "sampling": "cgroup v2 via kubectl exec; 1 second gap plus command latency"}
+    (directory / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
+    phase, samples, rounds = ["idle"], [], []
+    finish, cutoff = threading.Event(), threading.Event()
+    guard = {"reason": None, "last_sample_monotonic": time.monotonic()}
+    probe_script = ("echo SECTION memory; cat /sys/fs/cgroup/memory.current; "
+                    "echo SECTION limit; cat /sys/fs/cgroup/memory.max; "
+                    "echo SECTION stat; cat /sys/fs/cgroup/memory.stat; "
+                    "echo SECTION cpu; cat /sys/fs/cgroup/cpu.stat; "
+                    "echo SECTION events; cat /sys/fs/cgroup/memory.events")
+    probe = ["kubectl", "-n", args.namespace, "exec", upf["metadata"]["name"],
+             "--", "sh", "-c", probe_script]
+    def trip(reason):
+        if not cutoff.is_set():
+            guard["reason"] = reason
+            cutoff.set()
+            print(f"{now()} SAFETY STOP {reason}", flush=True)
+    def monitor():
+        previous = None
+        with (directory / "upf-cgroup.jsonl").open("w", buffering=1) as output:
+            while not finish.is_set():
+                try:
+                    sample = parse_cgroup(require_output(run(probe, timeout=8)))
+                    sample.update(timestamp=now(), phase=phase[0], monotonic=time.monotonic())
+                    sample["memory_mib"] = sample["memory_bytes"] / 1024**2
+                    if previous:
+                        delta = sample["monotonic"] - previous["monotonic"]
+                        sample["cpu_cores"] = (sample["cpu_stat"]["usage_usec"] -
+                                               previous["cpu_stat"]["usage_usec"]) / 1e6 / delta
+                    samples.append(sample)
+                    output.write(json.dumps(sample) + "\n")
+                    guard["last_sample_monotonic"] = sample["monotonic"]
+                    threshold = min(args.memory_stop_mib * 1024**2, sample["limit_bytes"] * .5)
+                    if sample["memory_bytes"] >= threshold:
+                        trip(f"UPF memory {sample['memory_mib']:.1f} MiB reached guard limit")
+                    if sample["memory_events"].get("oom", 0) or sample["memory_events"].get("oom_kill", 0):
+                        trip("UPF cgroup reported OOM")
+                    previous = sample
+                except Exception as exc:
+                    output.write(json.dumps({"timestamp": now(), "phase": phase[0], "error": str(exc)}) + "\n")
+                    trip(f"UPF sampling failed: {exc}")
+                    break
+                finish.wait(1)
+    def observe(seconds):
+        deadline = time.monotonic() + seconds
+        while time.monotonic() < deadline:
+            if time.monotonic() - guard["last_sample_monotonic"] > 5:
+                trip("UPF sample stale for more than 5 seconds")
+            if cutoff.is_set():
+                raise RuntimeError(guard["reason"])
+            time.sleep(.2)
+    thread = threading.Thread(target=monitor, daemon=True)
+    thread.start()
+    failure = None
+    try:
+        print(f"{now()} START idle {args.idle_seconds}s", flush=True)
+        observe(args.idle_seconds)
+        for protocol in ("tcp", "udp"):
+            for rate in args.rates_mbps:
+                phase[0] = f"{protocol}-{rate}M"
+                if cutoff.is_set():
+                    raise RuntimeError(guard["reason"])
+                command = ue_cmd + ["iperf3", "-c", args.server, "-B", source_ip, "-p", "5201",
+                                    "-t", str(args.duration), "-P", "1", "-b", f"{rate}M", "-J",
+                                    "--get-server-output", "--connect-timeout", "5000"]
+                if protocol == "udp":
+                    command.extend(["-u", "-l", "1200"])
+                label = phase[0]
+                (directory / f"{label}.command.json").write_text(json.dumps(command) + "\n")
+                row = {"phase": label, "target_mbps": rate, "started_at": now()}
+                print(f"{now()} START {label} {args.duration}s", flush=True)
+                process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                deadline = time.monotonic() + args.duration + 15
+                reason = None
+                while True:
+                    try:
+                        stdout, stderr = process.communicate(timeout=1)
+                        break
+                    except subprocess.TimeoutExpired:
+                        if time.monotonic() - guard["last_sample_monotonic"] > 5:
+                            trip("UPF sample stale for more than 5 seconds")
+                        if cutoff.is_set() or time.monotonic() >= deadline:
+                            reason = guard["reason"] or "iperf timeout"
+                            run(ue_cmd + ["pkill", "-TERM", "-x", "iperf3"], timeout=8)
+                            process.kill()
+                            stdout, stderr = process.communicate()
+                            break
+                (directory / f"{label}.json").write_text(stdout)
+                (directory / f"{label}.stderr.txt").write_text(stderr)
+                row.update(ended_at=now(), exit_code=process.returncode)
+                try:
+                    if reason or process.returncode:
+                        raise RuntimeError(reason or stderr or f"exit {process.returncode}")
+                    result = json.loads(stdout)
+                    if result.get("error"):
+                        raise RuntimeError(result["error"])
+                    end = result["end"]
+                    received = (end.get("sum_received") or end["sum"]) if protocol == "udp" else end["sum_received"]
+                    row.update(status="success", receiver_mbps=received["bits_per_second"] / 1e6)
+                    if protocol == "udp":
+                        row.update(lost_packets=received.get("lost_packets"), packets=received.get("packets"),
+                                   loss_percent=received.get("lost_percent"), jitter_ms=received.get("jitter_ms"))
+                    else:
+                        row["retransmits"] = end.get("sum_sent", {}).get("retransmits")
+                except (ValueError, KeyError, RuntimeError) as exc:
+                    row.update(status="failed", error=str(exc))
+                rounds.append(row)
+                (directory / "rounds.json").write_text(json.dumps(rounds, indent=2) + "\n")
+                print(f"{now()} DONE {label} {row['status']} receiver={row.get('receiver_mbps')}", flush=True)
+                phase[0] = f"cooldown-{label}"
+                if row["status"] == "failed":
+                    run(ue_cmd + ["pkill", "-TERM", "-x", "iperf3"], timeout=8)
+                    # Continue sampling without applying any new load.
+                    finish.wait(min(args.cooldown_seconds, 30))
+                    raise RuntimeError(row["error"])
+                observe(args.cooldown_seconds)
+    except Exception as exc:
+        failure = str(exc)
+        print(f"{now()} STOP {failure}", flush=True)
+    finally:
+        finish.set()
+        thread.join(timeout=10)
+        metadata.update(end_time=now(), failure=failure, safety_stop=guard["reason"])
+        status = kubectl("get", "pod", upf["metadata"]["name"], "-n", args.namespace, "-o", "json")
+        if status[0] == 0:
+            current = json.loads(status[1])
+            metadata["upf_final_status"] = current["status"].get("containerStatuses", [])
+        (directory / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
+        grouped = {}
+        for sample in samples:
+            grouped.setdefault(sample["phase"], []).append(sample)
+        summary = {"failure": failure, "safety_stop": guard["reason"], "rounds": rounds, "phases": {}}
+        for name, values in grouped.items():
+            summary["phases"][name] = {
+                "samples": len(values), "memory_start_mib": values[0]["memory_mib"],
+                "memory_end_mib": values[-1]["memory_mib"],
+                "memory_peak_mib": max(v["memory_mib"] for v in values),
+                "anon_end_mib": values[-1]["memory_stat"].get("anon", 0) / 1024**2,
+                "cpu_cores": stats([v["cpu_cores"] for v in values if "cpu_cores" in v]),
+                "oom_kill_end": values[-1]["memory_events"].get("oom_kill", 0)}
+        (directory / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+        print(json.dumps(summary, indent=2), flush=True)
+    if failure:
+        raise SystemExit(1)
+
+
 def summarize(directory):
     rows = list(csv.DictReader((directory / "rounds.csv").open()))
     rtts = []
@@ -113,9 +311,19 @@ def main():
     parser.add_argument("--duration", type=int, default=30)
     parser.add_argument("--warmup", type=int, default=3)
     parser.add_argument("--ping-count", type=int, default=30)
+    parser.add_argument("--stability", action="store_true", help="Bounded load diagnostic, not full throughput benchmark")
+    parser.add_argument("--rates-mbps", nargs="+", type=int, default=[5, 10, 20])
+    parser.add_argument("--idle-seconds", type=int, default=60)
+    parser.add_argument("--cooldown-seconds", type=int, default=30)
+    parser.add_argument("--memory-stop-mib", type=int, default=512)
     parser.add_argument("--modes", nargs="+", choices=["rtt", "tcp-up", "tcp-down", "udp-up"],
                         default=["rtt", "tcp-up", "tcp-down", "udp-up"])
     args = parser.parse_args()
+    if args.stability:
+        if min(args.rates_mbps + [args.duration, args.idle_seconds, args.cooldown_seconds, args.memory_stop_mib]) <= 0:
+            parser.error("Stability diagnostic parameters must be positive")
+        stability_test(args)
+        return
     directory = Path(args.out_dir)
     directory.mkdir(parents=True, exist_ok=False)
     os.environ.setdefault("KUBECONFIG", "/home/lhm/.kube/config")

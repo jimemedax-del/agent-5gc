@@ -1,0 +1,26 @@
+Extended idle observation; no workload or configuration changes
+{"timestamp": "2026-10-08T07:17:12.497375+00:00", "elapsed_seconds": 0.10007738199783489, "memory_mib": 21.14453125, "anon_mib": 20.08203125, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:17.595593+00:00", "elapsed_seconds": 5.198283780999191, "memory_mib": 21.1015625, "anon_mib": 20.08203125, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:22.699976+00:00", "elapsed_seconds": 10.302666376999696, "memory_mib": 21.22265625, "anon_mib": 20.14453125, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:27.806214+00:00", "elapsed_seconds": 15.40890485500131, "memory_mib": 21.25390625, "anon_mib": 20.14453125, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:32.916811+00:00", "elapsed_seconds": 20.519501998001942, "memory_mib": 21.30078125, "anon_mib": 20.20703125, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:38.017348+00:00", "elapsed_seconds": 25.620039014000213, "memory_mib": 21.29296875, "anon_mib": 20.2109375, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:43.123568+00:00", "elapsed_seconds": 30.72626062400377, "memory_mib": 21.37109375, "anon_mib": 20.2734375, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:48.228945+00:00", "elapsed_seconds": 35.83163611600321, "memory_mib": 21.2734375, "anon_mib": 20.26953125, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:53.329830+00:00", "elapsed_seconds": 40.93252174900408, "memory_mib": 9.42578125, "anon_mib": 8.34765625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:17:58.443049+00:00", "elapsed_seconds": 46.04573933400388, "memory_mib": 9.4765625, "anon_mib": 8.34765625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:03.549253+00:00", "elapsed_seconds": 51.15194347900251, "memory_mib": 9.4765625, "anon_mib": 8.34765625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:08.652113+00:00", "elapsed_seconds": 56.25480539200362, "memory_mib": 9.38671875, "anon_mib": 8.3515625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:13.754697+00:00", "elapsed_seconds": 61.3573885720034, "memory_mib": 9.67578125, "anon_mib": 8.4140625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:18.864448+00:00", "elapsed_seconds": 66.46716021400061, "memory_mib": 9.95703125, "anon_mib": 8.4140625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:23.965512+00:00", "elapsed_seconds": 71.56820418500138, "memory_mib": 9.63671875, "anon_mib": 8.48046875, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:29.066346+00:00", "elapsed_seconds": 76.66903677899973, "memory_mib": 9.5, "anon_mib": 8.4765625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:34.168985+00:00", "elapsed_seconds": 81.77167567900324, "memory_mib": 9.58203125, "anon_mib": 8.54296875, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:39.270175+00:00", "elapsed_seconds": 86.8728658580003, "memory_mib": 9.609375, "anon_mib": 8.5390625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:44.372501+00:00", "elapsed_seconds": 91.97519581900269, "memory_mib": 9.68359375, "anon_mib": 8.6015625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:49.484029+00:00", "elapsed_seconds": 97.08671992600284, "memory_mib": 9.7578125, "anon_mib": 8.60546875, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:54.593604+00:00", "elapsed_seconds": 102.19629455899849, "memory_mib": 9.69140625, "anon_mib": 8.66796875, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:18:59.693353+00:00", "elapsed_seconds": 107.29604363100225, "memory_mib": 9.76953125, "anon_mib": 8.66796875, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:19:04.795028+00:00", "elapsed_seconds": 112.3977199400033, "memory_mib": 9.83984375, "anon_mib": 8.73046875, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:19:09.892419+00:00", "elapsed_seconds": 117.49510998900223, "memory_mib": 9.90234375, "anon_mib": 8.7265625, "oom_kill": 0}
+{"timestamp": "2026-10-08T07:19:14.994431+00:00", "elapsed_seconds": 122.59712326800218, "memory_mib": 9.85546875, "anon_mib": 8.79296875, "oom_kill": 0}

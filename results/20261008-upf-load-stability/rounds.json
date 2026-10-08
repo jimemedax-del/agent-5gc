@@ -1,0 +1,71 @@
+[
+  {
+    "phase": "tcp-5M",
+    "target_mbps": 5,
+    "started_at": "2026-10-08T07:09:44.292219+00:00",
+    "ended_at": "2026-10-08T07:10:24.456364+00:00",
+    "exit_code": 0,
+    "status": "success",
+    "receiver_mbps": 3.7700238937941175,
+    "retransmits": 0
+  },
+  {
+    "phase": "tcp-10M",
+    "target_mbps": 10,
+    "started_at": "2026-10-08T07:10:54.490970+00:00",
+    "ended_at": "2026-10-08T07:11:34.678430+00:00",
+    "exit_code": 0,
+    "status": "success",
+    "receiver_mbps": 7.514648162430734,
+    "retransmits": 10
+  },
+  {
+    "phase": "tcp-20M",
+    "target_mbps": 20,
+    "started_at": "2026-10-08T07:12:04.714449+00:00",
+    "ended_at": "2026-10-08T07:12:44.908753+00:00",
+    "exit_code": 0,
+    "status": "success",
+    "receiver_mbps": 15.004430614016607,
+    "retransmits": 41
+  },
+  {
+    "phase": "udp-5M",
+    "target_mbps": 5,
+    "started_at": "2026-10-08T07:13:14.945144+00:00",
+    "ended_at": "2026-10-08T07:13:45.177787+00:00",
+    "exit_code": 0,
+    "status": "success",
+    "receiver_mbps": 4.999987166699605,
+    "lost_packets": 0,
+    "packets": 15625,
+    "loss_percent": 0,
+    "jitter_ms": 0.04295478254864203
+  },
+  {
+    "phase": "udp-10M",
+    "target_mbps": 10,
+    "started_at": "2026-10-08T07:14:15.214783+00:00",
+    "ended_at": "2026-10-08T07:14:45.459419+00:00",
+    "exit_code": 0,
+    "status": "success",
+    "receiver_mbps": 9.999967333440043,
+    "lost_packets": 0,
+    "packets": 31250,
+    "loss_percent": 0,
+    "jitter_ms": 0.19834884153825152
+  },
+  {
+    "phase": "udp-20M",
+    "target_mbps": 20,
+    "started_at": "2026-10-08T07:15:15.495152+00:00",
+    "ended_at": "2026-10-08T07:15:45.731827+00:00",
+    "exit_code": 0,
+    "status": "success",
+    "receiver_mbps": 19.99944333992048,
+    "lost_packets": 0,
+    "packets": 62499,
+    "loss_percent": 0,
+    "jitter_ms": 0.9528661095492973
+  }
+]

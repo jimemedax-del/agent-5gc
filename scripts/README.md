@@ -94,3 +94,19 @@ iperf3 每轮计量30秒，另有3秒预热，不计入统计；轮间等待2秒
 可用 `--modes rtt` 或 `--modes udp-up` 分项运行。首个失败即停止，超时后尝试清理
 UE 中的 iperf3 进程；失败数据不被替换。参数改变或恢复后的诊断须使用新的结果目录。
 2026-10-08 实际测量因 UPF OOM 未完成吞吐批次，详见[测试记录](../docs/10-controlled-data-plane-baseline.md)。
+
+同一脚本的 `--stability` 模式用于限速稳定性诊断，不测最大吞吐：空载 60 秒，
+TCP/UDP 上行依次为 5、10、20 Mbps，每档 30 秒、无预热，每档结束后观察 30 秒。
+约每秒采集 UPF cgroup v2 内存、匿名内存、CPU 和 OOM 计数；实际间隔还包含
+`kubectl exec` 耗时。达到 512 MiB 或容器限额的 50%（取较小值）、出现 OOM 或
+采样失效时停止负载。保护线不保证绝对杜绝突发 OOM，不代替长期稳定性验证。
+
+```bash
+python3 scripts/measure-controlled-data-plane.py --stability \
+  --out-dir /home/lhm/.work/data-plane-results/<新的唯一诊断目录> \
+  --duration 30 --idle-seconds 60 --cooldown-seconds 30 \
+  --rates-mbps 5 10 20 --memory-stop-mib 512
+```
+
+结果保存为 `upf-cgroup.jsonl`、`rounds.json`、各档 iperf3 JSON、metadata 和 summary。
+保持同一 UPF Pod 和 UE 会话；不修改资源限制、URR、模块版本或网络拓扑。

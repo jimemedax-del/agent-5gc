@@ -1,0 +1,3 @@
+7a5308cadd66272eb4eeda49b45a1bbf07b67940b907f30b573c3581c3b019cc  scripts/measure-controlled-data-plane.py
+Archive SHA256: 51df0eecd235d6c3c51123c760a4d3193cf9b737d9023bfc7a8d195f136d5dc1
+Archive contains the original diagnostic run; extended idle observations are separate.
