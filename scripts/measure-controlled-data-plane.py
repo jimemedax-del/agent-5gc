@@ -3,6 +3,7 @@
 import argparse
 import csv
 import datetime as dt
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -112,6 +113,7 @@ def stability_test(args):
                 "resources": [c.get("resources", {}) for c in upf["spec"]["containers"]],
                 "images": [c["image"] for c in upf["spec"]["containers"]],
                 "upf_initial_status": upf["status"].get("containerStatuses", []),
+                "collector_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 "configuration_changed": False, "warmup_seconds": 0,
                 "sampling": "cgroup v2 via kubectl exec; 1 second gap plus command latency"}
     (directory / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
@@ -170,7 +172,7 @@ def stability_test(args):
     try:
         print(f"{now()} START idle {args.idle_seconds}s", flush=True)
         observe(args.idle_seconds)
-        for protocol in ("tcp", "udp"):
+        for protocol in args.protocols:
             for rate in args.rates_mbps:
                 phase[0] = f"{protocol}-{rate}M"
                 if cutoff.is_set():
@@ -217,6 +219,10 @@ def stability_test(args):
                                    loss_percent=received.get("lost_percent"), jitter_ms=received.get("jitter_ms"))
                     else:
                         row["retransmits"] = end.get("sum_sent", {}).get("retransmits")
+                        sent = end["sum_sent"]
+                        row.update(sender_mbps=sent["bits_per_second"] / 1e6,
+                                   sender_seconds=sent["seconds"], receiver_seconds=received["seconds"],
+                                   sent_bytes=sent["bytes"], received_bytes=received["bytes"])
                 except (ValueError, KeyError, RuntimeError) as exc:
                     row.update(status="failed", error=str(exc))
                 rounds.append(row)
@@ -313,6 +319,7 @@ def main():
     parser.add_argument("--ping-count", type=int, default=30)
     parser.add_argument("--stability", action="store_true", help="Bounded load diagnostic, not full throughput benchmark")
     parser.add_argument("--rates-mbps", nargs="+", type=int, default=[5, 10, 20])
+    parser.add_argument("--protocols", nargs="+", choices=["tcp", "udp"], default=["tcp", "udp"])
     parser.add_argument("--idle-seconds", type=int, default=60)
     parser.add_argument("--cooldown-seconds", type=int, default=30)
     parser.add_argument("--memory-stop-mib", type=int, default=512)

@@ -1,0 +1,71 @@
+{
+  "failure": null,
+  "safety_stop": null,
+  "rounds": [
+    {
+      "phase": "tcp-100M",
+      "target_mbps": 100,
+      "started_at": "2026-10-08T07:35:01.363171+00:00",
+      "ended_at": "2026-10-08T07:35:21.555569+00:00",
+      "exit_code": 0,
+      "status": "success",
+      "receiver_mbps": 49.89894984526786,
+      "retransmits": 150,
+      "sender_mbps": 100.000362796626,
+      "sender_seconds": 10.000093,
+      "receiver_seconds": 20.040761,
+      "sent_bytes": 125001616,
+      "received_bytes": 125001616
+    }
+  ],
+  "phases": {
+    "idle": {
+      "samples": 14,
+      "memory_start_mib": 85.921875,
+      "memory_end_mib": 85.59765625,
+      "memory_peak_mib": 85.97265625,
+      "anon_end_mib": 84.41015625,
+      "cpu_cores": {
+        "count": 13,
+        "mean": 0.011075500880827756,
+        "p50": 0.010285599920200431,
+        "p95": 0.015339177885075928,
+        "min": 0.0097332574227089,
+        "max": 0.018089375909041753
+      },
+      "oom_kill_end": 0
+    },
+    "tcp-100M": {
+      "samples": 18,
+      "memory_start_mib": 26.125,
+      "memory_end_mib": 242.65625,
+      "memory_peak_mib": 260.2578125,
+      "anon_end_mib": 241.1796875,
+      "cpu_cores": {
+        "count": 18,
+        "mean": 0.4588309851038015,
+        "p50": 0.45883976136834037,
+        "p95": 0.9468196601672766,
+        "min": 0.009856420289152727,
+        "max": 0.9490014327252879
+      },
+      "oom_kill_end": 0
+    },
+    "cooldown-tcp-100M": {
+      "samples": 28,
+      "memory_start_mib": 242.95703125,
+      "memory_end_mib": 242.6875,
+      "memory_peak_mib": 243.99609375,
+      "anon_end_mib": 241.17578125,
+      "cpu_cores": {
+        "count": 28,
+        "mean": 0.011449448855461853,
+        "p50": 0.010475988304995517,
+        "p95": 0.016601633290423738,
+        "min": 0.009427670838253242,
+        "max": 0.017475974589359712
+      },
+      "oom_kill_end": 0
+    }
+  }
+}

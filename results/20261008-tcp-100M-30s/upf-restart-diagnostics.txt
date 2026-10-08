@@ -1,0 +1,361 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "checksum/config": "99cd9efd0423722ee0a5d2eb747eae7f834bde04b0649799047c714c4accc57f",
+            "kubectl.kubernetes.io/restartedAt": "2026-10-07T23:30:32+08:00"
+        },
+        "creationTimestamp": "2026-10-08T03:24:18Z",
+        "generateName": "free5gc-helm-free5gc-upf-upf-58ff5d859c-",
+        "labels": {
+            "app.kubernetes.io/instance": "free5gc-helm",
+            "app.kubernetes.io/name": "free5gc-upf",
+            "nf": "upf",
+            "pod-template-hash": "58ff5d859c",
+            "project": "free5gc"
+        },
+        "name": "free5gc-helm-free5gc-upf-upf-58ff5d859c-5mkp2",
+        "namespace": "free5gc",
+        "ownerReferences": [
+            {
+                "apiVersion": "apps/v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicaSet",
+                "name": "free5gc-helm-free5gc-upf-upf-58ff5d859c",
+                "uid": "2a9957ce-9589-424c-bae2-fe701944675d"
+            }
+        ],
+        "resourceVersion": "89313",
+        "uid": "5ef36d88-8aa7-4643-9ac9-4a05807f8cf0"
+    },
+    "spec": {
+        "affinity": {},
+        "containers": [
+            {
+                "command": [
+                    "/free5gc/config//wrapper.sh"
+                ],
+                "image": "free5gc/upf:v4.2.2",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                    "exec": {
+                        "command": [
+                            "/bin/sh",
+                            "-c",
+                            "grep -q ':2265 .* 07 ' /proc/net/udp || grep -q ':2265 .* 07 ' /proc/net/udp6"
+                        ]
+                    },
+                    "failureThreshold": 3,
+                    "initialDelaySeconds": 50,
+                    "periodSeconds": 10,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 10
+                },
+                "name": "upf",
+                "ports": [
+                    {
+                        "containerPort": 8805,
+                        "name": "n4",
+                        "protocol": "UDP"
+                    }
+                ],
+                "readinessProbe": {
+                    "exec": {
+                        "command": [
+                            "/bin/sh",
+                            "-c",
+                            "grep -q ':2265 .* 07 ' /proc/net/udp || grep -q ':2265 .* 07 ' /proc/net/udp6"
+                        ]
+                    },
+                    "failureThreshold": 40,
+                    "initialDelaySeconds": 10,
+                    "periodSeconds": 1,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                },
+                "resources": {
+                    "limits": {
+                        "cpu": "1",
+                        "memory": "1Gi"
+                    },
+                    "requests": {
+                        "cpu": "500m",
+                        "memory": "512Mi"
+                    }
+                },
+                "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                        "add": [
+                            "NET_ADMIN"
+                        ]
+                    }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/free5gc/config/",
+                        "name": "free5gc-helm-free5gc-upf-upf-volume"
+                    },
+                    {
+                        "mountPath": "/free5gc/config/TLS",
+                        "name": "free5gc-helm-free5gc-upf-upf-empty-volume"
+                    },
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "kube-api-access-tcl9x",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "worker-upf",
+        "nodeSelector": {
+            "5gc.free5gc.org/gtp5g": "true",
+            "5gc.free5gc.org/plane": "user"
+        },
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+            "sysctls": [
+                {
+                    "name": "net.ipv4.ip_forward",
+                    "value": "1"
+                }
+            ]
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "free5gc-helm-free5gc-upf-upf-volume",
+                "projected": {
+                    "defaultMode": 420,
+                    "sources": [
+                        {
+                            "configMap": {
+                                "items": [
+                                    {
+                                        "key": "upfcfg.yaml",
+                                        "path": "upfcfg.yaml"
+                                    },
+                                    {
+                                        "key": "wrapper.sh",
+                                        "mode": 511,
+                                        "path": "wrapper.sh"
+                                    }
+                                ],
+                                "name": "free5gc-helm-free5gc-upf-upf-configmap"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "emptyDir": {},
+                "name": "free5gc-helm-free5gc-upf-upf-empty-volume"
+            },
+            {
+                "name": "kube-api-access-tcl9x",
+                "projected": {
+                    "defaultMode": 420,
+                    "sources": [
+                        {
+                            "serviceAccountToken": {
+                                "expirationSeconds": 3607,
+                                "path": "token"
+                            }
+                        },
+                        {
+                            "configMap": {
+                                "items": [
+                                    {
+                                        "key": "ca.crt",
+                                        "path": "ca.crt"
+                                    }
+                                ],
+                                "name": "kube-root-ca.crt"
+                            }
+                        },
+                        {
+                            "downwardAPI": {
+                                "items": [
+                                    {
+                                        "fieldRef": {
+                                            "apiVersion": "v1",
+                                            "fieldPath": "metadata.namespace"
+                                        },
+                                        "path": "namespace"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-08T03:24:17Z",
+                "status": "True",
+                "type": "PodReadyToStartContainers"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-08T03:24:15Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-08T07:36:22Z",
+                "message": "containers with unready status: [upf]",
+                "reason": "ContainersNotReady",
+                "status": "False",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-08T07:36:22Z",
+                "message": "containers with unready status: [upf]",
+                "reason": "ContainersNotReady",
+                "status": "False",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-08T03:24:18Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "containerd://9ab4525a8a0c73b52accdf82bffe9dde7d15a44fb9e17e99e1ef440eb2dc2eea",
+                "image": "docker.io/free5gc/upf:v4.2.2",
+                "imageID": "docker.io/free5gc/upf@sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04",
+                "lastState": {
+                    "terminated": {
+                        "containerID": "containerd://9ab4525a8a0c73b52accdf82bffe9dde7d15a44fb9e17e99e1ef440eb2dc2eea",
+                        "exitCode": 0,
+                        "finishedAt": "2026-10-08T07:37:58Z",
+                        "reason": "Completed",
+                        "startedAt": "2026-10-08T07:37:58Z"
+                    }
+                },
+                "name": "upf",
+                "ready": false,
+                "restartCount": 4,
+                "started": false,
+                "state": {
+                    "waiting": {
+                        "message": "back-off 1m20s restarting failed container=upf pod=free5gc-helm-free5gc-upf-upf-58ff5d859c-5mkp2_free5gc(5ef36d88-8aa7-4643-9ac9-4a05807f8cf0)",
+                        "reason": "CrashLoopBackOff"
+                    }
+                }
+            }
+        ],
+        "hostIP": "192.168.244.129",
+        "hostIPs": [
+            {
+                "ip": "192.168.244.129"
+            }
+        ],
+        "phase": "Running",
+        "podIP": "10.42.1.17",
+        "podIPs": [
+            {
+                "ip": "10.42.1.17"
+            }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-10-08T03:24:15Z"
+    }
+}
+[wrapper] UPF Pod IP detected: 10.42.1.17
+[wrapper] UPF PFCP config:
+pfcp:
+  addr: 10.42.1.17 # IP addr for listening - replaced at runtime
+  nodeID: 10.42.1.17 # External IP or FQDN can be reached - replaced at runtime
+  retransTimeout: 1s # retransmission timeout
+[wrapper] Waiting for upfgtp interface...
+[wrapper] upfgtp interface is ready
+[wrapper] Starting UPF with dynamic config
+2026-10-08T07:37:58.351934967Z[36m [INFO][UPF][Main] [0mUPF version:  
+	free5GC version: v4.2.2
+	build time:      2026-04-21T03:16:03Z
+	commit hash:     04c1ab64
+	commit time:     2026-04-18T13:02:58Z
+	go version:      go1.25.5 linux/amd64
+2026-10-08T07:37:58.352013952Z[36m [INFO][UPF][CFG] [0mRead config from [/tmp/upfcfg.yaml]
+2026-10-08T07:37:58.352155968Z[36m [INFO][UPF][CFG] [0m==================================================
+2026-10-08T07:37:58.352161779Z[36m [INFO][UPF][CFG] [0m(*factory.Config)(0xc000512820)({
+	Version: (string) (len=5) "1.0.3",
+	Description: (string) (len=31) "UPF initial local configuration",
+	Pfcp: (*factory.Pfcp)(0xc00051ba10)({
+		Addr: (string) (len=10) "10.42.1.17",
+		NodeID: (string) (len=10) "10.42.1.17",
+		RetransTimeout: (time.Duration) 1s,
+		MaxRetrans: (uint8) 3
+	}),
+	Gtpu: (*factory.Gtpu)(0xc00051bbc0)({
+		Forwarder: (string) (len=5) "gtp5g",
+		IfList: ([]factory.IfInfo) (len=1 cap=1) {
+			(factory.IfInfo) {
+				Addr: (string) (len=10) "10.42.1.17",
+				Type: (string) (len=2) "N3",
+				Name: (string) "",
+				IfName: (string) "",
+				MTU: (uint32) 0
+			}
+		}
+	}),
+	DnnList: ([]factory.DnnList) (len=1 cap=1) {
+		(factory.DnnList) {
+			Dnn: (string) (len=8) "internet",
+			Cidr: (string) (len=12) "10.60.0.0/16",
+			NatIfName: (string) ""
+		}
+	},
+	Logger: (*factory.Logger)(0xc000522ae0)({
+		Enable: (bool) true,
+		Level: (string) (len=4) "info",
+		ReportCaller: (bool) false
+	})
+})
+2026-10-08T07:37:58.352163957Z[36m [INFO][UPF][CFG] [0m==================================================
+2026-10-08T07:37:58.352166146Z[36m [INFO][UPF][Main] [0mLog level is set to [info]
+2026-10-08T07:37:58.352167690Z[36m [INFO][UPF][Main] [0mReport Caller is set to [false]
+2026-10-08T07:37:58.352176393Z[36m [INFO][UPF][Main] [0mstarting Gtpu Forwarder [gtp5g]
+2026-10-08T07:37:58.352181523Z[36m [INFO][UPF][Main] [0mGTP Address: "10.42.1.17:2152"
+2026-10-08T07:37:58.352391236Z[31m [ERRO][UPF][Main] [0mUPF Cli Run Error: open Gtp5g: open link: create: file exists
+LAST SEEN   TYPE      REASON    OBJECT                                              MESSAGE
+92s         Normal    Pulled    pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-5mkp2   Container image "free5gc/upf:v4.2.2" already present on machine
+92s         Normal    Created   pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-5mkp2   Created container: upf
+92s         Normal    Started   pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-5mkp2   Started container upf
+91s         Warning   BackOff   pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-5mkp2   Back-off restarting failed container upf in pod free5gc-helm-free5gc-upf-upf-58ff5d859c-5mkp2_free5gc(5ef36d88-8aa7-4643-9ac9-4a05807f8cf0)

@@ -110,3 +110,8 @@ python3 scripts/measure-controlled-data-plane.py --stability \
 
 结果保存为 `upf-cgroup.jsonl`、`rounds.json`、各档 iperf3 JSON、metadata 和 summary。
 保持同一 UPF Pod 和 UE 会话；不修改资源限制、URR、模块版本或网络拓扑。
+
+高档位诊断可用 `--protocols tcp` 只测 TCP，再以 `--rates-mbps 50` 或 `100`
+指定单档；每档先 `--duration 10`，通过后再以新目录测 `--duration 30`。
+保留相同保护线，失败则停止后续档位。TCP 结果同时记录发送/接收速率、窗口时长、
+字节数与重传，避免把不一致的统计窗口误判为丢包；metadata 保存采集脚本 SHA256。

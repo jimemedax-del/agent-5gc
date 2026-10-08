@@ -1,0 +1,17 @@
+[
+  {
+    "phase": "tcp-100M",
+    "target_mbps": 100,
+    "started_at": "2026-10-08T07:35:01.363171+00:00",
+    "ended_at": "2026-10-08T07:35:21.555569+00:00",
+    "exit_code": 0,
+    "status": "success",
+    "receiver_mbps": 49.89894984526786,
+    "retransmits": 150,
+    "sender_mbps": 100.000362796626,
+    "sender_seconds": 10.000093,
+    "receiver_seconds": 20.040761,
+    "sent_bytes": 125001616,
+    "received_bytes": 125001616
+  }
+]
