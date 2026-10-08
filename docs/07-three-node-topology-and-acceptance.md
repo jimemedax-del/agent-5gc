@@ -13,6 +13,8 @@
 - [已验证] 固定提交、受控补丁、单节点基线 Values 与多节点放置覆盖组合后，free5GC 和 UERANSIM Chart 均通过 `helm lint` 与 `helm template`。
 - [已验证] 已真实完成多节点迁移：控制面 NF 与 MongoDB 位于 VM1，UPF 位于 VM2，gNB/UE 位于 VM3；`free5gc-helm` 为 Revision 11、`ueransim` 为 Revision 3，均为 `deployed`。
 - [已验证] UE 已完成注册、鉴权和 PDU Session，获得 `uesimtun0 (10.60.0.4/16)`；绑定该接口对 `1.1.1.1` 的 10 包测试为 10/10 成功（平均 RTT 270.617 ms）。
+- [已验证] 三节点功能基线已完成 20 轮 UE 重启测量：注册、PDU Session 与 `uesimtun0` 均为 20/20 成功；详细口径和原始数据见[功能基线测量](08-multinode-functional-baseline.md)。公网 Ping 不作为平台时延结论。
+- [已测，吞吐未完成] 2026-10-08 已安装 VM1 iperf3 服务与 UE 持久化客户端镜像，UERANSIM 升级到 Revision 4；受控 RTT 300/300 成功、均值 1.354 ms。TCP 压测触发 UPF 1Gi 容器内存限制，服务已恢复，完整吞吐批次暂停；详见[数据面基线](10-controlled-data-plane-baseline.md)。上述 Revision 3 为三节点迁移验收时的版本。
 - [边界] Tailscale只用于远程管理。k3s节点间通信优先使用VMware局域网，避免把Kubernetes覆盖网络再次套入Tailscale隧道。
 - [边界] 三台VM位于同一宿主机和虚拟交换网络，天然时延几乎相同；后续必须使用独立VMnet或`tc netem`构造受控的core/edge路径差异。
 

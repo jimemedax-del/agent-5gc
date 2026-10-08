@@ -1,0 +1,27 @@
+Path preflight, 2026-10-08 Asia/Shanghai
+UE tunnel address: 10.60.0.26
+gNB Pod: 10.42.2.57 on ran-test / VM3
+UPF Pod: 10.42.1.16 on worker-upf / VM2
+Server: 192.168.244.128 / VM1
+Bound-interface ping: 5 transmitted, 5 received, 0% loss (preflight only).
+UPF MASQUERADE counter: 22 packets / 1848 bytes -> 23 packets / 1932 bytes.
+NAT counters count newly tracked flows, not every packet.
+
+VM2 cni0 packet capture, filtered to UDP 2152, during the preflight:
+11:15:46.992661 IP (tos 0x0, ttl 62, id 38112, offset 0, flags [DF], proto UDP (17), length 128)
+    10.42.2.57.2152 > 10.42.1.16.2152: [udp sum ok] UDP, length 100
+11:15:46.996899 IP (tos 0x0, ttl 64, id 2131, offset 0, flags [none], proto UDP (17), length 128)
+    10.42.1.16.2152 > 10.42.2.57.2152: [no cksum] UDP, length 100
+11:15:47.192533 IP (tos 0x0, ttl 62, id 38215, offset 0, flags [DF], proto UDP (17), length 128)
+    10.42.2.57.2152 > 10.42.1.16.2152: [udp sum ok] UDP, length 100
+11:15:47.192800 IP (tos 0x0, ttl 64, id 2143, offset 0, flags [none], proto UDP (17), length 128)
+    10.42.1.16.2152 > 10.42.2.57.2152: [no cksum] UDP, length 100
+11:15:47.392835 IP (tos 0x0, ttl 62, id 38402, offset 0, flags [DF], proto UDP (17), length 128)
+    10.42.2.57.2152 > 10.42.1.16.2152: [udp sum ok] UDP, length 100
+11:15:47.393061 IP (tos 0x0, ttl 64, id 2166, offset 0, flags [none], proto UDP (17), length 128)
+    10.42.1.16.2152 > 10.42.2.57.2152: [no cksum] UDP, length 100
+6 packets captured
+6 packets received by filter
+0 packets dropped by kernel
+
+Preflight ping and packet capture are excluded from formal measurement statistics.

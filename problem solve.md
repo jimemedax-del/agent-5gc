@@ -899,6 +899,27 @@ sudo systemctl restart tailscaled
 
 ---
 
+# PS-006：受控 TCP 压测触发 UPF OOM，容器重启无法恢复
+
+## 1. 现象与证据
+
+2026-10-08，VM3 UE 经 VM2 UPF 向 VM1 iperf3 进行 TCP 单流压测。首轮未完成，
+VM2 内核在 11:19:43 报告 `CONSTRAINT_MEMCG` 并杀死 `upf`，匿名驻留内存约 1Gi，
+对应 UPF 容器 1Gi 限制。后续重启出现 `open Gtp5g: ... create: file exists`。
+
+已确定直接失败机制是容器 OOM 及同 Pod 内残留 `upfgtp`。为何负载期间内存增长
+尚未确定；SMF 的大量 URR quota 报告只是线索，不足以证明根因。
+
+## 2. 恢复与边界
+
+停止 UE，删除并重建 UPF Pod；等待 Ready 后重启 SMF，以重新解析已变化的 UPF
+Pod IP，再启动 UE。恢复后注册、PDU Session、TUN Ping 5/5 成功，5 秒 20 Mbps
+UDP 探测零丢包。资源限额、URR 和模块版本均未修改；根因未修复，不能宣称长期稳定。
+
+完整数据、方法和后续诊断边界见[受控数据面基线](docs/10-controlled-data-plane-baseline.md)。
+
+---
+
 ## 新案例追加模板
 
 ```markdown

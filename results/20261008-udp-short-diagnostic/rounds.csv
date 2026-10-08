@@ -1,0 +1,2 @@
+mode,round,started_at,ended_at,status,exit_code,receiver_mbps,jitter_ms,lost_packets,packets_tx,packets_rx,loss_percent,tcp_retransmits,error
+udp-up,1,2026-10-08T03:26:17.185966+00:00,2026-10-08T03:26:22.494842+00:00,success,0,19.996356080894998,0.718011659846805,0,,10415,0,,

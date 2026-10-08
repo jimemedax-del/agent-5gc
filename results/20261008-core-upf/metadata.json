@@ -1,0 +1,603 @@
+{
+  "start_time": "2026-10-08T03:18:03.924737+00:00",
+  "server": "192.168.244.128",
+  "ue_pod": "ueransim-ue-594d88c755-bjqmn",
+  "source_ip": "10.60.0.26",
+  "route": "192.168.244.128 from 10.60.0.26 dev uesimtun0 table rt_uesimtun0 uid 0 \n    cache \n",
+  "parameters": {
+    "out_dir": "/home/lhm/.work/data-plane-results/20261008-core-upf",
+    "server": "192.168.244.128",
+    "namespace": "free5gc",
+    "rounds": 10,
+    "duration": 30,
+    "warmup": 3,
+    "ping_count": 30
+  },
+  "tcp_streams": 1,
+  "udp_target_mbps": 20,
+  "udp_payload_bytes": 1200,
+  "ping_interval_seconds": 0.2,
+  "placement": "core-upf-vm2",
+  "pods": [
+    {
+      "name": "free5gc-helm-free5gc-amf-amf-9f7467b59-qcg5s",
+      "uid": "74d9f3bb-64b4-400d-ad1f-7a922728bc05",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.119",
+      "containers": [
+        {
+          "name": "amf",
+          "image": "free5gc/amf:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "300m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "150m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://1b7e2620bfc7337589724da46158b3750b1541bd036428a42e14d2866b32dbb7",
+          "image": "docker.io/free5gc/amf:v4.2.2",
+          "imageID": "docker.io/free5gc/amf@sha256:8fc343349f7b0d55a257ecae328bff4e2d4b6800004ed932c128b2699a3860e7",
+          "lastState": {},
+          "name": "amf",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:33Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-ausf-ausf-747649f6f6-h6mr2",
+      "uid": "bc6a4332-f72d-4eee-b2cc-c60192a66aa7",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.120",
+      "containers": [
+        {
+          "name": "ausf",
+          "image": "free5gc/ausf:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://681a215872d37e8c1be9181cb5ee9b615665911475bc0bcb5a1cafeaf885ec5b",
+          "image": "docker.io/free5gc/ausf:v4.2.2",
+          "imageID": "docker.io/free5gc/ausf@sha256:ec2752692a10c879cbe9c76d27377794bb26774abbb776e5a59df1f7eded3bf7",
+          "lastState": {},
+          "name": "ausf",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:34Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-chf-chf-6544cd6848-5k7zs",
+      "uid": "38f018d5-f19b-4a89-ab70-57c3bcb78087",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.130",
+      "containers": [
+        {
+          "name": "chf",
+          "image": "free5gc/chf:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://7f49a4393ae579cb723ddbcf7f4285aafe0dc48658104ddb8ef6747d42a7ca31",
+          "image": "docker.io/free5gc/chf:v4.2.2",
+          "imageID": "docker.io/free5gc/chf@sha256:22705af4e06ddb8e29d8103cb5b05e637059dbfb397df27f5f0a44843335d846",
+          "lastState": {},
+          "name": "chf",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:46:52Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-nef-nef-f458776bb-8jqxz",
+      "uid": "47c84fea-5942-400f-adcb-f886124c3af5",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.122",
+      "containers": [
+        {
+          "name": "nef",
+          "image": "free5gc/nef:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://08345ee6a53a03e9853b976fcfb4ee36238b16d2c30f9458b05fa0a2bd33dc29",
+          "image": "docker.io/free5gc/nef:v4.2.2",
+          "imageID": "docker.io/free5gc/nef@sha256:ad98ab4a9d9aff9733f4dc12a212057abf039f992bdd4736107be28431eb0a90",
+          "lastState": {},
+          "name": "nef",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:34Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-nrf-nrf-9d864dc66-l24kj",
+      "uid": "754cea2c-6b71-4dac-91ae-a41455b36aee",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.112",
+      "containers": [
+        {
+          "name": "nrf",
+          "image": "free5gc/nrf:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://a520db169d7444d3629efa966128470cab15eece04e3b69babb61a1c48ea9f0a",
+          "image": "docker.io/free5gc/nrf:v4.2.2",
+          "imageID": "docker.io/free5gc/nrf@sha256:0811f4af5038ad9fc366321cbc104910dfb09503a50d08a9184850980419e0d9",
+          "lastState": {},
+          "name": "nrf",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:26:03Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-nssf-nssf-7576df9757-qwlpq",
+      "uid": "409af624-d536-4b91-919a-3d55e5f93da2",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.123",
+      "containers": [
+        {
+          "name": "nssf",
+          "image": "free5gc/nssf:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://67deb6453b77f319f101dcd797c272780065e7108b00171d0f506c90609048b5",
+          "image": "docker.io/free5gc/nssf:v4.2.2",
+          "imageID": "docker.io/free5gc/nssf@sha256:beea02cca34919f86b6711cc901a008701b790cfccf3fd64d712590bb646af87",
+          "lastState": {},
+          "name": "nssf",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:34Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-pcf-pcf-d886d6f7f-p76ml",
+      "uid": "7c6842dc-23bf-443a-a21c-aa5c2c71cf3f",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.124",
+      "containers": [
+        {
+          "name": "pcf",
+          "image": "free5gc/pcf:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://0f4032c2025fca79adbbb00197196ac59cff244fdfa6adf1495f0f37901621c0",
+          "image": "docker.io/free5gc/pcf:v4.2.2",
+          "imageID": "docker.io/free5gc/pcf@sha256:b6208c82a02917cb6d620336d1245c00d875254e2c9bd28416c2e250a43453a4",
+          "lastState": {},
+          "name": "pcf",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:34Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-smf-smf-77698649d9-vgztp",
+      "uid": "bc0f78c1-423a-4ecc-9af0-7876a813b553",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.129",
+      "containers": [
+        {
+          "name": "smf",
+          "image": "free5gc/smf:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://7dc72291bf1831e2255aabdfa936b3bec88e710f6be9998426128e3d0b103f04",
+          "image": "docker.io/free5gc/smf:v4.2.2",
+          "imageID": "docker.io/free5gc/smf@sha256:55043e366af867fda567156709c1dcf1ddad8827c2a246a64e0d4f6fea23718f",
+          "lastState": {},
+          "name": "smf",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:39:26Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-udm-udm-6b78f656bf-frm4f",
+      "uid": "d7a47350-8dcb-4d8c-9a99-07b14bb511df",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.127",
+      "containers": [
+        {
+          "name": "udm",
+          "image": "free5gc/udm:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://eee83fc103934a329aefa8c01d3f0f6ccef2d32fab0056ceaa223fdc9f850063",
+          "image": "docker.io/free5gc/udm:v4.2.2",
+          "imageID": "docker.io/free5gc/udm@sha256:3c0ea07415976e01352a4d6ca65d29dfb253247548e873decb6f45246da75562",
+          "lastState": {},
+          "name": "udm",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:35Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-udr-udr-7989f78997-hm6fn",
+      "uid": "c4944d92-466a-47df-89c5-8a8f78a9152b",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.126",
+      "containers": [
+        {
+          "name": "udr",
+          "image": "free5gc/udr:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://49b7d6a255d5c9dc1f18c1c385a87b6cf907e0c114bc8db973ddf55838ac186f",
+          "image": "docker.io/free5gc/udr:v4.2.2",
+          "imageID": "docker.io/free5gc/udr@sha256:955b91fc7b5082e8732b578fb0df729ed730a8ae4c196304e03f946965a1eb85",
+          "lastState": {},
+          "name": "udr",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:35Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-upf-upf-58ff5d859c-6mlhc",
+      "uid": "7b7e7ccd-2bd0-4b1b-86fb-0121b1ec835f",
+      "node": "worker-upf",
+      "pod_ip": "10.42.1.16",
+      "containers": [
+        {
+          "name": "upf",
+          "image": "free5gc/upf:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "1",
+              "memory": "1Gi"
+            },
+            "requests": {
+              "cpu": "500m",
+              "memory": "512Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://18a70273dd5af23c10dc7493951b144870cf1fbb6ec7286e53f33fdd4327426b",
+          "image": "docker.io/free5gc/upf:v4.2.2",
+          "imageID": "docker.io/free5gc/upf@sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04",
+          "lastState": {},
+          "name": "upf",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:33Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "free5gc-helm-free5gc-webui-webui-849f7697f4-qwjsn",
+      "uid": "3c8b58c1-0df3-445a-afaa-aa4064d028b0",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.128",
+      "containers": [
+        {
+          "name": "webui",
+          "image": "free5gc/webui:v4.2.2",
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://03c4c03e71d1a9d031eed10f21a0f009c11f740970cd55cf7efaa3d779ff18ef",
+          "image": "docker.io/free5gc/webui:v4.2.2",
+          "imageID": "docker.io/free5gc/webui@sha256:170842263d72bcc7a8caa88ac31ebd8c6c5b2828f2159a9198d7c83066b7497d",
+          "lastState": {},
+          "name": "webui",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:30:36Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "mongodb-0",
+      "uid": "236b97e8-303a-4a35-ba2b-813dd9cc83fd",
+      "node": "lhm-virtual-machine",
+      "pod_ip": "10.42.0.118",
+      "containers": [
+        {
+          "name": "mongodb",
+          "image": "docker.io/bitnamilegacy/mongodb:7.0.9-debian-12-r4",
+          "resources": {
+            "limits": {
+              "cpu": "750m",
+              "ephemeral-storage": "1Gi",
+              "memory": "768Mi"
+            },
+            "requests": {
+              "cpu": "500m",
+              "ephemeral-storage": "50Mi",
+              "memory": "512Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://c154b3bf6b8e6d674a5a7dd71ffabe34641451ce5413e10056445460f4c811f4",
+          "image": "docker.io/bitnamilegacy/mongodb:7.0.9-debian-12-r4",
+          "imageID": "docker.io/bitnamilegacy/mongodb@sha256:62fb92d0111f8dc0565b7daf8a57279fd09520020b79fd3bc550deb3ae5aee70",
+          "lastState": {},
+          "name": "mongodb",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-07T15:25:53Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ueransim-gnb-7746d4c977-dxf5x",
+      "uid": "b3f7f653-cae3-4c2c-89dc-9ad535ee36aa",
+      "node": "ran-test",
+      "pod_ip": "10.42.2.57",
+      "containers": [
+        {
+          "name": "gnb",
+          "image": "free5gc/ueransim:v4.0.1",
+          "resources": {
+            "requests": {
+              "cpu": "100m",
+              "memory": "256Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://3f31b245f4c29887ea546258817c5bc779d1433ed6efd61834e7b4c0dfdb1454",
+          "image": "docker.io/free5gc/ueransim:v4.0.1",
+          "imageID": "docker.io/free5gc/ueransim@sha256:4a6745b0c9f0c60173833f8bef89816324e84636e220917bdc682555a299e8ba",
+          "lastState": {},
+          "name": "gnb",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-08T03:15:13Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ueransim-ue-594d88c755-bjqmn",
+      "uid": "1826b5b0-b87b-4466-86bc-fa0e120d5fc0",
+      "node": "ran-test",
+      "pod_ip": "10.42.2.58",
+      "containers": [
+        {
+          "name": "ue",
+          "image": "local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "resources": {
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          }
+        }
+      ],
+      "status": [
+        {
+          "containerID": "containerd://0b16e461229fbf4a6510953be394add1c6196b93e43d58b7a24b13b7450f8e62",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "sha256:6c253f1aabb68cd6490a26de33dcd7ad124c503565ad2bb8eee61a3de658adc4",
+          "lastState": {},
+          "name": "ue",
+          "ready": true,
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-08T03:15:14Z"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "artificial_delay": false
+}

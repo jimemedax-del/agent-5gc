@@ -1,0 +1,65 @@
+[四 10月  8 11:19:43 2026] zswapped 0
+[四 10月  8 11:19:43 2026] file_mapped 0
+[四 10月  8 11:19:43 2026] file_dirty 0
+[四 10月  8 11:19:43 2026] file_writeback 0
+[四 10月  8 11:19:43 2026] swapcached 0
+[四 10月  8 11:19:43 2026] anon_thp 0
+[四 10月  8 11:19:43 2026] file_thp 0
+[四 10月  8 11:19:43 2026] shmem_thp 0
+[四 10月  8 11:19:43 2026] inactive_anon 8192
+[四 10月  8 11:19:43 2026] active_anon 1070231552
+[四 10月  8 11:19:43 2026] inactive_file 0
+[四 10月  8 11:19:43 2026] active_file 0
+[四 10月  8 11:19:43 2026] unevictable 0
+[四 10月  8 11:19:43 2026] slab_reclaimable 84344
+[四 10月  8 11:19:43 2026] slab_unreclaimable 268352
+[四 10月  8 11:19:43 2026] slab 352696
+[四 10月  8 11:19:43 2026] workingset_refault_anon 0
+[四 10月  8 11:19:43 2026] workingset_refault_file 0
+[四 10月  8 11:19:43 2026] workingset_activate_anon 0
+[四 10月  8 11:19:43 2026] workingset_activate_file 0
+[四 10月  8 11:19:43 2026] workingset_restore_anon 0
+[四 10月  8 11:19:43 2026] workingset_restore_file 0
+[四 10月  8 11:19:43 2026] workingset_nodereclaim 0
+[四 10月  8 11:19:43 2026] pgscan 41
+[四 10月  8 11:19:43 2026] pgsteal 11
+[四 10月  8 11:19:43 2026] pgscan_kswapd 0
+[四 10月  8 11:19:43 2026] pgscan_direct 41
+[四 10月  8 11:19:43 2026] pgscan_khugepaged 0
+[四 10月  8 11:19:43 2026] pgsteal_kswapd 0
+[四 10月  8 11:19:43 2026] pgsteal_direct 11
+[四 10月  8 11:19:43 2026] pgsteal_khugepaged 0
+[四 10月  8 11:19:43 2026] pgfault 13990388
+[四 10月  8 11:19:43 2026] pgmajfault 0
+[四 10月  8 11:19:43 2026] pgrefill 1
+[四 10月  8 11:19:43 2026] pgactivate 0
+[四 10月  8 11:19:43 2026] pgdeactivate 0
+[四 10月  8 11:19:43 2026] pglazyfree 0
+[四 10月  8 11:19:43 2026] pglazyfreed 0
+[四 10月  8 11:19:43 2026] zswpin 0
+[四 10月  8 11:19:43 2026] zswpout 0
+[四 10月  8 11:19:43 2026] zswpwb 0
+[四 10月  8 11:19:43 2026] thp_fault_alloc 0
+[四 10月  8 11:19:43 2026] thp_collapse_alloc 0
+[四 10月  8 11:19:43 2026] thp_swpout 0
+[四 10月  8 11:19:43 2026] thp_swpout_fallback 0
+[四 10月  8 11:19:43 2026] Tasks state (memory values in pages):
+[四 10月  8 11:19:43 2026] [  pid  ]   uid  tgid total_vm      rss rss_anon rss_file rss_shmem pgtables_bytes swapents oom_score_adj name
+[四 10月  8 11:19:43 2026] [ 622411] 65535 622411      243      128        0      128         0    28672        0          -998 pause
+[四 10月  8 11:19:43 2026] [ 622442]     0 622442   561306   263371   261195     2176         0  2211840        0           936 upf
+[四 10月  8 11:19:43 2026] oom-kill:constraint=CONSTRAINT_MEMCG,nodemask=(null),cpuset=cri-containerd-18a70273dd5af23c10dc7493951b144870cf1fbb6ec7286e53f33fdd4327426b.scope,mems_allowed=0,oom_memcg=/kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod7b7e7ccd_2bd0_4b1b_86fb_0121b1ec835f.slice,task_memcg=/kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod7b7e7ccd_2bd0_4b1b_86fb_0121b1ec835f.slice/cri-containerd-18a70273dd5af23c10dc7493951b144870cf1fbb6ec7286e53f33fdd4327426b.scope,task=upf,pid=622442,uid=0
+[四 10月  8 11:19:43 2026] Memory cgroup out of memory: Killed process 622442 (upf) total-vm:2245224kB, anon-rss:1044780kB, file-rss:8704kB, shmem-rss:0kB, UID:0 pgtables:2160kB oom_score_adj:936
+[四 10月  8 11:19:43 2026] Tasks in /kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod7b7e7ccd_2bd0_4b1b_86fb_0121b1ec835f.slice/cri-containerd-18a70273dd5af23c10dc7493951b144870cf1fbb6ec7286e53f33fdd4327426b.scope are going to be killed due to memory.oom.group set
+[四 10月  8 11:19:43 2026] Memory cgroup out of memory: Killed process 624193 (upf) total-vm:2245224kB, anon-rss:1044780kB, file-rss:8704kB, shmem-rss:0kB, UID:0 pgtables:2160kB oom_score_adj:936
+[四 10月  8 11:24:11 2026] cni0: port 2(veth0bf53d07) entered disabled state
+[四 10月  8 11:24:11 2026] veth0bf53d07 (unregistering): left allmulticast mode
+[四 10月  8 11:24:11 2026] veth0bf53d07 (unregistering): left promiscuous mode
+[四 10月  8 11:24:11 2026] cni0: port 2(veth0bf53d07) entered disabled state
+[四 10月  8 11:24:11 2026] cni0: port 1(vethcaafa7b5) entered blocking state
+[四 10月  8 11:24:11 2026] cni0: port 1(vethcaafa7b5) entered disabled state
+[四 10月  8 11:24:11 2026] vethcaafa7b5: entered allmulticast mode
+[四 10月  8 11:24:11 2026] vethcaafa7b5: entered promiscuous mode
+[四 10月  8 11:24:11 2026] cni0: port 1(vethcaafa7b5) entered blocking state
+[四 10月  8 11:24:11 2026] cni0: port 1(vethcaafa7b5) entered forwarding state
+[四 10月  8 11:24:41 2026] [gtp5g] gtp5g_encap_enable: enable gtp5g for the fd(11) type(5)
+[四 10月  8 11:24:41 2026] upfgtp:[gtp5g] gtp5g_newlink: Registered a new 5G GTP interface

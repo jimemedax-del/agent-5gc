@@ -1,7 +1,7 @@
 # 基于 Agent 的 5G 核心网 NF 编排：项目总览与当前状态
 
-> 最后更新：2026-10-07
-> 文档状态：首个版本化基线
+> 最后更新：2026-10-08
+> 文档状态：三节点功能通过；受控数据面测试暴露 UPF OOM，吞吐批次暂停
 
 ## 项目目标
 
@@ -19,7 +19,7 @@
 
 研究重点不是让大模型自由生成 YAML 或直接控制集群，而是让它理解意图、选择受控部署方案，并由确定性代码负责安全和可执行性。
 
-当前已完成 **Docker Compose 与单节点 k3s/Helm 两条 Single UPF 业务基线**；k3s/Helm 已在第二台空白 VM 从零重建并通过端到端验证。第三台空白 Ubuntu VM 已创建，三台 VM 的 VMware 局域网互通已经验证，下一阶段进入三节点集群与 NF 放置。
+当前已完成 **Docker Compose、单节点 k3s/Helm 和三节点 NF 放置业务基线**。三节点为 VM1 控制面、VM2 UPF、VM3 UERANSIM，20 轮注册和建会话均成功。受控数据面 RTT 已完成；TCP 压测触发 UPF 容器 OOM，已恢复服务，下一步先排查负载稳定性，再完成吞吐和 core/edge 对照。
 
 ## 当前结论
 
@@ -29,7 +29,9 @@
 - [已验证] 第三台 VM 已完成 Tailscale/SSH 接入；三台 VM 位于同一 VMware `192.168.244.0/24` 网络并可直接互通。
 - [已确认] 首版用户面采用 Single UPF；不把 ULCL、高可用或在线无损迁移作为 MVP 目标。
 - [已确认] Agent 仅提出受控方案；规则/优化器负责计算，Go 校验器拥有否决权。
-- [待验证] 多节点 Kubernetes、Multus、双 UPF 与真实 core/edge 时延差异。
+- [已验证] 三节点 Kubernetes 与 NF 放置；20/20 注册和 PDU Session 成功。受控 RTT 300/300 收到，均值 1.354 ms。
+- [已发现，待定位] TCP 压测触发 UPF 的 1Gi 内存限制；服务已恢复，尚无完整 TCP 吞吐结果。
+- [待验证] 长时间负载稳定性、Multus、双 UPF 与受控 core/edge 时延差异。
 - [待确认] 导师所说的“NF 挑选”究竟指完整 Profile、NF 实例、NF 类型，还是主要指 NF 放置位置。
 
 ## 已固化的Chart基线
@@ -55,7 +57,7 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 | `scripts/` | 节点初始化、部署、订阅创建和验收工具（待实机验证） |
 | `problem solve.md` | 按问题编号维护的故障、根因、修复和证据 |
 
-临时Chart副本、SSH密钥、运行日志和镜像归档不会进入Git。提交规范与后续协作流程见[CONTRIBUTING.md](CONTRIBUTING.md)。
+临时Chart副本、SSH密钥和镜像归档不会进入Git。可审核的原始测量数据保存在 `results/`，提交前检查敏感信息；`.log` 文件默认忽略。提交规范与后续协作流程见[CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 文档导航
 
@@ -65,6 +67,9 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 | [05-k3s-helm-single-upf-baseline.md](docs/05-k3s-helm-single-upf-baseline.md) | 单节点 k3s/Helm 的实际版本、修补、业务验收与复查命令 |
 | [06-clean-vm-rebuild.md](docs/06-clean-vm-rebuild.md) | 第二台 VM 从零重建的步骤、问题与验证证据 |
 | [07-three-node-topology-and-acceptance.md](docs/07-three-node-topology-and-acceptance.md) | 三节点角色、网络现状、迁移步骤和阶段验收标准 |
+| [08-multinode-functional-baseline.md](docs/08-multinode-functional-baseline.md) | 20 轮注册、PDU Session 功能测量 |
+| [09-controlled-data-endpoint-setup.md](docs/09-controlled-data-endpoint-setup.md) | iperf3 服务端和 UE 客户端配置 |
+| [10-controlled-data-plane-baseline.md](docs/10-controlled-data-plane-baseline.md) | 受控 RTT、未完成吞吐测试及 UPF OOM 证据 |
 | [02-5gc-end-to-end-flow.md](docs/02-5gc-end-to-end-flow.md) | 注册、鉴权、PDU Session 和用户数据流的心智模型 |
 | [03-research-roadmap.md](docs/03-research-roadmap.md) | 研究问题、实施路线、论文方向与待确认事项 |
 | [04-project-notes-method.md](docs/04-project-notes-method.md) | 后续如何维护实验记录、决策记录和文献笔记 |

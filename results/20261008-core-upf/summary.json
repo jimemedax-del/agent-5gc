@@ -1,0 +1,119 @@
+{
+  "generated_at": "2026-10-08T03:27:42.789915+00:00",
+  "rtt_ms": {
+    "count": 300,
+    "mean": 1.3538333333333334,
+    "p50": 1.31,
+    "p95": 1.6805,
+    "min": 1.09,
+    "max": 3.69
+  },
+  "ping": {
+    "tx": 300,
+    "rx": 300,
+    "loss_percent": 0.0
+  },
+  "tcp-up": {
+    "rounds": 5,
+    "successful": 0,
+    "receiver_mbps": {
+      "count": 0,
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    }
+  },
+  "tcp-down": {
+    "rounds": 0,
+    "successful": 0,
+    "receiver_mbps": {
+      "count": 0,
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    }
+  },
+  "udp-up": {
+    "rounds": 0,
+    "successful": 0,
+    "receiver_mbps": {
+      "count": 0,
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    },
+    "jitter_ms": {
+      "count": 0,
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    },
+    "lost_packets": 0,
+    "packets": 0,
+    "loss_percent": null
+  },
+  "node_resources": {
+    "lhm-virtual-machine": {
+      "cpu_cores": {
+        "count": 12,
+        "mean": 0.3746479056666667,
+        "p50": 0.2948342275,
+        "p95": 0.6776082164999999,
+        "min": 0.23497104000000002,
+        "max": 0.800059892
+      },
+      "memory_mib": {
+        "count": 12,
+        "mean": 3421.7610677083335,
+        "p50": 3348.865234375,
+        "p95": 3578.1927734375,
+        "min": 3312.62109375,
+        "max": 3580.4765625
+      }
+    },
+    "ran-test": {
+      "cpu_cores": {
+        "count": 12,
+        "mean": 0.30121328933333336,
+        "p50": 0.0193143765,
+        "p95": 1.0070412039,
+        "min": 0.004697181,
+        "max": 1.009294423
+      },
+      "memory_mib": {
+        "count": 12,
+        "mean": 1230.8603515625,
+        "p50": 1231.189453125,
+        "p95": 1232.405078125,
+        "min": 1227.87890625,
+        "max": 1232.41796875
+      }
+    },
+    "worker-upf": {
+      "cpu_cores": {
+        "count": 12,
+        "mean": 0.24363092800000002,
+        "p50": 0.031585806,
+        "p95": 1.0854456075499996,
+        "min": 0.0059976000000000005,
+        "max": 1.518614761
+      },
+      "memory_mib": {
+        "count": 12,
+        "mean": 2035.9820963541667,
+        "p50": 1953.26953125,
+        "p95": 2422.9439453124996,
+        "min": 1944.8984375,
+        "max": 2830.15234375
+      }
+    }
+  }
+}

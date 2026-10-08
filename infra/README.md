@@ -8,6 +8,8 @@
 | `ueransim-single-node-values.yaml` | 与测试订阅匹配的UERANSIM配置 |
 | `free5gc-multinode-placement-values.yaml` | 三节点阶段的free5GC放置覆盖：控制面/数据库在VM1，UPF在VM2 |
 | `ueransim-multinode-placement-values.yaml` | 三节点阶段的UERANSIM放置覆盖：gNB与UE在VM3 |
+| `ueransim-iperf3-values.yaml` | UE 客户端镜像覆盖；使用前先向 VM3 的 containerd 导入镜像 |
+| `iperf3/` | VM1 测试服务 systemd 配置、UE 客户端 Dockerfile 与复现步骤 |
 | `free5gc-test-subscriber-ue1.json` | 隔离实验环境使用的UE1测试订阅 |
 | `k3s-registries.yaml` | k3s镜像源配置 |
 | `patches/` | 相对于固定上游提交的最小Chart修改 |
