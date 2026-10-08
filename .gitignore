@@ -6,3 +6,4 @@ tmp/
 *.tar
 *.tar.gz
 __pycache__/
+results/**/upf-live.txt

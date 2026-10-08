@@ -1,0 +1,49 @@
+{
+  "failure": "UPF sampling failed: error: Internal error occurred: unable to upgrade connection: container not found (\"upf\")\n",
+  "safety_stop": "UPF sampling failed: error: Internal error occurred: unable to upgrade connection: container not found (\"upf\")\n",
+  "rounds": [
+    {
+      "phase": "tcp-100M",
+      "target_mbps": 100,
+      "started_at": "2026-10-08T07:51:30.450049+00:00",
+      "ended_at": "2026-10-08T07:51:47.578188+00:00",
+      "exit_code": 1,
+      "status": "failed",
+      "error": "UPF sampling failed: error: Internal error occurred: unable to upgrade connection: container not found (\"upf\")\n"
+    }
+  ],
+  "phases": {
+    "idle": {
+      "samples": 14,
+      "memory_start_mib": 8.296875,
+      "memory_end_mib": 8.1875,
+      "memory_peak_mib": 8.53515625,
+      "anon_end_mib": 7.2265625,
+      "cpu_cores": {
+        "count": 13,
+        "mean": 0.011162653293665909,
+        "p50": 0.010613495150682252,
+        "p95": 0.014386875425279631,
+        "min": 0.009441729379784151,
+        "max": 0.018166578687690102
+      },
+      "oom_kill_end": 0
+    },
+    "tcp-100M": {
+      "samples": 14,
+      "memory_start_mib": 14.75390625,
+      "memory_end_mib": 239.11328125,
+      "memory_peak_mib": 242.0078125,
+      "anon_end_mib": 237.4921875,
+      "cpu_cores": {
+        "count": 14,
+        "mean": 0.8076350066709139,
+        "p50": 0.8931409883673453,
+        "p95": 0.9486777891126922,
+        "min": 0.13640637645874062,
+        "max": 0.9780604906073103
+      },
+      "oom_kill_end": 0
+    }
+  }
+}

@@ -80,6 +80,43 @@ def parse_cgroup(text):
             "memory_events": mapping("events")}
 
 
+def pod_status_template():
+    def literal(value):
+        return "{" + json.dumps(value) + "}"
+    return (literal('{"resourceVersion":"') + "{.metadata.resourceVersion}" +
+            literal('","uid":"') + "{.metadata.uid}" +
+            literal('","phase":"') + "{.status.phase}" +
+            literal('","containers":') + "{.status.containerStatuses}" + literal("}\n"))
+
+
+def capture_stream(command, filename, finish, trip, handler=None):
+    """Drain diagnostics immediately so container log GC cannot erase a crash."""
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                               text=True, bufsize=1)
+    def collect():
+        size = 0
+        try:
+            with filename.open("w", buffering=1) as output:
+                for line in process.stdout:
+                    size += len(line.encode("utf-8", errors="replace"))
+                    if size > 64 * 1024**2:
+                        output.write("[capture size limit reached; workload stopped]\n")
+                        trip(f"Diagnostic capture exceeded 64 MiB: {filename.name}")
+                        process.terminate()
+                        break
+                    output.write(line)
+                    if handler:
+                        handler(line)
+            if not finish.is_set():
+                trip(f"Diagnostic stream ended: {filename.name}")
+        except Exception as exc:
+            if not finish.is_set():
+                trip(f"Diagnostic capture failed: {filename.name}: {exc}")
+    thread = threading.Thread(target=collect, daemon=True)
+    thread.start()
+    return process, thread
+
+
 def stability_test(args):
     """Bounded diagnostic loads with cgroup sampling and fail-closed cutoff."""
     directory = Path(args.out_dir)
@@ -120,6 +157,9 @@ def stability_test(args):
     phase, samples, rounds = ["idle"], [], []
     finish, cutoff = threading.Event(), threading.Event()
     guard = {"reason": None, "last_sample_monotonic": time.monotonic()}
+    watch_ready = threading.Event()
+    first_exit = []
+    diagnostics = []
     probe_script = ("echo SECTION memory; cat /sys/fs/cgroup/memory.current; "
                     "echo SECTION limit; cat /sys/fs/cgroup/memory.max; "
                     "echo SECTION stat; cat /sys/fs/cgroup/memory.stat; "
@@ -132,6 +172,27 @@ def stability_test(args):
             guard["reason"] = reason
             cutoff.set()
             print(f"{now()} SAFETY STOP {reason}", flush=True)
+    def watch_status(line):
+        try:
+            state = json.loads(line)
+        except ValueError:
+            raise RuntimeError(f"Invalid Pod watch output: {line[:200]}")
+        state["observed_at"] = now()
+        with (directory / "pod-status-timeline.jsonl").open("a") as output:
+            output.write(json.dumps(state) + "\n")
+        statuses = state.get("containers", [])
+        watch_ready.set()
+        original = {c["name"]: c for c in upf["status"].get("containerStatuses", [])}
+        for container in statuses:
+            initial = original.get(container["name"], {})
+            changed = (container.get("restartCount", 0) != initial.get("restartCount", 0) or
+                       "terminated" in container.get("state", {}) or
+                       "waiting" in container.get("state", {}))
+            if changed:
+                if not first_exit:
+                    first_exit.append(state)
+                    (directory / "first-exit-observation.json").write_text(json.dumps(state, indent=2) + "\n")
+                trip("UPF Pod watch detected container exit/restart")
     def monitor():
         previous = None
         with (directory / "upf-cgroup.jsonl").open("w", buffering=1) as output:
@@ -170,6 +231,20 @@ def stability_test(args):
     thread.start()
     failure = None
     try:
+        diagnostic_commands = {
+            "upf-live.txt": ["kubectl", "-n", args.namespace, "logs", "-f", upf["metadata"]["name"],
+                             "-c", "upf", "--timestamps", "--since=5s"],
+            "pod-watch.txt": ["kubectl", "-n", args.namespace, "get", "pod", upf["metadata"]["name"],
+                              "--watch", "-o", "jsonpath=" + pod_status_template()],
+            "pod-events.txt": ["kubectl", "-n", args.namespace, "get", "events", "--watch", "--no-headers",
+                               "--field-selector", "involvedObject.uid=" + upf["metadata"]["uid"]]
+        }
+        metadata["diagnostic_commands"] = diagnostic_commands
+        for name, command in diagnostic_commands.items():
+            diagnostics.append(capture_stream(command, directory / name, finish, trip,
+                                              watch_status if name == "pod-watch.txt" else None))
+        if not watch_ready.wait(5):
+            trip("Pod watch was not ready before load")
         print(f"{now()} START idle {args.idle_seconds}s", flush=True)
         observe(args.idle_seconds)
         for protocol in args.protocols:
@@ -241,6 +316,15 @@ def stability_test(args):
     finally:
         finish.set()
         thread.join(timeout=10)
+        for process, collector in diagnostics:
+            if process.poll() is None:
+                process.terminate()
+                try:
+                    process.wait(timeout=3)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    process.wait(timeout=3)
+            collector.join(timeout=3)
         metadata.update(end_time=now(), failure=failure, safety_stop=guard["reason"])
         status = kubectl("get", "pod", upf["metadata"]["name"], "-n", args.namespace, "-o", "json")
         if status[0] == 0:

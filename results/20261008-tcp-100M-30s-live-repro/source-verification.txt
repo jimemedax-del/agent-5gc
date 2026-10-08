@@ -1,0 +1,101 @@
+Source verification: 2026-10-08, read-only GitHub contents API.
+Repository: https://github.com/free5gc/go-upf
+Build ref from UPF startup log: 04c1ab64
+Resolved commit: 04c1ab640350f5d354d09fac82cd7b4d66c78533
+Build log evidence: ../20261008-tcp-100M-30s/upf-restart-diagnostics.txt
+Observed image digest: sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04
+
+node.go Git blob SHA: 193d83a3b218167a68ee584b87e9d49f222d7c53
+https://github.com/free5gc/go-upf/blob/04c1ab640350f5d354d09fac82cd7b4d66c78533/internal/pfcp/node.go
+708: func (n *LocalNode) RemoteSess(rSeid uint64, addr net.Addr) (*Sess, error) {
+709:     for _, s := range n.sess {
+710:         if s.RemoteID == rSeid && s.rnode.addr.String() == addr.String() {
+711:             return s, nil
+712:         }
+713:     }
+714:     return nil, errors.Errorf("RemoteSess: invalid rSeid:%#x, addr:%s ", rSeid, addr)
+715: }
+
+LocalNode.DeleteSess excerpt:
+757:     n.sess[idx].log.Infoln("sess deleted")
+758:     usars := n.sess[idx].Close()
+759:     n.sess[idx] = nil
+760:     n.free = append(n.free, lSeid)
+
+session.go Git blob SHA: e7efbf3f6b7bffffe19ff6da164741c1a8223628
+https://github.com/free5gc/go-upf/blob/04c1ab640350f5d354d09fac82cd7b4d66c78533/internal/pfcp/session.go
+Function: PfcpServer.handleSessionReportResponse
+616:     if rsp.Header.SEID == 0 {
+617:         s.log.Warnf("rsp SEID is 0; no this session on remote; delete it on local")
+618:         sess, err := s.lnode.RemoteSess(req.SEID(), addr)
+619:         if err != nil {
+620:             s.log.Errorln(err)
+621:             return
+622:         }
+623:         sess.rnode.DeleteSess(sess.LocalID)
+624:         return
+625:     }
+
+Conclusion: deletion leaves a nil slot; RemoteSess dereferences each slot without
+a nil guard. This agrees with the captured report-response / deletion / panic
+sequence. No upstream code, image, or configuration was modified.
+The trigger of the report timeouts and SEID-zero responses remains unverified.
+
+Bounded follow-up: 2026-10-08; read-only; no deployment or load changes.
+Merged upstream PR: https://github.com/free5gc/go-upf/pull/97
+Merged at: 2026-06-24T09:24:24Z
+Fix commit: cbad64a4caa89ac99ef062e257e80e23cb9eba29
+https://github.com/free5gc/go-upf/commit/cbad64a4caa89ac99ef062e257e80e23cb9eba29
+Title: fix: nil when processing session report response
+Changes: internal/pfcp/node.go and internal/pfcp/node_test.go.
+Guard excerpt from fix commit:
+    addrString := ""
+    if addr != nil {
+        addrString = addr.String()
+    }
+    for _, s := range n.sess {
+        if s == nil || s.rnode == nil || s.rnode.addr == nil {
+            continue
+        }
+        if s.RemoteID == rSeid && s.rnode.addr.String() == addrString {
+            return s, nil
+        }
+    }
+Upstream test added: "remote sess skips deleted local slots".
+It deletes one of two sessions, checks lookup of the surviving session, and
+checks an error for the deleted session. Not executed locally in this audit.
+
+Verified source tag refs and node.go Git blob SHAs:
+v1.2.10 -> 04c1ab640350f5d354d09fac82cd7b4d66c78533 (current build)
+v1.2.11 -> e06c3cfda8ceb05a55a095ac5c2d570e34cb8d4d
+  node.go blob 193d83a3b218167a68ee584b87e9d49f222d7c53; guard absent
+v1.2.12 -> 0012cebc4c3758882a89f6485d1d0d95ec3659c7
+v1.2.13 -> 616a4ff6cbd2e7de2bccd39399f37425f373bcc8
+  both node.go blobs ce793fdfb4a9b30647a26d8ac1b35c3ad784409f; guard present
+free5gc/free5gc contents API NFs/upf at v4.3.0 points to the v1.2.13 SHA.
+No container image or Helm compatibility was verified for a new release.
+
+SMF startup log from the recovered Pod reports build ref 2232d299.
+Resolved SMF source commit: 2232d2992f204207e58830ac8ee55bf0cd832f92
+https://github.com/free5gc/smf/blob/2232d2992f204207e58830ac8ee55bf0cd832f92/internal/pfcp/handler/handler.go
+handler.go Git blob: 5ce3914d68c6b5142d0549fe4c86ca32c9cc79a3
+HandlePfcpSessionReportRequest sends SEID=0 in these inspected branches:
+99-103: smContext == nil -> CauseSessionContextNotFound
+111-115: resolved UPF address unspecified -> CauseNoEstablishedPfcpAssociation
+120-124: pfcpCtx == nil -> CauseNoEstablishedPfcpAssociation
+135-139: UPF lookup nil -> CauseNoEstablishedPfcpAssociation
+141-145: UPF IsAssociated error -> CauseNoEstablishedPfcpAssociation
+send.go blob: 5183835cdbd394e42625623f4ce51e548dfac454
+SendPfcpSessionReportResponse (375-394) copies the supplied seid into the header.
+
+Evidence limit: recovered SMF Pod is ...-6ggpw, starts at 07:54:42 UTC,
+after the crash at 07:51:42 UTC. kubectl logs --previous reports no previous
+terminated SMF container. A sudo read-only find under /var/log/pods found only
+the recovered SMF Pod's smf/0.log and wait-nrf/0.log, not the fault-time Pod.
+The exact branch producing SEID=0 in this incident therefore remains unknown.
+Do not interpret earlier ChargingInfo warnings as proof of that branch.
+
+Recommendation only: backport the verified upstream guard and regression test
+to the fixed current build, using a separate experimental image and digest.
+Requires a separately authorized change and controlled comparison. No fix was
+applied here; no claim about solving memory growth or session availability.

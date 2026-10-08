@@ -1,7 +1,7 @@
 # 基于 Agent 的 5G 核心网 NF 编排：项目总览与当前状态
 
 > 最后更新：2026-10-08
-> 文档状态：三节点功能通过；低负载诊断通过，100 Mbps/30 秒测试退出，服务已恢复，根因待定位
+> 文档状态：三节点功能通过；低负载诊断通过，高负载复现已捕获 UPF 空指针崩溃；业务已恢复，尚未修复
 
 ## 项目目标
 
@@ -33,6 +33,8 @@
 - [已发现，待定位] TCP 压测触发 UPF 的 1Gi 内存限制；服务已恢复，尚无完整 TCP 吞吐结果。
 - [已验证] 后续 TCP/UDP 各 5/10/20 Mbps、每档 30 秒均完成，UDP 零丢包，无 OOM/重启，停流量后内存回落；不代表高负载或长期稳定性。
 - [已发现，待定位] 50 Mbps TCP 的 10/30 秒及 100 Mbps 的 10 秒完成；100 Mbps/30 秒时 UPF 退出，未查到本次 OOM 记录，不能直接归因于 OOM。业务已恢复，详见受控数据面测试文档。
+- [已验证] 带实时日志的 100 Mbps/30 秒复现，在约 12 秒时捕获 UPF `RemoteSess` 空指针崩溃、首次退出码 1；对应源码缺少空槽判空。服务已恢复；报告超时及 SEID=0 响应的触发原因仍待定位，未修改 NF 镜像或配置。
+- [已确认] 上游 PR #97 已修复该空指针，go-upf v1.2.12/1.2.13 含修复。建议在当前基线上最小回移植；尚未实施或验证，不整套升级。有限排查结论见数据面测试文档。
 - [待验证] 长时间负载稳定性、Multus、双 UPF 与受控 core/edge 时延差异。
 - [待确认] 导师所说的“NF 挑选”究竟指完整 Profile、NF 实例、NF 类型，还是主要指 NF 放置位置。
 
@@ -71,7 +73,7 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 | [07-three-node-topology-and-acceptance.md](docs/07-three-node-topology-and-acceptance.md) | 三节点角色、网络现状、迁移步骤和阶段验收标准 |
 | [08-multinode-functional-baseline.md](docs/08-multinode-functional-baseline.md) | 20 轮注册、PDU Session 功能测量 |
 | [09-controlled-data-endpoint-setup.md](docs/09-controlled-data-endpoint-setup.md) | iperf3 服务端和 UE 客户端配置 |
-| [10-controlled-data-plane-baseline.md](docs/10-controlled-data-plane-baseline.md) | 受控 RTT、未完成吞吐测试及 UPF OOM 证据 |
+| [10-controlled-data-plane-baseline.md](docs/10-controlled-data-plane-baseline.md) | 受控 RTT、负载诊断、UPF OOM 与空指针崩溃证据 |
 | [02-5gc-end-to-end-flow.md](docs/02-5gc-end-to-end-flow.md) | 注册、鉴权、PDU Session 和用户数据流的心智模型 |
 | [03-research-roadmap.md](docs/03-research-roadmap.md) | 研究问题、实施路线、论文方向与待确认事项 |
 | [04-project-notes-method.md](docs/04-project-notes-method.md) | 后续如何维护实验记录、决策记录和文献笔记 |

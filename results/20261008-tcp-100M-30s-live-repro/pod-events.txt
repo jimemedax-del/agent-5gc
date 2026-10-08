@@ -1,0 +1,8 @@
+11m   Normal    Pulled      pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc   Container image "free5gc/upf:v4.2.2" already present on machine
+11m   Normal    Created     pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc   Created container: upf
+11m   Normal    Started     pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc   Started container upf
+11m   Normal    Scheduled   pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc   Successfully assigned free5gc/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc to worker-upf
+10m   Warning   Unhealthy   pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc   Readiness probe failed:
+4s    Warning   Unhealthy   pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc   Readiness probe errored: rpc error: code = NotFound desc = failed to exec in container: failed to load task: no running task found: task d1c7e95a1f4279a90f53c16434b34238aecae447b7a59516fcd7e0a86598e35a not found: not found
+3s    Normal    Pulled      pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc   Container image "free5gc/upf:v4.2.2" already present on machine
+3s    Normal    Created     pod/free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc   Created container: upf

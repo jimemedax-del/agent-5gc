@@ -1,0 +1,27 @@
+{
+  "resourceVersion": "89863",
+  "uid": "e5e561d6-bef8-4e60-a9eb-ebfaf6aa7ec3",
+  "phase": "Running",
+  "containers": [
+    {
+      "containerID": "containerd://d1c7e95a1f4279a90f53c16434b34238aecae447b7a59516fcd7e0a86598e35a",
+      "image": "docker.io/free5gc/upf:v4.2.2",
+      "imageID": "docker.io/free5gc/upf@sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04",
+      "lastState": {},
+      "name": "upf",
+      "ready": false,
+      "restartCount": 0,
+      "started": false,
+      "state": {
+        "terminated": {
+          "containerID": "containerd://d1c7e95a1f4279a90f53c16434b34238aecae447b7a59516fcd7e0a86598e35a",
+          "exitCode": 1,
+          "finishedAt": "2026-10-08T07:51:42Z",
+          "reason": "Error",
+          "startedAt": "2026-10-08T07:40:09Z"
+        }
+      }
+    }
+  ],
+  "observed_at": "2026-10-08T07:51:46.920098+00:00"
+}

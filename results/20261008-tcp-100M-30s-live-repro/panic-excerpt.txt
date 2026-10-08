@@ -1,0 +1,49 @@
+Excerpt: final 48 lines of upf-live.txt; full raw stream retained separately.
+2026-10-08T15:51:42.229872946+08:00 2026-10-08T07:51:42.229855081Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.229877014+08:00 2026-10-08T07:51:42.229868375Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.229901735+08:00 2026-10-08T07:51:42.229877776Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.229907497+08:00 2026-10-08T07:51:42.229886953Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.229916486+08:00 2026-10-08T07:51:42.229895830Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.229917691+08:00 2026-10-08T07:51:42.229903592Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.229919781+08:00 2026-10-08T07:51:42.229910993Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230512584+08:00 2026-10-08T07:51:42.229919622Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230523784+08:00 2026-10-08T07:51:42.230074640Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230525761+08:00 2026-10-08T07:51:42.230080723Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230527025+08:00 2026-10-08T07:51:42.230122232Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230528005+08:00 2026-10-08T07:51:42.230151443Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230528851+08:00 2026-10-08T07:51:42.230178804Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230529725+08:00 2026-10-08T07:51:42.230213640Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230530654+08:00 2026-10-08T07:51:42.230305718Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230531506+08:00 2026-10-08T07:51:42.230311199Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230532352+08:00 2026-10-08T07:51:42.230351198Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230533209+08:00 2026-10-08T07:51:42.230355214Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230534033+08:00 2026-10-08T07:51:42.230392154Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230534878+08:00 2026-10-08T07:51:42.230395623Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230535696+08:00 2026-10-08T07:51:42.230444853Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.230536544+08:00 2026-10-08T07:51:42.230470964Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportRequestTimeout: SEID[0x1]
+2026-10-08T15:51:42.231140876+08:00 2026-10-08T07:51:42.231087567Z[36m [INFO][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportResponse
+2026-10-08T15:51:42.231149094+08:00 2026-10-08T07:51:42.231100515Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mrsp SEID is 0; no this session on remote; delete it on local
+2026-10-08T15:51:42.231152067+08:00 2026-10-08T07:51:42.231107168Z[36m [INFO][UPF][PFCP][LAddr:10.42.1.18:8805][CPNodeID:10.42.0.132][CPSEID:0x1][UPSEID:0x1] [0msess deleted
+2026-10-08T15:51:42.232228918+08:00 2026-10-08T07:51:42.232176185Z[36m [INFO][UPF][Perio] [0mrecv event[TYPE_PERIO_DEL][{eType:2 lSeid:1 urrid:2 period:0}]
+2026-10-08T15:51:42.232451443+08:00 2026-10-08T07:51:42.232416496Z[36m [INFO][UPF][Perio] [0mrecv event[TYPE_PERIO_DEL][{eType:2 lSeid:1 urrid:1 period:0}]
+2026-10-08T15:51:42.232490557+08:00 2026-10-08T07:51:42.232457125Z[36m [INFO][UPF][Perio] [0mticker[10s] Stopped
+2026-10-08T15:51:42.236745675+08:00 2026-10-08T07:51:42.236683844Z[36m [INFO][UPF][PFCP][LAddr:10.42.1.18:8805] [0mhandleSessionReportResponse
+2026-10-08T15:51:42.236757623+08:00 2026-10-08T07:51:42.236694635Z[33m [WARN][UPF][PFCP][LAddr:10.42.1.18:8805] [0mrsp SEID is 0; no this session on remote; delete it on local
+2026-10-08T15:51:42.237571979+08:00 2026-10-08T07:51:42.237042834Z[31m [FATA][UPF][PFCP][LAddr:10.42.1.18:8805] [0mpanic: runtime error: invalid memory address or nil pointer dereference
+2026-10-08T15:51:42.237583329+08:00 goroutine 8 [running]:
+2026-10-08T15:51:42.237585196+08:00 runtime/debug.Stack()
+2026-10-08T15:51:42.237586616+08:00 	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+2026-10-08T15:51:42.237588010+08:00 github.com/free5gc/go-upf/internal/pfcp.(*PfcpServer).main.func1()
+2026-10-08T15:51:42.237589086+08:00 	/go/src/free5gc/NFs/upf/internal/pfcp/pfcp.go:86 +0x4a
+2026-10-08T15:51:42.237590297+08:00 panic({0x8e1c20?, 0xdc19b0?})
+2026-10-08T15:51:42.237592481+08:00 	/usr/local/go/src/runtime/panic.go:783 +0x132
+2026-10-08T15:51:42.237593525+08:00 github.com/free5gc/go-upf/internal/pfcp.(*LocalNode).RemoteSess(0xc000186e70?, 0x1, {0xa31528, 0xc008f13e30})
+2026-10-08T15:51:42.237594441+08:00 	/go/src/free5gc/NFs/upf/internal/pfcp/node.go:710 +0x4f
+2026-10-08T15:51:42.237596468+08:00 github.com/free5gc/go-upf/internal/pfcp.(*PfcpServer).handleSessionReportResponse(0xc0000a3ba0, 0xc0097d3200, {0xa31528, 0xc008f13e30}, {0xa35a40, 0xc000f075e0})
+2026-10-08T15:51:42.237597524+08:00 	/go/src/free5gc/NFs/upf/internal/pfcp/session.go:618 +0x186
+2026-10-08T15:51:42.237599066+08:00 github.com/free5gc/go-upf/internal/pfcp.(*PfcpServer).rspDispacher(0xc0057f6b80?, {0xa35c20?, 0xc0097d3200?}, {0xa31528?, 0xc008f13e30?}, {0xa35a40?, 0xc000f075e0?})
+2026-10-08T15:51:42.237600099+08:00 	/go/src/free5gc/NFs/upf/internal/pfcp/dispacher.go:35 +0x65
+2026-10-08T15:51:42.237601415+08:00 github.com/free5gc/go-upf/internal/pfcp.(*PfcpServer).main(0xc0000a3ba0, 0xc00030d750)
+2026-10-08T15:51:42.237602290+08:00 	/go/src/free5gc/NFs/upf/internal/pfcp/pfcp.go:169 +0xbad
+2026-10-08T15:51:42.237603177+08:00 created by github.com/free5gc/go-upf/internal/pfcp.(*PfcpServer).Start in goroutine 1
+2026-10-08T15:51:42.237604045+08:00 	/go/src/free5gc/NFs/upf/internal/pfcp/pfcp.go:230 +0xb3

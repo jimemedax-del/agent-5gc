@@ -1,0 +1,28 @@
+NAME                                            READY   STATUS    RESTARTS   AGE     IP           NODE         NOMINATED NODE   READINESS GATES
+free5gc-helm-free5gc-upf-upf-58ff5d859c-8mqsm   1/1     Running   0          2m40s   10.42.1.19   worker-upf   <none>           <none>
+[2026-10-08 07:54:53.487] [nas] [debug] Sending Registration Complete
+[2026-10-08 07:54:53.487] [nas] [info] Initial Registration is successful
+[2026-10-08 07:54:53.487] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-08 07:54:53.487] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-08 07:54:53.689] [nas] [debug] Configuration Update Command received
+[2026-10-08 07:54:53.794] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-08 07:54:53.794] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-08 07:54:53.808] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.1] is up.
+PING 192.168.244.128 (192.168.244.128) from 10.60.0.1 uesimtun0: 56(84) bytes of data.
+64 bytes from 192.168.244.128: icmp_seq=1 ttl=62 time=1.93 ms
+64 bytes from 192.168.244.128: icmp_seq=2 ttl=62 time=1.39 ms
+64 bytes from 192.168.244.128: icmp_seq=3 ttl=62 time=1.15 ms
+64 bytes from 192.168.244.128: icmp_seq=4 ttl=62 time=1.19 ms
+64 bytes from 192.168.244.128: icmp_seq=5 ttl=62 time=1.28 ms
+
+--- 192.168.244.128 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 803ms
+rtt min/avg/max/mdev = 1.150/1.389/1.933/0.284 ms
+8327168
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0
+active

@@ -115,3 +115,10 @@ python3 scripts/measure-controlled-data-plane.py --stability \
 指定单档；每档先 `--duration 10`，通过后再以新目录测 `--duration 30`。
 保留相同保护线，失败则停止后续档位。TCP 结果同时记录发送/接收速率、窗口时长、
 字节数与重传，避免把不一致的统计窗口误判为丢包；metadata 保存采集脚本 SHA256。
+
+稳定性模式同时实时保存 `upf-live.txt`、`pod-watch.txt`、`pod-status-timeline.jsonl`
+和按原 Pod UID 筛选的 `pod-events.txt`；首次观察到容器退出、等待或重启时保存
+`first-exit-observation.json`。诊断流意外结束、采集异常或单文件超过 64 MiB 即停止负载，
+结束时关闭后台采集；Pod watch 就绪后才进入负载流程。该采集在 2026-10-08 复现中已捕获
+首次退出码及 Panic 堆栈，不依赖可能已被清理的 `kubectl logs --previous`。
+完整 `upf-live.txt` 默认不进 Git，保留在实验目录和归档中；小型堆栈摘录可供审阅。

@@ -1,0 +1,136 @@
+{
+  "start_time": "2026-10-08T07:51:15.345027+00:00",
+  "kind": "load-stability-diagnostic",
+  "parameters": {
+    "out_dir": "/home/lhm/.work/data-plane-results/20261008-tcp-100M-30s-live-repro",
+    "server": "192.168.244.128",
+    "namespace": "free5gc",
+    "rounds": 10,
+    "duration": 30,
+    "warmup": 3,
+    "ping_count": 30,
+    "stability": true,
+    "rates_mbps": [
+      100
+    ],
+    "protocols": [
+      "tcp"
+    ],
+    "idle_seconds": 15,
+    "cooldown_seconds": 30,
+    "memory_stop_mib": 512,
+    "modes": [
+      "rtt",
+      "tcp-up",
+      "tcp-down",
+      "udp-up"
+    ]
+  },
+  "ue_pod": "ueransim-ue-594d88c755-mdvv6",
+  "upf_pod": "free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc",
+  "upf_uid": "e5e561d6-bef8-4e60-a9eb-ebfaf6aa7ec3",
+  "upf_node": "worker-upf",
+  "source_ip": "10.60.0.1",
+  "route": "192.168.244.128 from 10.60.0.1 dev uesimtun0 table rt_uesimtun0 uid 0 \n    cache \n",
+  "resources": [
+    {
+      "limits": {
+        "cpu": "1",
+        "memory": "1Gi"
+      },
+      "requests": {
+        "cpu": "500m",
+        "memory": "512Mi"
+      }
+    }
+  ],
+  "images": [
+    "free5gc/upf:v4.2.2"
+  ],
+  "upf_initial_status": [
+    {
+      "containerID": "containerd://d1c7e95a1f4279a90f53c16434b34238aecae447b7a59516fcd7e0a86598e35a",
+      "image": "docker.io/free5gc/upf:v4.2.2",
+      "imageID": "docker.io/free5gc/upf@sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04",
+      "lastState": {},
+      "name": "upf",
+      "ready": true,
+      "restartCount": 0,
+      "started": true,
+      "state": {
+        "running": {
+          "startedAt": "2026-10-08T07:40:09Z"
+        }
+      }
+    }
+  ],
+  "collector_sha256": "bc7ca78663693665984e95fc30bae9d377497329294cf17d3c0387230b977427",
+  "configuration_changed": false,
+  "warmup_seconds": 0,
+  "sampling": "cgroup v2 via kubectl exec; 1 second gap plus command latency",
+  "diagnostic_commands": {
+    "upf-live.txt": [
+      "kubectl",
+      "-n",
+      "free5gc",
+      "logs",
+      "-f",
+      "free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc",
+      "-c",
+      "upf",
+      "--timestamps",
+      "--since=5s"
+    ],
+    "pod-watch.txt": [
+      "kubectl",
+      "-n",
+      "free5gc",
+      "get",
+      "pod",
+      "free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc",
+      "--watch",
+      "-o",
+      "jsonpath={\"{\\\"resourceVersion\\\":\\\"\"}{.metadata.resourceVersion}{\"\\\",\\\"uid\\\":\\\"\"}{.metadata.uid}{\"\\\",\\\"phase\\\":\\\"\"}{.status.phase}{\"\\\",\\\"containers\\\":\"}{.status.containerStatuses}{\"}\\n\"}"
+    ],
+    "pod-events.txt": [
+      "kubectl",
+      "-n",
+      "free5gc",
+      "get",
+      "events",
+      "--watch",
+      "--no-headers",
+      "--field-selector",
+      "involvedObject.uid=e5e561d6-bef8-4e60-a9eb-ebfaf6aa7ec3"
+    ]
+  },
+  "end_time": "2026-10-08T07:52:17.683447+00:00",
+  "failure": "UPF sampling failed: error: Internal error occurred: unable to upgrade connection: container not found (\"upf\")\n",
+  "safety_stop": "UPF sampling failed: error: Internal error occurred: unable to upgrade connection: container not found (\"upf\")\n",
+  "upf_final_status": [
+    {
+      "containerID": "containerd://ea48fa26d4fbe3d1a4893d9652a63a8dd98693c48dbbadb7c9d36b1cc7787a3f",
+      "image": "docker.io/free5gc/upf:v4.2.2",
+      "imageID": "docker.io/free5gc/upf@sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04",
+      "lastState": {
+        "terminated": {
+          "containerID": "containerd://ea48fa26d4fbe3d1a4893d9652a63a8dd98693c48dbbadb7c9d36b1cc7787a3f",
+          "exitCode": 0,
+          "finishedAt": "2026-10-08T07:52:03Z",
+          "reason": "Completed",
+          "startedAt": "2026-10-08T07:52:03Z"
+        }
+      },
+      "name": "upf",
+      "ready": false,
+      "restartCount": 2,
+      "started": false,
+      "state": {
+        "waiting": {
+          "message": "back-off 20s restarting failed container=upf pod=free5gc-helm-free5gc-upf-upf-58ff5d859c-vrrbc_free5gc(e5e561d6-bef8-4e60-a9eb-ebfaf6aa7ec3)",
+          "reason": "CrashLoopBackOff"
+        }
+      }
+    }
+  ]
+}
