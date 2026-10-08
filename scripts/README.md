@@ -1,6 +1,6 @@
 # 自动化脚本
 
-> 状态：**待空白VM实机验证**。脚本根据两次人工部署记录整理，不得将“脚本已编写”表述为“自动化流程已验证”。
+> 状态：**完整空白VM自动化待实机验证**；UPF 修复构建与清单检查已在现有环境实测。不得将“脚本已编写”表述为“自动化流程已验证”。
 
 这些脚本用于自动复现已经人工验证过的单节点基线，并为三节点集群提供统一入口。当前项目的正式可复现核心是固定上游提交、受控补丁和Values；脚本是辅助工具。
 
@@ -122,3 +122,18 @@ python3 scripts/measure-controlled-data-plane.py --stability \
 结束时关闭后台采集；Pod watch 就绪后才进入负载流程。该采集在 2026-10-08 复现中已捕获
 首次退出码及 Panic 堆栈，不依赖可能已被清理的 `kubectl logs --previous`。
 完整 `upf-live.txt` 默认不进 Git，保留在实验目录和归档中；小型堆栈摘录可供审阅。
+`--capture-smf` 可在稳定性模式同步保存 `smf-live.log`；该流同样受文件大小及意外 EOF
+保护，SMF 容器结束会停止负载。完整运行日志默认忽略，不作为可提交的堆栈摘录。
+
+## UPF 判空修复构建与部署前检查
+
+`build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档
+`source.tar.gz`、官方 Go 1.25.5 Linux amd64 归档和
+`infra/patches/go-upf-v1.2.10-remotesess-nil.patch`；脚本校验两份归档 SHA256。
+从干净源码开始，不在已应用补丁的目录重复运行。归档、依赖缓存、二进制和镜像留在 `.work/`。
+
+`check-upf-only-manifest-change.py`（需 PyYAML）比较 `helm get manifest` 与
+`helm template --is-upgrade --skip-tests` 的 YAML 语义，仅允许唯一 UPF Deployment 的
+镜像和拉取策略改变，资源集合或其他字段变化均拒绝。部署前保存完整当前 Values，使用
+`--reset-values -f <保存的Values> -f infra/free5gc-upf-nilfix-values.yaml` 保持其余参数。
+不把普通 Helm test Pod 渲染结果误当作新增运行资源。

@@ -1,0 +1,13 @@
+=== RUN   TestLocalNode
+=== RUN   TestLocalNode/new_session
+=== RUN   TestLocalNode/recycle_LocalID
+=== RUN   TestLocalNode/remote_sess_skips_deleted_local_slots
+2026-10-08T16:16:13.143696815+08:00[36m [INFO][UPF][PFCP][CPNodeID:smf1][CPSEID:0x1efcd][UPSEID:0x1] [0mNew session
+2026-10-08T16:16:13.143748454+08:00[36m [INFO][UPF][PFCP][CPNodeID:smf1][CPSEID:0x1efce][UPSEID:0x2] [0mNew session
+2026-10-08T16:16:13.143751125+08:00[36m [INFO][UPF][PFCP][CPNodeID:smf1][CPSEID:0x1efcd][UPSEID:0x1] [0msess deleted
+--- PASS: TestLocalNode (0.00s)
+    --- PASS: TestLocalNode/new_session (0.00s)
+    --- PASS: TestLocalNode/recycle_LocalID (0.00s)
+    --- PASS: TestLocalNode/remote_sess_skips_deleted_local_slots (0.00s)
+PASS
+ok  	github.com/free5gc/go-upf/internal/pfcp	0.007s

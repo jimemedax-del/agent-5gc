@@ -1,0 +1,27 @@
+=== RUN   TestLocalNode
+=== RUN   TestLocalNode/remote_sess_skips_deleted_local_slots
+2026-10-08T16:16:12.726136893+08:00[36m [INFO][UPF][PFCP][CPNodeID:smf1][CPSEID:0x1efcd][UPSEID:0x1] [0mNew session
+2026-10-08T16:16:12.726178240+08:00[36m [INFO][UPF][PFCP][CPNodeID:smf1][CPSEID:0x1efce][UPSEID:0x2] [0mNew session
+2026-10-08T16:16:12.726180843+08:00[36m [INFO][UPF][PFCP][CPNodeID:smf1][CPSEID:0x1efcd][UPSEID:0x1] [0msess deleted
+--- FAIL: TestLocalNode (0.00s)
+    --- FAIL: TestLocalNode/remote_sess_skips_deleted_local_slots (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x10 pc=0x679def]
+
+goroutine 23 [running]:
+testing.tRunner.func1.2({0x6f6ac0, 0xa208d0})
+	/home/lhm/.work/upf-nilfix-build/go/src/testing/testing.go:1872 +0x237
+testing.tRunner.func1()
+	/home/lhm/.work/upf-nilfix-build/go/src/testing/testing.go:1875 +0x35b
+panic({0x6f6ac0?, 0xa208d0?})
+	/home/lhm/.work/upf-nilfix-build/go/src/runtime/panic.go:783 +0x132
+github.com/free5gc/go-upf/internal/pfcp.(*LocalNode).RemoteSess(0xc0000eaf00?, 0x1efce, {0x7e3fa8, 0xc000260330})
+	/home/lhm/.work/upf-nilfix-build/free5gc-go-upf-04c1ab6/internal/pfcp/node.go:710 +0x4f
+github.com/free5gc/go-upf/internal/pfcp.TestLocalNode.func3(0xc0000828c0)
+	/home/lhm/.work/upf-nilfix-build/free5gc-go-upf-04c1ab6/internal/pfcp/node_test.go:257 +0x2d0
+testing.tRunner(0xc0000828c0, 0x783288)
+	/home/lhm/.work/upf-nilfix-build/go/src/testing/testing.go:1934 +0xea
+created by testing.(*T).Run in goroutine 22
+	/home/lhm/.work/upf-nilfix-build/go/src/testing/testing.go:1997 +0x465
+FAIL	github.com/free5gc/go-upf/internal/pfcp	0.009s
+FAIL

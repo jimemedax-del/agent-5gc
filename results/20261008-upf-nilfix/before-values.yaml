@@ -1,0 +1,151 @@
+controlPlaneSelector:
+  5gc.free5gc.org/plane: control
+deployDbPython: false
+deployN3iwf: false
+free5gc-amf:
+  amf:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-ausf:
+  ausf:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-chf:
+  chf:
+    cgf:
+      enabled: false
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-nef:
+  nef:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-nrf:
+  nrf:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-nssf:
+  nssf:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-pcf:
+  pcf:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-smf:
+  smf:
+    configuration:
+      configuration: |-
+        smfName: SMF
+        snssaiInfos:
+          - sNssai:
+              sst: 1
+              sd: 010203
+            dnnInfos:
+              - dnn: internet
+                dnaiList:
+                  - mec
+                dns:
+                  ipv4: 8.8.8.8
+                  ipv6: 2001:4860:4860::8888
+        plmnList:
+          - mcc: "208"
+            mnc: "93"
+        userplaneInformation:
+          upNodes:
+            gNB1:
+              type: AN
+            UPF:
+              type: UPF
+              nodeID: UPF_SERVICE_NAME
+              sNssaiUpfInfos:
+                - sNssai:
+                    sst: 1
+                    sd: 010203
+                  dnnUpfInfoList:
+                    - dnn: internet
+                      pools:
+                        - cidr: 10.60.0.0/16
+                      dnaiList:
+                        - mec
+              interfaces:
+                - interfaceType: N3
+                  endpoints:
+                    - UPF_SERVICE_NAME
+                  networkInstances:
+                    - internet
+          links:
+            - A: gNB1
+              B: UPF
+        locality: area1
+        t3591:
+          enable: true
+          expireTime: 16s
+          maxRetryTimes: 3
+        t3592:
+          enable: true
+          expireTime: 16s
+          maxRetryTimes: 3
+      ueRoutingInfo: |-
+        UE1:
+          members:
+            - imsi-208930000000001
+          topology:
+            - A: gNB1
+              B: UPF
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-udm:
+  udm:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-udr:
+  udr:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+free5gc-upf:
+  iupf1:
+    nodeSelector:
+      5gc.free5gc.org/gtp5g: "true"
+      5gc.free5gc.org/plane: user
+  psaupf1:
+    nodeSelector:
+      5gc.free5gc.org/gtp5g: "true"
+      5gc.free5gc.org/plane: user
+  psaupf2:
+    nodeSelector:
+      5gc.free5gc.org/gtp5g: "true"
+      5gc.free5gc.org/plane: user
+  upf:
+    nodeSelector:
+      5gc.free5gc.org/gtp5g: "true"
+      5gc.free5gc.org/plane: user
+free5gc-webui:
+  webui:
+    nodeSelector:
+      5gc.free5gc.org/plane: control
+global:
+  amf:
+    multus:
+      enabled: false
+  smf:
+    multus:
+      enabled: false
+  upf:
+    multus:
+      enabled: false
+  userPlaneArchitecture: single
+mongodb:
+  args: []
+  command: []
+  extraVolumeMounts: []
+  extraVolumes: []
+  initContainers: []
+  nodeSelector:
+    5gc.free5gc.org/plane: control
+  persistence:
+    size: 6Gi
+    storageClass: local-path
+userPlaneSelector:
+  5gc.free5gc.org/gtp5g: "true"
+  5gc.free5gc.org/plane: user

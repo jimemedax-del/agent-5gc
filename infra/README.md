@@ -9,6 +9,8 @@
 | `free5gc-multinode-placement-values.yaml` | 三节点阶段的free5GC放置覆盖：控制面/数据库在VM1，UPF在VM2 |
 | `ueransim-multinode-placement-values.yaml` | 三节点阶段的UERANSIM放置覆盖：gNB与UE在VM3 |
 | `ueransim-iperf3-values.yaml` | UE 客户端镜像覆盖；使用前先向 VM3 的 containerd 导入镜像 |
+| `free5gc-upf-nilfix-values.yaml` | 固定 Digest 的 UPF 空指针修复镜像覆盖，使用前在 UPF 节点导入镜像及 Digest 别名 |
+| `upf/` | 在固定原 UPF 运行时镜像上仅替换修复后二进制的 Dockerfile |
 | `iperf3/` | VM1 测试服务 systemd 配置、UE 客户端 Dockerfile 与复现步骤 |
 | `free5gc-test-subscriber-ue1.json` | 隔离实验环境使用的UE1测试订阅 |
 | `k3s-registries.yaml` | k3s镜像源配置 |
@@ -33,3 +35,8 @@ helm upgrade --install free5gc-helm <fixed-chart-path> -n free5gc \
 ```
 
 先使用同一命令加`--dry-run`检查渲染结果，再执行真实升级。`--reset-values`是必须项：Helm 的历史 Values 可能保留旧数组或旧配置。渲染结果应显示控制面位于VM1、UPF位于VM2且UERANSIM位于VM3。`local-path` MongoDB PV不跨节点迁移。
+
+当前已部署独立 UPF 判空修复镜像；继续维护这一运行基线时，在上述两份 Values 之后增加
+`-f infra/free5gc-upf-nilfix-values.yaml`，否则会回到原始 UPF。旧配置保留作历史基线与回滚。
+镜像不发布到公网；`Never` 模式需先导入，并将 Tag 注册为对应 `@sha256` 别名。
+构建、验证结果与回滚边界见[数据面测试模块](../docs/10-controlled-data-plane-baseline.md)。

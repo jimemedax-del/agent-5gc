@@ -22,3 +22,15 @@ git -C /path/to/free5gc-helm apply /path/to/infra/patches/free5gc-helm-v4.2.2-si
 ```
 
 部署脚本会自动完成固定提交、补丁检查和应用，不需要手工修改 Chart。
+
+## UPF 空指针回移植（独立于 Chart 补丁）
+
+`go-upf-v1.2.10-remotesess-nil.patch` 来自上游修复提交
+`cbad64a4caa89ac99ef062e257e80e23cb9eba29`（[PR #97](https://github.com/free5gc/go-upf/pull/97)），
+应用基线为 go-upf `04c1ab640350f5d354d09fac82cd7b4d66c78533`（v1.2.10）。
+仅修改 `RemoteSess` 的空值处理，并加入上游删除会话槽回归测试，不升级依赖或其他 NF。
+
+`scripts/build-patched-upf.sh` 在原实现上先运行新增测试并要求出现空指针，之后应用修复，
+运行 `TestLocalNode` 和 `go vet`，校验依赖文件未变，再用 Go 1.25.5 构建二进制。
+独立镜像使用 `infra/upf/Dockerfile`，只替换固定原镜像中的 `/free5gc/upf`；
+部署使用 `infra/free5gc-upf-nilfix-values.yaml`，详细验证及回滚见数据面测试模块。

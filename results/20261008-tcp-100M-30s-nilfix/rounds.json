@@ -1,0 +1,11 @@
+[
+  {
+    "phase": "tcp-100M",
+    "target_mbps": 100,
+    "started_at": "2026-10-08T08:28:31.968746+00:00",
+    "ended_at": "2026-10-08T08:28:48.089260+00:00",
+    "exit_code": 1,
+    "status": "failed",
+    "error": "Diagnostic stream ended: smf-live.log"
+  }
+]

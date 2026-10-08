@@ -1,0 +1,8 @@
+# Apply after the baseline and placement Values, after importing on worker-upf.
+# This changes only the UPF executable image; not resources, URR, or topology.
+free5gc-upf:
+  upf:
+    image:
+      name: docker.io/local/free5gc-upf
+      tag: v4.2.2-nilfix-20261008@sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3
+      pullPolicy: Never

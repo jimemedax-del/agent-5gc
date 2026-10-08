@@ -1,0 +1,400 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "checksum/config": "347d044f2c9d9dc9435cc1e1994526b1a46c3c87070834dda9d785bc64e91bea",
+                    "kubectl.kubernetes.io/restartedAt": "2026-10-08T16:27:12+08:00"
+                },
+                "creationTimestamp": "2026-10-08T08:27:12Z",
+                "generateName": "free5gc-helm-free5gc-smf-smf-858659649b-",
+                "labels": {
+                    "app.kubernetes.io/instance": "free5gc-helm",
+                    "app.kubernetes.io/name": "free5gc-smf",
+                    "nf": "smf",
+                    "pod-template-hash": "858659649b",
+                    "project": "free5gc"
+                },
+                "name": "free5gc-helm-free5gc-smf-smf-858659649b-7grsz",
+                "namespace": "free5gc",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "free5gc-helm-free5gc-smf-smf-858659649b",
+                        "uid": "f1bc08d9-8dc8-43f9-91e3-3425ca96943a"
+                    }
+                ],
+                "resourceVersion": "91275",
+                "uid": "8d8c7c22-1c1e-4ae6-9ea6-f64d9b845a37"
+            },
+            "spec": {
+                "affinity": {},
+                "containers": [
+                    {
+                        "command": [
+                            "/sbin/tini",
+                            "--",
+                            "/bin/sh",
+                            "/free5gc/config//wrapper.sh"
+                        ],
+                        "env": [
+                            {
+                                "name": "GIN_MODE",
+                                "value": "release"
+                            }
+                        ],
+                        "image": "free5gc/smf:v4.2.2",
+                        "imagePullPolicy": "IfNotPresent",
+                        "livenessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/bin/sh",
+                                    "-c",
+                                    "HEX_PORT=$(printf '%04X' \"8080\")\ngrep -q \":${HEX_PORT} .* 0A \" /proc/net/tcp || grep -q \":${HEX_PORT} .* 0A \" /proc/net/tcp6\n"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "initialDelaySeconds": 50,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 10
+                        },
+                        "name": "smf",
+                        "ports": [
+                            {
+                                "containerPort": 8080,
+                                "name": "nsmf",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 8805,
+                                "name": "n4",
+                                "protocol": "UDP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/bin/sh",
+                                    "-c",
+                                    "HEX_PORT=$(printf '%04X' \"8080\")\ngrep -q \":${HEX_PORT} .* 0A \" /proc/net/tcp || grep -q \":${HEX_PORT} .* 0A \" /proc/net/tcp6\n"
+                                ]
+                            },
+                            "failureThreshold": 40,
+                            "initialDelaySeconds": 10,
+                            "periodSeconds": 1,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {
+                            "limits": {
+                                "cpu": "200m",
+                                "memory": "256Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "128Mi"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/free5gc/config/",
+                                "name": "free5gc-helm-free5gc-smf-volume"
+                            },
+                            {
+                                "mountPath": "/free5gc/config/TLS",
+                                "name": "free5gc-helm-free5gc-smf-empty-volume"
+                            },
+                            {
+                                "mountPath": "/free5gc/cert",
+                                "name": "free5gc-helm-free5gc-smf-cert-volume"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-td4rx",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "initContainers": [
+                    {
+                        "command": [
+                            "sh",
+                            "-c",
+                            "set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w \"%{http_code}\" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;"
+                        ],
+                        "env": [
+                            {
+                                "name": "DEPENDENCIES",
+                                "value": "http://nrf-nnrf:8000"
+                            }
+                        ],
+                        "image": "curlimages/curl:8.7.1",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "wait-nrf",
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-td4rx",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "nodeName": "lhm-virtual-machine",
+                "nodeSelector": {
+                    "5gc.free5gc.org/plane": "control"
+                },
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 1000,
+                    "runAsGroup": 1000,
+                    "runAsNonRoot": true,
+                    "runAsUser": 1000
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "free5gc-helm-free5gc-smf-volume",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "smfcfg.yaml",
+                                                "path": "smfcfg.yaml"
+                                            },
+                                            {
+                                                "key": "uerouting.yaml",
+                                                "path": "uerouting.yaml"
+                                            },
+                                            {
+                                                "key": "wrapper.sh",
+                                                "mode": 511,
+                                                "path": "wrapper.sh"
+                                            }
+                                        ],
+                                        "name": "free5gc-helm-free5gc-smf-configmap"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "emptyDir": {},
+                        "name": "free5gc-helm-free5gc-smf-empty-volume"
+                    },
+                    {
+                        "name": "free5gc-helm-free5gc-smf-cert-volume",
+                        "projected": {
+                            "defaultMode": 256,
+                            "sources": [
+                                {
+                                    "secret": {
+                                        "items": [
+                                            {
+                                                "key": "smf.pem",
+                                                "path": "smf.pem"
+                                            },
+                                            {
+                                                "key": "smf.key",
+                                                "path": "smf.key"
+                                            }
+                                        ],
+                                        "name": "free5gc-helm-smf-tls-secret"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "nrf.pem",
+                                                "path": "nrf.pem"
+                                            }
+                                        ],
+                                        "name": "free5gc-public-certs"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "kube-api-access-td4rx",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T08:27:12Z",
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T08:27:12Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T08:28:57Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T08:28:57Z",
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T08:27:12Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "containerd://5443f3dd78a264c28a299bb78039cc2ade04fbabf3d99c08c4064da075d8e276",
+                        "image": "docker.io/free5gc/smf:v4.2.2",
+                        "imageID": "docker.io/free5gc/smf@sha256:55043e366af867fda567156709c1dcf1ddad8827c2a246a64e0d4f6fea23718f",
+                        "lastState": {
+                            "terminated": {
+                                "containerID": "containerd://b9edecb93027259f6b6d9120f551273bd9663ad3e7e8e188679484b212162de6",
+                                "exitCode": 137,
+                                "finishedAt": "2026-10-08T08:28:46Z",
+                                "reason": "OOMKilled",
+                                "startedAt": "2026-10-08T08:27:13Z"
+                            }
+                        },
+                        "name": "smf",
+                        "ready": true,
+                        "restartCount": 1,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2026-10-08T08:28:47Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.244.128",
+                "hostIPs": [
+                    {
+                        "ip": "192.168.244.128"
+                    }
+                ],
+                "initContainerStatuses": [
+                    {
+                        "containerID": "containerd://47253b11063e091bf19d8c41598baf8f90de0a4fbfcca38b44c1b57dd0b86df6",
+                        "image": "docker.io/curlimages/curl:8.7.1",
+                        "imageID": "docker.io/curlimages/curl@sha256:25d29daeb9b14b89e2fa8cc17c70e4b188bca1466086907c2d9a4b56b59d8e21",
+                        "lastState": {},
+                        "name": "wait-nrf",
+                        "ready": true,
+                        "restartCount": 0,
+                        "started": false,
+                        "state": {
+                            "terminated": {
+                                "containerID": "containerd://47253b11063e091bf19d8c41598baf8f90de0a4fbfcca38b44c1b57dd0b86df6",
+                                "exitCode": 0,
+                                "finishedAt": "2026-10-08T08:27:12Z",
+                                "reason": "Completed",
+                                "startedAt": "2026-10-08T08:27:12Z"
+                            }
+                        }
+                    }
+                ],
+                "phase": "Running",
+                "podIP": "10.42.0.134",
+                "podIPs": [
+                    {
+                        "ip": "10.42.0.134"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "startTime": "2026-10-08T08:27:12Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

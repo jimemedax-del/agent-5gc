@@ -1,6 +1,6 @@
 # 受控数据面测试与 UPF 负载稳定性
 
-> 2026-10-08。RTT 和低速限流诊断已完成；未限速 TCP 曾触发 OOM，带实时日志的 100 Mbps/30 秒复现已定位 UPF 空指针崩溃。业务已恢复，尚未修复，完整吞吐基线仍未完成。
+> 2026-10-08。RTT 和低速限流诊断已完成；UPF 空指针补丁已部署并通过回归测试。高负载复测因 SMF 重启中止，业务已恢复；暂不继续追查，完整吞吐基线仍未完成。
 
 ## 测试路径与条件
 
@@ -183,3 +183,52 @@ metadata 内保存本轮采集脚本 SHA256；未补测或替换失败数据。
 
 本轮只有只读检查和记录更新，无负载、NF 重启、镜像或参数变更。详细提交、文件 Blob
 及证据缺口追加在现有 `source-verification.txt`；有限排查到此结束。
+
+## UPF 最小修复部署与验证（不扩展故障调查）
+
+- [已验证] 在固定 go-upf v1.2.10 源码上回移植 PR #97，仅修改 `node.go` 并加入
+  上游 `node_test.go` 回归测试。先在旧实现运行新增测试，复现 `node.go:710` 空指针；
+  修复后 `TestLocalNode` 三个子测试和 `go vet ./internal/pfcp` 通过，`go.mod/go.sum` 未变。
+- [已验证] 使用 Go 1.25.5 构建，镜像保留原 UPF 固定 Digest 的运行环境，仅替换
+  `/free5gc/upf`。新镜像为 `docker.io/local/free5gc-upf:v4.2.2-nilfix-20261008`，
+  Digest 为 `sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3`；
+  二进制 SHA256 为 `8d540588deb10b00b1008282158e6ad5a8bf9bfcd298d4ea387ba42017c26b56`。
+- [已验证] 对比 Helm 的 61 个运行资源，只允许 UPF 镜像与拉取策略改变；资源限制、
+  URR、gtp5g、网络、其他 NF 镜像和配置不变。清单检查亦拒绝额外内存、缺失资源及
+  ConfigMap 改动。Helm 使用保存的当前 Values 加修复覆盖文件，升级到 revision 12。
+- [已验证] 停 UE/旧 UPF 后切换镜像，UPF Ready 后重启 SMF、启动 UE；注册、PDU Session
+  和 TUN Ping 5/5 成功。容器内二进制 SHA256 与构建产物一致。
+
+### 一次受保护复测与最终恢复
+
+16:28:31 发起 100 Mbps/30 秒 TCP 上行，同时记录 UPF/SMF 日志，保留 512 MiB 保护线。
+约 15 秒时 SMF 容器重启，状态记录为 `OOMKilled/137`，其日志流结束使采集器停流量。
+补丁 UPF 初末为同一容器、0 重启，已保存日志未出现 Panic；仍收到 SEID=0 并删除会话。
+这一轮未完成 30 秒，**只能说明补丁回归通过且 UPF 在本轮未崩溃，不能说明高负载业务稳定**。
+SMF 退出作为剩余限制记录，不展开新一轮 OOM、计费或内核排查。
+
+随后停 UE、重建补丁 UPF Pod、重启 SMF并重建 UE 会话。最终 UPF/SMF 均 Ready、0 重启，
+注册及 PDU Session 成功，TUN Ping VM1 为 5/5。当前 UPF IP 为 `10.42.1.21`，不是固定配置。
+
+证据：[构建、部署与恢复](../results/20261008-upf-nilfix/)、
+[独立负载复测](../results/20261008-tcp-100M-30s-nilfix/)。完整证据归档 SHA256 为
+`64c29bd8c6c6967269a0a6a8ed40572caef0e3ce06a1d47c15f7ca36125c9f8c`；
+大型实时日志默认不入 Git。补丁、Dockerfile、构建脚本和固定镜像 Values 保存于 `infra/`、`scripts/`。
+
+### 复现与回滚边界
+
+完整镜像归档保存在 VM1 `/home/lhm/.work/upf-nilfix-build/patched-upf.tar`；VM2 本次使用
+基于已缓存原镜像层的增量 OCI 归档导入。新节点没有原层时应导入完整归档，不直接用增量包。
+导入后还须注册 Digest 别名，才能在 `Never` 模式按 Digest 启动：
+
+```bash
+sudo k3s ctr images tag docker.io/local/free5gc-upf:v4.2.2-nilfix-20261008 \
+  docker.io/local/free5gc-upf@sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3
+```
+
+原镜像保留；回滚时先停 UE/UPF，再用保存的 `before-values.yaml`（不加修复覆盖）进行
+Helm 升级，或回到 revision 11。UPF Ready 后重启 SMF 再启动 UE，重新验收业务。
+回滚会恢复已知缺陷，不在本次执行；不要仅以 Helm deployed 判定业务恢复。
+
+后续主线：将已验证的三节点 Single-UPF/no-Multus 配置整理为首个受控 Profile，登记 NF
+目录及依赖，再实现确定性方案选择与校验；不等待所有高负载故障解决，也不马上编写 Agent。

@@ -1,0 +1,10 @@
+{
+  "checkedResources": 61,
+  "changes": [
+    {
+      "resource": "free5gc-helm-free5gc-upf-upf",
+      "oldImage": "free5gc/upf:v4.2.2",
+      "newImage": "docker.io/local/free5gc-upf:v4.2.2-nilfix-20261008@sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3"
+    }
+  ]
+}

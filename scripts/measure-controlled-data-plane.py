@@ -131,6 +131,7 @@ def stability_test(args):
             raise RuntimeError(f"Expected one live {label}={value} Pod")
         return matches[0]
     ue, upf = select("component", "ue"), select("nf", "upf")
+    smf = select("nf", "smf") if args.capture_smf else None
     ue_cmd = ["kubectl", "-n", args.namespace, "exec", ue["metadata"]["name"], "--"]
     ip_text = require_output(run(ue_cmd + ["ip", "-4", "addr", "show", "uesimtun0"]))
     source_ip = re.search(r"inet ([0-9.]+)/", ip_text)[1]
@@ -239,6 +240,11 @@ def stability_test(args):
             "pod-events.txt": ["kubectl", "-n", args.namespace, "get", "events", "--watch", "--no-headers",
                                "--field-selector", "involvedObject.uid=" + upf["metadata"]["uid"]]
         }
+        if smf:
+            metadata["smf_pod"] = smf["metadata"]["name"]
+            diagnostic_commands["smf-live.log"] = [
+                "kubectl", "-n", args.namespace, "logs", "-f", smf["metadata"]["name"],
+                "-c", "smf", "--timestamps", "--since=5s"]
         metadata["diagnostic_commands"] = diagnostic_commands
         for name, command in diagnostic_commands.items():
             diagnostics.append(capture_stream(command, directory / name, finish, trip,
@@ -402,6 +408,7 @@ def main():
     parser.add_argument("--warmup", type=int, default=3)
     parser.add_argument("--ping-count", type=int, default=30)
     parser.add_argument("--stability", action="store_true", help="Bounded load diagnostic, not full throughput benchmark")
+    parser.add_argument("--capture-smf", action="store_true", help="Capture SMF live logs during stability mode")
     parser.add_argument("--rates-mbps", nargs="+", type=int, default=[5, 10, 20])
     parser.add_argument("--protocols", nargs="+", choices=["tcp", "udp"], default=["tcp", "udp"])
     parser.add_argument("--idle-seconds", type=int, default=60)

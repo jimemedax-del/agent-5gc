@@ -1,0 +1,45 @@
+2026-10-08: authorized minimal UPF nil-pointer fix; no further OOM investigation.
+Source: go-upf 04c1ab640350f5d354d09fac82cd7b4d66c78533 (v1.2.10).
+Backport: cbad64a4caa89ac99ef062e257e80e23cb9eba29 (upstream PR #97).
+Changed source files: internal/pfcp/node.go and internal/pfcp/node_test.go only.
+Go 1.25.5; go.mod and go.sum checksums unchanged.
+Regression-before: added upstream test on original implementation failed with
+the expected nil-pointer at node.go:710.
+Regression-after: all three TestLocalNode subtests passed; go vet passed.
+
+Image: docker.io/local/free5gc-upf:v4.2.2-nilfix-20261008
+Manifest digest: sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3
+Binary SHA256: 8d540588deb10b00b1008282158e6ad5a8bf9bfcd298d4ea387ba42017c26b56
+Full image archive SHA256: c16fe86eee20a3befbd1d523d17d29d3f5015df317b34ee7f549f0105c08108e
+Delta OCI archive SHA256: b33a9ba9b5b73a6abab4f57f795f3ebeca115dddbeb0d045bf3cd3f91b1b02b1
+Delta import depends on the original cached layers; full archive retained on VM1.
+Original runtime base image and original UPF tag remain available for rollback.
+The first full-image transfer was superseded by the verified delta transfer;
+a partial full archive on VM2 is not an authoritative artifact.
+
+Deployment: saved current release Values; rendered with --skip-tests; compared
+all 61 resources. Only UPF image/pull policy changed. Guard also rejected an
+unapproved memory limit, missing resource, and ConfigMap change in tests.
+Helm upgrade revision 11 -> 12 with --reset-values, saved Values, fix overlay,
+--atomic --wait. No resource, URR, network, gtp5g or other NF image change.
+Local containerd digest alias explicitly registered for pullPolicy=Never.
+Stopped UE and old UPF, upgraded, restarted SMF to refresh UPF IP, restarted UE.
+Registration, PDU Session and five tunnel pings passed before the load test.
+
+One controlled test only: 100 Mbps TCP uplink, requested 30 seconds, idle 15s,
+cooldown 30s, memory guard 512 MiB, simultaneous SMF capture.
+Load started 08:28:31.968746 UTC. SMF exited at 08:28:46 UTC (137/OOMKilled).
+SMF live stream ended; collector stopped the workload. No full throughput result.
+Patched UPF remained the same container, 0 restarts; saved log has no panic.
+UPF still received an SEID-zero response and deleted its session.
+This is not a successful 30-second high-load acceptance or an OOM fix.
+No further load tests or investigation performed.
+
+Restored by stopping UE, recreating patched UPF, restarting SMF, restarting UE.
+Final UPF Pod: free5gc-helm-free5gc-upf-upf-54758dbc5-89mtk, IP 10.42.1.21.
+Final SMF Pod: free5gc-helm-free5gc-smf-smf-66f95cf86b-2vjbs, IP 10.42.0.135.
+Both Ready with 0 restarts. UE registered, PDU Session established,
+uesimtun0 10.60.0.1; tunnel ping VM1 5/5, 0% loss.
+Container binary checksum matches the built executable.
+Evidence archive SHA256: 64c29bd8c6c6967269a0a6a8ed40572caef0e3ce06a1d47c15f7ca36125c9f8c
+Next: validated NF catalog and first controlled three-node deployment Profile.

@@ -1,0 +1,70 @@
+2026-10-08T08:28:46.670210281Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670216039Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.670218807Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670221887Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.670223740Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670225529Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
+2026-10-08T08:28:46.670227508Z[36m [INFO][SMF][Charging] [0mNo report need to be charged
+2026-10-08T08:28:46.670246833Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=1, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670249891Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670253137Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.670258775Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670260897Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.670264121Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670265940Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
+2026-10-08T08:28:46.670267752Z[36m [INFO][SMF][Charging] [0mNo report need to be charged
+2026-10-08T08:28:46.670289404Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=1, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670292675Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670301955Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.670305625Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670307591Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.670309467Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670312170Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
+2026-10-08T08:28:46.670536978Z[36m [INFO][SMF][Charging] [0mNo report need to be charged
+2026-10-08T08:28:46.670566773Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=1, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670574364Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670577125Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.670580381Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670582257Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.670584196Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670585913Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
+2026-10-08T08:28:46.670588661Z[36m [INFO][SMF][Charging] [0mNo report need to be charged
+2026-10-08T08:28:46.670601163Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=1, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670605469Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670612017Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.670613977Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670616953Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.670618863Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670627707Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
+2026-10-08T08:28:46.670631332Z[36m [INFO][SMF][Charging] [0mNo report need to be charged
+2026-10-08T08:28:46.670648319Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=1, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670652734Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670654870Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.670656945Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670658889Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.670661837Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670669966Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
+2026-10-08T08:28:46.670672667Z[36m [INFO][SMF][Charging] [0mNo report need to be charged
+2026-10-08T08:28:46.670685185Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=1, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670688179Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670691265Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.670693188Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670694988Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.670703388Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670705275Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
+2026-10-08T08:28:46.670707018Z[36m [INFO][SMF][Charging] [0mNo report need to be charged
+2026-10-08T08:28:46.670717754Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=1, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670720271Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.670722095Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.670725136Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670726893Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.670728638Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.670731337Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
+2026-10-08T08:28:46.670733104Z[36m [INFO][SMF][Charging] [0mNo report need to be charged
+2026-10-08T08:28:46.671077515Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=1, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.671085987Z[37m [TRAC][SMF][PduSess] [0m[HandleReports] Request: URRID=2, UpfId=ade61eae-df32-4340-8a14-c89680c912b2, ReportType=QUOTA_THRESHOLD, TotalVol=0, UlVol=0, DlVol=0
+2026-10-08T08:28:46.671088411Z[36m [INFO][SMF][Charging] [0mbuild MultiUnitUsageFromUsageReport
+2026-10-08T08:28:46.671090696Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=1, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.671093764Z[33m [WARN][SMF][PduSess] [0mURR 1 is not in ChargingInfo map!
+2026-10-08T08:28:46.671095905Z[37m [DEBU][SMF][Charging] [0mProcessing Usage Report: URR ID=2, ReportType=QUOTA_THRESHOLD
+2026-10-08T08:28:46.671097852Z[33m [WARN][SMF][PduSess] [0mURR 2 is not in ChargingInfo map!
