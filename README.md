@@ -3,6 +3,17 @@
 > 最后更新：2026-10-10
 > 文档状态：三节点固定部署 Profile 已完成一次受控重部署与严格业务验收；研究主线已扩展至 CNF 服务链编排
 
+## 当前路线与阶段
+
+**当前：R2.S1 功能能力盘点与选型。**范围文档已整理；选型、能力实验及 CNF 服务链部署尚未完成。
+
+| 路线 | 推进顺序与定位 | 入口 |
+|---|---|---|
+| R1（历史，底座成果已继承） | Compose → 单节点/空白 VM 重建 → 三节点验收 → 固定 Profile；后续部署编排研究计划已调整 | [历史里程碑](docs/03-research-roadmap.md#r1-历史里程碑与成果入口) |
+| R2（当前） | S1 能力盘点与选型 → S2 手工最小实验 → S3 可重复部署与测量 → S4 确定性编排 → S5 Agent | [当前阶段表](docs/03-research-roadmap.md#r2-当前阶段顺序) |
+
+阶段状态和纠偏依据统一维护在 [研究路线](docs/03-research-roadmap.md)。模块文档按职责维护；新路线继承可用成果，文件名不随阶段重新编号。
+
 ## 项目目标
 
 本项目拟构建一条受约束的闭环：
@@ -70,17 +81,17 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 
 | 文档 | 用途 |
 |---|---|
+| [03-research-roadmap.md](docs/03-research-roadmap.md) | 路线版本、纠偏依据、历史里程碑和当前阶段顺序的主记录 |
+| [cnf-service-chain-orchestration.md](docs/cnf-service-chain-orchestration.md) | R2·阶段1—3：CNF能力与最小实验；后续编排细节继续归入该模块 |
+| [04-project-notes-method.md](docs/04-project-notes-method.md) | 路线、阶段、模块和实验记录的维护方法 |
 | [01-5gc-single-upf-baseline.md](docs/01-5gc-single-upf-baseline.md) | 单机 Docker Compose 实验环境、版本、验证结果与常用命令 |
+| [02-5gc-end-to-end-flow.md](docs/02-5gc-end-to-end-flow.md) | 注册、鉴权、PDU Session 和用户数据流的心智模型 |
 | [05-k3s-helm-single-upf-baseline.md](docs/05-k3s-helm-single-upf-baseline.md) | 单节点 k3s/Helm 的实际版本、修补、业务验收与复查命令 |
 | [06-clean-vm-rebuild.md](docs/06-clean-vm-rebuild.md) | 第二台 VM 从零重建的步骤、问题与验证证据 |
 | [07-three-node-topology-and-acceptance.md](docs/07-three-node-topology-and-acceptance.md) | 三节点角色、网络现状、迁移步骤和阶段验收标准 |
 | [08-multinode-functional-baseline.md](docs/08-multinode-functional-baseline.md) | 20 轮注册、PDU Session 功能测量 |
 | [09-controlled-data-endpoint-setup.md](docs/09-controlled-data-endpoint-setup.md) | iperf3 服务端和 UE 客户端配置 |
 | [10-controlled-data-plane-baseline.md](docs/10-controlled-data-plane-baseline.md) | 受控 RTT、负载诊断、UPF OOM 与空指针崩溃证据 |
-| [02-5gc-end-to-end-flow.md](docs/02-5gc-end-to-end-flow.md) | 注册、鉴权、PDU Session 和用户数据流的心智模型 |
-| [03-research-roadmap.md](docs/03-research-roadmap.md) | 研究问题、实施路线、论文方向与待确认事项 |
-| [cnf-service-chain-orchestration.md](docs/cnf-service-chain-orchestration.md) | CNF 服务链编排的范围、最小实验、功能目录与实施路线 |
-| [04-project-notes-method.md](docs/04-project-notes-method.md) | 后续如何维护实验记录、决策记录和文献笔记 |
 | [problem solve.md](<problem solve.md>) | 持续记录真实故障、根因、完整解决流程与验证证据 |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | 分支、验证、提交、版本固定和敏感信息规则 |
 
