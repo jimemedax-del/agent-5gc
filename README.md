@@ -1,25 +1,23 @@
 # 基于 Agent 的 5G 核心网 NF 编排：项目总览与当前状态
 
-> 最后更新：2026-10-08
-> 文档状态：三节点固定部署 Profile 已完成一次受控重部署与严格业务验收；高负载限制保持归档
+> 最后更新：2026-10-10
+> 文档状态：三节点固定部署 Profile 已完成一次受控重部署与严格业务验收；研究主线已扩展至 CNF 服务链编排
 
 ## 项目目标
 
 本项目拟构建一条受约束的闭环：
 
 ```text
-自然语言网络需求
-→ 结构化意图
-→ 规则/优化规划
-→ 安全校验
-→ Task 与 Helm 部署
-→ Kubernetes 上的 free5GC
-→ UERANSIM 端到端验证与性能反馈
+业务需求
+→ 结构化意图与受控规划
+→ 5GC 开放能力和 CNF 服务链配置
+→ Kubernetes 上的 free5GC 与新增 CNF
+→ UE 端到端验证与性能反馈
 ```
 
-研究重点不是让大模型自由生成 YAML 或直接控制集群，而是让它理解意图、选择受控部署方案，并由确定性代码负责安全和可执行性。
+研究重点不是让大模型自由生成 YAML 或直接控制集群，而是让它理解业务意图，在确定性约束下规划、配置并验证可编排网络功能服务链。
 
-当前已完成 **Docker Compose、单节点 k3s/Helm 和三节点 NF 放置业务基线**。三节点为 VM1 控制面、VM2 UPF、VM3 UERANSIM，20 轮注册和建会话均成功。UPF 空指针补丁已部署；高负载限制保持归档，不继续追查。固定部署 Profile 已完成一次受控重部署、UE 注册、PDU Session 与隧道连通性验收，下一步可整理 NF 目录与受控规划输入，而非马上写 Agent。
+当前已完成 **Docker Compose、单节点 k3s/Helm 和三节点 NF 放置业务基线**。三节点为 VM1 控制面、VM2 UPF、VM3 UERANSIM，20 轮注册和建会话均成功。UPF 空指针补丁已部署；高负载限制保持归档，不继续追查。固定部署 Profile 已完成一次受控重部署、UE 注册、PDU Session 与隧道连通性验收。下一阶段是建立流量识别、QoS控制、代理转发、流量引导和边缘服务接入的最小 CNF 服务链，详见 [CNF 服务链编排模块](docs/cnf-service-chain-orchestration.md)。
 
 ## 当前结论
 
@@ -36,7 +34,8 @@
 - [已验证] 带实时日志的 100 Mbps/30 秒复现，在约 12 秒时捕获 UPF `RemoteSess` 空指针崩溃、首次退出码 1；对应源码缺少空槽判空。服务已恢复；报告超时及 SEID=0 响应的触发原因尚未证明，且不再继续追查。
 - [已验证] 上游 PR #97 已最小回移植至当前 UPF；旧代码回归测试复现 Panic，新代码通过。固定 Digest 镜像已部署，注册、会话及 TUN Ping 通过；100 Mbps 复测中 UPF 无 Panic/重启，但 SMF 重启使测试中止，不能宣称高负载通过。此问题作为限制归档，详见数据面测试模块。
 - [待验证] 长时间负载稳定性、Multus、双 UPF 与受控 core/edge 时延差异。
-- [待确认] 导师所说的“NF 挑选”究竟指完整 Profile、NF 实例、NF 类型，还是主要指 NF 放置位置。
+- [已确认] 研究方向扩展为：以现有 5GC 为接入和用户面底座，构建可编排 CNF 服务链；SMF/UPF 实例选择保留为后续扩展能力。
+- [待验证] 现有 PCF/NEF 在当前版本与配置中能否形成可测的QoS控制和流量引导效果。
 - [已验证] `free5gc-3node-no-multus-v1` 锁定 Chart、配置、17 个镜像 Digest与15个工作负载；22 项单测及 1 项真实 Helm 集成测试通过。首次完整 `apply` 已通过：核心网 Revision 14、UERANSIM Revision 6，UE 注册、PDU Session 和 TUN Ping 均成功。
 
 ## 已固化的Chart基线
@@ -60,7 +59,7 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 
 | 路径 | 内容 |
 |---|---|
-| `docs/` | 业务心智模型、实验基线、研究路线和三节点计划 |
+| `docs/` | 业务心智模型、实验基线、研究路线、三节点计划和 CNF 服务链设计 |
 | `infra/` | 受控Values、测试订阅、镜像源配置和Chart补丁 |
 | `scripts/` | 固定 Profile 渲染/检查/重部署/验收入口；初始化脚本待实机验证 |
 | `problem solve.md` | 按问题编号维护的故障、根因、修复和证据 |
@@ -80,6 +79,7 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 | [10-controlled-data-plane-baseline.md](docs/10-controlled-data-plane-baseline.md) | 受控 RTT、负载诊断、UPF OOM 与空指针崩溃证据 |
 | [02-5gc-end-to-end-flow.md](docs/02-5gc-end-to-end-flow.md) | 注册、鉴权、PDU Session 和用户数据流的心智模型 |
 | [03-research-roadmap.md](docs/03-research-roadmap.md) | 研究问题、实施路线、论文方向与待确认事项 |
+| [cnf-service-chain-orchestration.md](docs/cnf-service-chain-orchestration.md) | CNF 服务链编排的范围、最小实验、功能目录与实施路线 |
 | [04-project-notes-method.md](docs/04-project-notes-method.md) | 后续如何维护实验记录、决策记录和文献笔记 |
 | [problem solve.md](<problem solve.md>) | 持续记录真实故障、根因、完整解决流程与验证证据 |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | 分支、验证、提交、版本固定和敏感信息规则 |
