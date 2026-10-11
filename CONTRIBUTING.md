@@ -19,6 +19,70 @@ git push -u origin <branch-name>
 
 建议的提交类型：`docs`、`infra`、`feat`、`fix`、`test`、`chore`。
 
+## 团队协作流程
+
+`main`是**稳定分支名**，不是本地目录。它只保留已审阅、可复现的成果；任何人都不直接在`main`开发或向其直接推送。
+
+协作单位固定为：**一个 GitHub Issue（或明确任务）→ 一个短期分支 → 一个 Pull Request（PR）**。例如：
+
+```text
+docs/cnf-capability-survey       # 文档或能力调研
+feat/pcf-capability-probe        # 新功能或最小验证
+test/qos-probe                   # 测试与测量
+infra/multus-lab-profile         # 环境与部署配置
+```
+
+新成员首次加入：
+
+```bash
+git clone https://github.com/jimemedax-del/agent-5gc.git
+cd agent-5gc
+git switch main
+git pull --ff-only origin main
+git switch -c <type>/<short-topic>
+```
+
+日常提交后，向自己的远程分支推送，并在GitHub创建PR：
+
+```bash
+git status --short
+git diff --check
+git add <明确的文件>
+git commit -m "<type>: <summary>"
+git push -u origin <type>/<short-topic>
+```
+
+PR描述必须写清：任务目标、改动范围、验证命令及结果、尚未验证的边界，以及关联的Issue。至少一名同学审阅后，由项目负责人使用**Squash merge**合入`main`；合并后删除远程分支。
+
+合并前将自己的分支同步到最新`main`。只允许重写**自己**的分支历史，且使用保护性选项：
+
+```bash
+git fetch origin
+git rebase origin/main
+# 如有冲突：修复冲突后 git add <文件> && git rebase --continue
+git push --force-with-lease
+```
+
+`--force-with-lease`不能用于`main`，也不要用无保护的`--force`。PR合并后，本地清理方式：
+
+```bash
+git switch main
+git pull --ff-only origin main
+git branch -d <type>/<short-topic>
+```
+
+### 分工与实验环境
+
+- 开始任务前先认领Issue；多人不要同时修改同一文件的同一段、同一Chart Values或同一实验记录。
+- VM、集群和实验数据属于共享状态：一次实验指定唯一执行人；执行前记录配置版本，结束后记录结果目录和结论。不要将临时运行状态当作可合并源码。
+- PR审阅检查范围是否越界、是否保留可复现证据、是否泄露凭据，以及是否符合当前路线`R2`。
+
+### GitHub仓库设置（由仓库管理员操作）
+
+- 仓库保持`Private`，邀请同学为Collaborator（通常授予`Write`）；
+- 对`main`启用分支保护：必须PR、至少1个批准、合并前必须同步最新`main`、禁止force push和删除；
+- 使用GitHub Issue分派任务，用PR关联Issue；不在聊天记录中以“口头完成”替代提交和PR。
+
 ## 合入前检查
 
 - 文档结论使用`[已验证]`、`[已确认]`、`[待验证]`或`[待确认]`；
