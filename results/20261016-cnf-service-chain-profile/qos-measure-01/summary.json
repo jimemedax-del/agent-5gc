@@ -1,0 +1,38 @@
+{
+  "outcome": "passed",
+  "command": "measure",
+  "evidence": {
+    "state": "qos",
+    "classes": {
+      "core": {
+        "rounds": 5,
+        "capMbps": 5,
+        "medianReceiverMbps": 4.826614280935994,
+        "receiverMbps": [
+          4.8229229368153,
+          4.826560928602768,
+          4.826614280935994,
+          4.82674541698417,
+          4.8266538138472965
+        ]
+      },
+      "edge": {
+        "rounds": 5,
+        "capMbps": 15,
+        "medianReceiverMbps": 14.373985933838187,
+        "receiverMbps": [
+          14.375890694873936,
+          14.365162326801341,
+          14.373985933838187,
+          14.373190822269358,
+          14.376496126543572
+        ]
+      }
+    },
+    "medianRatio": 2.9780680819290026,
+    "sessions": 10,
+    "proxyConnections": 20,
+    "fullAcceptance": true
+  },
+  "endedAt": "2026-10-15T16:11:03.389225Z"
+}

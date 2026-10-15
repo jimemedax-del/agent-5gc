@@ -1,0 +1,13 @@
+{
+  "outcome": "passed",
+  "command": "measure",
+  "evidence": {
+    "state": "protected",
+    "sessions": 20,
+    "proxyConnections": 40,
+    "allowedChecks": 15,
+    "deniedChecks": 30,
+    "fullAcceptance": true
+  },
+  "endedAt": "2026-10-15T16:06:23.340345Z"
+}

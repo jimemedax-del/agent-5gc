@@ -1,7 +1,7 @@
 # 面向业务需求的 CNF 服务链编排
 
-> 最后更新：2026-10-15
-> 状态：R2.S1 与 R2.S2 已验收；M0—M4 及 NetworkPolicy 正反例通过，当前运行 `cnf-netpol-v1`；下一阶段 R2.S3 可重复部署与测量待开始。
+> 最后更新：2026-10-16
+> 状态：R2.S1—R2.S3 已验收；当前为 `cnf-service-chain-v1/protected`，下一阶段 R2.S4 确定性编排待开始。
 > 适用路线/阶段：R2.S1—R2.S3（能力盘点、手工实验、复现与测量）；R2.S4—R2.S5 的编排与 Agent 细节后续继续维护在本模块。阶段状态见 [研究路线](03-research-roadmap.md#r2-当前阶段顺序)。
 
 ## 目标与边界
@@ -27,7 +27,7 @@
 | PCF | 已部署，QoS 策略是否产生可测用户面效果尚未验证 | 候选 QoS 策略控制能力 |
 | NEF | 已部署，源码含 Traffic Influence 接口 | 候选应用/业务需求入口，需验证端到端效果 |
 | Kubernetes 三节点与固定 Profile | 已验证可重复部署 | 承载既有 5GC 与后续新增 CNF |
-| 流量识别、代理转发、可观测流量引导 | 代理链、端口分类引导、受控整形、跨节点放置及 Pod 隔离正反例已验收 | R2.S3 固化部署、恢复与重复测量 |
+| 流量识别、代理转发、可观测流量引导 | 能力实验与固定 Profile 的部署/恢复、重复测量已验收 | R2.S4 继续结构化需求与确定性编排 |
 
 已有 5GC 基线不需要重做。此前以 SMF/UPF 实例选择为中心的设想保留为后续扩展决策维度，但不再单独构成当前主线。
 
@@ -595,7 +595,118 @@ python scripts/audit-cnf-networkpolicy.py results/20261015-cnf-service-chain-net
 
 **R2.S2 已完成验收。** 当前保留 M4 放置与两条策略；M3 整形结果作为独立实验保留，当前未重新开启 TBF。
 结论限于当前 VM1/VM3 普通 Pod、固定标签及端口；没有测试宿主机/hostNetwork 来源、经 UPF 直连后端或恶意改标签，
-不将标签策略视为身份认证或全来源绕行防护。下一阶段 R2.S3 固化统一部署/恢复入口和重复测量，尚未开始。
+不将标签策略视为身份认证或全来源绕行防护。后续 R2.S3 已固化统一入口并完成恢复与重复测量，见下节。
+
+## R2.S3 固定 Profile 与可重复部署测量
+
+R2.S3 从隔离验收提交 `444698e` 继续，分支为 `codex/cnf-reproducible-profile`。
+统一入口 [`cnf-profile.py`](../scripts/cnf-profile.py) 读取
+[`service-chain-profile.json`](../infra/cnfs/service-chain-profile.json)，配置版本为 `cnf-service-chain-v1`。
+它锁定 14 个既有配置/脚本输入的 LF SHA256，复用已验收实现，不覆盖 M1—M4 或 NetworkPolicy 的历史入口。
+新测量元数据明确标为 R2.S3；继承的业务参数仍来自已锁定的 S2 资产。
+
+### 固定状态与操作边界
+
+| 状态 | 后端放置 | qdisc | NetworkPolicy |
+|---|---|---|---|
+| `neutral` | core/edge 都在 VM1 | 两侧 `noqueue` | 无本实验策略 |
+| `qos` | core/edge 都在 VM1 | 同配置 TBF，仅速率为 5/15 Mbps | 无本实验策略 |
+| `placed` | core 在 VM1、edge 在 VM3 | 两侧 `noqueue` | 无本实验策略 |
+| `protected`（默认） | core 在 VM1、edge 在 VM3 | 两侧 `noqueue` | 保留两条已验收策略 |
+
+范围只包含既有 `cnf-lab` 的 3 个 Deployment、3 个 Service、2 个实验 ConfigMap，以及按状态存在的两条策略。
+自动生成的 `kube-root-ca.crt` 由 Kubernetes 管理，既不接管也不删除。
+入口要求已有固定 5GC、Namespace、角色标签和节点镜像缓存；不初始化空白 VM、CNI、5GC 或订阅数据。
+不删除 Namespace、Service、PVC 或 5GC 资源。受控重建只删除三个已校验的 CNF Deployment，随后从固定清单部署。
+
+开始修改前，必须将现场唯一识别为上述四种状态之一；所检查的工作负载、Service、ConfigMap、NetworkPolicy 种类中，
+未知对象、额外策略、节点/镜像/资源/权限漂移会被拒绝。系统 ServiceAccount、Secret、PVC 等其他种类不接管、不删除。
+每次操作保留新的独立输出目录，并运行严格 5GC 验收。实际 Pod 节点、容器 Digest、Endpoints/EndpointSlice、qdisc
+都要与状态一致，不能仅以 Deployment 配置或 Pod Ready 判断成功。
+apply、重建及恢复先做服务端 dry-run；目标为保护状态时先应用隔离策略。
+同状态重复 apply 要求所有原有 Pod UID、容器身份和重启数不变。
+
+### 统一命令
+
+在 VM1 独立源码目录设置 `KUBECONFIG` 后执行，`--out` 必须指向新目录：
+
+| 命令 | 行为 |
+|---|---|
+| `render --target <状态>` | 离线渲染，校验固定输入哈希 |
+| `check` | 严格 5GC 验收、识别并检查当前状态，保存状态快照 |
+| `snapshot` | 与 `check` 相同的只读检查，显式生成可用于恢复的快照 |
+| `apply --target <状态>` | 备份已识别起点，dry-run、应用、等待 rollout、校验；失败尝试回到起点 |
+| `restore --snapshot <快照JSON>` | 只接受匹配当前 Profile 的已知状态快照，再从固定清单生成目标；不直接执行任意保存的 YAML |
+| `rebuild --target <状态>` | 备份后只重建三个 CNF Deployment，保留 Service/VIP/NodePort |
+| `recovery-check --target <不同状态>` | 实际切换后触发专用的预设验证失败，验证自动回滚；此命令是恢复演练，不是业务失败样本 |
+| `measure` | 自动识别当前状态，按对应已锁定参数采集业务/整形/隔离证据，结束后严格复验 |
+
+示例：
+
+```bash
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-profile.py check --out <新目录>/check
+python3 scripts/cnf-profile.py apply --target protected --out <新目录>/apply
+python3 scripts/cnf-profile.py apply --target qos --out <新目录>/qos-apply
+python3 scripts/cnf-profile.py measure --out <新目录>/qos-measure
+python3 scripts/cnf-profile.py restore --snapshot <新目录>/qos-apply/snapshot.json --out <新目录>/restore
+python3 scripts/cnf-profile.py measure --out <新目录>/protected-measure
+```
+
+快照记录 Profile 版本、固定状态、清单规范化哈希和安全的 Pod 身份；恢复时重新校验这些约束。
+自动回滚只承诺本入口捕获的失败：在可识别起点保存快照后应用新状态，失败即尝试按固定起点恢复并保存 `recovery.json`。
+若回滚本身失败，操作仍报告失败；不能将恢复尝试当作业务通过。
+进程被强制终止、外部并发修改或无法识别的残缺现场不在本轮自动恢复承诺内，入口会拒绝直接覆盖。
+部署/状态切换可能中断 CNF 服务；不声称在线无损迁移。
+
+### 测量与独立审计
+
+`qos` 继承 M3 的两侧各 5 轮、每轮 15 秒 TCP 下行和 5/15 Mbps 阈值；
+`neutral/placed` 继承 M4 的两类上下行各 5 次、每次 5 秒/1 Mbps；
+`protected` 保持策略不变，创建临时测试 Pod，执行 3 轮隔离矩阵及同样的 20 次 UE 业务，结束后清理测试 Pod。
+保护状态测量不重复撤销策略，S2 的 ABA 对照保留为历史验收依据。
+所有状态继续沿用 Pod/容器身份、重启与 512MiB UPF 内存护栏，失败批次不补测或拼接。
+
+独立审计入口为 [`audit-cnf-profile.py`](../scripts/audit-cnf-profile.py)，从原始数据复核重复 apply、受控重建、
+恢复轨迹、相同测量配置、动态 Pod/IP 证据、吞吐中位数与输入哈希，不依赖仅汇总的“通过”标记。
+
+### 2026-10-16 实机验收结果
+
+日期按 Asia/Shanghai 归档，原始日志保留 UTC 时间戳。证据为
+[`results/20261016-cnf-service-chain-profile/`](../results/20261016-cnf-service-chain-profile/)，共 13 个独立操作目录。
+所有操作均从当次已校验状态执行，不使用失败轮次拼接成功结果。
+
+| 验收项 | 实际结果与证据 |
+|---|---|
+| 状态与输入固定 | 四状态唯一识别和实机切换通过；14 个继承输入固定，每次元数据另记录 Profile/入口哈希 |
+| 幂等部署 | [`apply-idempotent-01`](../results/20261016-cnf-service-chain-profile/apply-idempotent-01/summary.json)、`02`、`03` 三次均不改变任何 Pod/容器身份或重启数 |
+| 失败回滚 | [`recovery-01`](../results/20261016-cnf-service-chain-profile/recovery-01/recovery.json) 实际从 `protected` 切到 `neutral`，专用预设失败后回到 `protected`，随后完整业务测量通过 |
+| 受控重建 | [`rebuild-01`](../results/20261016-cnf-service-chain-profile/rebuild-01/summary.json) 的 3 个 CNF Pod UID 均实际变化；Service UID、ClusterIP、NodePort 保留 |
+| 整形与快照恢复 | `qos-apply-01` → [`qos-measure-01`](../results/20261016-cnf-service-chain-profile/qos-measure-01/summary.json) → [`restore-01`](../results/20261016-cnf-service-chain-profile/restore-01/summary.json)；恢复使用转换前快照重新生成固定保护状态 |
+| 跨节点策略开关 | `placed-apply-01` → `placed-restore-01` 通过；仅撤销/恢复策略，Pod 身份不变 |
+| 独立重复测量 | [`protected-measure-01`](../results/20261016-cnf-service-chain-profile/protected-measure-01/summary.json) 与 [`02`](../results/20261016-cnf-service-chain-profile/protected-measure-02/summary.json) 配置相同，中间经历 CNF 重建和状态切换；两批分别完整验收 |
+
+两批保护状态各完成 20/20 会话，每批 core/edge 上下行各 5 次、40 条正确代理连接，
+隔离矩阵各为 15 次允许、30 次拒绝，DNS 正确；测量期间不撤销策略，临时测试 Pod 均已清理。
+整形状态另外完成两侧各 5×15 秒：中位吞吐 **4.826614/14.373986 Mbps**、比值 **2.978068**，
+qdisc 与代理路径证据完整，满足原 5/15 Mbps 阈值。
+三组测量合计 50 个唯一 Cookie、100 条正确代理连接、205,668,352 字节接收载荷。
+这些合计仅描述证据数量，不将不同负载/配置拼成同一性能批次。
+
+原有 15 个 5GC Pod 在 106 份身份检查记录中保持不变；CNF 只在明确的状态切换/重建步骤更新，
+各测量批次内身份稳定。26 份服务检查记录中的三个 Service UID、VIP 和端口一致，最终容器重启数为 0。
+280 次 UPF 内存采样峰值为 16.75390625 MiB，仅为离散采样峰值；各操作严格 5GC 验收均通过。
+Windows 与 VM1 共 **58 项单测通过**，独立审计 **208 项输入哈希**匹配，结果见
+[`audit.json`](../results/20261016-cnf-service-chain-profile/audit.json)。
+快照哈希改写、Service 被替换、绕过成功、错误整形速率及 5GC Pod 替换这 5 类损坏副本均被审计器拒绝，原始证据不变，见
+[`audit-negative-checks.json`](../results/20261016-cnf-service-chain-profile/audit-negative-checks.json)。
+
+```bash
+python scripts/audit-cnf-profile.py results/20261016-cnf-service-chain-profile --out <新的审计JSON路径>
+```
+
+**R2.S3 在既有集群范围内验收完成。** 当前回到默认 `protected`，core 在 VM1、edge 在 VM3、两侧无 TBF、两条策略生效。
+这不是空白 VM/Namespace 重建、强制终止后的任意现场恢复或长期稳定性验收。下一阶段 R2.S4 确定性编排尚未开始，Agent 不提前进入编码。
 
 ## 实施路线与产出
 

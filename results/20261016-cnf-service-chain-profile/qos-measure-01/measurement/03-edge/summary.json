@@ -1,0 +1,29 @@
+{
+  "round": 3,
+  "businessClass": "edge",
+  "outcome": "passed",
+  "startedAt": "2026-10-15T16:09:19.401047Z",
+  "trafficEndedAt": "2026-10-15T16:09:34.748511Z",
+  "upfGtpRxBytesDelta": 488491,
+  "upfGtpTxBytesDelta": 29073074,
+  "qdiscDelta": {
+    "bytes": 28585690,
+    "packets": 19549,
+    "drops": 0,
+    "overlimits": 32271,
+    "requeues": 0,
+    "backlogBytesAfter": 0,
+    "backlogPacketsAfter": 0
+  },
+  "cookie": "zwvz3aeomac3q2rimfwnicfofitgymvz7ce6",
+  "receivedBytes": 26951680,
+  "proxyConnections": 2,
+  "backendHit": "edge",
+  "incorrectRoutes": 0,
+  "receiverMbps": 14.373985933838187,
+  "senderMbps": 14.579799875321006,
+  "senderBytes": 27410432,
+  "receiverWindowSeconds": 15.000254,
+  "senderWindowSeconds": 15.040224,
+  "logWaitSeconds": 3.726
+}

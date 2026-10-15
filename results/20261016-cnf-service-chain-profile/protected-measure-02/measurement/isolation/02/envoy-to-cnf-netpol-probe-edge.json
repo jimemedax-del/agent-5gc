@@ -1,0 +1,26 @@
+{
+  "sourcePod": "cnf-m1-envoy-856978b666-8zsfw",
+  "target": "10.42.2.79",
+  "port": 5201,
+  "expectedAllowed": false,
+  "returnCode": 1,
+  "stdout": "",
+  "stderr": "probe: connect: Connection refused\nprobe: line 1: /dev/tcp/10.42.2.79/5201: Connection refused\ncommand terminated with exit code 1\n",
+  "command": [
+    "kubectl",
+    "-n",
+    "cnf-lab",
+    "exec",
+    "cnf-m1-envoy-856978b666-8zsfw",
+    "--",
+    "timeout",
+    "2",
+    "bash",
+    "-c",
+    "set -e; exec 3<>/dev/tcp/\"$1\"/\"$2\"; exec 3>&-",
+    "probe",
+    "10.42.2.79",
+    "5201"
+  ],
+  "at": "2026-10-15T16:13:22.661465Z"
+}

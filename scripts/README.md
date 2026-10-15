@@ -96,6 +96,21 @@ M1—M3 证据判定测试：`python -m unittest discover -s tests -p 'test_cnf_
 `audit-cnf-networkpolicy.py <单次run目录> --out <新的JSON路径>` 独立离线复核对照和业务证据，不访问集群。
 采集、复测与保护边界见 [NetworkPolicy 模块章节](../docs/cnf-service-chain-orchestration.md#networkpolicy-隔离正反例与阶段收尾)。
 
+## R2.S3 统一 CNF Profile 入口
+
+`cnf-profile.py` 读取 `infra/cnfs/service-chain-profile.json`，锁定 14 个继承输入，管理
+`neutral/qos/placed/protected` 四种固定状态，默认 `protected`。所有命令要求新的 `--out` 目录：
+`render --target` 离线渲染；`check/snapshot` 识别当前状态并保存快照；`apply --target` 备份、dry-run、部署和校验；
+`restore --snapshot` 只恢复匹配当前 Profile 的已知状态；`rebuild --target` 只重建三个 CNF Deployment；
+`recovery-check --target <不同状态>` 专门演练预设失败后的回滚；`measure` 自动选择当前状态的已锁定测量参数。
+部署失败尝试回到已识别起点并保存恢复记录；未知现场拒绝覆盖。既有 5GC、Namespace、Service、PVC 不重建。
+
+保护状态测量保留策略，创建/清理临时测试 Pod，执行隔离矩阵和 20 次 UE 业务；整形状态执行各 5×15 秒下行。
+2026-10-16 实机验收通过：3 次幂等 apply、3 个 CNF 受控重建、快照恢复、失败回滚，
+两批保护状态各 20 次业务和 10 次整形复测通过；58 项单测在 Windows/VM1 通过。
+`audit-cnf-profile.py <结果目录> --out <新的JSON路径>` 独立离线复核固定数据集。
+执行示例、恢复边界与证据见 [R2.S3 模块章节](../docs/cnf-service-chain-orchestration.md#r2s3-固定-profile-与可重复部署测量)。
+
 ## 初始化节点
 
 Server示例：

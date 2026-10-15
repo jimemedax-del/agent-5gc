@@ -1,0 +1,3 @@
+deployment.apps "cnf-m1-backend" deleted
+deployment.apps "cnf-m2-edge" deleted
+deployment.apps "cnf-m1-envoy" deleted

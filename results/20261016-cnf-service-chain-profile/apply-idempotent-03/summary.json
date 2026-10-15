@@ -1,0 +1,12 @@
+{
+  "outcome": "passed",
+  "command": "apply",
+  "evidence": {
+    "previousState": "protected",
+    "finalState": "protected",
+    "idempotent": true,
+    "controlledRebuild": false,
+    "recoveryExercised": false
+  },
+  "endedAt": "2026-10-15T16:17:05.331565Z"
+}

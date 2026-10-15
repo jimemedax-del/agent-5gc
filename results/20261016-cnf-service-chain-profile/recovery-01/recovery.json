@@ -1,0 +1,5 @@
+{
+  "trigger": "Intentional post-apply failure for recovery verification",
+  "intentional": true,
+  "outcome": "passed"
+}

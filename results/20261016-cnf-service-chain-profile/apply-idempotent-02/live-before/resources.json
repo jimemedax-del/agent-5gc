@@ -1,0 +1,611 @@
+[
+  {
+    "kind": "ConfigMap",
+    "name": "cnf-m1-envoy",
+    "uid": "e3ff358e-9f76-4fb3-a2ce-fb97771f5d77",
+    "body": {
+      "envoy.yaml": "static_resources:\n  listeners:\n  - name: m1_iperf\n    address:\n      socket_address: {address: 0.0.0.0, port_value: 15201}\n    filter_chains:\n    - filters:\n      - name: envoy.filters.network.tcp_proxy\n        typed_config:\n          \"@type\": type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n          stat_prefix: m1_iperf\n          cluster: m1_backend\n          idle_timeout: 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n            typed_config:\n              \"@type\": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n              log_format:\n                json_format:\n                  experiment: cnf-m1-v3\n                  listener: m1_iperf\n                  start: \"%START_TIME%\"\n                  downstream: \"%DOWNSTREAM_REMOTE_ADDRESS%\"\n                  local: \"%DOWNSTREAM_LOCAL_ADDRESS%\"\n                  upstream: \"%UPSTREAM_HOST%\"\n                  cluster: \"%UPSTREAM_CLUSTER%\"\n                  bytes_received: \"%BYTES_RECEIVED%\"\n                  bytes_sent: \"%BYTES_SENT%\"\n                  duration_ms: \"%DURATION%\"\n                  flags: \"%RESPONSE_FLAGS%\"\n  clusters:\n  - name: m1_backend\n    type: STRICT_DNS\n    connect_timeout: 5s\n    load_assignment:\n      cluster_name: m1_backend\n      endpoints:\n      - lb_endpoints:\n        - endpoint:\n            address:\n              socket_address:\n                # Absolute DNS name avoids inherited host search domains.\n                address: cnf-m1-backend.cnf-lab.svc.cluster.local.\n                port_value: 5201\nadmin:\n  address:\n    socket_address: {address: 127.0.0.1, port_value: 9901}\n"
+    }
+  },
+  {
+    "kind": "ConfigMap",
+    "name": "cnf-m2-envoy",
+    "uid": "a14f2e7f-4b2d-447f-838a-350b53e18eed",
+    "body": {
+      "envoy.yaml": "static_resources:\n  listeners:\n  - name: m2_core\n    address:\n      socket_address:\n        address: 0.0.0.0\n        port_value: 15201\n    filter_chains:\n    - filters:\n      - name: envoy.filters.network.tcp_proxy\n        typed_config:\n          '@type': type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n          stat_prefix: m2_core\n          cluster: m2_core\n          idle_timeout: 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n            typed_config:\n              '@type': type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n              log_format:\n                json_format:\n                  experiment: cnf-m2-v4\n                  listener: m2_core\n                  start: '%START_TIME%'\n                  downstream: '%DOWNSTREAM_REMOTE_ADDRESS%'\n                  local: '%DOWNSTREAM_LOCAL_ADDRESS%'\n                  upstream: '%UPSTREAM_HOST%'\n                  cluster: '%UPSTREAM_CLUSTER%'\n                  bytes_received: '%BYTES_RECEIVED%'\n                  bytes_sent: '%BYTES_SENT%'\n                  duration_ms: '%DURATION%'\n                  flags: '%RESPONSE_FLAGS%'\n                  business_class: core\n  - name: m2_edge\n    address:\n      socket_address:\n        address: 0.0.0.0\n        port_value: 15202\n    filter_chains:\n    - filters:\n      - name: envoy.filters.network.tcp_proxy\n        typed_config:\n          '@type': type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n          stat_prefix: m2_edge\n          cluster: m2_edge\n          idle_timeout: 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n            typed_config:\n              '@type': type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n              log_format:\n                json_format:\n                  experiment: cnf-m2-v4\n                  listener: m2_edge\n                  start: '%START_TIME%'\n                  downstream: '%DOWNSTREAM_REMOTE_ADDRESS%'\n                  local: '%DOWNSTREAM_LOCAL_ADDRESS%'\n                  upstream: '%UPSTREAM_HOST%'\n                  cluster: '%UPSTREAM_CLUSTER%'\n                  bytes_received: '%BYTES_RECEIVED%'\n                  bytes_sent: '%BYTES_SENT%'\n                  duration_ms: '%DURATION%'\n                  flags: '%RESPONSE_FLAGS%'\n                  business_class: edge\n  clusters:\n  - name: m2_core\n    type: STRICT_DNS\n    connect_timeout: 5s\n    load_assignment:\n      cluster_name: m2_core\n      endpoints:\n      - lb_endpoints:\n        - endpoint:\n            address:\n              socket_address:\n                address: cnf-m1-backend.cnf-lab.svc.cluster.local.\n                port_value: 5201\n  - name: m2_edge\n    type: STRICT_DNS\n    connect_timeout: 5s\n    load_assignment:\n      cluster_name: m2_edge\n      endpoints:\n      - lb_endpoints:\n        - endpoint:\n            address:\n              socket_address:\n                address: cnf-m2-edge.cnf-lab.svc.cluster.local.\n                port_value: 5201\nadmin:\n  address:\n    socket_address:\n      address: 127.0.0.1\n      port_value: 9901\n"
+    }
+  },
+  {
+    "kind": "Deployment",
+    "name": "cnf-m1-backend",
+    "uid": "897a4688-434e-4341-adf4-d0469c7a9d3a",
+    "body": {
+      "progressDeadlineSeconds": 600,
+      "replicas": 1,
+      "revisionHistoryLimit": 10,
+      "selector": {
+        "matchLabels": {
+          "app": "cnf-m1-backend"
+        }
+      },
+      "strategy": {
+        "type": "Recreate"
+      },
+      "template": {
+        "metadata": {
+          "creationTimestamp": null,
+          "labels": {
+            "app": "cnf-m1-backend",
+            "app.kubernetes.io/part-of": "cnf-m1"
+          }
+        },
+        "spec": {
+          "automountServiceAccountToken": false,
+          "containers": [
+            {
+              "args": [
+                "-s",
+                "-p",
+                "5201",
+                "--forceflush",
+                "-V"
+              ],
+              "command": [
+                "iperf3"
+              ],
+              "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "imagePullPolicy": "Never",
+              "name": "iperf3",
+              "ports": [
+                {
+                  "containerPort": 5201,
+                  "name": "iperf",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": {
+                "exec": {
+                  "command": [
+                    "sh",
+                    "-ec",
+                    "kill -0 1"
+                  ]
+                },
+                "failureThreshold": 3,
+                "initialDelaySeconds": 2,
+                "periodSeconds": 5,
+                "successThreshold": 1,
+                "timeoutSeconds": 1
+              },
+              "resources": {
+                "limits": {
+                  "cpu": "500m",
+                  "memory": "256Mi"
+                },
+                "requests": {
+                  "cpu": "100m",
+                  "memory": "64Mi"
+                }
+              },
+              "securityContext": {
+                "allowPrivilegeEscalation": false,
+                "capabilities": {
+                  "drop": [
+                    "ALL"
+                  ]
+                },
+                "readOnlyRootFilesystem": true
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "volumeMounts": [
+                {
+                  "mountPath": "/tmp",
+                  "name": "scratch"
+                }
+              ]
+            }
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "nodeSelector": {
+            "5gc.free5gc.org/plane": "control"
+          },
+          "restartPolicy": "Always",
+          "schedulerName": "default-scheduler",
+          "securityContext": {
+            "fsGroup": 65532,
+            "runAsGroup": 65532,
+            "runAsNonRoot": true,
+            "runAsUser": 65532,
+            "seccompProfile": {
+              "type": "RuntimeDefault"
+            }
+          },
+          "terminationGracePeriodSeconds": 30,
+          "volumes": [
+            {
+              "emptyDir": {
+                "medium": "Memory",
+                "sizeLimit": "16Mi"
+              },
+              "name": "scratch"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "kind": "Deployment",
+    "name": "cnf-m1-envoy",
+    "uid": "399a58da-733e-43d7-bfcd-4434cae880cd",
+    "body": {
+      "progressDeadlineSeconds": 600,
+      "replicas": 1,
+      "revisionHistoryLimit": 10,
+      "selector": {
+        "matchLabels": {
+          "app": "cnf-m1-envoy"
+        }
+      },
+      "strategy": {
+        "rollingUpdate": {
+          "maxSurge": "25%",
+          "maxUnavailable": "25%"
+        },
+        "type": "RollingUpdate"
+      },
+      "template": {
+        "metadata": {
+          "annotations": {
+            "cnf.lab/config-sha256": "63184417964f0fcd9e8bc2009c7ab74de787013e1e6d84f73c62bb1ed4ab70f5"
+          },
+          "creationTimestamp": null,
+          "labels": {
+            "app": "cnf-m1-envoy",
+            "app.kubernetes.io/part-of": "cnf-m1"
+          }
+        },
+        "spec": {
+          "automountServiceAccountToken": false,
+          "containers": [
+            {
+              "args": [
+                "-c",
+                "/etc/envoy/envoy.yaml",
+                "--concurrency",
+                "1",
+                "--log-level",
+                "info",
+                "--disable-hot-restart"
+              ],
+              "command": [
+                "envoy"
+              ],
+              "image": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac",
+              "imagePullPolicy": "IfNotPresent",
+              "name": "envoy",
+              "ports": [
+                {
+                  "containerPort": 15201,
+                  "name": "core",
+                  "protocol": "TCP"
+                },
+                {
+                  "containerPort": 15202,
+                  "name": "edge",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": {
+                "exec": {
+                  "command": [
+                    "sh",
+                    "-ec",
+                    "kill -0 1"
+                  ]
+                },
+                "failureThreshold": 3,
+                "initialDelaySeconds": 2,
+                "periodSeconds": 5,
+                "successThreshold": 1,
+                "timeoutSeconds": 1
+              },
+              "resources": {
+                "limits": {
+                  "cpu": "500m",
+                  "memory": "256Mi"
+                },
+                "requests": {
+                  "cpu": "100m",
+                  "memory": "64Mi"
+                }
+              },
+              "securityContext": {
+                "allowPrivilegeEscalation": false,
+                "capabilities": {
+                  "drop": [
+                    "ALL"
+                  ]
+                },
+                "readOnlyRootFilesystem": true
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "volumeMounts": [
+                {
+                  "mountPath": "/etc/envoy",
+                  "name": "config",
+                  "readOnly": true
+                }
+              ]
+            }
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "nodeSelector": {
+            "5gc.free5gc.org/plane": "control"
+          },
+          "restartPolicy": "Always",
+          "schedulerName": "default-scheduler",
+          "securityContext": {
+            "runAsGroup": 65532,
+            "runAsNonRoot": true,
+            "runAsUser": 65532,
+            "seccompProfile": {
+              "type": "RuntimeDefault"
+            }
+          },
+          "terminationGracePeriodSeconds": 30,
+          "volumes": [
+            {
+              "configMap": {
+                "defaultMode": 420,
+                "name": "cnf-m2-envoy"
+              },
+              "name": "config"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "kind": "Deployment",
+    "name": "cnf-m2-edge",
+    "uid": "fea1eb6d-2085-4278-a62e-a53632c2bccb",
+    "body": {
+      "progressDeadlineSeconds": 600,
+      "replicas": 1,
+      "revisionHistoryLimit": 10,
+      "selector": {
+        "matchLabels": {
+          "app": "cnf-m2-edge"
+        }
+      },
+      "strategy": {
+        "type": "Recreate"
+      },
+      "template": {
+        "metadata": {
+          "creationTimestamp": null,
+          "labels": {
+            "app": "cnf-m2-edge",
+            "app.kubernetes.io/part-of": "cnf-m2"
+          }
+        },
+        "spec": {
+          "automountServiceAccountToken": false,
+          "containers": [
+            {
+              "args": [
+                "-s",
+                "-p",
+                "5201",
+                "--forceflush",
+                "-V"
+              ],
+              "command": [
+                "iperf3"
+              ],
+              "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "imagePullPolicy": "Never",
+              "name": "iperf3",
+              "ports": [
+                {
+                  "containerPort": 5201,
+                  "name": "iperf",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": {
+                "exec": {
+                  "command": [
+                    "sh",
+                    "-ec",
+                    "kill -0 1"
+                  ]
+                },
+                "failureThreshold": 3,
+                "initialDelaySeconds": 2,
+                "periodSeconds": 5,
+                "successThreshold": 1,
+                "timeoutSeconds": 1
+              },
+              "resources": {
+                "limits": {
+                  "cpu": "500m",
+                  "memory": "256Mi"
+                },
+                "requests": {
+                  "cpu": "100m",
+                  "memory": "64Mi"
+                }
+              },
+              "securityContext": {
+                "allowPrivilegeEscalation": false,
+                "capabilities": {
+                  "drop": [
+                    "ALL"
+                  ]
+                },
+                "readOnlyRootFilesystem": true
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "volumeMounts": [
+                {
+                  "mountPath": "/tmp",
+                  "name": "scratch"
+                }
+              ]
+            }
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "nodeSelector": {
+            "5gc.free5gc.org/role": "ran-test"
+          },
+          "restartPolicy": "Always",
+          "schedulerName": "default-scheduler",
+          "securityContext": {
+            "fsGroup": 65532,
+            "runAsGroup": 65532,
+            "runAsNonRoot": true,
+            "runAsUser": 65532,
+            "seccompProfile": {
+              "type": "RuntimeDefault"
+            }
+          },
+          "terminationGracePeriodSeconds": 30,
+          "volumes": [
+            {
+              "emptyDir": {
+                "medium": "Memory",
+                "sizeLimit": "16Mi"
+              },
+              "name": "scratch"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "kind": "NetworkPolicy",
+    "name": "cnf-backends-from-envoy",
+    "uid": "aebd6e9d-a77c-4a7d-8a9c-08820d782346",
+    "body": {
+      "ingress": [
+        {
+          "from": [
+            {
+              "podSelector": {
+                "matchLabels": {
+                  "app": "cnf-m1-envoy"
+                }
+              }
+            }
+          ],
+          "ports": [
+            {
+              "port": 5201,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ],
+      "podSelector": {
+        "matchExpressions": [
+          {
+            "key": "app",
+            "operator": "In",
+            "values": [
+              "cnf-m1-backend",
+              "cnf-m2-edge"
+            ]
+          }
+        ]
+      },
+      "policyTypes": [
+        "Ingress"
+      ]
+    }
+  },
+  {
+    "kind": "NetworkPolicy",
+    "name": "cnf-envoy-chain-and-dns",
+    "uid": "49e59906-3068-4430-8600-a04dc7e4d0b4",
+    "body": {
+      "egress": [
+        {
+          "ports": [
+            {
+              "port": 5201,
+              "protocol": "TCP"
+            }
+          ],
+          "to": [
+            {
+              "podSelector": {
+                "matchExpressions": [
+                  {
+                    "key": "app",
+                    "operator": "In",
+                    "values": [
+                      "cnf-m1-backend",
+                      "cnf-m2-edge"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "ports": [
+            {
+              "port": 53,
+              "protocol": "UDP"
+            },
+            {
+              "port": 53,
+              "protocol": "TCP"
+            }
+          ],
+          "to": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "kube-system"
+                }
+              },
+              "podSelector": {
+                "matchLabels": {
+                  "k8s-app": "kube-dns"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "ingress": [
+        {
+          "ports": [
+            {
+              "port": 15201,
+              "protocol": "TCP"
+            },
+            {
+              "port": 15202,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ],
+      "podSelector": {
+        "matchLabels": {
+          "app": "cnf-m1-envoy"
+        }
+      },
+      "policyTypes": [
+        "Ingress",
+        "Egress"
+      ]
+    }
+  },
+  {
+    "kind": "Service",
+    "name": "cnf-m1-backend",
+    "uid": "bdebc423-967a-4e83-a5a7-5e50295a8bdc",
+    "body": {
+      "clusterIP": "10.43.108.155",
+      "clusterIPs": [
+        "10.43.108.155"
+      ],
+      "internalTrafficPolicy": "Cluster",
+      "ipFamilies": [
+        "IPv4"
+      ],
+      "ipFamilyPolicy": "SingleStack",
+      "ports": [
+        {
+          "name": "iperf",
+          "port": 5201,
+          "protocol": "TCP",
+          "targetPort": "iperf"
+        }
+      ],
+      "selector": {
+        "app": "cnf-m1-backend"
+      },
+      "sessionAffinity": "None",
+      "type": "ClusterIP"
+    }
+  },
+  {
+    "kind": "Service",
+    "name": "cnf-m1-envoy",
+    "uid": "a1ce7f99-c966-4438-8ce2-d6f14cecb349",
+    "body": {
+      "clusterIP": "10.43.196.252",
+      "clusterIPs": [
+        "10.43.196.252"
+      ],
+      "externalTrafficPolicy": "Local",
+      "internalTrafficPolicy": "Cluster",
+      "ipFamilies": [
+        "IPv4"
+      ],
+      "ipFamilyPolicy": "SingleStack",
+      "ports": [
+        {
+          "name": "core",
+          "nodePort": 31201,
+          "port": 15201,
+          "protocol": "TCP",
+          "targetPort": "core"
+        },
+        {
+          "name": "edge",
+          "nodePort": 31202,
+          "port": 15202,
+          "protocol": "TCP",
+          "targetPort": "edge"
+        }
+      ],
+      "selector": {
+        "app": "cnf-m1-envoy"
+      },
+      "sessionAffinity": "None",
+      "type": "NodePort"
+    }
+  },
+  {
+    "kind": "Service",
+    "name": "cnf-m2-edge",
+    "uid": "42fd815f-a110-4db5-bcc0-1aa0fdde791d",
+    "body": {
+      "clusterIP": "10.43.151.195",
+      "clusterIPs": [
+        "10.43.151.195"
+      ],
+      "internalTrafficPolicy": "Cluster",
+      "ipFamilies": [
+        "IPv4"
+      ],
+      "ipFamilyPolicy": "SingleStack",
+      "ports": [
+        {
+          "name": "iperf",
+          "port": 5201,
+          "protocol": "TCP",
+          "targetPort": "iperf"
+        }
+      ],
+      "selector": {
+        "app": "cnf-m2-edge"
+      },
+      "sessionAffinity": "None",
+      "type": "ClusterIP"
+    }
+  }
+]

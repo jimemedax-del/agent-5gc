@@ -1,0 +1,18 @@
+{
+  "round": 3,
+  "businessClass": "core",
+  "direction": "downlink",
+  "outcome": "passed",
+  "startedAt": "2026-10-15T16:15:09.897275Z",
+  "trafficEndedAt": "2026-10-15T16:15:15.170576Z",
+  "cookie": "pv52cj5rhujh7hoc3zlaatb764nz52fojs56",
+  "receivedBytes": 638976,
+  "proxyConnections": 2,
+  "backendHit": "core",
+  "incorrectRoutes": 0,
+  "receiverMbps": 1.0223423799632567,
+  "senderMbps": 1.0142645234563434,
+  "senderBytes": 638976,
+  "receiverWindowSeconds": 5.000094,
+  "senderWindowSeconds": 5.039916
+}

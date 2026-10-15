@@ -1,0 +1,27 @@
+{
+  "route": "R2",
+  "stage": "R2.S3",
+  "configVersion": "cnf-service-chain-v1",
+  "command": "apply",
+  "requestedTarget": "protected",
+  "startedAt": "2026-10-15T16:16:53.123204Z",
+  "evidencePath": "/home/lhm/.work/cnf-profile-20261016/apply-idempotent-03",
+  "sha256LF": {
+    "infra/cnfs/service-chain-profile.json": "3e7383a5dcd46af74d6973f27de6f41489941701d6bddbb878d116fff31e9e34",
+    "scripts/cnf-profile.py": "773f2d987c71d1f1b68e50b59bffa5bd2e4f38a4cbd243e6759ea4990cd0b7aa",
+    "infra/cnfs/networkpolicy-experiment.json": "cf42776596fc2b8c548041d61d8df42cf0266140549c9c506a1d1c5d690902f1",
+    "infra/cnfs/networkpolicy.yaml": "8f6785cea95ce023a1c8661cb25f4a06b55f6285635278f8a99a0cd9e23e14df",
+    "infra/cnfs/m4-experiment.json": "fc698f1fc8ca960853f4309919c1a578af62776e3506f67947d6ea485c4d1630",
+    "infra/cnfs/m3-experiment.json": "54563a55703918298b4957065e84e0bf009cd99b91f203099409d87385f3e323",
+    "infra/cnfs/m2-experiment.json": "1e4cdfe90da9e70e330a6699789b4f11deae5ea9899bb59093274d15c7eb103d",
+    "infra/cnfs/m1-proxy.yaml": "260c822b06961ccce2a48f7347d963baa37471cd03442035343ba4c2fae84687",
+    "infra/cnfs/m1-images.json": "fa24126b4c27f4aed9bcb9a08fc1878105296bc19817fce21215630a37a32f18",
+    "scripts/cnf-networkpolicy.py": "5712c4f50512a068ac5375e488b7597c01d5d552478bebb94c487865b55584ae",
+    "scripts/cnf-m1.py": "c9d42bd97307f1de7e806ac01bd423f2d81fbe88fc9a0a8c502060a6c47aefc7",
+    "scripts/cnf-m2.py": "54ecc11f19adb70bfdc6b0ce5c1875aae0298e1301432446497260b37c28b391",
+    "scripts/cnf-m3.py": "c97f9739842b625cc3a6a60949ea282665d843e02949d68463ae636ce7ff14a9",
+    "scripts/cnf-m4.py": "0fb07e9efb3ff995acadf830242b16cd92de32bc7dae142da1810cdd557cd5fa",
+    "scripts/free5gc-profile.py": "97c5b0c5fcd334655564f2052d027b421ed4b050e288816854604758a0e95701",
+    "infra/profiles/free5gc-3node-no-multus-v1.json": "1dbb4825e345ebe09a1de2548e41443dfb9cd366363143008d59af05e8e54ef4"
+  }
+}

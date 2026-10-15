@@ -1,0 +1,12 @@
+{
+  "outcome": "passed",
+  "command": "recovery-check",
+  "evidence": {
+    "previousState": "protected",
+    "attemptedState": "neutral",
+    "finalState": "protected",
+    "recoveryExercised": true,
+    "controlledFailureObserved": true
+  },
+  "endedAt": "2026-10-15T16:02:23.091144Z"
+}

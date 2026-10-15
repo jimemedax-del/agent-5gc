@@ -1,0 +1,3 @@
+qdisc tbf 1: root refcnt 129 rate 5Mbit burst 32Kb/1 mpu 0b lat 100ms linklayer ethernet 
+ Sent 9735971 bytes 6675 pkt (dropped 36, overlimits 8657 requeues 0) 
+ backlog 0b 0p requeues 0

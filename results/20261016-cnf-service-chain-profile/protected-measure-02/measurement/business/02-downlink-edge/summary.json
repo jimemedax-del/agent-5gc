@@ -1,0 +1,18 @@
+{
+  "round": 2,
+  "businessClass": "edge",
+  "direction": "downlink",
+  "outcome": "passed",
+  "startedAt": "2026-10-15T16:14:39.721293Z",
+  "trafficEndedAt": "2026-10-15T16:14:44.943345Z",
+  "cookie": "wwkdbnpxramgvz2xqq2ff2fb5hw4qmkyuwr4",
+  "receivedBytes": 638976,
+  "proxyConnections": 2,
+  "backendHit": "edge",
+  "incorrectRoutes": 0,
+  "receiverMbps": 1.0223425844279297,
+  "senderMbps": 1.0143927335636704,
+  "senderBytes": 638976,
+  "receiverWindowSeconds": 5.000093,
+  "senderWindowSeconds": 5.039279
+}

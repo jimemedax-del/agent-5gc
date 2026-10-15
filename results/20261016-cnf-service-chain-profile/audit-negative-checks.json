@@ -1,0 +1,31 @@
+{
+  "outcome": "passed",
+  "cases": [
+    {
+      "case": "changed restore snapshot hash",
+      "outcome": "rejected-as-required",
+      "reason": "Invalid restore snapshot"
+    },
+    {
+      "case": "Service replaced during rebuild",
+      "outcome": "rejected-as-required",
+      "reason": "Rebuild changed Services/VIPs/ports"
+    },
+    {
+      "case": "successful backend bypass",
+      "outcome": "rejected-as-required",
+      "reason": "Raw allow/deny mismatch"
+    },
+    {
+      "case": "wrong QoS rate",
+      "outcome": "rejected-as-required",
+      "reason": "QoS counter/rate proof missing"
+    },
+    {
+      "case": "5GC replacement during QoS test",
+      "outcome": "rejected-as-required",
+      "reason": "5GC identity changed: D:\\APP\\project\\codex\\worktrees\\cnf-m1-proxy\\postgraduate-analyse\\.work\\profile-audit-negative-01\\qos-measure-01\\measurement\\01-core\\guard-pods.json"
+    }
+  ],
+  "originalEvidenceModified": false
+}

@@ -1,0 +1,1 @@
+deployment "cnf-m2-edge" successfully rolled out
