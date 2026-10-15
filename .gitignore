@@ -2,6 +2,7 @@
 .vscode/
 .work/
 tmp/
+tools/
 *.log
 *.tar
 *.tar.gz
