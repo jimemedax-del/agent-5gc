@@ -1,0 +1,16 @@
+{
+  "outcome": "passed",
+  "command": "measure",
+  "evidence": {
+    "sessions": 4,
+    "proxyConnections": 8,
+    "incorrectRoutes": 0,
+    "fullAcceptance": false,
+    "correctPerClassPerDirection": 1,
+    "placement": {
+      "core": "lhm-virtual-machine",
+      "edge": "ran-test"
+    }
+  },
+  "endedAt": "2026-10-15T15:21:01.252788Z"
+}

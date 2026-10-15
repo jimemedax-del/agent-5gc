@@ -1,0 +1,159 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "annotations": {
+      "deployment.kubernetes.io/revision": "3",
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-m2\"},\"name\":\"cnf-m2-edge\",\"namespace\":\"cnf-lab\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"cnf-m2-edge\"}},\"strategy\":{\"rollingUpdate\":null,\"type\":\"Recreate\"},\"template\":{\"metadata\":{\"labels\":{\"app\":\"cnf-m2-edge\",\"app.kubernetes.io/part-of\":\"cnf-m2\"}},\"spec\":{\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"-s\",\"-p\",\"5201\",\"--forceflush\",\"-V\"],\"command\":[\"iperf3\"],\"image\":\"docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b\",\"imagePullPolicy\":\"Never\",\"name\":\"iperf3\",\"ports\":[{\"containerPort\":5201,\"name\":\"iperf\",\"protocol\":\"TCP\"}],\"readinessProbe\":{\"exec\":{\"command\":[\"sh\",\"-ec\",\"kill -0 1\"]},\"initialDelaySeconds\":2,\"periodSeconds\":5},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"64Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true},\"volumeMounts\":[{\"mountPath\":\"/tmp\",\"name\":\"scratch\"}]}],\"nodeSelector\":{\"5gc.free5gc.org/plane\":\"control\"},\"securityContext\":{\"fsGroup\":65532,\"runAsGroup\":65532,\"runAsNonRoot\":true,\"runAsUser\":65532,\"seccompProfile\":{\"type\":\"RuntimeDefault\"}},\"volumes\":[{\"emptyDir\":{\"medium\":\"Memory\",\"sizeLimit\":\"16Mi\"},\"name\":\"scratch\"}]}}}}\n"
+    },
+    "creationTimestamp": "2026-10-15T14:10:50Z",
+    "generation": 3,
+    "labels": {
+      "app.kubernetes.io/part-of": "cnf-m2"
+    },
+    "name": "cnf-m2-edge",
+    "namespace": "cnf-lab",
+    "resourceVersion": "410714",
+    "uid": "cc34c632-d9a6-423b-85e6-4dda83885d41"
+  },
+  "spec": {
+    "progressDeadlineSeconds": 600,
+    "replicas": 1,
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "app": "cnf-m2-edge"
+      }
+    },
+    "strategy": {
+      "type": "Recreate"
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "app": "cnf-m2-edge",
+          "app.kubernetes.io/part-of": "cnf-m2"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "-s",
+              "-p",
+              "5201",
+              "--forceflush",
+              "-V"
+            ],
+            "command": [
+              "iperf3"
+            ],
+            "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+            "imagePullPolicy": "Never",
+            "name": "iperf3",
+            "ports": [
+              {
+                "containerPort": 5201,
+                "name": "iperf",
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "exec": {
+                "command": [
+                  "sh",
+                  "-ec",
+                  "kill -0 1"
+                ]
+              },
+              "failureThreshold": 3,
+              "initialDelaySeconds": 2,
+              "periodSeconds": 5,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "256Mi"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "64Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "readOnlyRootFilesystem": true
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/tmp",
+                "name": "scratch"
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeSelector": {
+          "5gc.free5gc.org/plane": "control"
+        },
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "fsGroup": 65532,
+          "runAsGroup": 65532,
+          "runAsNonRoot": true,
+          "runAsUser": 65532,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "terminationGracePeriodSeconds": 30,
+        "volumes": [
+          {
+            "emptyDir": {
+              "medium": "Memory",
+              "sizeLimit": "16Mi"
+            },
+            "name": "scratch"
+          }
+        ]
+      }
+    }
+  },
+  "status": {
+    "availableReplicas": 1,
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-15T14:10:50Z",
+        "lastUpdateTime": "2026-10-15T14:47:44Z",
+        "message": "ReplicaSet \"cnf-m2-edge-8cbbc845f\" has successfully progressed.",
+        "reason": "NewReplicaSetAvailable",
+        "status": "True",
+        "type": "Progressing"
+      },
+      {
+        "lastTransitionTime": "2026-10-15T15:16:54Z",
+        "lastUpdateTime": "2026-10-15T15:16:54Z",
+        "message": "Deployment has minimum availability.",
+        "reason": "MinimumReplicasAvailable",
+        "status": "True",
+        "type": "Available"
+      }
+    ],
+    "observedGeneration": 3,
+    "readyReplicas": 1,
+    "replicas": 1,
+    "updatedReplicas": 1
+  }
+}

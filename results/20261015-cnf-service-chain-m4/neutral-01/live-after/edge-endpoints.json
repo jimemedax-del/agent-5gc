@@ -1,0 +1,40 @@
+{
+  "apiVersion": "v1",
+  "kind": "Endpoints",
+  "metadata": {
+    "annotations": {
+      "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-15T15:16:54Z"
+    },
+    "creationTimestamp": "2026-10-15T14:10:50Z",
+    "labels": {
+      "app.kubernetes.io/part-of": "cnf-m2"
+    },
+    "name": "cnf-m2-edge",
+    "namespace": "cnf-lab",
+    "resourceVersion": "410712",
+    "uid": "0cf6e92a-1811-4cde-9527-434d9b8e769d"
+  },
+  "subsets": [
+    {
+      "addresses": [
+        {
+          "ip": "10.42.0.185",
+          "nodeName": "lhm-virtual-machine",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "cnf-m2-edge-846dc7fb45-8t8xh",
+            "namespace": "cnf-lab",
+            "uid": "9f5a9a82-8767-4ed5-ad5c-9cee3587a20f"
+          }
+        }
+      ],
+      "ports": [
+        {
+          "name": "iperf",
+          "port": 5201,
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+deployment.apps/cnf-m2-edge configured (server dry run)

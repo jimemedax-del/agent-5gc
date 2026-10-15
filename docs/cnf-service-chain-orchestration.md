@@ -1,7 +1,7 @@
 # 面向业务需求的 CNF 服务链编排
 
 > 最后更新：2026-10-15
-> 状态：R2.S1 选型已完成；R2.S2 的 M0—M3 验收通过，当前运行 `cnf-m3-v1`；下一步撤销整形差异后做 M4 放置实验。
+> 状态：R2.S1 选型已完成；R2.S2 的 M0—M4 验收通过，当前运行 `cnf-m4-v1`；下一步 NetworkPolicy 允许与拒绝正反例。
 > 适用路线/阶段：R2.S1—R2.S3（能力盘点、手工实验、复现与测量）；R2.S4—R2.S5 的编排与 Agent 细节后续继续维护在本模块。阶段状态见 [研究路线](03-research-roadmap.md#r2-当前阶段顺序)。
 
 ## 目标与边界
@@ -27,7 +27,7 @@
 | PCF | 已部署，QoS 策略是否产生可测用户面效果尚未验证 | 候选 QoS 策略控制能力 |
 | NEF | 已部署，源码含 Traffic Influence 接口 | 候选应用/业务需求入口，需验证端到端效果 |
 | Kubernetes 三节点与固定 Profile | 已验证可重复部署 | 承载既有 5GC 与后续新增 CNF |
-| 流量识别、代理转发、可观测流量引导 | 单代理链及两类端口分类引导已验收 | 后续增加 QoS、放置与隔离效果验证 |
+| 流量识别、代理转发、可观测流量引导 | 代理链、端口分类引导、受控整形及跨节点后端放置已验收 | 继续验证 NetworkPolicy 隔离效果 |
 
 已有 5GC 基线不需要重做。此前以 SMF/UPF 实例选择为中心的设想保留为后续扩展决策维度，但不再单独构成当前主线。
 
@@ -94,7 +94,7 @@ Cilium、Istio、Kube-OVN、KubeEdge 和 Multus 均保留为后续对照或扩�
 | QoS 控制 | Linux `tc` TBF；由仅授予 `NET_ADMIN` 的辅助容器在后端 Pod 共享网络命名空间内配置和读取 qdisc | 链内整形 | [已验证，M3] 5/15 Mbps 各 5×15 秒下行，中位吞吐比 2.981；限于顺序单流，不解释为 5G 无线 QoS |
 | 代理转发 | 单副本独立 Envoy Deployment，静态 v3 API 配置；镜像锁定版本与 Digest | 链内 L4 代理 | [已验证，M1] 单 Listener、单后端的受控上行通过；不安装 Istio、不接管其他 Pod 流量 |
 | 流量引导 | Envoy Listener/Cluster 映射到两个 ClusterIP 后端；外部只暴露 Envoy NodePort | 链内选择后端 | [已验证，M2] 手工静态映射、错误路由 0；R2.S4 再接 xDS/受控规划器 |
-| 边缘服务接入 | 同一 iperf3 服务镜像分别放置到 VM1 与 VM3，使用现有节点标签固定位置 | 链终点与放置变量 | [待验证] 当前三台 VM 同宿主机，不宣称 VM3 具备真实 MEC 时延优势 |
+| 边缘服务接入 | 同一 iperf3 服务镜像分别放置到 VM1 与 VM3，使用现有节点标签固定位置 | 链终点与放置变量 | [已验证，M4] 去整形后跨节点业务通过；三台 VM 同宿主机，不宣称真实 MEC 时延优势 |
 | NAT/地址转发 | 复用 UPF N6、Flannel、kube-proxy 与固定 NodePort；保存路由和转发表证据 | 平台连通底座 | [已验证，M1 计数关联] 不迁移 Cilium/Calico，不新增第二 CNI |
 | 网络策略控制 | `cnf-lab` 独立 Namespace + k3s kube-router 执行标准 NetworkPolicy，只允许 Envoy 到后端和必要 DNS | 平台隔离护栏 | [待验证] 必须有允许与拒绝两类实测，不能只看对象已创建 |
 
@@ -202,7 +202,7 @@ python3 scripts/free5gc-profile.py verify
 - [已验证] 固定 Envoy 镜像在 VM1 Docker 中以非 root、只读文件系统和无 capabilities 执行 `--mode validate`，配置校验通过；此项没有部署 Kubernetes 工作负载。
 - [已验证] 10 项证据判定单测在 Windows 和 VM1 通过，覆盖路径证据缺失、Pod 替换、声明/实际镜像不符及只有一条代理日志等情况。
 - [已验证] 已导入 VM1 后端镜像，执行服务端 dry-run、真实部署与受控配置修正；`probe-06` 的单流 TCP 上行和收尾严格验收通过。完整记录见 [`results/20261015-cnf-service-chain-m1/`](../results/20261015-cnf-service-chain-m1/)。
-- [后续进展] M2 分类引导与 M3 `tc` 已完成，见后续章节；M4 放置及 NetworkPolicy 正反例仍待验证。M1 单次短时探测不等于 R2.S2 全阶段完成。
+- [后续进展] M2 分类引导、M3 `tc` 与 M4 放置已完成，见后续章节；NetworkPolicy 正反例仍待验证。M1 单次短时探测不等于 R2.S2 全阶段完成。
 
 | `probe-06` 观察 | 结果与口径 |
 |---|---|
@@ -342,11 +342,11 @@ python3 -m unittest discover -s tests -p 'test_cnf_m*.py' -v
 `measure --smoke` 每侧只测一轮，始终不算完整 M3 验收；`measure` 才按固定参数执行各 5 轮。
 正式批次不拼接探测或失败批次的数据。
 
-当前 M3 状态下，M1 的 `probe`、M2 的 `measure` 不适合作为 M3 验收入口；严格 5GC `verify` 仍可独立执行。
+运行 M3 配置时，M1 的 `probe`、M2 的 `measure` 不适合作为 M3 验收入口；严格 5GC `verify` 仍可独立执行。
 重复测量直接运行 M3 `measure`；不要重复执行要求原 M2 状态的 `deploy`。
 
 M4 前须先撤销两侧整形差异。可生成原 M2 的两个后端清单，再审阅并应用；此路径会重建两个后端，
-本轮实测的恢复范围仅为 Pod 内 qdisc 删除/重建，**尚未执行下列整套 Deployment 回退**：
+M3 当轮实测的恢复范围仅为 Pod 内 qdisc 删除/重建，**以下手工回退命令未直接执行**；后续 M4 使用固定 `normalize` 入口完成了两侧后端去整形及复验：
 
 ```bash
 python3 - <<'PY'
@@ -409,8 +409,98 @@ Windows 与 VM1 的 M1—M3 共 **31 项单测通过**。独立离线审计从�
 python scripts/audit-cnf-m3.py results/20261015-cnf-service-chain-m3 --out <新的审计JSON路径>
 ```
 
-当前保留两侧 5/15 Mbps TBF 配置。M3 已完成，R2.S2 仍需 M4 放置与 NetworkPolicy 正反例；
-整套后端 Deployment 回退及跨节点放置不计入本轮已验证范围。
+M3 验收结束时保留两侧 5/15 Mbps TBF 配置；随后 M4 已通过固定入口重建无整形后端并完成跨节点放置，见下节。
+这些后续操作不计入 M3 当轮证据。NetworkPolicy 正反例仍待验证。
+
+## M4 后端放置与跨节点路径实验
+
+M4 从 M3 提交 `ca0d064` 继续，分支为 `codex/cnf-m4-placement`。配置为
+[`m4-experiment.json`](../infra/cnfs/m4-experiment.json)，部署与测量入口为
+[`cnf-m4.py`](../scripts/cnf-m4.py)，离线审计为 [`audit-cnf-m4.py`](../scripts/audit-cnf-m4.py)。
+适用路线/阶段仍为 R2.S2；本实验只验证放置和路径可控。
+
+### 单变量设置与证据
+
+先撤销两个后端的 TBF，并移除整形辅助容器，恢复同节点、同镜像、同资源的无整形基线。
+通过两类业务的上下行探测后，再只对 edge Deployment 的 Pod `nodeSelector` 做以下修改：
+
+| 项目 | 去整形后的对照 | 放置实验 |
+|---|---|---|
+| core | VM1，`5gc.free5gc.org/plane=control` | 不变 |
+| edge | VM1，`5gc.free5gc.org/plane=control` | VM3，`5gc.free5gc.org/role=ran-test` |
+| 后端镜像与容器 | 单个 `iperf3`，复用 M1 固定 Digest，`imagePullPolicy: Never` | 不变；VM3 复用已有 UE 镜像缓存 |
+| 资源/权限 | 每侧 request 100m/64Mi，limit 500m/256Mi；UID 65532、drop ALL、只读根文件系统与可写 `/tmp` | 不变；不再保留 `NET_ADMIN` 辅助容器 |
+| qdisc | 两侧 `eth0` 为 `noqueue`，无 TBF/HTB | 每轮前后继续核对 |
+| 代理/Service | VM1 Envoy，M2 的 31201/31202 → core/edge，`externalTrafficPolicy: Local` | 不变；只更新 edge 后端 Pod 和端点 |
+| 测量 | 单流 TCP、5 秒、1 Mbps、16KiB 块长；UE 源地址绑定 `uesimtun0` | 相同参数；每类上下行各 5 次，计 20 次正式会话 |
+
+业务入口固定为 VM1 NodePort，因此 UE 与 edge 同在 VM3 也不将业务改为直连后端。
+证据包括源地址绑定及 UE 路由、UPF `upfgtp` 双向计数、Envoy 的两条控制/数据连接、后端 Cookie 和 Envoy 来源地址，
+以及 Endpoints/EndpointSlice 中的实际 Pod IP、UID、节点、Ready 与端口。
+保存节点 PodCIDR、后端到 Envoy 的路由和镜像 Digest，以关联跨节点放置；节点记录不保存任意注解或凭据。
+
+部署检查会拒绝不唯一、不可调度、非 Ready、架构不符或缺少固定本地镜像的 VM3；
+测量时继续监测原有 5GC 和 CNF Pod/容器身份、重启及 UPF 内存，停止阈值仍为 512MiB。
+上下行分别检查代理 `bytes_received` / `bytes_sent`。上行沿用 M2 的完整载荷核对，下行保留 M3 的接收端统计和原始发送端窗口。
+任何路由错误、身份变化、采集失效或超时都停止，不在同一结果目录补测。
+
+### 执行与恢复边界
+
+在 VM1 独立源码目录执行；每个输出目录必须是新目录：
+
+```bash
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-m4.py normalize --out <新的实验目录>/normalize-01
+python3 scripts/cnf-m4.py measure-neutral --out <新的实验目录>/neutral-01
+python3 scripts/cnf-m4.py place --out <新的实验目录>/place-01
+python3 scripts/cnf-m4.py measure --smoke --out <新的实验目录>/smoke-01
+python3 scripts/cnf-m4.py measure --out <新的实验目录>/measure-01
+```
+
+`normalize` 只接受已验证的 M3 起点，重建两侧后端以去除整形辅助容器；它不修改 5GC、Envoy 或 Service。
+`measure-neutral` 验证两侧仍在 VM1，各做一次上下行探测；`place` 只接受该无整形放置配置，
+实际只应用 edge Deployment。采用 Recreate，切换期间会中断 edge 服务，不是在线无损迁移。
+`measure --smoke` 在 VM3 放置后各做一次上下行；正式 `measure` 才执行各 5 次。
+所有部署和测量前后均执行严格 5GC 验收。重复测量直接运行 M4 `measure`，不能重跑要求 M3 起点的 `normalize`。
+
+若需回到 VM1 对照，可从 `normalize-01/manifest.yaml` 提取 edge Deployment，服务端 dry-run 后再应用并等待 rollout，
+随后运行 `measure-neutral`；这是保留的恢复方法，**本次未执行 edge 从 VM3 回到 VM1 的反向迁移**。
+旧的 M1—M3 业务入口依赖各自放置/容器配置，不适用于当前 M4 实验验收。
+
+三台 VM 同属一个宿主机，本实验不设置 RTT/吞吐优势阈值，不宣称真实 MEC、5G 无线 QoS、并发隔离或最大容量。
+UPF 计数属于聚合关联证据，未开展逐流抓包；NetworkPolicy 正反例须单独验证。
+
+### 2026-10-15 验收结果
+
+原始证据见 [`results/20261015-cnf-service-chain-m4/`](../results/20261015-cnf-service-chain-m4/)。
+[`normalize-01`](../results/20261015-cnf-service-chain-m4/normalize-01/summary.json) 完成去整形，
+[`neutral-01`](../results/20261015-cnf-service-chain-m4/neutral-01/summary.json) 的同节点上下行 4 次探测通过；
+[`place-01`](../results/20261015-cnf-service-chain-m4/place-01/summary.json) 只应用 edge Deployment，
+[`smoke-01`](../results/20261015-cnf-service-chain-m4/smoke-01/summary.json) 的迁移后 4 次探测通过。
+正式数据仅取 [`measure-01`](../results/20261015-cnf-service-chain-m4/measure-01/summary.json)，不混入上述探测数据。
+
+| 业务 | 实际后端节点 / 本轮 Pod IP | 上行 | 下行 | qdisc |
+|---|---|---:|---:|---|
+| core | VM1 `lhm-virtual-machine` / `10.42.0.186` | 5/5 | 5/5 | `noqueue` |
+| edge | VM3 `ran-test` / `10.42.2.73` | 5/5 | 5/5 | `noqueue` |
+
+20/20 正式会话完成，20 个 Cookie 唯一、40 条正确代理连接，错误路由为 0；接收载荷共 12,779,520 字节。
+原有 15 个 5GC Pod 从去整形前到收尾身份不变；Envoy 未重建/重启，去整形后 core 在 edge 迁移期间身份不变。
+两个后端只在预定部署步骤重建；正式批次所有 Pod/容器身份稳定，最终重启数为 0。
+80 次 UPF 内存采样的峰值为 11.0078125 MiB，这是离散采样峰值；批次前后严格 5GC 验收均通过。
+
+Windows 与 VM1 的 M1—M4 共 **41 项单测通过**，包含旧 Pod UID、错误节点、过期/非 Ready/重复 EndpointSlice、
+残留 TBF 与单变量清单检查。独立离线审计核对原始路径、实际端点与 PodCIDR、后端返回路由、资源/权限不变、身份、qdisc 及
+**55 项输入哈希**，见 [`audit.json`](../results/20261015-cnf-service-chain-m4/audit.json)。复核命令：
+
+```bash
+python scripts/audit-cnf-m4.py results/20261015-cnf-service-chain-m4 --out <新的审计JSON路径>
+```
+
+审计器对旧 Pod 端点、残留 TBF 和护栏中 Pod 被替换的三个损坏副本均拒绝通过，原始证据未改写，见
+[`audit-negative-checks.json`](../results/20261015-cnf-service-chain-m4/audit-negative-checks.json)。
+
+当前保留 core 在 VM1、edge 在 VM3 的无整形配置。M4 已完成，R2.S2 仍需 NetworkPolicy 允许/拒绝正反例。
 
 ## 实施路线与产出
 
@@ -435,6 +525,7 @@ python scripts/audit-cnf-m3.py results/20261015-cnf-service-chain-m3 --out <新�
 - [已确认] 七项能力中，五项构成业务服务链，NAT/转发和 NetworkPolicy 是平台保障能力。
 - [已验证，范围有限] Envoy TCP proxy 与当前 iperf3 3.9 的 M1 受控上行、M2 双入口和 M3 单流下行兼容性及路径日志；并发和代理资源开销对照仍待验证。
 - [已验证，M3] Pod 网络命名空间内 TBF 的配置、撤销/重建、统计读取和本次 5/15 Mbps 各 5×15 秒验收；跨批次长期稳定性仍待验证。
+- [已验证，M4] 去整形同节点对照、edge 的 VM1→VM3 放置及跨节点上下行路径；不证明时延收益或无损迁移。
 - [待验证] k3s kube-router NetworkPolicy 控制器在当前集群是否启用并正确拦截 `cnf-lab` 流量。
 - [已验证，计数关联] 本轮 NodePort 路径的 UE 绑定选路、UPF NAT/接口计数、Envoy 连接及后端来源证据闭合；未进行逐流抓包或全流量绕行防护验收。
 - [待验证] 现有 free5GC PCF/NEF 在 v4.2.2、Single-UPF Profile 中能否形成可测用户面效果；此项不阻塞 R2.S2。

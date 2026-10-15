@@ -1,0 +1,22 @@
+{
+  "round": 1,
+  "businessClass": "core",
+  "direction": "downlink",
+  "backendNode": "lhm-virtual-machine",
+  "outcome": "passed",
+  "startedAt": "2026-10-15T15:18:08.462485Z",
+  "trafficEndedAt": "2026-10-15T15:18:13.731322Z",
+  "upfGtpRxBytesDelta": 5119,
+  "upfGtpTxBytesDelta": 668113,
+  "cookie": "3clvn7dsfq5uvd7oppdape7wafb7ense7cbt",
+  "receivedBytes": 638976,
+  "proxyConnections": 2,
+  "backendHit": "core",
+  "incorrectRoutes": 0,
+  "receiverMbps": 1.0223272498044065,
+  "senderMbps": 1.01404601704185,
+  "senderBytes": 638976,
+  "receiverWindowSeconds": 5.000168,
+  "senderWindowSeconds": 5.041002,
+  "logWaitSeconds": 4.304
+}

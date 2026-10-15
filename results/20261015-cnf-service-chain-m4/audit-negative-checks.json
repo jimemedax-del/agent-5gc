@@ -1,0 +1,21 @@
+{
+  "outcome": "passed",
+  "cases": [
+    {
+      "case": "stale Pod in endpoint",
+      "outcome": "rejected-as-required",
+      "reason": "Endpoint does not identify current target Pod"
+    },
+    {
+      "case": "remaining TBF",
+      "outcome": "rejected-as-required",
+      "reason": "Shaping remains active"
+    },
+    {
+      "case": "guard Pod replacement",
+      "outcome": "rejected-as-required",
+      "reason": "Guard identity drift"
+    }
+  ],
+  "originalEvidenceModified": false
+}

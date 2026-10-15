@@ -1,6 +1,6 @@
 # 三节点 Kubernetes 拓扑与阶段验收
 
-> 最后更新：2026-10-08。本文记录三节点集群、受控部署模板及实际验收边界。
+> 最后更新：2026-10-15。本文记录三节点集群、受控部署模板及实际验收边界；R2.S2 的 CNF 放置扩展见下方入口。
 
 ## 当前结论
 
@@ -61,6 +61,10 @@ python3 scripts/free5gc-profile.py verify    # Digest、放置、Ready、业务�
 - **2026-10-08 完整 `apply` 已通过。** 核心网为 Revision 14、UERANSIM 为 Revision 6；严格 `verify` 检查到 15 个工作负载均使用锁定 Digest、放置正确、`gtp5g`已加载，UE 注册和 PDU Session 成功。`uesimtun0` 至 VM1 的 5 包 Ping 为 0% 丢包，平均 RTT 1.093 ms。证据见[重部署结果](../results/20261008-profile-template-redeploy/)。空白 VM 初始化路径仍未验收。
 
 ## 主机清单
+
+R2.S2 的 M4 已在独立 `cnf-lab` 中验证：VM1 运行 Envoy 与 core 后端，VM3 在 UERANSIM 之外增加 edge 后端。
+原有 5GC 固定 Profile 的角色与放置不变，UPF 仍在 VM2；此扩展不是 edge-UPF 迁移。
+配置与证据统一维护在 [M4 模块章节](cnf-service-chain-orchestration.md#m4-后端放置与跨节点路径实验)。
 
 以下地址是2026-10-07的当前观测值。Tailscale地址用于SSH别名，VMware地址由DHCP获得；在加入集群前应确认地址稳定或设置DHCP保留，不能直接当作长期Chart配置。
 

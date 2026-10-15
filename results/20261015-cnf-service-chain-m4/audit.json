@@ -1,0 +1,36 @@
+{
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M4",
+  "configVersion": "cnf-m4-v1",
+  "outcome": "passed",
+  "acceptedBatch": "measure-01",
+  "correctSessions": {
+    "core/uplink": 5,
+    "edge/uplink": 5,
+    "core/downlink": 5,
+    "edge/downlink": 5
+  },
+  "uniqueCookies": 20,
+  "proxyConnections": 40,
+  "receivedBytes": 12779520,
+  "backendNodes": {
+    "core": "lhm-virtual-machine",
+    "edge": "ran-test"
+  },
+  "backendIPs": {
+    "core": "10.42.0.186",
+    "edge": "10.42.2.73"
+  },
+  "envoyNode": "lhm-virtual-machine",
+  "original5gcPodsUnchanged": 15,
+  "finalContainerRestarts": 0,
+  "upfMemorySamples": 80,
+  "sampledPeakUpfMiB": 11.0078125,
+  "sourceHashChecks": 55,
+  "limitations": [
+    "Placement and functional path validation only; no latency, throughput advantage or seamless migration claim",
+    "QoS helpers and TBF removed from both backends before placement; no NetworkPolicy installed",
+    "All three VMs share one physical host; core and edge are logical experiment roles"
+  ]
+}

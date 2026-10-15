@@ -67,6 +67,21 @@ M0、M1 部署及端到端探测已在 VM1 验证（`cnf-m1-v3`）；日志等�
 M1—M3 证据判定测试：`python -m unittest discover -s tests -p 'test_cnf_m*.py' -v`。
 配置、权限、恢复边界和结果见 [M3 模块章节](../docs/cnf-service-chain-orchestration.md#m3-同节点下行整形实验)。
 
+## CNF M4 后端放置入口
+
+`cnf-m4.py` 读取 `infra/cnfs/m4-experiment.json`，命令为 `render`、`normalize`、
+`measure-neutral`、`place`、`measure`，均要求 `--out <新的结果目录>`。
+`normalize` 只接受 M3 起点，去除两侧整形辅助容器，恢复同节点无整形后端；
+`measure-neutral` 验证该对照的两类上下行各一次；`place` 再只修改 edge 的节点选择到 VM3。
+`measure --smoke` 验证迁移后的 4 次会话，`measure` 执行两类上下行各 5 次、每次 5 秒/1 Mbps。
+验证实际 Pod/Endpoint/EndpointSlice 的 UID、节点和 Ready，逐轮关联 UPF、代理方向和后端 Cookie，
+护栏与失败即停策略沿用 M3。重复测量直接使用 `measure`，不要重跑要求 M3 起点的 `normalize`。
+
+2026-10-15 `cnf-m4-v1` 正式验收通过：core 在 VM1、edge 在 VM3，20/20 会话、40 条正确代理连接，错误路由 0。
+`audit-cnf-m4.py <结果目录> --out <新的JSON路径>` 离线核对 `measure-01` 与同目录的对照/部署证据；
+可用 `--batch` 指定其他正式批次名。M1—M4 共 41 项单测通过。
+执行顺序、恢复边界和限制见 [M4 模块章节](../docs/cnf-service-chain-orchestration.md#m4-后端放置与跨节点路径实验)。
+
 ## 初始化节点
 
 Server示例：

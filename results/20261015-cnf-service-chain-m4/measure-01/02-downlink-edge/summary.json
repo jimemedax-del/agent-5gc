@@ -1,0 +1,22 @@
+{
+  "round": 2,
+  "businessClass": "edge",
+  "direction": "downlink",
+  "backendNode": "ran-test",
+  "outcome": "passed",
+  "startedAt": "2026-10-15T15:22:38.636046Z",
+  "trafficEndedAt": "2026-10-15T15:22:43.863290Z",
+  "upfGtpRxBytesDelta": 5325,
+  "upfGtpTxBytesDelta": 668838,
+  "cookie": "r7h52egjascybmm5hoo7pddlzgmfc4j5vjek",
+  "receivedBytes": 638976,
+  "proxyConnections": 2,
+  "backendHit": "edge",
+  "incorrectRoutes": 0,
+  "receiverMbps": 1.0223411531769366,
+  "senderMbps": 1.0142755921244653,
+  "senderBytes": 638976,
+  "receiverWindowSeconds": 5.0001,
+  "senderWindowSeconds": 5.039861,
+  "logWaitSeconds": 3.743
+}

@@ -19,6 +19,7 @@
 | `cnfs/m1-proxy.yaml`、`cnfs/m1-images.json` | R2.S2 的 M1 单代理/单后端清单与镜像锁；`cnf-m1-v3` 已部署并通过短时端到端业务验收 |
 | `cnfs/m2-experiment.json` | M2 固定端口映射与测量参数；复用 M1 镜像/资源/权限，新增同节点后端；v4 定时批次已完成两类各 20/20 验收 |
 | `cnfs/m3-experiment.json` | M3 同节点后端 Pod 的 5/15 Mbps TBF 配置；同镜像/资源、各 5×15 秒下行，中位吞吐比 2.981，v1 已通过验收；路由继续继承 M2 |
+| `cnfs/m4-experiment.json` | M4 去整形后仅将 edge 后端从 VM1 放至 VM3；同镜像/资源、两类上下行各 5 次，v1 已通过 20 次会话及路径验收 |
 
 正式Chart基线为`free5gc-helm v4.2.2`提交`0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c`，应用`patches/free5gc-helm-v4.2.2-single-upf.patch`后再传入受控Values。`tmp/`只是本地验证副本，不进入Git。
 

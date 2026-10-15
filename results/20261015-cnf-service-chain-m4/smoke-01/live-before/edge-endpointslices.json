@@ -1,0 +1,61 @@
+[
+  {
+    "addressType": "IPv4",
+    "apiVersion": "discovery.k8s.io/v1",
+    "endpoints": [
+      {
+        "addresses": [
+          "10.42.2.73"
+        ],
+        "conditions": {
+          "ready": true,
+          "serving": true,
+          "terminating": false
+        },
+        "nodeName": "ran-test",
+        "targetRef": {
+          "kind": "Pod",
+          "name": "cnf-m2-edge-cc965dd8b-dmzlc",
+          "namespace": "cnf-lab",
+          "uid": "f9230c9f-60d1-4ea5-96ef-5a711054300f"
+        },
+        "zone": "edge"
+      }
+    ],
+    "kind": "EndpointSlice",
+    "metadata": {
+      "annotations": {
+        "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-15T15:19:40Z"
+      },
+      "creationTimestamp": "2026-10-15T14:10:50Z",
+      "generateName": "cnf-m2-edge-",
+      "generation": 15,
+      "labels": {
+        "app.kubernetes.io/part-of": "cnf-m2",
+        "endpointslice.kubernetes.io/managed-by": "endpointslice-controller.k8s.io",
+        "kubernetes.io/service-name": "cnf-m2-edge"
+      },
+      "name": "cnf-m2-edge-rxlbv",
+      "namespace": "cnf-lab",
+      "ownerReferences": [
+        {
+          "apiVersion": "v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "Service",
+          "name": "cnf-m2-edge",
+          "uid": "42fd815f-a110-4db5-bcc0-1aa0fdde791d"
+        }
+      ],
+      "resourceVersion": "410846",
+      "uid": "06ee3554-c1a0-4b8e-87e2-47f4b340458f"
+    },
+    "ports": [
+      {
+        "name": "iperf",
+        "port": 5201,
+        "protocol": "TCP"
+      }
+    ]
+  }
+]
