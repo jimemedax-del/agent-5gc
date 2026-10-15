@@ -16,6 +16,7 @@
 | `k3s-registries.yaml` | k3s镜像源配置 |
 | `patches/` | 相对于固定上游提交的最小Chart修改 |
 | `profiles/free5gc-3node-no-multus-v1.json` | 当前三节点固定 Profile：输入/Chart 哈希、镜像 Digest、放置角色与验收参数 |
+| `cnfs/m1-proxy.yaml`、`cnfs/m1-images.json` | R2.S2 的 M1 单代理/单后端清单与镜像锁；`cnf-m1-v3` 已部署并通过短时端到端业务验收 |
 
 正式Chart基线为`free5gc-helm v4.2.2`提交`0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c`，应用`patches/free5gc-helm-v4.2.2-single-upf.patch`后再传入受控Values。`tmp/`只是本地验证副本，不进入Git。
 

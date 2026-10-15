@@ -1,0 +1,6 @@
+namespace/cnf-lab unchanged
+configmap/cnf-m1-envoy configured
+deployment.apps/cnf-m1-backend unchanged
+service/cnf-m1-backend unchanged
+deployment.apps/cnf-m1-envoy unchanged
+service/cnf-m1-envoy unchanged

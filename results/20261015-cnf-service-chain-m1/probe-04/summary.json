@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "probe",
+  "error": "Missing successful Envoy control/data connection logs",
+  "endedAt": "2026-10-15T13:46:01.350641Z"
+}

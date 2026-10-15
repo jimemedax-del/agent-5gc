@@ -1,0 +1,6 @@
+namespace/cnf-lab configured (server dry run)
+configmap/cnf-m1-envoy created (server dry run)
+deployment.apps/cnf-m1-backend created (server dry run)
+service/cnf-m1-backend created (server dry run)
+deployment.apps/cnf-m1-envoy created (server dry run)
+service/cnf-m1-envoy created (server dry run)

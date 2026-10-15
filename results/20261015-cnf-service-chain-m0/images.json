@@ -1,0 +1,29 @@
+{
+  "configVersion": "cnf-m1-v1",
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M1",
+  "platform": "linux/amd64",
+  "images": {
+    "envoy": {
+      "source": "docker.io/envoyproxy/envoy:v1.39.4",
+      "release": "https://github.com/envoyproxy/envoy/releases/tag/v1.39.4",
+      "indexDigest": "sha256:74bd4eb5629708d3fadca1a5e6b85d208f338d7bb54e06b69565905c5294cc01",
+      "image": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac",
+      "digestVerifiedOn": "2026-10-15",
+      "verification": "Docker Registry v2 response; independent SHA256 of index; selected linux/amd64 child manifest"
+    },
+    "backend": {
+      "source": "local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+      "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+      "iperfVersion": "3.9",
+      "evidence": "infra/profiles/free5gc-3node-no-multus-v1.json",
+      "prerequisite": "Import full existing UE image archive into VM1 containerd and register digest alias; VM3 cache is not shared with VM1"
+    }
+  },
+  "limitations": [
+    "Image identity does not prove runtime compatibility",
+    "M1 has no tc shaping or NetworkPolicy claim",
+    "NodePort is an explicit application entry, not transparent interception of arbitrary UE traffic"
+  ]
+}

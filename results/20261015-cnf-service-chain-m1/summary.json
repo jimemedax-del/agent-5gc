@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-15",
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M1",
+  "configVersion": "cnf-m1-v3",
+  "outcome": "passed",
+  "acceptedRun": "probe-06",
+  "evidencePath": "results/20261015-cnf-service-chain-m1/probe-06/",
+  "failedRunsRetained": {
+    "probe-01": "Incorrect collector comparison of runtime image display name; no traffic generated",
+    "probe-02": "Inherited DNS search domain returned an unintended upstream address",
+    "probe-03": "iperf3 could not create stream temporary file on read-only root filesystem",
+    "probe-04": "Completed traffic but control access log not yet flushed; not accepted",
+    "probe-05": "Completed traffic but observed log buffering exceeded initial 5 second drain; not accepted"
+  },
+  "fixEvidence": ["config-fix-01", "config-fix-02"],
+  "validation": {
+    "vm1ImageImportAndDigestAlias": "passed",
+    "kubernetesServerDryRunAndDeployment": "passed",
+    "windowsEvidenceUnitTests": 10,
+    "vm1EvidenceUnitTests": 10,
+    "strict5gcVerifyBeforeAndAfter": "passed",
+    "originalCorePodUidsUnchangedSinceM0": true,
+    "originalCorePodRestarts": 0,
+    "probeCnfPodReplacementsOrRestarts": 0,
+    "receivedBytes": 3252220,
+    "envoySuccessfulControlAndDataConnections": 2,
+    "upfGtpRxBytesDelta": 3380248,
+    "upfGtpTxBytesDelta": 47189,
+    "natNewFlowCountDelta": 2,
+    "upfPeakSampledMiB": 10.10546875
+  },
+  "limitations": [
+    "One bounded upstream TCP probe; no downlink, concurrency, throughput capacity or longevity claim",
+    "Sender and receiver summary windows differ; preserve original values",
+    "UPF path observations use aggregate counters, not per-flow packet capture",
+    "No tc, classification/steering comparison, placement comparison or NetworkPolicy acceptance yet"
+  ],
+  "next": "R2.S2/M2: two listeners and two backend classes; 20 correct routes per class, zero incorrect routes"
+}

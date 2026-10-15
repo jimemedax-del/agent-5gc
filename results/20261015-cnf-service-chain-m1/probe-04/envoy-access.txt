@@ -1,0 +1,1 @@
+{"bytes_received":3252257,"bytes_sent":0,"cluster":"m1_backend","downstream":"192.168.244.129:24508","duration_ms":15090,"experiment":"cnf-m1-v3","flags":"-","listener":"m1_iperf","local":"10.42.0.178:15201","start":"2026-10-15T13:45:45.718Z","upstream":"10.43.108.155:5201"}

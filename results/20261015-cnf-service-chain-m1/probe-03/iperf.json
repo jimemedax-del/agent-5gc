@@ -1,0 +1,30 @@
+{
+	"start":	{
+		"connected":	[{
+				"socket":	5,
+				"local_host":	"10.60.0.1",
+				"local_port":	59385,
+				"remote_host":	"192.168.244.128",
+				"remote_port":	31201
+			}],
+		"version":	"iperf 3.9",
+		"system_info":	"Linux ueransim-ue-69fdcb588d-lxdkf 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64",
+		"timestamp":	{
+			"time":	"Thu, 15 Oct 2026 13:43:31 GMT",
+			"timesecs":	1792071811
+		},
+		"connecting_to":	{
+			"host":	"192.168.244.128",
+			"port":	31201
+		},
+		"cookie":	"kuooyygrakoounz6qud4wevdj2dadu3iifzo",
+		"tcp_mss_default":	1348,
+		"target_bitrate":	5000000,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	16384,
+		"rcvbuf_actual":	131072
+	},
+	"intervals":	[],
+	"end":	{
+	}
+}

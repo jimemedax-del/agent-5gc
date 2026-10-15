@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "probe",
+  "error": "iperf command failed; see raw output",
+  "endedAt": "2026-10-15T13:43:27.814822Z"
+}

@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "probe",
+  "error": "Live M1 image differs from the image lock",
+  "endedAt": "2026-10-15T13:38:48.340729Z"
+}

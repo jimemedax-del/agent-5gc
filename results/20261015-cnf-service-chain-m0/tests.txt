@@ -1,0 +1,11 @@
+test_backend_must_observe_proxy_peer (test_cnf_m1.EvidenceTests) ... ok
+test_bypassing_upf_is_not_a_success (test_cnf_m1.EvidenceTests) ... ok
+test_complete_chain_evidence (test_cnf_m1.EvidenceTests) ... ok
+test_pod_replacement_cannot_hide_zero_restart_count (test_cnf_m1.EvidenceTests) ... ok
+test_successful_direct_iperf_is_insufficient (test_cnf_m1.EvidenceTests) ... ok
+test_wrong_upstream_is_not_a_success (test_cnf_m1.EvidenceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK

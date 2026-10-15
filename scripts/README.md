@@ -28,6 +28,16 @@
 Linux 真实 Helm 集成测试再设置 `F5GC_INTEGRATION_CHART_SOURCE=<Chart Git仓库>` 与
 `F5GC_INTEGRATION_OUT=<独立输出目录>`；只克隆/渲染，不操作集群。
 
+## CNF M0/M1 固定实验入口
+
+`cnf-m1.py` 只处理 `infra/cnfs/m1-proxy.yaml` 的单代理/单后端实验。`render` 不访问集群；
+`m0` 严格复查既有 5GC；`deploy` 创建独立 `cnf-lab` 资源；`probe` 运行 5 秒、5 Mbps TCP
+兼容性探测并关联 UE 选路、UPF 计数、Envoy 和后端证据。集群命令要求 `--out <新的结果目录>`。
+M0、M1 部署及端到端探测已在 VM1 验证（`cnf-m1-v3`）；日志等待上限为 15 秒。镜像导入、执行顺序、清理与局限见
+[CNF 模块](../docs/cnf-service-chain-orchestration.md#m0m1-执行入口与验证记录)。
+
+证据判定测试：`python -m unittest discover -s tests -p test_cnf_m1.py -v`。
+
 ## 初始化节点
 
 Server示例：

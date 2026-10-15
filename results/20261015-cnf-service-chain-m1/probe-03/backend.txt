@@ -1,0 +1,16 @@
+iperf 3.9
+Linux cnf-m1-backend-85d858d8d8-2rbl6 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+iperf3: error - unable to create a new stream: Read-only file system
+Time: Thu, 15 Oct 2026 13:43:27 GMT
+Accepted connection from 10.42.0.176, port 59506
+      Cookie: kuooyygrakoounz6qud4wevdj2dadu3iifzo
+      TCP MSS: 0 (default)
+      Target Bitrate: 5000000
+iperf 3.9
+Linux cnf-m1-backend-85d858d8d8-2rbl6 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------

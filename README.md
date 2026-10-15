@@ -1,11 +1,11 @@
 # 基于 Agent 的 5G 核心网 NF 编排：项目总览与当前状态
 
 > 最后更新：2026-10-15
-> 文档状态：三节点固定部署 Profile 已完成一次受控重部署与严格业务验收；CNF 首版选型已完成，手工最小实验尚未部署
+> 文档状态：三节点固定部署 Profile、M0 复查和 M1 单代理服务链验收通过；下一步为 M2 分类与引导
 
 ## 当前路线与阶段
 
-**当前：R2.S2 手工最小实验准备。** R2.S1 已完成三份调研材料与官方资料的二次复核，首版选择独立 Envoy、Linux `tc` 与 k3s 原生 Service/NetworkPolicy；部署资产和实机验证尚未开始。
+**当前：R2.S2 手工最小实验。** M0 基线复查和 M1 单 Listener、单后端的 UE→UPF→Envoy→后端业务验收已通过；当前配置为 `cnf-m1-v3`。下一步做 M2 两类业务的分类与引导，`tc`、放置和 NetworkPolicy 效果仍待后续验证。
 
 | 路线 | 推进顺序与定位 | 入口 |
 |---|---|---|
@@ -28,7 +28,7 @@
 
 研究重点不是让大模型自由生成 YAML 或直接控制集群，而是让它理解业务意图，在确定性约束下规划、配置并验证可编排网络功能服务链。
 
-当前已完成 **Docker Compose、单节点 k3s/Helm 和三节点 NF 放置业务基线**。三节点为 VM1 控制面、VM2 UPF、VM3 UERANSIM，20 轮注册和建会话均成功。UPF 空指针补丁已部署；高负载限制保持归档，不继续追查。固定部署 Profile 已完成一次受控重部署、UE 注册、PDU Session 与隧道连通性验收。下一阶段是在不更换 Flannel、不安装服务网格的前提下，建立独立 Envoy、Linux `tc` 和两类后端组成的最小 CNF 服务链，详见 [CNF 服务链编排模块](docs/cnf-service-chain-orchestration.md)。
+当前已完成 **Docker Compose、单节点 k3s/Helm 和三节点 NF 放置业务基线**。三节点为 VM1 控制面、VM2 UPF、VM3 UERANSIM，20 轮注册和建会话均成功。UPF 空指针补丁已部署；高负载限制保持归档，不继续追查。固定部署 Profile 已完成一次受控重部署及业务验收；新增独立 Envoy 与单后端的服务链也已通过短时验收。下一步扩展两类业务分类引导，再验证 Linux `tc`、放置与隔离，详见 [CNF 服务链编排模块](docs/cnf-service-chain-orchestration.md)。
 
 ## 当前结论
 
@@ -49,7 +49,8 @@
 - [待验证] 现有 PCF/NEF 在当前版本与配置中能否形成可测的QoS控制和流量引导效果。
 - [已验证] `free5gc-3node-no-multus-v1` 锁定 Chart、配置、17 个镜像 Digest与15个工作负载；22 项单测及 1 项真实 Helm 集成测试通过。首次完整 `apply` 已通过：核心网 Revision 14、UERANSIM Revision 6，UE 注册、PDU Session 和 TUN Ping 均成功。
 - [已确认] R2.S1 首版选型为独立 Envoy + Linux `tc` + k3s 原生 Service/NetworkPolicy；先做 L4 端口分类、代理、引导和 5/15 Mbps 受控差异，不迁移 CNI。
-- [待验证] `cnf-lab` 部署、Envoy 与 iperf3 兼容性、`tc` 效果、NetworkPolicy 正反例及完整 UE→UPF→代理→后端路径。
+- [已验证] `cnf-lab` 中单个 Envoy 与 iperf3 3.9 后端完成 UE→UPF→代理→后端探测，控制/数据连接、后端来源与 UPF 计数证据齐全，收尾严格 5GC 验收通过；原有 15 个 Pod UID 未变、重启数仍为 0。
+- [待验证] 两类业务的分类引导、`tc` 效果、后端放置及 NetworkPolicy 正反例；M1 仅为短时功能验收。
 
 ## 已固化的Chart基线
 

@@ -1,0 +1,6 @@
+namespace/cnf-lab configured
+configmap/cnf-m1-envoy created
+deployment.apps/cnf-m1-backend created
+service/cnf-m1-backend created
+deployment.apps/cnf-m1-envoy created
+service/cnf-m1-envoy created

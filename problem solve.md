@@ -1,6 +1,6 @@
 # Problem Solve：free5GC 实验问题与解决记录
 
-> 最后更新：2026-10-07
+> 最后更新：2026-10-15
 > 用途：持续记录项目中已实际遇到的问题、根因、完整解决流程、验证证据和复现方法。
 > 安全约定：不记录虚拟机密码、SSH 私钥、WebUI 令牌或真实生产密钥。文中的 K、OPc、SUPI 均为封闭实验环境的测试数据。
 
@@ -13,6 +13,7 @@
 | PS-003 | 2026-10-06 | k3s/Helm 单 UPF 部署中 UPF、SMF 和 gNB 依次受阻 | [已解决] 放行 UPF sysctl、修正 SMF 拓扑、关闭非必需的 gNB 前置镜像检查；端到端业务通过 |
 | PS-004 | 2026-10-06 | 第二台空白 VM 的 `gtp5g` 编译失败与 k3s 镜像长时间拉取 | [已解决] 补齐匹配内核的 GCC 12，校验后导入同版本镜像缓存；第二台业务端到端通过 |
 | PS-005 | 2026-10-07 | VM 重启后 Tailscale 在线但 SSH 与 VS Code Remote-SSH 超时 | [已解决] 重启 `tailscaled` 后普通数据面和 SSH 恢复；VS Code 重新建立 Remote-SSH 会话 |
+| PS-007 | 2026-10-15 | CNF 首轮代理验收受镜像显示名、DNS 搜索域、临时目录与日志缓冲阻断 | [已解决，M1 范围] 修正采集和受控配置，`probe-06` 通过；失败轮次保留 |
 
 ---
 
@@ -932,6 +933,45 @@ go-upf v1.2.12/1.2.13 含判空修复及回归测试，当前 v1.2.10 不含。�
 一次复测中 UPF 无 Panic/重启，但 SMF 重启导致测试中止，不能标记高负载通过。
 已恢复注册、PDU Session 与 TUN Ping 5/5；剩余负载故障归档，不继续深挖。
 构建证据、修复覆盖文件与回滚顺序统一见上述数据面模块。
+
+---
+
+# PS-007：CNF 首轮代理实验的镜像核验、DNS、临时目录与日志采集问题
+
+适用 `R2.S2/M1`。本轮仅新增 `cnf-lab` 单代理/单后端，既有 5GC Profile、Flannel、UPF 与 SMF 配置不变。
+原始材料统一位于 [`results/20261015-cnf-service-chain-m1/`](results/20261015-cnf-service-chain-m1/)，最终配置为 `cnf-m1-v3`。
+
+## 1. 现象、证据与根因
+
+| 轮次 | 观察 | 已证实原因 |
+|---|---|---|
+| `probe-01` | 发流量前报 `Live M1 image differs from the image lock` | 采集脚本错误地比较 `containerStatuses.image`，该字段可为 Tag 或配置哈希；Pod spec 和实际 `imageID` 均为正确 Digest |
+| `probe-02` | UE 控制连接被关闭；代理上游为 `198.18.3.0:5201`，后端未接受连接 | Pod 的 `ndots:5` 与继承搜索域使无末尾点号的 Service 域名先展开到外部搜索域；该查询返回 `198.18.3.0`，未使用预期 Service 地址 |
+| `probe-03` | DNS 已正确，后端接受控制连接，随后报 `unable to create a new stream: Read-only file system` | iperf3 3.9 创建流时需要临时文件；只读根文件系统中的 `/tmp` 无法写入 |
+| `probe-04/05` | iperf 完成且字节数完整，但自动验收缺少两条代理日志 | 连接关闭和 stdout 日志落盘并不同步；CRI 时间戳显示本轮约 8 秒的缓冲延迟，初设的即时读取/5 秒等待不足 |
+
+DNS 正反例保存在 `probe-02/dns-search.txt`、`dns-absolute.txt` 与 `resolv.conf.txt`：同一 Pod 中，
+`getent ahostsv4 cnf-m1-backend.cnf-lab.svc.cluster.local` 返回带外部搜索后缀的 `198.18.3.0`，
+末尾加 `.` 后返回正确的 `10.43.108.155`。这证明本次搜索展开问题，不据此确定上游返回该地址的具体组件实现。
+日志缓冲证据见 `probe-04/envoy-after-log-drain.txt` 和 `probe-05/envoy-after-log-drain-timestamps.txt`。
+
+## 2. 完整修正流程
+
+1. 镜像核验分别读取 Pod spec 的不可变引用和 `containerStatuses.imageID` 的 Digest；拒绝实际 Digest 不符或 spec 回退为 Tag，不以显示名称作身份判断。
+2. 将 Envoy 后端目标改为绝对域名 `cnf-m1-backend.cnf-lab.svc.cluster.local.`，登记 `cnf-m1-v2`；实际镜像配置校验、服务端 dry-run 后仅滚动更新新增 Envoy。
+3. 后端挂载 16Mi 内存型 `emptyDir` 到 `/tmp`，使用 `fsGroup=65532` 供非 root 写入，根文件系统保持只读；登记 `cnf-m1-v3`。仅更新新增后端和 Envoy，未重启原有 5GC NF。
+4. 采集入口在业务结束后等待两条正确上游的代理日志，上限 15 秒（另加 API 调用耗时）；等待期间继续核对 Pod/容器标识。没有降低双连接、后端来源或 UPF 计数的证据要求。
+5. 每次修正使用新结果目录。`probe-01`—`probe-05` 均保留失败状态；采集器旧版本以 `collector-before-*.py` 保存，供核对各轮 metadata 中的 SHA256。
+
+## 3. 最终验收与边界
+
+`probe-06` 在配置 `cnf-m1-v3` 上通过：UE 经隧道向 NodePort 发起单流 TCP 上行，收发各 3,252,220 字节；
+Envoy 控制/数据两条日志齐全，后端确认来自 Envoy Pod 的连接，UPF `upfgtp` 双向字节和 NAT 新流计数增长。
+原 15 个 5GC Pod UID 从 M0 至收尾未变，重启数仍为 0；新增两 Pod 在本轮未替换或重启，收尾严格业务验收通过。
+10 项证据核验测试在 Windows 与 VM1 通过。结果、配置与复现入口见 [CNF 模块](docs/cnf-service-chain-orchestration.md#m0m1-执行入口与验证记录)。
+
+本次不是吞吐基准：发送窗口约 5 秒、接收汇总窗口约 15 秒，两端字节相等但汇总速率不同。
+保留原始值，不归因为丢包，也未以本轮证明 `tc`、无线 QoS、长期稳定性或后端隔离。
 
 ---
 

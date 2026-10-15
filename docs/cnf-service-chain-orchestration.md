@@ -1,7 +1,7 @@
 # 面向业务需求的 CNF 服务链编排
 
 > 最后更新：2026-10-15
-> 状态：R2.S1 调研复核与首版选型已完成；R2.S2 部署资产和实机能力实验尚未开始，本文中的方案不代表已经实现。
+> 状态：R2.S1 选型已完成；R2.S2 的 M0 严格复查及 M1 单代理链路验收通过，当前配置 `cnf-m1-v3`；下一步 M2 分类与引导。
 > 适用路线/阶段：R2.S1—R2.S3（能力盘点、手工实验、复现与测量）；R2.S4—R2.S5 的编排与 Agent 细节后续继续维护在本模块。阶段状态见 [研究路线](03-research-roadmap.md#r2-当前阶段顺序)。
 
 ## 目标与边界
@@ -27,7 +27,7 @@
 | PCF | 已部署，QoS 策略是否产生可测用户面效果尚未验证 | 候选 QoS 策略控制能力 |
 | NEF | 已部署，源码含 Traffic Influence 接口 | 候选应用/业务需求入口，需验证端到端效果 |
 | Kubernetes 三节点与固定 Profile | 已验证可重复部署 | 承载既有 5GC 与后续新增 CNF |
-| 流量识别、代理转发、可观测流量引导 | 已完成首版选型，尚未部署 | 本模块需要补充的核心能力 |
+| 流量识别、代理转发、可观测流量引导 | 单代理链已部署并验收；两类业务分类引导待验证 | 本模块需要补充的核心能力 |
 
 已有 5GC 基线不需要重做。此前以 SMF/UPF 实例选择为中心的设想保留为后续扩展决策维度，但不再单独构成当前主线。
 
@@ -92,10 +92,10 @@ Cilium、Istio、Kube-OVN、KubeEdge 和 Multus 均保留为后续对照或扩�
 |---|---|---|---|
 | 流量识别 | Envoy 两个受控 TCP Listener，按目的端口区分两类 iperf3 业务；访问日志记录 Listener、目标 Cluster、字节数与连接结果 | 链内分类 | [待验证] 首版只证明 L4 分类；HTTP Path/Header 分类留到 UE HTTP 客户端镜像固定后 |
 | QoS 控制 | Linux `tc` TBF/HTB；由仅授予 `NET_ADMIN` 的辅助容器在后端 Pod 共享网络命名空间内配置和读取 qdisc | 链内整形 | [待验证] 先做 5/15 Mbps 受控差异；不解释为 5G 无线 QoS |
-| 代理转发 | 单副本独立 Envoy Deployment，静态 v3 配置；镜像在部署前锁定版本与 Digest | 链内 L4 代理 | [待验证] 不安装 Istio，不接管其他 Pod 流量 |
+| 代理转发 | 单副本独立 Envoy Deployment，静态 v3 API 配置；镜像锁定版本与 Digest | 链内 L4 代理 | [已验证，M1] 单 Listener、单后端的受控上行通过；不安装 Istio、不接管其他 Pod 流量 |
 | 流量引导 | Envoy Listener/Cluster 映射到两个 ClusterIP 后端；外部只暴露 Envoy NodePort | 链内选择后端 | [待验证] R2.S2 手工配置；R2.S4 再接 xDS/受控规划器 |
 | 边缘服务接入 | 同一 iperf3 服务镜像分别放置到 VM1 与 VM3，使用现有节点标签固定位置 | 链终点与放置变量 | [待验证] 当前三台 VM 同宿主机，不宣称 VM3 具备真实 MEC 时延优势 |
-| NAT/地址转发 | 复用 UPF N6、Flannel、kube-proxy 与固定 NodePort；保存路由和转发表证据 | 平台连通底座 | [已有基线，新增路径待验证] 不迁移 Cilium/Calico，不新增第二 CNI |
+| NAT/地址转发 | 复用 UPF N6、Flannel、kube-proxy 与固定 NodePort；保存路由和转发表证据 | 平台连通底座 | [已验证，M1 计数关联] 不迁移 Cilium/Calico，不新增第二 CNI |
 | 网络策略控制 | `cnf-lab` 独立 Namespace + k3s kube-router 执行标准 NetworkPolicy，只允许 Envoy 到后端和必要 DNS | 平台隔离护栏 | [待验证] 必须有允许与拒绝两类实测，不能只看对象已创建 |
 
 PCF 是策略决策功能，不是通用流量识别器或应用代理；UPF 提供基础用户面转发，不自动保证业务经过新增 CNF。NEF/PCF 能力探针与上述首版链路分离：先保持只读或隔离测试，不把未验证的 Traffic Influence、5QI 或 GBR 配置写入主实验路径。free5GC v4.2.2 修复了此前 NEF Traffic Influence 鉴权缺陷，但 NEF 仍不应暴露为外部 NodePort。[free5GC 安全公告](https://github.com/free5gc/free5gc/security/advisories/GHSA-3p28-73q7-45xp)
@@ -125,6 +125,97 @@ NetworkPolicy 另做正反例：Envoy 到后端应允许；非 Envoy 测试 Pod 
 
 UERANSIM 不模拟真实无线调度，因此首版的 QoS 结论限定为当前虚拟网络与服务链中的可测效果，不能宣称无线侧 QoS 保障。
 
+## M0/M1 执行入口与验证记录
+
+配置为 [`infra/cnfs/m1-proxy.yaml`](../infra/cnfs/m1-proxy.yaml)，镜像来源和 Digest 为
+[`m1-images.json`](../infra/cnfs/m1-images.json)，入口为 [`scripts/cnf-m1.py`](../scripts/cnf-m1.py)。
+仅面向 M0/M1 的固定实验，不是 R2.S4 通用编排器。
+
+当前验收配置为 `cnf-m1-v3`；首轮部署和失败诊断的 v1/v2 配置随原始结果保留。固定项如下：
+
+| 项目 | 配置与边界 |
+|---|---|
+| 新增资源 | `cnf-lab` 内一个 ConfigMap、两个单副本 Deployment、两个 Service |
+| 入口 | VM1 当前 InternalIP 的 TCP `31201` → Envoy `15201`；`externalTrafficPolicy: Local`，Envoy 固定 VM1 |
+| 后端 | VM1 上单个 iperf3 3.9，ClusterIP `5201`；复用已验证的 UE 镜像并覆盖启动命令 |
+| Envoy | `v1.39.4`，锁定 Linux amd64 子清单 Digest；静态 TCP proxy，仅监听一个业务端口 |
+| 权限与资源 | 新增容器为非 root、只读根文件系统、移除全部 capabilities；各请求 100m CPU/64Mi，限制 500m/256Mi |
+| 临时文件与 DNS | 后端单独挂载 16Mi 内存型 `/tmp`，`fsGroup=65532`；Envoy 使用末尾带点号的绝对 Service 域名 |
+| 业务探测 | UE 绑定动态读取的 TUN IP，TCP 单流、5 秒、发送端设为 5 Mbps；只验证兼容性与路径，不作为 QoS 或最大吞吐结果 |
+| 当前保障边界 | 无 `tc`、无 NetworkPolicy 效果声明；ClusterIP 不代表已阻断绕过代理，隔离正反例仍须后续实测 |
+
+进程型 readiness 探针避免向 iperf 协议端口发送无效连接；Ready 只作为启动条件，不代替业务验收。
+Envoy 的管理接口只绑定容器回环地址 `127.0.0.1:9901`，不通过 Service 暴露。
+
+### VM1 镜像准备
+
+VM1 的 Docker 中已有 UE 测试镜像，但 Docker 与 k3s containerd 的缓存独立；VM3 中的镜像也不能直接供 VM1 Pod 使用。
+本次已将现存完整归档解压到 `/home/lhm/.work/cnf-m1-20261015/ueransim-iperf3.tar`。
+需由可交互执行 sudo 的操作者在 VM1 运行：
+
+```bash
+sudo k3s ctr images import /home/lhm/.work/cnf-m1-20261015/ueransim-iperf3.tar
+sudo k3s ctr images tag \
+  docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008 \
+  docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+```
+
+2026-10-15 已完成上述导入与别名创建。镜像未导入时，`deploy` 会在创建 Namespace 前拒绝继续；脚本不自动提权或修改 containerd 配置，凭据不写入仓库。
+Envoy 由 k3s 按固定 Digest 拉取；Docker 中的校验镜像不等于已进入 k3s 缓存。
+
+### 固定执行顺序
+
+在 VM1 的本次源码副本 `/home/lhm/.work/cnf-m1-20261015/repo` 中执行；之后复现可使用同版本仓库副本。
+Python 3.10+、PyYAML 和原固定 Profile 的依赖仍须满足。每次 `--out` 使用新的目录，禁止覆盖失败轮次。
+
+```bash
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-m1.py render
+python3 scripts/cnf-m1.py m0 --out /home/lhm/.work/cnf-m1-20261015/m0-new
+python3 scripts/cnf-m1.py deploy --out /home/lhm/.work/cnf-m1-20261015/deploy-new
+python3 scripts/cnf-m1.py probe --out /home/lhm/.work/cnf-m1-20261015/probe-new
+```
+
+`deploy` 先严格复验 5GC、检查 VM1 镜像和 NodePort 冲突，要求 `cnf-lab` 尚不存在；创建独立 Namespace 后再执行服务端 dry-run、apply 与 rollout 检查。
+失败时保留现场和结果，不自动删除 Namespace、不替换已有资源。检查失败原因后人工处理，不能不加检查地重复执行。
+
+`probe` 保存命令、镜像/配置哈希、Pod UID/容器标识/重启数、UE 地址与路由、UPF 接口和 NAT 计数、iperf JSON、Envoy 日志和后端日志。
+要求 iperf 完成、至少两条正确 Cluster/上游地址的 Envoy 控制/数据连接日志、后端观察到 Envoy Pod 地址、UPF `upfgtp` 双向字节数增长；最后再次严格复验 5GC。
+Envoy 日志在连接关闭后仍可能缓冲约 8 秒；采集入口允许 15 秒等待（另加 API 调用耗时），保持两条连接证据要求，超时仍判失败。声明镜像从 Pod spec 读取，实际镜像核对 `imageID` Digest，不能用运行时显示名称替代。
+路径证据是绑定选路与多处观察的关联，UPF 计数为接口聚合值，不等于逐流抓包。本轮 UPF 镜像没有 tcpdump，未向现有 UPF 容器临时安装工具。
+
+采样检查 Pod/容器标识与重启数变化，并保留 UPF 512MiB 停止线；采集异常或探测失败即停止，不自动重启 NF。
+采样间隔包含 Kubernetes API 与 exec 耗时，不能保证捕获瞬时峰值；5 秒、5 Mbps 也不证明长期稳定性。
+
+只撤除本次五个命名资源、保留 Namespace 的清理命令为：
+
+```bash
+kubectl -n cnf-lab delete deployment/cnf-m1-envoy deployment/cnf-m1-backend \
+  service/cnf-m1-envoy service/cnf-m1-backend configmap/cnf-m1-envoy
+python3 scripts/free5gc-profile.py verify
+```
+
+### 2026-10-15 验证范围
+
+- [已验证] Tailscale/SSH 恢复后，三节点 Ready，15 个既有工作负载 Running、0 次重启；固定 Profile 严格 `verify` 通过，UE 注册、PDU Session、TUN Ping 通过。
+- [已验证] M0 入口在 VM1 执行通过并保存 Pod 身份、镜像、UE 地址与选路；证据见 [`results/20261015-cnf-service-chain-m0/`](../results/20261015-cnf-service-chain-m0/)。Ping 仅用于连通验收，不与历史 RTT 直接作性能比较。
+- [已验证] 固定 Envoy 镜像在 VM1 Docker 中以非 root、只读文件系统和无 capabilities 执行 `--mode validate`，配置校验通过；此项没有部署 Kubernetes 工作负载。
+- [已验证] 10 项证据判定单测在 Windows 和 VM1 通过，覆盖路径证据缺失、Pod 替换、声明/实际镜像不符及只有一条代理日志等情况。
+- [已验证] 已导入 VM1 后端镜像，执行服务端 dry-run、真实部署与受控配置修正；`probe-06` 的单流 TCP 上行和收尾严格验收通过。完整记录见 [`results/20261015-cnf-service-chain-m1/`](../results/20261015-cnf-service-chain-m1/)。
+- [待验证] M2 分类引导、M3 `tc`、M4 放置及 NetworkPolicy 正反例；M1 单次短时探测不等于 R2.S2 全阶段完成。
+
+| `probe-06` 观察 | 结果与口径 |
+|---|---|
+| 业务入口与后端 | `192.168.244.128:31201` → Envoy `10.42.0.178` → Service `10.43.108.155:5201` → 后端 `10.42.0.177`；地址为本次观测值 |
+| 业务传输 | 发送/接收均为 3,252,220 字节；Envoy 两条成功日志，后端日志确认代理来源 |
+| UPF 路径 | `upfgtp` RX/TX 增加 3,380,248/47,189 字节；NAT 新流计数从 19 到 21；代理观察到 UPF NAT 后的 `192.168.244.129` |
+| 运行状态 | 原 15 个 5GC Pod UID 从 M0 至收尾均未改变，重启数为 0；新增两 Pod 在本轮身份不变、0 重启；UPF 12 次采样峰值 10.105MiB |
+| 日志等待 | 8.713 秒后证据齐全，未以第一条日志代替控制/数据两条证据 |
+| 吞吐限制 | 发送统计窗口 5.000095 秒、约 5.203Mbps；接收窗口 15.040593 秒、约 1.730Mbps。窗口不一致沿用原始结果，不解释为丢包、不作为 `tc` 或容量结论 |
+
+`probe-01` 至 `probe-05` 的失败 summary 和原始材料均保留，`probe-04/05` 虽有业务字节也没有回填为成功。
+配置变化只滚动更新新增 CNF；镜像显示名误判、DNS 搜索域、只读临时目录和日志缓冲问题的完整处理记录见 [PS-007](../problem%20solve.md#ps-007cnf-首轮代理实验的镜像核验dns临时目录与日志采集问题)。
+
 ## 实施路线与产出
 
 阶段顺序和状态统一维护在 [R2 阶段表](03-research-roadmap.md#r2-当前阶段顺序)，本模块只记录具体产出与技术证据：
@@ -146,9 +237,9 @@ UERANSIM 不模拟真实无线调度，因此首版的 QoS 结论限定为当前
 - [已确认] R2.S2 使用预部署实例和手工受控配置；运行时创建实例留到 R2.S4 评估。
 - [已确认] 首版采用独立 Envoy、Linux `tc`、Kubernetes Service/NodePort 和 k3s NetworkPolicy，不更换 CNI、不安装服务网格。
 - [已确认] 七项能力中，五项构成业务服务链，NAT/转发和 NetworkPolicy 是平台保障能力。
-- [待验证] Envoy TCP proxy 对当前 iperf3 3.9 控制连接和数据连接的实际兼容性、日志字段及资源开销。
+- [已验证，范围有限] Envoy TCP proxy 与当前 iperf3 3.9 在单 Listener、单后端、5 秒受控上行中的控制/数据连接兼容性及路径日志；下行、并发和资源开销对照仍待验证。
 - [待验证] Pod 网络命名空间内 `tc` 的配置、恢复、统计读取和 5/15 Mbps 验收阈值是否稳定。
 - [待验证] k3s kube-router NetworkPolicy 控制器在当前集群是否启用并正确拦截 `cnf-lab` 流量。
-- [待验证] NodePort 经 UPF 进入 Envoy 后的源地址、NAT 层次和完整路径证据。
+- [已验证，计数关联] 本轮 NodePort 路径的 UE 绑定选路、UPF NAT/接口计数、Envoy 连接及后端来源证据闭合；未进行逐流抓包或全流量绕行防护验收。
 - [待验证] 现有 free5GC PCF/NEF 在 v4.2.2、Single-UPF Profile 中能否形成可测用户面效果；此项不阻塞 R2.S2。
 - [待确认] 论文最终更偏服务链选择/配置算法、意图理解，还是平台自动化；低时延 SLA 绝对阈值也仍需导师确认。

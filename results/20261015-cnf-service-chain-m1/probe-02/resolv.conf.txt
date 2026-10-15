@@ -1,0 +1,3 @@
+search cnf-lab.svc.cluster.local svc.cluster.local cluster.local tailba7629.ts.net localdomain
+nameserver 10.43.0.10
+options ndots:5

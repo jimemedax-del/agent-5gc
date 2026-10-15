@@ -1,0 +1,20 @@
+{
+  "outcome": "passed",
+  "command": "probe",
+  "evidence": {
+    "receivedBytes": 3252220,
+    "receiverMbps": 1.7298360510120845,
+    "senderMbps": 5.203453134390446,
+    "senderWindowSeconds": 5.000095,
+    "receiverWindowSeconds": 15.040593,
+    "envoySuccessfulConnections": 2,
+    "upfGtpRxBytesDelta": 3380248,
+    "upfGtpTxBytesDelta": 47189,
+    "pathEvidence": "source-bound UE route, UPF interface/NAT observations, Envoy access log, backend peer log",
+    "limitations": [
+      "UPF counters are aggregate; this is not per-flow packet capture or a throughput benchmark"
+    ],
+    "accessLogWaitSeconds": 8.713
+  },
+  "endedAt": "2026-10-15T13:51:00.038195Z"
+}

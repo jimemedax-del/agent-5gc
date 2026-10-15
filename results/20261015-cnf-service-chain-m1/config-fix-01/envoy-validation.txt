@@ -1,0 +1,7 @@
+[2026-10-15 13:43:18.922][1][info][main] [source/server/server.cc:968] runtime: {}
+[2026-10-15 13:43:18.923][1][info][config] [source/server/configuration_impl.cc:181] loading tracing configuration
+[2026-10-15 13:43:18.923][1][info][config] [source/server/configuration_impl.cc:132] loading 0 static secret(s)
+[2026-10-15 13:43:18.923][1][info][config] [source/server/configuration_impl.cc:138] loading 1 cluster(s)
+[2026-10-15 13:43:18.923][1][info][config] [source/server/configuration_impl.cc:148] loading 1 listener(s)
+configuration '/etc/envoy/envoy.yaml' OK
+[2026-10-15 13:43:18.924][1][info][config] [source/server/configuration_impl.cc:164] loading stats configuration
