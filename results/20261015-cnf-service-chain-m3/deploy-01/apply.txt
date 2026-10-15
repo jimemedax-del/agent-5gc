@@ -1,0 +1,2 @@
+deployment.apps/cnf-m1-backend configured
+deployment.apps/cnf-m2-edge configured

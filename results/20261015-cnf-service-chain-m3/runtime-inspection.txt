@@ -1,0 +1,21 @@
+NAME                              READY   STATUS    RESTARTS   AGE    IP            NODE                  NOMINATED NODE   READINESS GATES
+cnf-m1-backend-85fc589b6c-m9bdj   2/2     Running   0          9m2s   10.42.0.183   lhm-virtual-machine   <none>           <none>
+cnf-m1-envoy-7cfddbd446-g4hm9     1/1     Running   0          35m    10.42.0.182   lhm-virtual-machine   <none>           <none>
+cnf-m2-edge-8cbbc845f-9s4m4       2/2     Running   0          9m2s   10.42.0.184   lhm-virtual-machine   <none>           <none>
+tc utility, iproute2-5.9.0, libbpf 0.3.0
+CapInh:	0000000000000000
+CapPrm:	0000000000001000
+CapEff:	0000000000001000
+CapBnd:	0000000000001000
+CapAmb:	0000000000000000
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	0000000000000000
+CapAmb:	0000000000000000
+CapInh:	0000000000000000
+CapPrm:	0000000000001000
+CapEff:	0000000000001000
+CapBnd:	0000000000001000
+CapAmb:	0000000000000000
+[{"ifindex":2,"link_index":56,"ifname":"eth0","flags":["BROADCAST","MULTICAST","UP","LOWER_UP"],"mtu":1450,"qdisc":"tbf","operstate":"UP","linkmode":"DEFAULT","group":"default","txqlen":1000,"link_type":"ether","address":"ce:e9:e5:53:c5:2f","broadcast":"ff:ff:ff:ff:ff:ff","link_netnsid":0}]

@@ -1,0 +1,37 @@
+{
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M3",
+  "configVersion": "cnf-m3-v1",
+  "outcome": "passed",
+  "acceptedBatch": "measure-01",
+  "receiverMbps": {
+    "core": [
+      4.826549679767408,
+      4.82195009036481,
+      4.822877285228819,
+      4.822014889255301,
+      4.823049608419142
+    ],
+    "edge": [
+      14.37620585784486,
+      14.376306444680631,
+      14.373813450997485,
+      14.376159875760164,
+      14.37669539368958
+    ]
+  },
+  "medianReceiverMbps": {
+    "core": 4.822877285228819,
+    "edge": 14.37620585784486
+  },
+  "medianRatio": 2.9808359217173797,
+  "uniqueCookies": 10,
+  "proxyConnections": 20,
+  "totalReceivedBytes": 180092928,
+  "upfMemorySamples": 119,
+  "sampledPeakUpfMiB": 16.1328125,
+  "original5gcPodsUnchanged": 15,
+  "finalContainerRestarts": 0,
+  "sourceHashChecks": 36
+}

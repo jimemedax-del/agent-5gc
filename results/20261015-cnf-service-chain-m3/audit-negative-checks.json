@@ -1,0 +1,31 @@
+{
+  "outcome": "passed",
+  "cases": [
+    {
+      "case": "zero receiver payload",
+      "outcome": "rejected-as-required",
+      "reason": "Incomplete receiver measurement"
+    },
+    {
+      "case": "stale shaping rate",
+      "outcome": "rejected-as-required",
+      "reason": "Wrong TBF rate"
+    },
+    {
+      "case": "guard Pod replacement",
+      "outcome": "rejected-as-required",
+      "reason": "Guard detected identity drift"
+    },
+    {
+      "case": "summary ratio changed",
+      "outcome": "rejected-as-required",
+      "reason": "Summary ratio differs"
+    },
+    {
+      "case": "truncated memory sampling",
+      "outcome": "rejected-as-required",
+      "reason": "Missing/unsafe memory samples"
+    }
+  ],
+  "originalEvidenceModified": false
+}

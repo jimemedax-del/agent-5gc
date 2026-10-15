@@ -1,0 +1,26 @@
+Time: Thu, 15 Oct 2026 14:46:09 GMT
+Accepted connection from 10.42.0.182, port 38178
+      Cookie: mkndtbgtgiepe5elkamoisevajrrtip5wykf
+      TCP MSS: 0 (default)
+      Target Bitrate: 5000000
+[  5] local 10.42.0.177 port 5201 connected to 10.42.0.182 port 38194
+Starting Test: protocol: TCP, 1 streams, 16384 byte blocks, omitting 0 seconds, 262144 bytes to send, tos 0
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec   624 KBytes  5.11 Mbits/sec    0   43.7 KBytes       
+[  5]   1.00-2.00   sec   608 KBytes  4.98 Mbits/sec    0   43.7 KBytes       
+[  5]   2.00-3.00   sec   608 KBytes  4.98 Mbits/sec    0   43.7 KBytes       
+[  5]   3.00-4.00   sec   608 KBytes  4.98 Mbits/sec    0   43.7 KBytes       
+[  5]   4.00-5.00   sec   608 KBytes  4.98 Mbits/sec    0   43.7 KBytes       
+[  5]   5.00-5.04   sec  32.0 KBytes  6.57 Mbits/sec    0   43.7 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-5.04   sec  3.02 MBytes  5.02 Mbits/sec    0             sender
+[  5] (receiver statistics not available)
+CPU Utilization: local/sender 0.0% (0.0%u/0.0%s), remote/receiver 4.3% (1.1%u/3.3%s)
+snd_tcp_congestion cubic
+iperf 3.9
+Linux cnf-m1-backend-6d74dd5f94-4gk5b 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------

@@ -1,0 +1,21 @@
+{
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M3",
+  "configVersion": "cnf-m3-v1",
+  "startedAt": "2026-10-15T14:47:39.895672Z",
+  "command": "deploy",
+  "smoke": false,
+  "evidencePath": "/home/lhm/.work/cnf-m3-20261015/deploy-01",
+  "sha256LF": {
+    "infra/cnfs/m3-experiment.json": "54563a55703918298b4957065e84e0bf009cd99b91f203099409d87385f3e323",
+    "infra/cnfs/m2-experiment.json": "1e4cdfe90da9e70e330a6699789b4f11deae5ea9899bb59093274d15c7eb103d",
+    "infra/cnfs/m1-proxy.yaml": "260c822b06961ccce2a48f7347d963baa37471cd03442035343ba4c2fae84687",
+    "infra/cnfs/m1-images.json": "fa24126b4c27f4aed9bcb9a08fc1878105296bc19817fce21215630a37a32f18",
+    "scripts/cnf-m1.py": "c9d42bd97307f1de7e806ac01bd423f2d81fbe88fc9a0a8c502060a6c47aefc7",
+    "scripts/cnf-m2.py": "54ecc11f19adb70bfdc6b0ce5c1875aae0298e1301432446497260b37c28b391",
+    "scripts/cnf-m3.py": "c97f9739842b625cc3a6a60949ea282665d843e02949d68463ae636ce7ff14a9",
+    "scripts/free5gc-profile.py": "97c5b0c5fcd334655564f2052d027b421ed4b050e288816854604758a0e95701",
+    "infra/profiles/free5gc-3node-no-multus-v1.json": "1dbb4825e345ebe09a1de2548e41443dfb9cd366363143008d59af05e8e54ef4"
+  }
+}

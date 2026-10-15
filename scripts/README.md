@@ -52,6 +52,21 @@ M0、M1 部署及端到端探测已在 VM1 验证（`cnf-m1-v3`）；日志等�
 
 路由证据测试：`python -m unittest discover -s tests -p test_cnf_m2.py -v`。
 
+## CNF M3 下行整形入口
+
+`cnf-m3.py` 读取 `infra/cnfs/m3-experiment.json`，沿用 M2 路由，只修改同节点两后端，
+各增加同镜像、同资源的 `tc` 辅助容器，在 Pod 内 `eth0` 配置 5/15 Mbps TBF。
+命令为 `render`、`preflight`、`deploy`、`measure`，均要求 `--out <新的结果目录>`。
+`preflight` 在原 M2 状态做各一次 5 秒下行探测；`deploy` 包括无流量的 qdisc 撤销/重建检查；
+`measure --smoke` 只做各一轮，`measure` 执行各 5 轮、每轮 15 秒下行，统一使用 20 Mbps 发送上界。
+正式数据按 UE 接收端统计判定，检查下行代理字节、后端 Cookie、UPF 计数及 TBF 活动。
+512MiB UPF 内存阈值、重启/身份变化、超时或采集失效均停止批次，失败目录不补测覆盖。
+
+2026-10-15 的 `cnf-m3-v1` 正式验收通过：中位数 4.823/14.376 Mbps，比值 2.981。
+`audit-cnf-m3.py <固定结果目录> --out <新的JSON路径>` 对已归档的 `measure-01` 与同目录部署/预检材料独立离线复核；不访问集群。
+M1—M3 证据判定测试：`python -m unittest discover -s tests -p 'test_cnf_m*.py' -v`。
+配置、权限、恢复边界和结果见 [M3 模块章节](../docs/cnf-service-chain-orchestration.md#m3-同节点下行整形实验)。
+
 ## 初始化节点
 
 Server示例：

@@ -1,0 +1,37 @@
+{
+  "outcome": "passed",
+  "command": "measure",
+  "evidence": {
+    "classes": {
+      "core": {
+        "rounds": 5,
+        "capMbps": 5,
+        "medianReceiverMbps": 4.822877285228819,
+        "receiverMbps": [
+          4.826549679767408,
+          4.82195009036481,
+          4.822877285228819,
+          4.8220148892553,
+          4.823049608419142
+        ]
+      },
+      "edge": {
+        "rounds": 5,
+        "capMbps": 15,
+        "medianReceiverMbps": 14.37620585784486,
+        "receiverMbps": [
+          14.37620585784486,
+          14.376306444680631,
+          14.373813450997485,
+          14.376159875760164,
+          14.37669539368958
+        ]
+      }
+    },
+    "medianRatio": 2.9808359217173797,
+    "sessions": 10,
+    "proxyConnections": 20,
+    "fullAcceptance": true
+  },
+  "endedAt": "2026-10-15T14:53:10.003266Z"
+}

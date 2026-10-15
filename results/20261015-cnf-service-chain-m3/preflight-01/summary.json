@@ -1,0 +1,9 @@
+{
+  "outcome": "passed",
+  "command": "preflight",
+  "evidence": {
+    "sessions": 2,
+    "fullAcceptance": false
+  },
+  "endedAt": "2026-10-15T14:46:29.844145Z"
+}

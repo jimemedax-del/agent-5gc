@@ -1,7 +1,7 @@
 # 面向业务需求的 CNF 服务链编排
 
 > 最后更新：2026-10-15
-> 状态：R2.S1 选型已完成；R2.S2 的 M0—M2 验收通过，当前运行 `cnf-m2-v4`；下一步 M3 的 5/15 Mbps `tc` 下行整形。
+> 状态：R2.S1 选型已完成；R2.S2 的 M0—M3 验收通过，当前运行 `cnf-m3-v1`；下一步撤销整形差异后做 M4 放置实验。
 > 适用路线/阶段：R2.S1—R2.S3（能力盘点、手工实验、复现与测量）；R2.S4—R2.S5 的编排与 Agent 细节后续继续维护在本模块。阶段状态见 [研究路线](03-research-roadmap.md#r2-当前阶段顺序)。
 
 ## 目标与边界
@@ -91,7 +91,7 @@ Cilium、Istio、Kube-OVN、KubeEdge 和 Multus 均保留为后续对照或扩�
 | 逻辑功能 | R2.S2 首版选择 | 在路径中的职责 | 状态与边界 |
 |---|---|---|---|
 | 流量识别 | Envoy 两个受控 TCP Listener，按目的端口区分两类 iperf3 业务；访问日志记录 Listener、目标 Cluster、字节数与连接结果 | 链内分类 | [已验证，M2] 两类各 20/20；仅 L4 端口分类，HTTP Path/Header 留到 UE HTTP 客户端镜像固定后 |
-| QoS 控制 | Linux `tc` TBF/HTB；由仅授予 `NET_ADMIN` 的辅助容器在后端 Pod 共享网络命名空间内配置和读取 qdisc | 链内整形 | [待验证] 先做 5/15 Mbps 受控差异；不解释为 5G 无线 QoS |
+| QoS 控制 | Linux `tc` TBF；由仅授予 `NET_ADMIN` 的辅助容器在后端 Pod 共享网络命名空间内配置和读取 qdisc | 链内整形 | [已验证，M3] 5/15 Mbps 各 5×15 秒下行，中位吞吐比 2.981；限于顺序单流，不解释为 5G 无线 QoS |
 | 代理转发 | 单副本独立 Envoy Deployment，静态 v3 API 配置；镜像锁定版本与 Digest | 链内 L4 代理 | [已验证，M1] 单 Listener、单后端的受控上行通过；不安装 Istio、不接管其他 Pod 流量 |
 | 流量引导 | Envoy Listener/Cluster 映射到两个 ClusterIP 后端；外部只暴露 Envoy NodePort | 链内选择后端 | [已验证，M2] 手工静态映射、错误路由 0；R2.S4 再接 xDS/受控规划器 |
 | 边缘服务接入 | 同一 iperf3 服务镜像分别放置到 VM1 与 VM3，使用现有节点标签固定位置 | 链终点与放置变量 | [待验证] 当前三台 VM 同宿主机，不宣称 VM3 具备真实 MEC 时延优势 |
@@ -202,7 +202,7 @@ python3 scripts/free5gc-profile.py verify
 - [已验证] 固定 Envoy 镜像在 VM1 Docker 中以非 root、只读文件系统和无 capabilities 执行 `--mode validate`，配置校验通过；此项没有部署 Kubernetes 工作负载。
 - [已验证] 10 项证据判定单测在 Windows 和 VM1 通过，覆盖路径证据缺失、Pod 替换、声明/实际镜像不符及只有一条代理日志等情况。
 - [已验证] 已导入 VM1 后端镜像，执行服务端 dry-run、真实部署与受控配置修正；`probe-06` 的单流 TCP 上行和收尾严格验收通过。完整记录见 [`results/20261015-cnf-service-chain-m1/`](../results/20261015-cnf-service-chain-m1/)。
-- [后续进展] M2 分类引导已完成，见下一节；M3 `tc`、M4 放置及 NetworkPolicy 正反例仍待验证。M1 单次短时探测不等于 R2.S2 全阶段完成。
+- [后续进展] M2 分类引导与 M3 `tc` 已完成，见后续章节；M4 放置及 NetworkPolicy 正反例仍待验证。M1 单次短时探测不等于 R2.S2 全阶段完成。
 
 | `probe-06` 观察 | 结果与口径 |
 |---|---|
@@ -293,7 +293,124 @@ python3 scripts/cnf-m1.py probe --out /home/lhm/.work/cnf-m2-20261015/restored-m
 | 校验 | M1/M2 共 18 项单测在 Windows 和 VM1 通过；离线复核 75 项输入哈希匹配，40 个 Cookie 唯一，另一后端均未出现该 Cookie |
 
 本轮只验收显式 TCP 目的端口分类和静态后端引导。两后端仍同放 VM1，不能称为实际 edge 时延收益；
-没有 `tc`、NetworkPolicy、最大容量或长时间稳定性结论。下一步 M3 在同镜像、同节点、同资源条件下验证 5/15 Mbps 下行整形。
+M2 本身没有 `tc`、NetworkPolicy、最大容量或长时间稳定性结论。后续 M3 在同镜像、同节点、同资源条件下验证了 5/15 Mbps 下行整形，见下节。
+
+## M3 同节点下行整形实验
+
+M3 配置为 [`m3-experiment.json`](../infra/cnfs/m3-experiment.json)，部署与采集入口为
+[`cnf-m3.py`](../scripts/cnf-m3.py)，离线复核为 [`audit-cnf-m3.py`](../scripts/audit-cnf-m3.py)。
+M2 已固化为本地提交 `748d025`，M3 从该提交在 `codex/cnf-m3-shaping` 分支继续。
+仍适用 R2.S2，不新增路线版本。
+
+### 配置与测量边界
+
+| 固定项 | `cnf-m3-v1` 配置 |
+|---|---|
+| 路由 | 沿用 `cnf-m2-v4` 的 Listener、Cluster、Service 和 31201/31202 端口；Envoy 不重建，日志中的 `experiment` 仍为 M2 路由版本 |
+| 后端 | core、edge 都在 VM1；`iperf3` 主容器和 `tc` 辅助容器均复用 M1 的固定 Digest 镜像，实际 `tc` 为 iproute2 5.9.0 |
+| 主容器资源 | 两侧相同：request 100m/64Mi，limit 500m/256Mi |
+| 辅助容器资源 | 两侧相同：request 10m/32Mi，limit 100m/64Mi；每个 Pod 合计 request 110m/96Mi，limit 600m/320Mi |
+| 整形位置 | 仅后端 Pod 共享网络命名空间的 `eth0` 出口；root TBF `1:`，core 5 Mbps、edge 15 Mbps，burst 32kb、latency 100ms |
+| 权限 | 主容器保持 UID 65532、drop ALL；辅助容器 UID 0、drop ALL 后仅加 `NET_ADMIN`，只读根文件系统、禁止提权、RuntimeDefault seccomp；不使用 privileged、hostNetwork 或宿主机 qdisc |
+| 业务 | UE 绑定动态读取的 `uesimtun0` 地址，通过 UPF、Envoy 到后端，`iperf3 -R -P 1 -t 15 -b 20M -l 16384`；交错执行各 5 轮 |
+| 统计 | 使用 UE 接收端 `sum_received` 的原始字节数/窗口计算吞吐；保留 sender/receiver 的原始字节、时长和速率，不要求两端停止时缓冲区中的字节完全一致 |
+| 护栏 | 逐会话监测所有原有 5GC 与 CNF Pod/容器身份、Ready 和重启数，采样 UPF 内存；512MiB、身份变化、重启、超时或采集失效即停，失败目录不重用 |
+
+20 Mbps 是两组一致、且高于两个 TBF 上限的发送端负载上界；它不作为整形结果。
+每轮要求 qdisc 字节增长覆盖本轮接收载荷、packet 和 overlimit 增长，并保存 drops、requeues、backlog。
+代理证据检查下行的 `bytes_sent`；每轮仍需两条正确的代理连接、目标后端 Cookie、另一后端不误收和 UPF 双向计数。
+
+本实验验证顺序单流条件下的两档下行控制效果，不代表并发业务资源隔离、最大容量、无线调度 QoS、PCF 策略生效或物理 edge 优势。
+TBF 队列可能丢包，TCP 也可能存在重传和停止时的在途缓冲；不能将成功完成解释为零丢包。
+
+### 执行与恢复
+
+在 VM1 独立源码目录执行，所有结果目录必须是新目录：
+
+```bash
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-m3.py preflight --out <新目录>/preflight
+python3 scripts/cnf-m3.py deploy --out <新目录>/deploy
+python3 scripts/cnf-m3.py measure --smoke --out <新目录>/smoke
+python3 scripts/cnf-m3.py measure --out <新目录>/measure
+python3 -m unittest discover -s tests -p 'test_cnf_m*.py' -v
+```
+
+`preflight` 只接受未增加辅助容器的 M2 基线，各做一次 5 秒、5 Mbps 下行兼容性探测。
+`deploy` 校验该基线，只修改两个后端 Deployment；Recreate 策略避免部署期同时存在新旧后端。
+它在无测试流量时对两个 Pod 各执行一次 TBF 删除、读取 `noqueue`、按原参数重建并复查，保留恢复证据。
+`measure --smoke` 每侧只测一轮，始终不算完整 M3 验收；`measure` 才按固定参数执行各 5 轮。
+正式批次不拼接探测或失败批次的数据。
+
+当前 M3 状态下，M1 的 `probe`、M2 的 `measure` 不适合作为 M3 验收入口；严格 5GC `verify` 仍可独立执行。
+重复测量直接运行 M3 `measure`；不要重复执行要求原 M2 状态的 `deploy`。
+
+M4 前须先撤销两侧整形差异。可生成原 M2 的两个后端清单，再审阅并应用；此路径会重建两个后端，
+本轮实测的恢复范围仅为 Pod 内 qdisc 删除/重建，**尚未执行下列整套 Deployment 回退**：
+
+```bash
+python3 - <<'PY'
+import importlib.util
+from pathlib import Path
+import yaml
+module = importlib.util.spec_from_file_location('m2', 'scripts/cnf-m2.py')
+m2 = importlib.util.module_from_spec(module)
+module.loader.exec_module(m2)
+core = next(d for d in m2.m1.config()[0]
+            if d['kind'] == 'Deployment' and d['metadata']['name'] == 'cnf-m1-backend')
+edge = next(d for d in m2.render()[2]
+            if d['kind'] == 'Deployment' and d['metadata']['name'] == 'cnf-m2-edge')
+with Path('cnf-restore-m2.yaml').open('x', encoding='utf-8') as f:
+    yaml.safe_dump_all([core, edge], f, sort_keys=False)
+PY
+kubectl apply --dry-run=server -f cnf-restore-m2.yaml
+kubectl apply -f cnf-restore-m2.yaml
+kubectl -n cnf-lab rollout status deployment/cnf-m1-backend --timeout=120s
+kubectl -n cnf-lab rollout status deployment/cnf-m2-edge --timeout=120s
+python3 scripts/cnf-m2.py measure --smoke --out <新的恢复验证目录>
+```
+
+恢复后还应确认两侧无 TBF、5GC 严格验收通过，再实施 M4 的节点放置变化。
+
+### 2026-10-15 验收结果
+
+证据集中于 [`results/20261015-cnf-service-chain-m3/`](../results/20261015-cnf-service-chain-m3/)。
+[`preflight-01`](../results/20261015-cnf-service-chain-m3/preflight-01/summary.json) 的两条未整形下行路径均通过，
+[`deploy-01`](../results/20261015-cnf-service-chain-m3/deploy-01/summary.json) 保存 TBF 撤销/重建记录，
+[`smoke-01`](../results/20261015-cnf-service-chain-m3/smoke-01/summary.json) 只作探测；
+正式数据仅取 [`measure-01`](../results/20261015-cnf-service-chain-m3/measure-01/summary.json)。
+
+| 轮次 | core：5 Mbps 上限，接收 Mbps | edge：15 Mbps 上限，接收 Mbps |
+|---|---:|---:|
+| 1 | 4.827 | 14.376 |
+| 2 | 4.822 | 14.376 |
+| 3 | 4.823 | 14.374 |
+| 4 | 4.822 | 14.376 |
+| 5 | 4.823 | 14.377 |
+| 中位数 | **4.822877** | **14.376206** |
+
+中位吞吐比 **2.980836**，满足至少 2 倍；两组中位数均低于各自配置上限，也低于验收允许的 5.75/17.25 Mbps。
+10/10 会话完成，10 个 Cookie 唯一、20 条正确代理连接、错误路由为 0；每轮 TBF 字节/包/overlimit 计数增长、UPF 双向计数增长。
+正式批次接收载荷共 180,092,928 字节。原有 15 个 5GC Pod 从部署前至收尾身份不变，Envoy 未重建；
+两个后端只在部署辅助容器时重建，测量期间全部 Pod/容器身份不变，最终重启数为 0。
+119 次 UPF 内存采样的峰值为 16.1328125 MiB；这是采样峰值，不是连续监控的绝对峰值。
+正式批次前后均通过严格 5GC 验收。
+
+Windows 与 VM1 的 M1—M3 共 **31 项单测通过**。独立离线审计从原始接收字节/时长重算吞吐和中位数，
+核对 qdisc、Cookie、日志方向、资源对等、实例身份及 **36 项输入哈希**，结果见
+[`audit.json`](../results/20261015-cnf-service-chain-m3/audit.json)。审计器对零接收载荷、错误限速、Pod 替换、
+被改写的中位数比值和缺失内存采样这 5 类损坏副本均拒绝通过，原始证据不变，见
+[`audit-negative-checks.json`](../results/20261015-cnf-service-chain-m3/audit-negative-checks.json)。
+[`runtime-inspection.txt`](../results/20261015-cnf-service-chain-m3/runtime-inspection.txt) 还记录两侧辅助容器的
+实际 `CapEff=0x1000`（仅 `NET_ADMIN`）、主容器能力为 0，以及 Pod `eth0` 的 1450 MTU/TBF 状态。
+复核此固定数据集可运行：
+
+```bash
+python scripts/audit-cnf-m3.py results/20261015-cnf-service-chain-m3 --out <新的审计JSON路径>
+```
+
+当前保留两侧 5/15 Mbps TBF 配置。M3 已完成，R2.S2 仍需 M4 放置与 NetworkPolicy 正反例；
+整套后端 Deployment 回退及跨节点放置不计入本轮已验证范围。
 
 ## 实施路线与产出
 
@@ -316,8 +433,8 @@ python3 scripts/cnf-m1.py probe --out /home/lhm/.work/cnf-m2-20261015/restored-m
 - [已确认] R2.S2 使用预部署实例和手工受控配置；运行时创建实例留到 R2.S4 评估。
 - [已确认] 首版采用独立 Envoy、Linux `tc`、Kubernetes Service/NodePort 和 k3s NetworkPolicy，不更换 CNI、不安装服务网格。
 - [已确认] 七项能力中，五项构成业务服务链，NAT/转发和 NetworkPolicy 是平台保障能力。
-- [已验证，范围有限] Envoy TCP proxy 与当前 iperf3 3.9 在单 Listener、单后端、5 秒受控上行中的控制/数据连接兼容性及路径日志；下行、并发和资源开销对照仍待验证。
-- [待验证] Pod 网络命名空间内 `tc` 的配置、恢复、统计读取和 5/15 Mbps 验收阈值是否稳定。
+- [已验证，范围有限] Envoy TCP proxy 与当前 iperf3 3.9 的 M1 受控上行、M2 双入口和 M3 单流下行兼容性及路径日志；并发和代理资源开销对照仍待验证。
+- [已验证，M3] Pod 网络命名空间内 TBF 的配置、撤销/重建、统计读取和本次 5/15 Mbps 各 5×15 秒验收；跨批次长期稳定性仍待验证。
 - [待验证] k3s kube-router NetworkPolicy 控制器在当前集群是否启用并正确拦截 `cnf-lab` 流量。
 - [已验证，计数关联] 本轮 NodePort 路径的 UE 绑定选路、UPF NAT/接口计数、Envoy 连接及后端来源证据闭合；未进行逐流抓包或全流量绕行防护验收。
 - [待验证] 现有 free5GC PCF/NEF 在 v4.2.2、Single-UPF Profile 中能否形成可测用户面效果；此项不阻塞 R2.S2。

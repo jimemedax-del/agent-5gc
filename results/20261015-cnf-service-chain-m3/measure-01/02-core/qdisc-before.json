@@ -1,0 +1,1 @@
+[{"kind":"tbf","handle":"1:","root":true,"refcnt":129,"options":{"rate":625000,"burst":"32Kb/1","mpu":0,"lat":100000,"linklayer":"ethernet"},"bytes":19320828,"packets":13239,"drops":67,"overlimits":17598,"requeues":0,"backlog":0,"qlen":0}]
