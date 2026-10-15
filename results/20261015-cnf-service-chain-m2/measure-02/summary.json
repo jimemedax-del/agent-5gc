@@ -1,0 +1,22 @@
+{
+  "outcome": "passed",
+  "command": "measure",
+  "evidence": {
+    "classes": {
+      "core": {
+        "correct": 20,
+        "required": 20,
+        "incorrectRoutes": 0
+      },
+      "edge": {
+        "correct": 20,
+        "required": 20,
+        "incorrectRoutes": 0
+      }
+    },
+    "sessions": 40,
+    "proxyConnections": 80,
+    "fullAcceptance": true
+  },
+  "endedAt": "2026-10-15T14:28:29.797258Z"
+}

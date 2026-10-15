@@ -1,0 +1,30 @@
+[
+  {
+    "round": 1,
+    "businessClass": "core",
+    "nodePort": 31201,
+    "outcome": "passed",
+    "startedAt": "2026-10-15T14:10:57.276916Z",
+    "trafficEndedAt": "2026-10-15T14:10:57.540429Z",
+    "cookie": "mrlflbzmj25ihxtevwknfchagb52b4ycl54z",
+    "receivedBytes": 16384,
+    "proxyConnections": 2,
+    "backendHit": "core",
+    "incorrectRoutes": 0,
+    "logWaitSeconds": 3.853
+  },
+  {
+    "round": 1,
+    "businessClass": "edge",
+    "nodePort": 31202,
+    "outcome": "passed",
+    "startedAt": "2026-10-15T14:11:02.096719Z",
+    "trafficEndedAt": "2026-10-15T14:11:02.370672Z",
+    "cookie": "o2aqm3sax2iovbzj7jumzpbqh3fqo4ey5m3q",
+    "receivedBytes": 16384,
+    "proxyConnections": 2,
+    "backendHit": "edge",
+    "incorrectRoutes": 0,
+    "logWaitSeconds": 8.833
+  }
+]

@@ -1,0 +1,4 @@
+NAME                              READY   STATUS    RESTARTS   AGE    IP            NODE                  NOMINATED NODE   READINESS GATES
+cnf-m1-backend-6d74dd5f94-4gk5b   1/1     Running   0          43m    10.42.0.177   lhm-virtual-machine   <none>           <none>
+cnf-m1-envoy-7cfddbd446-g4hm9     1/1     Running   0          8m8s   10.42.0.182   lhm-virtual-machine   <none>           <none>
+cnf-m2-edge-846dc7fb45-v8jcd      1/1     Running   0          18m    10.42.0.179   lhm-virtual-machine   <none>           <none>

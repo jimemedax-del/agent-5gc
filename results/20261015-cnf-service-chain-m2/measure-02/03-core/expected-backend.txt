@@ -1,0 +1,20 @@
+Time: Thu, 15 Oct 2026 14:22:28 GMT
+Accepted connection from 10.42.0.182, port 53924
+      Cookie: 7jzhzzhjvangom4a42ii2vgzitt7mlvjccfx
+      TCP MSS: 0 (default)
+      Target Bitrate: 1000000
+[  5] local 10.42.0.177 port 5201 connected to 10.42.0.182 port 53928
+Starting Test: protocol: TCP, 1 streams, 16384 byte blocks, omitting 0 seconds, 262144 bytes to send, tos 0
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.00   sec   128 KBytes  1.05 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bitrate
+[  5] (sender statistics not available)
+[  5]   0.00-1.04   sec   128 KBytes  1.01 Mbits/sec                  receiver
+rcv_tcp_congestion cubic
+iperf 3.9
+Linux cnf-m1-backend-6d74dd5f94-4gk5b 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------

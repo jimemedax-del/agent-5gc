@@ -1,0 +1,5 @@
+configmap/cnf-m2-envoy created (server dry run)
+deployment.apps/cnf-m2-edge created (server dry run)
+service/cnf-m2-edge created (server dry run)
+deployment.apps/cnf-m1-envoy configured (server dry run)
+service/cnf-m1-envoy configured (server dry run)

@@ -1,0 +1,16 @@
+NAME                                                READY   STATUS    RESTARTS   AGE    IP            NODE                  NOMINATED NODE   READINESS GATES
+free5gc-helm-free5gc-amf-amf-5944cf5cdf-dcqw5       1/1     Running   0          7d2h   10.42.0.173   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-ausf-ausf-6b5bd7556c-vqf6x     1/1     Running   0          7d2h   10.42.0.165   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-chf-chf-df69dccd4-fsf99        1/1     Running   0          7d2h   10.42.0.171   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-nef-nef-9d8f4dd4d-blz4h        1/1     Running   0          7d2h   10.42.0.170   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-nrf-nrf-5798fdf864-jcbvx       1/1     Running   0          7d2h   10.42.0.154   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-nssf-nssf-56ff4d54f7-zb2vf     1/1     Running   0          7d2h   10.42.0.169   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-pcf-pcf-5f759fcd89-zdt9l       1/1     Running   0          7d2h   10.42.0.168   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-smf-smf-7cd84fc946-mgq8b       1/1     Running   0          7d2h   10.42.0.172   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-udm-udm-79fb64ccf-8vr8c        1/1     Running   0          7d2h   10.42.0.167   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-udr-udr-6b6846cc77-p5mnt       1/1     Running   0          7d2h   10.42.0.166   lhm-virtual-machine   <none>           <none>
+free5gc-helm-free5gc-upf-upf-5988cd4f56-s5vwz       1/1     Running   0          7d2h   10.42.1.24    worker-upf            <none>           <none>
+free5gc-helm-free5gc-webui-webui-66d65bfb86-td2fz   1/1     Running   0          7d2h   10.42.0.162   lhm-virtual-machine   <none>           <none>
+mongodb-0                                           1/1     Running   0          7d2h   10.42.0.161   lhm-virtual-machine   <none>           <none>
+ueransim-gnb-7645695b4d-dv277                       1/1     Running   0          7d2h   10.42.2.71    ran-test              <none>           <none>
+ueransim-ue-69fdcb588d-lxdkf                        1/1     Running   0          7d2h   10.42.2.72    ran-test              <none>           <none>

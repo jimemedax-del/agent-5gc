@@ -1,0 +1,120 @@
+{
+	"start":	{
+		"connected":	[{
+				"socket":	5,
+				"local_host":	"10.60.0.1",
+				"local_port":	32811,
+				"remote_host":	"192.168.244.128",
+				"remote_port":	31202
+			}],
+		"version":	"iperf 3.9",
+		"system_info":	"Linux ueransim-ue-69fdcb588d-lxdkf 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64",
+		"timestamp":	{
+			"time":	"Thu, 15 Oct 2026 14:22:42 GMT",
+			"timesecs":	1792074162
+		},
+		"connecting_to":	{
+			"host":	"192.168.244.128",
+			"port":	31202
+		},
+		"cookie":	"2lum5bicdla3p62kjk3vz6thylhrcyaktaxo",
+		"tcp_mss_default":	1348,
+		"target_bitrate":	1000000,
+		"sock_bufsize":	0,
+		"sndbuf_actual":	16384,
+		"rcvbuf_actual":	131072,
+		"test_start":	{
+			"protocol":	"TCP",
+			"num_streams":	1,
+			"blksize":	16384,
+			"omit":	0,
+			"duration":	1,
+			"bytes":	0,
+			"blocks":	0,
+			"reverse":	0,
+			"tos":	0
+		}
+	},
+	"intervals":	[{
+			"streams":	[{
+					"socket":	5,
+					"start":	0,
+					"end":	1.000091,
+					"seconds":	1.0000909566879272,
+					"bytes":	131072,
+					"bits_per_second":	1048480.6336742052,
+					"retransmits":	0,
+					"snd_cwnd":	35048,
+					"rtt":	1885,
+					"rttvar":	129,
+					"pmtu":	1400,
+					"omitted":	false,
+					"sender":	true
+				}],
+			"sum":	{
+				"start":	0,
+				"end":	1.000091,
+				"seconds":	1.0000909566879272,
+				"bytes":	131072,
+				"bits_per_second":	1048480.6336742052,
+				"retransmits":	0,
+				"omitted":	false,
+				"sender":	true
+			}
+		}],
+	"end":	{
+		"streams":	[{
+				"sender":	{
+					"socket":	5,
+					"start":	0,
+					"end":	1.000091,
+					"seconds":	1.000091,
+					"bytes":	131072,
+					"bits_per_second":	1048480.5882664677,
+					"retransmits":	0,
+					"max_snd_cwnd":	35048,
+					"max_rtt":	1885,
+					"min_rtt":	1885,
+					"mean_rtt":	1885,
+					"sender":	true
+				},
+				"receiver":	{
+					"socket":	5,
+					"start":	0,
+					"end":	1.040391,
+					"seconds":	1.000091,
+					"bytes":	131072,
+					"bits_per_second":	1007867.2345300949,
+					"sender":	true
+				}
+			}],
+		"sum_sent":	{
+			"start":	0,
+			"end":	1.000091,
+			"seconds":	1.000091,
+			"bytes":	131072,
+			"bits_per_second":	1048480.5882664677,
+			"retransmits":	0,
+			"sender":	true
+		},
+		"sum_received":	{
+			"start":	0,
+			"end":	1.040391,
+			"seconds":	1.040391,
+			"bytes":	131072,
+			"bits_per_second":	1007867.2345300949,
+			"sender":	true
+		},
+		"cpu_utilization_percent":	{
+			"host_total":	4.48704016150066,
+			"host_user":	1.1844548247585227,
+			"host_system":	3.3025853367421365,
+			"remote_total":	0.00828439242109959,
+			"remote_user":	0,
+			"remote_system":	0.00828439242109959
+		},
+		"sender_tcp_congestion":	"cubic",
+		"receiver_tcp_congestion":	"cubic"
+	},
+	"server_output_text":	"iperf 3.9\nLinux cnf-m2-edge-846dc7fb45-v8jcd 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64\n-----------------------------------------------------------\nServer listening on 5201\n-----------------------------------------------------------\nTime: Thu, 15 Oct 2026 14:22:38 GMT\nAccepted connection from 10.42.0.182, port 33298\n      Cookie: 2lum5bicdla3p62kjk3vz6thylhrcyaktaxo\n      TCP MSS: 0 (default)\n      Target Bitrate: 1000000\n[  5] local 10.42.0.179 port 5201 connected to 10.42.0.182 port 33312\nStarting Test: protocol: TCP, 1 streams, 16384 byte blocks, omitting 0 seconds, 16384 bytes to send, tos 0\n[ ID] Interval           Transfer     Bitrate\n[  5]   0.00-1.00   sec   128 KBytes  1.05 Mbits/sec                  \n- - - - - - - - - - - - - - - - - - - - - - - - -\nTest Complete. Summary Results:\n[ ID] Interval           Transfer     Bitrate\n[  5] (sender statistics not available)\n[  5]   0.00-1.04   sec   128 KBytes  1.01 Mbits/sec                  receiver\nrcv_tcp_congestion cubic\n"
+}

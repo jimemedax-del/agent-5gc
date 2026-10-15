@@ -1,0 +1,1 @@
+[2026-10-15 14:09:02.446][1][critical][main] [source/server/config_validation/server.cc:76] error initializing configuration '/etc/envoy/envoy.yaml': Protobuf message (type envoy.config.bootstrap.v3.Bootstrap reason INVALID_ARGUMENT: invalid JSON   in envoy.config.bootstrap.v3.Bootstrap, near  1:2410 (offset 2409):   no such field:   'file_flush_interval') has unknown fields

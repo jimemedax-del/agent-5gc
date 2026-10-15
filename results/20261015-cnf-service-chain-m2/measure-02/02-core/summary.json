@@ -1,0 +1,14 @@
+{
+  "round": 2,
+  "businessClass": "core",
+  "nodePort": 31201,
+  "outcome": "passed",
+  "startedAt": "2026-10-15T14:22:08.123699Z",
+  "trafficEndedAt": "2026-10-15T14:22:09.386366Z",
+  "cookie": "oyzggis7vviz5wp6cb7nugx7jwvcch42qu23",
+  "receivedBytes": 131072,
+  "proxyConnections": 2,
+  "backendHit": "core",
+  "incorrectRoutes": 0,
+  "logWaitSeconds": 8.272
+}

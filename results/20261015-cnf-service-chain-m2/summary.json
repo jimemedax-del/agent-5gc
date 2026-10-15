@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-15",
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M2",
+  "configVersion": "cnf-m2-v4",
+  "outcome": "passed",
+  "acceptedRun": "measure-02",
+  "evidencePath": "results/20261015-cnf-service-chain-m2/measure-02/",
+  "sessions": 40,
+  "correctPerClass": {
+    "core": 20,
+    "edge": 20
+  },
+  "incorrectRoutes": 0,
+  "proxyConnections": 80,
+  "uniqueSessionCookies": 40,
+  "totalReceivedBytes": 5242880,
+  "receivedBytesPerSession": [
+    131072
+  ],
+  "originalCorePodIdentitiesUnchanged": true,
+  "measurementCnfPodIdentitiesUnchanged": true,
+  "allFinalRestartCounts": 0,
+  "sampledUpfPeakMiB": 10.21875,
+  "resourceSamples": 40,
+  "tests": {
+    "windows": 18,
+    "vm1Linux": 18
+  },
+  "provenanceHashChecks": 75,
+  "evidenceInputsAllMatched": true,
+  "backendPlacement": "Both backends and Envoy on the control-role node (VM1)",
+  "excludedRuns": {
+    "preflight-01": "Unsupported logging field; not deployed",
+    "measure-01": "v2 fixed-byte batch stopped at core session 7 because receiver reported zero bytes; not combined with acceptance",
+    "smoke-02": "v3 fixed-byte probe receiver short by 4096 bytes; proxy UR; failed",
+    "smoke-01": "v2 initial probe only; not acceptance",
+    "smoke-03": "v4 initial probe only; not counted in 40"
+  },
+  "limitations": [
+    "TCP destination-port classification only",
+    "No tc/QoS, physical edge latency benefit, NetworkPolicy, capacity or long-duration stability claim",
+    "UPF observations use aggregate counters rather than per-flow packet capture",
+    "Fixed-byte end-mode issue remains unproven; timed v4 workload is the accepted condition"
+  ],
+  "next": "R2.S2/M3: controlled 5/15 Mbps downlink shaping on identical colocated backends"
+}

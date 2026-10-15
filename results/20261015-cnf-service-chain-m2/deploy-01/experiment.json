@@ -1,0 +1,38 @@
+{
+  "configVersion": "cnf-m2-v2",
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M2",
+  "sessionsPerClass": 20,
+  "payloadBytes": 16384,
+  "offeredMbps": 1,
+  "gatewayDeployment": "cnf-m1-envoy",
+  "gatewayService": "cnf-m1-envoy",
+  "configMap": "cnf-m2-envoy",
+  "classes": [
+    {
+      "name": "core",
+      "listener": "m2_core",
+      "cluster": "m2_core",
+      "listenPort": 15201,
+      "nodePort": 31201,
+      "backendDeployment": "cnf-m1-backend",
+      "backendService": "cnf-m1-backend"
+    },
+    {
+      "name": "edge",
+      "listener": "m2_edge",
+      "cluster": "m2_edge",
+      "listenPort": 15202,
+      "nodePort": 31202,
+      "backendDeployment": "cnf-m2-edge",
+      "backendService": "cnf-m2-edge"
+    }
+  ],
+  "placement": "Both backends and Envoy use the existing control-role node; core/edge are logical classes only",
+  "limitations": [
+    "Only explicit TCP destination-port classification and backend steering",
+    "Each iperf session includes one control and one data TCP connection",
+    "No tc shaping, physical edge advantage, transparent interception or NetworkPolicy claim"
+  ]
+}

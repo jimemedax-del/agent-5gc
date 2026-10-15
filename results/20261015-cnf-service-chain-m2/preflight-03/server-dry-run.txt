@@ -1,0 +1,5 @@
+configmap/cnf-m2-envoy configured (server dry run)
+deployment.apps/cnf-m2-edge unchanged (server dry run)
+service/cnf-m2-edge unchanged (server dry run)
+deployment.apps/cnf-m1-envoy configured (server dry run)
+service/cnf-m1-envoy unchanged (server dry run)

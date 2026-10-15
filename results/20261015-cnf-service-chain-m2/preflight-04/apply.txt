@@ -1,0 +1,5 @@
+configmap/cnf-m2-envoy configured
+deployment.apps/cnf-m2-edge unchanged
+service/cnf-m2-edge unchanged
+deployment.apps/cnf-m1-envoy configured
+service/cnf-m1-envoy unchanged

@@ -1,0 +1,14 @@
+{
+  "round": 12,
+  "businessClass": "edge",
+  "nodePort": 31202,
+  "outcome": "passed",
+  "startedAt": "2026-10-15T14:25:38.305326Z",
+  "trafficEndedAt": "2026-10-15T14:25:39.580327Z",
+  "cookie": "kf5iwv3whs5aofqfttewwa6gti5j4psdnubz",
+  "receivedBytes": 131072,
+  "proxyConnections": 2,
+  "backendHit": "edge",
+  "incorrectRoutes": 0,
+  "logWaitSeconds": 8.29
+}

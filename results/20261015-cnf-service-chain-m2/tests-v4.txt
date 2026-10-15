@@ -1,0 +1,13 @@
+test_backend_cookie_is_required_independently (test_cnf_m2.RoutingEvidenceTests) ... ok
+test_complete_routing_evidence (test_cnf_m2.RoutingEvidenceTests) ... ok
+test_completed_but_incomplete_payload_is_rejected (test_cnf_m2.RoutingEvidenceTests) ... ok
+test_cookie_at_wrong_backend_is_a_failure (test_cnf_m2.RoutingEvidenceTests) ... ok
+test_matching_zero_counters_do_not_prove_data_transfer (test_cnf_m2.RoutingEvidenceTests) ... ok
+test_one_proxy_connection_is_not_a_complete_session (test_cnf_m2.RoutingEvidenceTests) ... ok
+test_previous_session_logs_do_not_count (test_cnf_m2.RoutingEvidenceTests) ... ok
+test_wrong_cluster_cannot_be_hidden_by_successful_iperf (test_cnf_m2.RoutingEvidenceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.074s
+
+OK

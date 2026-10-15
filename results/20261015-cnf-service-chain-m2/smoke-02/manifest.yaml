@@ -1,0 +1,241 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cnf-m2-envoy
+  namespace: cnf-lab
+  labels:
+    app.kubernetes.io/part-of: cnf-m2
+data:
+  envoy.yaml: "static_resources:\n  listeners:\n  - name: m2_core\n    address:\n\
+    \      socket_address:\n        address: 0.0.0.0\n        port_value: 15201\n\
+    \    filter_chains:\n    - filters:\n      - name: envoy.filters.network.tcp_proxy\n\
+    \        typed_config:\n          '@type': type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n\
+    \          stat_prefix: m2_core\n          cluster: m2_core\n          idle_timeout:\
+    \ 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n\
+    \            typed_config:\n              '@type': type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n\
+    \              log_format:\n                json_format:\n                  experiment:\
+    \ cnf-m2-v3\n                  listener: m2_core\n                  start: '%START_TIME%'\n\
+    \                  downstream: '%DOWNSTREAM_REMOTE_ADDRESS%'\n               \
+    \   local: '%DOWNSTREAM_LOCAL_ADDRESS%'\n                  upstream: '%UPSTREAM_HOST%'\n\
+    \                  cluster: '%UPSTREAM_CLUSTER%'\n                  bytes_received:\
+    \ '%BYTES_RECEIVED%'\n                  bytes_sent: '%BYTES_SENT%'\n         \
+    \         duration_ms: '%DURATION%'\n                  flags: '%RESPONSE_FLAGS%'\n\
+    \                  business_class: core\n  - name: m2_edge\n    address:\n   \
+    \   socket_address:\n        address: 0.0.0.0\n        port_value: 15202\n   \
+    \ filter_chains:\n    - filters:\n      - name: envoy.filters.network.tcp_proxy\n\
+    \        typed_config:\n          '@type': type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n\
+    \          stat_prefix: m2_edge\n          cluster: m2_edge\n          idle_timeout:\
+    \ 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n\
+    \            typed_config:\n              '@type': type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n\
+    \              log_format:\n                json_format:\n                  experiment:\
+    \ cnf-m2-v3\n                  listener: m2_edge\n                  start: '%START_TIME%'\n\
+    \                  downstream: '%DOWNSTREAM_REMOTE_ADDRESS%'\n               \
+    \   local: '%DOWNSTREAM_LOCAL_ADDRESS%'\n                  upstream: '%UPSTREAM_HOST%'\n\
+    \                  cluster: '%UPSTREAM_CLUSTER%'\n                  bytes_received:\
+    \ '%BYTES_RECEIVED%'\n                  bytes_sent: '%BYTES_SENT%'\n         \
+    \         duration_ms: '%DURATION%'\n                  flags: '%RESPONSE_FLAGS%'\n\
+    \                  business_class: edge\n  clusters:\n  - name: m2_core\n    type:\
+    \ STRICT_DNS\n    connect_timeout: 5s\n    load_assignment:\n      cluster_name:\
+    \ m2_core\n      endpoints:\n      - lb_endpoints:\n        - endpoint:\n    \
+    \        address:\n              socket_address:\n                address: cnf-m1-backend.cnf-lab.svc.cluster.local.\n\
+    \                port_value: 5201\n  - name: m2_edge\n    type: STRICT_DNS\n \
+    \   connect_timeout: 5s\n    load_assignment:\n      cluster_name: m2_edge\n \
+    \     endpoints:\n      - lb_endpoints:\n        - endpoint:\n            address:\n\
+    \              socket_address:\n                address: cnf-m2-edge.cnf-lab.svc.cluster.local.\n\
+    \                port_value: 5201\nadmin:\n  address:\n    socket_address:\n \
+    \     address: 127.0.0.1\n      port_value: 9901\n"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-m2-edge
+  namespace: cnf-lab
+  labels:
+    app.kubernetes.io/part-of: cnf-m2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-m2-edge
+  template:
+    metadata:
+      labels:
+        app: cnf-m2-edge
+        app.kubernetes.io/part-of: cnf-m2
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/plane: control
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: iperf3
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - iperf3
+        args:
+        - -s
+        - -p
+        - '5201'
+        - --forceflush
+        - -V
+        volumeMounts:
+        - name: scratch
+          mountPath: /tmp
+        ports:
+        - name: iperf
+          containerPort: 5201
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      volumes:
+      - name: scratch
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnf-m2-edge
+  namespace: cnf-lab
+  labels:
+    app.kubernetes.io/part-of: cnf-m2
+spec:
+  type: ClusterIP
+  selector:
+    app: cnf-m2-edge
+  ports:
+  - name: iperf
+    port: 5201
+    targetPort: iperf
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-m1-envoy
+  namespace: cnf-lab
+  labels:
+    app.kubernetes.io/part-of: cnf-m1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-m1-envoy
+  template:
+    metadata:
+      labels:
+        app: cnf-m1-envoy
+        app.kubernetes.io/part-of: cnf-m1
+      annotations:
+        cnf.lab/config-sha256: d4808e70d2615fab0d659a65347098794630c55d50251466abc79028aa2ade82
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/plane: control
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: envoy
+        image: docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac
+        imagePullPolicy: IfNotPresent
+        command:
+        - envoy
+        args:
+        - -c
+        - /etc/envoy/envoy.yaml
+        - --concurrency
+        - '1'
+        - --log-level
+        - info
+        - --disable-hot-restart
+        ports:
+        - name: core
+          containerPort: 15201
+          protocol: TCP
+        - name: edge
+          containerPort: 15202
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: config
+          mountPath: /etc/envoy
+          readOnly: true
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      volumes:
+      - name: config
+        configMap:
+          name: cnf-m2-envoy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnf-m1-envoy
+  namespace: cnf-lab
+  labels:
+    app.kubernetes.io/part-of: cnf-m1
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  selector:
+    app: cnf-m1-envoy
+  ports:
+  - name: core
+    port: 15201
+    targetPort: core
+    nodePort: 31201
+    protocol: TCP
+  - name: edge
+    port: 15202
+    targetPort: edge
+    nodePort: 31202
+    protocol: TCP

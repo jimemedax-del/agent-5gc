@@ -1,0 +1,9 @@
+{
+  "round": 7,
+  "businessClass": "core",
+  "nodePort": 31201,
+  "outcome": "failed",
+  "startedAt": "2026-10-15T14:13:41.736767Z",
+  "trafficEndedAt": "2026-10-15T14:13:42.002805Z",
+  "error": "iperf did not transfer the exact per-session payload"
+}

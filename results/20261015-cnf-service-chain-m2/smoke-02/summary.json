@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "measure",
+  "error": "iperf did not transfer the exact per-session payload",
+  "endedAt": "2026-10-15T14:17:44.658361Z"
+}

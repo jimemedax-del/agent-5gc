@@ -38,6 +38,20 @@ M0、M1 部署及端到端探测已在 VM1 验证（`cnf-m1-v3`）；日志等�
 
 证据判定测试：`python -m unittest discover -s tests -p test_cnf_m1.py -v`。
 
+## CNF M2 分类与引导入口
+
+`cnf-m2.py` 以固定 M1 资产和 `infra/cnfs/m2-experiment.json` 渲染双 Listener / 双后端实验；
+两后端同放 VM1、同镜像和资源，按 TCP NodePort `31201/31202` 区分 core/edge 逻辑业务。
+命令为 `render`、`deploy`、`measure`，均要求 `--out <新的结果目录>`；
+`measure --smoke` 只做各一次探测，`measure` 才执行各 20 次的正式验收。
+当前配置 `cnf-m2-v4` 使用 1 秒、1 Mbps 参数、16KiB 块长的定时会话，要求收发一致且非空；
+逐轮同时验证代理两连接、目标 Cookie、另一后端不误收及 UPF 计数，失败即停。
+原固定字节数模式的失败记录保留，不能混入正式数据。运行 M2 时使用 M2 入口进行业务测量。
+2026-10-15 的正式 v4 测量已通过：两类各 20/20、错误路由 0、收尾严格 5GC 验收通过。
+实现、结果与恢复 M1 的方法见 [CNF 模块](../docs/cnf-service-chain-orchestration.md#m2-分类与引导实验)。
+
+路由证据测试：`python -m unittest discover -s tests -p test_cnf_m2.py -v`。
+
 ## 初始化节点
 
 Server示例：

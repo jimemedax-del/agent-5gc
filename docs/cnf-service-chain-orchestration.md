@@ -1,7 +1,7 @@
 # 面向业务需求的 CNF 服务链编排
 
 > 最后更新：2026-10-15
-> 状态：R2.S1 选型已完成；R2.S2 的 M0 严格复查及 M1 单代理链路验收通过，当前配置 `cnf-m1-v3`；下一步 M2 分类与引导。
+> 状态：R2.S1 选型已完成；R2.S2 的 M0—M2 验收通过，当前运行 `cnf-m2-v4`；下一步 M3 的 5/15 Mbps `tc` 下行整形。
 > 适用路线/阶段：R2.S1—R2.S3（能力盘点、手工实验、复现与测量）；R2.S4—R2.S5 的编排与 Agent 细节后续继续维护在本模块。阶段状态见 [研究路线](03-research-roadmap.md#r2-当前阶段顺序)。
 
 ## 目标与边界
@@ -27,7 +27,7 @@
 | PCF | 已部署，QoS 策略是否产生可测用户面效果尚未验证 | 候选 QoS 策略控制能力 |
 | NEF | 已部署，源码含 Traffic Influence 接口 | 候选应用/业务需求入口，需验证端到端效果 |
 | Kubernetes 三节点与固定 Profile | 已验证可重复部署 | 承载既有 5GC 与后续新增 CNF |
-| 流量识别、代理转发、可观测流量引导 | 单代理链已部署并验收；两类业务分类引导待验证 | 本模块需要补充的核心能力 |
+| 流量识别、代理转发、可观测流量引导 | 单代理链及两类端口分类引导已验收 | 后续增加 QoS、放置与隔离效果验证 |
 
 已有 5GC 基线不需要重做。此前以 SMF/UPF 实例选择为中心的设想保留为后续扩展决策维度，但不再单独构成当前主线。
 
@@ -90,10 +90,10 @@ Cilium、Istio、Kube-OVN、KubeEdge 和 Multus 均保留为后续对照或扩�
 
 | 逻辑功能 | R2.S2 首版选择 | 在路径中的职责 | 状态与边界 |
 |---|---|---|---|
-| 流量识别 | Envoy 两个受控 TCP Listener，按目的端口区分两类 iperf3 业务；访问日志记录 Listener、目标 Cluster、字节数与连接结果 | 链内分类 | [待验证] 首版只证明 L4 分类；HTTP Path/Header 分类留到 UE HTTP 客户端镜像固定后 |
+| 流量识别 | Envoy 两个受控 TCP Listener，按目的端口区分两类 iperf3 业务；访问日志记录 Listener、目标 Cluster、字节数与连接结果 | 链内分类 | [已验证，M2] 两类各 20/20；仅 L4 端口分类，HTTP Path/Header 留到 UE HTTP 客户端镜像固定后 |
 | QoS 控制 | Linux `tc` TBF/HTB；由仅授予 `NET_ADMIN` 的辅助容器在后端 Pod 共享网络命名空间内配置和读取 qdisc | 链内整形 | [待验证] 先做 5/15 Mbps 受控差异；不解释为 5G 无线 QoS |
 | 代理转发 | 单副本独立 Envoy Deployment，静态 v3 API 配置；镜像锁定版本与 Digest | 链内 L4 代理 | [已验证，M1] 单 Listener、单后端的受控上行通过；不安装 Istio、不接管其他 Pod 流量 |
-| 流量引导 | Envoy Listener/Cluster 映射到两个 ClusterIP 后端；外部只暴露 Envoy NodePort | 链内选择后端 | [待验证] R2.S2 手工配置；R2.S4 再接 xDS/受控规划器 |
+| 流量引导 | Envoy Listener/Cluster 映射到两个 ClusterIP 后端；外部只暴露 Envoy NodePort | 链内选择后端 | [已验证，M2] 手工静态映射、错误路由 0；R2.S4 再接 xDS/受控规划器 |
 | 边缘服务接入 | 同一 iperf3 服务镜像分别放置到 VM1 与 VM3，使用现有节点标签固定位置 | 链终点与放置变量 | [待验证] 当前三台 VM 同宿主机，不宣称 VM3 具备真实 MEC 时延优势 |
 | NAT/地址转发 | 复用 UPF N6、Flannel、kube-proxy 与固定 NodePort；保存路由和转发表证据 | 平台连通底座 | [已验证，M1 计数关联] 不迁移 Cilium/Calico，不新增第二 CNI |
 | 网络策略控制 | `cnf-lab` 独立 Namespace + k3s kube-router 执行标准 NetworkPolicy，只允许 Envoy 到后端和必要 DNS | 平台隔离护栏 | [待验证] 必须有允许与拒绝两类实测，不能只看对象已创建 |
@@ -131,7 +131,7 @@ UERANSIM 不模拟真实无线调度，因此首版的 QoS 结论限定为当前
 [`m1-images.json`](../infra/cnfs/m1-images.json)，入口为 [`scripts/cnf-m1.py`](../scripts/cnf-m1.py)。
 仅面向 M0/M1 的固定实验，不是 R2.S4 通用编排器。
 
-当前验收配置为 `cnf-m1-v3`；首轮部署和失败诊断的 v1/v2 配置随原始结果保留。固定项如下：
+M1 验收配置为 `cnf-m1-v3`；首轮部署和失败诊断的 v1/v2 配置随原始结果保留。当前集群已扩展到下节 M2，M1 固定项如下：
 
 | 项目 | 配置与边界 |
 |---|---|
@@ -202,7 +202,7 @@ python3 scripts/free5gc-profile.py verify
 - [已验证] 固定 Envoy 镜像在 VM1 Docker 中以非 root、只读文件系统和无 capabilities 执行 `--mode validate`，配置校验通过；此项没有部署 Kubernetes 工作负载。
 - [已验证] 10 项证据判定单测在 Windows 和 VM1 通过，覆盖路径证据缺失、Pod 替换、声明/实际镜像不符及只有一条代理日志等情况。
 - [已验证] 已导入 VM1 后端镜像，执行服务端 dry-run、真实部署与受控配置修正；`probe-06` 的单流 TCP 上行和收尾严格验收通过。完整记录见 [`results/20261015-cnf-service-chain-m1/`](../results/20261015-cnf-service-chain-m1/)。
-- [待验证] M2 分类引导、M3 `tc`、M4 放置及 NetworkPolicy 正反例；M1 单次短时探测不等于 R2.S2 全阶段完成。
+- [后续进展] M2 分类引导已完成，见下一节；M3 `tc`、M4 放置及 NetworkPolicy 正反例仍待验证。M1 单次短时探测不等于 R2.S2 全阶段完成。
 
 | `probe-06` 观察 | 结果与口径 |
 |---|---|
@@ -215,6 +215,85 @@ python3 scripts/free5gc-profile.py verify
 
 `probe-01` 至 `probe-05` 的失败 summary 和原始材料均保留，`probe-04/05` 虽有业务字节也没有回填为成功。
 配置变化只滚动更新新增 CNF；镜像显示名误判、DNS 搜索域、只读临时目录和日志缓冲问题的完整处理记录见 [PS-007](../problem%20solve.md#ps-007cnf-首轮代理实验的镜像核验dns临时目录与日志采集问题)。
+
+## M2 分类与引导实验
+
+M2 在已验收的 M1 上扩展，输入为 [`m2-experiment.json`](../infra/cnfs/m2-experiment.json)，入口为
+[`scripts/cnf-m2.py`](../scripts/cnf-m2.py)。固定渲染器继承 M1 的镜像、资源和权限配置，生成 M2 ConfigMap、
+一个新增后端 Deployment/Service，以及现有 Envoy Deployment/Service 的覆盖；不重施加原后端或 5GC 清单。
+M1 已固化为本地提交 `9629c67`，M2 在 `codex/cnf-m2-steering` 分支继续，旧配置和结果不覆盖。
+
+### 固定变量与验收口径
+
+| 逻辑业务 | UE 目标 NodePort | Envoy Listener / Cluster | 后端 |
+|---|---:|---|---|
+| core | 31201 | `m2_core` / `m2_core`，容器端口 15201 | 既有 `cnf-m1-backend:5201` |
+| edge | 31202 | `m2_edge` / `m2_edge`，容器端口 15202 | 新增 `cnf-m2-edge:5201` |
+
+两个后端都先放在 VM1 的 control-role 节点，使用相同 Digest、100m/64Mi 请求、500m/256Mi 限制和 16Mi 临时卷；
+`core/edge` 在 M2 仅为逻辑业务标签。Envoy 复用 M1 的单实例，原 31201 入口与原后端保留。
+没有增加 `tc`、NetworkPolicy 或业务识别模型；本轮分类依据是显式目的端口。
+
+当前 `cnf-m2-v4` 正式测量交错执行 core/edge 各 20 次独立 iperf3 会话，每次单流、计时 1 秒、块长 16,384 字节，
+客户端发送速率参数为 1 Mbps，绑定动态 UE TUN IP。逐轮记录实际字节，要求非空且收发一致，不将速率参数解释为 `tc` 效果。
+每次包含控制和数据两条 TCP 连接；“20 次”计业务会话而非 TCP socket 数。
+先各做一次 smoke 验证，另存目录且不计入正式 40 次。
+
+每次会话要求：
+
+1. iperf 收发字节完全一致且至少 16,384 字节，使用客户端生成的唯一 Cookie 标识该次会话；两端均为 0 也不能算成功。
+2. 代理 JSON 日志的连接开始时间位于本次发起/结束时间窗内；恰有两条成功记录，业务类、Listener、本地端口、Cluster 和上游 Service 地址全部符合映射。
+3. 预期后端日志包含该 Cookie 和 Envoy Pod 来源，另一后端日志不含该 Cookie；不能只凭 iperf 成功或代理配置推定命中。
+4. UPF `upfgtp` 双向字节增长，Pod/容器标识与重启数稳定；保留 512MiB UPF 停止线及会话超时保护。
+
+日志仍使用 M1 的有界等待，最多 15 秒另加 API 耗时。任一会话失败即停止，保留逐轮原始输出和失败状态；
+每轮输出目录包含命令、iperf JSON、两后端日志、代理日志、UPF 观察、资源采样与判定。
+测量前后运行固定 5GC Profile 的严格业务验收。总体目标为两类各 20/20、错误路由 0，共 80 条代理 TCP 连接记录。
+
+### VM1 执行与恢复
+
+本次源码副本位于 `/home/lhm/.work/cnf-m2-20261015/repo`。每次使用新的结果目录：
+
+```bash
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-m2.py render --out /home/lhm/.work/cnf-m2-20261015/render-new
+python3 scripts/cnf-m2.py deploy --out /home/lhm/.work/cnf-m2-20261015/deploy-new
+python3 scripts/cnf-m2.py measure --smoke --out /home/lhm/.work/cnf-m2-20261015/smoke-new
+python3 scripts/cnf-m2.py measure --out /home/lhm/.work/cnf-m2-20261015/measure-new
+```
+
+部署先确认 M1 基线、检查新增名称与 NodePort 冲突，执行服务端 dry-run 和受控 apply，只更新新增 CNF。
+已有 M2 资源时 `deploy` 拒绝再次覆盖；正常复测直接使用 `measure`，不重复部署。
+当前运行 M2 后，M1 的旧 `probe` 不适用于新的日志和 Listener 配置；5GC 的 `free5gc-profile.py verify` 仍可独立执行。
+
+需要恢复 M1 时，先确认没有运行中的测量，再执行下列命令并重新进行 M1 业务验收；本次成功路径不执行恢复：
+
+```bash
+kubectl apply -f infra/cnfs/m1-proxy.yaml
+kubectl -n cnf-lab rollout status deployment/cnf-m1-envoy --timeout=120s
+kubectl -n cnf-lab delete deployment/cnf-m2-edge service/cnf-m2-edge configmap/cnf-m2-envoy
+python3 scripts/cnf-m1.py probe --out /home/lhm/.work/cnf-m2-20261015/restored-m1-new
+```
+
+### 实施与证据
+
+- [已验证] M1 在变更前再次完成端到端探测与收尾严格验收。
+- [已验证] `cnf-m2-v4` 配置通过实际 Envoy 镜像校验、服务端 dry-run 与受控更新；两类各一次固定时长 smoke 验证通过，不计正式验收。
+- [已验证] 8 项路由证据单测在 Windows 和 VM1 通过，覆盖错误后端 Cookie、错误 Cluster、旧会话日志、缺少连接、不完整字节和全零统计等情况。
+- [已记录，未接受] 初版日志刷新字段不被 Envoy 接受，预校验失败后未部署；v2 固定 16KiB 测量在两类各完成 6 次后，第 7 次 core 的接收统计为 0，整批停止。v3 的 256KiB 多块探测又少统计最后 4KiB，代理数据连接为 `UR`，仍判失败。没有合并这些成功片段凑足 20 次。具体观察与根因边界见 [PS-008](../problem%20solve.md#ps-008m2-固定字节数短会话的接收统计不完整)。
+- [已验证] v4 固定 1 秒的正式 `measure-02` 完成两类各 20/20，错误路由 0，收尾严格业务验收通过。数据见 [`results/20261015-cnf-service-chain-m2/`](../results/20261015-cnf-service-chain-m2/)，`measure-01` 与 `smoke-02` 的失败状态未改写，也未拼入本轮。
+
+| 正式 `measure-02` 指标 | 结果与边界 |
+|---|---|
+| 分类引导 | core 20/20，edge 20/20，错误路由 0；40 个独立 Cookie、80 条成功代理 TCP 连接 |
+| 业务字节 | 每会话收发各 131,072 字节，共 5,242,880 字节；计时 1 秒是客户端参数，不等于整轮采集耗时 |
+| 后端观察 | core Service `10.43.108.155` → Pod `10.42.0.177`；edge Service `10.43.151.195` → Pod `10.42.0.179`；Envoy Pod `10.42.0.182`，均为本次动态观测值 |
+| 运行状态 | 从部署前到收尾，原 15 个 5GC Pod/容器身份未变；正式测量中的三个 CNF Pod/容器身份未变，最终均为 0 重启 |
+| 资源采样 | 40 个 UPF 内存采样点，采样峰值 10.219MiB；采样不代表瞬时最大值 |
+| 校验 | M1/M2 共 18 项单测在 Windows 和 VM1 通过；离线复核 75 项输入哈希匹配，40 个 Cookie 唯一，另一后端均未出现该 Cookie |
+
+本轮只验收显式 TCP 目的端口分类和静态后端引导。两后端仍同放 VM1，不能称为实际 edge 时延收益；
+没有 `tc`、NetworkPolicy、最大容量或长时间稳定性结论。下一步 M3 在同镜像、同节点、同资源条件下验证 5/15 Mbps 下行整形。
 
 ## 实施路线与产出
 

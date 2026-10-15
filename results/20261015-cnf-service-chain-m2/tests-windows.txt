@@ -1,0 +1,23 @@
+test_actual_digest_mismatch_is_rejected (test_cnf_m1.EvidenceTests.test_actual_digest_mismatch_is_rejected) ... ok
+test_backend_must_observe_proxy_peer (test_cnf_m1.EvidenceTests.test_backend_must_observe_proxy_peer) ... ok
+test_bypassing_upf_is_not_a_success (test_cnf_m1.EvidenceTests.test_bypassing_upf_is_not_a_success) ... ok
+test_complete_chain_evidence (test_cnf_m1.EvidenceTests.test_complete_chain_evidence) ... ok
+test_data_log_alone_is_pending_not_accepted (test_cnf_m1.EvidenceTests.test_data_log_alone_is_pending_not_accepted) ... ok
+test_matching_runtime_digest_does_not_allow_mutable_spec (test_cnf_m1.EvidenceTests.test_matching_runtime_digest_does_not_allow_mutable_spec) ... ok
+test_pod_replacement_cannot_hide_zero_restart_count (test_cnf_m1.EvidenceTests.test_pod_replacement_cannot_hide_zero_restart_count) ... ok
+test_runtime_display_name_is_not_an_image_identity (test_cnf_m1.EvidenceTests.test_runtime_display_name_is_not_an_image_identity) ... ok
+test_successful_direct_iperf_is_insufficient (test_cnf_m1.EvidenceTests.test_successful_direct_iperf_is_insufficient) ... ok
+test_wrong_upstream_is_not_a_success (test_cnf_m1.EvidenceTests.test_wrong_upstream_is_not_a_success) ... ok
+test_backend_cookie_is_required_independently (test_cnf_m2.RoutingEvidenceTests.test_backend_cookie_is_required_independently) ... ok
+test_complete_routing_evidence (test_cnf_m2.RoutingEvidenceTests.test_complete_routing_evidence) ... ok
+test_completed_but_incomplete_payload_is_rejected (test_cnf_m2.RoutingEvidenceTests.test_completed_but_incomplete_payload_is_rejected) ... ok
+test_cookie_at_wrong_backend_is_a_failure (test_cnf_m2.RoutingEvidenceTests.test_cookie_at_wrong_backend_is_a_failure) ... ok
+test_matching_zero_counters_do_not_prove_data_transfer (test_cnf_m2.RoutingEvidenceTests.test_matching_zero_counters_do_not_prove_data_transfer) ... ok
+test_one_proxy_connection_is_not_a_complete_session (test_cnf_m2.RoutingEvidenceTests.test_one_proxy_connection_is_not_a_complete_session) ... ok
+test_previous_session_logs_do_not_count (test_cnf_m2.RoutingEvidenceTests.test_previous_session_logs_do_not_count) ... ok
+test_wrong_cluster_cannot_be_hidden_by_successful_iperf (test_cnf_m2.RoutingEvidenceTests.test_wrong_cluster_cannot_be_hidden_by_successful_iperf) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.104s
+
+OK

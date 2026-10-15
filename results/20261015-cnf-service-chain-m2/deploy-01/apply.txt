@@ -1,0 +1,5 @@
+configmap/cnf-m2-envoy created
+deployment.apps/cnf-m2-edge created
+service/cnf-m2-edge created
+deployment.apps/cnf-m1-envoy configured
+service/cnf-m1-envoy configured
