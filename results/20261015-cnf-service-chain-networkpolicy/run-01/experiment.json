@@ -1,0 +1,32 @@
+{
+  "configVersion": "cnf-netpol-v1",
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "NetworkPolicy",
+  "inheritedPlacement": "cnf-m4-v1",
+  "isolationRounds": 3,
+  "businessRoundsPerClassPerDirection": 5,
+  "durationSeconds": 5,
+  "offeredMbps": 1,
+  "connectTimeoutSeconds": 2,
+  "policySettleSeconds": 5,
+  "probes": [
+    {
+      "name": "cnf-netpol-probe-core",
+      "nodeSelector": {
+        "5gc.free5gc.org/plane": "control"
+      }
+    },
+    {
+      "name": "cnf-netpol-probe-edge",
+      "nodeSelector": {
+        "5gc.free5gc.org/role": "ran-test"
+      }
+    }
+  ],
+  "limitations": [
+    "Pod label based allow rules in cnf-lab; not workload identity authentication or whole-cluster isolation",
+    "No hostNetwork/node-origin bypass, adversarial label changes or radio QoS claim",
+    "NetworkPolicy return traffic is stateful; probes always use new TCP connections"
+  ]
+}

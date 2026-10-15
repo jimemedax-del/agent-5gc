@@ -1,0 +1,26 @@
+{
+  "sourcePod": "cnf-netpol-probe-edge",
+  "target": "10.43.108.155",
+  "port": 5201,
+  "expectedAllowed": false,
+  "returnCode": 1,
+  "stdout": "",
+  "stderr": "probe: connect: Connection refused\nprobe: line 1: /dev/tcp/10.43.108.155/5201: Connection refused\ncommand terminated with exit code 1\n",
+  "command": [
+    "kubectl",
+    "-n",
+    "cnf-lab",
+    "exec",
+    "cnf-netpol-probe-edge",
+    "--",
+    "timeout",
+    "2",
+    "bash",
+    "-c",
+    "set -e; exec 3<>/dev/tcp/\"$1\"/\"$2\"; exec 3>&-",
+    "probe",
+    "10.43.108.155",
+    "5201"
+  ],
+  "at": "2026-10-15T15:42:46.474309Z"
+}

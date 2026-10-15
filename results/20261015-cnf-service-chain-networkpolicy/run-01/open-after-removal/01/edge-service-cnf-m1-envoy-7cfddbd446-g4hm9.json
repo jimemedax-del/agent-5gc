@@ -1,0 +1,26 @@
+{
+  "sourcePod": "cnf-m1-envoy-7cfddbd446-g4hm9",
+  "target": "10.43.151.195",
+  "port": 5201,
+  "expectedAllowed": true,
+  "returnCode": 0,
+  "stdout": "",
+  "stderr": "",
+  "command": [
+    "kubectl",
+    "-n",
+    "cnf-lab",
+    "exec",
+    "cnf-m1-envoy-7cfddbd446-g4hm9",
+    "--",
+    "timeout",
+    "2",
+    "bash",
+    "-c",
+    "set -e; exec 3<>/dev/tcp/\"$1\"/\"$2\"; exec 3>&-",
+    "probe",
+    "10.43.151.195",
+    "5201"
+  ],
+  "at": "2026-10-15T15:42:59.574710Z"
+}

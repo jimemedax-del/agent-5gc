@@ -1,0 +1,5 @@
+{
+  "returnCode": 0,
+  "stdout": "networkpolicy.networking.k8s.io/cnf-backends-from-envoy unchanged\nnetworkpolicy.networking.k8s.io/cnf-envoy-chain-and-dns unchanged\n",
+  "stderr": ""
+}

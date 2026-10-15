@@ -1,0 +1,151 @@
+[
+  {
+    "apiVersion": "networking.k8s.io/v1",
+    "kind": "NetworkPolicy",
+    "metadata": {
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"networking.k8s.io/v1\",\"kind\":\"NetworkPolicy\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-netpol\"},\"name\":\"cnf-backends-from-envoy\",\"namespace\":\"cnf-lab\"},\"spec\":{\"ingress\":[{\"from\":[{\"podSelector\":{\"matchLabels\":{\"app\":\"cnf-m1-envoy\"}}}],\"ports\":[{\"port\":5201,\"protocol\":\"TCP\"}]}],\"podSelector\":{\"matchExpressions\":[{\"key\":\"app\",\"operator\":\"In\",\"values\":[\"cnf-m1-backend\",\"cnf-m2-edge\"]}]},\"policyTypes\":[\"Ingress\"]}}\n"
+      },
+      "creationTimestamp": "2026-10-15T15:42:39Z",
+      "generation": 1,
+      "labels": {
+        "app.kubernetes.io/part-of": "cnf-netpol"
+      },
+      "name": "cnf-backends-from-envoy",
+      "namespace": "cnf-lab",
+      "resourceVersion": "411573",
+      "uid": "07d53889-cbba-456a-8fa3-0f726ae946bb"
+    },
+    "spec": {
+      "ingress": [
+        {
+          "from": [
+            {
+              "podSelector": {
+                "matchLabels": {
+                  "app": "cnf-m1-envoy"
+                }
+              }
+            }
+          ],
+          "ports": [
+            {
+              "port": 5201,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ],
+      "podSelector": {
+        "matchExpressions": [
+          {
+            "key": "app",
+            "operator": "In",
+            "values": [
+              "cnf-m1-backend",
+              "cnf-m2-edge"
+            ]
+          }
+        ]
+      },
+      "policyTypes": [
+        "Ingress"
+      ]
+    }
+  },
+  {
+    "apiVersion": "networking.k8s.io/v1",
+    "kind": "NetworkPolicy",
+    "metadata": {
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"networking.k8s.io/v1\",\"kind\":\"NetworkPolicy\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-netpol\"},\"name\":\"cnf-envoy-chain-and-dns\",\"namespace\":\"cnf-lab\"},\"spec\":{\"egress\":[{\"ports\":[{\"port\":5201,\"protocol\":\"TCP\"}],\"to\":[{\"podSelector\":{\"matchExpressions\":[{\"key\":\"app\",\"operator\":\"In\",\"values\":[\"cnf-m1-backend\",\"cnf-m2-edge\"]}]}}]},{\"ports\":[{\"port\":53,\"protocol\":\"UDP\"},{\"port\":53,\"protocol\":\"TCP\"}],\"to\":[{\"namespaceSelector\":{\"matchLabels\":{\"kubernetes.io/metadata.name\":\"kube-system\"}},\"podSelector\":{\"matchLabels\":{\"k8s-app\":\"kube-dns\"}}}]}],\"ingress\":[{\"ports\":[{\"port\":15201,\"protocol\":\"TCP\"},{\"port\":15202,\"protocol\":\"TCP\"}]}],\"podSelector\":{\"matchLabels\":{\"app\":\"cnf-m1-envoy\"}},\"policyTypes\":[\"Ingress\",\"Egress\"]}}\n"
+      },
+      "creationTimestamp": "2026-10-15T15:42:39Z",
+      "generation": 1,
+      "labels": {
+        "app.kubernetes.io/part-of": "cnf-netpol"
+      },
+      "name": "cnf-envoy-chain-and-dns",
+      "namespace": "cnf-lab",
+      "resourceVersion": "411574",
+      "uid": "42c06427-ff36-44b6-96a3-a79d68a9a8e4"
+    },
+    "spec": {
+      "egress": [
+        {
+          "ports": [
+            {
+              "port": 5201,
+              "protocol": "TCP"
+            }
+          ],
+          "to": [
+            {
+              "podSelector": {
+                "matchExpressions": [
+                  {
+                    "key": "app",
+                    "operator": "In",
+                    "values": [
+                      "cnf-m1-backend",
+                      "cnf-m2-edge"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "ports": [
+            {
+              "port": 53,
+              "protocol": "UDP"
+            },
+            {
+              "port": 53,
+              "protocol": "TCP"
+            }
+          ],
+          "to": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "kube-system"
+                }
+              },
+              "podSelector": {
+                "matchLabels": {
+                  "k8s-app": "kube-dns"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "ingress": [
+        {
+          "ports": [
+            {
+              "port": 15201,
+              "protocol": "TCP"
+            },
+            {
+              "port": 15202,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ],
+      "podSelector": {
+        "matchLabels": {
+          "app": "cnf-m1-envoy"
+        }
+      },
+      "policyTypes": [
+        "Ingress",
+        "Egress"
+      ]
+    }
+  }
+]

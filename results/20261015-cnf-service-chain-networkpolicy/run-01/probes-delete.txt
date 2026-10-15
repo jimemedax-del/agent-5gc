@@ -1,0 +1,2 @@
+pod "cnf-netpol-probe-core" deleted
+pod "cnf-netpol-probe-edge" deleted

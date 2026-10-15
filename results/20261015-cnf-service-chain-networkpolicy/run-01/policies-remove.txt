@@ -1,0 +1,2 @@
+networkpolicy.networking.k8s.io "cnf-backends-from-envoy" deleted
+networkpolicy.networking.k8s.io "cnf-envoy-chain-and-dns" deleted

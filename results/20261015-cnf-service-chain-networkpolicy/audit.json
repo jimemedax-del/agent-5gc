@@ -1,0 +1,45 @@
+{
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "NetworkPolicy",
+  "configVersion": "cnf-netpol-v1",
+  "outcome": "passed",
+  "matrix": {
+    "open-before": {
+      "allowed": 15,
+      "denied": 0
+    },
+    "isolated-initial": {
+      "allowed": 5,
+      "denied": 10
+    },
+    "open-after-removal": {
+      "allowed": 15,
+      "denied": 0
+    },
+    "isolated-final": {
+      "allowed": 15,
+      "denied": 30
+    }
+  },
+  "ueSessions": {
+    "core/uplink": 5,
+    "edge/uplink": 5,
+    "core/downlink": 5,
+    "edge/downlink": 5
+  },
+  "uniqueCookies": 20,
+  "proxyConnections": 40,
+  "receivedBytes": 12779520,
+  "original5gcPodsUnchanged": 15,
+  "allOriginalPodsUnchanged": 18,
+  "finalContainerRestarts": 0,
+  "sourceHashChecks": 14,
+  "upfMemorySamples": 80,
+  "sampledPeakUpfMiB": 13.0390625,
+  "probePodsRemoved": true,
+  "finalPolicies": [
+    "cnf-backends-from-envoy",
+    "cnf-envoy-chain-and-dns"
+  ]
+}

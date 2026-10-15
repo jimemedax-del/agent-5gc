@@ -1,0 +1,26 @@
+{
+  "sourcePod": "cnf-netpol-probe-core",
+  "target": "10.42.0.186",
+  "port": 5201,
+  "expectedAllowed": true,
+  "returnCode": 0,
+  "stdout": "",
+  "stderr": "",
+  "command": [
+    "kubectl",
+    "-n",
+    "cnf-lab",
+    "exec",
+    "cnf-netpol-probe-core",
+    "--",
+    "timeout",
+    "2",
+    "bash",
+    "-c",
+    "set -e; exec 3<>/dev/tcp/\"$1\"/\"$2\"; exec 3>&-",
+    "probe",
+    "10.42.0.186",
+    "5201"
+  ],
+  "at": "2026-10-15T15:42:59.362446Z"
+}

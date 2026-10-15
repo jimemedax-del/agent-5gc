@@ -1,0 +1,15 @@
+{
+  "outcome": "passed",
+  "command": "run",
+  "evidence": {
+    "businessSessions": 20,
+    "proxyConnections": 40,
+    "incorrectRoutes": 0,
+    "isolationChecks": 45,
+    "allowedChecks": 15,
+    "deniedChecks": 30,
+    "probePodsRemoved": true,
+    "fullAcceptance": true
+  },
+  "endedAt": "2026-10-15T15:47:03.344702Z"
+}

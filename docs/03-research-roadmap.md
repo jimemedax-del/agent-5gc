@@ -1,7 +1,7 @@
 # 研究路线：基于 Agent 的 5GC 与 CNF 服务链编排
 
 > 最后更新：2026-10-15
-> 当前路线：R2｜当前阶段：R2.S2 手工最小实验（M0—M4 通过；下一步 NetworkPolicy 正反例）。
+> 当前路线：R2｜当前阶段：R2.S2 手工最小实验已验收（M0—M4 与 NetworkPolicy 正反例通过）；下一阶段 R2.S3 待开始。
 > 本文统一维护路线版本和阶段状态；模块文档维护实现细节，未验证计划不代表已实现。
 
 ## 路线版本与方向调整记录
@@ -11,7 +11,7 @@
 | 路线 | 登记时间 | 研究范围 | 当前定位 |
 |---|---|---|---|
 | R1 | 2026-10-10 追溯登记；主要基线验收见 2026-10-08 记录 | 5GC 部署、NF 放置与受控 Profile；规划后续意图驱动部署 | 历史路线，基础设施成果继承至 R2；规划器、Task/Helm 适配器和 Agent 等未实施部分不按原顺序继续 |
-| R2 | 2026-10-10 | 以既有 5GC 为底座，建立可编排网络功能环境，先验证五类能力的最小实验，再研究服务链编排 | 当前路线；首版选型、代理链路、分类引导、受控下行整形与后端放置已验证，继续验证隔离效果 |
+| R2 | 2026-10-10 | 以既有 5GC 为底座，建立可编排网络功能环境，先验证五类能力的最小实验，再研究服务链编排 | 当前路线；首版选型及 R2.S2 手工最小实验已验收，下一阶段固化可重复部署、恢复与测量 |
 
 ### R1 → R2：调整依据与继承关系
 
@@ -39,7 +39,7 @@
 | 阶段 | 工作与完成条件 | 状态 | 模块入口 |
 |---|---|---|---|
 | R2.S1 | 能力盘点与选型：区分已有、待验证和待补充能力，明确接口、依赖、候选实现及首版验收标准 | 已完成：三份调研材料已按官方资料二次复核；首版组合、七项能力边界和单变量验收顺序已确定 | [CNF 功能目录](cnf-service-chain-orchestration.md#功能目录与首版选型) |
-| R2.S2 | 手工最小实验：业务经 UPF、代理到达预期后端，有分类、引导和 QoS 效果证据 | 进行中：M0—M4 通过；M3 整形通过；M4 撤销整形后 core/edge 位于 VM1/VM3，两类上下行各 5/5，错误路由 0；下一步 NetworkPolicy 正反例 | [最小实验](cnf-service-chain-orchestration.md#最小实验)、[M3 实验](cnf-service-chain-orchestration.md#m3-同节点下行整形实验)、[M4 实验](cnf-service-chain-orchestration.md#m4-后端放置与跨节点路径实验) |
+| R2.S2 | 手工最小实验：业务经 UPF、代理到达预期后端，有分类、引导和 QoS 效果证据 | 已完成：M0—M4 及 NetworkPolicy 正反例通过；策略撤销/重加对照成立，最终 15 次允许、30 次拒绝，UE 两类上下行各 5/5；原有 5GC/CNF 稳定，收尾严格验收通过 | [最小实验](cnf-service-chain-orchestration.md#最小实验)、[M3 实验](cnf-service-chain-orchestration.md#m3-同节点下行整形实验)、[M4 实验](cnf-service-chain-orchestration.md#m4-后端放置与跨节点路径实验)、[NetworkPolicy 实验](cnf-service-chain-orchestration.md#networkpolicy-隔离正反例与阶段收尾) |
 | R2.S3 | 可重复部署与测量：固定版本和配置，脚本可重复部署/恢复，测量保留参数和证据 | 待开始 | [实施路线与产出](cnf-service-chain-orchestration.md#实施路线与产出) |
 | R2.S4 | 确定性编排：结构化需求生成受控方案，验证规则、执行、失败处理及实际路径 | 待开始 | [CNF 模块](cnf-service-chain-orchestration.md)；实现细节开发时归入该模块 |
 | R2.S5 | Agent：接入意图理解、状态/记忆、规划工具、执行和反馈，并设计对照实验 | 待开始 | [研究定位](#当前研究定位)、[CNF 模块](cnf-service-chain-orchestration.md) |
@@ -72,7 +72,7 @@ Agent 不直接参与 5G 信令，不生成任意 YAML、镜像地址或 Helm Va
 
 ## 当前阶段
 
-当前进度：Compose、单节点 k3s/Helm 与三节点 Flannel 单网络基线均已完成。固定 Profile、M1 单代理、M2 双入口引导、M3 受控下行整形与 M4 后端放置已通过验收。接下来验证 NetworkPolicy 的允许与拒绝正反例；R2.S2 尚未全部完成，Agent 尚不进入编码阶段。详细范围见 [CNF 服务链编排模块](cnf-service-chain-orchestration.md)。
+当前进度：Compose、单节点 k3s/Helm 与三节点 Flannel 单网络基线均已完成。固定 Profile 与 R2.S2 的 M0—M4、NetworkPolicy 正反例均已验收。下一阶段 R2.S3 将固化统一部署/恢复入口和重复测量；目前尚未开始，Agent 仍不进入编码阶段。详细范围见 [CNF 服务链编排模块](cnf-service-chain-orchestration.md)。
 
 - [已验证] Docker Compose 与单节点 k3s/Helm 的 Single UPF 业务闭环；k3s 环境重启后可自动恢复。
 - [已验证] 第二台独立 Ubuntu VM 从零重建了相同版本的 k3s/Helm/Single UPF 基线，并完成 UE 端到端出网。
@@ -85,7 +85,8 @@ Agent 不直接参与 5G 信令，不生成任意 YAML、镜像地址或 Helm Va
 - [已验证] M2 `cnf-m2-v4` 中两类 TCP 目的端口各完成 20 次正确后端命中，错误路由为 0；固定字节数模式失败留档，正式定时批次独立验收，不代表 QoS/容量/边缘时延收益。
 - [已验证] M3 `cnf-m3-v1`：同节点、同镜像、同资源的后端各完成 5 轮 15 秒 TCP 下行，5/15 Mbps TBF 对应中位吞吐 4.823/14.376 Mbps，比值 2.981；qdisc 计数、撤销/重建和代理路径证据闭合，收尾严格验收通过。范围限定为顺序单流虚拟服务链整形。
 - [已验证] M4 `cnf-m4-v1`：先恢复无整形同节点基线，再仅将 edge 后端放置到 VM3；20 次正式会话、40 条正确代理连接，原有 15 个 5GC Pod 身份不变，收尾严格验收通过；不据此宣称 edge 时延优势。
-- [尚未开始] NetworkPolicy 正反例、确定性服务链编排和 Agent 工作流。
+- [已验证] NetworkPolicy `cnf-netpol-v1`：VM1/VM3 普通 Pod 的允许/拒绝及策略撤销/重加对照成立；Envoy DNS 和 20 次 UE 业务回归通过，原有 18 个 Pod 身份不变，收尾严格验收通过。范围限于当前 Pod 流量与固定标签。
+- [尚未开始] R2.S3 的统一可重复部署/恢复与重复测量、确定性服务链编排和 Agent 工作流。
 
 ## 为什么需要从单 UPF 基线走向 CNF 服务链
 

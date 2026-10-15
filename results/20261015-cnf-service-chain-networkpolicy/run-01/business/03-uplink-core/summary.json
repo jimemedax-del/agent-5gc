@@ -1,0 +1,14 @@
+{
+  "round": 3,
+  "businessClass": "core",
+  "direction": "uplink",
+  "outcome": "passed",
+  "startedAt": "2026-10-15T15:44:59.037164Z",
+  "trafficEndedAt": "2026-10-15T15:45:04.310779Z",
+  "cookie": "sxho5s3uyax7dgxhvrkf6zklo53b36k3lm6v",
+  "receivedBytes": 638976,
+  "proxyConnections": 2,
+  "backendHit": "core",
+  "incorrectRoutes": 0,
+  "receiverMbps": 1.0144271565523106
+}

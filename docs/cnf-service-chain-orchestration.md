@@ -1,7 +1,7 @@
 # 面向业务需求的 CNF 服务链编排
 
 > 最后更新：2026-10-15
-> 状态：R2.S1 选型已完成；R2.S2 的 M0—M4 验收通过，当前运行 `cnf-m4-v1`；下一步 NetworkPolicy 允许与拒绝正反例。
+> 状态：R2.S1 与 R2.S2 已验收；M0—M4 及 NetworkPolicy 正反例通过，当前运行 `cnf-netpol-v1`；下一阶段 R2.S3 可重复部署与测量待开始。
 > 适用路线/阶段：R2.S1—R2.S3（能力盘点、手工实验、复现与测量）；R2.S4—R2.S5 的编排与 Agent 细节后续继续维护在本模块。阶段状态见 [研究路线](03-research-roadmap.md#r2-当前阶段顺序)。
 
 ## 目标与边界
@@ -27,7 +27,7 @@
 | PCF | 已部署，QoS 策略是否产生可测用户面效果尚未验证 | 候选 QoS 策略控制能力 |
 | NEF | 已部署，源码含 Traffic Influence 接口 | 候选应用/业务需求入口，需验证端到端效果 |
 | Kubernetes 三节点与固定 Profile | 已验证可重复部署 | 承载既有 5GC 与后续新增 CNF |
-| 流量识别、代理转发、可观测流量引导 | 代理链、端口分类引导、受控整形及跨节点后端放置已验收 | 继续验证 NetworkPolicy 隔离效果 |
+| 流量识别、代理转发、可观测流量引导 | 代理链、端口分类引导、受控整形、跨节点放置及 Pod 隔离正反例已验收 | R2.S3 固化部署、恢复与重复测量 |
 
 已有 5GC 基线不需要重做。此前以 SMF/UPF 实例选择为中心的设想保留为后续扩展决策维度，但不再单独构成当前主线。
 
@@ -96,7 +96,7 @@ Cilium、Istio、Kube-OVN、KubeEdge 和 Multus 均保留为后续对照或扩�
 | 流量引导 | Envoy Listener/Cluster 映射到两个 ClusterIP 后端；外部只暴露 Envoy NodePort | 链内选择后端 | [已验证，M2] 手工静态映射、错误路由 0；R2.S4 再接 xDS/受控规划器 |
 | 边缘服务接入 | 同一 iperf3 服务镜像分别放置到 VM1 与 VM3，使用现有节点标签固定位置 | 链终点与放置变量 | [已验证，M4] 去整形后跨节点业务通过；三台 VM 同宿主机，不宣称真实 MEC 时延优势 |
 | NAT/地址转发 | 复用 UPF N6、Flannel、kube-proxy 与固定 NodePort；保存路由和转发表证据 | 平台连通底座 | [已验证，M1 计数关联] 不迁移 Cilium/Calico，不新增第二 CNI |
-| 网络策略控制 | `cnf-lab` 独立 Namespace + k3s kube-router 执行标准 NetworkPolicy，只允许 Envoy 到后端和必要 DNS | 平台隔离护栏 | [待验证] 必须有允许与拒绝两类实测，不能只看对象已创建 |
+| 网络策略控制 | 后端 Ingress 仅同 Namespace 的 Envoy TCP 5201；Envoy Ingress 保留 15201/15202，Egress 限后端 5201 与 CoreDNS UDP/TCP 53 | 平台隔离护栏 | [已验证] VM1/VM3 普通 Pod 正反例与撤销/重加对照通过；非全来源绕行防护 |
 
 PCF 是策略决策功能，不是通用流量识别器或应用代理；UPF 提供基础用户面转发，不自动保证业务经过新增 CNF。NEF/PCF 能力探针与上述首版链路分离：先保持只读或隔离测试，不把未验证的 Traffic Influence、5QI 或 GBR 配置写入主实验路径。free5GC v4.2.2 修复了此前 NEF Traffic Influence 鉴权缺陷，但 NEF 仍不应暴露为外部 NodePort。[free5GC 安全公告](https://github.com/free5gc/free5gc/security/advisories/GHSA-3p28-73q7-45xp)
 
@@ -202,7 +202,7 @@ python3 scripts/free5gc-profile.py verify
 - [已验证] 固定 Envoy 镜像在 VM1 Docker 中以非 root、只读文件系统和无 capabilities 执行 `--mode validate`，配置校验通过；此项没有部署 Kubernetes 工作负载。
 - [已验证] 10 项证据判定单测在 Windows 和 VM1 通过，覆盖路径证据缺失、Pod 替换、声明/实际镜像不符及只有一条代理日志等情况。
 - [已验证] 已导入 VM1 后端镜像，执行服务端 dry-run、真实部署与受控配置修正；`probe-06` 的单流 TCP 上行和收尾严格验收通过。完整记录见 [`results/20261015-cnf-service-chain-m1/`](../results/20261015-cnf-service-chain-m1/)。
-- [后续进展] M2 分类引导、M3 `tc` 与 M4 放置已完成，见后续章节；NetworkPolicy 正反例仍待验证。M1 单次短时探测不等于 R2.S2 全阶段完成。
+- [后续进展] M2 分类引导、M3 `tc`、M4 放置及 NetworkPolicy 正反例均已完成，证据见后续章节。M1 单次短时探测本身不等于 R2.S2 全阶段验收。
 
 | `probe-06` 观察 | 结果与口径 |
 |---|---|
@@ -410,7 +410,7 @@ python scripts/audit-cnf-m3.py results/20261015-cnf-service-chain-m3 --out <新�
 ```
 
 M3 验收结束时保留两侧 5/15 Mbps TBF 配置；随后 M4 已通过固定入口重建无整形后端并完成跨节点放置，见下节。
-这些后续操作不计入 M3 当轮证据。NetworkPolicy 正反例仍待验证。
+这些后续操作不计入 M3 当轮证据。NetworkPolicy 的后续验收见独立章节。
 
 ## M4 后端放置与跨节点路径实验
 
@@ -500,7 +500,102 @@ python scripts/audit-cnf-m4.py results/20261015-cnf-service-chain-m4 --out <新�
 审计器对旧 Pod 端点、残留 TBF 和护栏中 Pod 被替换的三个损坏副本均拒绝通过，原始证据未改写，见
 [`audit-negative-checks.json`](../results/20261015-cnf-service-chain-m4/audit-negative-checks.json)。
 
-当前保留 core 在 VM1、edge 在 VM3 的无整形配置。M4 已完成，R2.S2 仍需 NetworkPolicy 允许/拒绝正反例。
+M4 验收后保留 core 在 VM1、edge 在 VM3 的无整形配置，后续 NetworkPolicy 在此基础上完成，见下节。
+
+## NetworkPolicy 隔离正反例与阶段收尾
+
+配置为 [`networkpolicy.yaml`](../infra/cnfs/networkpolicy.yaml) 与
+[`networkpolicy-experiment.json`](../infra/cnfs/networkpolicy-experiment.json)，入口为
+[`cnf-networkpolicy.py`](../scripts/cnf-networkpolicy.py)，独立离线审计为
+[`audit-cnf-networkpolicy.py`](../scripts/audit-cnf-networkpolicy.py)。
+配置版本 `cnf-netpol-v1` 从 M4 提交 `790fd4f` 继续，分支 `codex/cnf-networkpolicy`；路线/阶段仍为 R2.S2。
+
+### 策略边界
+
+| 对象 | 规则与边界 |
+|---|---|
+| `cnf-backends-from-envoy` | 选中 core/edge 两后端，仅允许同 `cnf-lab` 内 `app=cnf-m1-envoy` 的 TCP 5201 入站；不限制后端 Egress |
+| `cnf-envoy-chain-and-dns` | 选中 Envoy；入站保留公开业务端口 TCP 15201/15202；出站仅同 Namespace 的两个后端 TCP 5201，以及 `kube-system` 内 `k8s-app=kube-dns` 的 UDP/TCP 53 |
+| DNS peer | Namespace 与 Pod selector 放在同一个 peer，按 AND 匹配；不是两个可分别命中的宽松 peer |
+| 临时测试 Pod | VM1/VM3 各一台，标签不匹配 Envoy/后端；固定 M1 Digest 镜像、非 root、drop ALL、无服务账号令牌；不被上述策略选为隔离源，以便单独验证后端 Ingress |
+| 保持项 | M4 的节点、镜像、资源、无整形状态、Envoy ConfigMap 与 Service 均不变；不修改 free5gc Namespace 或既有 MongoDB 策略 |
+
+VM1、VM3 的宿主机 `iptables-save -c -t filter` 已观察到 kube-router netpol 规则链；
+同时保留策略生效后的规则记录。没有更换 CNI、重启 k3s 或使用 privileged/hostNetwork 测试 Pod。
+判定以实际连接结果为主，不以规则链存在或 Policy 对象创建代替验收。
+
+### 对照与测量方法
+
+所有 TCP 探测都创建新连接，避免复用已有连接的状态。探测固定源 Pod、目标 IP 与端口，顺序为：
+
+1. 无策略：两测试 Pod 到两后端的 Service/Pod IP，以及 Envoy 到后端/测试 Pod 均可达。
+2. 加策略并等待 5 秒收敛：期望后端拒绝非 Envoy 来源，Envoy 出站拒绝测试 Pod；允许后端与 DNS。
+3. 仅撤销本实验两条策略，等待 5 秒：同一源/目标恢复可达，排除服务未监听、错误 IP 或测试工具失效。
+4. 重加同一策略，等待 5 秒后执行 3 轮正式隔离矩阵；随后运行两类上下行各 5 次、每次 5 秒/1 Mbps 的 UE 回归。
+
+每轮正式矩阵如下；Service IP 和 Pod IP 都覆盖同节点与跨节点：
+
+| 路径 | 每轮 | 3 轮合计 | 期望 |
+|---|---:|---:|---|
+| 两测试 Pod → 两后端，各 Service/Pod IP | 8 | 24 | 拒绝 |
+| Envoy → 两后端，各 Service/Pod IP | 4 | 12 | 允许 |
+| Envoy → 两测试 Pod IP | 2 | 6 | 拒绝 |
+| Envoy → CoreDNS Service TCP 53 | 1 | 3 | 允许 |
+
+另在 Envoy 容器中逐轮执行两个后端 FQDN 的 `getent ahostsv4`，共 6 次解析，要求返回正确 Service IP；
+TCP 53 测的是连接建立，不宣称完成 DNS over TCP 查询。普通 TCP 探测会连上后立即关闭，
+可能使 iperf3 服务器记录协议未完成消息；这些连接只作为连通性证据，业务成功另用完整 iperf3 会话核对。
+允许要求退出码 0；拒绝只接受超时或明确网络拒绝，命令缺失和 kubectl 错误均不能算拒绝。
+
+在策略切换、连接矩阵和 UE 测量中监测原有工作负载与临时 Pod 的 UID、容器身份、Ready 和重启；
+既有 Deployment/Service/ConfigMap 的运行配置必须不变。UE 测量继续使用 512MiB UPF 内存停止阈值，
+关联 UPF 双向计数、代理方向字节、目标 Cookie 和另一后端不误收，失败立即停止并保留原始目录。
+
+### 执行、恢复与复测
+
+在 VM1 独立源码目录执行。开始时必须是没有本实验策略、没有同名测试 Pod 的 M4 配置：
+
+```bash
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-networkpolicy.py render --out <新的渲染目录>
+python3 scripts/cnf-networkpolicy.py run --engine-dir <引擎证据目录> --out <新的实验目录>/run-01
+python3 -m unittest discover -s tests -p 'test_cnf*.py' -v
+```
+
+`--engine-dir` 应含 VM1/VM3 分别采集的 `engine-before-vm1.txt`、`engine-before-vm3.txt`：
+在对应主机执行 `sudo iptables-save -c -t filter > <新文件路径>`，再将两文件放到 VM1 同一证据目录。
+采集只读规则，不把密码、服务环境变量或 k3s token 写入文件。
+
+成功后保留两条策略，删除两个临时测试 Pod，并再次严格验收 5GC。
+若应用策略后的测试失败，脚本尝试保留预期的两条策略并记录该动作；失败现场和测试 Pod 留待检查，不能将失败目录重用为成功数据。
+正常运行状态下不要直接重跑该完整对照：复测前须明确执行
+`kubectl delete -f infra/cnfs/networkpolicy.yaml`，恢复无策略 M4 起点后再选择新输出目录运行。
+这只删除本实验两条策略；撤销/重加及连接恢复已实测，不会重建后端或 Envoy。
+M4 的旧 `measure` 要求无策略，不能直接用于当前保护状态；严格 5GC `verify` 仍可独立执行。
+
+### 2026-10-15 验收结果
+
+原始证据见 [`results/20261015-cnf-service-chain-networkpolicy/`](../results/20261015-cnf-service-chain-networkpolicy/)，
+正式批次为 [`run-01`](../results/20261015-cnf-service-chain-networkpolicy/run-01/summary.json)。
+无策略对照 15/15 可达；初次隔离 5 次允许、10 次拒绝均正确；撤销后同一 15 个连接目标恢复可达；
+重加后的正式矩阵为 **15 次允许、30 次拒绝**，另 6 次 FQDN 解析成功。
+策略生效后的 UE 上下行各 5/5，共 20 个唯一 Cookie、40 条正确代理连接，错误路由为 0；接收载荷 12,779,520 字节。
+
+原有 18 个 Pod（15 个 5GC、3 个 CNF）从部署前到收尾身份不变，最终重启数为 0；
+80 次 UPF 内存采样峰值 13.0390625 MiB，属于离散采样峰值。
+临时 Pod 已删除；部署前、创建测试 Pod 后、UE 业务结束后和清理后均完成严格 5GC 验收。
+Windows 与 VM1 共 **50 项单测通过**。独立审计复核原始连接的 ABA 对照、业务路径、身份和 **14 项输入哈希**，见
+[`audit.json`](../results/20261015-cnf-service-chain-networkpolicy/audit.json)；
+4 类损坏证据副本均被拒绝，原始材料不变，见
+[`audit-negative-checks.json`](../results/20261015-cnf-service-chain-networkpolicy/audit-negative-checks.json)。
+
+```bash
+python scripts/audit-cnf-networkpolicy.py results/20261015-cnf-service-chain-networkpolicy/run-01 --out <新的审计JSON路径>
+```
+
+**R2.S2 已完成验收。** 当前保留 M4 放置与两条策略；M3 整形结果作为独立实验保留，当前未重新开启 TBF。
+结论限于当前 VM1/VM3 普通 Pod、固定标签及端口；没有测试宿主机/hostNetwork 来源、经 UPF 直连后端或恶意改标签，
+不将标签策略视为身份认证或全来源绕行防护。下一阶段 R2.S3 固化统一部署/恢复入口和重复测量，尚未开始。
 
 ## 实施路线与产出
 
@@ -526,7 +621,7 @@ python scripts/audit-cnf-m4.py results/20261015-cnf-service-chain-m4 --out <新�
 - [已验证，范围有限] Envoy TCP proxy 与当前 iperf3 3.9 的 M1 受控上行、M2 双入口和 M3 单流下行兼容性及路径日志；并发和代理资源开销对照仍待验证。
 - [已验证，M3] Pod 网络命名空间内 TBF 的配置、撤销/重建、统计读取和本次 5/15 Mbps 各 5×15 秒验收；跨批次长期稳定性仍待验证。
 - [已验证，M4] 去整形同节点对照、edge 的 VM1→VM3 放置及跨节点上下行路径；不证明时延收益或无损迁移。
-- [待验证] k3s kube-router NetworkPolicy 控制器在当前集群是否启用并正确拦截 `cnf-lab` 流量。
+- [已验证] VM1/VM3 的 kube-router 规则链与 `cnf-lab` 普通 Pod 隔离正反例、策略撤销/重加和 UE 业务回归；不外推到未测来源。
 - [已验证，计数关联] 本轮 NodePort 路径的 UE 绑定选路、UPF NAT/接口计数、Envoy 连接及后端来源证据闭合；未进行逐流抓包或全流量绕行防护验收。
 - [待验证] 现有 free5GC PCF/NEF 在 v4.2.2、Single-UPF Profile 中能否形成可测用户面效果；此项不阻塞 R2.S2。
 - [待确认] 论文最终更偏服务链选择/配置算法、意图理解，还是平台自动化；低时延 SLA 绝对阈值也仍需导师确认。

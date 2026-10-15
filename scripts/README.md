@@ -82,6 +82,20 @@ M1—M3 证据判定测试：`python -m unittest discover -s tests -p 'test_cnf_
 可用 `--batch` 指定其他正式批次名。M1—M4 共 41 项单测通过。
 执行顺序、恢复边界和限制见 [M4 模块章节](../docs/cnf-service-chain-orchestration.md#m4-后端放置与跨节点路径实验)。
 
+## CNF NetworkPolicy 正反例入口
+
+`cnf-networkpolicy.py` 读取两份 `infra/cnfs/networkpolicy*` 固定资产，命令为 `render`、`run`，
+均要求 `--out <新的结果目录>`；`run` 另需 `--engine-dir` 指向含 VM1/VM3 规则链采集文件的目录。
+只接受未配置本实验策略的 M4 起点，创建 VM1/VM3 非 Envoy 测试 Pod，执行无策略/加策略/撤销/重加对照，
+覆盖两后端 Service/Pod IP、Envoy 出站及 DNS，再做两类上下行各 5 次、5 秒/1 Mbps 的 UE 回归。
+工具错误不能算连接拒绝。原有配置/Pod 身份变化、业务失败或内存护栏触发即停，失败目录不覆盖。
+成功后保留两条策略、删除临时 Pod，严格复查 5GC；完整对照复测前须先撤销本实验两条策略。
+
+2026-10-15 `cnf-netpol-v1` 已通过：最终矩阵 15 次允许、30 次拒绝，20 次 UE 会话、40 条正确代理连接。
+本地和 VM1 共 50 项单测通过：`python -m unittest discover -s tests -p 'test_cnf*.py' -v`。
+`audit-cnf-networkpolicy.py <单次run目录> --out <新的JSON路径>` 独立离线复核对照和业务证据，不访问集群。
+采集、复测与保护边界见 [NetworkPolicy 模块章节](../docs/cnf-service-chain-orchestration.md#networkpolicy-隔离正反例与阶段收尾)。
+
 ## 初始化节点
 
 Server示例：

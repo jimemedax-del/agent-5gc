@@ -1,0 +1,26 @@
+{
+  "outcome": "passed",
+  "cases": [
+    {
+      "case": "successful backend bypass",
+      "outcome": "rejected-as-required",
+      "reason": "Raw connection does not prove expected permission/denial"
+    },
+    {
+      "case": "kubectl error mistaken for denial",
+      "outcome": "rejected-as-required",
+      "reason": "Raw connection does not prove expected permission/denial"
+    },
+    {
+      "case": "unreachable destination in open control",
+      "outcome": "rejected-as-required",
+      "reason": "Raw connection does not prove expected permission/denial"
+    },
+    {
+      "case": "Pod replacement during UE traffic",
+      "outcome": "rejected-as-required",
+      "reason": "Guard identity changed"
+    }
+  ],
+  "originalEvidenceModified": false
+}
