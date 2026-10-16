@@ -1,0 +1,41 @@
+{
+  "route": "R2",
+  "stage": "R2.S3",
+  "purpose": "Main-directory baseline regression before R2.S4",
+  "configVersion": "cnf-service-chain-v1",
+  "state": "protected",
+  "sourceCommit": "e9af2bbb38ebe1ac1761ce7675820a04aa4bba9d",
+  "linuxEntrypointFixCommit": "bfb9c418b96623de3b1315c1b28e4d71e364bd4c",
+  "sourceDifference": "Python LF attributes and executable mode only; no Python logic changes",
+  "workingDirectory": "E:\\GPT-project\\postgraduate-analyse",
+  "evidencePath": "results/20261016-cnf-service-chain-regression",
+  "localUnitTests": {
+    "discovered": 80,
+    "passed": 79,
+    "skipped": 1
+  },
+  "vmUnitTests": {
+    "discovered": 80,
+    "passed": 79,
+    "skipped": 1
+  },
+  "vmHelmIntegration": {
+    "passed": 1,
+    "executedSeparately": true,
+    "priorFailuresPreserved": 2
+  },
+  "sshReachable": [
+    "free5gc-vm-1",
+    "free5gc-vm-2",
+    "free5gc-vm-3"
+  ],
+  "archiveSha256": {
+    ".work\\cnf-regression-20261016-source.tar": "c709722d0cbe426746d1b22feea0f770f5b8720484ff520f9882c5fa65d1e8e8",
+    ".work\\cnf-regression-linux-entrypoint.tar": "cca412459b5ce72ca34fc1f67624f40f5cbb6c8443d18491cdb19980ea7c7cf2"
+  },
+  "limitations": [
+    "No R2.S4 planner or orchestration acceptance",
+    "Protected state regression only; no new QoS or long-term load claim",
+    "Helm integration renders offline and does not upgrade live releases"
+  ]
+}

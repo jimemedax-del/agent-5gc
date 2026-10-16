@@ -1,0 +1,3 @@
+Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
+    pkts      bytes target     prot opt in     out     source               destination         
+     461    29580 MASQUERADE  all  --  *      eth0    10.60.0.0/16         0.0.0.0/0           

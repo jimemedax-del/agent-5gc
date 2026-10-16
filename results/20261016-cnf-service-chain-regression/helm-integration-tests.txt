@@ -1,0 +1,17 @@
+test_clean_clone_repeat_render_and_real_post_renderer (test_free5gc_profile.HelmIntegrationTests) ... ERROR
+
+======================================================================
+ERROR: test_clean_clone_repeat_render_and_real_post_renderer (test_free5gc_profile.HelmIntegrationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/lhm/.work/cnf-regression-20261016/repo/tests/test_free5gc_profile.py", line 184, in test_clean_clone_repeat_render_and_real_post_renderer
+    raw = tool.run([tool.helm_binary(), 'template', release['name'], chart / release['chartPath'],
+  File "/home/lhm/.work/cnf-regression-20261016/repo/scripts/free5gc-profile.py", line 43, in run
+    raise RuntimeError(f'{command[0]} failed ({proc.returncode}): {proc.stderr[-1500:]}')
+RuntimeError: /home/lhm/.local/bin/helm failed (1): Error: invalid argument "/home/lhm/.work/cnf-regression-20261016/repo/scripts/free5gc-profile.py" for "--post-renderer" flag: unable to find binary at /home/lhm/.work/cnf-regression-20261016/repo/scripts/free5gc-profile.py: exec: "/home/lhm/.work/cnf-regression-20261016/repo/scripts/free5gc-profile.py": permission denied
+
+
+----------------------------------------------------------------------
+Ran 1 test in 1.881s
+
+FAILED (errors=1)

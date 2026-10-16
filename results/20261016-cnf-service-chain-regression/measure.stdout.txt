@@ -1,0 +1,36 @@
+isolation 1/3: TCP allow/deny and Envoy DNS passed
+isolation 2/3: TCP allow/deny and Envoy DNS passed
+isolation 3/3: TCP allow/deny and Envoy DNS passed
+UE 1/5 uplink core: passed
+UE 1/5 uplink edge: passed
+UE 1/5 downlink core: passed
+UE 1/5 downlink edge: passed
+UE 2/5 uplink core: passed
+UE 2/5 uplink edge: passed
+UE 2/5 downlink core: passed
+UE 2/5 downlink edge: passed
+UE 3/5 uplink core: passed
+UE 3/5 uplink edge: passed
+UE 3/5 downlink core: passed
+UE 3/5 downlink edge: passed
+UE 4/5 uplink core: passed
+UE 4/5 uplink edge: passed
+UE 4/5 downlink core: passed
+UE 4/5 downlink edge: passed
+UE 5/5 uplink core: passed
+UE 5/5 uplink edge: passed
+UE 5/5 downlink core: passed
+UE 5/5 downlink edge: passed
+{
+  "outcome": "passed",
+  "command": "measure",
+  "evidence": {
+    "state": "protected",
+    "sessions": 20,
+    "proxyConnections": 40,
+    "allowedChecks": 15,
+    "deniedChecks": 30,
+    "fullAcceptance": true
+  },
+  "endedAt": "2026-10-16T02:19:07.449695Z"
+}

@@ -1,0 +1,25 @@
+{
+  "outcome": "passed",
+  "stage": "R2.S3",
+  "scope": "protected regression; not R2.S4 acceptance",
+  "sessions": 20,
+  "uniqueCookies": 20,
+  "proxyConnections": 40,
+  "counts": {
+    "core/uplink": 5,
+    "edge/uplink": 5,
+    "core/downlink": 5,
+    "edge/downlink": 5
+  },
+  "allowedChecks": 15,
+  "deniedChecks": 30,
+  "dnsChecks": 6,
+  "totalReceivedBytes": 12779520,
+  "sourceHashChecks": 32,
+  "originalPodsUnchanged": 18,
+  "finalState": "protected",
+  "finalContainerRestarts": 0,
+  "probePodsRemoved": true,
+  "upfMemorySamples": 79,
+  "sampledPeakUpfMiB": 11.52734375
+}

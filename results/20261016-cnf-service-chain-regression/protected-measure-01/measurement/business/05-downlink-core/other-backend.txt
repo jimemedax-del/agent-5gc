@@ -1,0 +1,13 @@
+[  5]   4.00-5.00   sec   112 KBytes   917 Kbits/sec                  
+[  5]   5.00-5.04   sec  16.0 KBytes  3.37 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bitrate
+[  5] (sender statistics not available)
+[  5]   0.00-5.04   sec   624 KBytes  1.01 Mbits/sec                  receiver
+rcv_tcp_congestion cubic
+iperf 3.9
+Linux cnf-m2-edge-cc965dd8b-p59md 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------

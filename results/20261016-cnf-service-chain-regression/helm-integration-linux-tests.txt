@@ -1,0 +1,6 @@
+test_clean_clone_repeat_render_and_real_post_renderer (test_free5gc_profile.HelmIntegrationTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.480s
+
+OK

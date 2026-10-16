@@ -1,0 +1,50 @@
+{
+  "route": "R2",
+  "stage": "R2.S3",
+  "configVersion": "cnf-service-chain-v1",
+  "outcome": "passed",
+  "protectedBatches": {
+    "protected-measure-01": {
+      "sessions": 20,
+      "counts": {
+        "core/uplink": 5,
+        "edge/uplink": 5,
+        "core/downlink": 5,
+        "edge/downlink": 5
+      },
+      "allowed": 15,
+      "denied": 30
+    },
+    "protected-measure-02": {
+      "sessions": 20,
+      "counts": {
+        "core/uplink": 5,
+        "edge/uplink": 5,
+        "core/downlink": 5,
+        "edge/downlink": 5
+      },
+      "allowed": 15,
+      "denied": 30
+    }
+  },
+  "qosMedianMbps": {
+    "core": 4.826614280935994,
+    "edge": 14.373985933838187
+  },
+  "qosMedianRatio": 2.9780680819290026,
+  "uniqueCookies": 50,
+  "proxyConnections": 100,
+  "totalReceivedBytes": 205668352,
+  "original5gcPodsUnchanged": 15,
+  "coreIdentityCheckpoints": 106,
+  "rebuildCNFs": 3,
+  "idempotentApplies": 3,
+  "snapshotRestore": true,
+  "intentionalRollback": true,
+  "serviceIdentityCheckpoints": 26,
+  "finalContainerRestarts": 0,
+  "sourceHashChecks": 208,
+  "upfMemorySamples": 280,
+  "sampledPeakUpfMiB": 16.75390625,
+  "finalState": "protected"
+}

@@ -1,0 +1,9 @@
+Command: python -m unittest discover -s tests -q
+Source commit: e9af2bb
+Working directory: E:\GPT-project\postgraduate-analyse
+----------------------------------------------------------------------
+Ran 80 tests in 3.035s
+
+OK (skipped=1)
+Skipped: HelmIntegrationTests requires Linux Helm and Chart Git source.
+The skipped integration test is executed separately on VM1; see helm-integration-tests.txt.

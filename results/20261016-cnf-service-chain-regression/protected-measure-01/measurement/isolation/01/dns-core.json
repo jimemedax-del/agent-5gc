@@ -1,0 +1,16 @@
+{
+  "command": [
+    "kubectl",
+    "-n",
+    "cnf-lab",
+    "exec",
+    "cnf-m1-envoy-856978b666-8zsfw",
+    "--",
+    "getent",
+    "ahostsv4",
+    "cnf-m1-backend.cnf-lab.svc.cluster.local."
+  ],
+  "returnCode": 0,
+  "stdout": "10.43.108.155   STREAM cnf-m1-backend.cnf-lab.svc.cluster.local\n10.43.108.155   DGRAM  \n10.43.108.155   RAW    \n",
+  "stderr": ""
+}

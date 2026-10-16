@@ -1,0 +1,2 @@
+pod/cnf-netpol-probe-core created
+pod/cnf-netpol-probe-edge created

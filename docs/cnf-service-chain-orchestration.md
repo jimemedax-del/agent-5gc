@@ -708,6 +708,19 @@ python scripts/audit-cnf-profile.py results/20261016-cnf-service-chain-profile -
 **R2.S3 在既有集群范围内验收完成。** 当前回到默认 `protected`，core 在 VM1、edge 在 VM3、两侧无 TBF、两条策略生效。
 这不是空白 VM/Namespace 重建、强制终止后的任意现场恢复或长期稳定性验收。下一阶段 R2.S4 确定性编排尚未开始，Agent 不提前进入编码。
 
+### 2026-10-16 主目录 main 回归测试
+
+在 `E:\GPT-project\postgraduate-analyse` 的 `main` 上运行测试，并从该 Git 树导出源码到 VM1 复验；证据归入
+[`results/20261016-cnf-service-chain-regression/`](../results/20261016-cnf-service-chain-regression/)，来源提交和入口修复记录见其中 `metadata.json`。
+Windows 和 VM1 均为 80 项测试中 79 项通过、1 项 Helm 集成因环境开关跳过；随后在 VM1 单独补跑该集成项。
+专项验证发现入口执行位及 Windows 导出的换行问题，修正后真实 Helm 的重复渲染、post-renderer 一致性测试 1/1 通过；两次失败日志保留，详见 [PS-009](../problem%20solve.md#ps-009windows-导出源码后的-helm-post-renderer-启动失败)。
+
+三台 VM SSH 可达、三个节点 Ready；严格 `check` 确认为 `protected`。新的一批业务完成两类上下行各 5/5、共 20 个独立会话及 40 条正确代理连接，接收载荷 12,779,520 字节；
+三轮隔离矩阵共 15 次允许、30 次拒绝、6 次 DNS 成功。原有 15 个 5GC Pod 和 3 个 CNF Pod 身份不变，Service 与策略身份不变，最终重启数为 0，测试 Pod 已清理。
+79 次 UPF 内存采样峰值 11.52734375 MiB。原始证据复核与 32 项输入哈希通过，见 [`audit.json`](../results/20261016-cnf-service-chain-regression/audit.json)；
+旧 S3 验收的 208 项输入哈希与原始证据也重新审计通过，见同目录 `historical-s3-audit.json`。
+本次是已完成基线的回归，不新增 QoS、长期稳定性或 R2.S4 确定性编排验收结论。
+
 ## 实施路线与产出
 
 阶段顺序和状态统一维护在 [R2 阶段表](03-research-roadmap.md#r2-当前阶段顺序)，本模块只记录具体产出与技术证据：
