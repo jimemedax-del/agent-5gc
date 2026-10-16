@@ -1008,6 +1008,24 @@ M2 最初尝试在 Bootstrap 中设置 `file_flush_interval`，实际固定 Envo
 
 ---
 
+# PS-009：Windows 导出源码后的 Helm post-renderer 启动失败
+
+## 1. 目标与验收标准
+
+从主目录 `main` 的 Git 树导出源码，在 VM1 通过真实 Helm 的干净 Chart 克隆、重复渲染和 post-renderer 一致性测试，不修改线上 Release。
+
+## 2. 现象与根因
+
+2026-10-16 首次专项测试报 `permission denied`：`scripts/free5gc-profile.py` 的 Git 模式为 `100644`。只修正为 `100755` 后再次测试，报 `/usr/bin/env: python3\r`：Python 文件未声明 LF，Windows 的 Git 导出引入 CRLF，破坏 Linux shebang。此前文档要求人工 `chmod`，但未固化跨平台导出的完整前提。
+
+## 3. 修复与验证
+
+通过 `git update-index --chmod=+x scripts/free5gc-profile.py` 固定执行位，新增 `.gitattributes` 规则 `*.py text eol=lf`。从修正后的索引树重新 `git archive` 并传到 VM1 解包，没有对远端脚本额外执行 `chmod` 或换行转换；真实 Helm 集成测试 1/1 通过。Python 逻辑和按 LF 规范化的输入哈希不变，不执行线上升级。
+
+原始失败日志为 [首次权限失败](results/20261016-cnf-service-chain-regression/helm-integration-tests.txt) 和 [仅修权限后的换行失败](results/20261016-cnf-service-chain-regression/helm-integration-fixed-tests.txt)；最终结果为 [Linux 入口复验](results/20261016-cnf-service-chain-regression/helm-integration-linux-tests.txt) 及 [渲染一致性报告](results/20261016-cnf-service-chain-regression/helm-integration-linux/integration-report.json)。后续复制方式若丢失文件模式，仍需恢复执行位；不要把跳过集成测试记为通过。
+
+---
+
 ## 新案例追加模板
 
 ```markdown

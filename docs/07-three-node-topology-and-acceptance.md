@@ -1,6 +1,6 @@
 # 三节点 Kubernetes 拓扑与阶段验收
 
-> 最后更新：2026-10-15。本文记录三节点集群、受控部署模板及实际验收边界；R2.S2 的 CNF 放置扩展见下方入口。
+> 最后更新：2026-10-16。本文记录三节点集群、受控部署模板及实际验收边界；R2.S2 的 CNF 放置扩展见下方入口。
 
 ## 当前结论
 
@@ -45,6 +45,8 @@ python3 scripts/free5gc-profile.py verify    # Digest、放置、Ready、业务�
 ```
 
 默认 Chart 和生成报告放在 `.work/free5gc-3node-no-multus-v1/`。可用 `--chart-dir` 指定独立副本、`--out` 保存唯一实验目录；离线时 `--chart-source <已有Chart Git仓库>` 只用于克隆，仍检出固定提交并应用补丁，不修改源目录。
+
+2026-10-16 跨平台复测已将入口的 Git 权限固定为 `100755`，并通过 `.gitattributes` 固定 Python 文件为 LF，保证 Linux 上 Helm 可直接执行 post-renderer；从修正后的 Git 树导出源码，真实 Helm 集成测试通过。未保留执行权限的复制方式仍需上面的 `chmod`。失败与修复证据见 [PS-009](../problem%20solve.md#ps-009windows-导出源码后的-helm-post-renderer-启动失败)。
 
 升级前可执行 `compare-current` 比较现有 Helm manifest；只允许镜像 Digest/拉取策略规范化，其他差异一律拒绝。当前仍是原 Tag 部署，可用 `verify --allow-tag-baseline` 核对实际 imageID；这不代表 Digest 模板已部署。正式 `verify` 不接受 Tag。
 
