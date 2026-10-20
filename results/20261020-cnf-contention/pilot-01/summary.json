@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "pilot",
+  "error": "Expecting value: line 1 column 1 (char 0)",
+  "endedAt": "2026-10-20T06:48:17.926059Z"
+}

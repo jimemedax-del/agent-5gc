@@ -1,0 +1,91 @@
+{
+  "users": {
+    "ue1": {
+      "steadyMbps": 7.999848117353757,
+      "windowMbps": [
+        7.997104111982789,
+        8.01603201211362,
+        7.987112403304446,
+        7.995296939745668,
+        7.998319837596551,
+        8.026049686450081,
+        7.97716161123481,
+        7.9973357864751815,
+        7.99636055614753,
+        8.015983755144616,
+        7.996719924202725,
+        7.996831935437898,
+        7.996776167749858,
+        8.016055901917252,
+        8.00635227842165,
+        7.987288074701656,
+        7.987048611267901,
+        8.0064,
+        7.996888180560672
+      ],
+      "steadySeconds": 18.999960720539093,
+      "steadyPackets": 15833,
+      "steadyLostPackets": 0,
+      "steadyLossPercent": 0.0,
+      "fullReceivedBytes": 30040800,
+      "fullReceiverMbps": 7.999944342748275,
+      "fullPackets": 25034,
+      "fullLostPackets": 0,
+      "cookie": "rt72jkfmj3xfk4qsv3xehwv6py7drtlrdvot",
+      "rtt": {
+        "samples": 90,
+        "p50Ms": 3.2,
+        "p95Ms": 5.75,
+        "p99Ms": 7.79,
+        "transmitted": 150,
+        "received": 150,
+        "scope": "class-mapped ICMP RTT; not one-way/application/radio delay guarantee"
+      }
+    },
+    "ue2": {
+      "steadyMbps": 8.000337318962528,
+      "windowMbps": [
+        8.006383774599533,
+        8.00644008656545,
+        7.987128589505647,
+        7.9967923736644995,
+        8.006423861002508,
+        8.016016244921227,
+        7.987231897100038,
+        7.987758950245833,
+        7.996231877827741,
+        8.01597611052957,
+        7.996759961900902,
+        8.006455834968847,
+        7.9967923736644995,
+        8.006328417845806,
+        8.006520260900603,
+        7.996736129889404,
+        7.987096217168847,
+        8.006527896635312,
+        7.996808102997408
+      ],
+      "steadySeconds": 18.99999886751175,
+      "steadyPackets": 15834,
+      "steadyLostPackets": 0,
+      "steadyLossPercent": 0.0,
+      "fullReceivedBytes": 30043200,
+      "fullReceiverMbps": 8.000210369274635,
+      "fullPackets": 25036,
+      "fullLostPackets": 0,
+      "cookie": "lh6inyos52wpbr433lucxbox4br7ixt2kts5",
+      "rtt": {
+        "samples": 90,
+        "p50Ms": 3.56,
+        "p95Ms": 5.92,
+        "p99Ms": 6.63,
+        "transmitted": 150,
+        "received": 150,
+        "scope": "class-mapped ICMP RTT; not one-way/application/radio delay guarantee"
+      }
+    }
+  },
+  "overlapLowerBoundSeconds": 29.000019073486328,
+  "aggregateSteadyMbps": 16.000185436316286,
+  "upfPeakMemoryBytes": 17498112
+}

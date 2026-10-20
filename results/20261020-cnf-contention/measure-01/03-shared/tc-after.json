@@ -1,0 +1,82 @@
+{
+  "qdisc": [
+    {
+      "kind": "htb",
+      "handle": "1:",
+      "root": true,
+      "refcnt": 129,
+      "options": {
+        "r2q": 10,
+        "default": "0x10",
+        "direct_packets_stat": 0,
+        "direct_qlen": 1000
+      },
+      "bytes": 0,
+      "packets": 0,
+      "drops": 0,
+      "overlimits": 0,
+      "requeues": 0,
+      "backlog": 0,
+      "qlen": 0
+    },
+    {
+      "kind": "fq_codel",
+      "handle": "10:",
+      "parent": "1:10",
+      "options": {
+        "limit": 256,
+        "flows": 1024,
+        "quantum": 1464,
+        "target": 4999,
+        "interval": 99999,
+        "memory_limit": 33554432,
+        "drop_batch": 64
+      },
+      "bytes": 0,
+      "packets": 0,
+      "drops": 0,
+      "overlimits": 0,
+      "requeues": 0,
+      "backlog": 0,
+      "qlen": 0,
+      "maxpacket": 0,
+      "drop_overlimit": 0,
+      "new_flow_count": 0,
+      "ecn_mark": 0,
+      "new_flows_len": 0,
+      "old_flows_len": 0
+    }
+  ],
+  "class": [
+    {
+      "kind": "htb",
+      "handle": "1:10",
+      "parent": "1:1",
+      "options": {
+        "rate": 1250000.0,
+        "ceil": 1250000.0,
+        "prio": 0
+      },
+      "bytes": 0,
+      "packets": 0
+    },
+    {
+      "kind": "htb",
+      "handle": "1:1",
+      "parent": "1:",
+      "options": {
+        "rate": 1250000.0,
+        "ceil": 1250000.0,
+        "prio": 0
+      },
+      "bytes": 0,
+      "packets": 0
+    }
+  ],
+  "filter": [],
+  "raw": {
+    "qdisc": "[{\"kind\":\"htb\",\"handle\":\"1:\",\"root\":true,\"refcnt\":129,\"options\":{\"r2q\":10,\"default\":\"0x10\",\"direct_packets_stat\":0,\"direct_qlen\":1000},\"bytes\":0,\"packets\":0,\"drops\":0,\"overlimits\":0,\"requeues\":0,\"backlog\":0,\"qlen\":0},{\"kind\":\"fq_codel\",\"handle\":\"10:\",\"parent\":\"1:10\",\"options\":{\"limit\":256,\"flows\":1024,\"quantum\":1464,\"target\":4999,\"interval\":99999,\"memory_limit\":33554432,\"drop_batch\":64},\"bytes\":0,\"packets\":0,\"drops\":0,\"overlimits\":0,\"requeues\":0,\"backlog\":0,\"qlen\":0,\"maxpacket\":0,\"drop_overlimit\":0,\"new_flow_count\":0,\"ecn_mark\":0,\"new_flows_len\":0,\"old_flows_len\":0}]\n",
+    "class": "class htb 1:10 parent 1:1 leaf 10: prio 0 quantum 1514 rate 10Mbit ceil 10Mbit linklayer ethernet burst 32Kb/1 mpu 0b cburst 32Kb/1 mpu 0b level 0 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n lended: 0 borrowed: 0 giants: 0\n tokens: 409593 ctokens: 409593\n\nclass htb 1:1 root rate 10Mbit ceil 10Mbit linklayer ethernet burst 32Kb/1 mpu 0b cburst 32Kb/1 mpu 0b level 7 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n lended: 0 borrowed: 0 giants: 0\n tokens: 409593 ctokens: 409593\n\n",
+    "filter": ""
+  }
+}

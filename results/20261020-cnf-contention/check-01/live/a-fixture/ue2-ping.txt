@@ -1,0 +1,8 @@
+PING 192.168.244.128 (192.168.244.128) from 10.60.0.13 uesimtun0: 56(84) bytes of data.
+64 bytes from 192.168.244.128: icmp_seq=1 ttl=62 time=1.34 ms
+64 bytes from 192.168.244.128: icmp_seq=2 ttl=62 time=1.47 ms
+64 bytes from 192.168.244.128: icmp_seq=3 ttl=62 time=1.32 ms
+
+--- 192.168.244.128 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 1.321/1.377/1.468/0.064 ms

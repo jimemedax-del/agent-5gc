@@ -1,0 +1,388 @@
+{
+  "outcome": "passed",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "C1",
+  "configVersion": "cnf-contention-v1",
+  "evidenceIntegrity": "passed",
+  "networkAcceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "folder": "unshaped-before",
+        "mode": "none",
+        "checks": {
+          "unshapedCapacity": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "01-shared",
+        "mode": "shared",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "01-equal",
+        "mode": "equal",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "equalPerUserMinimum": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "01-guarantee-ue1",
+        "mode": "guarantee-ue1",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "HighRateBounds": true,
+          "HighWindowViolationFraction": true,
+          "LowRateBounds": true,
+          "LowWindowViolationFraction": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "01-guarantee-ue2",
+        "mode": "guarantee-ue2",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "HighRateBounds": true,
+          "HighWindowViolationFraction": true,
+          "LowRateBounds": true,
+          "LowWindowViolationFraction": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "01-priority-ue1",
+        "mode": "priority-ue1",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "priorityHighMinimum": true,
+          "priorityLowMinimum": true,
+          "priorityPreference": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "01-priority-ue2",
+        "mode": "priority-ue2",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "priorityHighMinimum": true,
+          "priorityLowMinimum": true,
+          "priorityPreference": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "02-shared",
+        "mode": "shared",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "02-equal",
+        "mode": "equal",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "equalPerUserMinimum": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "02-guarantee-ue1",
+        "mode": "guarantee-ue1",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "HighRateBounds": true,
+          "HighWindowViolationFraction": true,
+          "LowRateBounds": true,
+          "LowWindowViolationFraction": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "02-guarantee-ue2",
+        "mode": "guarantee-ue2",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "HighRateBounds": true,
+          "HighWindowViolationFraction": true,
+          "LowRateBounds": true,
+          "LowWindowViolationFraction": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "02-priority-ue1",
+        "mode": "priority-ue1",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "priorityHighMinimum": true,
+          "priorityLowMinimum": true,
+          "priorityPreference": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "02-priority-ue2",
+        "mode": "priority-ue2",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "priorityHighMinimum": true,
+          "priorityLowMinimum": true,
+          "priorityPreference": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "03-shared",
+        "mode": "shared",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "03-equal",
+        "mode": "equal",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "equalPerUserMinimum": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "03-guarantee-ue1",
+        "mode": "guarantee-ue1",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "HighRateBounds": true,
+          "HighWindowViolationFraction": true,
+          "LowRateBounds": true,
+          "LowWindowViolationFraction": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "03-guarantee-ue2",
+        "mode": "guarantee-ue2",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "HighRateBounds": true,
+          "HighWindowViolationFraction": true,
+          "LowRateBounds": true,
+          "LowWindowViolationFraction": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "03-priority-ue1",
+        "mode": "priority-ue1",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "priorityHighMinimum": true,
+          "priorityLowMinimum": true,
+          "priorityPreference": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "03-priority-ue2",
+        "mode": "priority-ue2",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "priorityHighMinimum": true,
+          "priorityLowMinimum": true,
+          "priorityPreference": true
+        },
+        "passed": true
+      },
+      {
+        "folder": "unshaped-after",
+        "mode": "none",
+        "checks": {
+          "unshapedCapacity": true
+        },
+        "passed": true
+      }
+    ],
+    "rttAndLossAcceptance": "measurements only; no application latency/loss SLA supplied or accepted"
+  },
+  "groups": 20,
+  "sessions": 40,
+  "uniqueCookies": 40,
+  "modeSummary": {
+    "none": {
+      "ue1": {
+        "medianMbps": 8.000590515403058,
+        "pooledLossPercent": 0.0,
+        "rttP95MsByRound": [
+          5.96,
+          5.76
+        ]
+      },
+      "ue2": {
+        "medianMbps": 8.000843611223774,
+        "pooledLossPercent": 0.0,
+        "rttP95MsByRound": [
+          5.75,
+          5.1
+        ]
+      }
+    },
+    "shared": {
+      "ue1": {
+        "medianMbps": 4.827789928040058,
+        "pooledLossPercent": 42.907222244353264,
+        "rttP95MsByRound": [
+          3.56,
+          2.57,
+          2.97
+        ]
+      },
+      "ue2": {
+        "medianMbps": 4.827282953607141,
+        "pooledLossPercent": 42.969418412622616,
+        "rttP95MsByRound": [
+          3.16,
+          2.86,
+          3.8
+        ]
+      }
+    },
+    "equal": {
+      "ue1": {
+        "medianMbps": 4.827280424627172,
+        "pooledLossPercent": 42.98247359102393,
+        "rttP95MsByRound": [
+          3.33,
+          4.0,
+          4.21
+        ]
+      },
+      "ue2": {
+        "medianMbps": 4.826780991542446,
+        "pooledLossPercent": 42.99580324999503,
+        "rttP95MsByRound": [
+          4.14,
+          3.92,
+          3.35
+        ]
+      }
+    },
+    "guarantee-ue1": {
+      "ue1": {
+        "medianMbps": 7.7259822193735515,
+        "pooledLossPercent": 3.4374605313013094,
+        "rttP95MsByRound": [
+          2.83,
+          3.22,
+          2.92
+        ]
+      },
+      "ue2": {
+        "medianMbps": 1.928589183276952,
+        "pooledLossPercent": 78.39459581855235,
+        "rttP95MsByRound": [
+          6.43,
+          6.73,
+          6.11
+        ]
+      }
+    },
+    "guarantee-ue2": {
+      "ue1": {
+        "medianMbps": 1.929094549238271,
+        "pooledLossPercent": 78.38460086808831,
+        "rttP95MsByRound": [
+          6.33,
+          6.08,
+          6.14
+        ]
+      },
+      "ue2": {
+        "medianMbps": 7.725978874657228,
+        "pooledLossPercent": 3.425191048609503,
+        "rttP95MsByRound": [
+          3.16,
+          3.0,
+          2.93
+        ]
+      }
+    },
+    "priority-ue1": {
+      "ue1": {
+        "medianMbps": 7.7254724724367305,
+        "pooledLossPercent": 3.435500168406871,
+        "rttP95MsByRound": [
+          3.78,
+          4.25,
+          3.72
+        ]
+      },
+      "ue2": {
+        "medianMbps": 1.9285898911447978,
+        "pooledLossPercent": 78.38985449810338,
+        "rttP95MsByRound": [
+          6.21,
+          6.85,
+          6.35
+        ]
+      }
+    },
+    "priority-ue2": {
+      "ue1": {
+        "medianMbps": 1.9285908954710096,
+        "pooledLossPercent": 78.39449108574662,
+        "rttP95MsByRound": [
+          6.17,
+          5.91,
+          6.27
+        ]
+      },
+      "ue2": {
+        "medianMbps": 7.725978995842551,
+        "pooledLossPercent": 3.4375328912746026,
+        "rttP95MsByRound": [
+          3.68,
+          3.76,
+          3.76
+        ]
+      }
+    }
+  },
+  "sourceHashes": 24,
+  "currentSourcesDifferFromExecution": [],
+  "auditorSha256LF": "77367ed519b6e689a75550591aab8200a7172197a6aefd78e879c58cd49b56fa",
+  "all25PodIdentitiesUnchanged": true,
+  "restoredNoqueue": true,
+  "minimumOverlapLowerBoundSeconds": 28.000091075897217,
+  "upfPeakSampledMemoryBytes": 16080896,
+  "scope": "Container-local shared downlink bottleneck; explicit per-user fixture endpoints; measured UDP loss and class-mapped probe RTT; no PCF/QFI integration or radio/end-to-end SLA acceptance"
+}

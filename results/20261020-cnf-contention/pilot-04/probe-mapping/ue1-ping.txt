@@ -1,0 +1,10 @@
+PING 10.42.0.200 (10.42.0.200) from 10.60.0.3 uesimtun0: 56(84) bytes of data.
+[1792479343.139754] 64 bytes from 10.42.0.200: icmp_seq=1 ttl=61 time=1.32 ms
+[1792479343.340379] 64 bytes from 10.42.0.200: icmp_seq=2 ttl=61 time=1.32 ms
+[1792479343.540997] 64 bytes from 10.42.0.200: icmp_seq=3 ttl=61 time=1.30 ms
+[1792479343.741740] 64 bytes from 10.42.0.200: icmp_seq=4 ttl=61 time=1.44 ms
+[1792479343.942310] 64 bytes from 10.42.0.200: icmp_seq=5 ttl=61 time=1.29 ms
+
+--- 10.42.0.200 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 803ms
+rtt min/avg/max/mdev = 1.291/1.334/1.443/0.055 ms

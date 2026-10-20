@@ -1,0 +1,49 @@
+Time: Tue, 20 Oct 2026 07:11:47 GMT
+Accepted connection from 192.168.244.129, port 63695
+      Cookie: cfk4ndufwe4yeoxge2qwiqefa5ee5fgdvp23
+      Target Bitrate: 8000000
+[  5] local 10.42.0.200 port 5202 connected to 192.168.244.129 port 62232
+Starting Test: protocol: UDP, 1 streams, 1200 byte blocks, omitting 0 seconds, 30 second test, tos 80
+[ ID] Interval           Transfer     Bitrate         Total Datagrams
+[  5]   0.00-1.00   sec   354 KBytes  2.90 Mbits/sec  302  
+[  5]   1.00-2.00   sec   325 KBytes  2.66 Mbits/sec  277  
+[  5]   2.00-3.00   sec   382 KBytes  3.13 Mbits/sec  326  
+[  5]   3.00-4.00   sec   441 KBytes  3.61 Mbits/sec  376  
+[  5]   4.00-5.00   sec   500 KBytes  4.10 Mbits/sec  427  
+[  5]   5.00-6.00   sec   559 KBytes  4.58 Mbits/sec  477  
+[  5]   6.00-7.00   sec   618 KBytes  5.06 Mbits/sec  527  
+[  5]   7.00-8.00   sec   677 KBytes  5.55 Mbits/sec  578  
+[  5]   8.00-9.00   sec   735 KBytes  6.02 Mbits/sec  627  
+[  5]   9.00-10.00  sec   795 KBytes  6.51 Mbits/sec  678  
+[  5]  10.00-11.00  sec   852 KBytes  6.98 Mbits/sec  727  
+[  5]  11.00-12.00  sec   912 KBytes  7.47 Mbits/sec  778  
+[  5]  12.00-13.00  sec   967 KBytes  7.92 Mbits/sec  825  
+[  5]  13.00-14.00  sec  1.00 MBytes  8.42 Mbits/sec  877  
+[  5]  14.00-15.00  sec  1.06 MBytes  8.91 Mbits/sec  928  
+[  5]  15.00-16.00  sec  1.12 MBytes  9.39 Mbits/sec  978  
+[  5]  16.00-17.00  sec  1.18 MBytes  9.88 Mbits/sec  1029  
+[  5]  17.00-18.00  sec  1.23 MBytes  10.4 Mbits/sec  1079  
+[  5]  18.00-19.00  sec  1.29 MBytes  10.8 Mbits/sec  1129  
+[  5]  19.00-20.00  sec  1.35 MBytes  11.3 Mbits/sec  1179  
+[  5]  20.00-21.00  sec  1.41 MBytes  11.8 Mbits/sec  1229  
+[  5]  21.00-22.00  sec  1.46 MBytes  12.3 Mbits/sec  1280  
+[  5]  22.00-23.00  sec  1.51 MBytes  12.7 Mbits/sec  1323  
+[  5]  23.00-24.00  sec  1.58 MBytes  13.2 Mbits/sec  1380  
+[  5]  24.00-25.00  sec  1.64 MBytes  13.7 Mbits/sec  1431  
+[  5]  25.00-26.00  sec   734 KBytes  6.01 Mbits/sec  626  
+[  5]  26.00-27.00  sec   434 KBytes  3.55 Mbits/sec  370  
+[  5]  27.00-28.00  sec   492 KBytes  4.03 Mbits/sec  420  
+[  5]  28.00-29.00  sec   551 KBytes  4.51 Mbits/sec  470  
+[  5]  29.00-30.00  sec   609 KBytes  4.99 Mbits/sec  520  
+[  5]  30.00-30.04  sec  25.8 KBytes  4.84 Mbits/sec  22  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+[  5]   0.00-30.04  sec  26.5 MBytes  7.41 Mbits/sec  0.000 ms  0/23195 (0%)  sender
+[  5] (receiver statistics not available)
+CPU Utilization: local/sender 1.4% (0.1%u/1.3%s), remote/receiver 0.8% (0.3%u/0.5%s)
+iperf 3.9
+Linux cnf-c-endpoint-644d89c877-9m4t6 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5202
+-----------------------------------------------------------

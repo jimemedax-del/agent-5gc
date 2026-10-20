@@ -1,0 +1,8 @@
+{
+  "outcome": "failed",
+  "mode": "shared",
+  "round": 1,
+  "startedAt": "2026-10-20T06:56:20.052283Z",
+  "endedAt": "2026-10-20T06:56:50.955837Z",
+  "error": "No active common bottleneck counters"
+}

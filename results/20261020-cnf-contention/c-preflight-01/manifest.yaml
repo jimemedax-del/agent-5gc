@@ -1,0 +1,730 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-a-core-ue1
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-a-core-ue1
+  template:
+    metadata:
+      labels:
+        app: cnf-a-core-ue1
+        role: backend
+        app.kubernetes.io/part-of: cnf-multi-ue-v1
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/plane: control
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: iperf3
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - iperf3
+        args:
+        - -s
+        - -p
+        - '5201'
+        - --forceflush
+        - -V
+        volumeMounts:
+        - name: scratch
+          mountPath: /tmp
+        ports:
+        - name: iperf
+          containerPort: 5201
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      volumes:
+      - name: scratch
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnf-a-core-ue1
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  selector:
+    app: cnf-a-core-ue1
+  ports:
+  - name: iperf
+    port: 5201
+    targetPort: iperf
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-a-core-ue2
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-a-core-ue2
+  template:
+    metadata:
+      labels:
+        app: cnf-a-core-ue2
+        role: backend
+        app.kubernetes.io/part-of: cnf-multi-ue-v1
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/plane: control
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: iperf3
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - iperf3
+        args:
+        - -s
+        - -p
+        - '5201'
+        - --forceflush
+        - -V
+        volumeMounts:
+        - name: scratch
+          mountPath: /tmp
+        ports:
+        - name: iperf
+          containerPort: 5201
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      volumes:
+      - name: scratch
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnf-a-core-ue2
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  selector:
+    app: cnf-a-core-ue2
+  ports:
+  - name: iperf
+    port: 5201
+    targetPort: iperf
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-a-edge-ue1
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-a-edge-ue1
+  template:
+    metadata:
+      labels:
+        app: cnf-a-edge-ue1
+        role: backend
+        app.kubernetes.io/part-of: cnf-multi-ue-v1
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/role: ran-test
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: iperf3
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - iperf3
+        args:
+        - -s
+        - -p
+        - '5201'
+        - --forceflush
+        - -V
+        volumeMounts:
+        - name: scratch
+          mountPath: /tmp
+        ports:
+        - name: iperf
+          containerPort: 5201
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      volumes:
+      - name: scratch
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnf-a-edge-ue1
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  selector:
+    app: cnf-a-edge-ue1
+  ports:
+  - name: iperf
+    port: 5201
+    targetPort: iperf
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-a-edge-ue2
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-a-edge-ue2
+  template:
+    metadata:
+      labels:
+        app: cnf-a-edge-ue2
+        role: backend
+        app.kubernetes.io/part-of: cnf-multi-ue-v1
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/role: ran-test
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: iperf3
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - iperf3
+        args:
+        - -s
+        - -p
+        - '5201'
+        - --forceflush
+        - -V
+        volumeMounts:
+        - name: scratch
+          mountPath: /tmp
+        ports:
+        - name: iperf
+          containerPort: 5201
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      volumes:
+      - name: scratch
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnf-a-edge-ue2
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  selector:
+    app: cnf-a-edge-ue2
+  ports:
+  - name: iperf
+    port: 5201
+    targetPort: iperf
+    protocol: TCP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cnf-a-envoy
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+data:
+  envoy.yaml: "static_resources:\n  listeners:\n  - name: cnf-a-core-ue1\n    address:\n\
+    \      socket_address:\n        address: 0.0.0.0\n        port_value: 15301\n\
+    \    filter_chains:\n    - filters:\n      - name: envoy.filters.network.tcp_proxy\n\
+    \        typed_config:\n          '@type': type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n\
+    \          stat_prefix: cnf-a-core-ue1\n          cluster: cnf-a-core-ue1\n  \
+    \        idle_timeout: 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n\
+    \            typed_config:\n              '@type': type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n\
+    \              log_format:\n                json_format:\n                  experiment:\
+    \ cnf-multi-ue-v1\n                  listener: cnf-a-core-ue1\n              \
+    \    start: '%START_TIME%'\n                  downstream: '%DOWNSTREAM_REMOTE_ADDRESS%'\n\
+    \                  local: '%DOWNSTREAM_LOCAL_ADDRESS%'\n                  upstream:\
+    \ '%UPSTREAM_HOST%'\n                  cluster: '%UPSTREAM_CLUSTER%'\n       \
+    \           bytes_received: '%BYTES_RECEIVED%'\n                  bytes_sent:\
+    \ '%BYTES_SENT%'\n                  duration_ms: '%DURATION%'\n              \
+    \    flags: '%RESPONSE_FLAGS%'\n                  business_class: core\n     \
+    \             test_user: ue1\n  - name: cnf-a-core-ue2\n    address:\n      socket_address:\n\
+    \        address: 0.0.0.0\n        port_value: 15302\n    filter_chains:\n   \
+    \ - filters:\n      - name: envoy.filters.network.tcp_proxy\n        typed_config:\n\
+    \          '@type': type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n\
+    \          stat_prefix: cnf-a-core-ue2\n          cluster: cnf-a-core-ue2\n  \
+    \        idle_timeout: 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n\
+    \            typed_config:\n              '@type': type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n\
+    \              log_format:\n                json_format:\n                  experiment:\
+    \ cnf-multi-ue-v1\n                  listener: cnf-a-core-ue2\n              \
+    \    start: '%START_TIME%'\n                  downstream: '%DOWNSTREAM_REMOTE_ADDRESS%'\n\
+    \                  local: '%DOWNSTREAM_LOCAL_ADDRESS%'\n                  upstream:\
+    \ '%UPSTREAM_HOST%'\n                  cluster: '%UPSTREAM_CLUSTER%'\n       \
+    \           bytes_received: '%BYTES_RECEIVED%'\n                  bytes_sent:\
+    \ '%BYTES_SENT%'\n                  duration_ms: '%DURATION%'\n              \
+    \    flags: '%RESPONSE_FLAGS%'\n                  business_class: core\n     \
+    \             test_user: ue2\n  - name: cnf-a-edge-ue1\n    address:\n      socket_address:\n\
+    \        address: 0.0.0.0\n        port_value: 15303\n    filter_chains:\n   \
+    \ - filters:\n      - name: envoy.filters.network.tcp_proxy\n        typed_config:\n\
+    \          '@type': type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n\
+    \          stat_prefix: cnf-a-edge-ue1\n          cluster: cnf-a-edge-ue1\n  \
+    \        idle_timeout: 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n\
+    \            typed_config:\n              '@type': type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n\
+    \              log_format:\n                json_format:\n                  experiment:\
+    \ cnf-multi-ue-v1\n                  listener: cnf-a-edge-ue1\n              \
+    \    start: '%START_TIME%'\n                  downstream: '%DOWNSTREAM_REMOTE_ADDRESS%'\n\
+    \                  local: '%DOWNSTREAM_LOCAL_ADDRESS%'\n                  upstream:\
+    \ '%UPSTREAM_HOST%'\n                  cluster: '%UPSTREAM_CLUSTER%'\n       \
+    \           bytes_received: '%BYTES_RECEIVED%'\n                  bytes_sent:\
+    \ '%BYTES_SENT%'\n                  duration_ms: '%DURATION%'\n              \
+    \    flags: '%RESPONSE_FLAGS%'\n                  business_class: edge\n     \
+    \             test_user: ue1\n  - name: cnf-a-edge-ue2\n    address:\n      socket_address:\n\
+    \        address: 0.0.0.0\n        port_value: 15304\n    filter_chains:\n   \
+    \ - filters:\n      - name: envoy.filters.network.tcp_proxy\n        typed_config:\n\
+    \          '@type': type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy\n\
+    \          stat_prefix: cnf-a-edge-ue2\n          cluster: cnf-a-edge-ue2\n  \
+    \        idle_timeout: 60s\n          access_log:\n          - name: envoy.access_loggers.stdout\n\
+    \            typed_config:\n              '@type': type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog\n\
+    \              log_format:\n                json_format:\n                  experiment:\
+    \ cnf-multi-ue-v1\n                  listener: cnf-a-edge-ue2\n              \
+    \    start: '%START_TIME%'\n                  downstream: '%DOWNSTREAM_REMOTE_ADDRESS%'\n\
+    \                  local: '%DOWNSTREAM_LOCAL_ADDRESS%'\n                  upstream:\
+    \ '%UPSTREAM_HOST%'\n                  cluster: '%UPSTREAM_CLUSTER%'\n       \
+    \           bytes_received: '%BYTES_RECEIVED%'\n                  bytes_sent:\
+    \ '%BYTES_SENT%'\n                  duration_ms: '%DURATION%'\n              \
+    \    flags: '%RESPONSE_FLAGS%'\n                  business_class: edge\n     \
+    \             test_user: ue2\n  clusters:\n  - name: cnf-a-core-ue1\n    type:\
+    \ STRICT_DNS\n    connect_timeout: 5s\n    load_assignment:\n      cluster_name:\
+    \ cnf-a-core-ue1\n      endpoints:\n      - lb_endpoints:\n        - endpoint:\n\
+    \            address:\n              socket_address:\n                address:\
+    \ cnf-a-core-ue1.cnf-multi-ue.svc.cluster.local.\n                port_value:\
+    \ 5201\n  - name: cnf-a-core-ue2\n    type: STRICT_DNS\n    connect_timeout: 5s\n\
+    \    load_assignment:\n      cluster_name: cnf-a-core-ue2\n      endpoints:\n\
+    \      - lb_endpoints:\n        - endpoint:\n            address:\n          \
+    \    socket_address:\n                address: cnf-a-core-ue2.cnf-multi-ue.svc.cluster.local.\n\
+    \                port_value: 5201\n  - name: cnf-a-edge-ue1\n    type: STRICT_DNS\n\
+    \    connect_timeout: 5s\n    load_assignment:\n      cluster_name: cnf-a-edge-ue1\n\
+    \      endpoints:\n      - lb_endpoints:\n        - endpoint:\n            address:\n\
+    \              socket_address:\n                address: cnf-a-edge-ue1.cnf-multi-ue.svc.cluster.local.\n\
+    \                port_value: 5201\n  - name: cnf-a-edge-ue2\n    type: STRICT_DNS\n\
+    \    connect_timeout: 5s\n    load_assignment:\n      cluster_name: cnf-a-edge-ue2\n\
+    \      endpoints:\n      - lb_endpoints:\n        - endpoint:\n            address:\n\
+    \              socket_address:\n                address: cnf-a-edge-ue2.cnf-multi-ue.svc.cluster.local.\n\
+    \                port_value: 5201\nadmin:\n  address:\n    socket_address:\n \
+    \     address: 127.0.0.1\n      port_value: 9901\n"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-a-envoy
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-a-envoy
+  template:
+    metadata:
+      labels:
+        app: cnf-a-envoy
+        app.kubernetes.io/part-of: cnf-multi-ue-v1
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/plane: control
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: envoy
+        image: docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac
+        imagePullPolicy: IfNotPresent
+        command:
+        - envoy
+        args:
+        - -c
+        - /etc/envoy/envoy.yaml
+        - --concurrency
+        - '1'
+        - --log-level
+        - info
+        - --disable-hot-restart
+        ports:
+        - name: ue1-core
+          containerPort: 15301
+          protocol: TCP
+        - name: ue2-core
+          containerPort: 15302
+          protocol: TCP
+        - name: ue1-edge
+          containerPort: 15303
+          protocol: TCP
+        - name: ue2-edge
+          containerPort: 15304
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: config
+          mountPath: /etc/envoy
+          readOnly: true
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      volumes:
+      - name: config
+        configMap:
+          name: cnf-a-envoy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnf-a-envoy
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  selector:
+    app: cnf-a-envoy
+  ports:
+  - name: ue1-core
+    port: 15301
+    targetPort: 15301
+    nodePort: 31301
+    protocol: TCP
+  - name: ue2-core
+    port: 15302
+    targetPort: 15302
+    nodePort: 31302
+    protocol: TCP
+  - name: ue1-edge
+    port: 15303
+    targetPort: 15303
+    nodePort: 31303
+    protocol: TCP
+  - name: ue2-edge
+    port: 15304
+    targetPort: 15304
+    nodePort: 31304
+    protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cnf-a-backends
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  podSelector:
+    matchLabels:
+      role: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: cnf-a-envoy
+    ports:
+    - protocol: TCP
+      port: 5201
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cnf-a-envoy
+  namespace: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  podSelector:
+    matchLabels:
+      app: cnf-a-envoy
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 15301
+    - protocol: TCP
+      port: 15302
+    - protocol: TCP
+      port: 15303
+    - protocol: TCP
+      port: 15304
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: backend
+    ports:
+    - protocol: TCP
+      port: 5201
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cnf-a-ue2
+  namespace: free5gc
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+data:
+  ue-config.yaml: "supi: imsi-208930000000002\nmcc: '208'\nmnc: '93'\nkey: d6823874fead42caa9e84a9fdb189a18\n\
+    op: ff190ef083ac1b95dea60dd715ac79e9\nopType: OPC\namf: '8000'\nimei: '356938035643804'\n\
+    imeiSv: '4370816125816152'\nuacAic:\n  mps: false\n  mcs: false\nuacAcc:\n  normalClass:\
+    \ 0\n  class11: false\n  class12: false\n  class13: false\n  class14: false\n\
+    \  class15: false\nsessions:\n- type: IPv4\n  apn: internet\n  slice: &id001\n\
+    \    sst: 1\n    sd: 66051\nconfigured-nssai:\n- *id001\ndefault-nssai:\n- sst:\
+    \ 1\n  sd: 1\nintegrity:\n  IA1: true\n  IA2: true\n  IA3: true\nciphering:\n\
+    \  EA1: true\n  EA2: true\n  EA3: true\nintegrityMaxRate:\n  uplink: full\n  downlink:\
+    \ full\ngnbSearchList:\n- gnb-service\n"
+  wrapper.sh: '#!/bin/sh
+
+    set -eu
+
+    mkdir -p /dev/net
+
+    [ -c /dev/net/tun ] || mknod /dev/net/tun c 10 200
+
+    exec ./nr-ue -c /ueransim/config/ue-config.yaml
+
+    '
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-a-ue2
+  namespace: free5gc
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cnf-a-ue2
+  template:
+    metadata:
+      labels:
+        app: cnf-a-ue2
+        app.kubernetes.io/part-of: cnf-multi-ue-v1
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/role: ran-test
+      containers:
+      - name: ue
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - /bin/sh
+        - /ueransim/config/wrapper.sh
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - test -d /sys/class/net/uesimtun0 && kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 2
+        volumeMounts:
+        - name: ue
+          mountPath: /ueransim/config
+          readOnly: true
+      volumes:
+      - name: ue
+        configMap:
+          name: cnf-a-ue2

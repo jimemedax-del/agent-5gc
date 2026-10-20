@@ -1,0 +1,14 @@
+{
+  "outcome": "captured",
+  "command": "pilot",
+  "evidence": {
+    "groups": 8,
+    "sessions": 16,
+    "mode": "pilot",
+    "original24PodIdentitiesUnchanged": true,
+    "newEndpointPods": 1,
+    "restoredNoqueue": true,
+    "acceptance": "independent audit required; RTT/loss observations do not imply an application SLA"
+  },
+  "endedAt": "2026-10-20T07:04:58.437928Z"
+}

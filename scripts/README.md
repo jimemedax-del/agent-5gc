@@ -271,6 +271,32 @@ python3 scripts/audit-cnf-qos-probe.py <测量目录> --out <新的审计JSON>
 提前失败/连接失败仍拒绝，不将它记为无损、干净收尾或带宽保底。
 详细能力结论及失败记录见 [B 模块章节](../docs/cnf-service-chain-orchestration.md#b-5g-qos-能力探针)。
 
+## 容器化共享瓶颈竞争入口
+
+`cnf-contention.py` 使用 `infra/cnfs/contention-experiment.json`，新增独立 `cnf-contention` 命名空间和一个三容器 Pod。
+两个 iperf3 服务进程共用 `eth0`，仅 queue 辅助容器有 `NET_ADMIN`，不挂载主机网络/目录。
+`render/deploy/check/pilot/measure/restore` 均要求 `--out <新目录>`；在 VM1 设置既有 KUBECONFIG 后使用。
+
+```bash
+python3 scripts/cnf-contention.py render --out <新目录>/render
+python3 scripts/cnf-contention.py deploy --out <新目录>/deploy
+python3 scripts/cnf-contention.py pilot --out <新目录>/pilot
+python3 scripts/audit-cnf-contention.py <小批目录> --out <新的小批审计JSON>
+python3 scripts/cnf-contention.py measure --out <新的正式目录>
+python3 scripts/audit-cnf-contention.py <正式目录> --out <新的正式审计JSON>
+```
+
+`deploy` 拒绝覆盖已有命名空间/端口，`check` 严格复用 A/原 protected 验证并核对单个共享端点、权限、镜像与原生 QoS 关闭状态。
+正式下行 UDP 每用户 8 Mbps、30 秒，根瓶颈 10 Mbps；共享、等额、保障角色交换、仅优先级交换共六模式各 3 轮，另有前后未整形对照。
+保留接收区间、丢包、类映射 RTT、真实重叠、队列/UPF 计数、原 24 个加新 Pod 的身份和 UPF 内存护栏。
+RTT/丢包在本轮是观测指标，不承诺业务 SLA；端点直接经 N6 到 UE，不宣称经过 Envoy 或实现 PCF/QFI 控制。
+
+普通异常尝试撤销新 Pod 内的自有队列。手工恢复使用
+`python3 scripts/cnf-contention.py restore --out <新的恢复目录>`；未知队列/配置漂移拒绝覆盖，先保留诊断。
+采集器兼容镜像中的 iproute2 5.9 原生输出；iperf3 3.9 反向 UDP 以客户端接收区间重算，不能用结束汇总字节误当接收量。
+每次执行归档源码输入及哈希，审计分别返回证据完整性和网络目标结果。详见
+[C 模块](../docs/cnf-service-chain-orchestration.md#c-共享瓶颈竞争容器化调度与受控需求) 与 [PS-012](../problem%20solve.md#ps-012旧版-tc-输出与反向-udp-汇总字段导致-c-采集失败)。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

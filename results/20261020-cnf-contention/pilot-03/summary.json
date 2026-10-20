@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "pilot",
+  "error": "'target_bitrate'",
+  "endedAt": "2026-10-20T06:53:12.247549Z"
+}

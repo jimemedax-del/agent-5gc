@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "pilot",
+  "error": "No active common bottleneck counters",
+  "endedAt": "2026-10-20T06:56:52.771581Z"
+}

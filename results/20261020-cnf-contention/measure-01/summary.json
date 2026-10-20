@@ -1,0 +1,14 @@
+{
+  "outcome": "captured",
+  "command": "measure",
+  "evidence": {
+    "groups": 20,
+    "sessions": 40,
+    "mode": "formal",
+    "original24PodIdentitiesUnchanged": true,
+    "newEndpointPods": 1,
+    "restoredNoqueue": true,
+    "acceptance": "independent audit required; RTT/loss observations do not imply an application SLA"
+  },
+  "endedAt": "2026-10-20T07:18:05.800671Z"
+}

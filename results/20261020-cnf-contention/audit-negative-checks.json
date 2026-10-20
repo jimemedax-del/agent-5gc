@@ -1,0 +1,89 @@
+{
+  "outcome": "passed",
+  "uncorruptedControlPassed": true,
+  "networkControlAccepted": true,
+  "originalEvidenceUnchanged": true,
+  "auditorSha256LF": "77367ed519b6e689a75550591aab8200a7172197a6aefd78e879c58cd49b56fa",
+  "cases": [
+    {
+      "case": "source-hash",
+      "outcome": "rejected",
+      "reason": "Execution input hash mismatch"
+    },
+    {
+      "case": "wrong-ue",
+      "outcome": "rejected",
+      "reason": "Wrong UE receiver socket"
+    },
+    {
+      "case": "serial-flows",
+      "outcome": "rejected",
+      "reason": "Insufficient class RTT observations"
+    },
+    {
+      "case": "wrong-capacity",
+      "outcome": "rejected",
+      "reason": "Wrong guaranteed rate/ceiling/priority"
+    },
+    {
+      "case": "wrong-classifier",
+      "outcome": "rejected",
+      "reason": "Classifier selector differs from user/probe endpoint"
+    },
+    {
+      "case": "inactive-bottleneck",
+      "outcome": "rejected",
+      "reason": "No active common bottleneck counters"
+    },
+    {
+      "case": "wrong-backend-cookie",
+      "outcome": "rejected",
+      "reason": "Missing correct server cookie/UPF peer or wrong endpoint hit"
+    },
+    {
+      "case": "receiver-byte-mismatch",
+      "outcome": "rejected",
+      "reason": "Receiver datagram/byte counts do not close"
+    },
+    {
+      "case": "reported-metric",
+      "outcome": "rejected",
+      "reason": "Derived group differs from raw measurements"
+    },
+    {
+      "case": "rtt-bypass",
+      "outcome": "rejected",
+      "reason": "RTT path/class binding differs"
+    },
+    {
+      "case": "native-policer-enabled",
+      "outcome": "rejected",
+      "reason": "UPF policer drift during group"
+    },
+    {
+      "case": "admission-changed-queue",
+      "outcome": "rejected",
+      "reason": "Overcapacity admission changed TC"
+    },
+    {
+      "case": "smf-replacement",
+      "outcome": "rejected",
+      "reason": "Final Pod identity drift"
+    },
+    {
+      "case": "missing-round",
+      "outcome": "rejected",
+      "reason": "Missing/duplicate experimental groups"
+    },
+    {
+      "case": "weakened-contract",
+      "outcome": "rejected",
+      "reason": "Experiment differs from frozen input"
+    },
+    {
+      "case": "not-restored",
+      "outcome": "rejected",
+      "reason": "Derived TC state differs from native output"
+    }
+  ]
+}
