@@ -18,6 +18,51 @@ def request(description='视频播放'):
 
 
 class RequirementsTests(unittest.TestCase):
+    def test_compositional_task_relations_without_application_labels(self):
+        for description, expected in [('我们需要及时问答', 'interactive'),
+                                      ('直播教学时回答学生问题', 'interactive'),
+                                      ('收看录制的科学节目', 'streaming'),
+                                      ('迁移历史数据到存储设备', 'bulk'),
+                                      ('归档实验目录', 'bulk')]:
+            with self.subTest(description=description):
+                result = tool.normalize({'request_id': 'x', 'description': description})
+                self.assertEqual(result['category']['value'], expected)
+                self.assertFalse(result['capabilityReview']['candidateForEPlanning'])
+
+    def test_active_conversation_vs_recording_object(self):
+        for description, expected in [('视频会议正在进行', 'interactive'),
+                                      ('视频会议的录像作为视频播放', 'streaming'),
+                                      ('上传视频会议的录像供以后查阅', 'bulk')]:
+            self.assertEqual(tool.normalize({'request_id': 'x', 'description': description})['category']['value'], expected)
+
+    def test_contrast_keeps_positive_scope_and_original_offsets(self):
+        description = '不是视频会议而是文件归档，最低需要 2 Mbps'
+        result = tool.normalize({'request_id': 'x', 'description': description})
+        self.assertEqual(result['category']['value'], 'bulk')
+        self.assertEqual(result['requirements']['min_bandwidth_mbps']['value'], 2)
+        for evidence in result['category']['evidence']:
+            self.assertEqual(description[evidence['start']:evidence['end']], evidence['text'])
+
+    def test_future_service_duration_and_completion_deadline_are_distinct(self):
+        for description, validity, deadline in [('视频播放，接下来 2 分钟', 120, None),
+                                               ('后台备份，接下来 2 分钟内传完', None, 120),
+                                               ('后台备份，10 分钟内备份完', None, 600)]:
+            result = tool.normalize({'request_id': 'x', 'description': description})
+            self.assertEqual(result['requirements']['valid_for_seconds']['value'], validity)
+            self.assertEqual(result['requirements']['deadline_seconds']['value'], deadline)
+
+    def test_mixed_request_does_not_promote_subtask_direction_or_rate(self):
+        result = tool.normalize({'request_id': 'x', 'description': '视频会议，同时上传录像归档，上传最多 3 Mbps'})
+        self.assertEqual(result['category']['status'], 'ambiguous')
+        for name in ['direction', 'max_bandwidth_mbps']:
+            self.assertIsNone(result['requirements'][name]['value'])
+        self.assertFalse(result['capabilityReview']['candidateForEPlanning'])
+
+    def test_negative_transfer_is_not_direction_or_business_evidence(self):
+        result = tool.normalize({'request_id': 'x', 'description': '不上传文件，视频播放'})
+        self.assertEqual(result['category']['value'], 'streaming')
+        self.assertIsNone(result['requirements']['direction']['value'])
+
     def test_three_business_definitions_not_application_word(self):
         for description, expected in [('视频会议', 'interactive'), ('视频播放', 'streaming'), ('视频文件归档', 'bulk')]:
             self.assertEqual(tool.normalize(request(description))['category']['value'], expected)

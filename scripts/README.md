@@ -334,6 +334,7 @@ D1 的开发集评估器保持原样；D2 使用不同的审核格式，不能�
 ```powershell
 python scripts/review-cnf-requirements.py prepare --d1 --out <新的审核包目录>
 python scripts/review-cnf-requirements.py prepare --collection <原始需求集合.json> --out <新的审核包目录>
+python scripts/review-cnf-requirements.py prepare --collection <合成需求集合.json> --annotation-mode agent_synthetic --out <新的合成审核包目录>
 python scripts/review-cnf-requirements.py audit --review <审核包目录>/review.json --out <新的检查.json>
 python scripts/review-cnf-requirements.py evaluate --review <审核包目录>/review.json --out <新的评估目录>
 ```
@@ -342,6 +343,13 @@ python scripts/review-cnf-requirements.py evaluate --review <审核包目录>/re
 `review.html` 离线打开，仅辅助类别标注并导出 JSON，不向外上传或自动保存。将导出的文件保存为该包的 `review.json`，保留其他文件。
 如需从已有审核 JSON 重新生成表单，使用 `render --review <...>/review.json --out <新的HTML路径>`。
 若工具后续发生变化，应使用该包中 `frozen-inputs/scripts/review-cnf-requirements.py` 执行 `audit/evaluate/render`，保留原识别器及审核口径。
+
+默认 `--annotation-mode human` 保留人工声明检查和类别表单。
+用户授权的 Agent 自校验使用 `agent_synthetic`，仅限 `synthetic/development`，不生成人工表单；
+`reviewerKind` 必须为 `agent`、`independentOfPredictions` 必须为 `false`，报告明确为合成开发检查，人工计数不增加。
+两种模式都需要逐字段依据及完整性检查；`evaluate` 在函数入口也重新检验冻结样本，避免绕过命令入口修改原始事实。
+Agent 检查可推进工程，不替代独立泛化或真实应用证据。六条受控试验及前后对照见
+[`synthetic-pilot/metadata.json`](../results/20261020-cnf-requirements-d2/synthetic-pilot/metadata.json)。
 
 真实原始集合格式为 `collectionVersion:cnf-requirements-collection-v1`、`collectionId` 和非空 `cases`。
 每条记录包含以下字段，尚未采集时保留空集合，不填入伪造案例：

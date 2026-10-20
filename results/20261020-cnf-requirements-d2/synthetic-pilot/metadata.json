@@ -1,0 +1,52 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "D2",
+  "date": "2026-10-20",
+  "outcome": "six_synthetic_scenarios_checked_and_rule_v2_regression_passed",
+  "recognizerVersion": "cnf-requirements-rules-v2",
+  "claimScope": "exposed synthetic development cases; not held-out, human-validated or real-application accuracy",
+  "controlledPilotComplete": true,
+  "stageDComplete": false,
+  "source": "collection.json",
+  "reference": "reference-labels.json",
+  "dataAudit": "data-audit.json",
+  "before": "evaluation-before/report.json",
+  "after": "evaluation-after/report.json",
+  "beforeExactDecisions": 1,
+  "afterExactDecisions": 6,
+  "explicitTargetMatches": 8,
+  "explicitTargets": 8,
+  "allTargetValueResolutionMatches": 60,
+  "invarianceChecks": 18,
+  "legacyRegressionCategoryAgreements": 33,
+  "legacyRegressionCases": 36,
+  "legacyRegressionRemainingDisagreements": [
+    "unseen-viewing",
+    "unseen-copy",
+    "unseen-game"
+  ],
+  "legacyInvariancePassed": 108,
+  "unitTests": {
+    "discovered": 218,
+    "passed": 217,
+    "conditionalHelmSkipped": 1,
+    "newThisIteration": 10,
+    "evidence": "tests-windows.txt"
+  },
+  "sourceSha256LF": {
+    "scripts/cnf-requirements.py": "91e3bf3ab1d5930d9be6387a9dc338b4e975eb10979f23354e8f556e1f078fcb",
+    "infra/cnfs/requirements-contract.json": "2867963401c878c442abdd9ed962e04e824ad139786daab9f211e379488a2eb0",
+    "scripts/review-cnf-requirements.py": "03826b1c3f4059740a8307bb2d6dd5e0b761090fb1e5bb7f102466e5f2cfd514",
+    "tests/test_cnf_requirements.py": "6b1efcabfef30633c767de849db23ac7c14e25dbd7331bfa480c2802bed10f8c",
+    "tests/test_review_cnf_requirements.py": "e484df6fd88efc67b5db15cf4b0207116f2f120545eff0ca9d79e9330c42f81a"
+  },
+  "userActionRequiredNow": [],
+  "remainingBoundaries": [
+    "Three original challenge cases still conservatively refused",
+    "Six development examples and reference labels were seen during fixes, so no generalization claim",
+    "Missing actual request/session identities, minimums, priorities, validity/windows and backup amount prevent plans; no defaults added",
+    "Native 5G QoS, stable latency/loss, real applications, E planner and Agent workflow remain unaccepted"
+  ],
+  "clusterAccessed": false
+}

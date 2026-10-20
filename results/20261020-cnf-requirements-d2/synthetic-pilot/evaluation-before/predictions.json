@@ -1,0 +1,1368 @@
+[
+  {
+    "id": "pilot-remote-discussion",
+    "scenarioFamily": "pilot-remote-discussion",
+    "split": "development",
+    "inputMode": "description_only",
+    "originKind": "synthetic",
+    "review": {
+      "decision": "known",
+      "category": "interactive",
+      "reason": "任务依赖持续的人际反馈，未给出数值或明确网络方向。",
+      "reviewerId": "root-agent-semantic-audit",
+      "reviewerKind": "agent",
+      "reviewedAt": "2026-10-20T12:31:09.906275+00:00",
+      "independentOfPredictions": false
+    },
+    "prediction": {
+      "contractVersion": "cnf-requirements-v1",
+      "request_id": "pilot-remote-discussion",
+      "category": {
+        "value": null,
+        "candidates": [],
+        "status": "unknown",
+        "confidence": {
+          "level": "low",
+          "method": "deterministic_rule_strength",
+          "calibrated": false
+        },
+        "evidence": []
+      },
+      "subject": {
+        "user_id": null,
+        "session_id": null,
+        "bindingStatus": "not_verified_against_live_sessions"
+      },
+      "requirements": {
+        "direction": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "max_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        }
+      },
+      "status": "abstained",
+      "clarificationFields": [
+        "direction",
+        "max_bandwidth_mbps",
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "issues": [],
+      "planningInputComplete": false,
+      "capabilityReview": {
+        "mode": "offline_experiment_reference_not_live_admission",
+        "blockingFindings": [],
+        "candidateForEPlanning": false,
+        "note": "E must validate live identity, capacity, overhead, policy and measurement; no feasibility assertion",
+        "evidenceRefs": [
+          "results/20261020-cnf-contention/metadata.json",
+          "results/20261020-cnf-contention-uplink/metadata.json",
+          "results/20261020-cnf-qos-probe/audit.json"
+        ]
+      },
+      "ignoredForInference": [],
+      "executionAuthorized": false,
+      "planGenerated": false
+    },
+    "categoryDecisionMatches": false,
+    "targetComparisons": [
+      {
+        "field": "direction",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "min_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "max_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "rtt_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "one_way_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "loss_max_percent",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "priority",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "valid_for_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "deadline_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "measurement_window_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      }
+    ]
+  },
+  {
+    "id": "pilot-recorded-course",
+    "scenarioFamily": "pilot-recorded-course",
+    "split": "development",
+    "inputMode": "description_only",
+    "originKind": "synthetic",
+    "review": {
+      "decision": "known",
+      "category": "streaming",
+      "reason": "已录制内容按时间播放，不参与双向交谈；30分钟限定本次带宽服务时长。",
+      "reviewerId": "root-agent-semantic-audit",
+      "reviewerKind": "agent",
+      "reviewedAt": "2026-10-20T12:31:09.906288+00:00",
+      "independentOfPredictions": false
+    },
+    "prediction": {
+      "contractVersion": "cnf-requirements-v1",
+      "request_id": "pilot-recorded-course",
+      "category": {
+        "value": null,
+        "candidates": [],
+        "status": "unknown",
+        "confidence": {
+          "level": "low",
+          "method": "deterministic_rule_strength",
+          "calibrated": false
+        },
+        "evidence": []
+      },
+      "subject": {
+        "user_id": null,
+        "session_id": null,
+        "bindingStatus": "not_verified_against_live_sessions"
+      },
+      "requirements": {
+        "direction": {
+          "value": "downlink",
+          "resolution": "explicit",
+          "sources": [
+            {
+              "value": "downlink",
+              "kind": "user_text",
+              "text": "下行",
+              "start": 49,
+              "end": 51
+            }
+          ]
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "max_bandwidth_mbps": {
+          "value": 8.0,
+          "resolution": "explicit",
+          "sources": [
+            {
+              "value": 8.0,
+              "kind": "user_text",
+              "text": "最多8 Mbps",
+              "start": 41,
+              "end": 49
+            }
+          ]
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        }
+      },
+      "status": "abstained",
+      "clarificationFields": [
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "issues": [
+        {
+          "code": "bandwidth_expression_unsupported",
+          "field": "min_bandwidth_mbps",
+          "text": "播放至少需要4 Mbps、最多8 Mbps下行带宽"
+        }
+      ],
+      "planningInputComplete": false,
+      "capabilityReview": {
+        "mode": "offline_experiment_reference_not_live_admission",
+        "blockingFindings": [],
+        "candidateForEPlanning": false,
+        "note": "E must validate live identity, capacity, overhead, policy and measurement; no feasibility assertion",
+        "evidenceRefs": [
+          "results/20261020-cnf-contention/metadata.json",
+          "results/20261020-cnf-contention-uplink/metadata.json",
+          "results/20261020-cnf-qos-probe/audit.json"
+        ]
+      },
+      "ignoredForInference": [],
+      "executionAuthorized": false,
+      "planGenerated": false
+    },
+    "categoryDecisionMatches": false,
+    "targetComparisons": [
+      {
+        "field": "direction",
+        "expectedValue": "downlink",
+        "actualValue": "downlink",
+        "expectedResolution": "explicit",
+        "actualResolution": "explicit",
+        "evidenceChannels": [
+          "text"
+        ],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "min_bandwidth_mbps",
+        "expectedValue": 4,
+        "actualValue": null,
+        "expectedResolution": "explicit",
+        "actualResolution": "unknown",
+        "evidenceChannels": [
+          "text"
+        ],
+        "valueMatches": false,
+        "resolutionMatches": false
+      },
+      {
+        "field": "max_bandwidth_mbps",
+        "expectedValue": 8,
+        "actualValue": 8.0,
+        "expectedResolution": "explicit",
+        "actualResolution": "explicit",
+        "evidenceChannels": [
+          "text"
+        ],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "rtt_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "one_way_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "loss_max_percent",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "priority",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "valid_for_seconds",
+        "expectedValue": 1800,
+        "actualValue": null,
+        "expectedResolution": "explicit",
+        "actualResolution": "unknown",
+        "evidenceChannels": [
+          "text"
+        ],
+        "valueMatches": false,
+        "resolutionMatches": false
+      },
+      {
+        "field": "deadline_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "measurement_window_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      }
+    ]
+  },
+  {
+    "id": "pilot-recording-upload",
+    "scenarioFamily": "pilot-recording-upload",
+    "split": "development",
+    "inputMode": "description_only",
+    "originKind": "synthetic",
+    "review": {
+      "decision": "known",
+      "category": "bulk",
+      "reason": "完成录制文件上传供以后查阅；明确不要求边传边看，不应识别成媒体播放。",
+      "reviewerId": "root-agent-semantic-audit",
+      "reviewerKind": "agent",
+      "reviewedAt": "2026-10-20T12:31:09.906291+00:00",
+      "independentOfPredictions": false
+    },
+    "prediction": {
+      "contractVersion": "cnf-requirements-v1",
+      "request_id": "pilot-recording-upload",
+      "category": {
+        "value": null,
+        "candidates": [],
+        "status": "unknown",
+        "confidence": {
+          "level": "low",
+          "method": "deterministic_rule_strength",
+          "calibrated": false
+        },
+        "evidence": []
+      },
+      "subject": {
+        "user_id": null,
+        "session_id": null,
+        "bindingStatus": "not_verified_against_live_sessions"
+      },
+      "requirements": {
+        "direction": {
+          "value": "uplink",
+          "resolution": "explicit",
+          "sources": [
+            {
+              "value": "uplink",
+              "kind": "user_text",
+              "text": "上传",
+              "start": 2,
+              "end": 4
+            }
+          ]
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "max_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        }
+      },
+      "status": "abstained",
+      "clarificationFields": [
+        "max_bandwidth_mbps",
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "issues": [],
+      "planningInputComplete": false,
+      "capabilityReview": {
+        "mode": "offline_experiment_reference_not_live_admission",
+        "blockingFindings": [],
+        "candidateForEPlanning": false,
+        "note": "E must validate live identity, capacity, overhead, policy and measurement; no feasibility assertion",
+        "evidenceRefs": [
+          "results/20261020-cnf-contention/metadata.json",
+          "results/20261020-cnf-contention-uplink/metadata.json",
+          "results/20261020-cnf-qos-probe/audit.json"
+        ]
+      },
+      "ignoredForInference": [],
+      "executionAuthorized": false,
+      "planGenerated": false
+    },
+    "categoryDecisionMatches": false,
+    "targetComparisons": [
+      {
+        "field": "direction",
+        "expectedValue": "uplink",
+        "actualValue": "uplink",
+        "expectedResolution": "explicit",
+        "actualResolution": "explicit",
+        "evidenceChannels": [
+          "text"
+        ],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "min_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "max_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "rtt_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "one_way_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "loss_max_percent",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "priority",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "valid_for_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "deadline_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "measurement_window_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      }
+    ]
+  },
+  {
+    "id": "pilot-app-name-only",
+    "scenarioFamily": "pilot-app-name-only",
+    "split": "development",
+    "inputMode": "description_only",
+    "originKind": "synthetic",
+    "review": {
+      "decision": "unknown",
+      "category": null,
+      "reason": "应用名和“流畅”未区分对话、观看或文件传输；没有可操作数值。",
+      "reviewerId": "root-agent-semantic-audit",
+      "reviewerKind": "agent",
+      "reviewedAt": "2026-10-20T12:31:09.906292+00:00",
+      "independentOfPredictions": false
+    },
+    "prediction": {
+      "contractVersion": "cnf-requirements-v1",
+      "request_id": "pilot-app-name-only",
+      "category": {
+        "value": null,
+        "candidates": [],
+        "status": "unknown",
+        "confidence": {
+          "level": "low",
+          "method": "deterministic_rule_strength",
+          "calibrated": false
+        },
+        "evidence": []
+      },
+      "subject": {
+        "user_id": null,
+        "session_id": null,
+        "bindingStatus": "not_verified_against_live_sessions"
+      },
+      "requirements": {
+        "direction": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "max_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        }
+      },
+      "status": "abstained",
+      "clarificationFields": [
+        "direction",
+        "max_bandwidth_mbps",
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "issues": [],
+      "planningInputComplete": false,
+      "capabilityReview": {
+        "mode": "offline_experiment_reference_not_live_admission",
+        "blockingFindings": [],
+        "candidateForEPlanning": false,
+        "note": "E must validate live identity, capacity, overhead, policy and measurement; no feasibility assertion",
+        "evidenceRefs": [
+          "results/20261020-cnf-contention/metadata.json",
+          "results/20261020-cnf-contention-uplink/metadata.json",
+          "results/20261020-cnf-qos-probe/audit.json"
+        ]
+      },
+      "ignoredForInference": [],
+      "executionAuthorized": false,
+      "planGenerated": false
+    },
+    "categoryDecisionMatches": true,
+    "targetComparisons": [
+      {
+        "field": "direction",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "min_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "max_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "rtt_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "one_way_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "loss_max_percent",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "priority",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "valid_for_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "deadline_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "measurement_window_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      }
+    ]
+  },
+  {
+    "id": "pilot-parallel-tasks",
+    "scenarioFamily": "pilot-parallel-tasks",
+    "split": "development",
+    "inputMode": "description_only",
+    "originKind": "synthetic",
+    "review": {
+      "decision": "ambiguous",
+      "category": null,
+      "reason": "包含互动和归档两个任务，需拆分；上传方向只属于子任务，不能充当整个请求的单一方向。",
+      "reviewerId": "root-agent-semantic-audit",
+      "reviewerKind": "agent",
+      "reviewedAt": "2026-10-20T12:31:09.906294+00:00",
+      "independentOfPredictions": false
+    },
+    "prediction": {
+      "contractVersion": "cnf-requirements-v1",
+      "request_id": "pilot-parallel-tasks",
+      "category": {
+        "value": null,
+        "candidates": [],
+        "status": "unknown",
+        "confidence": {
+          "level": "low",
+          "method": "deterministic_rule_strength",
+          "calibrated": false
+        },
+        "evidence": []
+      },
+      "subject": {
+        "user_id": null,
+        "session_id": null,
+        "bindingStatus": "not_verified_against_live_sessions"
+      },
+      "requirements": {
+        "direction": {
+          "value": "uplink",
+          "resolution": "explicit",
+          "sources": [
+            {
+              "value": "uplink",
+              "kind": "user_text",
+              "text": "上传",
+              "start": 19,
+              "end": 21
+            }
+          ]
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "max_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        }
+      },
+      "status": "abstained",
+      "clarificationFields": [
+        "max_bandwidth_mbps",
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "issues": [],
+      "planningInputComplete": false,
+      "capabilityReview": {
+        "mode": "offline_experiment_reference_not_live_admission",
+        "blockingFindings": [],
+        "candidateForEPlanning": false,
+        "note": "E must validate live identity, capacity, overhead, policy and measurement; no feasibility assertion",
+        "evidenceRefs": [
+          "results/20261020-cnf-contention/metadata.json",
+          "results/20261020-cnf-contention-uplink/metadata.json",
+          "results/20261020-cnf-qos-probe/audit.json"
+        ]
+      },
+      "ignoredForInference": [],
+      "executionAuthorized": false,
+      "planGenerated": false
+    },
+    "categoryDecisionMatches": false,
+    "targetComparisons": [
+      {
+        "field": "direction",
+        "expectedValue": null,
+        "actualValue": "uplink",
+        "expectedResolution": "unknown",
+        "actualResolution": "explicit",
+        "evidenceChannels": [],
+        "valueMatches": false,
+        "resolutionMatches": false
+      },
+      {
+        "field": "min_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "max_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "rtt_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "one_way_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "loss_max_percent",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "priority",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "valid_for_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "deadline_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "measurement_window_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      }
+    ]
+  },
+  {
+    "id": "pilot-deadline-backup",
+    "scenarioFamily": "pilot-deadline-backup",
+    "split": "development",
+    "inputMode": "description_only",
+    "originKind": "synthetic",
+    "review": {
+      "decision": "known",
+      "category": "bulk",
+      "reason": "以完成数据备份为目标；20分钟是完成期限，不是有效期或优先级；未提供数据量无法准入。",
+      "reviewerId": "root-agent-semantic-audit",
+      "reviewerKind": "agent",
+      "reviewedAt": "2026-10-20T12:31:09.906295+00:00",
+      "independentOfPredictions": false
+    },
+    "prediction": {
+      "contractVersion": "cnf-requirements-v1",
+      "request_id": "pilot-deadline-backup",
+      "category": {
+        "value": null,
+        "candidates": [],
+        "status": "unknown",
+        "confidence": {
+          "level": "low",
+          "method": "deterministic_rule_strength",
+          "calibrated": false
+        },
+        "evidence": []
+      },
+      "subject": {
+        "user_id": null,
+        "session_id": null,
+        "bindingStatus": "not_verified_against_live_sessions"
+      },
+      "requirements": {
+        "direction": {
+          "value": "uplink",
+          "resolution": "explicit",
+          "sources": [
+            {
+              "value": "uplink",
+              "kind": "user_text",
+              "text": "上传",
+              "start": 9,
+              "end": 11
+            }
+          ]
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "max_bandwidth_mbps": {
+          "value": 10.0,
+          "resolution": "explicit",
+          "sources": [
+            {
+              "value": 10.0,
+              "kind": "user_text",
+              "text": "最多10 Mbps",
+              "start": 11,
+              "end": 20
+            }
+          ]
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "sources": []
+        }
+      },
+      "status": "abstained",
+      "clarificationFields": [
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "issues": [],
+      "planningInputComplete": false,
+      "capabilityReview": {
+        "mode": "offline_experiment_reference_not_live_admission",
+        "blockingFindings": [],
+        "candidateForEPlanning": false,
+        "note": "E must validate live identity, capacity, overhead, policy and measurement; no feasibility assertion",
+        "evidenceRefs": [
+          "results/20261020-cnf-contention/metadata.json",
+          "results/20261020-cnf-contention-uplink/metadata.json",
+          "results/20261020-cnf-qos-probe/audit.json"
+        ]
+      },
+      "ignoredForInference": [],
+      "executionAuthorized": false,
+      "planGenerated": false
+    },
+    "categoryDecisionMatches": false,
+    "targetComparisons": [
+      {
+        "field": "direction",
+        "expectedValue": "uplink",
+        "actualValue": "uplink",
+        "expectedResolution": "explicit",
+        "actualResolution": "explicit",
+        "evidenceChannels": [
+          "text"
+        ],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "min_bandwidth_mbps",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "max_bandwidth_mbps",
+        "expectedValue": 10,
+        "actualValue": 10.0,
+        "expectedResolution": "explicit",
+        "actualResolution": "explicit",
+        "evidenceChannels": [
+          "text"
+        ],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "rtt_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "one_way_p95_max_ms",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "loss_max_percent",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "priority",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "valid_for_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      },
+      {
+        "field": "deadline_seconds",
+        "expectedValue": 1200,
+        "actualValue": null,
+        "expectedResolution": "explicit",
+        "actualResolution": "unknown",
+        "evidenceChannels": [
+          "text"
+        ],
+        "valueMatches": false,
+        "resolutionMatches": false
+      },
+      {
+        "field": "measurement_window_seconds",
+        "expectedValue": null,
+        "actualValue": null,
+        "expectedResolution": "unknown",
+        "actualResolution": "unknown",
+        "evidenceChannels": [],
+        "valueMatches": true,
+        "resolutionMatches": true
+      }
+    ]
+  }
+]

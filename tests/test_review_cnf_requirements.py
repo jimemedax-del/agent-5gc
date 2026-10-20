@@ -51,6 +51,20 @@ class ReviewRequirementsTests(unittest.TestCase):
         self.save()
         return tool.load_bundle(self.folder / 'review.json')
 
+    def evaluate_refrozen_unit_packet(self):
+        """Metric fixtures with changed raw facts need a new freeze, just like CLI data."""
+        raw = {'collectionVersion': 'cnf-requirements-collection-v1', 'collectionId': 'unit-refrozen',
+               'cases': [{k: v for k, v in i.items() if k not in ['review', 'targetReview']} for i in self.packet['items']]}
+        folder = Path(self.temp.name) / 'refrozen'
+        packet = tool.prepare(raw, folder)
+        for item, annotated in zip(packet['items'], self.packet['items']):
+            item['review'] = copy.deepcopy(annotated['review'])
+            item['targetReview'] = copy.deepcopy(annotated['targetReview'])
+            item['review']['reviewedAt'] = datetime.now(timezone.utc).isoformat()
+        (folder / 'review.json').write_text(json.dumps(packet), encoding='utf-8')
+        packet, manifest, normalizer = tool.load_bundle(folder / 'review.json')
+        return tool.evaluate(packet, manifest, normalizer)
+
     def test_pending_packet_audits_without_fabricated_score(self):
         packet, manifest, _ = self.load()
         report = tool.audit(packet, manifest)
@@ -236,7 +250,7 @@ class ReviewRequirementsTests(unittest.TestCase):
         item['input']['description'] = '未见过的表达'
         annotate(item, category='interactive')
         manifest = tool.read_json(self.folder / 'manifest.json')
-        report, _ = tool.evaluate(self.packet, manifest, tool.baseline)
+        report, _ = self.evaluate_refrozen_unit_packet()
         metrics = report['strata']['synthetic/development']
         self.assertEqual(metrics['knownAccuracyIncludingRefusals'], 0)
         self.assertEqual(metrics['knownCoverage'], 0)
@@ -256,7 +270,7 @@ class ReviewRequirementsTests(unittest.TestCase):
         item['input']['description'] = '未见过的表达'
         annotate(item, decision='ambiguous', category=None)
         manifest = tool.read_json(self.folder / 'manifest.json')
-        report, _ = tool.evaluate(self.packet, manifest, tool.baseline)
+        report, _ = self.evaluate_refrozen_unit_packet()
         metrics = report['strata']['synthetic/development']
         self.assertEqual(metrics['safeAbstentions'], 1)
         self.assertEqual(metrics['exactDecisionMatches'], 0)
@@ -294,9 +308,10 @@ class ReviewRequirementsTests(unittest.TestCase):
         second['id'] = second['input']['request_id'] = 'unit-2'
         second.update(split='holdout', scenarioFamily='unit-new-family')
         second['origin'].update(kind='real_requirement', authorKind='human')
+        second['input']['description'] = 'Unit-test-only distinct media consumption task'
         self.packet['items'].append(second)
         manifest = tool.read_json(self.folder / 'manifest.json')
-        report, _ = tool.evaluate(self.packet, manifest, tool.baseline)
+        report, _ = self.evaluate_refrozen_unit_packet()
         self.assertEqual(set(report['strata']), {'synthetic/development', 'real_requirement/holdout'})
         self.assertNotIn('overall', report)
         self.assertFalse(report['stageDAccepted'])
@@ -340,10 +355,47 @@ class ReviewRequirementsTests(unittest.TestCase):
             item['targetReview']['fields'][field].update(value=value, resolution='explicit', evidence=[evidence])
         tool.validate_labels(item, tool.baseline)
         manifest = tool.read_json(self.folder / 'manifest.json')
-        report, _ = tool.evaluate(self.packet, manifest, tool.baseline)
+        report, _ = self.evaluate_refrozen_unit_packet()
         by_source = report['strata']['synthetic/development']['explicitTargetsByEvidence']
         self.assertEqual(by_source['text_only'], {'fields': 1, 'valueMatches': 1})
         self.assertEqual(by_source['structured_only'], {'fields': 1, 'valueMatches': 1})
+
+    def test_agent_synthetic_mode_never_counts_as_human_review(self):
+        folder = Path(self.temp.name) / 'agent-mode'
+        packet = tool.prepare(collection(), folder, 'agent_synthetic')
+        item = packet['items'][0]
+        annotate(item)
+        item['review'].update(reviewerKind='agent', independentOfPredictions=False)
+        target_labels(item)
+        (folder / 'review.json').write_text(json.dumps(packet), encoding='utf-8')
+        packet, manifest, normalizer = tool.load_bundle(folder / 'review.json')
+        report, _ = tool.evaluate(packet, manifest, normalizer)
+        self.assertEqual(report['audit']['humanCategoryDeclarations'], 0)
+        self.assertEqual(report['audit']['agentCategoryAnnotations'], 1)
+        self.assertIn('not an independent benchmark', report['claimScope'])
+        self.assertFalse((folder / 'review.html').exists())
+
+    def test_agent_mode_refuses_real_requirements(self):
+        value = collection()
+        value['cases'][0]['origin'].update(kind='real_requirement', authorKind='human')
+        with self.assertRaisesRegex(ValueError, 'restricted'):
+            tool.prepare(value, Path(self.temp.name) / 'invalid-agent', 'agent_synthetic')
+
+    def test_agent_mode_cannot_claim_human_or_independent_labels(self):
+        item = copy.deepcopy(self.packet['items'][0])
+        annotate(item)
+        with self.assertRaisesRegex(ValueError, 'non-independent'):
+            tool.validate_labels(item, tool.baseline, 'agent_synthetic')
+        item['review'].update(reviewerKind='agent', independentOfPredictions=True)
+        with self.assertRaises(ValueError):
+            tool.validate_labels(item, tool.baseline, 'agent_synthetic')
+
+    def test_evaluate_rechecks_frozen_raw_membership(self):
+        annotate(self.packet['items'][0])
+        manifest = tool.read_json(self.folder / 'manifest.json')
+        self.packet['items'][0]['input']['description'] = 'mutated after freeze'
+        with self.assertRaisesRegex(ValueError, 'Raw facts changed'):
+            tool.evaluate(self.packet, manifest, tool.baseline)
 
 
 if __name__ == '__main__':

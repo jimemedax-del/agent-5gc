@@ -1,5 +1,6 @@
 {
   "contractVersion": "cnf-requirements-v1",
+  "recognizerVersion": "cnf-requirements-rules-v2",
   "route": "R2",
   "stage": "R2.S4",
   "task": "D1",

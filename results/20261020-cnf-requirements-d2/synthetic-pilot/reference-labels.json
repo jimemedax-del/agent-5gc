@@ -1,0 +1,460 @@
+{
+  "referenceVersion": "cnf-synthetic-pilot-reference-v1",
+  "annotationSource": "Primary Agent semantic check of subagent-authored synthetic scenarios; not human validation; no prediction-derived reference labels",
+  "items": [
+    {
+      "id": "pilot-remote-discussion",
+      "title": "远程讨论实验操作",
+      "decision": "known",
+      "category": "interactive",
+      "reason": "任务依赖持续的人际反馈，未给出数值或明确网络方向。",
+      "fields": {
+        "direction": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "max_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "pilot-recorded-course",
+      "title": "观看课程回放",
+      "decision": "known",
+      "category": "streaming",
+      "reason": "已录制内容按时间播放，不参与双向交谈；30分钟限定本次带宽服务时长。",
+      "fields": {
+        "direction": {
+          "value": "downlink",
+          "resolution": "explicit",
+          "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+          "evidence": [
+            {
+              "path": "/description",
+              "quote": "下行带宽"
+            }
+          ]
+        },
+        "min_bandwidth_mbps": {
+          "value": 4,
+          "resolution": "explicit",
+          "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+          "evidence": [
+            {
+              "path": "/description",
+              "quote": "至少需要4 Mbps"
+            }
+          ]
+        },
+        "max_bandwidth_mbps": {
+          "value": 8,
+          "resolution": "explicit",
+          "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+          "evidence": [
+            {
+              "path": "/description",
+              "quote": "最多8 Mbps"
+            }
+          ]
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "valid_for_seconds": {
+          "value": 1800,
+          "resolution": "explicit",
+          "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+          "evidence": [
+            {
+              "path": "/description",
+              "quote": "接下来30分钟"
+            }
+          ]
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "pilot-recording-upload",
+      "title": "上传课程录像",
+      "decision": "known",
+      "category": "bulk",
+      "reason": "完成录制文件上传供以后查阅；明确不要求边传边看，不应识别成媒体播放。",
+      "fields": {
+        "direction": {
+          "value": "uplink",
+          "resolution": "explicit",
+          "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+          "evidence": [
+            {
+              "path": "/description",
+              "quote": "上传录好的课程文件"
+            }
+          ]
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "max_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "pilot-app-name-only",
+      "title": "只有应用名称",
+      "decision": "unknown",
+      "category": null,
+      "reason": "应用名和“流畅”未区分对话、观看或文件传输；没有可操作数值。",
+      "fields": {
+        "direction": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "max_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "pilot-parallel-tasks",
+      "title": "互动与上传并行",
+      "decision": "ambiguous",
+      "category": null,
+      "reason": "包含互动和归档两个任务，需拆分；上传方向只属于子任务，不能充当整个请求的单一方向。",
+      "fields": {
+        "direction": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "max_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "deadline_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "pilot-deadline-backup",
+      "title": "限时备份数据",
+      "decision": "known",
+      "category": "bulk",
+      "reason": "以完成数据备份为目标；20分钟是完成期限，不是有效期或优先级；未提供数据量无法准入。",
+      "fields": {
+        "direction": {
+          "value": "uplink",
+          "resolution": "explicit",
+          "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+          "evidence": [
+            {
+              "path": "/description",
+              "quote": "上传最多10 Mbps"
+            }
+          ]
+        },
+        "min_bandwidth_mbps": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "max_bandwidth_mbps": {
+          "value": 10,
+          "resolution": "explicit",
+          "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+          "evidence": [
+            {
+              "path": "/description",
+              "quote": "最多10 Mbps"
+            }
+          ]
+        },
+        "rtt_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "one_way_p95_max_ms": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "loss_max_percent": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "priority": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "valid_for_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        },
+        "deadline_seconds": {
+          "value": 1200,
+          "resolution": "explicit",
+          "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+          "evidence": [
+            {
+              "path": "/description",
+              "quote": "20分钟内传完"
+            }
+          ]
+        },
+        "measurement_window_seconds": {
+          "value": null,
+          "resolution": "unknown",
+          "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+          "evidence": []
+        }
+      }
+    }
+  ]
+}

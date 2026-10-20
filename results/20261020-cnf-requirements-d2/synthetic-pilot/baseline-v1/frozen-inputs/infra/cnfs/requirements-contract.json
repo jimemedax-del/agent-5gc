@@ -1,0 +1,146 @@
+{
+  "contractVersion": "cnf-requirements-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "D1",
+  "taxonomyStatus": "candidate_categories_authorized_by_user_2026-10-20; sample labels still require human review",
+  "categories": [
+    {
+      "id": "interactive",
+      "label": "实时交互",
+      "definition": "任务依赖人与人或人与系统的持续闭环反馈；数值 SLA 与优先级另行提供。",
+      "patterns": [
+        "视频会议",
+        "语音通话",
+        "远程控制",
+        "闭环交互",
+        "video conference",
+        "video call",
+        "remote control"
+      ]
+    },
+    {
+      "id": "streaming",
+      "label": "持续媒体",
+      "definition": "按连续时间消费媒体内容；实时交互与文件归档需分别识别。",
+      "patterns": [
+        "视频播放",
+        "音频播放",
+        "直播观看",
+        "持续播放",
+        "流式播放",
+        "continuous playback",
+        "live stream viewing"
+      ]
+    },
+    {
+      "id": "bulk",
+      "label": "后台传输",
+      "definition": "以完成文件或数据迁移为目标；即使有截止时间也不自动转为交互或高优先级。",
+      "patterns": [
+        "后台传输",
+        "后台备份",
+        "文件备份",
+        "批量传输",
+        "文件归档",
+        "离线下载",
+        "background backup",
+        "batch transfer"
+      ]
+    }
+  ],
+  "fields": {
+    "direction": {
+      "type": "enum",
+      "values": [
+        "uplink",
+        "downlink",
+        "bidirectional"
+      ]
+    },
+    "min_bandwidth_mbps": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "max_bandwidth_mbps": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "rtt_p95_max_ms": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "one_way_p95_max_ms": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "loss_max_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "priority": {
+      "type": "enum",
+      "values": [
+        "low",
+        "normal",
+        "high"
+      ]
+    },
+    "valid_for_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "deadline_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "measurement_window_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    }
+  },
+  "requiredForPlanning": [
+    "direction",
+    "min_bandwidth_mbps",
+    "max_bandwidth_mbps",
+    "priority",
+    "valid_for_seconds",
+    "measurement_window_seconds"
+  ],
+  "sourceKinds": [
+    "user_text",
+    "user_structured",
+    "application_context"
+  ],
+  "confidence": {
+    "levels": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "method": "deterministic_rule_strength",
+    "calibrated": false
+  },
+  "referenceCapabilities": {
+    "mode": "offline_experiment_reference_not_live_admission",
+    "rootCapacityMbps": 10,
+    "bandwidth": "validated_only_in_C1_C2_two_UE_fixtures; arbitrary policies need E validation",
+    "rttGuarantee": "unvalidated; C2 has a retained counterexample",
+    "lossGuarantee": "unvalidated",
+    "native5gQos": "not_accepted",
+    "evidence": [
+      "results/20261020-cnf-contention/metadata.json",
+      "results/20261020-cnf-contention-uplink/metadata.json",
+      "results/20261020-cnf-qos-probe/audit.json"
+    ]
+  },
+  "rules": {
+    "defaultsAllowed": false,
+    "flowMetadataUsedForClassification": false,
+    "observationsUsedAsRequestedTargets": false,
+    "templateDefaults": "none approved; no automatic SLA templates",
+    "automatic5qiMapping": false,
+    "outputMeaning": "structured intent only; never a feasible or executable plan"
+  }
+}

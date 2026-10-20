@@ -16,7 +16,14 @@ RATE_UNITS = {'Gbps': 1000, 'Gbit/s': 1000, 'Mbps': 1, 'Mbit/s': 1,
               'kbps': .001, 'Kbps': .001, 'kbit/s': .001, 'GB/s': 8000, 'MB/s': 8, 'kB/s': .008}
 TIME_UNITS = {'秒': 1, 's': 1, '分钟': 60, 'min': 60, '小时': 3600, 'h': 3600}
 NUMBER = r'([-+]?\d+(?:\.\d+)?)'
-NEGATION = re.compile(r'不是|并非|不要|无需|不需要|不要求|非(?:视频|后台|远程)|\bnot\b', re.I)
+NEGATION = re.compile(r'不是|并非|不要|无需|不需要|不要求|不(?:上传|下载|播放|观看|传输|直播|备份)|没有(?:规定|要求|截止|完成期限)|非(?:视频|后台|远程)|\bnot\b', re.I)
+SEMANTIC_PATTERNS = {
+    'interactive': [r'(?:来回|双向|即时|及时).{0,6}(?:对话|问答|反馈)',
+                    r'(?:演示|直播|操作|协作).{0,24}(?:回答.{0,5}问题|根据.{0,10}反馈)'],
+    'streaming': [r'(?:看|观看|收看).{0,10}(?:录好|录制|回放|录播).{0,10}(?:课程|实验课|视频|节目|讲座)',
+                  r'(?:播放|收看|观看).{0,12}(?:录制内容|课程回放|回放内容|视频|音频)'],
+    'bulk': [r'(?:上传|下载|传输|复制|迁移|同步).{0,12}(?:文件|录像|录制内容|数据|目录).{0,16}(?:归档|备份|查阅|传完|存储)',
+             r'(?:备份|归档).{0,12}(?:文件|数据|录像|目录|课程)']}
 
 
 def require(condition, message):
@@ -90,20 +97,30 @@ def validate_input(value, spec):
 def clauses(text):
     # Reject inference inside a negated clause rather than interpreting arbitrary
     # natural-language scope. The conservative abstentions are part of evaluation.
-    for match in re.finditer(r'[^，。；;\n]+', text):
-        if not NEGATION.search(match[0]):
-            yield match[0], match.start()
+    for match in re.finditer(r'[^，,。；;\n]+', text):
+        part, offset = match[0], match.start()
+        contrast = re.search(r'(?:不是|并非).+?(?:而是|改为)', part)
+        if contrast:
+            offset += contrast.end()
+            part = part[contrast.end():]
+        if not NEGATION.search(part):
+            yield part, offset
 
 
 def classify(value, spec):
     evidence, found = [], set()
     for text, offset in clauses(value.get('description', '')):
         for category in spec['categories']:
-            for pattern in category['patterns']:
+            patterns = [(p, 'literal_phrase') for p in category['patterns']]
+            patterns += [(p, 'task_relation') for p in SEMANTIC_PATTERNS[category['id']]]
+            for pattern, rule in patterns:
                 for match in re.finditer(pattern, text, re.I):
+                    # A conference recording is an object, not evidence of an active conversation.
+                    if category['id'] == 'interactive' and re.match(r'(?:的)?(?:录像|录屏|回放|记录|文稿)', text[match.end():]):
+                        continue
                     found.add(category['id'])
                     evidence.append({'category': category['id'], 'kind': 'user_text', 'text': match[0],
-                                     'start': offset + match.start(), 'end': offset + match.end()})
+                                     'start': offset + match.start(), 'end': offset + match.end(), 'rule': rule})
     context = value.get('context', {})
     facts = [('interaction', 'closed_loop', 'interactive'), ('delivery', 'continuous_playback', 'streaming'),
              ('delivery', 'background_transfer', 'bulk')]
@@ -136,14 +153,15 @@ def extract(value, spec):
     rate_unit = '(' + '|'.join(re.escape(x) for x in sorted(RATE_UNITS, key=len, reverse=True)) + ')'
     time_unit = '(' + '|'.join(re.escape(x) for x in sorted(TIME_UNITS, key=len, reverse=True)) + ')'
     patterns = [
-        ('min_bandwidth_mbps', r'(?:最低|至少|不低于|保底|(?i:minimum|min))\s*(?:带宽|速率)?\s*[:：=]?\s*' + NUMBER + r'\s*' + rate_unit, RATE_UNITS),
-        ('max_bandwidth_mbps', r'(?:最高|最多|不超过|上限|(?i:maximum|max))\s*(?:带宽|速率)?\s*[:：=]?\s*' + NUMBER + r'\s*' + rate_unit, RATE_UNITS),
+        ('min_bandwidth_mbps', r'(?:最低|至少|不低于|保底|(?i:minimum|min))\s*(?:需要|要求|提供)?\s*(?:带宽|速率)?\s*[:：=]?\s*' + NUMBER + r'\s*' + rate_unit, RATE_UNITS),
+        ('max_bandwidth_mbps', r'(?:最高|最多|不超过|上限|(?i:maximum|max))\s*(?:需要|要求|提供)?\s*(?:带宽|速率)?\s*[:：=]?\s*' + NUMBER + r'\s*' + rate_unit, RATE_UNITS),
         ('rtt_p95_max_ms', r'(?:RTT\s*[pP]95|[pP]95\s*RTT)\s*(?:不超过|上限|<=|≤)\s*' + NUMBER + r'\s*(ms|毫秒)', {'ms': 1, '毫秒': 1}),
         ('one_way_p95_max_ms', r'(?:单向时延\s*[pP]95|[pP]95\s*单向时延)\s*(?:不超过|上限|<=|≤)\s*' + NUMBER + r'\s*(ms|毫秒)', {'ms': 1, '毫秒': 1}),
         ('loss_max_percent', r'丢包(?:率)?\s*(?:不超过|上限|<=|≤)\s*' + NUMBER + r'\s*(%)', {'%': 1}),
         ('valid_for_seconds', r'(?:有效期|有效|valid for)\s*[:：=]?\s*' + NUMBER + r'\s*' + time_unit, TIME_UNITS),
+        ('valid_for_seconds', r'(?:接下来|未来|随后)\s*' + NUMBER + r'\s*' + time_unit + r'(?!\s*内(?:完成|传完|上传完|备份完))', TIME_UNITS),
         ('measurement_window_seconds', r'(?:统计窗口|测量窗口|window)\s*[:：=]?\s*' + NUMBER + r'\s*' + time_unit, TIME_UNITS),
-        ('deadline_seconds', r'在\s*' + NUMBER + r'\s*' + time_unit + r'\s*内完成', TIME_UNITS)]
+        ('deadline_seconds', r'(?:在\s*)?' + NUMBER + r'\s*' + time_unit + r'\s*内(?:完成|传完|上传完|备份完)', TIME_UNITS)]
     for text, offset in clauses(value.get('description', '')):
         if re.search(r'当前|实测|观测|测得', text):
             continue
@@ -175,7 +193,7 @@ def extract(value, spec):
         if re.search(r'有效期|valid for', text) and not any(
                 re.search(pattern, text) for name, pattern, _ in patterns if name == 'valid_for_seconds'):
             issues.append({'code': 'validity_expression_unsupported', 'text': text})
-        if re.search(r'截止|deadline|内完成', text, re.I) and not any(
+        if re.search(r'截止|deadline|期限|内(?:完成|传完|上传完|备份完)', text, re.I) and not any(
                 re.search(pattern, text) for name, pattern, _ in patterns if name == 'deadline_seconds'):
             issues.append({'code': 'deadline_expression_unsupported', 'text': text})
     fields = {}
@@ -205,6 +223,11 @@ def normalize(value):
     validate_input(value, spec)
     category = classify(value, spec)
     fields, issues = extract(value, spec)
+    if category['status'] == 'ambiguous' and len(category['candidates']) > 1:
+        for name, field in fields.items():
+            if field['value'] is not None and field['sources'] and all(s['kind'] == 'user_text' for s in field['sources']):
+                field.update(value=None, resolution='unknown')
+                issues.append({'code': 'mixed_business_text_target_requires_scope', 'field': name})
     missing = [name for name in spec['requiredForPlanning'] if fields[name]['value'] is None]
     if not value.get('subject', {}).get('user_id'):
         missing.append('subject.user_id')
@@ -228,7 +251,8 @@ def normalize(value):
     conflicts = any(i['code'] in ['field_conflict', 'field_invalid', 'minimum_exceeds_maximum', 'measurement_window_exceeds_validity'] for i in issues)
     status = 'conflict' if conflicts else 'abstained' if category['status'] == 'unknown' else 'needs_clarification' if (
         category['status'] == 'ambiguous' or missing or issues) else 'parsed'
-    return {'contractVersion': spec['contractVersion'], 'request_id': value['request_id'], 'category': category,
+    return {'contractVersion': spec['contractVersion'], 'recognizerVersion': spec.get('recognizerVersion', 'cnf-requirements-rules-v1'),
+            'request_id': value['request_id'], 'category': category,
             'subject': {'user_id': value.get('subject', {}).get('user_id'), 'session_id': value.get('subject', {}).get('session_id'),
                         'bindingStatus': 'not_verified_against_live_sessions'},
             'requirements': fields, 'status': status, 'clarificationFields': sorted(set(missing)), 'issues': issues,

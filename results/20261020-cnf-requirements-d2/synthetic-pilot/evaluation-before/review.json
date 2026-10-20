@@ -1,0 +1,611 @@
+{
+  "reviewVersion": "cnf-requirements-review-v2",
+  "collectionId": "d2-six-synthetic-pilot-v1",
+  "instructions": {
+    "category": "Record known/category, unknown, or ambiguous; explain using original business facts.",
+    "annotationMode": "agent_synthetic",
+    "targets": "Only explicitly requested targets; no default SLA. Null means unknown/conflicting/invalid, not zero.",
+    "independence": "Human reviewer declares no recognizer predictions seen before labeling; this declaration is not authenticated.",
+    "evidence": "Every reviewed target needs a basis. Explicit/conflict/invalid targets also need original evidence: path and quote or value.",
+    "scope": "Real requirement text is not evidence of an executed network workload or an SLA guarantee."
+  },
+  "categoryDefinitions": [
+    {
+      "id": "interactive",
+      "label": "实时交互",
+      "definition": "任务依赖人与人或人与系统的持续闭环反馈；数值 SLA 与优先级另行提供。"
+    },
+    {
+      "id": "streaming",
+      "label": "持续媒体",
+      "definition": "按连续时间消费媒体内容；实时交互与文件归档需分别识别。"
+    },
+    {
+      "id": "bulk",
+      "label": "后台传输",
+      "definition": "以完成文件或数据迁移为目标；即使有截止时间也不自动转为交互或高优先级。"
+    }
+  ],
+  "items": [
+    {
+      "id": "pilot-remote-discussion",
+      "scenarioFamily": "pilot-remote-discussion",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "draft_d2_scenarios",
+        "sourceRef": "Conversation: six generated scenarios, as displayed in the primary Agent response; not a real platform record",
+        "collectedAt": "2026-10-20T12:30:53.651037+00:00"
+      },
+      "input": {
+        "request_id": "pilot-remote-discussion",
+        "description": "同学操作设备，我看画面并随时提醒他调整位置，我们需要来回对话。"
+      },
+      "review": {
+        "decision": "known",
+        "category": "interactive",
+        "reason": "任务依赖持续的人际反馈，未给出数值或明确网络方向。",
+        "reviewerId": "root-agent-semantic-audit",
+        "reviewerKind": "agent",
+        "reviewedAt": "2026-10-20T12:31:09.906275+00:00",
+        "independentOfPredictions": false
+      },
+      "targetReview": {
+        "status": "complete",
+        "fields": {
+          "direction": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "min_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "max_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "rtt_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "one_way_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "loss_max_percent": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "priority": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "valid_for_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "deadline_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "measurement_window_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          }
+        }
+      }
+    },
+    {
+      "id": "pilot-recorded-course",
+      "scenarioFamily": "pilot-recorded-course",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "draft_d2_scenarios",
+        "sourceRef": "Conversation: six generated scenarios, as displayed in the primary Agent response; not a real platform record",
+        "collectedAt": "2026-10-20T12:30:53.651037+00:00"
+      },
+      "input": {
+        "request_id": "pilot-recorded-course",
+        "description": "我要看昨天录好的实验课，只观看、不连麦。接下来30分钟，播放至少需要4 Mbps、最多8 Mbps下行带宽。"
+      },
+      "review": {
+        "decision": "known",
+        "category": "streaming",
+        "reason": "已录制内容按时间播放，不参与双向交谈；30分钟限定本次带宽服务时长。",
+        "reviewerId": "root-agent-semantic-audit",
+        "reviewerKind": "agent",
+        "reviewedAt": "2026-10-20T12:31:09.906288+00:00",
+        "independentOfPredictions": false
+      },
+      "targetReview": {
+        "status": "complete",
+        "fields": {
+          "direction": {
+            "value": "downlink",
+            "resolution": "explicit",
+            "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+            "evidence": [
+              {
+                "path": "/description",
+                "quote": "下行带宽"
+              }
+            ]
+          },
+          "min_bandwidth_mbps": {
+            "value": 4,
+            "resolution": "explicit",
+            "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+            "evidence": [
+              {
+                "path": "/description",
+                "quote": "至少需要4 Mbps"
+              }
+            ]
+          },
+          "max_bandwidth_mbps": {
+            "value": 8,
+            "resolution": "explicit",
+            "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+            "evidence": [
+              {
+                "path": "/description",
+                "quote": "最多8 Mbps"
+              }
+            ]
+          },
+          "rtt_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "one_way_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "loss_max_percent": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "priority": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "valid_for_seconds": {
+            "value": 1800,
+            "resolution": "explicit",
+            "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+            "evidence": [
+              {
+                "path": "/description",
+                "quote": "接下来30分钟"
+              }
+            ]
+          },
+          "deadline_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "measurement_window_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          }
+        }
+      }
+    },
+    {
+      "id": "pilot-recording-upload",
+      "scenarioFamily": "pilot-recording-upload",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "draft_d2_scenarios",
+        "sourceRef": "Conversation: six generated scenarios, as displayed in the primary Agent response; not a real platform record",
+        "collectedAt": "2026-10-20T12:30:53.651037+00:00"
+      },
+      "input": {
+        "request_id": "pilot-recording-upload",
+        "description": "我要上传录好的课程文件供以后查阅，传完即可，不需要边传边看，也没有完成期限。"
+      },
+      "review": {
+        "decision": "known",
+        "category": "bulk",
+        "reason": "完成录制文件上传供以后查阅；明确不要求边传边看，不应识别成媒体播放。",
+        "reviewerId": "root-agent-semantic-audit",
+        "reviewerKind": "agent",
+        "reviewedAt": "2026-10-20T12:31:09.906291+00:00",
+        "independentOfPredictions": false
+      },
+      "targetReview": {
+        "status": "complete",
+        "fields": {
+          "direction": {
+            "value": "uplink",
+            "resolution": "explicit",
+            "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+            "evidence": [
+              {
+                "path": "/description",
+                "quote": "上传录好的课程文件"
+              }
+            ]
+          },
+          "min_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "max_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "rtt_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "one_way_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "loss_max_percent": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "priority": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "valid_for_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "deadline_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "measurement_window_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          }
+        }
+      }
+    },
+    {
+      "id": "pilot-app-name-only",
+      "scenarioFamily": "pilot-app-name-only",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "draft_d2_scenarios",
+        "sourceRef": "Conversation: six generated scenarios, as displayed in the primary Agent response; not a real platform record",
+        "collectedAt": "2026-10-20T12:30:53.651037+00:00"
+      },
+      "input": {
+        "request_id": "pilot-app-name-only",
+        "description": "我一会儿要用校内视频平台，帮我把网络调得流畅一点。"
+      },
+      "review": {
+        "decision": "unknown",
+        "category": null,
+        "reason": "应用名和“流畅”未区分对话、观看或文件传输；没有可操作数值。",
+        "reviewerId": "root-agent-semantic-audit",
+        "reviewerKind": "agent",
+        "reviewedAt": "2026-10-20T12:31:09.906292+00:00",
+        "independentOfPredictions": false
+      },
+      "targetReview": {
+        "status": "complete",
+        "fields": {
+          "direction": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "min_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "max_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "rtt_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "one_way_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "loss_max_percent": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "priority": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "valid_for_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "deadline_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "measurement_window_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          }
+        }
+      }
+    },
+    {
+      "id": "pilot-parallel-tasks",
+      "scenarioFamily": "pilot-parallel-tasks",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "draft_d2_scenarios",
+        "sourceRef": "Conversation: six generated scenarios, as displayed in the primary Agent response; not a real platform record",
+        "collectedAt": "2026-10-20T12:30:53.651037+00:00"
+      },
+      "input": {
+        "request_id": "pilot-parallel-tasks",
+        "description": "我要给远程同学演示实验并回答问题，同时上传昨天的录像归档，还没决定哪个更重要。"
+      },
+      "review": {
+        "decision": "ambiguous",
+        "category": null,
+        "reason": "包含互动和归档两个任务，需拆分；上传方向只属于子任务，不能充当整个请求的单一方向。",
+        "reviewerId": "root-agent-semantic-audit",
+        "reviewerKind": "agent",
+        "reviewedAt": "2026-10-20T12:31:09.906294+00:00",
+        "independentOfPredictions": false
+      },
+      "targetReview": {
+        "status": "complete",
+        "fields": {
+          "direction": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "min_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "max_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "rtt_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "one_way_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "loss_max_percent": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "priority": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "valid_for_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "deadline_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "measurement_window_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          }
+        }
+      }
+    },
+    {
+      "id": "pilot-deadline-backup",
+      "scenarioFamily": "pilot-deadline-backup",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "draft_d2_scenarios",
+        "sourceRef": "Conversation: six generated scenarios, as displayed in the primary Agent response; not a real platform record",
+        "collectedAt": "2026-10-20T12:30:53.651037+00:00"
+      },
+      "input": {
+        "request_id": "pilot-deadline-backup",
+        "description": "我要备份实验数据，上传最多10 Mbps，20分钟内传完；做不到就告诉我，不要提高上限。"
+      },
+      "review": {
+        "decision": "known",
+        "category": "bulk",
+        "reason": "以完成数据备份为目标；20分钟是完成期限，不是有效期或优先级；未提供数据量无法准入。",
+        "reviewerId": "root-agent-semantic-audit",
+        "reviewerKind": "agent",
+        "reviewedAt": "2026-10-20T12:31:09.906295+00:00",
+        "independentOfPredictions": false
+      },
+      "targetReview": {
+        "status": "complete",
+        "fields": {
+          "direction": {
+            "value": "uplink",
+            "resolution": "explicit",
+            "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+            "evidence": [
+              {
+                "path": "/description",
+                "quote": "上传最多10 Mbps"
+              }
+            ]
+          },
+          "min_bandwidth_mbps": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "max_bandwidth_mbps": {
+            "value": 10,
+            "resolution": "explicit",
+            "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+            "evidence": [
+              {
+                "path": "/description",
+                "quote": "最多10 Mbps"
+              }
+            ]
+          },
+          "rtt_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "one_way_p95_max_ms": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "loss_max_percent": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "priority": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "valid_for_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          },
+          "deadline_seconds": {
+            "value": 1200,
+            "resolution": "explicit",
+            "basis": "按原文明确值记录；时间换算为秒，速率保持 Mbps。",
+            "evidence": [
+              {
+                "path": "/description",
+                "quote": "20分钟内传完"
+              }
+            ]
+          },
+          "measurement_window_seconds": {
+            "value": null,
+            "resolution": "unknown",
+            "basis": "原始描述未给出本请求可统一使用的明确目标；不自动填充默认值。",
+            "evidence": []
+          }
+        }
+      }
+    }
+  ]
+}

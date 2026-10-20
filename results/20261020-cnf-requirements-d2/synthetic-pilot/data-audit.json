@@ -1,0 +1,114 @@
+{
+  "scope": "Agent semantic consistency check of six synthetic descriptions; not authenticated human labels or independent testing",
+  "originalCollectionSha256LF": "ae3a0d6f6914d15a5d47cd9737d3f06aa1e42e1d15dbbdb32be11993eac57592",
+  "referenceLabelsSha256LF": "6649a56dbb5e5ae3d5bb5d9d6e526c1dd678d7842fdc95f16ffe02d6fd7921a4",
+  "referenceLabelsChangedForPredictions": false,
+  "internallyConsistent": true,
+  "explicitTargets": 8,
+  "targetFieldsCheckedIncludingUnknowns": 60,
+  "allExplicitEvidenceQuotesExist": true,
+  "unitConversions": {
+    "30_minutes_service_duration_seconds": 1800,
+    "20_minutes_completion_deadline_seconds": 1200
+  },
+  "samplesRequirePlatform": false,
+  "allPlanningInputsComplete": false,
+  "userActionRequiredNow": [],
+  "caseChecks": [
+    {
+      "id": "pilot-remote-discussion",
+      "referenceDecision": "interactive",
+      "missingPlanningFields": [
+        "direction",
+        "max_bandwidth_mbps",
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "blockingFindings": [],
+      "planningCandidate": false,
+      "action": "clarify_or_split_before_planning"
+    },
+    {
+      "id": "pilot-recorded-course",
+      "referenceDecision": "streaming",
+      "missingPlanningFields": [
+        "measurement_window_seconds",
+        "priority",
+        "subject.user_id"
+      ],
+      "blockingFindings": [],
+      "planningCandidate": false,
+      "action": "clarify_or_split_before_planning"
+    },
+    {
+      "id": "pilot-recording-upload",
+      "referenceDecision": "bulk",
+      "missingPlanningFields": [
+        "max_bandwidth_mbps",
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "blockingFindings": [],
+      "planningCandidate": false,
+      "action": "clarify_or_split_before_planning"
+    },
+    {
+      "id": "pilot-app-name-only",
+      "referenceDecision": "unknown",
+      "missingPlanningFields": [
+        "direction",
+        "max_bandwidth_mbps",
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "blockingFindings": [],
+      "planningCandidate": false,
+      "action": "clarify_or_split_before_planning"
+    },
+    {
+      "id": "pilot-parallel-tasks",
+      "referenceDecision": "ambiguous",
+      "missingPlanningFields": [
+        "direction",
+        "max_bandwidth_mbps",
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "blockingFindings": [],
+      "planningCandidate": false,
+      "action": "clarify_or_split_before_planning"
+    },
+    {
+      "id": "pilot-deadline-backup",
+      "referenceDecision": "bulk",
+      "missingPlanningFields": [
+        "measurement_window_seconds",
+        "min_bandwidth_mbps",
+        "priority",
+        "subject.user_id",
+        "valid_for_seconds"
+      ],
+      "blockingFindings": [
+        "completion_deadline_requires_workload_and_E_check"
+      ],
+      "planningCandidate": false,
+      "action": "clarify_or_split_before_planning"
+    }
+  ],
+  "futureEvidenceNeededForStrongerClaims": [
+    "separate independently labeled scenarios for generalization claims",
+    "actual application measurements for application QoE/SLA claims"
+  ]
+}

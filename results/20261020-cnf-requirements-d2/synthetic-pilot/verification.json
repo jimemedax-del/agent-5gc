@@ -1,0 +1,17 @@
+{
+  "verifiedAt": "2026-10-20T12:36:24.540605+00:00",
+  "outcome": "passed_controlled_synthetic_checks",
+  "archivedEvaluationReplaysMatch": [
+    "evaluation-before",
+    "evaluation-after"
+  ],
+  "D1ArchivedNineInputHashesIntact": true,
+  "D1V2RegressionReplaysMatch": true,
+  "pilotInvarianceChecksPassed": 18,
+  "humanCategoryDeclarations": 0,
+  "independentBenchmark": false,
+  "allSixRetained": true,
+  "allSixDeniedPlanningAuthorization": true,
+  "networkPoliciesApplied": false,
+  "clusterAccessed": false
+}

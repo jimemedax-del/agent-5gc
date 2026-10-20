@@ -1,0 +1,158 @@
+{
+  "evaluationVersion": "cnf-requirements-reviewed-evaluation-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "D2",
+  "claimScope": "Agent-checked synthetic development only; not an independent benchmark, human validation or network SLA",
+  "audit": {
+    "auditVersion": "cnf-requirements-review-audit-v1",
+    "route": "R2",
+    "stage": "R2.S4",
+    "task": "D2",
+    "integrity": "passed",
+    "annotationMode": "agent_synthetic",
+    "cases": 6,
+    "humanCategoryDeclarations": 0,
+    "agentCategoryAnnotations": 6,
+    "pendingCategories": 0,
+    "completeTargetReviews": 6,
+    "pendingTargetReviews": 0,
+    "originCounts": {
+      "synthetic": 6
+    },
+    "splitCounts": {
+      "development": 6
+    },
+    "reviewedCategoryCounts": {
+      "interactive": 1,
+      "streaming": 1,
+      "bulk": 2
+    },
+    "reviewedUnknown": 1,
+    "reviewedAmbiguous": 1,
+    "missingReviewedCategories": [],
+    "evaluationReady": true,
+    "frozenBaselineSha256LF": {
+      "scripts/cnf-requirements.py": "467c69456bf5b630c2dfb69e62c58b453373def637d6570928bba0f4c3097547",
+      "infra/cnfs/requirements-contract.json": "9b6856c4d2c05de201dba73eb86705328e784b041cda39e435db5b8146c0c45e",
+      "scripts/review-cnf-requirements.py": "03826b1c3f4059740a8307bb2d6dd5e0b761090fb1e5bb7f102466e5f2cfd514"
+    },
+    "reviewProvenance": "Agent-checked synthetic development labels; no independent human validation",
+    "leakageCheckScope": "declared family identifiers and whitespace-normalized exact descriptions; semantic paraphrase leakage requires human review",
+    "realWorkloadExecutionVerified": false,
+    "stageDAccepted": false,
+    "clusterAccessed": false
+  },
+  "strata": {
+    "synthetic/development": {
+      "cases": 6,
+      "knownCases": 4,
+      "knownCorrect": 0,
+      "knownAccuracyIncludingRefusals": 0.0,
+      "knownCoverage": 0.0,
+      "selectiveAccuracy": null,
+      "unknownOrAmbiguousCases": 2,
+      "safeAbstentions": 2,
+      "exactDecisionMatches": 1,
+      "confusion": [
+        {
+          "referenceLabel": "ambiguous",
+          "prediction": "unknown",
+          "cases": 1
+        },
+        {
+          "referenceLabel": "bulk",
+          "prediction": "unknown",
+          "cases": 2
+        },
+        {
+          "referenceLabel": "interactive",
+          "prediction": "unknown",
+          "cases": 1
+        },
+        {
+          "referenceLabel": "streaming",
+          "prediction": "unknown",
+          "cases": 1
+        },
+        {
+          "referenceLabel": "unknown",
+          "prediction": "unknown",
+          "cases": 1
+        }
+      ],
+      "scenarioFamilies": 6,
+      "categoryByInputMode": {
+        "description_only": {
+          "cases": 6,
+          "knownCases": 4,
+          "knownCorrect": 0,
+          "knownAccuracyIncludingRefusals": 0.0,
+          "knownCoverage": 0.0,
+          "selectiveAccuracy": null,
+          "unknownOrAmbiguousCases": 2,
+          "safeAbstentions": 2,
+          "exactDecisionMatches": 1,
+          "confusion": [
+            {
+              "referenceLabel": "ambiguous",
+              "prediction": "unknown",
+              "cases": 1
+            },
+            {
+              "referenceLabel": "bulk",
+              "prediction": "unknown",
+              "cases": 2
+            },
+            {
+              "referenceLabel": "interactive",
+              "prediction": "unknown",
+              "cases": 1
+            },
+            {
+              "referenceLabel": "streaming",
+              "prediction": "unknown",
+              "cases": 1
+            },
+            {
+              "referenceLabel": "unknown",
+              "prediction": "unknown",
+              "cases": 1
+            }
+          ]
+        }
+      },
+      "reviewedTargetFields": 60,
+      "explicitTargetFields": 8,
+      "explicitValueMatches": 5,
+      "fieldValueAndResolutionMatches": 56,
+      "hallucinatedFields": 1,
+      "explicitTargetsByEvidence": {
+        "text_only": {
+          "fields": 8,
+          "valueMatches": 5
+        },
+        "structured_only": {
+          "fields": 0,
+          "valueMatches": 0
+        },
+        "mixed": {
+          "fields": 0,
+          "valueMatches": 0
+        }
+      }
+    }
+  },
+  "disagreements": [
+    "pilot-remote-discussion",
+    "pilot-recorded-course",
+    "pilot-recording-upload",
+    "pilot-parallel-tasks",
+    "pilot-deadline-backup"
+  ],
+  "unreviewedTargetsNotScored": 0,
+  "plansGenerated": 0,
+  "executionsAuthorized": 0,
+  "stageDAccepted": false,
+  "clusterAccessed": false
+}

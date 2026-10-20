@@ -1,0 +1,96 @@
+{
+  "comparisons": 18,
+  "passed": 18,
+  "checks": [
+    {
+      "id": "pilot-remote-discussion",
+      "kind": "port_transport",
+      "passed": true
+    },
+    {
+      "id": "pilot-remote-discussion",
+      "kind": "observations",
+      "passed": true
+    },
+    {
+      "id": "pilot-remote-discussion",
+      "kind": "description_port",
+      "passed": true
+    },
+    {
+      "id": "pilot-recorded-course",
+      "kind": "port_transport",
+      "passed": true
+    },
+    {
+      "id": "pilot-recorded-course",
+      "kind": "observations",
+      "passed": true
+    },
+    {
+      "id": "pilot-recorded-course",
+      "kind": "description_port",
+      "passed": true
+    },
+    {
+      "id": "pilot-recording-upload",
+      "kind": "port_transport",
+      "passed": true
+    },
+    {
+      "id": "pilot-recording-upload",
+      "kind": "observations",
+      "passed": true
+    },
+    {
+      "id": "pilot-recording-upload",
+      "kind": "description_port",
+      "passed": true
+    },
+    {
+      "id": "pilot-app-name-only",
+      "kind": "port_transport",
+      "passed": true
+    },
+    {
+      "id": "pilot-app-name-only",
+      "kind": "observations",
+      "passed": true
+    },
+    {
+      "id": "pilot-app-name-only",
+      "kind": "description_port",
+      "passed": true
+    },
+    {
+      "id": "pilot-parallel-tasks",
+      "kind": "port_transport",
+      "passed": true
+    },
+    {
+      "id": "pilot-parallel-tasks",
+      "kind": "observations",
+      "passed": true
+    },
+    {
+      "id": "pilot-parallel-tasks",
+      "kind": "description_port",
+      "passed": true
+    },
+    {
+      "id": "pilot-deadline-backup",
+      "kind": "port_transport",
+      "passed": true
+    },
+    {
+      "id": "pilot-deadline-backup",
+      "kind": "observations",
+      "passed": true
+    },
+    {
+      "id": "pilot-deadline-backup",
+      "kind": "description_port",
+      "passed": true
+    }
+  ]
+}

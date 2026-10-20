@@ -3,10 +3,10 @@
   "stage": "R2.S4",
   "task": "D2",
   "date": "2026-10-20",
-  "outcome": "annotation_intake_and_frozen_evaluation_implemented_data_pending",
+  "outcome": "controlled_synthetic_pilot_checked_rules_v2_ready_for_next_engineering_step",
   "stageDComplete": false,
   "contractVersion": "cnf-requirements-v1",
-  "baselineChanged": false,
+  "baselineChanged": true,
   "preparation": "review-01/manifest.json",
   "reviewForm": "review-01/review.html",
   "editableLabels": "review-01/review.json",
@@ -20,32 +20,83 @@
   "realNetworkWorkloadsExecuted": 0,
   "formalRecognitionEvaluation": null,
   "unitTests": {
-    "discovered": 208,
-    "passed": 207,
+    "discovered": 218,
+    "passed": 217,
     "conditionalHelmSkipped": 1,
-    "newD2Tests": 35,
+    "newThisIteration": 10,
     "evidence": "tests-windows.txt"
   },
   "sourceSha256LF": {
-    "scripts/review-cnf-requirements.py": "d335d59f1baa11f9c8393257704dd20341cac7aea087749955c3531109cfb3b4",
-    "tests/test_review_cnf_requirements.py": "cbe12853d8e5ce4eb2714dc003ab3d4bc115f718b302fae6e8cbfba26495c49f",
-    "scripts/cnf-requirements.py": "467c69456bf5b630c2dfb69e62c58b453373def637d6570928bba0f4c3097547",
-    "infra/cnfs/requirements-contract.json": "9b6856c4d2c05de201dba73eb86705328e784b041cda39e435db5b8146c0c45e"
+    "scripts/cnf-requirements.py": "91e3bf3ab1d5930d9be6387a9dc338b4e975eb10979f23354e8f556e1f078fcb",
+    "infra/cnfs/requirements-contract.json": "2867963401c878c442abdd9ed962e04e824ad139786daab9f211e379488a2eb0",
+    "scripts/review-cnf-requirements.py": "03826b1c3f4059740a8307bb2d6dd5e0b761090fb1e5bb7f102466e5f2cfd514",
+    "tests/test_cnf_requirements.py": "6b1efcabfef30633c767de849db23ac7c14e25dbd7331bfa480c2802bed10f8c",
+    "tests/test_review_cnf_requirements.py": "e484df6fd88efc67b5db15cf4b0207116f2f120545eff0ca9d79e9330c42f81a"
   },
   "clusterAccessed": false,
   "networkPoliciesApplied": false,
   "limitations": [
-    "No independent human labels or real requirement scenarios have been supplied; D2 scientific validation remains pending",
-    "Human identity, provenance and blindness are declarations, not authenticated evidence",
-    "Family/exact-description checks cannot discover arbitrary semantic overlap or paraphrase leakage",
-    "HTML form labels categories only; numeric targets stay unreviewed until separately annotated",
-    "No recognized intent improvement, new model comparison, packet-only recognition or live SLA claim",
-    "3-6 requested user scenarios would be initial collection, not statistical acceptance"
+    "Three original challenge cases still conservatively refused",
+    "Six development examples and reference labels were seen during fixes, so no generalization claim",
+    "Missing actual request/session identities, minimums, priorities, validity/windows and backup amount prevent plans; no defaults added",
+    "Native 5G QoS, stable latency/loss, real applications, E planner and Agent workflow remain unaccepted"
   ],
   "nextSteps": [
-    "Human category and target review of synthetic examples; do not expose per-sample predictions to reviewers",
-    "Collect real original requirements with source/author/time; freeze scenario grouping before evaluation",
-    "Use a distinct human reviewer for holdout, record unknown/ambiguous decisions and explicit/unknown/conflicting targets",
-    "Evaluate frozen baseline by origin/split/input channel; set research acceptance criteria and compare methods before claiming D acceptance"
-  ]
+    "Proceed with explicitly configured controlled planning/validation; do not apply the six incomplete raw requests",
+    "Retain three safe-refusal cases; compare methods on separately prepared data before asserting generalization",
+    "Human/real-application validation can strengthen later claims and is not a blocker for this controlled engineering pilot"
+  ],
+  "historicalPreparationOutcome": "annotation_intake_and_frozen_evaluation_implemented_data_pending",
+  "recognizerVersion": "cnf-requirements-rules-v2",
+  "currentPilot": "synthetic-pilot/metadata.json",
+  "currentUnitTests": {
+    "discovered": 218,
+    "passed": 217,
+    "conditionalHelmSkipped": 1,
+    "newThisIteration": 10,
+    "evidence": "tests-windows.txt"
+  },
+  "currentScope": "User authorized Agent self-check of synthetic development scenarios; real application platform and human annotations are optional for engineering progression, required only for stronger evidence claims.",
+  "currentLimitations": [
+    "Three original challenge cases still conservatively refused",
+    "Six development examples and reference labels were seen during fixes, so no generalization claim",
+    "Missing actual request/session identities, minimums, priorities, validity/windows and backup amount prevent plans; no defaults added",
+    "Native 5G QoS, stable latency/loss, real applications, E planner and Agent workflow remain unaccepted"
+  ],
+  "historicalHumanPreparation": {
+    "historicalPreparationOutcome": "annotation_intake_and_frozen_evaluation_implemented_data_pending",
+    "preparation": "review-01/manifest.json",
+    "reviewForm": "review-01/review.html",
+    "editableLabels": "review-01/review.json",
+    "readiness": "readiness-01.json",
+    "verification": "verification.json",
+    "syntheticReviewCases": 36,
+    "completeTargetReviews": 0,
+    "unitTests": {
+      "discovered": 208,
+      "passed": 207,
+      "conditionalHelmSkipped": 1,
+      "newD2Tests": 35,
+      "evidence": "tests-windows.txt"
+    },
+    "sourceSha256LF": {
+      "scripts/review-cnf-requirements.py": "d335d59f1baa11f9c8393257704dd20341cac7aea087749955c3531109cfb3b4",
+      "tests/test_review_cnf_requirements.py": "cbe12853d8e5ce4eb2714dc003ab3d4bc115f718b302fae6e8cbfba26495c49f",
+      "scripts/cnf-requirements.py": "467c69456bf5b630c2dfb69e62c58b453373def637d6570928bba0f4c3097547",
+      "infra/cnfs/requirements-contract.json": "9b6856c4d2c05de201dba73eb86705328e784b041cda39e435db5b8146c0c45e"
+    },
+    "limitations": [
+      "No independent human labels or real requirement scenarios have been supplied; D2 scientific validation remains pending",
+      "Human identity, provenance and blindness are declarations, not authenticated evidence",
+      "Family/exact-description checks cannot discover arbitrary semantic overlap or paraphrase leakage",
+      "HTML form labels categories only; numeric targets stay unreviewed until separately annotated",
+      "No recognized intent improvement, new model comparison, packet-only recognition or live SLA claim",
+      "3-6 requested user scenarios would be initial collection, not statistical acceptance"
+    ]
+  },
+  "agentReviewedSyntheticPilotCases": 6,
+  "syntheticDevelopmentEvaluation": "synthetic-pilot/evaluation-after/report.json",
+  "agentCompleteTargetReviews": 6,
+  "currentVerification": "synthetic-pilot/verification.json",
+  "userActionRequiredNow": []
 }

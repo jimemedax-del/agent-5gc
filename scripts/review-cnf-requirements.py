@@ -165,14 +165,19 @@ document.getElementById('export').onclick=()=>{
 };</script></html>'''
 
 
-def prepare(collection, out):
+def prepare(collection, out, annotation_mode='human'):
     reference = development_reference()
     validate_collection(collection, reference, baseline)
+    require(annotation_mode in ['human', 'agent_synthetic'], 'Unknown annotation mode')
+    if annotation_mode == 'agent_synthetic':
+        require(all(c['origin']['kind'] == 'synthetic' and c['split'] == 'development'
+                    for c in collection['cases']), 'Agent mode is restricted to synthetic development data')
     prepared_at = datetime.now(timezone.utc)
     require(all(timestamp(c['origin']['collectedAt']) <= prepared_at for c in collection['cases']),
             'Collection timestamps cannot be in the future')
     packet = {'reviewVersion': 'cnf-requirements-review-v2', 'collectionId': collection['collectionId'],
               'instructions': {'category': 'Record known/category, unknown, or ambiguous; explain using original business facts.',
+                               'annotationMode': annotation_mode,
                                'targets': 'Only explicitly requested targets; no default SLA. Null means unknown/conflicting/invalid, not zero.',
                                'independence': 'Human reviewer declares no recognizer predictions seen before labeling; this declaration is not authenticated.',
                                'evidence': 'Every reviewed target needs a basis. Explicit/conflict/invalid targets also need original evidence: path and quote or value.',
@@ -195,14 +200,15 @@ def prepare(collection, out):
     write_json(out / 'development-reference.json', reference)
     write_json(out / 'review.json', packet)
     manifest = {'bundleVersion': 'cnf-requirements-review-bundle-v1', 'route': 'R2', 'stage': 'R2.S4', 'task': 'D2',
-                'preparedAt': prepared_at.isoformat(), 'baselineSha256LF': hashes,
+                'preparedAt': prepared_at.isoformat(), 'baselineSha256LF': hashes, 'annotationMode': annotation_mode,
                 'collectionSha256LF': file_hash(out / 'collection.json'),
                 'developmentReferenceSha256LF': file_hash(out / 'development-reference.json'),
                 'immutableReviewSha256': digest(immutable_review(packet)),
                 'provenanceAuthentication': 'declarations_only_not_external_identity_verification',
                 'clusterAccessed': False}
     write_json(out / 'manifest.json', manifest)
-    (out / 'review.html').write_text(render_review(packet), encoding='utf-8')
+    if annotation_mode == 'human':
+        (out / 'review.html').write_text(render_review(packet), encoding='utf-8')
     return packet
 
 
@@ -221,7 +227,7 @@ def validate_evidence(evidence, request):
                 evidence['value'] == request['requested'][field], 'Structured evidence differs from original input')
 
 
-def validate_labels(item, normalizer):
+def validate_labels(item, normalizer, annotation_mode='human'):
     require(set(item) == {'id', 'scenarioFamily', 'split', 'origin', 'input', 'review', 'targetReview'}, 'Wrong item keys')
     review = item['review']
     require(type(review) is dict and set(review) == {'decision', 'category', 'reason', 'reviewerId', 'reviewerKind',
@@ -233,8 +239,14 @@ def validate_labels(item, normalizer):
     else:
         require((decision == 'known' and review['category'] in CATEGORIES) or
                 (decision != 'known' and review['category'] is None), 'Decision and category disagree')
-        require(review['reviewerKind'] == 'human' and review['independentOfPredictions'] is True,
-                'Human annotation and prediction independence must be explicitly declared')
+        if annotation_mode == 'human':
+            require(review['reviewerKind'] == 'human' and review['independentOfPredictions'] is True,
+                    'Human annotation and prediction independence must be explicitly declared')
+        else:
+            require(annotation_mode == 'agent_synthetic' and item['origin']['kind'] == 'synthetic' and
+                    item['split'] == 'development' and review['reviewerKind'] == 'agent' and
+                    review['independentOfPredictions'] is False,
+                    'Agent annotations must remain non-independent synthetic development checks')
         text(review['reviewerId'], 'reviewerId')
         text(review['reason'], 'review reason')
         reviewed = timestamp(review['reviewedAt'])
@@ -247,7 +259,7 @@ def validate_labels(item, normalizer):
     if targets['status'] == 'unreviewed':
         require(not targets['fields'], 'Unreviewed target fields must be empty')
         return
-    require(targets['status'] == 'complete' and decision != 'unreviewed', 'Target review needs human category review')
+    require(targets['status'] == 'complete' and decision != 'unreviewed', 'Target review needs category review')
     require(set(targets['fields']) == set(normalizer.FIELDS), 'Complete review must cover every target including unknowns')
     for field, annotation in targets['fields'].items():
         require(type(annotation) is dict and set(annotation) == {'value', 'resolution', 'basis', 'evidence'}, 'Wrong target annotation keys')
@@ -279,13 +291,15 @@ def load_bundle(review_path):
     packet = read_json(review_path)
     require(packet['reviewVersion'] == 'cnf-requirements-review-v2', 'Unknown review version')
     require(digest(immutable_review(packet)) == manifest['immutableReviewSha256'], 'Raw facts, split or membership changed after freezing')
+    annotation_mode = manifest.get('annotationMode', 'human')
+    require(annotation_mode == packet['instructions'].get('annotationMode', 'human'), 'Annotation mode differs from frozen packet')
     collection = read_json(folder / 'collection.json')
     normalizer = load_baseline(folder / 'frozen-inputs')
     validate_collection(collection, read_json(folder / 'development-reference.json'), normalizer)
     require([{k: v for k, v in i.items() if k not in ['review', 'targetReview']} for i in packet['items']] == collection['cases'],
             'Review does not match original collection')
     for item in packet['items']:
-        validate_labels(item, normalizer)
+        validate_labels(item, normalizer, annotation_mode)
         if item['review']['decision'] != 'unreviewed':
             require(timestamp(item['review']['reviewedAt']) >= timestamp(manifest['preparedAt']),
                     'Review predates frozen annotation packet')
@@ -297,8 +311,11 @@ def audit(packet, manifest):
     reviewed = [i for i in items if i['review']['decision'] != 'unreviewed']
     targets = [i for i in items if i['targetReview']['status'] == 'complete']
     categories = Counter(i['review']['category'] for i in reviewed if i['review']['decision'] == 'known')
+    annotation_mode = manifest.get('annotationMode', 'human')
     return {'auditVersion': 'cnf-requirements-review-audit-v1', 'route': 'R2', 'stage': 'R2.S4', 'task': 'D2',
-            'integrity': 'passed', 'cases': len(items), 'humanCategoryDeclarations': len(reviewed),
+            'integrity': 'passed', 'annotationMode': annotation_mode, 'cases': len(items),
+            'humanCategoryDeclarations': sum(i['review']['reviewerKind'] == 'human' for i in reviewed),
+            'agentCategoryAnnotations': sum(i['review']['reviewerKind'] == 'agent' for i in reviewed),
             'pendingCategories': len(items) - len(reviewed), 'completeTargetReviews': len(targets),
             'pendingTargetReviews': len(items) - len(targets),
             'originCounts': dict(Counter(i['origin']['kind'] for i in items)),
@@ -308,12 +325,16 @@ def audit(packet, manifest):
             'missingReviewedCategories': [c for c in CATEGORIES if not categories[c]],
             'evaluationReady': len(reviewed) == len(items),
             'frozenBaselineSha256LF': manifest['baselineSha256LF'],
-            'reviewProvenance': 'human declarations, not independently authenticated; blindness not technically provable',
+            'reviewProvenance': ('Agent-checked synthetic development labels; no independent human validation' if annotation_mode == 'agent_synthetic'
+                                 else 'human declarations, not independently authenticated; blindness not technically provable'),
             'leakageCheckScope': 'declared family identifiers and whitespace-normalized exact descriptions; semantic paraphrase leakage requires human review',
             'realWorkloadExecutionVerified': False, 'stageDAccepted': False, 'clusterAccessed': False}
 
 
 def evaluate(packet, manifest, normalizer):
+    require(digest(immutable_review(packet)) == manifest['immutableReviewSha256'], 'Raw facts changed before evaluation')
+    for item in packet['items']:
+        validate_labels(item, normalizer, manifest.get('annotationMode', 'human'))
     readiness = audit(packet, manifest)
     require(readiness['evaluationReady'], 'Category annotations incomplete; use audit, not a partial scored subset')
     records = []
@@ -353,7 +374,8 @@ def evaluate(packet, manifest, normalizer):
                 'unknownOrAmbiguousCases': len(other),
                 'safeAbstentions': sum(r['prediction']['category']['value'] is None for r in other),
                 'exactDecisionMatches': sum(r['categoryDecisionMatches'] for r in rows),
-                'confusion': [{'humanLabel': k[0], 'prediction': k[1], 'cases': n} for k, n in sorted(confusion.items())]}
+                'confusion': [{('referenceLabel' if readiness['annotationMode'] == 'agent_synthetic' else 'humanLabel'): k[0],
+                               'prediction': k[1], 'cases': n} for k, n in sorted(confusion.items())]}
 
     def metrics(rows):
         fields = [f for r in rows for f in r['targetComparisons']]
@@ -371,7 +393,8 @@ def evaluate(packet, manifest, normalizer):
                                               for name, channels in sources.items()}}
 
     report = {'evaluationVersion': 'cnf-requirements-reviewed-evaluation-v1', 'route': 'R2', 'stage': 'R2.S4', 'task': 'D2',
-              'claimScope': 'Frozen rule baseline against declared human annotations; strata kept separate; no network SLA or stage acceptance',
+              'claimScope': ('Agent-checked synthetic development only; not an independent benchmark, human validation or network SLA' if readiness['annotationMode'] == 'agent_synthetic'
+                             else 'Frozen rule baseline against declared human annotations; strata kept separate; no network SLA or stage acceptance'),
               'audit': readiness, 'strata': {origin + '/' + split: metrics([r for r in records if r['originKind'] == origin and r['split'] == split])
                                            for origin, split in sorted({(r['originKind'], r['split']) for r in records})},
               'disagreements': [r['id'] for r in records if not r['categoryDecisionMatches'] or
@@ -391,17 +414,19 @@ def main():
     source.add_argument('--d1', action='store_true')
     source.add_argument('--collection', type=Path)
     prepare_parser.add_argument('--out', type=Path, required=True)
+    prepare_parser.add_argument('--annotation-mode', choices=['human', 'agent_synthetic'], default='human')
     for command in ['audit', 'evaluate', 'render']:
         child = sub.add_parser(command)
         child.add_argument('--review', type=Path, required=True)
         child.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     if args.command == 'prepare':
-        packet = prepare(from_d1() if args.d1 else read_json(args.collection), args.out)
+        packet = prepare(from_d1() if args.d1 else read_json(args.collection), args.out, args.annotation_mode)
         print(json.dumps({'prepared': len(packet['items']), 'humanLabelsCreated': 0, 'path': str(args.out / 'review.json')}))
         return
     packet, manifest, normalizer = load_bundle(args.review)
     if args.command == 'render':
+        require(manifest.get('annotationMode', 'human') == 'human', 'Human form is not used for Agent synthetic annotations')
         with args.out.open('x', encoding='utf-8') as stream:
             stream.write(render_review(packet))
         print(json.dumps({'outcome': 'rendered', 'humanLabelsCreated': 0}))
