@@ -1,11 +1,13 @@
 # 基于 Agent 的 5G 核心网 NF 编排：项目总览与当前状态
 
-> 最后更新：2026-10-16
-> 文档状态：R2.S3 固定 Profile、部署/恢复与独立重复测量已验收；下一阶段为 R2.S4 确定性编排
+> 最后更新：2026-10-20
+> 文档状态：R2.S3 已验收；后续任务与 Agent 接入边界已补充，尚无新增实机验收
 
 ## 当前路线与阶段
 
-**当前：R2.S3 可重复部署与测量已验收。** 统一入口 `cnf-profile.py` 管理四种固定状态；3 次幂等 apply、3 个 CNF 受控重建、快照恢复和预设失败回滚均通过。两批独立保护状态测量各 20 次业务通过，另有 10 次整形复测。当前为 `cnf-service-chain-v1/protected`：core 在 VM1、edge 在 VM3、无整形、保留隔离策略。下一阶段 R2.S4 确定性编排待开始。
+**当前：R2.S3 可重复部署与测量已验收，R2.S4 尚未实施。** 最近一次实机验收状态为 `cnf-service-chain-v1/protected`：core 在 VM1、edge 在 VM3、无整形、保留隔离策略；本次文档整理未复查现场。已有成果证明单 UE 完整链路、显式端口引导和限定范围整形可用，不证明业务需求自主识别、多用户保障或完整 5G QoS。
+
+**下一项：双 UE 低负载并发基线，并先核查当前 QoS 能力。** 后续按共享瓶颈竞争、需求建模与识别、确定性工具、Agent 接入推进；需求字段可同步设计。任务依赖与验收见 [CNF 后续任务](docs/cnf-service-chain-orchestration.md#后续任务验收与-agent-接入)，阶段状态以 [研究路线](docs/03-research-roadmap.md#r2-当前阶段顺序) 为准。
 
 | 路线 | 推进顺序与定位 | 入口 |
 |---|---|---|
@@ -90,7 +92,7 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 | 文档 | 用途 |
 |---|---|
 | [03-research-roadmap.md](docs/03-research-roadmap.md) | 路线版本、纠偏依据、历史里程碑和当前阶段顺序的主记录 |
-| [cnf-service-chain-orchestration.md](docs/cnf-service-chain-orchestration.md) | R2·阶段1—3：CNF能力与最小实验；后续编排细节继续归入该模块 |
+| [cnf-service-chain-orchestration.md](docs/cnf-service-chain-orchestration.md) | 已验证 CNF 能力与证据；双 UE/QoS/需求识别的后续任务、验收标准和 Agent 工具契约 |
 | [04-project-notes-method.md](docs/04-project-notes-method.md) | 路线、阶段、模块和实验记录的维护方法 |
 | [01-5gc-single-upf-baseline.md](docs/01-5gc-single-upf-baseline.md) | 单机 Docker Compose 实验环境、版本、验证结果与常用命令 |
 | [02-5gc-end-to-end-flow.md](docs/02-5gc-end-to-end-flow.md) | 注册、鉴权、PDU Session 和用户数据流的心智模型 |
