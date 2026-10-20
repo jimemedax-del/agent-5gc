@@ -1,0 +1,51 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "D2",
+  "date": "2026-10-20",
+  "outcome": "annotation_intake_and_frozen_evaluation_implemented_data_pending",
+  "stageDComplete": false,
+  "contractVersion": "cnf-requirements-v1",
+  "baselineChanged": false,
+  "preparation": "review-01/manifest.json",
+  "reviewForm": "review-01/review.html",
+  "editableLabels": "review-01/review.json",
+  "readiness": "readiness-01.json",
+  "verification": "verification.json",
+  "realCollectionIntake": "collection-intake.json",
+  "syntheticReviewCases": 36,
+  "humanCategoryDeclarations": 0,
+  "completeTargetReviews": 0,
+  "realRequirementSamples": 0,
+  "realNetworkWorkloadsExecuted": 0,
+  "formalRecognitionEvaluation": null,
+  "unitTests": {
+    "discovered": 208,
+    "passed": 207,
+    "conditionalHelmSkipped": 1,
+    "newD2Tests": 35,
+    "evidence": "tests-windows.txt"
+  },
+  "sourceSha256LF": {
+    "scripts/review-cnf-requirements.py": "d335d59f1baa11f9c8393257704dd20341cac7aea087749955c3531109cfb3b4",
+    "tests/test_review_cnf_requirements.py": "cbe12853d8e5ce4eb2714dc003ab3d4bc115f718b302fae6e8cbfba26495c49f",
+    "scripts/cnf-requirements.py": "467c69456bf5b630c2dfb69e62c58b453373def637d6570928bba0f4c3097547",
+    "infra/cnfs/requirements-contract.json": "9b6856c4d2c05de201dba73eb86705328e784b041cda39e435db5b8146c0c45e"
+  },
+  "clusterAccessed": false,
+  "networkPoliciesApplied": false,
+  "limitations": [
+    "No independent human labels or real requirement scenarios have been supplied; D2 scientific validation remains pending",
+    "Human identity, provenance and blindness are declarations, not authenticated evidence",
+    "Family/exact-description checks cannot discover arbitrary semantic overlap or paraphrase leakage",
+    "HTML form labels categories only; numeric targets stay unreviewed until separately annotated",
+    "No recognized intent improvement, new model comparison, packet-only recognition or live SLA claim",
+    "3-6 requested user scenarios would be initial collection, not statistical acceptance"
+  ],
+  "nextSteps": [
+    "Human category and target review of synthetic examples; do not expose per-sample predictions to reviewers",
+    "Collect real original requirements with source/author/time; freeze scenario grouping before evaluation",
+    "Use a distinct human reviewer for holdout, record unknown/ambiguous decisions and explicit/unknown/conflicting targets",
+    "Evaluate frozen baseline by origin/split/input channel; set research acceptance criteria and compare methods before claiming D acceptance"
+  ]
+}

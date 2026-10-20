@@ -326,6 +326,49 @@ python scripts/evaluate-cnf-requirements.py --out <新的结果目录>
 新增 D 测试可用 `python -m unittest discover -s tests -p 'test*requirements*.py' -v` 运行。
 能力边界、完整验证及 D2 审核入口见 [业务需求识别](../docs/cnf-service-chain-orchestration.md#业务需求识别的输入与验收)。
 
+## D2 人工标注与冻结评估
+
+`review-cnf-requirements.py` 使用 Python 3.10+ 标准库，在本地生成审核包并评价冻结识别器，不连接集群。
+D1 的开发集评估器保持原样；D2 使用不同的审核格式，不能将修改旧集的 `humanReviewStatus` 当作完成审核。
+
+```powershell
+python scripts/review-cnf-requirements.py prepare --d1 --out <新的审核包目录>
+python scripts/review-cnf-requirements.py prepare --collection <原始需求集合.json> --out <新的审核包目录>
+python scripts/review-cnf-requirements.py audit --review <审核包目录>/review.json --out <新的检查.json>
+python scripts/review-cnf-requirements.py evaluate --review <审核包目录>/review.json --out <新的评估目录>
+```
+
+`prepare` 两种来源二选一。审核包包括 `review.html`、`review.json`、原始集合、开发参考、版本及源码哈希；
+`review.html` 离线打开，仅辅助类别标注并导出 JSON，不向外上传或自动保存。将导出的文件保存为该包的 `review.json`，保留其他文件。
+如需从已有审核 JSON 重新生成表单，使用 `render --review <...>/review.json --out <新的HTML路径>`。
+若工具后续发生变化，应使用该包中 `frozen-inputs/scripts/review-cnf-requirements.py` 执行 `audit/evaluate/render`，保留原识别器及审核口径。
+
+真实原始集合格式为 `collectionVersion:cnf-requirements-collection-v1`、`collectionId` 和非空 `cases`。
+每条记录包含以下字段，尚未采集时保留空集合，不填入伪造案例：
+
+| 字段 | 内容 |
+|---|---|
+| `id`、`scenarioFamily` | 唯一请求标识、业务场景族；同族不得跨开发和留出集合 |
+| `split` | `development` 或 `holdout`；D1 已出现家族/描述不能作为新留出数据 |
+| `origin` | `kind` 为 `synthetic` 或 `real_requirement`；以及 `authorKind`（`human/agent`）、`authorId`、原始证据 `sourceRef`、带时区的 `collectedAt` |
+| `input` | D1 原始请求格式，`request_id` 与 `id` 相同；不得含草案类别、预测或正确答案 |
+
+审核 `review` 需逐条填写 `decision`（`known/unknown/ambiguous`）、相应 `category`、理由、审核者标识、`reviewerKind:human`、时间和 `independentOfPredictions:true` 声明。
+留出样本须为声明的真实人类需求，作者与审核者不同；工具不认证身份及声明，不检验所有语义重叠，仍需人工检查。
+只有全部类别审核完成才评分；修改原始事实、成员或划分后必须重新冻结，不能悄悄删掉拒判样例。
+
+`targetReview` 初始为 `status:unreviewed, fields:{}`，不参与目标评分。
+完成数值审核时改为 `status:complete`，`fields` 必须覆盖合同全部十个字段，每项包含 `value`、`resolution`、`basis`、`evidence`：
+
+- `resolution` 为 `explicit` 时值须合法；`unknown/conflict/invalid` 时值为 `null`，不能把未提供需求设成零。
+- `basis` 写人工依据；明确/冲突/无效字段还需 `evidence`，例如原文 `{"path":"/description","quote":"最低 4 Mbps"}` 或原结构化值 `{"path":"/requested/min_bandwidth_mbps","value":4}`。该例仅说明格式，不是为样本指定答案。
+- 原文片段存在和结构化值一致会被校验；是否正确理解任务仍由审核者负责，不从业务类别默认生成 SLA。
+
+评估按合成/真实、开发/留出分层；分类区分带/不带应用上下文，参数区分文本/结构化来源；含拒判的正确率与识别覆盖率同时报告。
+输出完整分歧及冻结输入，未审核目标不算正确未知，也不因评估脚本成功而宣称 D 验收或网络保证成立。
+测试入口：`python -m unittest discover -s tests -p test_review_cnf_requirements.py -v`。
+当前审核表、准备度和待采集信息见 [D2 模块](../docs/cnf-service-chain-orchestration.md#d2-人工标注数据冻结与独立验证)。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

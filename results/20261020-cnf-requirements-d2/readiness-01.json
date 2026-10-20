@@ -1,0 +1,37 @@
+{
+  "auditVersion": "cnf-requirements-review-audit-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "D2",
+  "integrity": "passed",
+  "cases": 36,
+  "humanCategoryDeclarations": 0,
+  "pendingCategories": 36,
+  "completeTargetReviews": 0,
+  "pendingTargetReviews": 36,
+  "originCounts": {
+    "synthetic": 36
+  },
+  "splitCounts": {
+    "development": 36
+  },
+  "reviewedCategoryCounts": {},
+  "reviewedUnknown": 0,
+  "reviewedAmbiguous": 0,
+  "missingReviewedCategories": [
+    "interactive",
+    "streaming",
+    "bulk"
+  ],
+  "evaluationReady": false,
+  "frozenBaselineSha256LF": {
+    "scripts/cnf-requirements.py": "467c69456bf5b630c2dfb69e62c58b453373def637d6570928bba0f4c3097547",
+    "infra/cnfs/requirements-contract.json": "9b6856c4d2c05de201dba73eb86705328e784b041cda39e435db5b8146c0c45e",
+    "scripts/review-cnf-requirements.py": "d335d59f1baa11f9c8393257704dd20341cac7aea087749955c3531109cfb3b4"
+  },
+  "reviewProvenance": "human declarations, not independently authenticated; blindness not technically provable",
+  "leakageCheckScope": "declared family identifiers and whitespace-normalized exact descriptions; semantic paraphrase leakage requires human review",
+  "realWorkloadExecutionVerified": false,
+  "stageDAccepted": false,
+  "clusterAccessed": false
+}

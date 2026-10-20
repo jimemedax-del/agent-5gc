@@ -1,0 +1,12 @@
+{
+  "scope": "temporary DOM simulation only; no human labels or browser downloads saved",
+  "checks": [
+    "36 initially unreviewed",
+    "empty export remains unreviewed",
+    "missing human/independence declaration rejected",
+    "selected category exported without inference",
+    "target reviews remain pending",
+    "immutable raw facts preserved"
+  ],
+  "passed": true
+}

@@ -1,0 +1,947 @@
+{
+  "collectionVersion": "cnf-requirements-collection-v1",
+  "collectionId": "d1-synthetic-review",
+  "cases": [
+    {
+      "id": "meeting-text",
+      "scenarioFamily": "conference",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "meeting-text",
+        "description": "视频会议，上行，最低 1 Mbps，最高 3 Mbps，优先级高，有效期 120 秒，统计窗口 20 秒，RTT p95 不超过 20 ms",
+        "subject": {
+          "user_id": "lab-ue1"
+        }
+      }
+    },
+    {
+      "id": "remote-control",
+      "scenarioFamily": "control",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "remote-control",
+        "description": "远程控制设备",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "uplink",
+          "min_bandwidth_mbps": 1,
+          "max_bandwidth_mbps": 2,
+          "priority": "high",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "playback-text",
+      "scenarioFamily": "video-consumption",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "playback-text",
+        "description": "视频播放，下行，最低 4 Mbps，最高 8 Mbps，优先级中，有效期 60 秒，统计窗口 20 秒",
+        "subject": {
+          "user_id": "lab-ue1"
+        }
+      }
+    },
+    {
+      "id": "audio-context",
+      "scenarioFamily": "audio-consumption",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "audio-context",
+        "description": "接收讲座音频并持续消费",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        },
+        "context": {
+          "delivery": "continuous_playback"
+        }
+      }
+    },
+    {
+      "id": "archive-units",
+      "scenarioFamily": "video-file",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "archive-units",
+        "description": "视频文件归档，上行，最低 500 kbps，最高 1 MB/s，优先级低，有效期 2 分钟，统计窗口 20 秒",
+        "subject": {
+          "user_id": "lab-ue1"
+        }
+      }
+    },
+    {
+      "id": "backup-context",
+      "scenarioFamily": "storage-copy",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "backup-context",
+        "description": "将站点数据迁移到存储设备",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        },
+        "context": {
+          "delivery": "background_transfer"
+        }
+      }
+    },
+    {
+      "id": "voice-missing",
+      "scenarioFamily": "voice",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "voice-missing",
+        "description": "语音通话",
+        "subject": {
+          "user_id": "lab-ue1"
+        }
+      }
+    },
+    {
+      "id": "video-ambiguous",
+      "scenarioFamily": "video-unspecified",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "video-ambiguous",
+        "description": "视频",
+        "subject": {
+          "user_id": "lab-ue1"
+        }
+      }
+    },
+    {
+      "id": "flow-only",
+      "scenarioFamily": "traffic-only",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "flow-only",
+        "description": "",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "flow": {
+          "protocol": "UDP",
+          "destination_port": 5201
+        },
+        "observations": {
+          "throughput_mbps": 8,
+          "rtt_p95_ms": 3,
+          "loss_percent": 0
+        }
+      }
+    },
+    {
+      "id": "route-label-only",
+      "scenarioFamily": "route-hint",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "route-label-only",
+        "description": "端口 31301 转发到 edge，5QI=7",
+        "subject": {
+          "user_id": "lab-ue1"
+        }
+      }
+    },
+    {
+      "id": "mixed-tasks",
+      "scenarioFamily": "mixed",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "mixed-tasks",
+        "description": "视频会议和后台备份",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "negated-meeting",
+      "scenarioFamily": "negation",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "negated-meeting",
+        "description": "不是视频会议，是后台备份",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "min-contradiction",
+      "scenarioFamily": "contradictory-minimum",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "min-contradiction",
+        "description": "视频播放，最低 6 Mbps",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "bounds-contradiction",
+      "scenarioFamily": "bounds",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "bounds-contradiction",
+        "description": "文件归档",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 9,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "window-conflict",
+      "scenarioFamily": "window-validity",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "window-conflict",
+        "description": "文件归档",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 90
+        }
+      }
+    },
+    {
+      "id": "latency-unspecified",
+      "scenarioFamily": "missing-latency-definition",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "latency-unspecified",
+        "description": "视频会议，时延不超过 20 ms",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "rtt-unsupported",
+      "scenarioFamily": "rtt-goal",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "rtt-unsupported",
+        "description": "视频会议",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20,
+          "rtt_p95_max_ms": 20
+        }
+      }
+    },
+    {
+      "id": "loss-unsupported",
+      "scenarioFamily": "loss-goal",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "loss-unsupported",
+        "description": "视频播放",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20,
+          "loss_max_percent": 0.1
+        }
+      }
+    },
+    {
+      "id": "bidirectional-unverified",
+      "scenarioFamily": "bidirectional",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "bidirectional-unverified",
+        "description": "语音通话",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "bidirectional",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "observation-not-target",
+      "scenarioFamily": "observed-vs-target",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "observation-not-target",
+        "description": "视频播放，当前实测 RTT p95 不超过 20 ms",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        },
+        "observations": {
+          "throughput_mbps": 90,
+          "rtt_p95_ms": 4,
+          "loss_percent": 50
+        }
+      }
+    },
+    {
+      "id": "unqualified-rate",
+      "scenarioFamily": "unqualified-rate",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "unqualified-rate",
+        "description": "视频播放，带宽 6 Mbps",
+        "subject": {
+          "user_id": "lab-ue1"
+        }
+      }
+    },
+    {
+      "id": "deadline-short",
+      "scenarioFamily": "same-flow-deadline",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "deadline-short",
+        "description": "后台备份，在 60 秒内完成",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        },
+        "flow": {
+          "protocol": "TCP",
+          "destination_port": 5201
+        }
+      }
+    },
+    {
+      "id": "deadline-long",
+      "scenarioFamily": "same-flow-deadline",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "deadline-long",
+        "description": "后台备份，在 600 秒内完成",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        },
+        "flow": {
+          "protocol": "TCP",
+          "destination_port": 5201
+        }
+      }
+    },
+    {
+      "id": "unknown-task",
+      "scenarioFamily": "unknown",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "unknown-task",
+        "description": "完成一项业务",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "context-contradiction",
+      "scenarioFamily": "context-conflict",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "context-contradiction",
+        "description": "视频播放",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        },
+        "context": {
+          "interaction": "closed_loop"
+        }
+      }
+    },
+    {
+      "id": "reference-overload",
+      "scenarioFamily": "single-overload",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "reference-overload",
+        "description": "文件备份",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 12,
+          "max_bandwidth_mbps": 15,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "two-directions-one-target",
+      "scenarioFamily": "directions-need-decomposition",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "two-directions-one-target",
+        "description": "视频播放，上行最低 4 Mbps，下行最低 4 Mbps",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "no-latency-demand",
+      "scenarioFamily": "negative-goal",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "no-latency-demand",
+        "description": "视频文件归档，无需低时延",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "competing-six-a",
+      "scenarioFamily": "shared-overload-pair",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "competing-six-a",
+        "description": "视频播放",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 6,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "competing-six-b",
+      "scenarioFamily": "shared-overload-pair",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "competing-six-b",
+        "description": "后台备份",
+        "subject": {
+          "user_id": "lab-ue2"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 6,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "unseen-interview",
+      "scenarioFamily": "unseen-interview",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "unseen-interview",
+        "description": "多方远程面试，双方需要即时问答",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "unseen-viewing",
+      "scenarioFamily": "unseen-viewing",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "unseen-viewing",
+        "description": "每秒接收演讲内容并边收边看",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "unseen-copy",
+      "scenarioFamily": "unseen-copy",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "unseen-copy",
+        "description": "夜间将照片增量复制到存储设备",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "meeting-recording",
+      "scenarioFamily": "meeting-recording",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "meeting-recording",
+        "description": "视频会议的录像用于视频播放",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "negation-without-comma",
+      "scenarioFamily": "negation-without-comma",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "negation-without-comma",
+        "description": "不是视频会议而是文件归档",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    },
+    {
+      "id": "unseen-game",
+      "scenarioFamily": "unseen-game",
+      "split": "development",
+      "origin": {
+        "kind": "synthetic",
+        "authorKind": "agent",
+        "authorId": "D1-Agent",
+        "sourceRef": "tests/fixtures/requirements-cases.json",
+        "collectedAt": "2026-10-20T00:00:00+08:00"
+      },
+      "input": {
+        "request_id": "unseen-game",
+        "description": "玩在线多人游戏并即时操作角色",
+        "subject": {
+          "user_id": "lab-ue1"
+        },
+        "requested": {
+          "direction": "downlink",
+          "min_bandwidth_mbps": 4,
+          "max_bandwidth_mbps": 8,
+          "priority": "normal",
+          "valid_for_seconds": 60,
+          "measurement_window_seconds": 20
+        }
+      }
+    }
+  ]
+}

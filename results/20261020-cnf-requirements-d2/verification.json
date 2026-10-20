@@ -1,0 +1,18 @@
+{
+  "verifiedAt": "2026-10-20T11:59:52.020623+00:00",
+  "outcome": "engineering_checks_passed_labels_and_real_data_pending",
+  "archivedAuditReplayMatches": true,
+  "currentSourcesMatchFrozen": true,
+  "D1AllNineSourceHashesUnchanged": true,
+  "D1HistoricalFailuresPreserved": true,
+  "pendingReviewEvaluationRejected": true,
+  "rejectionReason": "ValueError: Category annotations incomplete; use audit, not a partial scored subset",
+  "noEvaluationDirectoryCreated": true,
+  "reviewedCategoryLabels": 0,
+  "realRequirementSamples": 0,
+  "formalAccuracyReported": false,
+  "formCheck": "form-check.json",
+  "formCheckScope": "Node DOM simulation and JavaScript syntax; browser visual preview unavailable",
+  "stageDAccepted": false,
+  "clusterAccessed": false
+}

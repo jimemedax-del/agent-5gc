@@ -1,0 +1,17 @@
+{
+  "bundleVersion": "cnf-requirements-review-bundle-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "D2",
+  "preparedAt": "2026-10-20T11:57:07.540621+00:00",
+  "baselineSha256LF": {
+    "scripts/cnf-requirements.py": "467c69456bf5b630c2dfb69e62c58b453373def637d6570928bba0f4c3097547",
+    "infra/cnfs/requirements-contract.json": "9b6856c4d2c05de201dba73eb86705328e784b041cda39e435db5b8146c0c45e",
+    "scripts/review-cnf-requirements.py": "d335d59f1baa11f9c8393257704dd20341cac7aea087749955c3531109cfb3b4"
+  },
+  "collectionSha256LF": "f05100671ee8abf04108dc5f75b84e5708740b64c34ab2253d7c1454f0ca184f",
+  "developmentReferenceSha256LF": "94f401c33c2169f5dfbeb4a2a53afbe661c8d6c60fe7d2dd6f9e14bdc70734f4",
+  "immutableReviewSha256": "36e9dfd7b808d69cc5b7414ca031238026f676df92d295644412f48823b54585",
+  "provenanceAuthentication": "declarations_only_not_external_identity_verification",
+  "clusterAccessed": false
+}
