@@ -1,0 +1,16 @@
+{
+  "command": [
+    "tc",
+    "-j",
+    "-s",
+    "filter",
+    "show",
+    "dev",
+    "eth0",
+    "parent",
+    "ffff:"
+  ],
+  "returncode": 0,
+  "stdout": "[{\"protocol\":\"ip\",\"pref\":45000,\"kind\":\"matchall\",\"chain\":0},{\"protocol\":\"ip\",\"pref\":45000,\"kind\":\"matchall\",\"chain\":0,\"options\":{\"handle\":1,\"not_in_hw\":true,\"rule_hit\":0,\"actions\":[{\"order\":1,\"kind\":\"mirred\",\"mirred_action\":\"redirect\",\"direction\":\"egress\",\"to_dev\":\"cnfc2ifb0\",\"control_action\":{\"type\":\"stolen\"},\"index\":1,\"ref\":1,\"bind\":1,\"installed\":0,\"last_used\":0,\"stats\":{\"bytes\":0,\"packets\":0,\"drops\":0,\"overlimits\":0,\"requeues\":0,\"backlog\":0,\"qlen\":0}}]}}]\n",
+  "stderr": ""
+}

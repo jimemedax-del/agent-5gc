@@ -1,0 +1,14 @@
+{
+  "command": [
+    "tc",
+    "filter",
+    "show",
+    "dev",
+    "eth0",
+    "parent",
+    "ffff:"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

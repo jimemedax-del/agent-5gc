@@ -1,0 +1,149 @@
+{
+  "eth0Qdisc": [
+    {
+      "kind": "noqueue",
+      "handle": "0:",
+      "root": true,
+      "refcnt": 2,
+      "options": {},
+      "bytes": 0,
+      "packets": 0,
+      "drops": 0,
+      "overlimits": 0,
+      "requeues": 0,
+      "backlog": 0,
+      "qlen": 0
+    },
+    {
+      "kind": "ingress",
+      "handle": "ffff:",
+      "parent": "ffff:fff1",
+      "options": {},
+      "bytes": 61428008,
+      "packets": 50354,
+      "drops": 0,
+      "overlimits": 0,
+      "requeues": 0,
+      "backlog": 0,
+      "qlen": 0
+    }
+  ],
+  "ingressFilters": [
+    {
+      "protocol": "ip",
+      "pref": 45000,
+      "kind": "matchall",
+      "chain": 0
+    },
+    {
+      "protocol": "ip",
+      "pref": 45000,
+      "kind": "matchall",
+      "chain": 0,
+      "options": {
+        "handle": 1,
+        "not_in_hw": true,
+        "rule_hit": 50351,
+        "actions": [
+          {
+            "order": 1,
+            "kind": "mirred",
+            "mirred_action": "redirect",
+            "direction": "egress",
+            "to_dev": "cnfc2ifb0",
+            "control_action": {
+              "type": "stolen"
+            },
+            "index": 1,
+            "ref": 1,
+            "bind": 1,
+            "installed": 38,
+            "last_used": 0,
+            "first_used": 36,
+            "stats": {
+              "bytes": 61427896,
+              "packets": 50351,
+              "drops": 0,
+              "overlimits": 0,
+              "requeues": 0,
+              "backlog": 0,
+              "qlen": 0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "link": [
+    {
+      "ifindex": 6,
+      "ifname": "cnfc2ifb0",
+      "flags": [
+        "BROADCAST",
+        "NOARP",
+        "UP",
+        "LOWER_UP"
+      ],
+      "mtu": 1450,
+      "qdisc": "fq_codel",
+      "operstate": "UNKNOWN",
+      "linkmode": "DEFAULT",
+      "group": "default",
+      "link_type": "ether",
+      "address": "ce:84:97:77:1a:35",
+      "broadcast": "ff:ff:ff:ff:ff:ff",
+      "promiscuity": 0,
+      "min_mtu": 0,
+      "max_mtu": 0,
+      "linkinfo": {
+        "info_kind": "ifb"
+      },
+      "inet6_addr_gen_mode": "eui64",
+      "num_tx_queues": 1,
+      "num_rx_queues": 1,
+      "gso_max_size": 65536,
+      "gso_max_segs": 65535,
+      "ifalias": "cnf-contention-uplink-v1"
+    }
+  ],
+  "tc": {
+    "qdisc": [
+      {
+        "kind": "fq_codel",
+        "handle": "0:",
+        "root": true,
+        "refcnt": 2,
+        "options": {
+          "limit": 10240,
+          "flows": 1024,
+          "quantum": 1464,
+          "target": 4999,
+          "interval": 99999,
+          "memory_limit": 33554432,
+          "ecn": true,
+          "drop_batch": 64
+        },
+        "bytes": 62131970,
+        "packets": 50343,
+        "drops": 0,
+        "overlimits": 0,
+        "requeues": 11155,
+        "backlog": 0,
+        "qlen": 0,
+        "maxpacket": 1242,
+        "drop_overlimit": 0,
+        "new_flow_count": 17810,
+        "ecn_mark": 0,
+        "new_flows_len": 0,
+        "old_flows_len": 0
+      }
+    ],
+    "class": [],
+    "filter": [],
+    "raw": {
+      "qdisc": "[{\"kind\":\"fq_codel\",\"handle\":\"0:\",\"root\":true,\"refcnt\":2,\"options\":{\"limit\":10240,\"flows\":1024,\"quantum\":1464,\"target\":4999,\"interval\":99999,\"memory_limit\":33554432,\"ecn\":true,\"drop_batch\":64},\"bytes\":62131970,\"packets\":50343,\"drops\":0,\"overlimits\":0,\"requeues\":11155,\"backlog\":0,\"qlen\":0,\"maxpacket\":1242,\"drop_overlimit\":0,\"new_flow_count\":17810,\"ecn_mark\":0,\"new_flows_len\":0,\"old_flows_len\":0}]\n",
+      "class": "",
+      "filter": ""
+    }
+  }
+}

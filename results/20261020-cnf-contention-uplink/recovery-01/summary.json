@@ -1,0 +1,1 @@
+{"outcome": "passed", "reason": "iproute2 link-add alias not installed; exact prior link/ifindex/MAC confirmed, explicit link-set alias then restore", "ifindex": 3}

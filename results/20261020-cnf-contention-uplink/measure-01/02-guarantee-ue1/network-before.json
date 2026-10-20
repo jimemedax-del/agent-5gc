@@ -1,0 +1,396 @@
+{
+  "eth0Qdisc": [
+    {
+      "kind": "noqueue",
+      "handle": "0:",
+      "root": true,
+      "refcnt": 2,
+      "options": {},
+      "bytes": 0,
+      "packets": 0,
+      "drops": 0,
+      "overlimits": 0,
+      "requeues": 0,
+      "backlog": 0,
+      "qlen": 0
+    },
+    {
+      "kind": "ingress",
+      "handle": "ffff:",
+      "parent": "ffff:fff1",
+      "options": {},
+      "bytes": 552855126,
+      "packets": 453109,
+      "drops": 0,
+      "overlimits": 0,
+      "requeues": 0,
+      "backlog": 0,
+      "qlen": 0
+    }
+  ],
+  "ingressFilters": [
+    {
+      "protocol": "ip",
+      "pref": 45000,
+      "kind": "matchall",
+      "chain": 0
+    },
+    {
+      "protocol": "ip",
+      "pref": 45000,
+      "kind": "matchall",
+      "chain": 0,
+      "options": {
+        "handle": 1,
+        "not_in_hw": true,
+        "rule_hit": 453097,
+        "actions": [
+          {
+            "order": 1,
+            "kind": "mirred",
+            "mirred_action": "redirect",
+            "direction": "egress",
+            "to_dev": "cnfc2ifb0",
+            "control_action": {
+              "type": "stolen"
+            },
+            "index": 1,
+            "ref": 1,
+            "bind": 1,
+            "installed": 313,
+            "last_used": 2,
+            "first_used": 310,
+            "stats": {
+              "bytes": 552854669,
+              "packets": 453097,
+              "drops": 0,
+              "overlimits": 319,
+              "requeues": 0,
+              "backlog": 0,
+              "qlen": 0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "link": [
+    {
+      "ifindex": 6,
+      "ifname": "cnfc2ifb0",
+      "flags": [
+        "BROADCAST",
+        "NOARP",
+        "UP",
+        "LOWER_UP"
+      ],
+      "mtu": 1450,
+      "qdisc": "htb",
+      "operstate": "UNKNOWN",
+      "linkmode": "DEFAULT",
+      "group": "default",
+      "link_type": "ether",
+      "address": "ce:84:97:77:1a:35",
+      "broadcast": "ff:ff:ff:ff:ff:ff",
+      "promiscuity": 0,
+      "min_mtu": 0,
+      "max_mtu": 0,
+      "linkinfo": {
+        "info_kind": "ifb"
+      },
+      "inet6_addr_gen_mode": "eui64",
+      "num_tx_queues": 1,
+      "num_rx_queues": 1,
+      "gso_max_size": 65536,
+      "gso_max_segs": 65535,
+      "ifalias": "cnf-contention-uplink-v1"
+    }
+  ],
+  "tc": {
+    "qdisc": [
+      {
+        "kind": "htb",
+        "handle": "1:",
+        "root": true,
+        "refcnt": 2,
+        "options": {
+          "r2q": 10,
+          "default": "0x99",
+          "direct_packets_stat": 0,
+          "direct_qlen": 0
+        },
+        "bytes": 37874525,
+        "packets": 30813,
+        "drops": 19532,
+        "overlimits": 6144,
+        "requeues": 0,
+        "backlog": 0,
+        "qlen": 0
+      },
+      {
+        "kind": "fq_codel",
+        "handle": "99:",
+        "parent": "1:99",
+        "options": {
+          "limit": 256,
+          "flows": 1024,
+          "quantum": 1464,
+          "target": 4999,
+          "interval": 99999,
+          "memory_limit": 33554432,
+          "drop_batch": 64
+        },
+        "bytes": 0,
+        "packets": 0,
+        "drops": 0,
+        "overlimits": 0,
+        "requeues": 0,
+        "backlog": 0,
+        "qlen": 0,
+        "maxpacket": 0,
+        "drop_overlimit": 0,
+        "new_flow_count": 0,
+        "ecn_mark": 0,
+        "new_flows_len": 0,
+        "old_flows_len": 0
+      },
+      {
+        "kind": "fq_codel",
+        "handle": "10:",
+        "parent": "1:10",
+        "options": {
+          "limit": 256,
+          "flows": 1024,
+          "quantum": 1464,
+          "target": 4999,
+          "interval": 99999,
+          "memory_limit": 33554432,
+          "drop_batch": 64
+        },
+        "bytes": 18939713,
+        "packets": 15408,
+        "drops": 9764,
+        "overlimits": 0,
+        "requeues": 0,
+        "backlog": 0,
+        "qlen": 0,
+        "maxpacket": 1242,
+        "drop_overlimit": 1088,
+        "new_flow_count": 161,
+        "ecn_mark": 0,
+        "new_flows_len": 0,
+        "old_flows_len": 1
+      },
+      {
+        "kind": "fq_codel",
+        "handle": "20:",
+        "parent": "1:20",
+        "options": {
+          "limit": 256,
+          "flows": 1024,
+          "quantum": 1464,
+          "target": 4999,
+          "interval": 99999,
+          "memory_limit": 33554432,
+          "drop_batch": 64
+        },
+        "bytes": 18934812,
+        "packets": 15405,
+        "drops": 9768,
+        "overlimits": 0,
+        "requeues": 0,
+        "backlog": 0,
+        "qlen": 0,
+        "maxpacket": 1242,
+        "drop_overlimit": 1088,
+        "new_flow_count": 162,
+        "ecn_mark": 0,
+        "new_flows_len": 0,
+        "old_flows_len": 1
+      }
+    ],
+    "class": [
+      {
+        "kind": "htb",
+        "handle": "1:99",
+        "parent": "1:1",
+        "options": {
+          "rate": 12500.0,
+          "ceil": 1250000.0,
+          "prio": 7
+        },
+        "bytes": 0,
+        "packets": 0
+      },
+      {
+        "kind": "htb",
+        "handle": "1:1",
+        "parent": "1:",
+        "options": {
+          "rate": 1250000.0,
+          "ceil": 1250000.0,
+          "prio": 0
+        },
+        "bytes": 37874525,
+        "packets": 30813
+      },
+      {
+        "kind": "htb",
+        "handle": "1:10",
+        "parent": "1:1",
+        "options": {
+          "rate": 500000.0,
+          "ceil": 1000000.0,
+          "prio": 0
+        },
+        "bytes": 18939713,
+        "packets": 15408
+      },
+      {
+        "kind": "htb",
+        "handle": "1:20",
+        "parent": "1:1",
+        "options": {
+          "rate": 500000.0,
+          "ceil": 1000000.0,
+          "prio": 0
+        },
+        "bytes": 18934812,
+        "packets": 15405
+      }
+    ],
+    "filter": [
+      {
+        "kind": "u32",
+        "parent": "1:",
+        "protocol": "ip",
+        "pref": 5,
+        "options": {
+          "flowid": "1:10",
+          "matches": [
+            [
+              "00010000",
+              "00ff0000",
+              8
+            ],
+            [
+              "00280000",
+              "00fc0000",
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "kind": "u32",
+        "parent": "1:",
+        "protocol": "ip",
+        "pref": 5,
+        "options": {
+          "flowid": "1:20",
+          "matches": [
+            [
+              "00010000",
+              "00ff0000",
+              8
+            ],
+            [
+              "00500000",
+              "00fc0000",
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "kind": "u32",
+        "parent": "1:",
+        "protocol": "ip",
+        "pref": 10,
+        "options": {
+          "flowid": "1:10",
+          "matches": [
+            [
+              "00060000",
+              "00ff0000",
+              8
+            ],
+            [
+              "00001451",
+              "0000ffff",
+              20
+            ]
+          ]
+        }
+      },
+      {
+        "kind": "u32",
+        "parent": "1:",
+        "protocol": "ip",
+        "pref": 10,
+        "options": {
+          "flowid": "1:10",
+          "matches": [
+            [
+              "00110000",
+              "00ff0000",
+              8
+            ],
+            [
+              "00001451",
+              "0000ffff",
+              20
+            ]
+          ]
+        }
+      },
+      {
+        "kind": "u32",
+        "parent": "1:",
+        "protocol": "ip",
+        "pref": 10,
+        "options": {
+          "flowid": "1:20",
+          "matches": [
+            [
+              "00060000",
+              "00ff0000",
+              8
+            ],
+            [
+              "00001452",
+              "0000ffff",
+              20
+            ]
+          ]
+        }
+      },
+      {
+        "kind": "u32",
+        "parent": "1:",
+        "protocol": "ip",
+        "pref": 10,
+        "options": {
+          "flowid": "1:20",
+          "matches": [
+            [
+              "00110000",
+              "00ff0000",
+              8
+            ],
+            [
+              "00001452",
+              "0000ffff",
+              20
+            ]
+          ]
+        }
+      }
+    ],
+    "raw": {
+      "qdisc": "[{\"kind\":\"htb\",\"handle\":\"1:\",\"root\":true,\"refcnt\":2,\"options\":{\"r2q\":10,\"default\":\"0x99\",\"direct_packets_stat\":0,\"direct_qlen\":0},\"bytes\":37874525,\"packets\":30813,\"drops\":19532,\"overlimits\":6144,\"requeues\":0,\"backlog\":0,\"qlen\":0},{\"kind\":\"fq_codel\",\"handle\":\"99:\",\"parent\":\"1:99\",\"options\":{\"limit\":256,\"flows\":1024,\"quantum\":1464,\"target\":4999,\"interval\":99999,\"memory_limit\":33554432,\"drop_batch\":64},\"bytes\":0,\"packets\":0,\"drops\":0,\"overlimits\":0,\"requeues\":0,\"backlog\":0,\"qlen\":0,\"maxpacket\":0,\"drop_overlimit\":0,\"new_flow_count\":0,\"ecn_mark\":0,\"new_flows_len\":0,\"old_flows_len\":0},{\"kind\":\"fq_codel\",\"handle\":\"10:\",\"parent\":\"1:10\",\"options\":{\"limit\":256,\"flows\":1024,\"quantum\":1464,\"target\":4999,\"interval\":99999,\"memory_limit\":33554432,\"drop_batch\":64},\"bytes\":18939713,\"packets\":15408,\"drops\":9764,\"overlimits\":0,\"requeues\":0,\"backlog\":0,\"qlen\":0,\"maxpacket\":1242,\"drop_overlimit\":1088,\"new_flow_count\":161,\"ecn_mark\":0,\"new_flows_len\":0,\"old_flows_len\":1},{\"kind\":\"fq_codel\",\"handle\":\"20:\",\"parent\":\"1:20\",\"options\":{\"limit\":256,\"flows\":1024,\"quantum\":1464,\"target\":4999,\"interval\":99999,\"memory_limit\":33554432,\"drop_batch\":64},\"bytes\":18934812,\"packets\":15405,\"drops\":9768,\"overlimits\":0,\"requeues\":0,\"backlog\":0,\"qlen\":0,\"maxpacket\":1242,\"drop_overlimit\":1088,\"new_flow_count\":162,\"ecn_mark\":0,\"new_flows_len\":0,\"old_flows_len\":1}]\n",
+      "class": "class htb 1:99 parent 1:1 leaf 99: prio 7 quantum 1514 rate 100Kbit ceil 10Mbit linklayer ethernet burst 32Kb/1 mpu 0b cburst 32Kb/1 mpu 0b level 0 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n lended: 0 borrowed: 0 giants: 0\n tokens: 40960000 ctokens: 409593\n\nclass htb 1:1 root rate 10Mbit ceil 10Mbit linklayer ethernet burst 32Kb/1 mpu 0b cburst 32Kb/1 mpu 0b level 7 \n Sent 37874525 bytes 30813 pkt (dropped 0, overlimits 6144 requeues 0) \n backlog 0b 0p requeues 0\n lended: 6125 borrowed: 0 giants: 0\n tokens: -22123 ctokens: -22123\n\nclass htb 1:10 parent 1:1 leaf 10: prio 0 quantum 1514 rate 4Mbit ceil 8Mbit linklayer ethernet burst 32Kb/1 mpu 0b cburst 32Kb/1 mpu 0b level 0 \n Sent 18939713 bytes 15408 pkt (dropped 17, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n lended: 12349 borrowed: 3059 giants: 0\n tokens: -38639 ctokens: 474143\n\nclass htb 1:20 parent 1:1 leaf 20: prio 0 quantum 1514 rate 4Mbit ceil 8Mbit linklayer ethernet burst 32Kb/1 mpu 0b cburst 32Kb/1 mpu 0b level 0 \n Sent 18934812 bytes 15405 pkt (dropped 17, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n lended: 12339 borrowed: 3066 giants: 0\n tokens: -38589 ctokens: 492593\n\nclass fq_codel 10:214 parent 10: \n (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n  deficit -912 count 552 lastcount 111 ldelay 270ms\nclass fq_codel 20:c9 parent 20: \n (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n  deficit -336 count 529 lastcount 108 ldelay 266ms\n",
+      "filter": "filter parent 1: protocol ip pref 5 u32 chain 0 \nfilter parent 1: protocol ip pref 5 u32 chain 0 fh 801: ht divisor 1 \nfilter parent 1: protocol ip pref 5 u32 chain 0 fh 801::800 order 2048 key ht 801 bkt 0 flowid 1:10 not_in_hw \n  match 00010000/00ff0000 at 8\n  match 00280000/00fc0000 at 0\nfilter parent 1: protocol ip pref 5 u32 chain 0 fh 801::801 order 2049 key ht 801 bkt 0 flowid 1:20 not_in_hw \n  match 00010000/00ff0000 at 8\n  match 00500000/00fc0000 at 0\nfilter parent 1: protocol ip pref 10 u32 chain 0 \nfilter parent 1: protocol ip pref 10 u32 chain 0 fh 800: ht divisor 1 \nfilter parent 1: protocol ip pref 10 u32 chain 0 fh 800::800 order 2048 key ht 800 bkt 0 flowid 1:10 not_in_hw \n  match 00060000/00ff0000 at 8\n  match 00001451/0000ffff at 20\nfilter parent 1: protocol ip pref 10 u32 chain 0 fh 800::801 order 2049 key ht 800 bkt 0 flowid 1:10 not_in_hw \n  match 00110000/00ff0000 at 8\n  match 00001451/0000ffff at 20\nfilter parent 1: protocol ip pref 10 u32 chain 0 fh 800::802 order 2050 key ht 800 bkt 0 flowid 1:20 not_in_hw \n  match 00060000/00ff0000 at 8\n  match 00001452/0000ffff at 20\nfilter parent 1: protocol ip pref 10 u32 chain 0 fh 800::803 order 2051 key ht 800 bkt 0 flowid 1:20 not_in_hw \n  match 00110000/00ff0000 at 8\n  match 00001452/0000ffff at 20\n"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "ip",
+    "link",
+    "set",
+    "dev",
+    "cnfc2ifb0",
+    "alias",
+    "cnf-contention-uplink-probe",
+    "mtu",
+    "1450",
+    "txqueuelen",
+    "0",
+    "up"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "ip",
+    "link",
+    "add",
+    "cnfc2ifb0",
+    "type",
+    "ifb"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,8 @@
+{
+  "outcome": "failed",
+  "mode": "guarantee-ue2",
+  "round": 2,
+  "startedAt": "2026-10-20T07:58:24.779531Z",
+  "endedAt": "2026-10-20T07:58:58.525488Z",
+  "error": "Insufficient class RTT observations"
+}

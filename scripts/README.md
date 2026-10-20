@@ -297,6 +297,14 @@ RTT/丢包在本轮是观测指标，不承诺业务 SLA；端点直接经 N6 �
 每次执行归档源码输入及哈希，审计分别返回证据完整性和网络目标结果。详见
 [C 模块](../docs/cnf-service-chain-orchestration.md#c-共享瓶颈竞争容器化调度与受控需求) 与 [PS-012](../problem%20solve.md#ps-012旧版-tc-输出与反向-udp-汇总字段导致-c-采集失败)。
 
+上行补充使用 `cnf-contention-uplink.py` 和独立配置 `infra/cnfs/contention-uplink-experiment.json`。
+它新增独立上行测试 Pod，通过 Pod 内入口重定向到同一 IFB 排队，保留 C1 下行端点；服务端输出 JSON 接收区间。
+依次在 VM1 使用相同的 `deploy/check/pilot/measure/restore --out <新目录>` 命令形式，离线审计使用
+`python3 scripts/audit-cnf-contention-uplink.py <测量目录> --out <新审计JSON>`。
+上行测量不加 `-R`；客户端发送数据只用于核对负载，实际吞吐/丢包读取服务端接收数据。
+正常收尾删除新 Pod 内的 IFB 与入口规则，保留测试资源；手工恢复同样拒绝未知接口所有权或队列漂移。
+详见 [C2 上行模块](../docs/cnf-service-chain-orchestration.md#c2-上行竞争入口-ifb-与服务端接收证据)。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

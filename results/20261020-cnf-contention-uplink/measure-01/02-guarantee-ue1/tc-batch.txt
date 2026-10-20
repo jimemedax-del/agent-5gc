@@ -1,0 +1,15 @@
+qdisc del dev cnfc2ifb0 root handle 1:
+qdisc add dev cnfc2ifb0 root handle 1: htb default 99
+class add dev cnfc2ifb0 parent 1: classid 1:1 htb rate 10mbit ceil 10mbit burst 32768 cburst 32768
+class add dev cnfc2ifb0 parent 1:1 classid 1:10 htb rate 6mbit ceil 8mbit prio 0 burst 32768 cburst 32768 quantum 1514
+qdisc add dev cnfc2ifb0 parent 1:10 handle 10: fq_codel limit 256 target 5ms interval 100ms noecn
+class add dev cnfc2ifb0 parent 1:1 classid 1:20 htb rate 2mbit ceil 4mbit prio 1 burst 32768 cburst 32768 quantum 1514
+qdisc add dev cnfc2ifb0 parent 1:20 handle 20: fq_codel limit 256 target 5ms interval 100ms noecn
+class add dev cnfc2ifb0 parent 1:1 classid 1:99 htb rate 0.1mbit ceil 10mbit prio 7 burst 32768 cburst 32768 quantum 1514
+qdisc add dev cnfc2ifb0 parent 1:99 handle 99: fq_codel limit 256 target 5ms interval 100ms noecn
+filter add dev cnfc2ifb0 parent 1: protocol ip prio 10 u32 match ip protocol 6 0xff match ip dport 5201 0xffff flowid 1:10
+filter add dev cnfc2ifb0 parent 1: protocol ip prio 10 u32 match ip protocol 17 0xff match ip dport 5201 0xffff flowid 1:10
+filter add dev cnfc2ifb0 parent 1: protocol ip prio 5 u32 match ip protocol 1 0xff match ip tos 40 0xfc flowid 1:10
+filter add dev cnfc2ifb0 parent 1: protocol ip prio 10 u32 match ip protocol 6 0xff match ip dport 5202 0xffff flowid 1:20
+filter add dev cnfc2ifb0 parent 1: protocol ip prio 10 u32 match ip protocol 17 0xff match ip dport 5202 0xffff flowid 1:20
+filter add dev cnfc2ifb0 parent 1: protocol ip prio 5 u32 match ip protocol 1 0xff match ip tos 80 0xfc flowid 1:20

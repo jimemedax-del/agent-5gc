@@ -1,0 +1,12 @@
+{
+  "command": [
+    "ip",
+    "link",
+    "show",
+    "dev",
+    "cnfc2ifb0"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Device \"cnfc2ifb0\" does not exist.\ncommand terminated with exit code 1\n"
+}

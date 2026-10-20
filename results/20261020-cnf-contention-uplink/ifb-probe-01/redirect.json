@@ -1,0 +1,27 @@
+{
+  "command": [
+    "tc",
+    "filter",
+    "add",
+    "dev",
+    "eth0",
+    "parent",
+    "ffff:",
+    "protocol",
+    "ip",
+    "pref",
+    "45000",
+    "handle",
+    "1",
+    "matchall",
+    "action",
+    "mirred",
+    "egress",
+    "redirect",
+    "dev",
+    "cnfc2ifb0"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

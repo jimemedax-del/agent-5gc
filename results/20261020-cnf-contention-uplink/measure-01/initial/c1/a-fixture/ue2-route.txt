@@ -1,0 +1,2 @@
+192.168.244.128 from 10.60.0.13 dev uesimtun0 table rt_uesimtun0 uid 0 
+    cache 

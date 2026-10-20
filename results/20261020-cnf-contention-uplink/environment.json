@@ -1,0 +1,32 @@
+{
+  "capturedAt": "2026-10-20T08:18:44.850024Z",
+  "nodes": {
+    "lhm-virtual-machine": {
+      "kernelVersion": "6.8.0-138-generic",
+      "osImage": "Ubuntu 22.04.5 LTS",
+      "containerRuntimeVersion": "containerd://1.7.27-k3s1",
+      "kubeletVersion": "v1.30.14+k3s1",
+      "architecture": "amd64",
+      "operatingSystem": "linux"
+    },
+    "ran-test": {
+      "kernelVersion": "6.8.0-138-generic",
+      "osImage": "Ubuntu 22.04.5 LTS",
+      "containerRuntimeVersion": "containerd://1.7.27-k3s1",
+      "kubeletVersion": "v1.30.14+k3s1",
+      "architecture": "amd64",
+      "operatingSystem": "linux"
+    },
+    "worker-upf": {
+      "kernelVersion": "6.8.0-138-generic",
+      "osImage": "Ubuntu 22.04.5 LTS",
+      "containerRuntimeVersion": "containerd://1.7.27-k3s1",
+      "kubeletVersion": "v1.30.14+k3s1",
+      "architecture": "amd64",
+      "operatingSystem": "linux"
+    }
+  },
+  "tcVersion": "tc utility, iproute2-5.9.0, libbpf 0.3.0\n",
+  "ipVersion": "ip utility, iproute2-5.9.0, libbpf 0.3.0\n",
+  "iperfVersion": "iperf 3.9 (cJSON 1.7.13)\nLinux cnf-c2-endpoint-7c749fd5b5-2kc9b 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64\nOptional features available: CPU affinity setting, IPv6 flow label, SCTP, TCP congestion algorithm setting, sendfile / zerocopy, socket pacing, authentication\n"
+}

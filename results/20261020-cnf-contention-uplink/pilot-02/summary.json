@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "pilot",
+  "error": "Incomplete RTT probe process",
+  "endedAt": "2026-10-20T07:44:00.532939Z"
+}

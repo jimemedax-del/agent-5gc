@@ -1,0 +1,13 @@
+{
+  "outcome": "captured",
+  "command": "measure",
+  "evidence": {
+    "groups": 20,
+    "sessions": 40,
+    "original25PodIdentitiesUnchanged": true,
+    "all26PodIdentitiesUnchanged": true,
+    "restoredNoIngressOrIfb": true,
+    "acceptance": "independent audit required; no business RTT/loss SLA"
+  },
+  "endedAt": "2026-10-20T08:18:18.234157Z"
+}

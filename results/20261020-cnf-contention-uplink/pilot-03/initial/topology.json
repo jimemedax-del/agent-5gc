@@ -1,0 +1,1337 @@
+{
+  "target": "192.168.244.128",
+  "envoy": {
+    "pod": "cnf-a-envoy-858f68b746-g8t64",
+    "uid": "c4d84652-62c2-4fe9-ba5a-78f4ff1ebb45",
+    "node": "lhm-virtual-machine",
+    "ip": "10.42.0.199",
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "envoy",
+        "image": "sha256:d4800f30429fc946d03932a6055a2d52c70183aa60487f9da38899f1543dfe6a",
+        "imageID": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac",
+        "containerID": "containerd://bd69bd2f4f7a821109f6e61dd8bb898cf27bf8dcff2393bb0390a921b464f2ca",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-20T03:51:07Z"
+          }
+        },
+        "lastState": {},
+        "specImage": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac"
+      }
+    ]
+  },
+  "users": {
+    "ue1": {
+      "name": "ue1",
+      "supi": "imsi-208930000000001",
+      "deployment": "ueransim-ue",
+      "pod": "ueransim-ue-8f555b79b-rdjdb",
+      "podUID": "d1cf89a5-1f2a-4e74-b016-dbefbd149762",
+      "ip": "10.60.0.3",
+      "node": "ran-test"
+    },
+    "ue2": {
+      "name": "ue2",
+      "supi": "imsi-208930000000002",
+      "deployment": "cnf-a-ue2",
+      "pod": "cnf-a-ue2-6998f7d65b-2szgn",
+      "podUID": "0d6c656d-bf53-4bc4-a55a-6763d6870084",
+      "ip": "10.60.0.13",
+      "node": "ran-test"
+    }
+  },
+  "backends": {
+    "cnf-a-core-ue1": {
+      "pod": "cnf-a-core-ue1-796f6455d4-qssr4",
+      "uid": "758e3bc6-3dd2-4100-b4e7-cac8a1dcdade",
+      "node": "lhm-virtual-machine",
+      "ip": "10.42.0.197",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "iperf3",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+          "containerID": "containerd://2795205c96411edcd781faa5c7f4ad144d24fde3ed653462f354666157e2e96a",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-20T03:51:07Z"
+            }
+          },
+          "lastState": {},
+          "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+        }
+      ]
+    },
+    "cnf-a-core-ue2": {
+      "pod": "cnf-a-core-ue2-85b8497c57-xjgw5",
+      "uid": "c5e777b6-57b5-4348-89a0-1e5b17f62702",
+      "node": "lhm-virtual-machine",
+      "ip": "10.42.0.198",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "iperf3",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+          "containerID": "containerd://3925ae596d7824b79e17290de6e5dca5fc87bdcdf4a4200b98c6fbd811a85521",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-20T03:51:07Z"
+            }
+          },
+          "lastState": {},
+          "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+        }
+      ]
+    },
+    "cnf-a-edge-ue1": {
+      "pod": "cnf-a-edge-ue1-7486d6f6df-lpkx7",
+      "uid": "13364f0d-adfe-4576-913a-34d0bc9d1573",
+      "node": "ran-test",
+      "ip": "10.42.2.83",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "iperf3",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+          "containerID": "containerd://d3e0e5a246e9dd51ca988c4b7cd94286218c8acf0001fe1122c2e77fc6f3cc27",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-20T03:51:07Z"
+            }
+          },
+          "lastState": {},
+          "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+        }
+      ]
+    },
+    "cnf-a-edge-ue2": {
+      "pod": "cnf-a-edge-ue2-677f77dd48-fjj7w",
+      "uid": "3f20d8ef-f3e5-40ec-a188-8867b0cdf1e9",
+      "node": "ran-test",
+      "ip": "10.42.2.84",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "iperf3",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+          "containerID": "containerd://f7988a090eff9b9fc7f00e6ce04a3a9b06e37f69ecd14a78039f46a2d54d8579",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-20T03:51:07Z"
+            }
+          },
+          "lastState": {},
+          "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+        }
+      ]
+    }
+  },
+  "services": {
+    "cnf-a-core-ue1": {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-multi-ue-v1\"},\"name\":\"cnf-a-core-ue1\",\"namespace\":\"cnf-multi-ue\"},\"spec\":{\"ports\":[{\"name\":\"iperf\",\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":\"iperf\"}],\"selector\":{\"app\":\"cnf-a-core-ue1\"}}}\n"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+        },
+        "name": "cnf-a-core-ue1",
+        "namespace": "cnf-multi-ue",
+        "resourceVersion": "607629",
+        "uid": "08759ae5-3e0d-4128-b8b4-5bf1e69defc4"
+      },
+      "spec": {
+        "clusterIP": "10.43.209.86",
+        "clusterIPs": [
+          "10.43.209.86"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP",
+            "targetPort": "iperf"
+          }
+        ],
+        "selector": {
+          "app": "cnf-a-core-ue1"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    "cnf-a-core-ue2": {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-multi-ue-v1\"},\"name\":\"cnf-a-core-ue2\",\"namespace\":\"cnf-multi-ue\"},\"spec\":{\"ports\":[{\"name\":\"iperf\",\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":\"iperf\"}],\"selector\":{\"app\":\"cnf-a-core-ue2\"}}}\n"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+        },
+        "name": "cnf-a-core-ue2",
+        "namespace": "cnf-multi-ue",
+        "resourceVersion": "607650",
+        "uid": "1f11bd73-b636-4965-870d-31d9582e0a89"
+      },
+      "spec": {
+        "clusterIP": "10.43.196.83",
+        "clusterIPs": [
+          "10.43.196.83"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP",
+            "targetPort": "iperf"
+          }
+        ],
+        "selector": {
+          "app": "cnf-a-core-ue2"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    "cnf-a-edge-ue1": {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-multi-ue-v1\"},\"name\":\"cnf-a-edge-ue1\",\"namespace\":\"cnf-multi-ue\"},\"spec\":{\"ports\":[{\"name\":\"iperf\",\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":\"iperf\"}],\"selector\":{\"app\":\"cnf-a-edge-ue1\"}}}\n"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+        },
+        "name": "cnf-a-edge-ue1",
+        "namespace": "cnf-multi-ue",
+        "resourceVersion": "607666",
+        "uid": "e2939650-4d46-45c0-ba4e-1cf1b0dc4f96"
+      },
+      "spec": {
+        "clusterIP": "10.43.82.128",
+        "clusterIPs": [
+          "10.43.82.128"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP",
+            "targetPort": "iperf"
+          }
+        ],
+        "selector": {
+          "app": "cnf-a-edge-ue1"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    "cnf-a-edge-ue2": {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-multi-ue-v1\"},\"name\":\"cnf-a-edge-ue2\",\"namespace\":\"cnf-multi-ue\"},\"spec\":{\"ports\":[{\"name\":\"iperf\",\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":\"iperf\"}],\"selector\":{\"app\":\"cnf-a-edge-ue2\"}}}\n"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+        },
+        "name": "cnf-a-edge-ue2",
+        "namespace": "cnf-multi-ue",
+        "resourceVersion": "607682",
+        "uid": "9c027469-8de5-4f50-9ed0-61d4e9bdc39a"
+      },
+      "spec": {
+        "clusterIP": "10.43.197.172",
+        "clusterIPs": [
+          "10.43.197.172"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP",
+            "targetPort": "iperf"
+          }
+        ],
+        "selector": {
+          "app": "cnf-a-edge-ue2"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    }
+  },
+  "contention": {
+    "pod": "cnf-c-endpoint-644d89c877-9m4t6",
+    "uid": "f225311a-48cc-49e6-9af7-1d4280548655",
+    "node": "lhm-virtual-machine",
+    "ip": "10.42.0.200",
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "queue",
+        "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+        "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+        "containerID": "containerd://c05625b3059376942373977614a0d74d7b5d68b0423b4ba63cea6874b617a605",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-20T06:46:01Z"
+          }
+        }
+      },
+      {
+        "name": "ue1",
+        "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+        "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+        "containerID": "containerd://894bc6a0e2e25d5ec089f68d044079e684327a3ffef68bc792a1f12670c7499e",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-20T06:46:01Z"
+          }
+        }
+      },
+      {
+        "name": "ue2",
+        "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+        "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+        "containerID": "containerd://5dd8475f9c8b015b08b34d947fc916afd71376aac17e149a16f1a555e42735ab",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-20T06:46:01Z"
+          }
+        }
+      }
+    ],
+    "resources": [
+      {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "metadata": {
+          "annotations": {
+            "deployment.kubernetes.io/revision": "1",
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"cnf-c-endpoint\",\"app.kubernetes.io/part-of\":\"cnf-contention-v1\"},\"name\":\"cnf-c-endpoint\",\"namespace\":\"cnf-contention\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"cnf-c-endpoint\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"cnf-c-endpoint\",\"app.kubernetes.io/part-of\":\"cnf-contention-v1\"}},\"spec\":{\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"-s\",\"-p\",\"5201\",\"--forceflush\",\"-V\"],\"command\":[\"iperf3\"],\"image\":\"docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b\",\"imagePullPolicy\":\"Never\",\"name\":\"ue1\",\"readinessProbe\":{\"exec\":{\"command\":[\"sh\",\"-ec\",\"kill -0 1\"]},\"periodSeconds\":2},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"64Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true,\"runAsGroup\":65532,\"runAsNonRoot\":true,\"runAsUser\":65532},\"volumeMounts\":[{\"mountPath\":\"/tmp\",\"name\":\"scratch\"}]},{\"args\":[\"-s\",\"-p\",\"5202\",\"--forceflush\",\"-V\"],\"command\":[\"iperf3\"],\"image\":\"docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b\",\"imagePullPolicy\":\"Never\",\"name\":\"ue2\",\"readinessProbe\":{\"exec\":{\"command\":[\"sh\",\"-ec\",\"kill -0 1\"]},\"periodSeconds\":2},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"64Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true,\"runAsGroup\":65532,\"runAsNonRoot\":true,\"runAsUser\":65532},\"volumeMounts\":[{\"mountPath\":\"/tmp\",\"name\":\"scratch\"}]},{\"command\":[\"sh\",\"-ec\",\"exec sleep infinity\"],\"image\":\"docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b\",\"imagePullPolicy\":\"Never\",\"name\":\"queue\",\"readinessProbe\":{\"exec\":{\"command\":[\"sh\",\"-ec\",\"kill -0 1\"]},\"periodSeconds\":2},\"resources\":{\"limits\":{\"cpu\":\"200m\",\"memory\":\"64Mi\"},\"requests\":{\"cpu\":\"50m\",\"memory\":\"32Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"add\":[\"NET_ADMIN\"],\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true,\"runAsNonRoot\":false,\"runAsUser\":0}}],\"nodeSelector\":{\"5gc.free5gc.org/plane\":\"control\"},\"securityContext\":{\"fsGroup\":65532,\"seccompProfile\":{\"type\":\"RuntimeDefault\"}},\"volumes\":[{\"emptyDir\":{\"medium\":\"Memory\",\"sizeLimit\":\"16Mi\"},\"name\":\"scratch\"}]}}}}\n"
+          },
+          "creationTimestamp": "2026-10-20T06:46:00Z",
+          "generation": 1,
+          "labels": {
+            "app": "cnf-c-endpoint",
+            "app.kubernetes.io/part-of": "cnf-contention-v1"
+          },
+          "name": "cnf-c-endpoint",
+          "namespace": "cnf-contention",
+          "resourceVersion": "613193",
+          "uid": "7158dafe-d2a6-4fff-b07a-dc616a6ecf01"
+        },
+        "spec": {
+          "progressDeadlineSeconds": 600,
+          "replicas": 1,
+          "revisionHistoryLimit": 10,
+          "selector": {
+            "matchLabels": {
+              "app": "cnf-c-endpoint"
+            }
+          },
+          "strategy": {
+            "rollingUpdate": {
+              "maxSurge": "25%",
+              "maxUnavailable": "25%"
+            },
+            "type": "RollingUpdate"
+          },
+          "template": {
+            "metadata": {
+              "creationTimestamp": null,
+              "labels": {
+                "app": "cnf-c-endpoint",
+                "app.kubernetes.io/part-of": "cnf-contention-v1"
+              }
+            },
+            "spec": {
+              "automountServiceAccountToken": false,
+              "containers": [
+                {
+                  "args": [
+                    "-s",
+                    "-p",
+                    "5201",
+                    "--forceflush",
+                    "-V"
+                  ],
+                  "command": [
+                    "iperf3"
+                  ],
+                  "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+                  "imagePullPolicy": "Never",
+                  "name": "ue1",
+                  "readinessProbe": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-ec",
+                        "kill -0 1"
+                      ]
+                    },
+                    "failureThreshold": 3,
+                    "periodSeconds": 2,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  },
+                  "resources": {
+                    "limits": {
+                      "cpu": "500m",
+                      "memory": "256Mi"
+                    },
+                    "requests": {
+                      "cpu": "100m",
+                      "memory": "64Mi"
+                    }
+                  },
+                  "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                      "drop": [
+                        "ALL"
+                      ]
+                    },
+                    "readOnlyRootFilesystem": true,
+                    "runAsGroup": 65532,
+                    "runAsNonRoot": true,
+                    "runAsUser": 65532
+                  },
+                  "terminationMessagePath": "/dev/termination-log",
+                  "terminationMessagePolicy": "File",
+                  "volumeMounts": [
+                    {
+                      "mountPath": "/tmp",
+                      "name": "scratch"
+                    }
+                  ]
+                },
+                {
+                  "args": [
+                    "-s",
+                    "-p",
+                    "5202",
+                    "--forceflush",
+                    "-V"
+                  ],
+                  "command": [
+                    "iperf3"
+                  ],
+                  "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+                  "imagePullPolicy": "Never",
+                  "name": "ue2",
+                  "readinessProbe": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-ec",
+                        "kill -0 1"
+                      ]
+                    },
+                    "failureThreshold": 3,
+                    "periodSeconds": 2,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  },
+                  "resources": {
+                    "limits": {
+                      "cpu": "500m",
+                      "memory": "256Mi"
+                    },
+                    "requests": {
+                      "cpu": "100m",
+                      "memory": "64Mi"
+                    }
+                  },
+                  "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                      "drop": [
+                        "ALL"
+                      ]
+                    },
+                    "readOnlyRootFilesystem": true,
+                    "runAsGroup": 65532,
+                    "runAsNonRoot": true,
+                    "runAsUser": 65532
+                  },
+                  "terminationMessagePath": "/dev/termination-log",
+                  "terminationMessagePolicy": "File",
+                  "volumeMounts": [
+                    {
+                      "mountPath": "/tmp",
+                      "name": "scratch"
+                    }
+                  ]
+                },
+                {
+                  "command": [
+                    "sh",
+                    "-ec",
+                    "exec sleep infinity"
+                  ],
+                  "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+                  "imagePullPolicy": "Never",
+                  "name": "queue",
+                  "readinessProbe": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-ec",
+                        "kill -0 1"
+                      ]
+                    },
+                    "failureThreshold": 3,
+                    "periodSeconds": 2,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  },
+                  "resources": {
+                    "limits": {
+                      "cpu": "200m",
+                      "memory": "64Mi"
+                    },
+                    "requests": {
+                      "cpu": "50m",
+                      "memory": "32Mi"
+                    }
+                  },
+                  "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                      "add": [
+                        "NET_ADMIN"
+                      ],
+                      "drop": [
+                        "ALL"
+                      ]
+                    },
+                    "readOnlyRootFilesystem": true,
+                    "runAsNonRoot": false,
+                    "runAsUser": 0
+                  },
+                  "terminationMessagePath": "/dev/termination-log",
+                  "terminationMessagePolicy": "File"
+                }
+              ],
+              "dnsPolicy": "ClusterFirst",
+              "nodeSelector": {
+                "5gc.free5gc.org/plane": "control"
+              },
+              "restartPolicy": "Always",
+              "schedulerName": "default-scheduler",
+              "securityContext": {
+                "fsGroup": 65532,
+                "seccompProfile": {
+                  "type": "RuntimeDefault"
+                }
+              },
+              "terminationGracePeriodSeconds": 30,
+              "volumes": [
+                {
+                  "emptyDir": {
+                    "medium": "Memory",
+                    "sizeLimit": "16Mi"
+                  },
+                  "name": "scratch"
+                }
+              ]
+            }
+          }
+        },
+        "status": {
+          "availableReplicas": 1,
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-20T06:46:02Z",
+              "lastUpdateTime": "2026-10-20T06:46:02Z",
+              "message": "Deployment has minimum availability.",
+              "reason": "MinimumReplicasAvailable",
+              "status": "True",
+              "type": "Available"
+            },
+            {
+              "lastTransitionTime": "2026-10-20T06:46:00Z",
+              "lastUpdateTime": "2026-10-20T06:46:02Z",
+              "message": "ReplicaSet \"cnf-c-endpoint-644d89c877\" has successfully progressed.",
+              "reason": "NewReplicaSetAvailable",
+              "status": "True",
+              "type": "Progressing"
+            }
+          ],
+          "observedGeneration": 1,
+          "readyReplicas": 1,
+          "replicas": 1,
+          "updatedReplicas": 1
+        }
+      },
+      {
+        "apiVersion": "v1",
+        "kind": "Service",
+        "metadata": {
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"cnf-c-endpoint\",\"app.kubernetes.io/part-of\":\"cnf-contention-v1\"},\"name\":\"cnf-c-endpoint\",\"namespace\":\"cnf-contention\"},\"spec\":{\"externalTrafficPolicy\":\"Local\",\"ports\":[{\"name\":\"ue1-tcp\",\"nodePort\":31401,\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":5201},{\"name\":\"ue1-udp\",\"nodePort\":31401,\"port\":5201,\"protocol\":\"UDP\",\"targetPort\":5201},{\"name\":\"ue2-tcp\",\"nodePort\":31402,\"port\":5202,\"protocol\":\"TCP\",\"targetPort\":5202},{\"name\":\"ue2-udp\",\"nodePort\":31402,\"port\":5202,\"protocol\":\"UDP\",\"targetPort\":5202}],\"selector\":{\"app\":\"cnf-c-endpoint\"},\"type\":\"NodePort\"}}\n"
+          },
+          "creationTimestamp": "2026-10-20T06:46:00Z",
+          "labels": {
+            "app": "cnf-c-endpoint",
+            "app.kubernetes.io/part-of": "cnf-contention-v1"
+          },
+          "name": "cnf-c-endpoint",
+          "namespace": "cnf-contention",
+          "resourceVersion": "613161",
+          "uid": "44f55b0d-cae6-4ab6-a075-4fc4d5438f51"
+        },
+        "spec": {
+          "clusterIP": "10.43.30.49",
+          "clusterIPs": [
+            "10.43.30.49"
+          ],
+          "externalTrafficPolicy": "Local",
+          "internalTrafficPolicy": "Cluster",
+          "ipFamilies": [
+            "IPv4"
+          ],
+          "ipFamilyPolicy": "SingleStack",
+          "ports": [
+            {
+              "name": "ue1-tcp",
+              "nodePort": 31401,
+              "port": 5201,
+              "protocol": "TCP",
+              "targetPort": 5201
+            },
+            {
+              "name": "ue1-udp",
+              "nodePort": 31401,
+              "port": 5201,
+              "protocol": "UDP",
+              "targetPort": 5201
+            },
+            {
+              "name": "ue2-tcp",
+              "nodePort": 31402,
+              "port": 5202,
+              "protocol": "TCP",
+              "targetPort": 5202
+            },
+            {
+              "name": "ue2-udp",
+              "nodePort": 31402,
+              "port": 5202,
+              "protocol": "UDP",
+              "targetPort": 5202
+            }
+          ],
+          "selector": {
+            "app": "cnf-c-endpoint"
+          },
+          "sessionAffinity": "None",
+          "type": "NodePort"
+        },
+        "status": {
+          "loadBalancer": {}
+        }
+      },
+      {
+        "apiVersion": "networking.k8s.io/v1",
+        "kind": "NetworkPolicy",
+        "metadata": {
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"networking.k8s.io/v1\",\"kind\":\"NetworkPolicy\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"cnf-c-endpoint\",\"app.kubernetes.io/part-of\":\"cnf-contention-v1\"},\"name\":\"cnf-c-endpoint\",\"namespace\":\"cnf-contention\"},\"spec\":{\"ingress\":[{\"ports\":[{\"port\":5201,\"protocol\":\"TCP\"},{\"port\":5201,\"protocol\":\"UDP\"},{\"port\":5202,\"protocol\":\"TCP\"},{\"port\":5202,\"protocol\":\"UDP\"}]},{\"from\":[{\"ipBlock\":{\"cidr\":\"192.168.244.129/32\"}},{\"ipBlock\":{\"cidr\":\"10.42.1.0/24\"}},{\"ipBlock\":{\"cidr\":\"10.60.0.0/16\"}}]}],\"podSelector\":{\"matchLabels\":{\"app\":\"cnf-c-endpoint\"}},\"policyTypes\":[\"Ingress\"]}}\n"
+          },
+          "creationTimestamp": "2026-10-20T06:46:00Z",
+          "generation": 1,
+          "labels": {
+            "app": "cnf-c-endpoint",
+            "app.kubernetes.io/part-of": "cnf-contention-v1"
+          },
+          "name": "cnf-c-endpoint",
+          "namespace": "cnf-contention",
+          "resourceVersion": "613166",
+          "uid": "1fbbee21-e9fe-4bfd-9de4-93a98944bc3e"
+        },
+        "spec": {
+          "ingress": [
+            {
+              "ports": [
+                {
+                  "port": 5201,
+                  "protocol": "TCP"
+                },
+                {
+                  "port": 5201,
+                  "protocol": "UDP"
+                },
+                {
+                  "port": 5202,
+                  "protocol": "TCP"
+                },
+                {
+                  "port": 5202,
+                  "protocol": "UDP"
+                }
+              ]
+            },
+            {
+              "from": [
+                {
+                  "ipBlock": {
+                    "cidr": "192.168.244.129/32"
+                  }
+                },
+                {
+                  "ipBlock": {
+                    "cidr": "10.42.1.0/24"
+                  }
+                },
+                {
+                  "ipBlock": {
+                    "cidr": "10.60.0.0/16"
+                  }
+                }
+              ]
+            }
+          ],
+          "podSelector": {
+            "matchLabels": {
+              "app": "cnf-c-endpoint"
+            }
+          },
+          "policyTypes": [
+            "Ingress"
+          ]
+        }
+      }
+    ],
+    "endpoint": {
+      "apiVersion": "v1",
+      "kind": "Endpoints",
+      "metadata": {
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-20T06:46:02Z"
+        },
+        "creationTimestamp": "2026-10-20T06:46:00Z",
+        "labels": {
+          "app": "cnf-c-endpoint",
+          "app.kubernetes.io/part-of": "cnf-contention-v1"
+        },
+        "name": "cnf-c-endpoint",
+        "namespace": "cnf-contention",
+        "resourceVersion": "613190",
+        "uid": "56a24f8e-6d70-4166-8285-bfe59b63f821"
+      },
+      "subsets": [
+        {
+          "addresses": [
+            {
+              "ip": "10.42.0.200",
+              "nodeName": "lhm-virtual-machine",
+              "targetRef": {
+                "kind": "Pod",
+                "name": "cnf-c-endpoint-644d89c877-9m4t6",
+                "namespace": "cnf-contention",
+                "uid": "f225311a-48cc-49e6-9af7-1d4280548655"
+              }
+            }
+          ],
+          "ports": [
+            {
+              "name": "ue1-tcp",
+              "port": 5201,
+              "protocol": "TCP"
+            },
+            {
+              "name": "ue2-udp",
+              "port": 5202,
+              "protocol": "UDP"
+            },
+            {
+              "name": "ue2-tcp",
+              "port": 5202,
+              "protocol": "TCP"
+            },
+            {
+              "name": "ue1-udp",
+              "port": 5201,
+              "protocol": "UDP"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "uplink": {
+    "pod": "cnf-c2-endpoint-7c749fd5b5-2kc9b",
+    "uid": "2d71960f-9153-4d8f-9c54-c3d7af59d058",
+    "node": "lhm-virtual-machine",
+    "ip": "10.42.0.201",
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "queue",
+        "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+        "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+        "containerID": "containerd://f9028ade93c1a35c99cbd0acd2102a8d040cafb6a856b9cf174a83338987806f",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-20T07:38:12Z"
+          }
+        }
+      },
+      {
+        "name": "ue1",
+        "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+        "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+        "containerID": "containerd://652bb2154c3a23c0b9e593d7faecf41b54587db64ca5fef14ea59cc0f9af7c7e",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-20T07:38:12Z"
+          }
+        }
+      },
+      {
+        "name": "ue2",
+        "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+        "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+        "containerID": "containerd://49205e912886f0e1b70e31e352907c5437bce8035a1c8fe214958d461cab925e",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-20T07:38:12Z"
+          }
+        }
+      }
+    ],
+    "resources": [
+      {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "metadata": {
+          "annotations": {
+            "deployment.kubernetes.io/revision": "1",
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"cnf-c2-endpoint\",\"app.kubernetes.io/part-of\":\"cnf-contention-uplink-v1\"},\"name\":\"cnf-c2-endpoint\",\"namespace\":\"cnf-contention-uplink\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"cnf-c2-endpoint\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"cnf-c2-endpoint\",\"app.kubernetes.io/part-of\":\"cnf-contention-uplink-v1\"}},\"spec\":{\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"-s\",\"-p\",\"5201\",\"-J\",\"--forceflush\"],\"command\":[\"iperf3\"],\"image\":\"docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b\",\"imagePullPolicy\":\"Never\",\"name\":\"ue1\",\"readinessProbe\":{\"exec\":{\"command\":[\"sh\",\"-ec\",\"kill -0 1\"]},\"periodSeconds\":2},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"64Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true,\"runAsGroup\":65532,\"runAsNonRoot\":true,\"runAsUser\":65532},\"volumeMounts\":[{\"mountPath\":\"/tmp\",\"name\":\"scratch\"}]},{\"args\":[\"-s\",\"-p\",\"5202\",\"-J\",\"--forceflush\"],\"command\":[\"iperf3\"],\"image\":\"docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b\",\"imagePullPolicy\":\"Never\",\"name\":\"ue2\",\"readinessProbe\":{\"exec\":{\"command\":[\"sh\",\"-ec\",\"kill -0 1\"]},\"periodSeconds\":2},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"64Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true,\"runAsGroup\":65532,\"runAsNonRoot\":true,\"runAsUser\":65532},\"volumeMounts\":[{\"mountPath\":\"/tmp\",\"name\":\"scratch\"}]},{\"command\":[\"sh\",\"-ec\",\"exec sleep infinity\"],\"image\":\"docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b\",\"imagePullPolicy\":\"Never\",\"name\":\"queue\",\"readinessProbe\":{\"exec\":{\"command\":[\"sh\",\"-ec\",\"kill -0 1\"]},\"periodSeconds\":2},\"resources\":{\"limits\":{\"cpu\":\"200m\",\"memory\":\"64Mi\"},\"requests\":{\"cpu\":\"50m\",\"memory\":\"32Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"add\":[\"NET_ADMIN\"],\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true,\"runAsNonRoot\":false,\"runAsUser\":0}}],\"nodeSelector\":{\"5gc.free5gc.org/plane\":\"control\"},\"securityContext\":{\"fsGroup\":65532,\"seccompProfile\":{\"type\":\"RuntimeDefault\"}},\"volumes\":[{\"emptyDir\":{\"medium\":\"Memory\",\"sizeLimit\":\"16Mi\"},\"name\":\"scratch\"}]}}}}\n"
+          },
+          "creationTimestamp": "2026-10-20T07:38:11Z",
+          "generation": 1,
+          "labels": {
+            "app": "cnf-c2-endpoint",
+            "app.kubernetes.io/part-of": "cnf-contention-uplink-v1"
+          },
+          "name": "cnf-c2-endpoint",
+          "namespace": "cnf-contention-uplink",
+          "resourceVersion": "614805",
+          "uid": "f360fc29-fda6-4e07-b837-810602f3c20c"
+        },
+        "spec": {
+          "progressDeadlineSeconds": 600,
+          "replicas": 1,
+          "revisionHistoryLimit": 10,
+          "selector": {
+            "matchLabels": {
+              "app": "cnf-c2-endpoint"
+            }
+          },
+          "strategy": {
+            "rollingUpdate": {
+              "maxSurge": "25%",
+              "maxUnavailable": "25%"
+            },
+            "type": "RollingUpdate"
+          },
+          "template": {
+            "metadata": {
+              "creationTimestamp": null,
+              "labels": {
+                "app": "cnf-c2-endpoint",
+                "app.kubernetes.io/part-of": "cnf-contention-uplink-v1"
+              }
+            },
+            "spec": {
+              "automountServiceAccountToken": false,
+              "containers": [
+                {
+                  "args": [
+                    "-s",
+                    "-p",
+                    "5201",
+                    "-J",
+                    "--forceflush"
+                  ],
+                  "command": [
+                    "iperf3"
+                  ],
+                  "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+                  "imagePullPolicy": "Never",
+                  "name": "ue1",
+                  "readinessProbe": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-ec",
+                        "kill -0 1"
+                      ]
+                    },
+                    "failureThreshold": 3,
+                    "periodSeconds": 2,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  },
+                  "resources": {
+                    "limits": {
+                      "cpu": "500m",
+                      "memory": "256Mi"
+                    },
+                    "requests": {
+                      "cpu": "100m",
+                      "memory": "64Mi"
+                    }
+                  },
+                  "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                      "drop": [
+                        "ALL"
+                      ]
+                    },
+                    "readOnlyRootFilesystem": true,
+                    "runAsGroup": 65532,
+                    "runAsNonRoot": true,
+                    "runAsUser": 65532
+                  },
+                  "terminationMessagePath": "/dev/termination-log",
+                  "terminationMessagePolicy": "File",
+                  "volumeMounts": [
+                    {
+                      "mountPath": "/tmp",
+                      "name": "scratch"
+                    }
+                  ]
+                },
+                {
+                  "args": [
+                    "-s",
+                    "-p",
+                    "5202",
+                    "-J",
+                    "--forceflush"
+                  ],
+                  "command": [
+                    "iperf3"
+                  ],
+                  "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+                  "imagePullPolicy": "Never",
+                  "name": "ue2",
+                  "readinessProbe": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-ec",
+                        "kill -0 1"
+                      ]
+                    },
+                    "failureThreshold": 3,
+                    "periodSeconds": 2,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  },
+                  "resources": {
+                    "limits": {
+                      "cpu": "500m",
+                      "memory": "256Mi"
+                    },
+                    "requests": {
+                      "cpu": "100m",
+                      "memory": "64Mi"
+                    }
+                  },
+                  "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                      "drop": [
+                        "ALL"
+                      ]
+                    },
+                    "readOnlyRootFilesystem": true,
+                    "runAsGroup": 65532,
+                    "runAsNonRoot": true,
+                    "runAsUser": 65532
+                  },
+                  "terminationMessagePath": "/dev/termination-log",
+                  "terminationMessagePolicy": "File",
+                  "volumeMounts": [
+                    {
+                      "mountPath": "/tmp",
+                      "name": "scratch"
+                    }
+                  ]
+                },
+                {
+                  "command": [
+                    "sh",
+                    "-ec",
+                    "exec sleep infinity"
+                  ],
+                  "image": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+                  "imagePullPolicy": "Never",
+                  "name": "queue",
+                  "readinessProbe": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-ec",
+                        "kill -0 1"
+                      ]
+                    },
+                    "failureThreshold": 3,
+                    "periodSeconds": 2,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  },
+                  "resources": {
+                    "limits": {
+                      "cpu": "200m",
+                      "memory": "64Mi"
+                    },
+                    "requests": {
+                      "cpu": "50m",
+                      "memory": "32Mi"
+                    }
+                  },
+                  "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                      "add": [
+                        "NET_ADMIN"
+                      ],
+                      "drop": [
+                        "ALL"
+                      ]
+                    },
+                    "readOnlyRootFilesystem": true,
+                    "runAsNonRoot": false,
+                    "runAsUser": 0
+                  },
+                  "terminationMessagePath": "/dev/termination-log",
+                  "terminationMessagePolicy": "File"
+                }
+              ],
+              "dnsPolicy": "ClusterFirst",
+              "nodeSelector": {
+                "5gc.free5gc.org/plane": "control"
+              },
+              "restartPolicy": "Always",
+              "schedulerName": "default-scheduler",
+              "securityContext": {
+                "fsGroup": 65532,
+                "seccompProfile": {
+                  "type": "RuntimeDefault"
+                }
+              },
+              "terminationGracePeriodSeconds": 30,
+              "volumes": [
+                {
+                  "emptyDir": {
+                    "medium": "Memory",
+                    "sizeLimit": "16Mi"
+                  },
+                  "name": "scratch"
+                }
+              ]
+            }
+          }
+        },
+        "status": {
+          "availableReplicas": 1,
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-20T07:38:14Z",
+              "lastUpdateTime": "2026-10-20T07:38:14Z",
+              "message": "Deployment has minimum availability.",
+              "reason": "MinimumReplicasAvailable",
+              "status": "True",
+              "type": "Available"
+            },
+            {
+              "lastTransitionTime": "2026-10-20T07:38:11Z",
+              "lastUpdateTime": "2026-10-20T07:38:14Z",
+              "message": "ReplicaSet \"cnf-c2-endpoint-7c749fd5b5\" has successfully progressed.",
+              "reason": "NewReplicaSetAvailable",
+              "status": "True",
+              "type": "Progressing"
+            }
+          ],
+          "observedGeneration": 1,
+          "readyReplicas": 1,
+          "replicas": 1,
+          "updatedReplicas": 1
+        }
+      },
+      {
+        "apiVersion": "v1",
+        "kind": "Service",
+        "metadata": {
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"cnf-c2-endpoint\",\"app.kubernetes.io/part-of\":\"cnf-contention-uplink-v1\"},\"name\":\"cnf-c2-endpoint\",\"namespace\":\"cnf-contention-uplink\"},\"spec\":{\"externalTrafficPolicy\":\"Local\",\"ports\":[{\"name\":\"ue1-tcp\",\"nodePort\":31403,\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":5201},{\"name\":\"ue1-udp\",\"nodePort\":31403,\"port\":5201,\"protocol\":\"UDP\",\"targetPort\":5201},{\"name\":\"ue2-tcp\",\"nodePort\":31404,\"port\":5202,\"protocol\":\"TCP\",\"targetPort\":5202},{\"name\":\"ue2-udp\",\"nodePort\":31404,\"port\":5202,\"protocol\":\"UDP\",\"targetPort\":5202}],\"selector\":{\"app\":\"cnf-c2-endpoint\"},\"type\":\"NodePort\"}}\n"
+          },
+          "creationTimestamp": "2026-10-20T07:38:11Z",
+          "labels": {
+            "app": "cnf-c2-endpoint",
+            "app.kubernetes.io/part-of": "cnf-contention-uplink-v1"
+          },
+          "name": "cnf-c2-endpoint",
+          "namespace": "cnf-contention-uplink",
+          "resourceVersion": "614773",
+          "uid": "90862a59-7411-42ee-8466-8c6eb840ec00"
+        },
+        "spec": {
+          "clusterIP": "10.43.234.250",
+          "clusterIPs": [
+            "10.43.234.250"
+          ],
+          "externalTrafficPolicy": "Local",
+          "internalTrafficPolicy": "Cluster",
+          "ipFamilies": [
+            "IPv4"
+          ],
+          "ipFamilyPolicy": "SingleStack",
+          "ports": [
+            {
+              "name": "ue1-tcp",
+              "nodePort": 31403,
+              "port": 5201,
+              "protocol": "TCP",
+              "targetPort": 5201
+            },
+            {
+              "name": "ue1-udp",
+              "nodePort": 31403,
+              "port": 5201,
+              "protocol": "UDP",
+              "targetPort": 5201
+            },
+            {
+              "name": "ue2-tcp",
+              "nodePort": 31404,
+              "port": 5202,
+              "protocol": "TCP",
+              "targetPort": 5202
+            },
+            {
+              "name": "ue2-udp",
+              "nodePort": 31404,
+              "port": 5202,
+              "protocol": "UDP",
+              "targetPort": 5202
+            }
+          ],
+          "selector": {
+            "app": "cnf-c2-endpoint"
+          },
+          "sessionAffinity": "None",
+          "type": "NodePort"
+        },
+        "status": {
+          "loadBalancer": {}
+        }
+      },
+      {
+        "apiVersion": "networking.k8s.io/v1",
+        "kind": "NetworkPolicy",
+        "metadata": {
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"networking.k8s.io/v1\",\"kind\":\"NetworkPolicy\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"cnf-c2-endpoint\",\"app.kubernetes.io/part-of\":\"cnf-contention-uplink-v1\"},\"name\":\"cnf-c2-endpoint\",\"namespace\":\"cnf-contention-uplink\"},\"spec\":{\"ingress\":[{\"ports\":[{\"port\":5201,\"protocol\":\"TCP\"},{\"port\":5201,\"protocol\":\"UDP\"},{\"port\":5202,\"protocol\":\"TCP\"},{\"port\":5202,\"protocol\":\"UDP\"}]},{\"from\":[{\"ipBlock\":{\"cidr\":\"192.168.244.129/32\"}},{\"ipBlock\":{\"cidr\":\"10.42.1.0/24\"}},{\"ipBlock\":{\"cidr\":\"10.60.0.0/16\"}}]}],\"podSelector\":{\"matchLabels\":{\"app\":\"cnf-c2-endpoint\"}},\"policyTypes\":[\"Ingress\"]}}\n"
+          },
+          "creationTimestamp": "2026-10-20T07:38:11Z",
+          "generation": 1,
+          "labels": {
+            "app": "cnf-c2-endpoint",
+            "app.kubernetes.io/part-of": "cnf-contention-uplink-v1"
+          },
+          "name": "cnf-c2-endpoint",
+          "namespace": "cnf-contention-uplink",
+          "resourceVersion": "614775",
+          "uid": "ce53e4f2-0c18-4007-97d8-9eb6d1f09f4b"
+        },
+        "spec": {
+          "ingress": [
+            {
+              "ports": [
+                {
+                  "port": 5201,
+                  "protocol": "TCP"
+                },
+                {
+                  "port": 5201,
+                  "protocol": "UDP"
+                },
+                {
+                  "port": 5202,
+                  "protocol": "TCP"
+                },
+                {
+                  "port": 5202,
+                  "protocol": "UDP"
+                }
+              ]
+            },
+            {
+              "from": [
+                {
+                  "ipBlock": {
+                    "cidr": "192.168.244.129/32"
+                  }
+                },
+                {
+                  "ipBlock": {
+                    "cidr": "10.42.1.0/24"
+                  }
+                },
+                {
+                  "ipBlock": {
+                    "cidr": "10.60.0.0/16"
+                  }
+                }
+              ]
+            }
+          ],
+          "podSelector": {
+            "matchLabels": {
+              "app": "cnf-c2-endpoint"
+            }
+          },
+          "policyTypes": [
+            "Ingress"
+          ]
+        }
+      }
+    ],
+    "endpoint": {
+      "apiVersion": "v1",
+      "kind": "Endpoints",
+      "metadata": {
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-20T07:38:14Z"
+        },
+        "creationTimestamp": "2026-10-20T07:38:11Z",
+        "labels": {
+          "app": "cnf-c2-endpoint",
+          "app.kubernetes.io/part-of": "cnf-contention-uplink-v1"
+        },
+        "name": "cnf-c2-endpoint",
+        "namespace": "cnf-contention-uplink",
+        "resourceVersion": "614802",
+        "uid": "3e7262cf-4e0c-4ed4-b30e-81997634ba18"
+      },
+      "subsets": [
+        {
+          "addresses": [
+            {
+              "ip": "10.42.0.201",
+              "nodeName": "lhm-virtual-machine",
+              "targetRef": {
+                "kind": "Pod",
+                "name": "cnf-c2-endpoint-7c749fd5b5-2kc9b",
+                "namespace": "cnf-contention-uplink",
+                "uid": "2d71960f-9153-4d8f-9c54-c3d7af59d058"
+              }
+            }
+          ],
+          "ports": [
+            {
+              "name": "ue1-tcp",
+              "port": 5201,
+              "protocol": "TCP"
+            },
+            {
+              "name": "ue2-udp",
+              "port": 5202,
+              "protocol": "UDP"
+            },
+            {
+              "name": "ue2-tcp",
+              "port": 5202,
+              "protocol": "TCP"
+            },
+            {
+              "name": "ue1-udp",
+              "port": 5201,
+              "protocol": "UDP"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

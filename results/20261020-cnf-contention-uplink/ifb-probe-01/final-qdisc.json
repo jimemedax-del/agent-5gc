@@ -1,0 +1,13 @@
+{
+  "command": [
+    "tc",
+    "-j",
+    "qdisc",
+    "show",
+    "dev",
+    "eth0"
+  ],
+  "returncode": 0,
+  "stdout": "[{\"kind\":\"noqueue\",\"handle\":\"0:\",\"root\":true,\"refcnt\":2,\"options\":{}}]\n",
+  "stderr": ""
+}

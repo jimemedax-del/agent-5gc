@@ -1,0 +1,1 @@
+qdisc del dev cnfc2ifb0 root handle 1:

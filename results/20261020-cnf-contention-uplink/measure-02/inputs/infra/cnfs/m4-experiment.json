@@ -1,0 +1,18 @@
+{
+  "configVersion": "cnf-m4-v1",
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M4",
+  "inheritedRouting": "cnf-m2-v4",
+  "roundsPerClassPerDirection": 5,
+  "directions": ["uplink", "downlink"],
+  "durationSeconds": 5,
+  "offeredMbps": 1,
+  "blockBytes": 16384,
+  "edgeNodeSelector": {"5gc.free5gc.org/role": "ran-test"},
+  "limitations": [
+    "Placement and functional path validation only; no latency, throughput advantage or seamless migration claim",
+    "QoS helpers and TBF removed from both backends before placement; no NetworkPolicy installed",
+    "All three VMs share one physical host; core and edge are logical experiment roles"
+  ]
+}

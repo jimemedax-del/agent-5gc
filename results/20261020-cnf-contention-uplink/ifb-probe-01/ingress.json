@@ -1,0 +1,15 @@
+{
+  "command": [
+    "tc",
+    "qdisc",
+    "add",
+    "dev",
+    "eth0",
+    "handle",
+    "ffff:",
+    "ingress"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

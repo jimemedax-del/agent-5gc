@@ -1,0 +1,45 @@
+PING 10.42.0.201 (10.42.0.201) from 10.60.0.3 uesimtun0: 56(84) bytes of data.
+[1792483104.791297] 64 bytes from 10.42.0.201: icmp_seq=1 ttl=61 time=1.59 ms
+[1792483105.206283] 64 bytes from 10.42.0.201: icmp_seq=2 ttl=61 time=216 ms
+[1792483106.901133] 64 bytes from 10.42.0.201: icmp_seq=10 ttl=61 time=257 ms
+[1792483107.293823] 64 bytes from 10.42.0.201: icmp_seq=12 ttl=61 time=240 ms
+[1792483107.954322] 64 bytes from 10.42.0.201: icmp_seq=15 ttl=61 time=285 ms
+[1792483108.128885] 64 bytes from 10.42.0.201: icmp_seq=16 ttl=61 time=252 ms
+[1792483109.132942] 64 bytes from 10.42.0.201: icmp_seq=21 ttl=61 time=232 ms
+[1792483109.376193] 64 bytes from 10.42.0.201: icmp_seq=22 ttl=61 time=268 ms
+[1792483110.217761] 64 bytes from 10.42.0.201: icmp_seq=26 ttl=61 time=293 ms
+[1792483114.345935] 64 bytes from 10.42.0.201: icmp_seq=47 ttl=61 time=61.3 ms
+[1792483115.131852] 64 bytes from 10.42.0.201: icmp_seq=51 ttl=61 time=23.3 ms
+[1792483115.518157] 64 bytes from 10.42.0.201: icmp_seq=52 ttl=61 time=209 ms
+[1792483115.786914] 64 bytes from 10.42.0.201: icmp_seq=53 ttl=61 time=270 ms
+[1792483117.640852] 64 bytes from 10.42.0.201: icmp_seq=62 ttl=61 time=268 ms
+[1792483118.252749] 64 bytes from 10.42.0.201: icmp_seq=65 ttl=61 time=264 ms
+[1792483118.668556] 64 bytes from 10.42.0.201: icmp_seq=67 ttl=61 time=272 ms
+[1792483119.062821] 64 bytes from 10.42.0.201: icmp_seq=69 ttl=61 time=258 ms
+[1792483120.935469] 64 bytes from 10.42.0.201: icmp_seq=78 ttl=61 time=267 ms
+[1792483121.966419] 64 bytes from 10.42.0.201: icmp_seq=83 ttl=61 time=266 ms
+[1792483122.161008] 64 bytes from 10.42.0.201: icmp_seq=84 ttl=61 time=252 ms
+[1792483123.670907] 64 bytes from 10.42.0.201: icmp_seq=92 ttl=61 time=114 ms
+[1792483124.023056] 64 bytes from 10.42.0.201: icmp_seq=94 ttl=61 time=57.5 ms
+[1792483125.155724] 64 bytes from 10.42.0.201: icmp_seq=99 ttl=61 time=159 ms
+[1792483125.901834] 64 bytes from 10.42.0.201: icmp_seq=102 ttl=61 time=289 ms
+[1792483126.120699] 64 bytes from 10.42.0.201: icmp_seq=103 ttl=61 time=300 ms
+[1792483126.512741] 64 bytes from 10.42.0.201: icmp_seq=105 ttl=61 time=291 ms
+[1792483127.546725] 64 bytes from 10.42.0.201: icmp_seq=110 ttl=61 time=294 ms
+[1792483129.196080] 64 bytes from 10.42.0.201: icmp_seq=118 ttl=61 time=287 ms
+[1792483129.564721] 64 bytes from 10.42.0.201: icmp_seq=120 ttl=61 time=247 ms
+[1792483130.225909] 64 bytes from 10.42.0.201: icmp_seq=123 ttl=61 time=293 ms
+[1792483131.403946] 64 bytes from 10.42.0.201: icmp_seq=129 ttl=61 time=231 ms
+[1792483131.996623] 64 bytes from 10.42.0.201: icmp_seq=132 ttl=61 time=208 ms
+[1792483132.762065] 64 bytes from 10.42.0.201: icmp_seq=136 ttl=61 time=141 ms
+[1792483132.939748] 64 bytes from 10.42.0.201: icmp_seq=137 ttl=61 time=120 ms
+[1792483134.113834] 64 bytes from 10.42.0.201: icmp_seq=143 ttl=61 time=53.2 ms
+[1792483134.964848] 64 bytes from 10.42.0.201: icmp_seq=146 ttl=61 time=288 ms
+[1792483135.230025] 64 bytes from 10.42.0.201: icmp_seq=147 ttl=61 time=344 ms
+[1792483135.230038] 64 bytes from 10.42.0.201: icmp_seq=148 ttl=61 time=144 ms
+[1792483135.287486] 64 bytes from 10.42.0.201: icmp_seq=149 ttl=61 time=1.33 ms
+[1792483135.488093] 64 bytes from 10.42.0.201: icmp_seq=150 ttl=61 time=1.40 ms
+
+--- 10.42.0.201 ping statistics ---
+150 packets transmitted, 40 received, 73.3333% packet loss, time 30694ms
+rtt min/avg/max/mdev = 1.327/208.053/344.428/97.027 ms, pipe 2

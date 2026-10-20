@@ -1,0 +1,108 @@
+{
+  "outcome": "passed",
+  "uncorruptedNetworkControlAccepted": true,
+  "originalEvidenceUnchanged": true,
+  "auditorSha256LF": "2f322a80e8198a12bd3d41dcbe245d1aa02c2e27f7299735fd8cc51d6db775fd",
+  "cases": [
+    {
+      "case": "source-hash",
+      "outcome": "rejected",
+      "reason": "Execution input hash mismatch"
+    },
+    {
+      "case": "wrong-ue",
+      "outcome": "rejected",
+      "reason": "Wrong UE sender socket"
+    },
+    {
+      "case": "reverse-direction",
+      "outcome": "rejected",
+      "reason": "Wrong uplink UE/load/target command"
+    },
+    {
+      "case": "missing-server-receiver",
+      "outcome": "rejected",
+      "reason": "Missing server receiver JSON"
+    },
+    {
+      "case": "receiver-byte-mismatch",
+      "outcome": "rejected",
+      "reason": "Server receiver datagram/byte counts do not close"
+    },
+    {
+      "case": "actual-underload",
+      "outcome": "rejected",
+      "reason": "Actual offered load differs from the 8 Mbps contract"
+    },
+    {
+      "case": "serial-receivers",
+      "outcome": "rejected",
+      "reason": "Uplink flows are not genuinely concurrent"
+    },
+    {
+      "case": "wrong-redirect",
+      "outcome": "rejected",
+      "reason": "Ingress is not redirected to the owned IFB"
+    },
+    {
+      "case": "source-port-classifier",
+      "outcome": "rejected",
+      "reason": "Uplink classifier must match destination ports and probe ToS"
+    },
+    {
+      "case": "wrong-capacity",
+      "outcome": "rejected",
+      "reason": "Capacity is not 10 Mbps"
+    },
+    {
+      "case": "inactive-bottleneck",
+      "outcome": "rejected",
+      "reason": "No active shared uplink bottleneck"
+    },
+    {
+      "case": "receiver-cookie",
+      "outcome": "rejected",
+      "reason": "Client/server cookie mismatch"
+    },
+    {
+      "case": "rtt-bypass",
+      "outcome": "rejected",
+      "reason": "Probe bypasses user tunnel/class"
+    },
+    {
+      "case": "native-policer-enabled",
+      "outcome": "rejected",
+      "reason": "Native UPF policer drift"
+    },
+    {
+      "case": "smf-replacement",
+      "outcome": "rejected",
+      "reason": "Pod identity changed"
+    },
+    {
+      "case": "missing-round",
+      "outcome": "rejected",
+      "reason": "Missing/duplicate experimental groups"
+    },
+    {
+      "case": "weakened-contract",
+      "outcome": "rejected",
+      "reason": "Frozen experiment mismatch"
+    },
+    {
+      "case": "fake-rtt-quantile",
+      "outcome": "rejected",
+      "reason": "Derived observations differ from raw evidence"
+    },
+    {
+      "case": "admission-changed-queue",
+      "outcome": "rejected",
+      "reason": "Unknown/drifted IFB queue; refusing replacement"
+    },
+    {
+      "case": "not-restored",
+      "outcome": "rejected",
+      "reason": "Ingress/IFB not restored"
+    }
+  ]
+}

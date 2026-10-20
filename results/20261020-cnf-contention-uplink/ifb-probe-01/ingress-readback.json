@@ -1,0 +1,15 @@
+{
+  "command": [
+    "tc",
+    "-s",
+    "filter",
+    "show",
+    "dev",
+    "eth0",
+    "parent",
+    "ffff:"
+  ],
+  "returncode": 0,
+  "stdout": "filter protocol ip pref 45000 matchall chain 0 \nfilter protocol ip pref 45000 matchall chain 0 handle 0x1 \n  not_in_hw (rule hit 0)\n\taction order 1: mirred (Egress Redirect to device cnfc2ifb0) stolen\n\tindex 1 ref 1 bind 1 installed 0 sec used 0 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\n",
+  "stderr": ""
+}

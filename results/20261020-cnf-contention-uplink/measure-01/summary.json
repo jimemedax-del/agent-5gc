@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "measure",
+  "error": "Insufficient class RTT observations",
+  "endedAt": "2026-10-20T07:58:59.640143Z"
+}

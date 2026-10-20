@@ -1,0 +1,4 @@
+namespace/cnf-contention-uplink created
+deployment.apps/cnf-c2-endpoint created
+service/cnf-c2-endpoint created
+networkpolicy.networking.k8s.io/cnf-c2-endpoint created

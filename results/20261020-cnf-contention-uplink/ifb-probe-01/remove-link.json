@@ -1,0 +1,12 @@
+{
+  "command": [
+    "ip",
+    "link",
+    "del",
+    "dev",
+    "cnfc2ifb0"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

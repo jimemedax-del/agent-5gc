@@ -1,0 +1,132 @@
+{
+  "outcome": "diagnostic-only-not-a-completed-batch",
+  "originalBatchVersion": "cnf-contention-uplink-v1",
+  "analysisVersion": "cnf-contention-uplink-v2",
+  "originalSummary": {
+    "outcome": "failed",
+    "command": "measure",
+    "error": "Insufficient class RTT observations",
+    "endedAt": "2026-10-20T07:58:59.640143Z"
+  },
+  "recordedCompletedGroups": 10,
+  "actualRttCounterexample": "measure-01/02-guarantee-ue2",
+  "users": {
+    "ue1": {
+      "steadyMbps": 1.9316209617366464,
+      "windowMbps": [
+        1.9295942493610103,
+        1.939205779283581,
+        1.9295942493610103,
+        1.9296039104540919,
+        1.929609661150666,
+        1.9390622320782758,
+        1.9297292834111783,
+        1.9296039104540919,
+        1.9296,
+        1.9296,
+        1.9391981506365292,
+        1.929588498756297,
+        1.9296193223980762,
+        1.9295960895617577,
+        1.9296019552250647,
+        1.9391960701068411,
+        1.9296019552250647,
+        1.9296019552250647,
+        1.9295903389460758
+      ],
+      "steadySeconds": 19.00000089406967,
+      "steadyPackets": 15845,
+      "steadyLostPackets": 12022,
+      "steadyLossPercent": 75.8725149889555,
+      "fullReceivedBytes": 7275600,
+      "fullReceiverMbps": 1.9371921005971269,
+      "fullPackets": 24756,
+      "fullLostPackets": 18693,
+      "actualSenderSteadyMbps": 8.00033812209068,
+      "cookie": "ka77v5fwpezlatkrt3ycjiftra47ln7eljr7",
+      "receiverBasis": "server receiver intervals; bytes=(packets-lost)*1200; client intervals are sender load only",
+      "rtt": {
+        "samples": 19,
+        "minimumRequired": 30,
+        "availability": "insufficient",
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "transmitted": 150,
+        "received": 40,
+        "fullProbeLossPercent": 73.33333333333333,
+        "scope": "class-mapped ICMP RTT conditional on received replies; missing quantiles are not a latency pass"
+      },
+      "fullPingSummaryMs": [
+        1.327,
+        208.053,
+        344.428,
+        97.027
+      ]
+    },
+    "ue2": {
+      "steadyMbps": 7.7259573764409994,
+      "windowMbps": [
+        7.727667443281767,
+        7.718407820900259,
+        7.7279539378050695,
+        7.737623059913695,
+        7.718353995025188,
+        7.728108248319528,
+        7.718284068513795,
+        7.728077385723639,
+        7.737576940223753,
+        7.7183687165574595,
+        7.728038692668091,
+        7.717712742779391,
+        7.728672570583405,
+        7.728030861977801,
+        7.728007830627747,
+        7.7279843387921145,
+        7.718384358247031,
+        7.727721792700124,
+        7.728216499671628
+      ],
+      "steadySeconds": 19.00005304813385,
+      "steadyPackets": 15836,
+      "steadyLostPackets": 545,
+      "steadyLossPercent": 3.4415256377873202,
+      "fullReceivedBytes": 28975200,
+      "fullReceiverMbps": 7.714812477970299,
+      "fullPackets": 24995,
+      "fullLostPackets": 849,
+      "actualSenderSteadyMbps": 8.000332224122069,
+      "cookie": "x4fqw45yyqt2satnw3imqcjil3dqdpfajz43",
+      "receiverBasis": "server receiver intervals; bytes=(packets-lost)*1200; client intervals are sender load only",
+      "rtt": {
+        "samples": 90,
+        "minimumRequired": 30,
+        "availability": "sufficient",
+        "p50Ms": 4.0,
+        "p95Ms": 6.68,
+        "p99Ms": 9.82,
+        "transmitted": 150,
+        "received": 150,
+        "fullProbeLossPercent": 0.0,
+        "scope": "class-mapped ICMP RTT conditional on received replies; missing quantiles are not a latency pass"
+      },
+      "fullPingSummaryMs": [
+        1.326,
+        3.991,
+        9.816,
+        1.237
+      ]
+    }
+  },
+  "bandwidthThresholdsUnchanged": true,
+  "renderedKubernetesResourcesUnchanged": true,
+  "changedExperimentFields": [
+    "configVersion",
+    "rttObservation",
+    "scope"
+  ],
+  "minimumSteadyRttSamplesStill30": true,
+  "noCausalDiagnosisClaimed": true,
+  "excludedFromMeasure02Statistics": true,
+  "originalIncompleteEvidenceUnchanged": true
+}
