@@ -232,6 +232,17 @@ python3 scripts/measure-controlled-data-plane.py --stability \
 `--capture-smf` 可在稳定性模式同步保存 `smf-live.log`；该流同样受文件大小及意外 EOF
 保护，SMF 容器结束会停止负载。完整运行日志默认忽略，不作为可提交的堆栈摘录。
 
+## 双 UE 低负载基线入口
+
+`cnf-multi-ue.py` 使用 `infra/cnfs/multi-ue-experiment.json` 和隔离测试订阅
+`infra/free5gc-test-subscriber-ue2.json`，提供 `render`、`deploy`、`check`、`individual`、`smoke`、`concurrent`，均要求 `--out <新目录>`。
+在 VM1 设置 `KUBECONFIG=/home/lhm/.kube/config` 后运行；`deploy` 只接受单 UE 的已验收 `protected` 起点，拒绝覆盖已有同名实验资源。
+新建 `cnf-multi-ue` 中的专用 Envoy、四个独立服务端以及两条保护策略，并在 `free5gc` 中增加独立身份的 UE2；不修改旧 CNF 资源或关闭旧 Profile 验证。
+分别验收 `individual` 后运行 `smoke`，再以独立目录运行 `concurrent`：正式批次 20 组、40 次 TCP 会话，每 UE 1 Mbps、10 秒；每组保守有效流量重叠至少 8 秒。
+额外采集两侧 SUPI/会话/IP、源地址绑定、四路代理/后端 Cookie、UPF 计数、Pod 身份和内存护栏。它不证明 QoS 保底或自主识别。
+离线审计入口为 `audit-cnf-multi-ue.py <证据目录> --out <新的JSON路径>`；具体配置和结果统一维护在
+[双 UE 模块章节](../docs/cnf-service-chain-orchestration.md#a-双-ue-低负载基线的实现与验收)。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

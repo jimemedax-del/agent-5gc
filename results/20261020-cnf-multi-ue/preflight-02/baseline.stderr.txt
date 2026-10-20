@@ -1,0 +1,3 @@
+PROFILE ERROR: kubectl failed (2): ping: SO_BINDTODEVICE uesimtun0: No such device
+command terminated with exit code 2
+

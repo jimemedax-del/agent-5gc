@@ -1,0 +1,36 @@
+01-uplink-core: 2 sessions passed; overlap=9.000077962875366
+01-uplink-edge: 2 sessions passed; overlap=9.000080108642578
+01-downlink-core: 2 sessions passed; overlap=9.000125885009766
+01-downlink-edge: 2 sessions passed; overlap=9.0001060962677
+02-uplink-core: 2 sessions passed; overlap=9.000077962875366
+02-uplink-edge: 2 sessions passed; overlap=9.00008511543274
+02-downlink-core: 2 sessions passed; overlap=9.000127077102661
+02-downlink-edge: 2 sessions passed; overlap=9.000128984451294
+03-uplink-core: 2 sessions passed; overlap=9.000076055526733
+03-uplink-edge: 2 sessions passed; overlap=9.000075101852417
+03-downlink-core: 2 sessions passed; overlap=9.000109910964966
+03-downlink-edge: 2 sessions passed; overlap=9.000132083892822
+04-uplink-core: 2 sessions passed; overlap=9.00006890296936
+04-uplink-edge: 2 sessions passed; overlap=9.000051975250244
+04-downlink-core: 2 sessions passed; overlap=9.000128030776978
+04-downlink-edge: 2 sessions passed; overlap=9.000111103057861
+05-uplink-core: 2 sessions passed; overlap=9.000034093856812
+05-uplink-edge: 2 sessions passed; overlap=9.000076055526733
+05-downlink-core: 2 sessions passed; overlap=9.000119924545288
+05-downlink-edge: 2 sessions passed; overlap=9.000116109848022
+{
+  "outcome": "passed",
+  "command": "concurrent",
+  "evidence": {
+    "mode": "concurrent",
+    "sessions": 40,
+    "groups": 20,
+    "uniqueCookies": 40,
+    "proxyConnections": 80,
+    "originalPodsUnchanged": 18,
+    "allMonitoredPodsUnchanged": 24,
+    "minimumOverlapLowerBoundSeconds": 9.000034093856812,
+    "fullAcceptance": true
+  },
+  "endedAt": "2026-10-20T04:04:29.788476Z"
+}

@@ -1,0 +1,24 @@
+01-uplink-core-ue1: 1 sessions passed; overlap=None
+01-uplink-core-ue2: 1 sessions passed; overlap=None
+01-uplink-edge-ue1: 1 sessions passed; overlap=None
+01-uplink-edge-ue2: 1 sessions passed; overlap=None
+01-downlink-core-ue1: 1 sessions passed; overlap=None
+01-downlink-core-ue2: 1 sessions passed; overlap=None
+01-downlink-edge-ue1: 1 sessions passed; overlap=None
+01-downlink-edge-ue2: 1 sessions passed; overlap=None
+{
+  "outcome": "passed",
+  "command": "individual",
+  "evidence": {
+    "mode": "individual",
+    "sessions": 8,
+    "groups": 8,
+    "uniqueCookies": 8,
+    "proxyConnections": 16,
+    "originalPodsUnchanged": 18,
+    "allMonitoredPodsUnchanged": 24,
+    "minimumOverlapLowerBoundSeconds": null,
+    "fullAcceptance": false
+  },
+  "endedAt": "2026-10-20T03:55:20.206311Z"
+}

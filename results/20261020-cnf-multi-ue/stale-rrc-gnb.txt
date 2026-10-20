@@ -1,0 +1,29 @@
+[gNB wrapper] Pod IP detected: 10.42.2.71
+[gNB wrapper] Configuration prepared:
+linkIp: 10.42.2.71   # gNB's local IP address for Radio Link Simulation
+ngapIp: 10.42.2.71   # gNB's local IP address for N2 Interface
+gtpIp: 10.42.2.71    # gNB's local IP address for N3 Interface
+UERANSIM v3.2.7
+[2026-10-08 12:00:43.274] [sctp] [info] Trying to establish SCTP connection... (10.43.144.221:38412)
+[2026-10-08 12:00:43.276] [sctp] [info] SCTP connection established (10.43.144.221:38412)
+[2026-10-08 12:00:43.277] [sctp] [debug] SCTP association setup ascId[5]
+[2026-10-08 12:00:43.277] [ngap] [debug] Sending NG Setup Request
+[2026-10-08 12:00:43.278] [ngap] [debug] NG Setup Response received
+[2026-10-08 12:00:43.278] [ngap] [info] NG Setup procedure is successful
+[2026-10-08 12:00:45.333] [rrc] [debug] UE[1] new signal detected
+[2026-10-08 12:00:45.334] [rrc] [info] RRC Setup for UE[1]
+[2026-10-08 12:00:45.334] [ngap] [debug] Initial NAS message received from UE[1]
+[2026-10-08 12:00:45.379] [ngap] [debug] Initial Context Setup Request received
+[2026-10-08 12:00:45.687] [ngap] [info] PDU session resource(s) setup for UE[1] count[1]
+[2026-10-16 06:35:44.764] [rrc] [debug] UE[2] new signal detected
+[2026-10-16 06:35:44.783] [rrc] [info] RRC Setup for UE[2]
+[2026-10-16 06:35:44.796] [ngap] [debug] Initial NAS message received from UE[2]
+[2026-10-16 06:35:49.786] [ngap] [debug] UE Context Release Command received
+[2026-10-16 06:35:49.786] [rrc] [info] Releasing RRC connection for UE[1]
+[2026-10-16 06:35:50.520] [ngap] [debug] Initial Context Setup Request received
+[2026-10-16 06:35:53.682] [ngap] [info] PDU session resource(s) setup for UE[2] count[1]
+[2026-10-16 06:36:15.898] [rls] [debug] UE[1] signal lost
+[2026-10-19 11:55:17.289] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2026-10-19 12:03:15.274] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2026-10-19 12:03:31.247] [rrc] [debug] UE[3] new signal detected
+[2026-10-19 12:03:32.248] [rls] [debug] UE[2] signal lost

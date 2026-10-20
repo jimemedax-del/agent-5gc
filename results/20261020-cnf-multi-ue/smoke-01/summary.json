@@ -1,0 +1,16 @@
+{
+  "outcome": "passed",
+  "command": "smoke",
+  "evidence": {
+    "mode": "smoke",
+    "sessions": 8,
+    "groups": 4,
+    "uniqueCookies": 8,
+    "proxyConnections": 16,
+    "originalPodsUnchanged": 18,
+    "allMonitoredPodsUnchanged": 24,
+    "minimumOverlapLowerBoundSeconds": 9.000072956085205,
+    "fullAcceptance": false
+  },
+  "endedAt": "2026-10-20T03:57:00.093527Z"
+}

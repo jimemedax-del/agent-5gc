@@ -1,0 +1,36 @@
+{
+  "outcome": "passed",
+  "rows": [
+    {
+      "round": 4,
+      "businessClass": "edge",
+      "direction": "uplink",
+      "user": "ue1",
+      "outcome": "passed",
+      "startedAt": "2026-10-20T04:01:59.655019Z",
+      "trafficEndedAt": "2026-10-20T04:02:10.048415Z",
+      "cookie": "c3zkvzqrbl324dk7cg6scplwetzz5dthias7",
+      "receivedBytes": 1261568,
+      "proxyConnections": 2,
+      "backendHit": "edge",
+      "incorrectRoutes": 0,
+      "receiverMbps": 1.0053013540157394
+    },
+    {
+      "round": 4,
+      "businessClass": "edge",
+      "direction": "uplink",
+      "user": "ue2",
+      "outcome": "passed",
+      "startedAt": "2026-10-20T04:01:59.655493Z",
+      "trafficEndedAt": "2026-10-20T04:02:10.048729Z",
+      "cookie": "4sqh44wdzxbweughya33n34hzymm4ox7hk2t",
+      "receivedBytes": 1261568,
+      "proxyConnections": 2,
+      "backendHit": "edge",
+      "incorrectRoutes": 0,
+      "receiverMbps": 1.0055010656222452
+    }
+  ],
+  "overlapLowerBoundSeconds": 9.000051975250244
+}

@@ -1026,6 +1026,26 @@ M2 最初尝试在 Bootstrap 中设置 `file_flush_interval`，实际固定 Envo
 
 ---
 
+# PS-010：UE 保留会话与 IP，但旧 RRC 上下文导致业务不通
+
+## 1. 现象与证据
+
+2026-10-20 A 实验前的严格复查失败：UE1 容器 Running/Ready，CLI 显示已注册、PDU Session 活跃且持有 `10.60.0.2`，但绑定 `uesimtun0` 到 VM1 的 Ping 为 100% 丢包。
+gNB 日志出现 `Discarding RRC Setup Request, UE context already exists`，UE 日志记录服务请求/周期注册重试超时。
+日志说明存在旧上下文与新请求冲突的现象；本次未证明其更深层触发原因，不将它归因于已经确认的 UPF 故障。
+
+## 2. 恢复与复验
+
+保存诊断后只对 `deployment/ueransim-ue` 执行一次受控 `rollout restart`，未重启 gNB、控制面或 UPF。
+首次紧接着的复查仍因 `uesimtun0` 尚未创建而失败，保留为 `preflight-02`；不能将 Deployment Ready 当成业务就绪。
+待旧 Pod 完全退出、新 UE 完成鉴权/注册/PDU Session 与 TUN 创建后，`preflight-03` 的原严格 5GC 和 `protected` Profile 检查通过，UE1 地址为 `10.60.0.3`。
+
+证据统一见 [`results/20261020-cnf-multi-ue/`](results/20261020-cnf-multi-ue/) 中 `preflight-01`—`03`、`stale-rrc-gnb.txt`、`stale-rrc-ue.txt`、`ue1-recovery-restart.txt`。
+这次 UE1 身份变化属于正式 A 批次之前的恢复操作；A 的“原有 18 个 Pod 身份不变”以恢复后的部署前快照为起点，不外推为整个故障处理期间均未重建。
+实验入口在进行下一步前同时核对注册、活跃会话、TUN、绑定选路和实际 Ping；不自动重启所有网元来掩盖失败。
+
+---
+
 ## 新案例追加模板
 
 ```markdown

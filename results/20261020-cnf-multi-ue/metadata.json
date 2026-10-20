@@ -1,0 +1,73 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "A",
+  "configVersion": "cnf-multi-ue-v1",
+  "workingDirectory": "E:\\GPT-project\\postgraduate-analyse",
+  "evidencePath": "results/20261020-cnf-multi-ue",
+  "referenceHead": "9f13a71d8f4f670ac848ccc0b3c106904054c378",
+  "sourceState": "New runtime sources are uncommitted working-tree files; per-action LF input hashes are authoritative",
+  "sourceArchiveSha256": "36c8855d518786ed32ae1a741a7492ac776aed1272c868ea6099229888247038",
+  "sourceSha256LF": {
+    "scripts/cnf-multi-ue.py": "faa479c74e85bffdab8e86d1181ec5c6e8fa0c9cdd79492da6bab7fc6862e394",
+    "scripts/audit-cnf-multi-ue.py": "814ad135cf1887802c5edb882a8f49a525a375df1482f4586c9291bb64f9c992",
+    "tests/test_cnf_multi_ue.py": "b0e91f6d47c2f15630122c2a57a0f2081108d9cfe28393b619aca7015441d73c",
+    "infra/cnfs/multi-ue-experiment.json": "dd09ca0eb63da585e5874e7b253227f5e4136216f1e054e35b52f6f9b0bb6c4b",
+    "infra/free5gc-test-subscriber-ue2.json": "d8873d128bbd0bcfbec1b811e1e013a8cd02fc4bd61b3a1a89e56137f5e0b3c3",
+    "results/20261020-cnf-multi-ue/audit-negative-checks.py": "c5f8d74ce6a0004e70930d9eb151ab65422c748a2421b9fcb0c1205ddfdf2736"
+  },
+  "phases": {
+    "deploy": "deploy-01",
+    "individual": "individual-01",
+    "smoke": "smoke-01",
+    "concurrent": "concurrent-01",
+    "check": "final-check-01"
+  },
+  "baselineRecovery": {
+    "ue1RecreatedBeforeFormalBaseline": true,
+    "untouchedComponents": [
+      "gNB",
+      "control-plane NFs",
+      "UPF",
+      "original cnf-lab"
+    ],
+    "failedPreflights": [
+      "preflight-01",
+      "preflight-02"
+    ],
+    "acceptedPreflight": "preflight-03",
+    "identityBaseline": "deploy-01/original-pods.json; after the UE1 recovery"
+  },
+  "tests": {
+    "windows": {
+      "discovered": 95,
+      "passed": 94,
+      "skipped": 1
+    },
+    "vm1": {
+      "discovered": 95,
+      "passed": 94,
+      "skipped": 1
+    },
+    "skipReason": "Existing Helm integration is conditional; no core deployment or post-renderer source changed",
+    "envoyActualImageValidation": "passed",
+    "corruptionRejections": 6
+  },
+  "retainedState": {
+    "originalCNF": "cnf-lab/protected",
+    "fixtureNamespace": "cnf-multi-ue",
+    "monitoredPods": 24,
+    "userAddresses": {
+      "ue1": "10.60.0.3",
+      "ue2": "10.60.0.4"
+    },
+    "activeIperfClients": 0
+  },
+  "limitations": [
+    "Explicit per-user test entry ports; not autonomous demand classification or identity-based access control",
+    "Dedicated Envoy and per-user backend processes in cnf-multi-ue; original cnf-lab unchanged",
+    "Only low-load TCP concurrency, no bandwidth guarantee, QoS policy or radio SLA claim",
+    "One-second client timestamp resolution; overlap proof uses conservative positive-byte intervals",
+    "UPF counters are aggregate; source binding and cookies correlate flows without per-packet capture"
+  ]
+}

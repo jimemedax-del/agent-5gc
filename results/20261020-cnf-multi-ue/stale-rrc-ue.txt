@@ -1,0 +1,64 @@
+UERANSIM v3.2.7
+[2026-10-16 06:35:44.761] [nas] [info] UE switches to state [MM-DEREGISTERED/PLMN-SEARCH]
+[2026-10-16 06:35:44.764] [rrc] [debug] New signal detected for cell[1], total [1] cells in coverage
+[2026-10-16 06:35:44.768] [nas] [info] Selected plmn[208/93]
+[2026-10-16 06:35:44.769] [rrc] [info] Selected cell plmn[208/93] tac[1] category[SUITABLE]
+[2026-10-16 06:35:44.770] [nas] [info] UE switches to state [MM-DEREGISTERED/PS]
+[2026-10-16 06:35:44.770] [nas] [info] UE switches to state [MM-DEREGISTERED/NORMAL-SERVICE]
+[2026-10-16 06:35:44.770] [nas] [debug] Initial registration required due to [MM-DEREG-NORMAL-SERVICE]
+[2026-10-16 06:35:44.770] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-16 06:35:44.770] [nas] [debug] Sending Initial Registration
+[2026-10-16 06:35:44.778] [nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[2026-10-16 06:35:44.778] [rrc] [debug] Sending RRC Setup Request
+[2026-10-16 06:35:44.784] [rrc] [info] RRC connection established
+[2026-10-16 06:35:44.784] [rrc] [info] UE switches to state [RRC-CONNECTED]
+[2026-10-16 06:35:44.784] [nas] [info] UE switches to state [CM-CONNECTED]
+[2026-10-16 06:35:49.670] [nas] [debug] Authentication Request received
+[2026-10-16 06:35:49.673] [nas] [debug] Received SQN [000000000047]
+[2026-10-16 06:35:49.673] [nas] [debug] SQN-MS [000000000000]
+[2026-10-16 06:35:49.775] [nas] [debug] Security Mode Command received
+[2026-10-16 06:35:49.775] [nas] [debug] Selected integrity[2] ciphering[0]
+[2026-10-16 06:35:50.521] [nas] [debug] Registration accept received
+[2026-10-16 06:35:50.522] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-10-16 06:35:50.522] [nas] [debug] Sending Registration Complete
+[2026-10-16 06:35:50.522] [nas] [info] Initial Registration is successful
+[2026-10-16 06:35:50.522] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-16 06:35:50.522] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-16 06:35:50.732] [nas] [debug] Configuration Update Command received
+[2026-10-16 06:35:53.681] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-16 06:35:53.682] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-16 06:35:53.706] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.2] is up.
+[2026-10-19 11:03:14.688] [rrc] [debug] Signal lost for cell[1], total [0] cells in coverage
+[2026-10-19 11:03:14.693] [rrc] [debug] New signal detected for cell[2], total [1] cells in coverage
+[2026-10-19 11:03:14.693] [nas] [error] Radio link failure detected
+[2026-10-19 11:03:14.694] [nas] [info] UE switches to state [CM-IDLE]
+[2026-10-19 11:03:14.694] [nas] [info] UE switches to state [MM-REGISTERED/PS]
+[2026-10-19 11:03:14.694] [nas] [info] UE switches to state [MM-REGISTERED/PLMN-SEARCH]
+[2026-10-19 11:03:14.694] [nas] [error] PLMN selection failure, no cells in coverage
+[2026-10-19 11:03:16.877] [nas] [error] PLMN selection failure, no cells in coverage
+[2026-10-19 11:03:17.178] [rrc] [warning] Acceptable cell selection failed in [1] cells. [1] no SI, [0] reserved, [0] barred, ftai [0]
+[2026-10-19 11:03:17.178] [rrc] [error] Cell selection failure, no suitable or acceptable cell found
+[2026-10-19 11:03:19.079] [nas] [error] PLMN selection failure, no cells in coverage
+[2026-10-19 11:03:20.180] [nas] [info] UE switches to state [MM-REGISTERED/NO-CELL-AVAILABLE]
+[2026-10-19 11:03:24.681] [rrc] [info] Selected cell plmn[208/93] tac[1] category[ACCEPTABLE]
+[2026-10-19 11:03:24.681] [nas] [info] Selected plmn[208/93]
+[2026-10-19 11:03:24.681] [nas] [info] UE switches to state [MM-REGISTERED/PS]
+[2026-10-19 11:03:24.681] [nas] [info] UE switches to state [MM-REGISTERED/LIMITED-SERVICE]
+[2026-10-19 11:55:17.268] [nas] [debug] Uplink data status changed PSI[1] pending[true]
+[2026-10-19 11:55:17.268] [nas] [debug] Service request required due to [IDLE-UPLINK-DATA-PENDING]
+[2026-10-19 11:55:17.269] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_data]
+[2026-10-19 11:55:17.269] [nas] [debug] Sending Service Request due to [IDLE-UPLINK-DATA-PENDING]
+[2026-10-19 11:55:17.278] [nas] [info] UE switches to state [MM-SERVICE-REQUEST-INITIATED]
+[2026-10-19 11:55:17.279] [rrc] [debug] Sending RRC Setup Request
+[2026-10-19 11:55:32.811] [nas] [debug] NAS timer[3517] expired [1]
+[2026-10-19 11:55:32.811] [nas] [info] UE switches to state [MM-REGISTERED/PS]
+[2026-10-19 11:55:32.811] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-10-19 12:03:15.273] [nas] [debug] NAS timer[3512] expired [1]
+[2026-10-19 12:03:15.273] [nas] [debug] Mobility registration updating required due to [T3512-EXPIRY]
+[2026-10-19 12:03:15.273] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_data]
+[2026-10-19 12:03:15.273] [nas] [debug] Sending Periodic Registration with update cause [T3512-EXPIRY]
+[2026-10-19 12:03:15.274] [nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[2026-10-19 12:03:15.274] [rrc] [debug] Sending RRC Setup Request
+[2026-10-19 12:03:30.288] [nas] [debug] NAS timer[3510] expired [1]
+[2026-10-19 12:03:30.288] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-10-19 12:03:30.288] [rrc] [info] UE switches to state [RRC-IDLE]

@@ -1,0 +1,16 @@
+NAME                                                UID                                    RESTARTS
+free5gc-helm-free5gc-amf-amf-5944cf5cdf-dcqw5       033d6215-dd8c-46fa-b0fe-73af420070c7   0
+free5gc-helm-free5gc-ausf-ausf-6b5bd7556c-vqf6x     b9bf9931-f5fe-49b2-a3d8-47d53c5a6b74   0
+free5gc-helm-free5gc-chf-chf-df69dccd4-fsf99        f35bee1a-73e0-4bcd-b2f1-feeb7b512276   0
+free5gc-helm-free5gc-nef-nef-9d8f4dd4d-blz4h        6acbe1d5-1c71-4d56-ba06-ef4b613c009c   0
+free5gc-helm-free5gc-nrf-nrf-5798fdf864-jcbvx       8209861f-534e-4219-8a14-126af535cc44   0
+free5gc-helm-free5gc-nssf-nssf-56ff4d54f7-zb2vf     1a6290a0-210c-46d7-84a0-036dfbeac7e1   0
+free5gc-helm-free5gc-pcf-pcf-5f759fcd89-zdt9l       7a9d54bb-3c31-4083-b4d7-1d9e465c02d2   0
+free5gc-helm-free5gc-smf-smf-7cd84fc946-mgq8b       628236c6-d6df-4ec1-9966-fe5cdfdbb6ce   0
+free5gc-helm-free5gc-udm-udm-79fb64ccf-8vr8c        72ccab4d-3e11-45df-8ee5-ef12edc64799   0
+free5gc-helm-free5gc-udr-udr-6b6846cc77-p5mnt       b0779c13-857a-4a1e-a3df-895a9f52d8d7   0
+free5gc-helm-free5gc-upf-upf-5988cd4f56-s5vwz       41b23b57-fa75-4cb5-af33-3e8aaed7c5d9   0
+free5gc-helm-free5gc-webui-webui-66d65bfb86-td2fz   92370ec2-531d-49f3-b1c0-f03c6ff6514a   0
+mongodb-0                                           99c77079-dec5-45ff-a2e4-eaf59298e3f7   0
+ueransim-gnb-7645695b4d-dv277                       d4398fa9-3ad0-4336-a486-ecfe6429c414   0
+ueransim-ue-69fdcb588d-bhdkr                        441a925b-70b7-4568-9422-3af63c2d6f77   0

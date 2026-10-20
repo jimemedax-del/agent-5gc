@@ -1,0 +1,25 @@
+{
+  "outcome": "passed",
+  "rows": [
+    {
+      "round": 1,
+      "businessClass": "edge",
+      "direction": "downlink",
+      "user": "ue1",
+      "outcome": "passed",
+      "startedAt": "2026-10-20T03:54:30.122377Z",
+      "trafficEndedAt": "2026-10-20T03:54:40.553837Z",
+      "cookie": "rqumqcmedax2orkehjoke7tysego6ugsfrql",
+      "receivedBytes": 1261568,
+      "proxyConnections": 2,
+      "backendHit": "edge",
+      "incorrectRoutes": 0,
+      "receiverMbps": 1.0092436010934682,
+      "senderMbps": 1.0052858331166057,
+      "senderBytes": 1261568,
+      "receiverWindowSeconds": 10.000107,
+      "senderWindowSeconds": 10.039477
+    }
+  ],
+  "overlapLowerBoundSeconds": null
+}

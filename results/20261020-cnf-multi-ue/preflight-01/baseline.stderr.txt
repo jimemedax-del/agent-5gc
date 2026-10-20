@@ -1,0 +1,2 @@
+PROFILE ERROR: kubectl failed (1): command terminated with exit code 1
+

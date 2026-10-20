@@ -1,0 +1,38 @@
+{
+  "outcome": "passed",
+  "uncorruptedControlPassed": true,
+  "originalEvidenceUnchanged": true,
+  "auditorSha256LF": "814ad135cf1887802c5edb882a8f49a525a375df1482f4586c9291bb64f9c992",
+  "cases": [
+    {
+      "case": "source-hash",
+      "outcome": "rejected",
+      "reason": "Input hash differs: scripts/cnf-multi-ue.py"
+    },
+    {
+      "case": "wrong-ue-binding",
+      "outcome": "rejected",
+      "reason": "Invalid payload/window/direction/UE socket"
+    },
+    {
+      "case": "cookie-at-wrong-backend",
+      "outcome": "rejected",
+      "reason": "Cookie reached wrong backend"
+    },
+    {
+      "case": "serial-traffic",
+      "outcome": "rejected",
+      "reason": "Concurrent positive-byte windows did not overlap"
+    },
+    {
+      "case": "smf-replacement",
+      "outcome": "rejected",
+      "reason": "Original Pod changed: E:\\GPT-project\\postgraduate-analyse\\.work\\cnf-a-negative-elyvjnr9\\evidence\\final-check-01\\live\\pods.json"
+    },
+    {
+      "case": "policy-bypass",
+      "outcome": "rejected",
+      "reason": "Fixture spec/Service/policy identity changed"
+    }
+  ]
+}

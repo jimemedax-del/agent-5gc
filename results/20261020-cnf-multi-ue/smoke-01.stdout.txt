@@ -1,0 +1,20 @@
+01-uplink-core: 2 sessions passed; overlap=9.000078916549683
+01-uplink-edge: 2 sessions passed; overlap=9.000072956085205
+01-downlink-core: 2 sessions passed; overlap=9.000119924545288
+01-downlink-edge: 2 sessions passed; overlap=9.000107049942017
+{
+  "outcome": "passed",
+  "command": "smoke",
+  "evidence": {
+    "mode": "smoke",
+    "sessions": 8,
+    "groups": 4,
+    "uniqueCookies": 8,
+    "proxyConnections": 16,
+    "originalPodsUnchanged": 18,
+    "allMonitoredPodsUnchanged": 24,
+    "minimumOverlapLowerBoundSeconds": 9.000072956085205,
+    "fullAcceptance": false
+  },
+  "endedAt": "2026-10-20T03:57:00.093527Z"
+}

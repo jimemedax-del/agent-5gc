@@ -1,0 +1,10 @@
+{
+  "outcome": "passed",
+  "command": "deploy",
+  "evidence": {
+    "originalPodsUnchanged": 18,
+    "addedPods": 6,
+    "state": "cnf-multi-ue-v1"
+  },
+  "endedAt": "2026-10-20T03:51:23.844752Z"
+}

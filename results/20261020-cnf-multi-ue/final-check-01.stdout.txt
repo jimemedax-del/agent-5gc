@@ -1,0 +1,28 @@
+{
+  "outcome": "passed",
+  "command": "check",
+  "evidence": {
+    "users": {
+      "ue1": {
+        "name": "ue1",
+        "supi": "imsi-208930000000001",
+        "deployment": "ueransim-ue",
+        "pod": "ueransim-ue-8f555b79b-rdjdb",
+        "podUID": "d1cf89a5-1f2a-4e74-b016-dbefbd149762",
+        "ip": "10.60.0.3",
+        "node": "ran-test"
+      },
+      "ue2": {
+        "name": "ue2",
+        "supi": "imsi-208930000000002",
+        "deployment": "cnf-a-ue2",
+        "pod": "cnf-a-ue2-6998f7d65b-2szgn",
+        "podUID": "0d6c656d-bf53-4bc4-a55a-6763d6870084",
+        "ip": "10.60.0.4",
+        "node": "ran-test"
+      }
+    },
+    "monitoredPods": 24
+  },
+  "endedAt": "2026-10-20T04:04:40.631328Z"
+}

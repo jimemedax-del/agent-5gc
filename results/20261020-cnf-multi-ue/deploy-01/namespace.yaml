@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cnf-multi-ue
+  labels:
+    app.kubernetes.io/part-of: cnf-multi-ue-v1

@@ -1,0 +1,16 @@
+{
+  "outcome": "passed",
+  "scope": "individual and smoke raw-flow review; formal batch excluded",
+  "phases": {
+    "individual": {
+      "uniqueCookies": 8,
+      "receivedBytes": 10092544,
+      "minimumOverlapSeconds": null
+    },
+    "smoke": {
+      "uniqueCookies": 8,
+      "receivedBytes": 10092544,
+      "minimumOverlapSeconds": 9.000072956085205
+    }
+  }
+}

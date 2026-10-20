@@ -1,0 +1,16 @@
+{
+  "outcome": "passed",
+  "command": "concurrent",
+  "evidence": {
+    "mode": "concurrent",
+    "sessions": 40,
+    "groups": 20,
+    "uniqueCookies": 40,
+    "proxyConnections": 80,
+    "originalPodsUnchanged": 18,
+    "allMonitoredPodsUnchanged": 24,
+    "minimumOverlapLowerBoundSeconds": 9.000034093856812,
+    "fullAcceptance": true
+  },
+  "endedAt": "2026-10-20T04:04:29.788476Z"
+}

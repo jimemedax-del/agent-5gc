@@ -1,0 +1,21 @@
+{
+  "outcome": "passed",
+  "rows": [
+    {
+      "round": 1,
+      "businessClass": "core",
+      "direction": "uplink",
+      "user": "ue1",
+      "outcome": "passed",
+      "startedAt": "2026-10-20T03:52:33.010202Z",
+      "trafficEndedAt": "2026-10-20T03:52:43.466818Z",
+      "cookie": "s26fgd2rs5ttjwwfw4kbrkptjhkpfsagdvk7",
+      "receivedBytes": 1261568,
+      "proxyConnections": 2,
+      "backendHit": "core",
+      "incorrectRoutes": 0,
+      "receiverMbps": 1.0054539850273934
+    }
+  ],
+  "overlapLowerBoundSeconds": null
+}

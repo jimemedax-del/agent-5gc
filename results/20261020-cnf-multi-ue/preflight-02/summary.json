@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "check",
+  "error": "Strict 5GC verify failed; see saved baseline output",
+  "endedAt": "2026-10-20T03:43:02.873505Z"
+}

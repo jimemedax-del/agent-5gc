@@ -1,0 +1,1 @@
+deployment "cnf-a-core-ue2" successfully rolled out

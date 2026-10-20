@@ -1,0 +1,16 @@
+{
+  "outcome": "passed",
+  "command": "individual",
+  "evidence": {
+    "mode": "individual",
+    "sessions": 8,
+    "groups": 8,
+    "uniqueCookies": 8,
+    "proxyConnections": 16,
+    "originalPodsUnchanged": 18,
+    "allMonitoredPodsUnchanged": 24,
+    "minimumOverlapLowerBoundSeconds": null,
+    "fullAcceptance": false
+  },
+  "endedAt": "2026-10-20T03:55:20.206311Z"
+}

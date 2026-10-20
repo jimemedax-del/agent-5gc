@@ -1,0 +1,21 @@
+{
+  "outcome": "passed",
+  "rows": [
+    {
+      "round": 1,
+      "businessClass": "edge",
+      "direction": "uplink",
+      "user": "ue1",
+      "outcome": "passed",
+      "startedAt": "2026-10-20T03:53:09.750570Z",
+      "trafficEndedAt": "2026-10-20T03:53:20.165116Z",
+      "cookie": "y5ljqhgnam54jdsdvw3xtp2bgdpwoe6v5tmt",
+      "receivedBytes": 1261568,
+      "proxyConnections": 2,
+      "backendHit": "edge",
+      "incorrectRoutes": 0,
+      "receiverMbps": 1.0053005529253447
+    }
+  ],
+  "overlapLowerBoundSeconds": null
+}

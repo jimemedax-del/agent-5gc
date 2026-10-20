@@ -1,0 +1,16 @@
+namespace/cnf-multi-ue unchanged
+deployment.apps/cnf-a-core-ue1 created
+service/cnf-a-core-ue1 created
+deployment.apps/cnf-a-core-ue2 created
+service/cnf-a-core-ue2 created
+deployment.apps/cnf-a-edge-ue1 created
+service/cnf-a-edge-ue1 created
+deployment.apps/cnf-a-edge-ue2 created
+service/cnf-a-edge-ue2 created
+configmap/cnf-a-envoy created
+deployment.apps/cnf-a-envoy created
+service/cnf-a-envoy created
+networkpolicy.networking.k8s.io/cnf-a-backends created
+networkpolicy.networking.k8s.io/cnf-a-envoy created
+configmap/cnf-a-ue2 created
+deployment.apps/cnf-a-ue2 created

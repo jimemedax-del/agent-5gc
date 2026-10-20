@@ -1,0 +1,1 @@
+deployment "cnf-a-envoy" successfully rolled out

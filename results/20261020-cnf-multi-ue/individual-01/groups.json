@@ -1,0 +1,194 @@
+[
+  {
+    "folder": "01-uplink-core-ue1",
+    "outcome": "passed",
+    "rows": [
+      {
+        "round": 1,
+        "businessClass": "core",
+        "direction": "uplink",
+        "user": "ue1",
+        "outcome": "passed",
+        "startedAt": "2026-10-20T03:52:33.010202Z",
+        "trafficEndedAt": "2026-10-20T03:52:43.466818Z",
+        "cookie": "s26fgd2rs5ttjwwfw4kbrkptjhkpfsagdvk7",
+        "receivedBytes": 1261568,
+        "proxyConnections": 2,
+        "backendHit": "core",
+        "incorrectRoutes": 0,
+        "receiverMbps": 1.0054539850273934
+      }
+    ],
+    "overlapLowerBoundSeconds": null
+  },
+  {
+    "folder": "01-uplink-core-ue2",
+    "outcome": "passed",
+    "rows": [
+      {
+        "round": 1,
+        "businessClass": "core",
+        "direction": "uplink",
+        "user": "ue2",
+        "outcome": "passed",
+        "startedAt": "2026-10-20T03:52:49.866229Z",
+        "trafficEndedAt": "2026-10-20T03:53:00.290812Z",
+        "cookie": "gbiz63rpyakijrbi2hvozxctd77isopun3zp",
+        "receivedBytes": 1261568,
+        "proxyConnections": 2,
+        "backendHit": "core",
+        "incorrectRoutes": 0,
+        "receiverMbps": 1.0051719944616933
+      }
+    ],
+    "overlapLowerBoundSeconds": null
+  },
+  {
+    "folder": "01-uplink-edge-ue1",
+    "outcome": "passed",
+    "rows": [
+      {
+        "round": 1,
+        "businessClass": "edge",
+        "direction": "uplink",
+        "user": "ue1",
+        "outcome": "passed",
+        "startedAt": "2026-10-20T03:53:09.750570Z",
+        "trafficEndedAt": "2026-10-20T03:53:20.165116Z",
+        "cookie": "y5ljqhgnam54jdsdvw3xtp2bgdpwoe6v5tmt",
+        "receivedBytes": 1261568,
+        "proxyConnections": 2,
+        "backendHit": "edge",
+        "incorrectRoutes": 0,
+        "receiverMbps": 1.0053005529253447
+      }
+    ],
+    "overlapLowerBoundSeconds": null
+  },
+  {
+    "folder": "01-uplink-edge-ue2",
+    "outcome": "passed",
+    "rows": [
+      {
+        "round": 1,
+        "businessClass": "edge",
+        "direction": "uplink",
+        "user": "ue2",
+        "outcome": "passed",
+        "startedAt": "2026-10-20T03:53:29.609388Z",
+        "trafficEndedAt": "2026-10-20T03:53:40.004611Z",
+        "cookie": "c4sd2ruju2vfb33ofbuxgb6ekp3o7njffaao",
+        "receivedBytes": 1261568,
+        "proxyConnections": 2,
+        "backendHit": "edge",
+        "incorrectRoutes": 0,
+        "receiverMbps": 1.0055641805701439
+      }
+    ],
+    "overlapLowerBoundSeconds": null
+  },
+  {
+    "folder": "01-downlink-core-ue1",
+    "outcome": "passed",
+    "rows": [
+      {
+        "round": 1,
+        "businessClass": "core",
+        "direction": "downlink",
+        "user": "ue1",
+        "outcome": "passed",
+        "startedAt": "2026-10-20T03:53:49.401032Z",
+        "trafficEndedAt": "2026-10-20T03:53:59.812725Z",
+        "cookie": "bby3azi5zaidyrlwf72yqkmluac2rosp3q32",
+        "receivedBytes": 1261568,
+        "proxyConnections": 2,
+        "backendHit": "core",
+        "incorrectRoutes": 0,
+        "receiverMbps": 1.0092402706362111,
+        "senderMbps": 1.0051235432619023,
+        "senderBytes": 1261568,
+        "receiverWindowSeconds": 10.00014,
+        "senderWindowSeconds": 10.041098
+      }
+    ],
+    "overlapLowerBoundSeconds": null
+  },
+  {
+    "folder": "01-downlink-core-ue2",
+    "outcome": "passed",
+    "rows": [
+      {
+        "round": 1,
+        "businessClass": "core",
+        "direction": "downlink",
+        "user": "ue2",
+        "outcome": "passed",
+        "startedAt": "2026-10-20T03:54:09.249702Z",
+        "trafficEndedAt": "2026-10-20T03:54:19.683127Z",
+        "cookie": "mfhvmynzrcwlhqbq22f64gqjseszz36nn4wk",
+        "receivedBytes": 1261568,
+        "proxyConnections": 2,
+        "backendHit": "core",
+        "incorrectRoutes": 0,
+        "receiverMbps": 1.009240169713607,
+        "senderMbps": 1.0052343672419626,
+        "senderBytes": 1261568,
+        "receiverWindowSeconds": 10.000141,
+        "senderWindowSeconds": 10.039991
+      }
+    ],
+    "overlapLowerBoundSeconds": null
+  },
+  {
+    "folder": "01-downlink-edge-ue1",
+    "outcome": "passed",
+    "rows": [
+      {
+        "round": 1,
+        "businessClass": "edge",
+        "direction": "downlink",
+        "user": "ue1",
+        "outcome": "passed",
+        "startedAt": "2026-10-20T03:54:30.122377Z",
+        "trafficEndedAt": "2026-10-20T03:54:40.553837Z",
+        "cookie": "rqumqcmedax2orkehjoke7tysego6ugsfrql",
+        "receivedBytes": 1261568,
+        "proxyConnections": 2,
+        "backendHit": "edge",
+        "incorrectRoutes": 0,
+        "receiverMbps": 1.0092436010934682,
+        "senderMbps": 1.0052858331166057,
+        "senderBytes": 1261568,
+        "receiverWindowSeconds": 10.000107,
+        "senderWindowSeconds": 10.039477
+      }
+    ],
+    "overlapLowerBoundSeconds": null
+  },
+  {
+    "folder": "01-downlink-edge-ue2",
+    "outcome": "passed",
+    "rows": [
+      {
+        "round": 1,
+        "businessClass": "edge",
+        "direction": "downlink",
+        "user": "ue2",
+        "outcome": "passed",
+        "startedAt": "2026-10-20T03:54:49.975109Z",
+        "trafficEndedAt": "2026-10-20T03:55:00.382973Z",
+        "cookie": "av7nwn4sy4kdh3yia3pugnixfzyowzlp3xkq",
+        "receivedBytes": 1261568,
+        "proxyConnections": 2,
+        "backendHit": "edge",
+        "incorrectRoutes": 0,
+        "receiverMbps": 1.0092431974005087,
+        "senderMbps": 1.0052529904714285,
+        "senderBytes": 1261568,
+        "receiverWindowSeconds": 10.000111,
+        "senderWindowSeconds": 10.039805
+      }
+    ],
+    "overlapLowerBoundSeconds": null
+  }
+]

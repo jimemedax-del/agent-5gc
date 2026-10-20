@@ -1,0 +1,68 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "A",
+  "configVersion": "cnf-multi-ue-v1",
+  "outcome": "passed",
+  "actions": {
+    "deploy": "deploy-01",
+    "individual": "individual-01",
+    "smoke": "smoke-01",
+    "concurrent": "concurrent-01",
+    "check": "final-check-01"
+  },
+  "phases": {
+    "individual": {
+      "sessions": 8,
+      "groups": 8
+    },
+    "smoke": {
+      "sessions": 8,
+      "groups": 4
+    },
+    "concurrent": {
+      "sessions": 40,
+      "groups": 20
+    }
+  },
+  "formalSessions": 40,
+  "formalProxyConnections": 80,
+  "formalMinimumOverlapLowerBoundSeconds": 9.000034093856812,
+  "allPhaseUniqueCookies": 56,
+  "allPhaseReceivedBytes": 70647808,
+  "originalPodsUnchanged": 18,
+  "totalStablePods": 24,
+  "identityCheckpoints": 64,
+  "fixtureResourceCheckpoints": 8,
+  "sourceHashChecks": 100,
+  "upfMemorySamples": 415,
+  "sampledPeakUpfMiB": 11.90234375,
+  "users": {
+    "ue1": {
+      "name": "ue1",
+      "supi": "imsi-208930000000001",
+      "deployment": "ueransim-ue",
+      "pod": "ueransim-ue-8f555b79b-rdjdb",
+      "podUID": "d1cf89a5-1f2a-4e74-b016-dbefbd149762",
+      "ip": "10.60.0.3",
+      "node": "ran-test"
+    },
+    "ue2": {
+      "name": "ue2",
+      "supi": "imsi-208930000000002",
+      "deployment": "cnf-a-ue2",
+      "pod": "cnf-a-ue2-6998f7d65b-2szgn",
+      "podUID": "0d6c656d-bf53-4bc4-a55a-6763d6870084",
+      "ip": "10.60.0.4",
+      "node": "ran-test"
+    }
+  },
+  "finalContainerRestarts": 0,
+  "limitations": [
+    "Explicit per-user test entry ports; not autonomous demand classification or identity-based access control",
+    "Dedicated Envoy and per-user backend processes in cnf-multi-ue; original cnf-lab unchanged",
+    "Only low-load TCP concurrency, no bandwidth guarantee, QoS policy or radio SLA claim",
+    "One-second client timestamp resolution; overlap proof uses conservative positive-byte intervals",
+    "UPF counters are aggregate; source binding and cookies correlate flows without per-packet capture"
+  ]
+}
