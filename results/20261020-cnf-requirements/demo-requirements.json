@@ -1,0 +1,150 @@
+{
+  "contractVersion": "cnf-requirements-v1",
+  "request_id": "playback-text",
+  "category": {
+    "value": "streaming",
+    "candidates": [
+      "streaming"
+    ],
+    "status": "recognized",
+    "confidence": {
+      "level": "medium",
+      "method": "deterministic_rule_strength",
+      "calibrated": false
+    },
+    "evidence": [
+      {
+        "category": "streaming",
+        "kind": "user_text",
+        "text": "视频播放",
+        "start": 0,
+        "end": 4
+      }
+    ]
+  },
+  "subject": {
+    "user_id": "lab-ue1",
+    "session_id": null,
+    "bindingStatus": "not_verified_against_live_sessions"
+  },
+  "requirements": {
+    "direction": {
+      "value": "downlink",
+      "resolution": "explicit",
+      "sources": [
+        {
+          "value": "downlink",
+          "kind": "user_text",
+          "text": "下行",
+          "start": 5,
+          "end": 7
+        }
+      ]
+    },
+    "min_bandwidth_mbps": {
+      "value": 4.0,
+      "resolution": "explicit",
+      "sources": [
+        {
+          "value": 4.0,
+          "kind": "user_text",
+          "text": "最低 4 Mbps",
+          "start": 8,
+          "end": 17
+        }
+      ]
+    },
+    "max_bandwidth_mbps": {
+      "value": 8.0,
+      "resolution": "explicit",
+      "sources": [
+        {
+          "value": 8.0,
+          "kind": "user_text",
+          "text": "最高 8 Mbps",
+          "start": 18,
+          "end": 27
+        }
+      ]
+    },
+    "rtt_p95_max_ms": {
+      "value": null,
+      "resolution": "unknown",
+      "sources": []
+    },
+    "one_way_p95_max_ms": {
+      "value": null,
+      "resolution": "unknown",
+      "sources": []
+    },
+    "loss_max_percent": {
+      "value": null,
+      "resolution": "unknown",
+      "sources": []
+    },
+    "priority": {
+      "value": "normal",
+      "resolution": "explicit",
+      "sources": [
+        {
+          "value": "normal",
+          "kind": "user_text",
+          "text": "优先级中",
+          "start": 28,
+          "end": 32
+        }
+      ]
+    },
+    "valid_for_seconds": {
+      "value": 60.0,
+      "resolution": "explicit",
+      "sources": [
+        {
+          "value": 60.0,
+          "kind": "user_text",
+          "text": "有效期 60 秒",
+          "start": 33,
+          "end": 41
+        }
+      ]
+    },
+    "deadline_seconds": {
+      "value": null,
+      "resolution": "unknown",
+      "sources": []
+    },
+    "measurement_window_seconds": {
+      "value": 20.0,
+      "resolution": "explicit",
+      "sources": [
+        {
+          "value": 20.0,
+          "kind": "user_text",
+          "text": "统计窗口 20 秒",
+          "start": 42,
+          "end": 51
+        }
+      ]
+    }
+  },
+  "status": "parsed",
+  "clarificationFields": [],
+  "issues": [],
+  "planningInputComplete": true,
+  "capabilityReview": {
+    "mode": "offline_experiment_reference_not_live_admission",
+    "blockingFindings": [],
+    "candidateForEPlanning": true,
+    "note": "E must validate live identity, capacity, overhead, policy and measurement; no feasibility assertion",
+    "evidenceRefs": [
+      "results/20261020-cnf-contention/metadata.json",
+      "results/20261020-cnf-contention-uplink/metadata.json",
+      "results/20261020-cnf-qos-probe/audit.json"
+    ]
+  },
+  "ignoredForInference": [],
+  "executionAuthorized": false,
+  "planGenerated": false,
+  "inputSha256": "0b9bd412584f32c45275f4d5914f501c3bbf904a245a3ee0c14d70c8f6e694f8",
+  "contractSha256LF": "9b6856c4d2c05de201dba73eb86705328e784b041cda39e435db5b8146c0c45e"
+}

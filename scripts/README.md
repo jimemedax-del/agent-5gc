@@ -305,6 +305,27 @@ RTT/丢包在本轮是观测指标，不承诺业务 SLA；端点直接经 N6 �
 正常收尾删除新 Pod 内的 IFB 与入口规则，保留测试资源；手工恢复同样拒绝未知接口所有权或队列漂移。
 详见 [C2 上行模块](../docs/cnf-service-chain-orchestration.md#c2-上行竞争入口-ifb-与服务端接收证据)。
 
+## D1 离线业务需求解析与开发评估
+
+`cnf-requirements.py` 使用 Python 3.10+ 标准库，读取 `infra/cnfs/requirements-contract.json`。
+它解析实时交互、持续媒体、后台传输三类候选及显式目标，记录来源、未知、冲突和需澄清项；不访问集群。
+可直接使用归档演示输入，输出文件须不存在且父目录已存在：
+
+```powershell
+python scripts/cnf-requirements.py results/20261020-cnf-requirements/demo-request.json --out <新的JSON路径>
+python scripts/evaluate-cnf-requirements.py --out <新的结果目录>
+```
+
+请求字段为 `request_id`、`description`、`subject`、`context`、`requested`，可附 `flow`、`observations`；
+端口/协议与实测指标不参与类别或目标推导，类别标签、后端选择与执行命令不能作为输入字段。
+不支持任意自然语言；`parsed` 或 `candidateForEPlanning` 不表示可满足或获准执行，所有输出均无方案、无执行授权。
+
+评估器默认读取 `tests/fixtures/requirements-cases.json`，可用 `--cases` 指定仓库内符合开发数据约束的样例文件。
+结果归档报告、逐样例差异、不变性检查和 9 份代码/数据/能力依据输入及哈希，不覆盖旧目录。
+当前 36 条合成样例由 Agent 编写，标签待人工审核；30 条草案类别一致、6 条复杂表达未识别，不能称为独立识别准确率。
+新增 D 测试可用 `python -m unittest discover -s tests -p 'test*requirements*.py' -v` 运行。
+能力边界、完整验证及 D2 审核入口见 [业务需求识别](../docs/cnf-service-chain-orchestration.md#业务需求识别的输入与验收)。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

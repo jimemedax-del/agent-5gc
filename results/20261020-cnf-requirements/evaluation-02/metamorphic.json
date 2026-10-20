@@ -1,0 +1,218 @@
+[
+  {
+    "id": "meeting-text",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "remote-control",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "playback-text",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "audio-context",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "archive-units",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "backup-context",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "voice-missing",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "video-ambiguous",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "flow-only",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "route-label-only",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "mixed-tasks",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "negated-meeting",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "min-contradiction",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "bounds-contradiction",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "window-conflict",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "latency-unspecified",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "rtt-unsupported",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "loss-unsupported",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "bidirectional-unverified",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "observation-not-target",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "unqualified-rate",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "deadline-short",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "deadline-long",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "unknown-task",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "context-contradiction",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "reference-overload",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "two-directions-one-target",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "no-latency-demand",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "competing-six-a",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "competing-six-b",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "unseen-interview",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "unseen-viewing",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "unseen-copy",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "meeting-recording",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "negation-without-comma",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  },
+  {
+    "id": "unseen-game",
+    "metadataPortAndTransportInvariant": true,
+    "descriptionPortInvariant": true,
+    "observedMetricsDoNotBecomeTargets": true
+  }
+]

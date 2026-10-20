@@ -1,0 +1,84 @@
+{
+  "outcome": "passed",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "B",
+  "sessions": 26,
+  "auditVersion": "qos-observation-audit-v2",
+  "auditorSha256LF": "6ad10b72f85538053354c02a87aaccf4663e82477a0d9dffa7be6cfbcbf8218b",
+  "verifiedArchivedExecutionInputs": [
+    "infra/cnfs/qos-probe.json",
+    "scripts/cnf-qos-probe.py",
+    "scripts/audit-cnf-qos-probe.py",
+    "tests/test_cnf_qos_probe.py"
+  ],
+  "sourceHashes": 24,
+  "uniqueCookies": 26,
+  "rateComparison": {
+    "uplink": {
+      "capMbps": 2,
+      "classification": "degraded-below-continuity-target",
+      "onCeilingMet": true,
+      "onMinimumContinuityMbps": 0.2,
+      "onMinimumContinuityMet": false,
+      "onToOffMedianRatio": 0.026870577150949676,
+      "cap-offMbps": [
+        2.0214703795766553,
+        2.0214671636337367,
+        2.0217524376679408
+      ],
+      "cap-onMbps": [
+        0.0569491395813912,
+        0.05301782194260267,
+        0.05431807579277404
+      ],
+      "cap-reoffMbps": [
+        2.026910161491239,
+        2.019768954566333,
+        2.0221299421562877
+      ]
+    },
+    "downlink": {
+      "capMbps": 4,
+      "classification": "ceiling-present-with-switch-off; upf-contribution-not-isolated",
+      "onCeilingMet": true,
+      "onMinimumContinuityMbps": 0.4,
+      "onMinimumContinuityMet": true,
+      "onToOffMedianRatio": 0.10938173644615452,
+      "cap-offMbps": [
+        4.060726488557342,
+        4.06407492213775,
+        4.063964865442345
+      ],
+      "cap-onMbps": [
+        0.4445235338382464,
+        0.4523176209216968,
+        0.44438298931460746
+      ],
+      "cap-reoffMbps": [
+        4.06359102818906,
+        4.11235802818896,
+        4.065084910582161
+      ]
+    }
+  },
+  "upfPeakSampledMemoryBytes": 15859712,
+  "networkAcceptance": "UPF-enabled TCP not accepted: continuity target failed",
+  "proxyResponseFlags": {
+    "-": 43,
+    "UR": 9
+  },
+  "terminationBoundary": "UR/DC at timed payload stop is recorded; complete receiver windows do not prove clean TCP termination or loss-free delivery",
+  "all24PodIdentitiesUnchanged": true,
+  "policyAndSwitchRestored": true,
+  "testedCapability": "Session-AMBR policy installation and receiver response, classified per direction",
+  "notDemonstrated": [
+    "dedicated QoS Flow/MFBR",
+    "online PCF policy update",
+    "GBR guarantee",
+    "priority scheduler",
+    "delay/loss SLA",
+    "wire QFI classification"
+  ],
+  "subscriptionOnlyOnlineUpdate": "old QER remained after 5 seconds; this is not a PCF notification test"
+}

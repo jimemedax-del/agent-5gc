@@ -1,0 +1,24 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "D1",
+  "contractVersion": "cnf-requirements-v1",
+  "capturedAt": "2026-10-20T08:46:49.374109+00:00",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.5",
+  "sourceBasisGitHead": "7a60ca83a81536cb7a12d771cb2442976fdb1ead",
+  "sourceSha256LF": {
+    "scripts/evaluate-cnf-requirements.py": "0e806e6eed0029df123de74f7ca4b047f72565d3e0a5908a6b04a83a66926151",
+    "scripts/cnf-requirements.py": "c7594dc045d291c466a4e597b96d9e938aa8e0a410840c6c9a59b2f82e817108",
+    "infra/cnfs/requirements-contract.json": "9b6856c4d2c05de201dba73eb86705328e784b041cda39e435db5b8146c0c45e",
+    "tests/fixtures/requirements-cases.json": "aff6056f975d216a05c59e6c8152b995a38d5f08e38e1793c523194943516787",
+    "tests/test_cnf_requirements.py": "f0e5aafd3c3d3b340cc52a4233a406c6268cdd7298b633ce55b334301c976bf3",
+    "tests/test_evaluate_cnf_requirements.py": "52f0d58991da7c4373a9f06f7e90c011d85b66399aca483ae67adee7ea7765cf",
+    "results/20261020-cnf-contention/metadata.json": "89cbc6a107c7e36e778b70f5297abc6f752ecd6103665d4d9d22ccca53e7a760",
+    "results/20261020-cnf-contention-uplink/metadata.json": "93a0c3f752ce6d4294fda3f93f51e17118c8df147ee449995ea97a6256d4ba7d",
+    "results/20261020-cnf-qos-probe/audit.json": "dbefc60e4b9613704e6e7def3b1475d0ff2d374791c8421b54f1a3646f7e84f0"
+  },
+  "datasetLabelReviewStatus": "pending",
+  "clusterAccessed": false,
+  "metricClaims": "development only; not a held-out or human-reviewed benchmark"
+}

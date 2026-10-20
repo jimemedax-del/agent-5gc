@@ -1,0 +1,23 @@
+{
+  "outcome": "passed",
+  "evaluation": "evaluation-03",
+  "verifiedAt": "2026-10-20T08:55:06.791210+00:00",
+  "basis": "archived executable inputs, not independent ground truth",
+  "sourceHashes": 9,
+  "currentSourcesMatchArchived": true,
+  "reportMatchesArchivedReplay": true,
+  "predictionsMatchArchivedReplay": true,
+  "metamorphicMatchesArchivedReplay": true,
+  "demoMatchesCurrentNormalizer": true,
+  "all36CasesIncluded": true,
+  "all6DisagreementsPreserved": [
+    "unseen-interview",
+    "unseen-viewing",
+    "unseen-copy",
+    "meeting-recording",
+    "negation-without-comma",
+    "unseen-game"
+  ],
+  "independentHumanValidation": false,
+  "clusterAccessed": false
+}

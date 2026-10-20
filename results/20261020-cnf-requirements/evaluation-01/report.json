@@ -1,0 +1,165 @@
+{
+  "evaluationVersion": "cnf-requirements-evaluation-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "D1",
+  "outcome": "captured_including_disagreements",
+  "datasetVersion": "cnf-requirements-cases-v1",
+  "claimScope": "Agent-authored synthetic development checks; no independent real-world accuracy or SLA claim",
+  "independentHumanValidation": false,
+  "labelReviewStatus": "pending",
+  "overall": {
+    "cases": 36,
+    "draftCategoryAgreements": 30,
+    "draftCategoryAgreementFraction": 0.8333333333333334,
+    "knownLabelCases": 30,
+    "knownLabelRecognized": 24,
+    "unknownOrAmbiguousCases": 6,
+    "unknownOrAmbiguousAbstained": 6,
+    "specifiedFieldAgreements": 189,
+    "specifiedFields": 189,
+    "textTargetFieldAgreements": 21,
+    "textTargetFields": 21,
+    "hallucinatedFieldsAgainstDraft": [],
+    "statusAgreements": 30,
+    "planningCandidateAgreements": 30,
+    "confusion": [
+      {
+        "draftLabel": "bulk",
+        "prediction": "abstained",
+        "cases": 2
+      },
+      {
+        "draftLabel": "bulk",
+        "prediction": "bulk",
+        "cases": 10
+      },
+      {
+        "draftLabel": "interactive",
+        "prediction": "abstained",
+        "cases": 2
+      },
+      {
+        "draftLabel": "interactive",
+        "prediction": "interactive",
+        "cases": 6
+      },
+      {
+        "draftLabel": "streaming",
+        "prediction": "abstained",
+        "cases": 2
+      },
+      {
+        "draftLabel": "streaming",
+        "prediction": "streaming",
+        "cases": 8
+      },
+      {
+        "draftLabel": "unknown_or_ambiguous",
+        "prediction": "abstained",
+        "cases": 6
+      }
+    ]
+  },
+  "byGroup": {
+    "development_synthetic": {
+      "cases": 30,
+      "draftCategoryAgreements": 30,
+      "draftCategoryAgreementFraction": 1.0,
+      "knownLabelCases": 24,
+      "knownLabelRecognized": 24,
+      "unknownOrAmbiguousCases": 6,
+      "unknownOrAmbiguousAbstained": 6,
+      "specifiedFieldAgreements": 153,
+      "specifiedFields": 153,
+      "textTargetFieldAgreements": 21,
+      "textTargetFields": 21,
+      "hallucinatedFieldsAgainstDraft": [],
+      "statusAgreements": 30,
+      "planningCandidateAgreements": 30,
+      "confusion": [
+        {
+          "draftLabel": "bulk",
+          "prediction": "bulk",
+          "cases": 10
+        },
+        {
+          "draftLabel": "interactive",
+          "prediction": "interactive",
+          "cases": 6
+        },
+        {
+          "draftLabel": "streaming",
+          "prediction": "streaming",
+          "cases": 8
+        },
+        {
+          "draftLabel": "unknown_or_ambiguous",
+          "prediction": "abstained",
+          "cases": 6
+        }
+      ]
+    },
+    "challenge_synthetic": {
+      "cases": 6,
+      "draftCategoryAgreements": 0,
+      "draftCategoryAgreementFraction": 0.0,
+      "knownLabelCases": 6,
+      "knownLabelRecognized": 0,
+      "unknownOrAmbiguousCases": 0,
+      "unknownOrAmbiguousAbstained": 0,
+      "specifiedFieldAgreements": 36,
+      "specifiedFields": 36,
+      "textTargetFieldAgreements": 0,
+      "textTargetFields": 0,
+      "hallucinatedFieldsAgainstDraft": [],
+      "statusAgreements": 0,
+      "planningCandidateAgreements": 0,
+      "confusion": [
+        {
+          "draftLabel": "bulk",
+          "prediction": "abstained",
+          "cases": 2
+        },
+        {
+          "draftLabel": "interactive",
+          "prediction": "abstained",
+          "cases": 2
+        },
+        {
+          "draftLabel": "streaming",
+          "prediction": "abstained",
+          "cases": 2
+        }
+      ]
+    }
+  },
+  "disagreementCaseIds": [
+    "unseen-interview",
+    "unseen-viewing",
+    "unseen-copy",
+    "meeting-recording",
+    "negation-without-comma",
+    "unseen-game"
+  ],
+  "metamorphic": {
+    "comparisons": 108,
+    "passed": 108,
+    "allPassed": true
+  },
+  "riskProxies": {
+    "meaning": "input-constraint loss/overrequest proxies only; no policy applied and no measured network violations",
+    "mislabeledPlanningCandidates": [],
+    "minimumUnderrequestMbpsAmongCandidates": 0,
+    "minimumOverrequestMbpsAmongCandidates": 0,
+    "executionAuthorizedOutputs": 0,
+    "plansGenerated": 0
+  },
+  "resourceConflictScenario": {
+    "family": "shared-overload-pair",
+    "assumedSameDownlinkRootMbps": 10,
+    "explicitMinimumSumMbps": 12,
+    "status": "requires_E_joint_admission; D candidates do not imply feasibility"
+  },
+  "clusterAccessed": false
+}

@@ -1,0 +1,7 @@
+{
+  "request_id": "playback-text",
+  "description": "视频播放，下行，最低 4 Mbps，最高 8 Mbps，优先级中，有效期 60 秒，统计窗口 20 秒",
+  "subject": {
+    "user_id": "lab-ue1"
+  }
+}
