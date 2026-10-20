@@ -1,0 +1,13 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "B",
+  "executionConfigVersion": "cnf-qos-probe-v4",
+  "formalAction": "probe-04",
+  "analysisVersion": "qos-observation-audit-v2",
+  "reason": "A complete receiver observation can be slow because the network capability failed. The first auditor incorrectly treated a positive rate below 0.1 Mbps as invalid evidence, preventing the degradation from being reported as a valid observation with failed network acceptance.",
+  "preservedCriterion": "The original on-state minimum continuity target remains 10% of the configured cap: UL 0.2 Mbps, DL 0.4 Mbps. Failed targets remain false in the report. No assertion of guaranteed bandwidth follows even if a target is true.",
+  "change": "Raw observations must still have complete receiver windows, positive payload, correct UE/route/cookie, full source provenance, stable identities and restored policy. Low positive rates are retained; rateComparison and networkAcceptance record capability failure separately from evidence integrity.",
+  "executionProvenance": "The four B-specific execution inputs are archived in probe-04/executed-inputs and verified against the original, unmodified metadata hashes. Other inputs are verified against the unchanged workspace. The revised auditor records its own separate hash.",
+  "reproduction": "The original auditor output is retained as audit-original-analysis.txt; the revised report is audit.json. Failed acquisition attempts probe-01/02/03 are not merged into the formal statistics."
+}

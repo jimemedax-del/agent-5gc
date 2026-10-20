@@ -1,0 +1,29 @@
+[
+  {
+    "ifindex": 6,
+    "ifname": "uesimtun0",
+    "flags": [
+      "POINTOPOINT",
+      "PROMISC",
+      "NOTRAILERS",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 1400,
+    "qdisc": "fq_codel",
+    "operstate": "UNKNOWN",
+    "group": "default",
+    "txqlen": 500,
+    "addr_info": [
+      {
+        "family": "inet",
+        "local": "10.60.0.7",
+        "prefixlen": 16,
+        "scope": "global",
+        "label": "uesimtun0",
+        "valid_life_time": 4294967295,
+        "preferred_life_time": 4294967295
+      }
+    ]
+  }
+]

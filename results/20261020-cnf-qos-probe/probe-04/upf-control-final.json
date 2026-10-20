@@ -1,0 +1,13 @@
+{
+  "capturedAt": "2026-10-20T04:45:00.684618+00:00",
+  "command": [
+    "kubectl",
+    "-n",
+    "free5gc",
+    "logs",
+    "deployment/free5gc-helm-free5gc-upf-upf",
+    "--since-time=2026-10-20T04:34:04.233411Z"
+  ],
+  "diagnosticSelectionOnly": true,
+  "lines": []
+}

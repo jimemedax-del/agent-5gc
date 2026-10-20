@@ -1,0 +1,38 @@
+[
+  {
+    "epoch": "restored",
+    "folder": "restored-01-uplink-ue1",
+    "user": "ue1",
+    "direction": "uplink",
+    "round": 1,
+    "receivedMbps": 7.983124404192728,
+    "cookie": "34gyyoysziq2bpdwm3fjqpszfl33knvtvhb2"
+  },
+  {
+    "epoch": "restored",
+    "folder": "restored-01-uplink-ue2",
+    "user": "ue2",
+    "direction": "uplink",
+    "round": 1,
+    "receivedMbps": 7.98306495373774,
+    "cookie": "x2xcr467bc4x37uobncrbouzi5k77jvzgdst"
+  },
+  {
+    "epoch": "restored",
+    "folder": "restored-01-downlink-ue1",
+    "user": "ue1",
+    "direction": "downlink",
+    "round": 1,
+    "receivedMbps": 8.021555596814553,
+    "cookie": "eab337gizft2wzk662qkc7t5lurgjeulqqot"
+  },
+  {
+    "epoch": "restored",
+    "folder": "restored-01-downlink-ue2",
+    "user": "ue2",
+    "direction": "downlink",
+    "round": 1,
+    "receivedMbps": 8.021558270650376,
+    "cookie": "qxhor5izoyyf4lq66wjiuymnaff7vmpo53ss"
+  }
+]

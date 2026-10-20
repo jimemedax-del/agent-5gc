@@ -1,0 +1,18 @@
+{
+  "outcome": "failed",
+  "rows": [
+    {
+      "round": 1,
+      "businessClass": "core",
+      "direction": "uplink",
+      "user": "ue2",
+      "outcome": "passed",
+      "startedAt": "2026-10-20T04:27:17.414008Z",
+      "trafficEndedAt": "2026-10-20T04:27:33.045750Z",
+      "cookie": "2n6gsyn5ys2oydocygeb7fh2gjtgcs66q6bz",
+      "receivedBytes": 3850240,
+      "proxyConnections": 2
+    }
+  ],
+  "error": "Raw receiver/path/guard validation failed; retain evidence"
+}

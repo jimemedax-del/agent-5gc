@@ -1,0 +1,85 @@
+{
+  "before": {
+    "singleNssai": {
+      "sst": 1,
+      "sd": "010203"
+    },
+    "dnnConfigurations": {
+      "internet": {
+        "sscModes": {
+          "defaultSscMode": "SSC_MODE_1",
+          "allowedSscModes": [
+            "SSC_MODE_2",
+            "SSC_MODE_3"
+          ]
+        },
+        "5gQosProfile": {
+          "5qi": 9,
+          "arp": {
+            "priorityLevel": 8,
+            "preemptCap": "",
+            "preemptVuln": ""
+          },
+          "priorityLevel": 8
+        },
+        "sessionAmbr": {
+          "downlink": "1000 Mbps",
+          "uplink": "1000 Mbps"
+        },
+        "pduSessionTypes": {
+          "defaultSessionType": "IPV4",
+          "allowedSessionTypes": [
+            "IPV4"
+          ]
+        }
+      }
+    },
+    "ueId": "imsi-208930000000002",
+    "servingPlmnId": "20893"
+  },
+  "after": {
+    "singleNssai": {
+      "sst": 1,
+      "sd": "010203"
+    },
+    "dnnConfigurations": {
+      "internet": {
+        "sscModes": {
+          "defaultSscMode": "SSC_MODE_1",
+          "allowedSscModes": [
+            "SSC_MODE_2",
+            "SSC_MODE_3"
+          ]
+        },
+        "5gQosProfile": {
+          "5qi": 9,
+          "arp": {
+            "priorityLevel": 8,
+            "preemptCap": "",
+            "preemptVuln": ""
+          },
+          "priorityLevel": 8
+        },
+        "sessionAmbr": {
+          "downlink": "1000 Mbps",
+          "uplink": "1000 Mbps"
+        },
+        "pduSessionTypes": {
+          "defaultSessionType": "IPV4",
+          "allowedSessionTypes": [
+            "IPV4"
+          ]
+        }
+      }
+    },
+    "ueId": "imsi-208930000000002",
+    "servingPlmnId": "20893"
+  },
+  "writeResult": {
+    "acknowledged": true,
+    "insertedId": null,
+    "matchedCount": 1,
+    "modifiedCount": 0,
+    "upsertedCount": 0
+  }
+}

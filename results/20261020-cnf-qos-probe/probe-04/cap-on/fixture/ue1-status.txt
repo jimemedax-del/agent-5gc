@@ -1,0 +1,18 @@
+cm-state: CM-CONNECTED
+rm-state: RM-REGISTERED
+mm-state: MM-REGISTERED/NORMAL-SERVICE
+5u-state: 5U1-UPDATED
+sim-inserted: true
+selected-plmn: 208/93
+current-cell: 1
+current-plmn: 208/93
+current-tac: 1
+last-tai: PLMN[208/93] TAC[1]
+stored-suci: no-identity
+stored-guti: 
+ plmn: 208/93
+ amf-region-id: 0xca
+ amf-set-id: 1016
+ amf-pointer: 0
+ tmsi: 0x00000003
+has-emergency: false

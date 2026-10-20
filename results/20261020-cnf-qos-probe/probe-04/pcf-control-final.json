@@ -1,0 +1,24 @@
+{
+  "capturedAt": "2026-10-20T04:45:00.387747+00:00",
+  "command": [
+    "kubectl",
+    "-n",
+    "free5gc",
+    "logs",
+    "deployment/free5gc-helm-free5gc-pcf-pcf",
+    "--since-time=2026-10-20T04:34:04.233411Z"
+  ],
+  "diagnosticSelectionOnly": true,
+  "lines": [
+    "2026-10-20T04:35:06.301325638Z\u001b[36m [INFO][PCF][SMpolicy] \u001b[0mHandle DeleteSmPolicyContext",
+    "2026-10-20T04:35:06.302415618Z\u001b[36m [INFO][PCF][GIN] \u001b[0m| 204 |     10.42.0.172 | POST    | /npcf-smpolicycontrol/v1/sm-policies/imsi-208930000000002-1/delete |  |",
+    "2026-10-20T04:35:06.731005798Z\u001b[36m [INFO][PCF][SMpolicy] \u001b[0mHandle CreateSmPolicy",
+    "2026-10-20T04:35:06.732888347Z\u001b[36m [INFO][PCF][SMpolicy] \u001b[0mMatched [0] trafficInfluDatas from UDR",
+    "2026-10-20T04:35:06.733189336Z\u001b[36m [INFO][PCF][GIN] \u001b[0m| 201 |     10.42.0.172 | POST    | /npcf-smpolicycontrol/v1/sm-policies |  |",
+    "2026-10-20T04:42:31.376097001Z\u001b[36m [INFO][PCF][SMpolicy] \u001b[0mHandle DeleteSmPolicyContext",
+    "2026-10-20T04:42:31.376796779Z\u001b[36m [INFO][PCF][GIN] \u001b[0m| 204 |     10.42.0.172 | POST    | /npcf-smpolicycontrol/v1/sm-policies/imsi-208930000000002-1/delete |  |",
+    "2026-10-20T04:42:32.492885111Z\u001b[36m [INFO][PCF][SMpolicy] \u001b[0mHandle CreateSmPolicy",
+    "2026-10-20T04:42:32.494868094Z\u001b[36m [INFO][PCF][SMpolicy] \u001b[0mMatched [0] trafficInfluDatas from UDR",
+    "2026-10-20T04:42:32.495126796Z\u001b[36m [INFO][PCF][GIN] \u001b[0m| 201 |     10.42.0.172 | POST    | /npcf-smpolicycontrol/v1/sm-policies |  |"
+  ]
+}

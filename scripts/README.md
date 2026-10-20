@@ -243,6 +243,34 @@ python3 scripts/measure-controlled-data-plane.py --stability \
 离线审计入口为 `audit-cnf-multi-ue.py <证据目录> --out <新的JSON路径>`；具体配置和结果统一维护在
 [双 UE 模块章节](../docs/cnf-service-chain-orchestration.md#a-双-ue-低负载基线的实现与验收)。
 
+## 5G Session-AMBR 能力探针入口
+
+`cnf-qos-probe.py` 复用已部署的 A 夹具，固定输入为 `infra/cnfs/qos-probe.json`。
+在 VM1 设置 `KUBECONFIG=/home/lhm/.kube/config` 后，依次使用独立新目录：
+
+```bash
+python3 scripts/cnf-qos-probe.py inspect --out <新的只读目录>
+python3 scripts/cnf-qos-probe.py probe --out <新的测量目录>
+python3 scripts/audit-cnf-qos-probe.py <测量目录> --out <新的审计JSON>
+```
+
+`inspect` 不修改策略。`probe` 仅比较后更新 UE2 订阅中的两个 Session-AMBR 字段，
+保留认证/SQN；经 UERANSIM 自动补建 PDU 会话验证 PCF/SMF 下发和 PDR/QER。
+原值为双向 1000 Mbps，探针为上行 2、下行 4 Mbps，发送目标 8 Mbps、15 秒；
+关/开/再关各方向 3 轮，并测原策略、UE1 对照和恢复后的业务，共 26 次 TCP 会话。
+每次采集接收端窗口、代理/后端 Cookie、规则、开关、Pod 身份与 512 MiB UPF 内存护栏。
+
+普通异常通过 `finally` 恢复原订阅、关闭全局 gtp5g QoS 并重建 UE2 会话。
+外部强杀/断电不在该保证内；先只读检查，再使用
+`python3 scripts/cnf-qos-probe.py restore --out <新的恢复目录>`，最后复验业务。
+入口只接受固定原值或探针值，遇到其他策略漂移拒绝覆盖；不是任意现场恢复工具。
+
+探针区分观测完成与能力支持。UERANSIM 自身也执行 Session-AMBR；开关关闭时已有上限，
+不能据端点吞吐单独证明 UPF 限速有效。TCP 定时结束可能有收发统计差异及数据连接 `UR/DC`：
+仅在完整接收窗口、足够代理载荷和正常控制连接成立时保留为测量，并报告标志；
+提前失败/连接失败仍拒绝，不将它记为无损、干净收尾或带宽保底。
+详细能力结论及失败记录见 [B 模块章节](../docs/cnf-service-chain-orchestration.md#b-5g-qos-能力探针)。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

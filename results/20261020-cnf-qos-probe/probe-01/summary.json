@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "probe",
+  "error": "iperf did not transfer matching nonempty per-session payload",
+  "endedAt": "2026-10-20T04:21:14.580700Z"
+}

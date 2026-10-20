@@ -1,0 +1,67 @@
+{
+  "recordedAt": "2026-10-20T04:48:06.293509+00:00",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "B",
+  "configVersion": "cnf-qos-probe-v4",
+  "analysisVersion": "qos-observation-audit-v2",
+  "scopeCompletion": "first scoped capability probe complete; UPF-enabled TCP network acceptance failed",
+  "workspaceBranch": "main",
+  "sourceBasisHead": "cf8765a0424b349bf0d5fc53cab8dbb5e8155e2e",
+  "sourceBasisNote": "B source and evidence are unstaged workspace changes; the base commit does not contain these new inputs.",
+  "formalAction": "probe-04",
+  "failedActions": [
+    "probe-01",
+    "probe-02",
+    "probe-03"
+  ],
+  "separateRecovery": "recovery-02",
+  "sessions": 26,
+  "proxyConnections": 52,
+  "receivedBytes": 192266240,
+  "upfMemorySamples": 301,
+  "upfPeakSampledMemoryMiB": 15.125,
+  "executionSourceHashesVerified": 24,
+  "windowsAndVm1AuditsIdentical": true,
+  "negativeAuditCases": 12,
+  "currentTestsPerPlatform": {
+    "discovered": 113,
+    "passed": 112,
+    "conditionalHelmSkipped": 1
+  },
+  "networkAcceptance": "UPF-enabled TCP not accepted: continuity target failed",
+  "restoration": {
+    "subscriberAmbr": {
+      "uplink": "1000 Mbps",
+      "downlink": "1000 Mbps"
+    },
+    "qosEnable": 0,
+    "all24PodIdentitiesUnchanged": true,
+    "finalUEs": {
+      "ue1": {
+        "supi": "imsi-208930000000001",
+        "ip": "10.60.0.3"
+      },
+      "ue2": {
+        "supi": "imsi-208930000000002",
+        "ip": "10.60.0.13"
+      }
+    }
+  },
+  "capabilityNotAccepted": [
+    "UPF-enabled TCP QoS for this tested configuration",
+    "guaranteed per-user bandwidth",
+    "priority scheduling",
+    "delay/loss SLA",
+    "dedicated QoS Flow/MFBR",
+    "online PCF policy notification"
+  ],
+  "diagnosticLimitation": "Initial SMF trace rotated before selection; installed rule values and PCF creation are saved. Real-time SMF PFCP accepted diagnostics cover the restoration session; no PFCP body or wire QFI capture.",
+  "auxiliarySha256LF": {
+    "capture-control-plane.py": "ed534aae76f96ef72a56280f5267e848e960c938cee8ddda7b2c72de744078ed",
+    "audit-negative-checks.py": "863e12a5f5f9fa6539a396c46a0e02a5503d42854f34878f3622f2c42dda801f",
+    "analysis-revision.json": "9c7eb7d4bc86c2c969cc3c9894209776543fa240e043e8407ffc06e795463232",
+    "kernel-source-inspection.json": "8291c60097d73b3f358e52885bfad86c35228c0f48f9f6af19bc275cc0d25097",
+    "ueransim-source-inspection.json": "6d5d2224c1cca514a2d517179772238a992143013e2f61270d0dcbde19b316cc"
+  }
+}

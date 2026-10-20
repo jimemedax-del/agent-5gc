@@ -1,0 +1,34 @@
+Time: Tue, 20 Oct 2026 04:36:00 GMT
+Accepted connection from 10.42.0.199, port 56140
+      Cookie: 5ywl3ojdtf5fiyja2frw76ggvey6xreimm4w
+      TCP MSS: 0 (default)
+      Target Bitrate: 8000000
+[  5] local 10.42.0.198 port 5201 connected to 10.42.0.199 port 56156
+Starting Test: protocol: TCP, 1 streams, 16384 byte blocks, omitting 0 seconds, 15 second test, tos 0
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.01   sec   432 KBytes  3.51 Mbits/sec                  
+[  5]   1.01-2.15   sec   272 KBytes  1.96 Mbits/sec                  
+[  5]   2.15-3.06   sec   208 KBytes  1.87 Mbits/sec                  
+[  5]   3.06-4.17   sec   272 KBytes  2.00 Mbits/sec                  
+[  5]   4.17-5.07   sec   208 KBytes  1.90 Mbits/sec                  
+[  5]   5.07-6.23   sec   272 KBytes  1.92 Mbits/sec                  
+[  5]   6.23-7.15   sec   208 KBytes  1.84 Mbits/sec                  
+[  5]   7.15-8.08   sec   224 KBytes  1.97 Mbits/sec                  
+[  5]   8.08-9.01   sec   240 KBytes  2.13 Mbits/sec                  
+[  5]   9.01-10.12  sec   240 KBytes  1.76 Mbits/sec                  
+[  5]  10.12-11.09  sec   224 KBytes  1.89 Mbits/sec                  
+[  5]  11.09-12.01  sec   224 KBytes  2.00 Mbits/sec                  
+[  5]  12.01-13.13  sec   256 KBytes  1.87 Mbits/sec                  
+[  5]  13.13-14.06  sec   224 KBytes  1.97 Mbits/sec                  
+[  5]  14.06-15.17  sec   240 KBytes  1.76 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bitrate
+[  5] (sender statistics not available)
+[  5]   0.00-15.17  sec  3.66 MBytes  2.02 Mbits/sec                  receiver
+rcv_tcp_congestion cubic
+iperf 3.9
+Linux cnf-a-core-ue2-85b8497c57-xjgw5 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------

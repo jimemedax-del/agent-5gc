@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-10-20T04:44:22.435963+00:00",
+  "command": [
+    "kubectl",
+    "-n",
+    "free5gc",
+    "logs",
+    "deployment/free5gc-helm-free5gc-smf-smf",
+    "--follow",
+    "--tail=0"
+  ],
+  "selectedLines": 6,
+  "probeSummaryObserved": true
+}

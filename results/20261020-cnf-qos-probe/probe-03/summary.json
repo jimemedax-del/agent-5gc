@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "probe",
+  "error": "Raw receiver/path/guard validation failed; retain evidence",
+  "endedAt": "2026-10-20T04:31:43.807674Z"
+}

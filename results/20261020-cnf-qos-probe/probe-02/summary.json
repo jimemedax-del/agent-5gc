@@ -1,0 +1,6 @@
+{
+  "outcome": "failed",
+  "command": "probe",
+  "error": "Unexpected multiple sessions; refusing release",
+  "endedAt": "2026-10-20T04:27:55.814059Z"
+}

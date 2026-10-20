@@ -1,0 +1,17 @@
+{
+  "outcome": "passed",
+  "rows": [
+    {
+      "round": 1,
+      "businessClass": "core",
+      "direction": "downlink",
+      "user": "ue1",
+      "outcome": "passed",
+      "startedAt": "2026-10-20T04:43:30.506513Z",
+      "trafficEndedAt": "2026-10-20T04:43:45.785693Z",
+      "cookie": "eab337gizft2wzk662qkc7t5lurgjeulqqot",
+      "receivedBytes": 15040512,
+      "proxyConnections": 2
+    }
+  ]
+}

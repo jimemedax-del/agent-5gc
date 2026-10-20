@@ -1,0 +1,20 @@
+[
+  {
+    "epoch": "ue1-control",
+    "folder": "ue1-control-01-uplink-ue1",
+    "user": "ue1",
+    "direction": "uplink",
+    "round": 1,
+    "receivedMbps": 7.983342042876486,
+    "cookie": "tbbjdyujbuqssbmt235b57mx4aznp2jmzanx"
+  },
+  {
+    "epoch": "ue1-control",
+    "folder": "ue1-control-01-downlink-ue1",
+    "user": "ue1",
+    "direction": "downlink",
+    "round": 1,
+    "receivedMbps": 8.021557201115833,
+    "cookie": "wihabkftuusvejyhcguzhqx3uyrvd6g7ji77"
+  }
+]

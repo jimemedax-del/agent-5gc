@@ -1,0 +1,22 @@
+PDU Session1: 
+ state: PS-ACTIVE
+ session-type: IPv4
+ apn: internet
+ s-nssai: 
+  sst: 0x01
+  sd: 0x010203
+ emergency: false
+ address: 10.60.0.7
+ ambr: up[2Mb/s] down[4Mb/s]
+ data-pending: false
+PDU Session2: 
+ state: PS-ACTIVE
+ session-type: IPv4
+ apn: internet
+ s-nssai: 
+  sst: 0x01
+  sd: 0x010203
+ emergency: false
+ address: 10.60.0.8
+ ambr: up[2Mb/s] down[4Mb/s]
+ data-pending: false

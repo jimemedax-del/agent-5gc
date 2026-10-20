@@ -1,0 +1,458 @@
+{
+  "capturedAt": "2026-10-20T04:27:16.695722Z",
+  "qosEnable": 0,
+  "subscription": {
+    "singleNssai": {
+      "sst": 1,
+      "sd": "010203"
+    },
+    "dnnConfigurations": {
+      "internet": {
+        "sscModes": {
+          "defaultSscMode": "SSC_MODE_1",
+          "allowedSscModes": [
+            "SSC_MODE_2",
+            "SSC_MODE_3"
+          ]
+        },
+        "5gQosProfile": {
+          "5qi": 9,
+          "arp": {
+            "priorityLevel": 8,
+            "preemptCap": "",
+            "preemptVuln": ""
+          },
+          "priorityLevel": 8
+        },
+        "sessionAmbr": {
+          "downlink": "4 Mbps",
+          "uplink": "2 Mbps"
+        },
+        "pduSessionTypes": {
+          "defaultSessionType": "IPV4",
+          "allowedSessionTypes": [
+            "IPV4"
+          ]
+        }
+      }
+    },
+    "ueId": "imsi-208930000000002",
+    "servingPlmnId": "20893"
+  },
+  "rules": {
+    "pdr": [
+      {
+        "ID": 14,
+        "Precedence": 255,
+        "PDI": {
+          "SrcIntf": null,
+          "UEAddr": "10.60.0.7",
+          "FTEID": null,
+          "SDF": null,
+          "EPFs": null
+        },
+        "OuterHdrRemoval": null,
+        "FARID": 14,
+        "QERID": [
+          14,
+          13
+        ],
+        "URRID": [
+          1,
+          2
+        ],
+        "SEID": 2,
+        "PDNType": null
+      },
+      {
+        "ID": 13,
+        "Precedence": 255,
+        "PDI": {
+          "SrcIntf": null,
+          "UEAddr": "10.60.0.7",
+          "FTEID": {
+            "TEID": 26,
+            "GTPuAddr": "10.42.1.24"
+          },
+          "SDF": null,
+          "EPFs": null
+        },
+        "OuterHdrRemoval": 0,
+        "FARID": 13,
+        "QERID": [
+          14,
+          13
+        ],
+        "URRID": [
+          1,
+          2
+        ],
+        "SEID": 2,
+        "PDNType": null
+      },
+      {
+        "ID": 6,
+        "Precedence": 255,
+        "PDI": {
+          "SrcIntf": null,
+          "UEAddr": "10.60.0.3",
+          "FTEID": null,
+          "SDF": null,
+          "EPFs": null
+        },
+        "OuterHdrRemoval": null,
+        "FARID": 6,
+        "QERID": [
+          6,
+          5
+        ],
+        "URRID": [
+          1,
+          2
+        ],
+        "SEID": 1,
+        "PDNType": null
+      },
+      {
+        "ID": 5,
+        "Precedence": 255,
+        "PDI": {
+          "SrcIntf": null,
+          "UEAddr": "10.60.0.3",
+          "FTEID": {
+            "TEID": 10,
+            "GTPuAddr": "10.42.1.24"
+          },
+          "SDF": null,
+          "EPFs": null
+        },
+        "OuterHdrRemoval": 0,
+        "FARID": 5,
+        "QERID": [
+          6,
+          5
+        ],
+        "URRID": [
+          1,
+          2
+        ],
+        "SEID": 1,
+        "PDNType": null
+      },
+      {
+        "ID": 16,
+        "Precedence": 255,
+        "PDI": {
+          "SrcIntf": null,
+          "UEAddr": "10.60.0.8",
+          "FTEID": null,
+          "SDF": null,
+          "EPFs": null
+        },
+        "OuterHdrRemoval": null,
+        "FARID": 16,
+        "QERID": [
+          16,
+          15
+        ],
+        "URRID": [
+          1,
+          2
+        ],
+        "SEID": 3,
+        "PDNType": null
+      },
+      {
+        "ID": 15,
+        "Precedence": 255,
+        "PDI": {
+          "SrcIntf": null,
+          "UEAddr": "10.60.0.8",
+          "FTEID": {
+            "TEID": 30,
+            "GTPuAddr": "10.42.1.24"
+          },
+          "SDF": null,
+          "EPFs": null
+        },
+        "OuterHdrRemoval": 0,
+        "FARID": 15,
+        "QERID": [
+          16,
+          15
+        ],
+        "URRID": [
+          1,
+          2
+        ],
+        "SEID": 3,
+        "PDNType": null
+      }
+    ],
+    "qer": [
+      {
+        "ID": 14,
+        "Gate": 0,
+        "MBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "GBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "CorrID": 0,
+        "RQI": 0,
+        "QFI": 1,
+        "PPI": 0,
+        "PDRIDs": [
+          14,
+          13
+        ],
+        "SEID": 2
+      },
+      {
+        "ID": 13,
+        "Gate": 0,
+        "MBR": {
+          "ULHigh": 7,
+          "ULLow": 208,
+          "UL_Kbps": 2000,
+          "DLHigh": 15,
+          "DLLow": 160,
+          "DL_Kbps": 4000
+        },
+        "GBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "CorrID": 0,
+        "RQI": 0,
+        "QFI": 1,
+        "PPI": 0,
+        "PDRIDs": [
+          14,
+          13
+        ],
+        "SEID": 2
+      },
+      {
+        "ID": 6,
+        "Gate": 0,
+        "MBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "GBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "CorrID": 0,
+        "RQI": 0,
+        "QFI": 1,
+        "PPI": 0,
+        "PDRIDs": [
+          6,
+          5
+        ],
+        "SEID": 1
+      },
+      {
+        "ID": 5,
+        "Gate": 0,
+        "MBR": {
+          "ULHigh": 3906,
+          "ULLow": 64,
+          "UL_Kbps": 1000000,
+          "DLHigh": 3906,
+          "DLLow": 64,
+          "DL_Kbps": 1000000
+        },
+        "GBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "CorrID": 0,
+        "RQI": 0,
+        "QFI": 1,
+        "PPI": 0,
+        "PDRIDs": [
+          6,
+          5
+        ],
+        "SEID": 1
+      },
+      {
+        "ID": 16,
+        "Gate": 0,
+        "MBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "GBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "CorrID": 0,
+        "RQI": 0,
+        "QFI": 1,
+        "PPI": 0,
+        "PDRIDs": [
+          16,
+          15
+        ],
+        "SEID": 3
+      },
+      {
+        "ID": 15,
+        "Gate": 0,
+        "MBR": {
+          "ULHigh": 7,
+          "ULLow": 208,
+          "UL_Kbps": 2000,
+          "DLHigh": 15,
+          "DLLow": 160,
+          "DL_Kbps": 4000
+        },
+        "GBR": {
+          "ULHigh": 0,
+          "ULLow": 0,
+          "UL_Kbps": 0,
+          "DLHigh": 0,
+          "DLLow": 0,
+          "DL_Kbps": 0
+        },
+        "CorrID": 0,
+        "RQI": 0,
+        "QFI": 1,
+        "PPI": 0,
+        "PDRIDs": [
+          16,
+          15
+        ],
+        "SEID": 3
+      }
+    ],
+    "far": [
+      {
+        "ID": 14,
+        "Action": 2,
+        "Param": {
+          "Creation": {
+            "Desc": 256,
+            "TEID": 7,
+            "PeerAddr": "10.42.2.71",
+            "Port": 2152
+          },
+          "Policy": null,
+          "TosTc": 0
+        },
+        "PDRIDs": [
+          14
+        ],
+        "BARID": null,
+        "SEID": 2
+      },
+      {
+        "ID": 13,
+        "Action": 2,
+        "Param": null,
+        "PDRIDs": [
+          13
+        ],
+        "BARID": null,
+        "SEID": 2
+      },
+      {
+        "ID": 6,
+        "Action": 2,
+        "Param": {
+          "Creation": {
+            "Desc": 256,
+            "TEID": 3,
+            "PeerAddr": "10.42.2.71",
+            "Port": 2152
+          },
+          "Policy": null,
+          "TosTc": 0
+        },
+        "PDRIDs": [
+          6
+        ],
+        "BARID": null,
+        "SEID": 1
+      },
+      {
+        "ID": 5,
+        "Action": 2,
+        "Param": null,
+        "PDRIDs": [
+          5
+        ],
+        "BARID": null,
+        "SEID": 1
+      },
+      {
+        "ID": 16,
+        "Action": 2,
+        "Param": {
+          "Creation": {
+            "Desc": 256,
+            "TEID": 8,
+            "PeerAddr": "10.42.2.71",
+            "Port": 2152
+          },
+          "Policy": null,
+          "TosTc": 0
+        },
+        "PDRIDs": [
+          16
+        ],
+        "BARID": null,
+        "SEID": 3
+      },
+      {
+        "ID": 15,
+        "Action": 2,
+        "Param": null,
+        "PDRIDs": [
+          15
+        ],
+        "BARID": null,
+        "SEID": 3
+      }
+    ]
+  }
+}

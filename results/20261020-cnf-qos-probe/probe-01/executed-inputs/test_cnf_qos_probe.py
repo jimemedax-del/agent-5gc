@@ -1,0 +1,126 @@
+import copy
+import importlib.util
+import json
+from pathlib import Path
+import unittest
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def load(name, filename):
+    spec = importlib.util.spec_from_file_location(name, ROOT / 'scripts' / filename)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+probe = load('qos_probe', 'cnf-qos-probe.py')
+auditor = load('qos_auditor', 'audit-cnf-qos-probe.py')
+
+
+class QoSProbeSafetyTests(unittest.TestCase):
+    def setUp(self):
+        self.spec = probe.config()
+        self.record = {'ueId': probe.SUPI, 'servingPlmnId': '20893', 'singleNssai': {'sst': 1, 'sd': '010203'},
+                       'dnnConfigurations': {'internet': {'sessionAmbr': self.spec['originalAmbr'],
+                                                         '5gQosProfile': {'5qi': 9}}}}
+
+    def test_write_only_two_rate_fields_with_identity_and_old_rate_guard(self):
+        after = copy.deepcopy(self.record)
+        after['dnnConfigurations']['internet']['sessionAmbr'] = self.spec['probeAmbr']
+        calls = []
+
+        def mongo(code):
+            calls.append(code)
+            return {'matchedCount': 1, 'modifiedCount': 1}
+
+        with patch.object(probe, 'subscription', side_effect=[self.record, after]), patch.object(probe, 'mongo', mongo):
+            probe.set_ambr(self.spec['originalAmbr'], self.spec['probeAmbr'])
+        query, update = json.JSONDecoder().raw_decode(calls[0].split('.updateOne(', 1)[1])[0], None
+        rest = calls[0].split('.updateOne(', 1)[1]
+        _, offset = json.JSONDecoder().raw_decode(rest)
+        update, _ = json.JSONDecoder().raw_decode(rest[offset + 1:])
+        self.assertEqual(query, {'ueId': probe.SUPI, 'servingPlmnId': '20893',
+            probe.FIELDS + '.uplink': '1000 Mbps', probe.FIELDS + '.downlink': '1000 Mbps'})
+        self.assertEqual(update, {'$set': {probe.FIELDS + '.uplink': '2 Mbps', probe.FIELDS + '.downlink': '4 Mbps'}})
+        self.assertNotIn('authentication', calls[0].lower())
+
+    def test_drift_prevents_write(self):
+        self.record['dnnConfigurations']['internet']['sessionAmbr'] = {'uplink': '7 Mbps', 'downlink': '7 Mbps'}
+        with patch.object(probe, 'subscription', return_value=self.record), patch.object(probe, 'mongo') as db:
+            with self.assertRaisesRegex(RuntimeError, 'drift'):
+                probe.set_ambr(self.spec['originalAmbr'], self.spec['probeAmbr'])
+            db.assert_not_called()
+
+    def test_unapproved_target_prevents_reads_and_writes(self):
+        with patch.object(probe, 'subscription') as read, patch.object(probe, 'mongo') as db:
+            with self.assertRaisesRegex(RuntimeError, 'Unapproved'):
+                probe.set_ambr(self.spec['originalAmbr'], {'uplink': '20 Mbps', 'downlink': '20 Mbps'})
+            read.assert_not_called()
+            db.assert_not_called()
+
+    def test_missing_compare_match_is_failure(self):
+        with patch.object(probe, 'subscription', return_value=self.record), patch.object(
+                probe, 'mongo', return_value={'matchedCount': 0}):
+            with self.assertRaisesRegex(RuntimeError, 'compare-and-set'):
+                probe.set_ambr(self.spec['originalAmbr'], self.spec['probeAmbr'])
+
+    def test_restore_disables_policer_before_attempting_session_renewal(self):
+        calls = []
+        with patch.object(probe, 'subscription', return_value=self.record), patch.object(
+                probe, 'switch', side_effect=lambda x: calls.append(('switch', x))), patch.object(
+                probe, 'set_ambr', side_effect=lambda *x: calls.append(('policy', x))), patch.object(
+                probe.m1, 'save'), patch.object(probe, 'renew', side_effect=RuntimeError('failed renewal')):
+            with self.assertRaisesRegex(RuntimeError, 'failed renewal'):
+                probe.restore(Path('unused'))
+        self.assertEqual(calls[0], ('switch', 0))
+        self.assertEqual(calls[1][0], 'policy')
+
+
+class QoSAuditRejectionTests(unittest.TestCase):
+    def rates(self):
+        return [{'epoch': epoch, 'direction': direction, 'receivedMbps': value}
+                for epoch in ['cap-off', 'cap-on', 'cap-reoff']
+                for direction, cap in [('uplink', 2), ('downlink', 4)]
+                for value in ([cap * .75] * 3 if epoch == 'cap-on' else [7.9] * 3)]
+
+    def test_reversible_ceiling_is_accepted(self):
+        self.assertEqual(auditor.rate_comparison(self.rates())['uplink']['capMbps'], 2)
+
+    def test_unchanged_data_plane_is_rejected(self):
+        rows = self.rates()
+        for row in rows:
+            row['receivedMbps'] = 7.9
+        with self.assertRaisesRegex(ValueError, 'ceiling'):
+            auditor.rate_comparison(rows)
+
+    def test_failed_restoration_control_is_rejected(self):
+        rows = self.rates()
+        rows[-1]['receivedMbps'] = .5
+        with self.assertRaisesRegex(ValueError, 'Off controls'):
+            auditor.rate_comparison(rows)
+
+    def test_missing_round_rejected(self):
+        with self.assertRaisesRegex(ValueError, 'rounds'):
+            auditor.rate_comparison(self.rates()[:-1])
+
+    def test_complete_outage_not_a_valid_cap(self):
+        rows = self.rates()
+        for row in rows:
+            if row['epoch'] == 'cap-on':
+                row['receivedMbps'] = 0
+        with self.assertRaisesRegex(ValueError, 'continuity'):
+            auditor.rate_comparison(rows)
+
+    def test_qfi_does_not_bind_a_rule_from_another_session(self):
+        raw = {'pdr': [
+            {'ID': 1, 'SEID': 10, 'PDI': {'UEAddr': '10.60.0.4', 'FTEID': {'TEID': 4}}, 'QERID': [3, 4]},
+            {'ID': 2, 'SEID': 10, 'PDI': {'UEAddr': '10.60.0.4', 'FTEID': None}, 'QERID': [3, 4]}],
+            'qer': [{'ID': qid, 'SEID': 11, 'QFI': 1, 'Gate': 0} for qid in [3, 4]]}
+        with self.assertRaisesRegex(ValueError, 'QFI/gate'):
+            auditor.binding(raw, '10.60.0.4', 2000, 4000)
+
+
+if __name__ == '__main__':
+    unittest.main()

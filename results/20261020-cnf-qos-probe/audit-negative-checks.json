@@ -1,0 +1,68 @@
+{
+  "outcome": "passed",
+  "uncorruptedControlPassed": true,
+  "originalEvidenceUnchanged": true,
+  "auditorSha256LF": "6ad10b72f85538053354c02a87aaccf4663e82477a0d9dffa7be6cfbcbf8218b",
+  "cases": [
+    {
+      "case": "source-hash",
+      "outcome": "rejected",
+      "reason": "Source hash mismatch: scripts/cnf-qos-probe.py"
+    },
+    {
+      "case": "wrong-ue",
+      "outcome": "rejected",
+      "reason": "Invalid receiver/direction/socket evidence"
+    },
+    {
+      "case": "cross-session-qer",
+      "outcome": "rejected",
+      "reason": "Default QFI/gate rules differ"
+    },
+    {
+      "case": "wrong-switch",
+      "outcome": "rejected",
+      "reason": "Per-flow policy/switch differs"
+    },
+    {
+      "case": "reported-rate",
+      "outcome": "rejected",
+      "reason": "Derived rate/cookie differs"
+    },
+    {
+      "case": "unrestored",
+      "outcome": "rejected",
+      "reason": "Wrong policy source"
+    },
+    {
+      "case": "duplicate-session",
+      "outcome": "rejected",
+      "reason": "Unexpected duplicate/pending session"
+    },
+    {
+      "case": "smf-replacement",
+      "outcome": "rejected",
+      "reason": "Switch/Pod state drift"
+    },
+    {
+      "case": "cookie-at-wrong-backend",
+      "outcome": "rejected",
+      "reason": "Cookie at wrong backend"
+    },
+    {
+      "case": "missing-round",
+      "outcome": "rejected",
+      "reason": "Missing/duplicate flows"
+    },
+    {
+      "case": "missing-source-hashes",
+      "outcome": "rejected",
+      "reason": "Missing required source hashes"
+    },
+    {
+      "case": "premature-reset",
+      "outcome": "rejected",
+      "reason": "Unexpected/early proxy failure"
+    }
+  ]
+}

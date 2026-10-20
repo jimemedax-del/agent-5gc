@@ -1,0 +1,20 @@
+[
+  {
+    "epoch": "baseline",
+    "folder": "baseline-01-uplink-ue2",
+    "user": "ue2",
+    "direction": "uplink",
+    "round": 1,
+    "receivedMbps": 7.98302195887115,
+    "cookie": "hb3cipj6grlas7qaeeuwfemdny5x4dc7vwsf"
+  },
+  {
+    "epoch": "baseline",
+    "folder": "baseline-01-downlink-ue2",
+    "user": "ue2",
+    "direction": "downlink",
+    "round": 1,
+    "receivedMbps": 8.021559874952725,
+    "cookie": "azw2rxweezamlullzvihy5qbyek2uhcuiquy"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "epoch": "cap-reoff",
+    "folder": "cap-reoff-01-uplink-ue2",
+    "user": "ue2",
+    "direction": "uplink",
+    "round": 1,
+    "receivedMbps": 2.026910161491239,
+    "cookie": "fw4i5yxmsl24opgtj2l524rhbcx6hip74xxe"
+  },
+  {
+    "epoch": "cap-reoff",
+    "folder": "cap-reoff-01-downlink-ue2",
+    "user": "ue2",
+    "direction": "downlink",
+    "round": 1,
+    "receivedMbps": 4.06359102818906,
+    "cookie": "t5fzqg4yriaekrc6wgq5bhwtwoukijkldq4r"
+  },
+  {
+    "epoch": "cap-reoff",
+    "folder": "cap-reoff-02-uplink-ue2",
+    "user": "ue2",
+    "direction": "uplink",
+    "round": 2,
+    "receivedMbps": 2.019768954566333,
+    "cookie": "3v3g5ufds3hj4uojebq35ojqelzenkpygw23"
+  },
+  {
+    "epoch": "cap-reoff",
+    "folder": "cap-reoff-02-downlink-ue2",
+    "user": "ue2",
+    "direction": "downlink",
+    "round": 2,
+    "receivedMbps": 4.11235802818896,
+    "cookie": "b4pqqoha6wg5nvbzbbml2w5kq2u5tx3cm2lk"
+  },
+  {
+    "epoch": "cap-reoff",
+    "folder": "cap-reoff-03-uplink-ue2",
+    "user": "ue2",
+    "direction": "uplink",
+    "round": 3,
+    "receivedMbps": 2.0221299421562877,
+    "cookie": "3u73hbpxkhbd4wgzfo4wupjanhyceasub2o3"
+  },
+  {
+    "epoch": "cap-reoff",
+    "folder": "cap-reoff-03-downlink-ue2",
+    "user": "ue2",
+    "direction": "downlink",
+    "round": 3,
+    "receivedMbps": 4.065084910582161,
+    "cookie": "jk7qxei3pkvpuh4tkp2yu4rkfrqjchm7zlna"
+  }
+]

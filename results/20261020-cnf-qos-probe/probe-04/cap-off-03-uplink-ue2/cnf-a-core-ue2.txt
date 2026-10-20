@@ -1,0 +1,35 @@
+Time: Tue, 20 Oct 2026 04:36:40 GMT
+Accepted connection from 10.42.0.199, port 42646
+      Cookie: xla7uqjfadr7gepdj5qsfnu5kexchvpfgebm
+      TCP MSS: 0 (default)
+      Target Bitrate: 8000000
+[  5] local 10.42.0.198 port 5201 connected to 10.42.0.199 port 42658
+Starting Test: protocol: TCP, 1 streams, 16384 byte blocks, omitting 0 seconds, 15 second test, tos 0
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.22   sec   480 KBytes  3.23 Mbits/sec                  
+[  5]   1.22-2.14   sec   224 KBytes  1.99 Mbits/sec                  
+[  5]   2.14-3.10   sec   224 KBytes  1.91 Mbits/sec                  
+[  5]   3.10-4.02   sec   208 KBytes  1.85 Mbits/sec                  
+[  5]   4.02-5.18   sec   272 KBytes  1.92 Mbits/sec                  
+[  5]   5.18-6.08   sec   224 KBytes  2.04 Mbits/sec                  
+[  5]   6.08-7.20   sec   256 KBytes  1.86 Mbits/sec                  
+[  5]   7.20-8.12   sec   224 KBytes  2.01 Mbits/sec                  
+[  5]   8.12-9.04   sec   208 KBytes  1.84 Mbits/sec                  
+[  5]   9.04-10.18  sec   272 KBytes  1.96 Mbits/sec                  
+[  5]  10.18-11.09  sec   208 KBytes  1.87 Mbits/sec                  
+[  5]  11.09-12.04  sec   224 KBytes  1.94 Mbits/sec                  
+[  5]  12.04-13.20  sec   272 KBytes  1.91 Mbits/sec                  
+[  5]  13.20-14.11  sec   224 KBytes  2.02 Mbits/sec                  
+[  5]  14.11-15.00  sec   208 KBytes  1.90 Mbits/sec                  
+[  5]  15.00-15.24  sec  32.0 KBytes  1.13 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bitrate
+[  5] (sender statistics not available)
+[  5]   0.00-15.24  sec  3.67 MBytes  2.02 Mbits/sec                  receiver
+rcv_tcp_congestion cubic
+iperf 3.9
+Linux cnf-a-core-ue2-85b8497c57-xjgw5 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------

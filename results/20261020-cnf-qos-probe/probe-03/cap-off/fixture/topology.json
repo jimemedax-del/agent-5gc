@@ -1,0 +1,323 @@
+{
+  "target": "192.168.244.128",
+  "envoy": {
+    "pod": "cnf-a-envoy-858f68b746-g8t64",
+    "uid": "c4d84652-62c2-4fe9-ba5a-78f4ff1ebb45",
+    "node": "lhm-virtual-machine",
+    "ip": "10.42.0.199",
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "envoy",
+        "image": "sha256:d4800f30429fc946d03932a6055a2d52c70183aa60487f9da38899f1543dfe6a",
+        "imageID": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac",
+        "containerID": "containerd://bd69bd2f4f7a821109f6e61dd8bb898cf27bf8dcff2393bb0390a921b464f2ca",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-20T03:51:07Z"
+          }
+        },
+        "lastState": {},
+        "specImage": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac"
+      }
+    ]
+  },
+  "users": {
+    "ue1": {
+      "name": "ue1",
+      "supi": "imsi-208930000000001",
+      "deployment": "ueransim-ue",
+      "pod": "ueransim-ue-8f555b79b-rdjdb",
+      "podUID": "d1cf89a5-1f2a-4e74-b016-dbefbd149762",
+      "ip": "10.60.0.3",
+      "node": "ran-test"
+    },
+    "ue2": {
+      "name": "ue2",
+      "supi": "imsi-208930000000002",
+      "deployment": "cnf-a-ue2",
+      "pod": "cnf-a-ue2-6998f7d65b-2szgn",
+      "podUID": "0d6c656d-bf53-4bc4-a55a-6763d6870084",
+      "ip": "10.60.0.10",
+      "node": "ran-test"
+    }
+  },
+  "backends": {
+    "cnf-a-core-ue1": {
+      "pod": "cnf-a-core-ue1-796f6455d4-qssr4",
+      "uid": "758e3bc6-3dd2-4100-b4e7-cac8a1dcdade",
+      "node": "lhm-virtual-machine",
+      "ip": "10.42.0.197",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "iperf3",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+          "containerID": "containerd://2795205c96411edcd781faa5c7f4ad144d24fde3ed653462f354666157e2e96a",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-20T03:51:07Z"
+            }
+          },
+          "lastState": {},
+          "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+        }
+      ]
+    },
+    "cnf-a-core-ue2": {
+      "pod": "cnf-a-core-ue2-85b8497c57-xjgw5",
+      "uid": "c5e777b6-57b5-4348-89a0-1e5b17f62702",
+      "node": "lhm-virtual-machine",
+      "ip": "10.42.0.198",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "iperf3",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+          "containerID": "containerd://3925ae596d7824b79e17290de6e5dca5fc87bdcdf4a4200b98c6fbd811a85521",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-20T03:51:07Z"
+            }
+          },
+          "lastState": {},
+          "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+        }
+      ]
+    },
+    "cnf-a-edge-ue1": {
+      "pod": "cnf-a-edge-ue1-7486d6f6df-lpkx7",
+      "uid": "13364f0d-adfe-4576-913a-34d0bc9d1573",
+      "node": "ran-test",
+      "ip": "10.42.2.83",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "iperf3",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+          "containerID": "containerd://d3e0e5a246e9dd51ca988c4b7cd94286218c8acf0001fe1122c2e77fc6f3cc27",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-20T03:51:07Z"
+            }
+          },
+          "lastState": {},
+          "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+        }
+      ]
+    },
+    "cnf-a-edge-ue2": {
+      "pod": "cnf-a-edge-ue2-677f77dd48-fjj7w",
+      "uid": "3f20d8ef-f3e5-40ec-a188-8867b0cdf1e9",
+      "node": "ran-test",
+      "ip": "10.42.2.84",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "iperf3",
+          "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+          "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+          "containerID": "containerd://f7988a090eff9b9fc7f00e6ce04a3a9b06e37f69ecd14a78039f46a2d54d8579",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-20T03:51:07Z"
+            }
+          },
+          "lastState": {},
+          "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+        }
+      ]
+    }
+  },
+  "services": {
+    "cnf-a-core-ue1": {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-multi-ue-v1\"},\"name\":\"cnf-a-core-ue1\",\"namespace\":\"cnf-multi-ue\"},\"spec\":{\"ports\":[{\"name\":\"iperf\",\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":\"iperf\"}],\"selector\":{\"app\":\"cnf-a-core-ue1\"}}}\n"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+        },
+        "name": "cnf-a-core-ue1",
+        "namespace": "cnf-multi-ue",
+        "resourceVersion": "607629",
+        "uid": "08759ae5-3e0d-4128-b8b4-5bf1e69defc4"
+      },
+      "spec": {
+        "clusterIP": "10.43.209.86",
+        "clusterIPs": [
+          "10.43.209.86"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP",
+            "targetPort": "iperf"
+          }
+        ],
+        "selector": {
+          "app": "cnf-a-core-ue1"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    "cnf-a-core-ue2": {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-multi-ue-v1\"},\"name\":\"cnf-a-core-ue2\",\"namespace\":\"cnf-multi-ue\"},\"spec\":{\"ports\":[{\"name\":\"iperf\",\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":\"iperf\"}],\"selector\":{\"app\":\"cnf-a-core-ue2\"}}}\n"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+        },
+        "name": "cnf-a-core-ue2",
+        "namespace": "cnf-multi-ue",
+        "resourceVersion": "607650",
+        "uid": "1f11bd73-b636-4965-870d-31d9582e0a89"
+      },
+      "spec": {
+        "clusterIP": "10.43.196.83",
+        "clusterIPs": [
+          "10.43.196.83"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP",
+            "targetPort": "iperf"
+          }
+        ],
+        "selector": {
+          "app": "cnf-a-core-ue2"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    "cnf-a-edge-ue1": {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-multi-ue-v1\"},\"name\":\"cnf-a-edge-ue1\",\"namespace\":\"cnf-multi-ue\"},\"spec\":{\"ports\":[{\"name\":\"iperf\",\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":\"iperf\"}],\"selector\":{\"app\":\"cnf-a-edge-ue1\"}}}\n"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+        },
+        "name": "cnf-a-edge-ue1",
+        "namespace": "cnf-multi-ue",
+        "resourceVersion": "607666",
+        "uid": "e2939650-4d46-45c0-ba4e-1cf1b0dc4f96"
+      },
+      "spec": {
+        "clusterIP": "10.43.82.128",
+        "clusterIPs": [
+          "10.43.82.128"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP",
+            "targetPort": "iperf"
+          }
+        ],
+        "selector": {
+          "app": "cnf-a-edge-ue1"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    "cnf-a-edge-ue2": {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/part-of\":\"cnf-multi-ue-v1\"},\"name\":\"cnf-a-edge-ue2\",\"namespace\":\"cnf-multi-ue\"},\"spec\":{\"ports\":[{\"name\":\"iperf\",\"port\":5201,\"protocol\":\"TCP\",\"targetPort\":\"iperf\"}],\"selector\":{\"app\":\"cnf-a-edge-ue2\"}}}\n"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+        },
+        "name": "cnf-a-edge-ue2",
+        "namespace": "cnf-multi-ue",
+        "resourceVersion": "607682",
+        "uid": "9c027469-8de5-4f50-9ed0-61d4e9bdc39a"
+      },
+      "spec": {
+        "clusterIP": "10.43.197.172",
+        "clusterIPs": [
+          "10.43.197.172"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP",
+            "targetPort": "iperf"
+          }
+        ],
+        "selector": {
+          "app": "cnf-a-edge-ue2"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/lhm/.work/cnf-qos-probe-20261020/repo/scripts/audit-cnf-qos-probe.py", line 235, in <module>
+    value = audit(args.root)
+  File "/home/lhm/.work/cnf-qos-probe-20261020/repo/scripts/audit-cnf-qos-probe.py", line 220, in audit
+    'rateComparison': rate_comparison(rows), 'upfPeakSampledMemoryBytes': peak,
+  File "/home/lhm/.work/cnf-qos-probe-20261020/repo/scripts/audit-cnf-qos-probe.py", line 56, in rate_comparison
+    require(all(.1 <= x <= 9.2 for v in values.values() for x in v), 'Outage or invalid receiver throughput')
+  File "/home/lhm/.work/cnf-qos-probe-20261020/repo/scripts/audit-cnf-qos-probe.py", line 15, in require
+    raise ValueError(message)
+ValueError: Outage or invalid receiver throughput

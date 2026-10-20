@@ -1,0 +1,11 @@
+{
+  "outcome": "passed",
+  "command": "probe",
+  "evidence": {
+    "sessions": 26,
+    "all24PodIdentitiesUnchanged": true,
+    "restoredPolicyAndSwitch": true,
+    "acceptance": "run independent offline audit"
+  },
+  "endedAt": "2026-10-20T04:44:21.532660Z"
+}

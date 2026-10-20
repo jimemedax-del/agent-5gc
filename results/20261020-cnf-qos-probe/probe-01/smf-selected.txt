@@ -1,0 +1,7 @@
+2026-10-20T04:20:44.894155712Z[36m [INFO][SMF][PduSess] [0mSending PFCP Session Deletion Request
+2026-10-20T04:20:44.895831143Z[36m [INFO][SMF][PduSess] [0mReceived PFCP Session Deletion Accepted Response
+2026-10-20T04:21:01.330946905Z[37m [DEBU][SMF][PduSess][pdu_session_id:1][supi:imsi-208930000000002] [0mInstall SessionRule[SessRuleId-1]: &{AuthSessAmbr:0xc004721a00 AuthDefQos:0xc0000ba5b0 SessRuleId:SessRuleId-1 RefUmData: RefUmN3gData: RefCondData:}
+2026-10-20T04:21:01.330999395Z[37m [TRAC][SMF][PduSess][pdu_session_id:1][supi:imsi-208930000000002] [0mPutPDRtoPFCPSession [&{PDRID:11 Precedence:0 PDI:{SourceInterface:{InterfaceValue:0} LocalFTeid:<nil> NetworkInstance:<nil> UEIPAddress:<nil> SDFFilter:<nil> ApplicationID:} OuterHeaderRemoval:<nil> FAR:0xc004072090 URR:[] QER:[] State:0}]
+2026-10-20T04:21:01.331005593Z[37m [TRAC][SMF][PduSess][pdu_session_id:1][supi:imsi-208930000000002] [0mPutPDRtoPFCPSession [&{PDRID:12 Precedence:0 PDI:{SourceInterface:{InterfaceValue:0} LocalFTeid:<nil> NetworkInstance:<nil> UEIPAddress:<nil> SDFFilter:<nil> ApplicationID:} OuterHeaderRemoval:<nil> FAR:0xc0040721e0 URR:[] QER:[] State:0}]
+2026-10-20T04:21:01.331171211Z[36m [INFO][SMF][PduSess] [0mSending PFCP Session Establishment Request
+2026-10-20T04:21:01.335418605Z[36m [INFO][SMF][PduSess] [0mReceived PFCP Session Establishment Accepted Response

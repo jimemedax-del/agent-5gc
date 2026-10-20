@@ -1,0 +1,28 @@
+{
+  "capturedDate": "2026-10-20",
+  "sourceVersion": "v3.2.7",
+  "runtimeVersionEvidence": "probe-04/initial/fixture/ue2-registration.txt",
+  "sources": [
+    {
+      "url": "https://github.com/aligungr/UERANSIM/blob/v3.2.7/src/gnb/gtp/task.cpp",
+      "gitBlobSha": "0475dcbc9cb98de146c41fbf8f4abdc9a51e0ef4",
+      "observations": [
+        "GtpTask::handleSessionCreate calls updateAmbrForSession.",
+        "updateAmbrForSession updates both uplink and downlink session limits from sessionAmbr.",
+        "handleUplinkData and handleUdpReceive consult allowUplinkPacket and allowDownlinkPacket respectively before forwarding.",
+        "handleUplinkData takes the QFI from qosFlows list element zero. This source does not demonstrate uplink per-application QFI selection."
+      ]
+    },
+    {
+      "url": "https://github.com/aligungr/UERANSIM/blob/v3.2.7/src/gnb/gtp/utils.cpp",
+      "gitBlobSha": "45f0133fa363917280a34831cadfc2c6e6ca8681",
+      "observations": [
+        "RateLimiter maintains per-UE and per-session buckets in both directions.",
+        "Packets are admitted only when the applicable TokenBucket::tryConsume calls succeed.",
+        "These limiters do not reference the Linux gtp5g /proc QoS switch."
+      ]
+    }
+  ],
+  "interpretation": "The simulator gNB is a confounder for isolating gtp5g Session-AMBR policing using endpoint throughput. The runtime image version matches the inspected release, but the upstream source is not a rebuilt attestation of the installed executable.",
+  "scope": "Source inspection supports mechanism interpretation; runtime rate effect and installed rule values require separate evidence. No radio scheduler or dedicated-flow acceptance follows."
+}

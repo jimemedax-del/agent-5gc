@@ -1,0 +1,1 @@
+PDU session establishment procedure triggered

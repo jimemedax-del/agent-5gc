@@ -1,0 +1,23 @@
+{
+  "configVersion": "cnf-qos-probe-v3",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "B",
+  "subscriber": "imsi-208930000000002",
+  "servingPlmnId": "20893",
+  "dnn": "internet",
+  "originalAmbr": {
+    "uplink": "1000 Mbps",
+    "downlink": "1000 Mbps"
+  },
+  "probeAmbr": {
+    "uplink": "2 Mbps",
+    "downlink": "4 Mbps"
+  },
+  "offeredMbps": 8,
+  "durationSeconds": 15,
+  "roundsPerDirection": 3,
+  "maximumUpfMemoryBytes": 536870912,
+  "policySource": "narrow compare-and-set of UE2 subscription smData; normal UDR/PCF/SMF session establishment",
+  "scope": "Session-AMBR ceiling; no GBR, scheduling, dedicated QoS Flow or radio SLA acceptance"
+}

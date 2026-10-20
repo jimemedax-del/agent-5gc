@@ -1,0 +1,56 @@
+[
+  {
+    "epoch": "cap-on",
+    "folder": "cap-on-01-uplink-ue2",
+    "user": "ue2",
+    "direction": "uplink",
+    "round": 1,
+    "receivedMbps": 0.0569491395813912,
+    "cookie": "2hjca2ag7hwnfxoc2bbw6fc4s4toipqzq3ag"
+  },
+  {
+    "epoch": "cap-on",
+    "folder": "cap-on-01-downlink-ue2",
+    "user": "ue2",
+    "direction": "downlink",
+    "round": 1,
+    "receivedMbps": 0.4445235338382464,
+    "cookie": "g2gcxehjrclwuxwgcypsgtyyjp3awsysodbk"
+  },
+  {
+    "epoch": "cap-on",
+    "folder": "cap-on-02-uplink-ue2",
+    "user": "ue2",
+    "direction": "uplink",
+    "round": 2,
+    "receivedMbps": 0.05301782194260267,
+    "cookie": "nkphyuhcyqck5aaccm43obpqm4cnvs5urmry"
+  },
+  {
+    "epoch": "cap-on",
+    "folder": "cap-on-02-downlink-ue2",
+    "user": "ue2",
+    "direction": "downlink",
+    "round": 2,
+    "receivedMbps": 0.4523176209216968,
+    "cookie": "dwe6iv724yufyk4vughkn3q7cpsatwo3i4a5"
+  },
+  {
+    "epoch": "cap-on",
+    "folder": "cap-on-03-uplink-ue2",
+    "user": "ue2",
+    "direction": "uplink",
+    "round": 3,
+    "receivedMbps": 0.05431807579277404,
+    "cookie": "pnwsdfbkbydroi46mqxrijsbwgcsbm7kmwg5"
+  },
+  {
+    "epoch": "cap-on",
+    "folder": "cap-on-03-downlink-ue2",
+    "user": "ue2",
+    "direction": "downlink",
+    "round": 3,
+    "receivedMbps": 0.44438298931460746,
+    "cookie": "s57vtdbbfq2b6qryll5ygssu76btszlmi2ul"
+  }
+]
