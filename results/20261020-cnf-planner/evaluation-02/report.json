@@ -1,0 +1,16 @@
+{
+  "evaluationVersion": "cnf-planner-evaluation-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E1",
+  "claimScope": "Agent-authored offline engineering fixtures; no live observations, policies or network SLA measurements",
+  "cases": 28,
+  "expectationMatches": 28,
+  "planned": 10,
+  "validOfflinePlans": 10,
+  "notPlanned": 18,
+  "disagreements": [],
+  "executionAuthorizations": 0,
+  "EStageFullyAccepted": false,
+  "clusterAccessed": false
+}

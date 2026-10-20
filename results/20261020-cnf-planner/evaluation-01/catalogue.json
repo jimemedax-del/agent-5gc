@@ -1,0 +1,280 @@
+{
+  "contract": {
+    "contractVersion": "cnf-planner-tools-v1",
+    "route": "R2",
+    "stage": "R2.S4",
+    "task": "E1",
+    "scope": "offline_two_ue_udp_steady_mean_fixture",
+    "requirementsContract": "cnf-requirements-v1",
+    "maxStateTtlSeconds": 300,
+    "maxPlanAgeSeconds": 30,
+    "requiredRequestFields": [
+      "direction",
+      "min_bandwidth_mbps",
+      "max_bandwidth_mbps",
+      "priority",
+      "valid_for_seconds",
+      "measurement_window_seconds"
+    ],
+    "candidateModes": [
+      "equal",
+      "guarantee-ue1",
+      "guarantee-ue2",
+      "priority-ue1",
+      "priority-ue2"
+    ],
+    "referenceFiles": {
+      "downlink": {
+        "config": "infra/cnfs/contention-experiment.json",
+        "evidence": "results/20261020-cnf-contention/metadata.json"
+      },
+      "uplink": {
+        "config": "infra/cnfs/contention-uplink-experiment.json",
+        "evidence": "results/20261020-cnf-contention-uplink/metadata.json"
+      }
+    },
+    "tools": {
+      "inspect_state": "offline_implemented",
+      "plan_policy": "offline_implemented",
+      "validate_plan": "offline_implemented",
+      "apply_plan": "unsupported_live_adapter_pending",
+      "verify_plan": "unsupported_live_adapter_pending",
+      "restore": "unsupported_live_adapter_pending"
+    },
+    "prioritySemantics": "relative_precedence_within_the_two_request_batch_only",
+    "referenceFloorSemantics": "historical_receiver_steady_mean_acceptance_envelope_not_a_live_guarantee",
+    "unsupported": [
+      "live_state_discovery",
+      "live_identity_binding",
+      "arbitrary_queue_parameters",
+      "simultaneous_bidirectional_policy",
+      "latency_or_loss_guarantee",
+      "native_5g_qos",
+      "deadline_admission",
+      "atomic_live_reservation",
+      "long_term_sla"
+    ]
+  },
+  "directions": {
+    "downlink": {
+      "configVersion": "cnf-contention-v1",
+      "namespace": "cnf-contention",
+      "deployment": "cnf-c-endpoint",
+      "queueDevice": "eth0",
+      "capacityMbps": 10,
+      "admissionMarginMbps": 0.5,
+      "durationSeconds": 30,
+      "windowSeconds": 20,
+      "offeredMbpsPerUE": 8,
+      "profiles": {
+        "equal": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 4,
+              "ceil": 8,
+              "prio": 0
+            },
+            "ue2": {
+              "rate": 4,
+              "ceil": 8,
+              "prio": 0
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 4,
+            "ue2": 4
+          }
+        },
+        "guarantee-ue1": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 6,
+              "ceil": 8,
+              "prio": 0
+            },
+            "ue2": {
+              "rate": 2,
+              "ceil": 4,
+              "prio": 1
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 5.5,
+            "ue2": 1.7
+          }
+        },
+        "guarantee-ue2": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 2,
+              "ceil": 4,
+              "prio": 1
+            },
+            "ue2": {
+              "rate": 6,
+              "ceil": 8,
+              "prio": 0
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 1.7,
+            "ue2": 5.5
+          }
+        },
+        "priority-ue1": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 0
+            },
+            "ue2": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 1
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 1.7,
+            "ue2": 1.7
+          }
+        },
+        "priority-ue2": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 1
+            },
+            "ue2": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 0
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 1.7,
+            "ue2": 1.7
+          }
+        }
+      },
+      "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+    },
+    "uplink": {
+      "configVersion": "cnf-contention-uplink-v2",
+      "namespace": "cnf-contention-uplink",
+      "deployment": "cnf-c2-endpoint",
+      "queueDevice": "cnfc2ifb0",
+      "capacityMbps": 10,
+      "admissionMarginMbps": 0.5,
+      "durationSeconds": 30,
+      "windowSeconds": 20,
+      "offeredMbpsPerUE": 8,
+      "profiles": {
+        "equal": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 4,
+              "ceil": 8,
+              "prio": 0
+            },
+            "ue2": {
+              "rate": 4,
+              "ceil": 8,
+              "prio": 0
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 4,
+            "ue2": 4
+          }
+        },
+        "guarantee-ue1": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 6,
+              "ceil": 8,
+              "prio": 0
+            },
+            "ue2": {
+              "rate": 2,
+              "ceil": 4,
+              "prio": 1
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 5.5,
+            "ue2": 1.7
+          }
+        },
+        "guarantee-ue2": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 2,
+              "ceil": 4,
+              "prio": 1
+            },
+            "ue2": {
+              "rate": 6,
+              "ceil": 8,
+              "prio": 0
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 1.7,
+            "ue2": 5.5
+          }
+        },
+        "priority-ue1": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 0
+            },
+            "ue2": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 1
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 1.7,
+            "ue2": 1.7
+          }
+        },
+        "priority-ue2": {
+          "queuePolicy": {
+            "ue1": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 1
+            },
+            "ue2": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 0
+            }
+          },
+          "referenceMinMbps": {
+            "ue1": 1.7,
+            "ue2": 1.7
+          }
+        }
+      },
+      "evidenceRef": "results/20261020-cnf-contention-uplink/metadata.json"
+    }
+  },
+  "sourceSha256LF": {
+    "scripts/cnf-planner.py": "4ec9fcd236058a70cf9cfa806131e7fb077167bcd119af5792e72720f9aaeeea",
+    "infra/cnfs/planner-contract.json": "db7afa006f725d94fe8b8c8ffff0efc693837ef2edccc42c5884d85603a8de65",
+    "infra/cnfs/requirements-contract.json": "2867963401c878c442abdd9ed962e04e824ad139786daab9f211e379488a2eb0",
+    "infra/cnfs/contention-experiment.json": "479eb875254553c966474b323a103b0c759bb40a87def8286101e6b81f9ba2e9",
+    "results/20261020-cnf-contention/metadata.json": "89cbc6a107c7e36e778b70f5297abc6f752ecd6103665d4d9d22ccca53e7a760",
+    "scripts/cnf-contention.py": "caf5096e016336b9a4587643b8c1e8efe6cfa797b2e4cd5cb44f695c60b35ce8",
+    "infra/cnfs/contention-uplink-experiment.json": "dc9e66879e6b5c45acc5b7605717fb7f7f3f5d9d71af8966fb2e4d183b78023c",
+    "results/20261020-cnf-contention-uplink/metadata.json": "93a0c3f752ce6d4294fda3f93f51e17118c8df147ee449995ea97a6256d4ba7d",
+    "scripts/cnf-contention-uplink.py": "1d0fafd7b2629428e16c3a7f42a2f9c9f033dcf224c1d9c59bd3a8daa9b20988"
+  },
+  "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6"
+}

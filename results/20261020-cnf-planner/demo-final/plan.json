@@ -1,0 +1,100 @@
+{
+  "toolVersion": "cnf-planner-tools-v1",
+  "tool": "plan_policy",
+  "status": "planned",
+  "executionAuthorized": false,
+  "networkChanged": false,
+  "issues": [],
+  "plan": {
+    "planVersion": "cnf-policy-plan-v1",
+    "scope": "offline_two_ue_udp_steady_mean_fixture",
+    "createdAt": "2026-10-20T04:00:00+00:00",
+    "validUntil": "2026-10-20T04:00:30+00:00",
+    "stateHash": "6cf2061e88e52c661f90bd22025be67b68f9f55e00a312f7881ce6296c170d5e",
+    "batchHash": "0490122229be2fa75547b79846c8c0cbef238e626b39cafc293da27c973fc9e2",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "direction": "downlink",
+    "mode": "equal",
+    "allocations": [
+      {
+        "slot": "ue1",
+        "request_id": "request-ue1",
+        "user_id": "ue1",
+        "session_id": "declared-session-ue1",
+        "queue": {
+          "rate": 4,
+          "ceil": 8,
+          "prio": 0
+        },
+        "requestedMinMbps": 4,
+        "requestedMaxMbps": 8,
+        "referenceMinMbps": 4
+      },
+      {
+        "slot": "ue2",
+        "request_id": "request-ue2",
+        "user_id": "ue2",
+        "session_id": "declared-session-ue2",
+        "queue": {
+          "rate": 4,
+          "ceil": 8,
+          "prio": 0
+        },
+        "requestedMinMbps": 4,
+        "requestedMaxMbps": 8,
+        "referenceMinMbps": 4
+      }
+    ],
+    "action": {
+      "kind": "select_existing_fixture_mode",
+      "namespace": "cnf-contention",
+      "deployment": "cnf-c-endpoint",
+      "queueDevice": "eth0",
+      "configVersion": "cnf-contention-v1",
+      "mode": "equal"
+    },
+    "restoreTarget": {
+      "mode": "none",
+      "stateHash": "6cf2061e88e52c661f90bd22025be67b68f9f55e00a312f7881ce6296c170d5e"
+    },
+    "verificationTarget": {
+      "metric": "receiver_steady_mean_mbps",
+      "steadyStartSeconds": 5,
+      "steadyEndSeconds": 25,
+      "durationSeconds": 30,
+      "offeredMbpsPerUE": 8,
+      "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+    },
+    "liveExecutionSupported": false,
+    "liveGuaranteeClaimed": false,
+    "planHash": "d36c745382626e88737df92769f15fbe21cd5a44a3b0c04d8f017e4f40033ddb",
+    "planId": "plan-d36c745382626e88737d"
+  },
+  "planGenerated": true,
+  "candidateEvaluations": {
+    "equal": [],
+    "guarantee-ue1": [
+      "ue2:minimum_exceeds_reference_envelope",
+      "relative_priority_not_preserved"
+    ],
+    "guarantee-ue2": [
+      "ue1:minimum_exceeds_reference_envelope",
+      "relative_priority_not_preserved"
+    ],
+    "priority-ue1": [
+      "ue1:minimum_exceeds_reference_envelope",
+      "ue1:queue_ceiling_exceeds_requested_cap",
+      "ue2:minimum_exceeds_reference_envelope",
+      "ue2:queue_ceiling_exceeds_requested_cap",
+      "relative_priority_not_preserved"
+    ],
+    "priority-ue2": [
+      "ue1:minimum_exceeds_reference_envelope",
+      "ue1:queue_ceiling_exceeds_requested_cap",
+      "ue2:minimum_exceeds_reference_envelope",
+      "ue2:queue_ceiling_exceeds_requested_cap",
+      "relative_priority_not_preserved"
+    ]
+  },
+  "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+}

@@ -1,0 +1,2949 @@
+[
+  {
+    "id": "equal-downlink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "equal",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "equal",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "batchHash": "0490122229be2fa75547b79846c8c0cbef238e626b39cafc293da27c973fc9e2",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "downlink",
+        "mode": "equal",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 4,
+              "ceil": 8,
+              "prio": 0
+            },
+            "requestedMinMbps": 4,
+            "requestedMaxMbps": 8,
+            "referenceMinMbps": 4
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 4,
+              "ceil": 8,
+              "prio": 0
+            },
+            "requestedMinMbps": 4,
+            "requestedMaxMbps": 8,
+            "referenceMinMbps": 4
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention",
+          "deployment": "cnf-c-endpoint",
+          "queueDevice": "eth0",
+          "configVersion": "cnf-contention-v1",
+          "mode": "equal"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "ebb77bd87cca8fffc6462912ffc705f7e2fa511b1f4245e6718be273841316ab",
+        "planId": "plan-ebb77bd87cca8fffc646"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [],
+        "guarantee-ue1": [
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ]
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "ebb77bd87cca8fffc6462912ffc705f7e2fa511b1f4245e6718be273841316ab",
+        "batchHash": "0490122229be2fa75547b79846c8c0cbef238e626b39cafc293da27c973fc9e2",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "guarantee-ue1-downlink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "guarantee-ue1",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "guarantee-ue1",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "batchHash": "1cf8c30de4feed969cf4166437e0cffb567f6b7e5c0e7b6a5eadc1e1446a87ea",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "downlink",
+        "mode": "guarantee-ue1",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 6,
+              "ceil": 8,
+              "prio": 0
+            },
+            "requestedMinMbps": 5,
+            "requestedMaxMbps": 8,
+            "referenceMinMbps": 5.5
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 2,
+              "ceil": 4,
+              "prio": 1
+            },
+            "requestedMinMbps": 1.5,
+            "requestedMaxMbps": 4,
+            "referenceMinMbps": 1.7
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention",
+          "deployment": "cnf-c-endpoint",
+          "queueDevice": "eth0",
+          "configVersion": "cnf-contention-v1",
+          "mode": "guarantee-ue1"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "ccfab58fc8f2dbef208714ab11cb63d80802ec19875b72368506eeac1d214532",
+        "planId": "plan-ccfab58fc8f2dbef2087"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue1": [],
+        "guarantee-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap"
+        ],
+        "priority-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ]
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "ccfab58fc8f2dbef208714ab11cb63d80802ec19875b72368506eeac1d214532",
+        "batchHash": "1cf8c30de4feed969cf4166437e0cffb567f6b7e5c0e7b6a5eadc1e1446a87ea",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "guarantee-ue2-downlink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "guarantee-ue2",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "guarantee-ue2",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "batchHash": "ab67b524426de5b189c1fcfbb8ac8107cb45402e895b960101bed50dd325f310",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "downlink",
+        "mode": "guarantee-ue2",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 2,
+              "ceil": 4,
+              "prio": 1
+            },
+            "requestedMinMbps": 1.5,
+            "requestedMaxMbps": 4,
+            "referenceMinMbps": 1.7
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 6,
+              "ceil": 8,
+              "prio": 0
+            },
+            "requestedMinMbps": 5,
+            "requestedMaxMbps": 8,
+            "referenceMinMbps": 5.5
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention",
+          "deployment": "cnf-c-endpoint",
+          "queueDevice": "eth0",
+          "configVersion": "cnf-contention-v1",
+          "mode": "guarantee-ue2"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "3e1a027c78c61f8073f57423e8ddbcfa382bd711dd463b6a9bb7dbbf749640f3",
+        "planId": "plan-3e1a027c78c61f8073f5"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue1": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [],
+        "priority-ue1": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap"
+        ]
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "3e1a027c78c61f8073f57423e8ddbcfa382bd711dd463b6a9bb7dbbf749640f3",
+        "batchHash": "ab67b524426de5b189c1fcfbb8ac8107cb45402e895b960101bed50dd325f310",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "priority-ue1-downlink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "priority-ue1",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "priority-ue1",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "batchHash": "6f5f6d7db58c4cbd8621bc1ffced78a2c861f420c4b026d85d6a8e7bb7c45ed7",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "downlink",
+        "mode": "priority-ue1",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 0
+            },
+            "requestedMinMbps": 1,
+            "requestedMaxMbps": 10,
+            "referenceMinMbps": 1.7
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 1
+            },
+            "requestedMinMbps": 1,
+            "requestedMaxMbps": 10,
+            "referenceMinMbps": 1.7
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention",
+          "deployment": "cnf-c-endpoint",
+          "queueDevice": "eth0",
+          "configVersion": "cnf-contention-v1",
+          "mode": "priority-ue1"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "991340f9fe27a82ccee3e1174228300df3458178b829628111908a58a02bbaed",
+        "planId": "plan-991340f9fe27a82ccee3"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue1": [],
+        "guarantee-ue2": [
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [],
+        "priority-ue2": [
+          "relative_priority_not_preserved"
+        ]
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "991340f9fe27a82ccee3e1174228300df3458178b829628111908a58a02bbaed",
+        "batchHash": "6f5f6d7db58c4cbd8621bc1ffced78a2c861f420c4b026d85d6a8e7bb7c45ed7",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "priority-ue2-downlink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "priority-ue2",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "priority-ue2",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "batchHash": "2af0e8ac9eec917dbb3195a4f01ea1ee4af83f079c7e0ac5b07225edf7418398",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "downlink",
+        "mode": "priority-ue2",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 1
+            },
+            "requestedMinMbps": 1,
+            "requestedMaxMbps": 10,
+            "referenceMinMbps": 1.7
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 0
+            },
+            "requestedMinMbps": 1,
+            "requestedMaxMbps": 10,
+            "referenceMinMbps": 1.7
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention",
+          "deployment": "cnf-c-endpoint",
+          "queueDevice": "eth0",
+          "configVersion": "cnf-contention-v1",
+          "mode": "priority-ue2"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "8ccdcb292f8a9b63f3323aa46190ca001b0b761c7bec8dd55af2d7f3aca20e55",
+        "planId": "plan-8ccdcb292f8a9b63f332"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue1": [
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [],
+        "priority-ue1": [
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": []
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "8ccdcb292f8a9b63f3323aa46190ca001b0b761c7bec8dd55af2d7f3aca20e55",
+        "batchHash": "2af0e8ac9eec917dbb3195a4f01ea1ee4af83f079c7e0ac5b07225edf7418398",
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "equal-uplink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "equal",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "equal",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "uplink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "b395b273038bee07559a5f0e39f73098c928b3bf714baaec5a8b9059148ec6b4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "stateId": "state-2427abd9ab8361b588b9"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "batchHash": "bd410aa5d4e257c1ff93048545536a08a4e2f00937b8c26bdfc9b55ed2b9021c",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "uplink",
+        "mode": "equal",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 4,
+              "ceil": 8,
+              "prio": 0
+            },
+            "requestedMinMbps": 4,
+            "requestedMaxMbps": 8,
+            "referenceMinMbps": 4
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 4,
+              "ceil": 8,
+              "prio": 0
+            },
+            "requestedMinMbps": 4,
+            "requestedMaxMbps": 8,
+            "referenceMinMbps": 4
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention-uplink",
+          "deployment": "cnf-c2-endpoint",
+          "queueDevice": "cnfc2ifb0",
+          "configVersion": "cnf-contention-uplink-v2",
+          "mode": "equal"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention-uplink/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "94d5c0d481572b293d6d1d733a8f4ef6ac674e74f4d882e046be4095cc0710cd",
+        "planId": "plan-94d5c0d481572b293d6d"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [],
+        "guarantee-ue1": [
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ]
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "94d5c0d481572b293d6d1d733a8f4ef6ac674e74f4d882e046be4095cc0710cd",
+        "batchHash": "bd410aa5d4e257c1ff93048545536a08a4e2f00937b8c26bdfc9b55ed2b9021c",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "guarantee-ue1-uplink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "guarantee-ue1",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "guarantee-ue1",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "uplink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "b395b273038bee07559a5f0e39f73098c928b3bf714baaec5a8b9059148ec6b4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "stateId": "state-2427abd9ab8361b588b9"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "batchHash": "2026eceb45d61e462d21a12dc98af9d9a815005c41023a138758d734efeec907",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "uplink",
+        "mode": "guarantee-ue1",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 6,
+              "ceil": 8,
+              "prio": 0
+            },
+            "requestedMinMbps": 5,
+            "requestedMaxMbps": 8,
+            "referenceMinMbps": 5.5
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 2,
+              "ceil": 4,
+              "prio": 1
+            },
+            "requestedMinMbps": 1.5,
+            "requestedMaxMbps": 4,
+            "referenceMinMbps": 1.7
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention-uplink",
+          "deployment": "cnf-c2-endpoint",
+          "queueDevice": "cnfc2ifb0",
+          "configVersion": "cnf-contention-uplink-v2",
+          "mode": "guarantee-ue1"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention-uplink/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "5c7309d63cc1136a33f8975115034887f661d1e9a31b3b5894d3d0026052400f",
+        "planId": "plan-5c7309d63cc1136a33f8"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue1": [],
+        "guarantee-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap"
+        ],
+        "priority-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ]
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "5c7309d63cc1136a33f8975115034887f661d1e9a31b3b5894d3d0026052400f",
+        "batchHash": "2026eceb45d61e462d21a12dc98af9d9a815005c41023a138758d734efeec907",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "guarantee-ue2-uplink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "guarantee-ue2",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "guarantee-ue2",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "uplink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "b395b273038bee07559a5f0e39f73098c928b3bf714baaec5a8b9059148ec6b4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "stateId": "state-2427abd9ab8361b588b9"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "batchHash": "dd056928b235a3f920e8ae401b42ba7a494419f4be917d4b529806887cd4781f",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "uplink",
+        "mode": "guarantee-ue2",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 2,
+              "ceil": 4,
+              "prio": 1
+            },
+            "requestedMinMbps": 1.5,
+            "requestedMaxMbps": 4,
+            "referenceMinMbps": 1.7
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 6,
+              "ceil": 8,
+              "prio": 0
+            },
+            "requestedMinMbps": 5,
+            "requestedMaxMbps": 8,
+            "referenceMinMbps": 5.5
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention-uplink",
+          "deployment": "cnf-c2-endpoint",
+          "queueDevice": "cnfc2ifb0",
+          "configVersion": "cnf-contention-uplink-v2",
+          "mode": "guarantee-ue2"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention-uplink/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "3f1ea04f1939cf894b3b29864673b4da2ad08bba013cb8dc170987913b0d4996",
+        "planId": "plan-3f1ea04f1939cf894b3b"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue1": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [],
+        "priority-ue1": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap"
+        ]
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "3f1ea04f1939cf894b3b29864673b4da2ad08bba013cb8dc170987913b0d4996",
+        "batchHash": "dd056928b235a3f920e8ae401b42ba7a494419f4be917d4b529806887cd4781f",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "priority-ue1-uplink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "priority-ue1",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "priority-ue1",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "uplink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "b395b273038bee07559a5f0e39f73098c928b3bf714baaec5a8b9059148ec6b4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "stateId": "state-2427abd9ab8361b588b9"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "batchHash": "d70ba9a74c2a65f96d240903db43c946986b2147093bc34c434153f1bbbec522",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "uplink",
+        "mode": "priority-ue1",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 0
+            },
+            "requestedMinMbps": 1,
+            "requestedMaxMbps": 10,
+            "referenceMinMbps": 1.7
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 1
+            },
+            "requestedMinMbps": 1,
+            "requestedMaxMbps": 10,
+            "referenceMinMbps": 1.7
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention-uplink",
+          "deployment": "cnf-c2-endpoint",
+          "queueDevice": "cnfc2ifb0",
+          "configVersion": "cnf-contention-uplink-v2",
+          "mode": "priority-ue1"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention-uplink/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "8d2dc296ad96f4bc598da34347afe884a0b0322ba1806c2da610b9bcdb622f6e",
+        "planId": "plan-8d2dc296ad96f4bc598d"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue1": [],
+        "guarantee-ue2": [
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [],
+        "priority-ue2": [
+          "relative_priority_not_preserved"
+        ]
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "8d2dc296ad96f4bc598da34347afe884a0b0322ba1806c2da610b9bcdb622f6e",
+        "batchHash": "d70ba9a74c2a65f96d240903db43c946986b2147093bc34c434153f1bbbec522",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "priority-ue2-uplink",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "priority-ue2",
+      "validationStatus": "valid_offline"
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "planned",
+      "mode": "priority-ue2",
+      "validationStatus": "valid_offline"
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "uplink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "b395b273038bee07559a5f0e39f73098c928b3bf714baaec5a8b9059148ec6b4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "stateId": "state-2427abd9ab8361b588b9"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "planned",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "plan": {
+        "planVersion": "cnf-policy-plan-v1",
+        "scope": "offline_two_ue_udp_steady_mean_fixture",
+        "createdAt": "2026-10-20T04:00:00+00:00",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "batchHash": "1aa229aa4e018752c12ea0bee80fff3bd3b67b440305b40959c7254f444cd092",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "direction": "uplink",
+        "mode": "priority-ue2",
+        "allocations": [
+          {
+            "slot": "ue1",
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "queue": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 1
+            },
+            "requestedMinMbps": 1,
+            "requestedMaxMbps": 10,
+            "referenceMinMbps": 1.7
+          },
+          {
+            "slot": "ue2",
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "queue": {
+              "rate": 2,
+              "ceil": 10,
+              "prio": 0
+            },
+            "requestedMinMbps": 1,
+            "requestedMaxMbps": 10,
+            "referenceMinMbps": 1.7
+          }
+        ],
+        "action": {
+          "kind": "select_existing_fixture_mode",
+          "namespace": "cnf-contention-uplink",
+          "deployment": "cnf-c2-endpoint",
+          "queueDevice": "cnfc2ifb0",
+          "configVersion": "cnf-contention-uplink-v2",
+          "mode": "priority-ue2"
+        },
+        "restoreTarget": {
+          "mode": "none",
+          "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20"
+        },
+        "verificationTarget": {
+          "metric": "receiver_steady_mean_mbps",
+          "steadyStartSeconds": 5,
+          "steadyEndSeconds": 25,
+          "durationSeconds": 30,
+          "offeredMbpsPerUE": 8,
+          "evidenceRef": "results/20261020-cnf-contention-uplink/metadata.json"
+        },
+        "liveExecutionSupported": false,
+        "liveGuaranteeClaimed": false,
+        "planHash": "cc8137bf118706f6a999bb01b94d82d30d62493fec97f7c639f9be777364363d",
+        "planId": "plan-cc8137bf118706f6a999"
+      },
+      "planGenerated": true,
+      "candidateEvaluations": {
+        "equal": [
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue1": [
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [],
+        "priority-ue1": [
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": []
+      },
+      "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist"
+    },
+    "validationResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "validate_plan",
+      "status": "valid_offline",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "validForOfflineReview": true,
+      "validation": {
+        "planHash": "cc8137bf118706f6a999bb01b94d82d30d62493fec97f7c639f9be777364363d",
+        "batchHash": "1aa229aa4e018752c12ea0bee80fff3bd3b67b440305b40959c7254f444cd092",
+        "stateHash": "2427abd9ab8361b588b9a75d4e6e23d93d0173a85c49b68a8e4d9417f20baa20",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "validUntil": "2026-10-20T04:00:30+00:00",
+        "liveExecutionSupported": false
+      }
+    }
+  },
+  {
+    "id": "overloaded-6-plus-6",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "no_compatible_validated_profile",
+          "detail": "No fixed reference profile satisfies the entire batch"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false,
+      "candidateEvaluations": {
+        "equal": [
+          "requested_minima_exceed_capacity_with_margin",
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue2:minimum_exceeds_reference_envelope"
+        ],
+        "guarantee-ue1": [
+          "requested_minima_exceed_capacity_with_margin",
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [
+          "requested_minima_exceed_capacity_with_margin",
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [
+          "requested_minima_exceed_capacity_with_margin",
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": [
+          "requested_minima_exceed_capacity_with_margin",
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ]
+      }
+    },
+    "validationResult": null
+  },
+  {
+    "id": "no-compatible-fixed-mode",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "no_compatible_validated_profile",
+          "detail": "No fixed reference profile satisfies the entire batch"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false,
+      "candidateEvaluations": {
+        "equal": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue2:minimum_exceeds_reference_envelope"
+        ],
+        "guarantee-ue1": [
+          "ue2:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": [
+          "ue1:minimum_exceeds_reference_envelope",
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:minimum_exceeds_reference_envelope",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ]
+      }
+    },
+    "validationResult": null
+  },
+  {
+    "id": "ceiling-cannot-fit",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "no_compatible_validated_profile",
+          "detail": "No fixed reference profile satisfies the entire batch"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false,
+      "candidateEvaluations": {
+        "equal": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap"
+        ],
+        "guarantee-ue1": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "guarantee-ue2": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue1": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ],
+        "priority-ue2": [
+          "ue1:queue_ceiling_exceeds_requested_cap",
+          "ue2:queue_ceiling_exceeds_requested_cap",
+          "relative_priority_not_preserved"
+        ]
+      }
+    },
+    "validationResult": null
+  },
+  {
+    "id": "missing-priority",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "needs_clarification",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "needs_clarification",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "needs_clarification",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "missing_required_targets",
+          "detail": "request-ue1: priority"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "missing-measurement-window",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "needs_clarification",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "needs_clarification",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "needs_clarification",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "missing_required_targets",
+          "detail": "request-ue2: measurement_window_seconds"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "rtt-unaccepted",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unsupported_target",
+          "detail": "rtt_p95_max_ms is not an accepted fixture guarantee"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "loss-unaccepted",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unsupported_target",
+          "detail": "loss_max_percent is not an accepted fixture guarantee"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "deadline-unaccepted",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unsupported_target",
+          "detail": "deadline_seconds is not an accepted fixture guarantee"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "bidirectional-unaccepted",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unsupported_direction",
+          "detail": "Batch and fixture must share one direction"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "long-duration-unaccepted",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unsupported_time_scope",
+          "detail": "E1 references 30 s experiments and the 20 s steady window only"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "different-window-unaccepted",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unsupported_time_scope",
+          "detail": "E1 references 30 s experiments and the 20 s steady window only"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "unknown-target-command",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unknown_target",
+          "detail": "Only versioned requirement fields are accepted"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "tcp-unaccepted",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unsupported_transport",
+          "detail": "Reference experiments use UDP"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "stale-session",
+    "actual": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "ok",
+      "planningStatus": "rejected",
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "ok",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [],
+      "state": {
+        "snapshotVersion": "cnf-planner-state-v1",
+        "source": {
+          "sourceVersion": "cnf-planner-state-input-v1",
+          "mode": "declared_fixture",
+          "direction": "downlink",
+          "declaredAt": "2026-10-20T12:00:00+08:00",
+          "ttlSeconds": 180,
+          "capacityMbps": 10,
+          "unmanagedReservedMbps": 0,
+          "unmanagedTrafficDetected": false,
+          "nativeQosEnabled": false,
+          "activeProfile": "none",
+          "bindings": [
+            {
+              "slot": "ue1",
+              "user_id": "ue1",
+              "session_id": "declared-session-ue1"
+            },
+            {
+              "slot": "ue2",
+              "user_id": "ue2",
+              "session_id": "declared-session-ue2"
+            }
+          ]
+        },
+        "validUntil": "2026-10-20T04:03:00+00:00",
+        "catalogHash": "68cc69cdf37270aa46d7dfa86edb9cc95ecff653570aa7df0630d556fe5c1eb6",
+        "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+        "liveBindingsVerified": false,
+        "liveStateObserved": false,
+        "stateHash": "95e86a563dc0c7bb34e3cd72c53695c710942e0f8ef20e4ec4754ee2bda91e61",
+        "stateId": "state-95e86a563dc0c7bb34e3"
+      }
+    },
+    "planResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "plan_policy",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "session_binding_mismatch",
+          "detail": "ue1"
+        }
+      ],
+      "plan": null,
+      "planGenerated": false
+    },
+    "validationResult": null
+  },
+  {
+    "id": "unmanaged-traffic",
+    "actual": {
+      "inspectStatus": "rejected",
+      "planningStatus": null,
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "rejected",
+      "planningStatus": null,
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unmanaged_competition_unvalidated",
+          "detail": "Reference envelopes do not cover additional competing traffic or reservations"
+        }
+      ]
+    },
+    "planResult": null,
+    "validationResult": null
+  },
+  {
+    "id": "native-qos-on",
+    "actual": {
+      "inspectStatus": "rejected",
+      "planningStatus": null,
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "rejected",
+      "planningStatus": null,
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "native_qos_unaccepted",
+          "detail": "B native UPF QoS-on is not accepted"
+        }
+      ]
+    },
+    "planResult": null,
+    "validationResult": null
+  },
+  {
+    "id": "unknown-current-policy",
+    "actual": {
+      "inspectStatus": "rejected",
+      "planningStatus": null,
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "rejected",
+      "planningStatus": null,
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "unknown_existing_policy",
+          "detail": "Refuse unknown policy ownership"
+        }
+      ]
+    },
+    "planResult": null,
+    "validationResult": null
+  },
+  {
+    "id": "expired-declaration",
+    "actual": {
+      "inspectStatus": "rejected",
+      "planningStatus": null,
+      "mode": null,
+      "validationStatus": null
+    },
+    "expected": {
+      "inspectStatus": "rejected",
+      "planningStatus": null,
+      "mode": null,
+      "validationStatus": null
+    },
+    "agrees": true,
+    "stateResult": {
+      "toolVersion": "cnf-planner-tools-v1",
+      "tool": "inspect_state",
+      "status": "rejected",
+      "executionAuthorized": false,
+      "networkChanged": false,
+      "issues": [
+        {
+          "code": "stale_state",
+          "detail": "Fixture declaration is future-dated or expired"
+        }
+      ]
+    },
+    "planResult": null,
+    "validationResult": null
+  }
+]

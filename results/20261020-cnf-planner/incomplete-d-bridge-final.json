@@ -1,0 +1,198 @@
+{
+  "scope": "Three arbitrary pairs of original incomplete D requirements, no identity or targets inferred",
+  "pairs": [
+    {
+      "pair": 0,
+      "requestIds": [
+        "pilot-remote-discussion",
+        "pilot-recorded-course"
+      ],
+      "imported": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "incomplete-pilot-pair-0",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "pilot-remote-discussion",
+            "user_id": null,
+            "session_id": null,
+            "requirements": {
+              "direction": null,
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": null,
+              "rtt_p95_max_ms": null,
+              "one_way_p95_max_ms": null,
+              "loss_max_percent": null,
+              "priority": null,
+              "valid_for_seconds": null,
+              "deadline_seconds": null,
+              "measurement_window_seconds": null
+            }
+          },
+          {
+            "request_id": "pilot-recorded-course",
+            "user_id": null,
+            "session_id": null,
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4.0,
+              "max_bandwidth_mbps": 8.0,
+              "rtt_p95_max_ms": null,
+              "one_way_p95_max_ms": null,
+              "loss_max_percent": null,
+              "priority": null,
+              "valid_for_seconds": 1800.0,
+              "deadline_seconds": null,
+              "measurement_window_seconds": null
+            }
+          }
+        ]
+      },
+      "planningResult": {
+        "toolVersion": "cnf-planner-tools-v1",
+        "tool": "plan_policy",
+        "status": "needs_clarification",
+        "executionAuthorized": false,
+        "networkChanged": false,
+        "issues": [
+          {
+            "code": "missing_subject",
+            "detail": "pilot-remote-discussion: user_id"
+          }
+        ],
+        "plan": null,
+        "planGenerated": false
+      }
+    },
+    {
+      "pair": 1,
+      "requestIds": [
+        "pilot-recording-upload",
+        "pilot-app-name-only"
+      ],
+      "imported": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "incomplete-pilot-pair-1",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "pilot-recording-upload",
+            "user_id": null,
+            "session_id": null,
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": null,
+              "rtt_p95_max_ms": null,
+              "one_way_p95_max_ms": null,
+              "loss_max_percent": null,
+              "priority": null,
+              "valid_for_seconds": null,
+              "deadline_seconds": null,
+              "measurement_window_seconds": null
+            }
+          },
+          {
+            "request_id": "pilot-app-name-only",
+            "user_id": null,
+            "session_id": null,
+            "requirements": {
+              "direction": null,
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": null,
+              "rtt_p95_max_ms": null,
+              "one_way_p95_max_ms": null,
+              "loss_max_percent": null,
+              "priority": null,
+              "valid_for_seconds": null,
+              "deadline_seconds": null,
+              "measurement_window_seconds": null
+            }
+          }
+        ]
+      },
+      "planningResult": {
+        "toolVersion": "cnf-planner-tools-v1",
+        "tool": "plan_policy",
+        "status": "needs_clarification",
+        "executionAuthorized": false,
+        "networkChanged": false,
+        "issues": [
+          {
+            "code": "missing_subject",
+            "detail": "pilot-recording-upload: user_id"
+          }
+        ],
+        "plan": null,
+        "planGenerated": false
+      }
+    },
+    {
+      "pair": 2,
+      "requestIds": [
+        "pilot-parallel-tasks",
+        "pilot-deadline-backup"
+      ],
+      "imported": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "incomplete-pilot-pair-2",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "pilot-parallel-tasks",
+            "user_id": null,
+            "session_id": null,
+            "requirements": {
+              "direction": null,
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": null,
+              "rtt_p95_max_ms": null,
+              "one_way_p95_max_ms": null,
+              "loss_max_percent": null,
+              "priority": null,
+              "valid_for_seconds": null,
+              "deadline_seconds": null,
+              "measurement_window_seconds": null
+            }
+          },
+          {
+            "request_id": "pilot-deadline-backup",
+            "user_id": null,
+            "session_id": null,
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 10.0,
+              "rtt_p95_max_ms": null,
+              "one_way_p95_max_ms": null,
+              "loss_max_percent": null,
+              "priority": null,
+              "valid_for_seconds": null,
+              "deadline_seconds": 1200.0,
+              "measurement_window_seconds": null
+            }
+          }
+        ]
+      },
+      "planningResult": {
+        "toolVersion": "cnf-planner-tools-v1",
+        "tool": "plan_policy",
+        "status": "needs_clarification",
+        "executionAuthorized": false,
+        "networkChanged": false,
+        "issues": [
+          {
+            "code": "missing_subject",
+            "detail": "pilot-parallel-tasks: user_id"
+          }
+        ],
+        "plan": null,
+        "planGenerated": false
+      }
+    }
+  ],
+  "allRefused": true
+}

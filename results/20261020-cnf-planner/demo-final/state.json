@@ -1,0 +1,42 @@
+{
+  "toolVersion": "cnf-planner-tools-v1",
+  "tool": "inspect_state",
+  "status": "ok",
+  "executionAuthorized": false,
+  "networkChanged": false,
+  "issues": [],
+  "state": {
+    "snapshotVersion": "cnf-planner-state-v1",
+    "source": {
+      "sourceVersion": "cnf-planner-state-input-v1",
+      "mode": "declared_fixture",
+      "direction": "downlink",
+      "declaredAt": "2026-10-20T12:00:00+08:00",
+      "ttlSeconds": 180,
+      "capacityMbps": 10,
+      "unmanagedReservedMbps": 0,
+      "unmanagedTrafficDetected": false,
+      "nativeQosEnabled": false,
+      "activeProfile": "none",
+      "bindings": [
+        {
+          "slot": "ue1",
+          "user_id": "ue1",
+          "session_id": "declared-session-ue1"
+        },
+        {
+          "slot": "ue2",
+          "user_id": "ue2",
+          "session_id": "declared-session-ue2"
+        }
+      ]
+    },
+    "validUntil": "2026-10-20T04:03:00+00:00",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "sourceHash": "7ec8da0d0399bec0176cb868eb5b37949ca5f4177106d9744fde7a18cf652bb4",
+    "liveBindingsVerified": false,
+    "liveStateObserved": false,
+    "stateHash": "6cf2061e88e52c661f90bd22025be67b68f9f55e00a312f7881ce6296c170d5e",
+    "stateId": "state-6cf2061e88e52c661f90"
+  }
+}

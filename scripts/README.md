@@ -377,6 +377,40 @@ Agent 检查可推进工程，不替代独立泛化或真实应用证据。六�
 测试入口：`python -m unittest discover -s tests -p test_review_cnf_requirements.py -v`。
 当前审核表、准备度和待采集信息见 [D2 模块](../docs/cnf-service-chain-orchestration.md#d2-人工标注数据冻结与独立验证)。
 
+## E1 离线规划器与工具接口
+
+`cnf-planner.py` 使用 Python 标准库，读取 `infra/cnfs/planner-contract.json` 和历史 C1/C2 固定配置/证据。
+所有入口均不访问集群。先读 `capabilities` 判断支持情况，不能以方法名推断已实现执行能力。
+
+```powershell
+python scripts/cnf-planner.py capabilities --out <新的能力JSON>
+python scripts/cnf-planner.py inspect --source results/20261020-cnf-planner/demo-state-source.json --at 2026-10-20T12:00:00+08:00 --out <新的状态JSON>
+python scripts/cnf-planner.py plan --requests results/20261020-cnf-planner/demo-requests.json --state <状态JSON> --at 2026-10-20T12:00:00+08:00 --out <新的计划JSON>
+python scripts/cnf-planner.py validate --requests results/20261020-cnf-planner/demo-requests.json --state <状态JSON> --plan <计划JSON> --at 2026-10-20T12:00:00+08:00 --out <新的校验JSON>
+python scripts/evaluate-cnf-planner.py --out <新的工程评估目录>
+```
+
+输出文件须不存在且父目录已存在，评估目录也须为新目录。`--at` 只指定离线模拟时钟，演示时间是历史夹具时间，不能作为现场新鲜度或运行记录；省略时使用当前 UTC 时间，旧声明会过期拒绝。
+`inspect` 输出的声明快照和 `plan` 的完整工具结果可直接传给后续 CLI，不必手工提取内部对象。
+`planned/valid_offline` 不代表执行成功，进程退出码 0 也不代表准入成功；应读 JSON `status/issues`。全入口 `executionAuthorized/networkChanged` 均为 `false`。
+
+输入合同和完整限制见 [E1 模块](../docs/cnf-service-chain-orchestration.md#e1-离线规划器与-agent-工具接口)。
+首版两用户、同一独立方向、UDP、30 秒实验/20 秒接收稳态均值；联合校验最低需求与 0.5 Mbps 余量，再选择既有五种队列模式。
+状态/需求/目录哈希和期限绑定旧计划；没有兼容固定配置时拒绝，不生成任意队列参数。
+`apply/verify/restore` 命令及同名 Python 工具保留入口，明确返回 `unsupported`，尚未配置或测量任何现场。
+
+D 输出导入为 JSON 列表，每项为 `cnf-requirements-v1` 结果：
+
+```powershell
+python scripts/cnf-planner.py import-requirements --input <D输出列表JSON> --batch-id <批次标识> --protocol UDP --assessment-scope controlled_receiver_steady_mean --out <新的导入JSON>
+python scripts/cnf-planner.py plan --requests <导入JSON> --state <状态JSON> --at <离线时刻> --out <新的计划JSON>
+```
+
+导入要求调用方明确实验口径，不补用户/会话/参数，不信任分类候选标志；真正规划时仍需恰好两个匹配状态的完整请求。
+Python 接口为 `inspect_state`、`plan_policy`、`validate_plan`、`import_requirements`，参数与版本边界见模块；后续 Agent 可复用相同接口，无需让模型生成系统命令。
+测试：`python -m unittest discover -s tests -p '*planner*.py' -v`。
+工程评估归档 14 份输入及哈希；可用归档 `inputs/scripts/evaluate-cnf-planner.py` 的 `evaluate` 函数重算报告和场景，用原固定模拟时钟复验。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

@@ -1,0 +1,117 @@
+{
+  "scope": "offline adversarial validation, no live authorization or execution",
+  "cases": 10,
+  "allRejected": true,
+  "results": [
+    {
+      "case": "queue-change-without-new-hash",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "content_hash_mismatch",
+          "detail": "plan content changed"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "queue-change-with-recomputed-hash",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "plan_semantics_mismatch",
+          "detail": "Policy, targets, identity or recovery descriptor differs from canonical contract"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "wrong-namespace-with-new-hash",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "plan_semantics_mismatch",
+          "detail": "Policy, targets, identity or recovery descriptor differs from canonical contract"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "cross-user-binding-with-new-hash",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "plan_semantics_mismatch",
+          "detail": "Policy, targets, identity or recovery descriptor differs from canonical contract"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "unknown-restore-target",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "plan_semantics_mismatch",
+          "detail": "Policy, targets, identity or recovery descriptor differs from canonical contract"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "changed-measurement-target",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "plan_semantics_mismatch",
+          "detail": "Policy, targets, identity or recovery descriptor differs from canonical contract"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "unknown-mode",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "unknown_policy_mode",
+          "detail": "Only declared fixed modes are allowed"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "expired-plan",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "expired_plan",
+          "detail": "Plan is expired or future-dated"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "state-changed",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "plan_binding_mismatch",
+          "detail": "Plan belongs to different requests, state or catalogue"
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "case": "overloaded-request-with-rebound-hashes",
+      "status": "rejected",
+      "issues": [
+        {
+          "code": "policy_constraints_failed",
+          "detail": "requested_minima_exceed_capacity_with_margin, ue1:minimum_exceeds_reference_envelope, ue2:minimum_exceeds_reference_envelope"
+        }
+      ],
+      "authorized": false
+    }
+  ]
+}

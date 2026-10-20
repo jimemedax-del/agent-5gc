@@ -1,0 +1,15 @@
+{
+  "toolVersion": "cnf-planner-tools-v1",
+  "tool": "apply_plan",
+  "status": "unsupported",
+  "executionAuthorized": false,
+  "networkChanged": false,
+  "issues": [
+    {
+      "code": "live_adapter_not_implemented",
+      "detail": "E1 provides offline planning only; no execution, measurements or recovery occurred"
+    }
+  ],
+  "supported": false,
+  "references": {}
+}

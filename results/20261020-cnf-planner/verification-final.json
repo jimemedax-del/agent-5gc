@@ -1,0 +1,14 @@
+{
+  "verifiedAt": "2026-10-20T13:21:21.630018+00:00",
+  "basis": "evaluation-02 and demo-final",
+  "outcome": "offline_first_version_verified",
+  "archivedSourceHashes": 14,
+  "archivedAndCurrentHashesMatch": true,
+  "archivedReportAndCasesReplayMatch": true,
+  "archivedCatalogueReplayMatches": true,
+  "demoInspectPlanValidateReplayMatches": true,
+  "adversarialRejections": 10,
+  "incompleteDRequestsRefused": 6,
+  "validOfflineIsNotExecutionAuthorization": true,
+  "clusterAccessed": false
+}

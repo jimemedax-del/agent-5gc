@@ -1,0 +1,17 @@
+{
+  "toolVersion": "cnf-planner-tools-v1",
+  "tool": "validate_plan",
+  "status": "valid_offline",
+  "executionAuthorized": false,
+  "networkChanged": false,
+  "issues": [],
+  "validForOfflineReview": true,
+  "validation": {
+    "planHash": "d36c745382626e88737df92769f15fbe21cd5a44a3b0c04d8f017e4f40033ddb",
+    "batchHash": "0490122229be2fa75547b79846c8c0cbef238e626b39cafc293da27c973fc9e2",
+    "stateHash": "6cf2061e88e52c661f90bd22025be67b68f9f55e00a312f7881ce6296c170d5e",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "validUntil": "2026-10-20T04:00:30+00:00",
+    "liveExecutionSupported": false
+  }
+}

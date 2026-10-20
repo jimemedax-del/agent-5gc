@@ -1,0 +1,28 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E1",
+  "toolVersion": "cnf-planner-tools-v1",
+  "capturedAt": "2026-10-20T13:18:10.722644+00:00",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.5",
+  "sourceSha256LF": {
+    "scripts/cnf-planner.py": "9c2952671b62c83a8e364540c38f3302ab9bb55144ff78f425abe61ca1c3f825",
+    "infra/cnfs/planner-contract.json": "db7afa006f725d94fe8b8c8ffff0efc693837ef2edccc42c5884d85603a8de65",
+    "infra/cnfs/requirements-contract.json": "2867963401c878c442abdd9ed962e04e824ad139786daab9f211e379488a2eb0",
+    "infra/cnfs/contention-experiment.json": "479eb875254553c966474b323a103b0c759bb40a87def8286101e6b81f9ba2e9",
+    "results/20261020-cnf-contention/metadata.json": "89cbc6a107c7e36e778b70f5297abc6f752ecd6103665d4d9d22ccca53e7a760",
+    "scripts/cnf-contention.py": "caf5096e016336b9a4587643b8c1e8efe6cfa797b2e4cd5cb44f695c60b35ce8",
+    "infra/cnfs/contention-uplink-experiment.json": "dc9e66879e6b5c45acc5b7605717fb7f7f3f5d9d71af8966fb2e4d183b78023c",
+    "results/20261020-cnf-contention-uplink/metadata.json": "93a0c3f752ce6d4294fda3f93f51e17118c8df147ee449995ea97a6256d4ba7d",
+    "scripts/cnf-contention-uplink.py": "1d0fafd7b2629428e16c3a7f42a2f9c9f033dcf224c1d9c59bd3a8daa9b20988",
+    "scripts/evaluate-cnf-planner.py": "6fca0968f816ad4f02e710c7d3625a3e0b669811ab70c70a92c12cfe3c33b339",
+    "infra/cnfs/planner-fixtures.json": "a17e780b7b0530a9c52070e2b4486b4b56bf2126d8ac447b765e814788151c89",
+    "tests/test_cnf_planner.py": "12f46acea9307462408acbe2a2f7b64db5843194228468b8332deb8331a45b5c",
+    "tests/test_evaluate_cnf_planner.py": "0309d726b6edcd0ac8de1b907e82e4530678271e80a43c6c267ffd03bad8d972",
+    "scripts/cnf-requirements.py": "91e3bf3ab1d5930d9be6387a9dc338b4e975eb10979f23354e8f556e1f078fcb"
+  },
+  "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+  "clock": "Each fixture explicitly declares a historical simulation time; no live freshness claim",
+  "clusterAccessed": false
+}
