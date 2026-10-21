@@ -1,0 +1,27 @@
+{
+  "outcome": "passed_offline_joint_audit",
+  "configVersion": "cnf-joint-check-v1",
+  "sessions": 22,
+  "proxyConnections": 44,
+  "medianReceiverMbps": {
+    "A-unshaped": {
+      "core": 20.053905035058808,
+      "edge": 20.05389968738181
+    },
+    "B-shaped": {
+      "core": 4.823372426041183,
+      "edge": 14.37744940158634
+    },
+    "C-unshaped": {
+      "core": 20.051950649083146,
+      "edge": 20.05323419462001
+    }
+  },
+  "totalReceivedBytes": 631341056,
+  "formalPodsStable": 26,
+  "unaffectedPodsStableAcrossSetupAndRestore": 24,
+  "sourceHashChecks": 92,
+  "upfMemorySamples": 220,
+  "sampledPeakUpfMiB": 25.41796875,
+  "restoredState": "protected"
+}

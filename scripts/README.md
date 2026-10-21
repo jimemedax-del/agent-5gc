@@ -473,6 +473,28 @@ Python 接口为 `inspect_state`、`plan_policy`、`validate_plan`、`apply_plan
 `evaluate-cnf-planner-policy.py --out <新的评估目录>` 是明确的实机测试入口，会生成预先声明的工程请求，执行四组合法请求、四组拒绝请求及一个 E2 正常对照。
 它对当前实际 SUPI/会话进行显式实验绑定，不属于自然语言需求识别，也不把该绑定能力作为替用户补写信息的生产接口。
 
+## 固定配置联合功能检查
+
+`cnf-joint-check.py` 在 VM1 执行，复用固定 Envoy 路由、保护策略和镜像，将 core 保持在 VM1、edge 保持在 VM3。
+只为两个后端增加容器内队列辅助容器；先无整形各 3 次、再 5/15 Mbps 各 5 次、最后撤销整形各 3 次。
+共 22 次顺序单流 TCP 下行，每次 15 秒、发送端 pacing 上界 20 Mbps，接收端原始字节/时长用于验收。
+
+```sh
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-joint-check.py render --out <新的本地配置检查目录>
+python3 scripts/cnf-joint-check.py run --out <新的现场批次目录>
+python3 scripts/audit-cnf-joint-check.py <现场批次目录> --out <新的审计JSON>
+```
+
+起点必须是已知 `protected` 配置，C1/C2 无队列残留、UPF 原生 QoS 关闭、两 UE 会话及严格基线正常。
+与 E2/E3 共用执行锁；A—C 期间两个后端不重建，只改变 Pod 内 TBF。准备和恢复时两个后端的受控重建属于预期变化。
+正式期保存全部受监测 Pod 身份、端点/节点、策略、代理日志、后端 Cookie、UPF 计数、队列及资源采样。
+无整形两类中位数均须至少 18 Mbps；整形中位数为 core 4–5.75、edge 12–17.25 Mbps，且比值至少 2。
+普通异常尝试恢复两个已知后端配置并复验；未知后端配置拒绝覆盖。恢复失败保留失败，不保证断电或强杀恢复。
+活动联合配置不是旧 Profile 的四种固定状态，不可在测试中另行运行旧 Profile 的部署/测量入口。
+该检查不提供业务自主识别、并发保障、原生 5G QoS、时延/丢包 SLA、持续在线策略或 Agent 能力。
+证据与验收结论见 [联合功能检查](../docs/cnf-service-chain-orchestration.md#固定配置联合功能检查)。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

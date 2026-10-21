@@ -1,0 +1,33 @@
+{
+  "outcome": "passed",
+  "startedAt": "2026-10-21T08:12:15.045589Z",
+  "phases": {
+    "A-unshaped": {
+      "medianReceiverMbps": {
+        "core": 20.053905035058808,
+        "edge": 20.05389968738181
+      },
+      "medianRatio": 0.9999997333348798,
+      "sessions": 6
+    },
+    "B-shaped": {
+      "medianReceiverMbps": {
+        "core": 4.823372426041183,
+        "edge": 14.37744940158634
+      },
+      "medianRatio": 2.9807877417806474,
+      "sessions": 10
+    },
+    "C-unshaped": {
+      "medianReceiverMbps": {
+        "core": 20.051950649083146,
+        "edge": 20.05323419462001
+      },
+      "medianRatio": 1.0000640110061774,
+      "sessions": 6
+    }
+  },
+  "restoration": "passed",
+  "strictFinal": "passed",
+  "endedAt": "2026-10-21T08:21:21.844598Z"
+}

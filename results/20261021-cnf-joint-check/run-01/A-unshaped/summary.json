@@ -1,0 +1,9 @@
+{
+  "outcome": "passed",
+  "medianReceiverMbps": {
+    "core": 20.053905035058808,
+    "edge": 20.05389968738181
+  },
+  "medianRatio": 0.9999997333348798,
+  "sessions": 6
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "addressType": "IPv4",
+    "apiVersion": "discovery.k8s.io/v1",
+    "endpoints": [
+      {
+        "addresses": [
+          "10.42.0.202"
+        ],
+        "conditions": {
+          "ready": true,
+          "serving": true,
+          "terminating": false
+        },
+        "nodeName": "lhm-virtual-machine",
+        "targetRef": {
+          "kind": "Pod",
+          "name": "cnf-m1-backend-64556b7d66-jlhq7",
+          "namespace": "cnf-lab",
+          "uid": "8e9d2b25-34f8-4bb7-b99a-638b83bee255"
+        },
+        "zone": "core"
+      }
+    ],
+    "kind": "EndpointSlice",
+    "metadata": {
+      "annotations": {
+        "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-21T08:12:35Z"
+      },
+      "creationTimestamp": "2026-10-15T13:37:27Z",
+      "generateName": "cnf-m1-backend-",
+      "generation": 31,
+      "labels": {
+        "app.kubernetes.io/part-of": "cnf-m1",
+        "endpointslice.kubernetes.io/managed-by": "endpointslice-controller.k8s.io",
+        "kubernetes.io/service-name": "cnf-m1-backend"
+      },
+      "name": "cnf-m1-backend-7nc7r",
+      "namespace": "cnf-lab",
+      "ownerReferences": [
+        {
+          "apiVersion": "v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "Service",
+          "name": "cnf-m1-backend",
+          "uid": "bdebc423-967a-4e83-a5a7-5e50295a8bdc"
+        }
+      ],
+      "resourceVersion": "659397",
+      "uid": "098adab3-6ab0-4803-982f-532b1133cd11"
+    },
+    "ports": [
+      {
+        "name": "iperf",
+        "port": 5201,
+        "protocol": "TCP"
+      }
+    ]
+  }
+]

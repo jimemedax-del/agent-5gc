@@ -1,0 +1,86 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "fixed-chain-joint-check",
+  "date": "2026-10-21",
+  "configVersion": "cnf-joint-check-v1",
+  "outcome": "accepted-within-declared-scope",
+  "formal": "run-01",
+  "sourceBasisGitHead": "dc4fc526f0f194afc1d62e2065e380aa0c55362a",
+  "scope": "fixed_explicit_TCP_ports_Envoy_cross_node_backends_NetworkPolicy_and_Pod_egress_TBF",
+  "phases": {
+    "A-unshaped": {
+      "medianReceiverMbps": {
+        "core": 20.053905035058808,
+        "edge": 20.05389968738181
+      },
+      "medianRatio": 0.9999997333348798,
+      "sessions": 6
+    },
+    "B-shaped": {
+      "medianReceiverMbps": {
+        "core": 4.823372426041183,
+        "edge": 14.37744940158634
+      },
+      "medianRatio": 2.9807877417806474,
+      "sessions": 10
+    },
+    "C-unshaped": {
+      "medianReceiverMbps": {
+        "core": 20.051950649083146,
+        "edge": 20.05323419462001
+      },
+      "medianRatio": 1.0000640110061774,
+      "sessions": 6
+    }
+  },
+  "audit": {
+    "outcome": "passed_offline_joint_audit",
+    "configVersion": "cnf-joint-check-v1",
+    "sessions": 22,
+    "proxyConnections": 44,
+    "medianReceiverMbps": {
+      "A-unshaped": {
+        "core": 20.053905035058808,
+        "edge": 20.05389968738181
+      },
+      "B-shaped": {
+        "core": 4.823372426041183,
+        "edge": 14.37744940158634
+      },
+      "C-unshaped": {
+        "core": 20.051950649083146,
+        "edge": 20.05323419462001
+      }
+    },
+    "totalReceivedBytes": 631341056,
+    "formalPodsStable": 26,
+    "unaffectedPodsStableAcrossSetupAndRestore": 24,
+    "sourceHashChecks": 92,
+    "upfMemorySamples": 220,
+    "sampledPeakUpfMiB": 25.41796875,
+    "restoredState": "protected"
+  },
+  "tests": {
+    "discovered": 311,
+    "passed": 310,
+    "conditionalSkipped": 1,
+    "newJointTests": 10
+  },
+  "negativeAuditCasesRejected": 12,
+  "packageSha256": "d87ff691c6bc9b059a42cfeff5986b6b389184f991aa8590727419fbc4b18b2a",
+  "originalTransferredEvidenceSha256": "ade8e0f38cff0547cb3f66974cd06f9bf584cbddfa6e2d6dd3120863a5869652",
+  "vmWorkspace": "/home/lhm/.work/cnf-joint-20261021",
+  "restoration": "passed",
+  "strictFinal": "passed",
+  "ueRecoveryOrRecreation": false,
+  "backendRecreation": "two specified backends during preparation and restoration only",
+  "startedAt": "2026-10-21T08:12:15.045589Z",
+  "endedAt": "2026-10-21T08:21:21.844598Z",
+  "limitations": [
+    "One existing UE, alternating sequential sessions, fixed explicit TCP ports; no autonomous business recognition",
+    "Same protected routing and cross-node placement in all phases; only backend Pod egress TBF changes",
+    "Bandwidth control only; no native 5G QoS, latency/loss SLA, concurrent guarantees or real MEC latency claim",
+    "Known protected-state restoration after ordinary failure; no forced-kill/power-loss recovery guarantee"
+  ]
+}

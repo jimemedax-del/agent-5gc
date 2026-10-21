@@ -1,0 +1,40 @@
+{
+  "apiVersion": "v1",
+  "kind": "Endpoints",
+  "metadata": {
+    "annotations": {
+      "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-21T08:21:03Z"
+    },
+    "creationTimestamp": "2026-10-15T14:10:50Z",
+    "labels": {
+      "app.kubernetes.io/part-of": "cnf-m2"
+    },
+    "name": "cnf-m2-edge",
+    "namespace": "cnf-lab",
+    "resourceVersion": "659746",
+    "uid": "0cf6e92a-1811-4cde-9527-434d9b8e769d"
+  },
+  "subsets": [
+    {
+      "addresses": [
+        {
+          "ip": "10.42.2.89",
+          "nodeName": "ran-test",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "cnf-m2-edge-cc965dd8b-mxwqt",
+            "namespace": "cnf-lab",
+            "uid": "a5f1cddf-d1e2-46f0-865d-98ad59d3ba0f"
+          }
+        }
+      ],
+      "ports": [
+        {
+          "name": "iperf",
+          "port": 5201,
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ]
+}

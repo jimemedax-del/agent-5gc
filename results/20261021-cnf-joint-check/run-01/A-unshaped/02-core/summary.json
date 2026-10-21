@@ -1,0 +1,20 @@
+{
+  "round": 2,
+  "businessClass": "core",
+  "phase": "A-unshaped",
+  "outcome": "passed",
+  "startedAt": "2026-10-21T08:13:26.675517Z",
+  "trafficEndedAt": "2026-10-21T08:13:42.056919Z",
+  "receiverMbps": 20.062648470051393,
+  "upfGtpRxBytesDelta": 318472,
+  "upfGtpTxBytesDelta": 39173936,
+  "cookie": "hhipdc4jeq3nmov3knvaiigec2633f7aygkg",
+  "receivedBytes": 37617664,
+  "proxyConnections": 2,
+  "backendHit": "core",
+  "incorrectRoutes": 0,
+  "senderMbps": 20.002909428903937,
+  "senderBytes": 37617664,
+  "receiverWindowSeconds": 15.000079,
+  "senderWindowSeconds": 15.044877
+}

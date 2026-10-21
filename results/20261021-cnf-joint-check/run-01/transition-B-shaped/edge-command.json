@@ -1,0 +1,17 @@
+[
+  "tc",
+  "qdisc",
+  "add",
+  "dev",
+  "eth0",
+  "root",
+  "handle",
+  "1:",
+  "tbf",
+  "rate",
+  "15mbit",
+  "burst",
+  "32kb",
+  "latency",
+  "100ms"
+]

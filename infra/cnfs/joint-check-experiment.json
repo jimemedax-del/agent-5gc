@@ -1,0 +1,33 @@
+{
+  "configVersion": "cnf-joint-check-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "fixed-chain-joint-check",
+  "initialAndFinalState": "protected",
+  "phases": [
+    {"name": "A-unshaped", "roundsPerClass": 3, "shaped": false},
+    {"name": "B-shaped", "roundsPerClass": 5, "shaped": true},
+    {"name": "C-unshaped", "roundsPerClass": 3, "shaped": false}
+  ],
+  "direction": "downlink",
+  "protocol": "TCP",
+  "durationSeconds": 15,
+  "offeredMbps": 20,
+  "blockBytes": 16384,
+  "ratesMbps": {"core": 5, "edge": 15},
+  "qdisc": {"kind": "tbf", "interface": "eth0", "handle": "1:", "burst": "32kb", "latency": "100ms"},
+  "acceptance": {
+    "unshapedMinimumMedianMbps": 18,
+    "shapedMinimumCapFraction": 0.8,
+    "shapedMaximumCapFraction": 1.15,
+    "minimumShapedMedianRatio": 2,
+    "minimumReceiverDurationFraction": 0.95,
+    "maximumUpfMemoryBytes": 536870912
+  },
+  "limitations": [
+    "One existing UE, alternating sequential sessions, fixed explicit TCP ports; no autonomous business recognition",
+    "Same protected routing and cross-node placement in all phases; only backend Pod egress TBF changes",
+    "Bandwidth control only; no native 5G QoS, latency/loss SLA, concurrent guarantees or real MEC latency claim",
+    "Known protected-state restoration after ordinary failure; no forced-kill/power-loss recovery guarantee"
+  ]
+}

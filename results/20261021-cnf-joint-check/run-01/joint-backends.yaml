@@ -1,0 +1,219 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-m1-backend
+  namespace: cnf-lab
+  labels:
+    app.kubernetes.io/part-of: cnf-m1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-m1-backend
+  template:
+    metadata:
+      labels:
+        app: cnf-m1-backend
+        app.kubernetes.io/part-of: cnf-m1
+      annotations:
+        cnf.lab/joint-version: cnf-joint-check-v1
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/plane: control
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: iperf3
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - iperf3
+        args:
+        - -s
+        - -p
+        - '5201'
+        - --forceflush
+        - -V
+        volumeMounts:
+        - name: scratch
+          mountPath: /tmp
+        ports:
+        - name: iperf
+          containerPort: 5201
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      - name: tc
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - sleep
+        - infinity
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        securityContext:
+          runAsNonRoot: false
+          runAsUser: 0
+          runAsGroup: 0
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - NET_ADMIN
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          periodSeconds: 5
+      volumes:
+      - name: scratch
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Mi
+  strategy:
+    type: Recreate
+    rollingUpdate: null
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnf-m2-edge
+  namespace: cnf-lab
+  labels:
+    app.kubernetes.io/part-of: cnf-m2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cnf-m2-edge
+  template:
+    metadata:
+      labels:
+        app: cnf-m2-edge
+        app.kubernetes.io/part-of: cnf-m2
+      annotations:
+        cnf.lab/joint-version: cnf-joint-check-v1
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        5gc.free5gc.org/role: ran-test
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: iperf3
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - iperf3
+        args:
+        - -s
+        - -p
+        - '5201'
+        - --forceflush
+        - -V
+        volumeMounts:
+        - name: scratch
+          mountPath: /tmp
+        ports:
+        - name: iperf
+          containerPort: 5201
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      - name: tc
+        image: docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b
+        imagePullPolicy: Never
+        command:
+        - sleep
+        - infinity
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        securityContext:
+          runAsNonRoot: false
+          runAsUser: 0
+          runAsGroup: 0
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - NET_ADMIN
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - kill -0 1
+          periodSeconds: 5
+      volumes:
+      - name: scratch
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Mi
+  strategy:
+    type: Recreate
+    rollingUpdate: null

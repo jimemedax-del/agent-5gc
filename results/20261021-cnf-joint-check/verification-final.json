@@ -1,0 +1,25 @@
+{
+  "branch": "main",
+  "gitHead": "dc4fc526f0f194afc1d62e2065e380aa0c55362a",
+  "agentCommitted": false,
+  "stagedFiles": [],
+  "tests": {
+    "discovered": 311,
+    "passed": 310,
+    "conditionalSkipped": 1,
+    "newJointTests": 10
+  },
+  "documentationLocalLinks": "passed",
+  "diffWhitespace": "passed",
+  "actualSessions": 22,
+  "actualCorrectProxyConnections": 44,
+  "vm1WindowsAuditIdentical": true,
+  "negativeCasesRejected": 12,
+  "formal26PodsStable": true,
+  "other24PodsStableAcrossSetupAndRestore": true,
+  "protectedRestorationAndStrictFinal": "passed",
+  "preservedUserFiles": [
+    "AGENTS.md",
+    "mind-model.md"
+  ]
+}

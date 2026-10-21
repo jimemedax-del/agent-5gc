@@ -1,0 +1,66 @@
+{
+  "outcome": "passed",
+  "cases": [
+    {
+      "case": "receiver-bytes",
+      "outcome": "rejected_as_expected",
+      "reason": "Raw receiver mismatch"
+    },
+    {
+      "case": "wrong-proxy-route",
+      "outcome": "rejected_as_expected",
+      "reason": "Proxy evidence mismatch"
+    },
+    {
+      "case": "wrong-endpoint-uid",
+      "outcome": "rejected_as_expected",
+      "reason": "Endpoint does not identify the expected backend Pod/node/port"
+    },
+    {
+      "case": "pod-identity-drift",
+      "outcome": "rejected_as_expected",
+      "reason": "Guard identity drift"
+    },
+    {
+      "case": "wrong-tbf-rate",
+      "outcome": "rejected_as_expected",
+      "reason": "Wrong TBF parameters"
+    },
+    {
+      "case": "phase-median",
+      "outcome": "rejected_as_expected",
+      "reason": "Phase summary mismatch"
+    },
+    {
+      "case": "final-native-qos",
+      "outcome": "rejected_as_expected",
+      "reason": "Final state differs: nativeQos"
+    },
+    {
+      "case": "missing-policy-evidence",
+      "outcome": "rejected_as_expected",
+      "reason": "[Errno 2] No such file or directory: 'E:\\\\GPT-project\\\\postgraduate-analyse\\\\.work\\\\joint-negative-ng80ulol\\\\evidence\\\\B-shaped\\\\01-core\\\\after-policies.json'"
+    },
+    {
+      "case": "frozen-source-changed",
+      "outcome": "rejected_as_expected",
+      "reason": "Source/input changed: scripts/cnf-joint-check.py"
+    },
+    {
+      "case": "threshold-relaxed",
+      "outcome": "rejected_as_expected",
+      "reason": "Frozen experiment differs"
+    },
+    {
+      "case": "restoration-failed",
+      "outcome": "rejected_as_expected",
+      "reason": "No full restored acceptance"
+    },
+    {
+      "case": "missing-session",
+      "outcome": "rejected_as_expected",
+      "reason": "Wrong number of sessions"
+    }
+  ],
+  "acceptedOriginalUnmodified": true
+}

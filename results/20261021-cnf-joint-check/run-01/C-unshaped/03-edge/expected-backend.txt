@@ -1,0 +1,36 @@
+Time: Wed, 21 Oct 2026 08:20:07 GMT
+Accepted connection from 10.42.0.190, port 56192
+      Cookie: oi6ewdwoo25mlq4skpbkl5bdr27xm3cbsihx
+      TCP MSS: 0 (default)
+      Target Bitrate: 20000000
+[  5] local 10.42.2.88 port 5201 connected to 10.42.0.190 port 56200
+Starting Test: protocol: TCP, 1 streams, 16384 byte blocks, omitting 0 seconds, 15 second test, tos 0
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec  2.39 MBytes  20.1 Mbits/sec    3   35.5 KBytes       
+[  5]   1.00-2.00   sec  2.39 MBytes  20.1 Mbits/sec    5   35.5 KBytes       
+[  5]   2.00-3.00   sec  2.38 MBytes  19.9 Mbits/sec    2   35.5 KBytes       
+[  5]   3.00-4.00   sec  2.39 MBytes  20.1 Mbits/sec    2   35.5 KBytes       
+[  5]   4.00-5.00   sec  2.38 MBytes  19.9 Mbits/sec    0   35.5 KBytes       
+[  5]   5.00-6.00   sec  2.39 MBytes  20.1 Mbits/sec    2   35.5 KBytes       
+[  5]   6.00-7.00   sec  2.38 MBytes  19.9 Mbits/sec    2   35.5 KBytes       
+[  5]   7.00-8.00   sec  2.39 MBytes  20.1 Mbits/sec    0   35.5 KBytes       
+[  5]   8.00-9.00   sec  2.39 MBytes  20.1 Mbits/sec    2   35.5 KBytes       
+[  5]   9.00-10.00  sec  2.38 MBytes  19.9 Mbits/sec    3   35.5 KBytes       
+[  5]  10.00-11.00  sec  2.39 MBytes  20.1 Mbits/sec    2   35.5 KBytes       
+[  5]  11.00-12.00  sec  2.38 MBytes  19.9 Mbits/sec    3   35.5 KBytes       
+[  5]  12.00-13.00  sec  2.39 MBytes  20.1 Mbits/sec    2   35.5 KBytes       
+[  5]  13.00-14.00  sec  2.39 MBytes  20.1 Mbits/sec    1   35.5 KBytes       
+[  5]  14.00-15.00  sec  2.38 MBytes  19.9 Mbits/sec    1   35.5 KBytes       
+[  5]  15.00-15.05  sec   128 KBytes  21.9 Mbits/sec    0   35.5 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-15.05  sec  35.9 MBytes  20.0 Mbits/sec   30             sender
+[  5] (receiver statistics not available)
+CPU Utilization: local/sender 1.7% (0.0%u/1.7%s), remote/receiver 1.2% (0.3%u/0.9%s)
+snd_tcp_congestion cubic
+iperf 3.9
+Linux cnf-m2-edge-7bd84776fd-whmwk 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
