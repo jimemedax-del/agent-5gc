@@ -1,0 +1,136 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "verify_plan",
+  "status": "passed_controlled_targets",
+  "evidenceIntegrity": "passed",
+  "targetComparisons": {
+    "ue1": {
+      "receivedSteadyMbps": 7.725469661122988,
+      "minimumMbps": 5,
+      "maximumMbps": 8,
+      "passed": true
+    },
+    "ue2": {
+      "receivedSteadyMbps": 1.9285901876024263,
+      "minimumMbps": 1.5,
+      "maximumMbps": 4,
+      "passed": true
+    }
+  },
+  "observation": {
+    "users": {
+      "ue1": {
+        "steadyMbps": 7.725469661122988,
+        "windowMbps": [
+          7.71829970986028,
+          7.708869382147592,
+          7.737576940223753,
+          7.728038692668091,
+          7.718485110649197,
+          7.737530821083596,
+          7.728,
+          7.7279843387921145,
+          7.718415641816367,
+          7.718376997444041,
+          7.7280617242021,
+          7.737530821083596,
+          7.7184,
+          7.7279843387921145,
+          7.728108248319528,
+          7.7278839243204045,
+          7.728053893465133,
+          7.718384358247031,
+          7.727938276783878
+        ],
+        "steadySeconds": 19.000009894371033,
+        "steadyPackets": 15834,
+        "steadyLostPackets": 544,
+        "steadyLossPercent": 3.4356448149551597,
+        "fullReceivedBytes": 29000400,
+        "fullReceiverMbps": 7.733420732382142,
+        "fullPackets": 25029,
+        "fullLostPackets": 862,
+        "reportedEndBytesNotUsedAsReceived": 30043200,
+        "receiverBasis": "client receiver intervals; bytes=(packets-lost)*1200; end bytes may be sent bytes in iperf3 3.9",
+        "cookie": "ycxgopagvfcenog2e2bhnjo3f6zgswza6x3f",
+        "rtt": {
+          "samples": 89,
+          "p50Ms": 1.44,
+          "p95Ms": 2.79,
+          "p99Ms": 4.59,
+          "transmitted": 150,
+          "received": 150,
+          "scope": "class-mapped ICMP RTT; not one-way/application/radio delay guarantee"
+        }
+      },
+      "ue2": {
+        "steadyMbps": 1.9285901876024263,
+        "windowMbps": [
+          1.929661764023738,
+          1.919948274098641,
+          1.9295960895617577,
+          1.9295942493610103,
+          1.929609661150666,
+          1.9296019552250647,
+          1.9296039104540919,
+          1.9295942493610103,
+          1.9296057506732665,
+          1.9199807741183013,
+          1.9296019552250647,
+          1.9296057506732665,
+          1.9296,
+          1.9296057506732665,
+          1.9295864285469908,
+          1.9296,
+          1.929609661150666,
+          1.9295942493610103,
+          1.9296134566291825
+        ],
+        "steadySeconds": 18.999992966651917,
+        "steadyPackets": 17666,
+        "steadyLostPackets": 13849,
+        "steadyLossPercent": 78.39352428393525,
+        "fullReceivedBytes": 7287600,
+        "fullReceiverMbps": 1.9433545558509753,
+        "fullPackets": 23159,
+        "fullLostPackets": 17086,
+        "reportedEndBytesNotUsedAsReceived": 27847200,
+        "receiverBasis": "client receiver intervals; bytes=(packets-lost)*1200; end bytes may be sent bytes in iperf3 3.9",
+        "cookie": "z4ejl3evuteztaoyjm7vombx4s7cgnz2qxi2",
+        "rtt": {
+          "samples": 89,
+          "p50Ms": 3.95,
+          "p95Ms": 6.33,
+          "p99Ms": 7.7,
+          "transmitted": 150,
+          "received": 150,
+          "scope": "class-mapped ICMP RTT; not one-way/application/radio delay guarantee"
+        }
+      }
+    },
+    "overlapLowerBoundSeconds": 29.000075101852417,
+    "aggregateSteadyMbps": 9.654059848725414,
+    "upfPeakMemoryBytes": 14159872
+  },
+  "historicalFixtureChecks": {
+    "passed": true,
+    "checks": [
+      {
+        "folder": "measurement",
+        "mode": "guarantee-ue1",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "HighRateBounds": true,
+          "HighWindowViolationFraction": true,
+          "LowRateBounds": true,
+          "LowWindowViolationFraction": true
+        },
+        "passed": true
+      }
+    ],
+    "rttAndLossAcceptance": "measurements only; no application latency/loss SLA supplied or accepted"
+  },
+  "latencyLossGuaranteesAccepted": false,
+  "policyPlanHash": "c4bdf155a4bf8a908db0fb12ecd0d95831a51e83edf583ce5a4698b79ff6b4bb"
+}

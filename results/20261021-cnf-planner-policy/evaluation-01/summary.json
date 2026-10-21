@@ -1,0 +1,60 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E3",
+  "outcome": "passed_controlled_policy_evaluation",
+  "startedAt": "2026-10-21T02:28:27.990479+00:00",
+  "scope": "complete_engineered_requests_choose_existing_C1_downlink_mode",
+  "cases": [
+    {
+      "name": "equal",
+      "outcome": "passed_controlled_targets",
+      "selectedMode": "equal",
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "name": "equal-lower-request",
+      "outcome": "passed_controlled_targets",
+      "selectedMode": "equal",
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "name": "guarantee-ue1",
+      "outcome": "passed_controlled_targets",
+      "selectedMode": "guarantee-ue1",
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "name": "guarantee-ue2",
+      "outcome": "passed_controlled_targets",
+      "selectedMode": "guarantee-ue2",
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "name": "missing-priority",
+      "outcome": "needs_clarification",
+      "selectedMode": null,
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "name": "stale-session",
+      "outcome": "rejected",
+      "selectedMode": null,
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "name": "over-capacity",
+      "outcome": "rejected",
+      "selectedMode": null,
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "name": "unsupported-loss",
+      "outcome": "rejected",
+      "selectedMode": null,
+      "finalStrictBaselinePassed": true
+    }
+  ],
+  "labels": "predeclared engineering expectations; not independent business recognition labels",
+  "endedAt": "2026-10-21T02:36:30.899813+00:00"
+}

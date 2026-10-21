@@ -1,0 +1,654 @@
+[
+  {
+    "name": "lhm-virtual-machine",
+    "uid": "2f31da79-edc1-4425-ae7b-2182f9ec9fb8",
+    "labels": {
+      "5gc.free5gc.org/plane": "control",
+      "beta.kubernetes.io/arch": "amd64",
+      "beta.kubernetes.io/instance-type": "k3s",
+      "beta.kubernetes.io/os": "linux",
+      "kubernetes.io/arch": "amd64",
+      "kubernetes.io/hostname": "lhm-virtual-machine",
+      "kubernetes.io/os": "linux",
+      "node-role.kubernetes.io/control-plane": "true",
+      "node-role.kubernetes.io/master": "true",
+      "node.kubernetes.io/instance-type": "k3s",
+      "topology.kubernetes.io/zone": "core"
+    },
+    "spec": {
+      "podCIDR": "10.42.0.0/24",
+      "podCIDRs": [
+        "10.42.0.0/24"
+      ],
+      "taints": null,
+      "unschedulable": null
+    },
+    "status": {
+      "addresses": [
+        {
+          "address": "192.168.244.128",
+          "type": "InternalIP"
+        },
+        {
+          "address": "lhm-virtual-machine",
+          "type": "Hostname"
+        }
+      ],
+      "conditions": [
+        {
+          "lastHeartbeatTime": "2026-10-21T02:28:54Z",
+          "lastTransitionTime": "2026-10-08T10:58:48Z",
+          "message": "kubelet has sufficient memory available",
+          "reason": "KubeletHasSufficientMemory",
+          "status": "False",
+          "type": "MemoryPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:28:54Z",
+          "lastTransitionTime": "2026-10-08T10:58:48Z",
+          "message": "kubelet has no disk pressure",
+          "reason": "KubeletHasNoDiskPressure",
+          "status": "False",
+          "type": "DiskPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:28:54Z",
+          "lastTransitionTime": "2026-10-08T10:58:48Z",
+          "message": "kubelet has sufficient PID available",
+          "reason": "KubeletHasSufficientPID",
+          "status": "False",
+          "type": "PIDPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:28:54Z",
+          "lastTransitionTime": "2026-10-08T10:58:48Z",
+          "message": "kubelet is posting ready status",
+          "reason": "KubeletReady",
+          "status": "True",
+          "type": "Ready"
+        }
+      ],
+      "nodeInfo": {
+        "architecture": "amd64",
+        "bootID": "1ea98707-892b-4f8b-9780-4b49b440b55d",
+        "containerRuntimeVersion": "containerd://1.7.27-k3s1",
+        "kernelVersion": "6.8.0-138-generic",
+        "kubeProxyVersion": "v1.30.14+k3s1",
+        "kubeletVersion": "v1.30.14+k3s1",
+        "machineID": "26acc6007ad747eab1dfb189207a6a8c",
+        "operatingSystem": "linux",
+        "osImage": "Ubuntu 22.04.5 LTS",
+        "systemUUID": "60b14d56-af38-083c-6590-34b2856ad844"
+      },
+      "images": [
+        {
+          "names": [
+            "docker.io/bitnamilegacy/mongodb@sha256:62fb92d0111f8dc0565b7daf8a57279fd09520020b79fd3bc550deb3ae5aee70",
+            "docker.io/bitnamilegacy/mongodb:7.0.9-debian-12-r4"
+          ],
+          "sizeBytes": 249777249
+        },
+        {
+          "names": [
+            "docker.io/free5gc/webui@sha256:170842263d72bcc7a8caa88ac31ebd8c6c5b2828f2159a9198d7c83066b7497d",
+            "docker.io/free5gc/webui:v4.2.2"
+          ],
+          "sizeBytes": 81084782
+        },
+        {
+          "names": [
+            "docker.io/local/free5gc-upf:v4.2.2-nilfix-20261008"
+          ],
+          "sizeBytes": 79229830
+        },
+        {
+          "names": [
+            "docker.io/free5gc/upf@sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04",
+            "docker.io/free5gc/upf:v4.2.2"
+          ],
+          "sizeBytes": 75190269
+        },
+        {
+          "names": [
+            "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac"
+          ],
+          "sizeBytes": 71424478
+        },
+        {
+          "names": [
+            "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+            "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008"
+          ],
+          "sizeBytes": 71388689
+        },
+        {
+          "names": [
+            "docker.io/free5gc/ueransim@sha256:4a6745b0c9f0c60173833f8bef89816324e84636e220917bdc682555a299e8ba",
+            "docker.io/free5gc/ueransim:v4.0.1"
+          ],
+          "sizeBytes": 69348273
+        },
+        {
+          "names": [
+            "docker.io/library/debian@sha256:7c7b2c966bc9ee8cedfeef67e0e279108992c77681fa595db4a9d65c06ccc587",
+            "docker.io/library/debian:12-slim"
+          ],
+          "sizeBytes": 28256448
+        },
+        {
+          "names": [
+            "docker.io/free5gc/chf@sha256:22705af4e06ddb8e29d8103cb5b05e637059dbfb397df27f5f0a44843335d846",
+            "docker.io/free5gc/chf:v4.2.2"
+          ],
+          "sizeBytes": 23786604
+        },
+        {
+          "names": [
+            "docker.io/rancher/mirrored-coredns-coredns@sha256:9eb4929fd181541e7743959884000f010bcc8b1ebf8715ff0965be04509882e5",
+            "docker.io/rancher/mirrored-coredns-coredns:1.12.1"
+          ],
+          "sizeBytes": 22384068
+        },
+        {
+          "names": [
+            "docker.io/rancher/local-path-provisioner@sha256:80496fdeb307541007621959aa13aed41d31db9cd2dc4167c19833e0bfa3878c",
+            "docker.io/rancher/local-path-provisioner:v0.0.31"
+          ],
+          "sizeBytes": 20727855
+        },
+        {
+          "names": [
+            "docker.io/rancher/mirrored-metrics-server@sha256:dccf8474fb910fef261d31d9483d7e4c1df7b86cf4d638fb6a7d7c88bd51600a",
+            "docker.io/rancher/mirrored-metrics-server:v0.7.2"
+          ],
+          "sizeBytes": 19494186
+        },
+        {
+          "names": [
+            "docker.io/free5gc/pcf@sha256:b6208c82a02917cb6d620336d1245c00d875254e2c9bd28416c2e250a43453a4",
+            "docker.io/free5gc/pcf:v4.2.2"
+          ],
+          "sizeBytes": 18725838
+        },
+        {
+          "names": [
+            "docker.io/free5gc/amf@sha256:8fc343349f7b0d55a257ecae328bff4e2d4b6800004ed932c128b2699a3860e7",
+            "docker.io/free5gc/amf:v4.2.2"
+          ],
+          "sizeBytes": 18671787
+        },
+        {
+          "names": [
+            "docker.io/free5gc/smf@sha256:55043e366af867fda567156709c1dcf1ddad8827c2a246a64e0d4f6fea23718f",
+            "docker.io/free5gc/smf:v4.2.2"
+          ],
+          "sizeBytes": 18366600
+        },
+        {
+          "names": [
+            "docker.io/free5gc/udr@sha256:955b91fc7b5082e8732b578fb0df729ed730a8ae4c196304e03f946965a1eb85",
+            "docker.io/free5gc/udr:v4.2.2"
+          ],
+          "sizeBytes": 17995088
+        },
+        {
+          "names": [
+            "docker.io/free5gc/nrf@sha256:0811f4af5038ad9fc366321cbc104910dfb09503a50d08a9184850980419e0d9",
+            "docker.io/free5gc/nrf:v4.2.2"
+          ],
+          "sizeBytes": 17758048
+        },
+        {
+          "names": [
+            "docker.io/free5gc/udm@sha256:3c0ea07415976e01352a4d6ca65d29dfb253247548e873decb6f45246da75562",
+            "docker.io/free5gc/udm:v4.2.2"
+          ],
+          "sizeBytes": 16852493
+        },
+        {
+          "names": [
+            "docker.io/free5gc/nef@sha256:ad98ab4a9d9aff9733f4dc12a212057abf039f992bdd4736107be28431eb0a90",
+            "docker.io/free5gc/nef:v4.2.2"
+          ],
+          "sizeBytes": 16610222
+        },
+        {
+          "names": [
+            "docker.io/free5gc/ausf@sha256:ec2752692a10c879cbe9c76d27377794bb26774abbb776e5a59df1f7eded3bf7",
+            "docker.io/free5gc/ausf:v4.2.2"
+          ],
+          "sizeBytes": 16552008
+        },
+        {
+          "names": [
+            "docker.io/free5gc/nssf@sha256:beea02cca34919f86b6711cc901a008701b790cfccf3fd64d712590bb646af87",
+            "docker.io/free5gc/nssf:v4.2.2"
+          ],
+          "sizeBytes": 15599888
+        },
+        {
+          "names": [
+            "docker.io/curlimages/curl@sha256:25d29daeb9b14b89e2fa8cc17c70e4b188bca1466086907c2d9a4b56b59d8e21",
+            "docker.io/curlimages/curl:8.7.1"
+          ],
+          "sizeBytes": 7720438
+        },
+        {
+          "names": [
+            "docker.io/rancher/mirrored-library-busybox@sha256:8a45424ddf949bbe9bb3231b05f9032a45da5cd036eb4867b511b00734756d6f",
+            "docker.io/rancher/mirrored-library-busybox:1.36.1"
+          ],
+          "sizeBytes": 2147340
+        },
+        {
+          "names": [
+            "docker.io/library/busybox@sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678",
+            "docker.io/library/busybox:1.32.0"
+          ],
+          "sizeBytes": 768697
+        },
+        {
+          "names": [
+            "docker.io/rancher/mirrored-pause@sha256:74c4244427b7312c5b901fe0f67cbc53683d06f4f24c6faee65d4182bf0fa893",
+            "docker.io/rancher/mirrored-pause:3.6"
+          ],
+          "sizeBytes": 301463
+        }
+      ],
+      "allocatable": {
+        "cpu": "8",
+        "ephemeral-storage": "49517134810",
+        "hugepages-1Gi": "0",
+        "hugepages-2Mi": "0",
+        "memory": "8083952Ki",
+        "pods": "110"
+      }
+    }
+  },
+  {
+    "name": "ran-test",
+    "uid": "702d040e-31e8-451d-999c-b3529063bba3",
+    "labels": {
+      "5gc.free5gc.org/role": "ran-test",
+      "beta.kubernetes.io/arch": "amd64",
+      "beta.kubernetes.io/instance-type": "k3s",
+      "beta.kubernetes.io/os": "linux",
+      "kubernetes.io/arch": "amd64",
+      "kubernetes.io/hostname": "ran-test",
+      "kubernetes.io/os": "linux",
+      "node.kubernetes.io/instance-type": "k3s",
+      "topology.kubernetes.io/zone": "edge"
+    },
+    "spec": {
+      "podCIDR": "10.42.2.0/24",
+      "podCIDRs": [
+        "10.42.2.0/24"
+      ],
+      "taints": null,
+      "unschedulable": null
+    },
+    "status": {
+      "addresses": [
+        {
+          "address": "192.168.244.130",
+          "type": "InternalIP"
+        },
+        {
+          "address": "lhm3-virtual-machine",
+          "type": "Hostname"
+        }
+      ],
+      "conditions": [
+        {
+          "lastHeartbeatTime": "2026-10-21T02:25:20Z",
+          "lastTransitionTime": "2026-10-08T11:00:53Z",
+          "message": "kubelet has sufficient memory available",
+          "reason": "KubeletHasSufficientMemory",
+          "status": "False",
+          "type": "MemoryPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:25:20Z",
+          "lastTransitionTime": "2026-10-08T11:00:53Z",
+          "message": "kubelet has no disk pressure",
+          "reason": "KubeletHasNoDiskPressure",
+          "status": "False",
+          "type": "DiskPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:25:20Z",
+          "lastTransitionTime": "2026-10-08T11:00:53Z",
+          "message": "kubelet has sufficient PID available",
+          "reason": "KubeletHasSufficientPID",
+          "status": "False",
+          "type": "PIDPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:25:20Z",
+          "lastTransitionTime": "2026-10-08T11:00:53Z",
+          "message": "kubelet is posting ready status",
+          "reason": "KubeletReady",
+          "status": "True",
+          "type": "Ready"
+        }
+      ],
+      "nodeInfo": {
+        "architecture": "amd64",
+        "bootID": "784f4af1-5125-4bec-9b62-bd6e608de2d8",
+        "containerRuntimeVersion": "containerd://1.7.27-k3s1",
+        "kernelVersion": "6.8.0-138-generic",
+        "kubeProxyVersion": "v1.30.14+k3s1",
+        "kubeletVersion": "v1.30.14+k3s1",
+        "machineID": "c9158ca333b7403684bbc27e0f1fae7e",
+        "operatingSystem": "linux",
+        "osImage": "Ubuntu 22.04.5 LTS",
+        "systemUUID": "fc8a4d56-b8cd-5b2d-faa7-ca1842e9e397"
+      },
+      "images": [
+        {
+          "names": [
+            "docker.io/free5gc/webui@sha256:170842263d72bcc7a8caa88ac31ebd8c6c5b2828f2159a9198d7c83066b7497d",
+            "docker.io/free5gc/webui:v4.2.2"
+          ],
+          "sizeBytes": 81084782
+        },
+        {
+          "names": [
+            "docker.io/free5gc/upf@sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04",
+            "docker.io/free5gc/upf:v4.2.2"
+          ],
+          "sizeBytes": 75190269
+        },
+        {
+          "names": [
+            "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+            "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008"
+          ],
+          "sizeBytes": 71388689
+        },
+        {
+          "names": [
+            "docker.io/free5gc/ueransim@sha256:4a6745b0c9f0c60173833f8bef89816324e84636e220917bdc682555a299e8ba",
+            "docker.io/free5gc/ueransim:v4.0.1"
+          ],
+          "sizeBytes": 69348273
+        },
+        {
+          "names": [
+            "docker.io/free5gc/chf@sha256:22705af4e06ddb8e29d8103cb5b05e637059dbfb397df27f5f0a44843335d846",
+            "docker.io/free5gc/chf:v4.2.2"
+          ],
+          "sizeBytes": 23786604
+        },
+        {
+          "names": [
+            "docker.io/free5gc/pcf@sha256:b6208c82a02917cb6d620336d1245c00d875254e2c9bd28416c2e250a43453a4",
+            "docker.io/free5gc/pcf:v4.2.2"
+          ],
+          "sizeBytes": 18725838
+        },
+        {
+          "names": [
+            "docker.io/free5gc/amf@sha256:8fc343349f7b0d55a257ecae328bff4e2d4b6800004ed932c128b2699a3860e7",
+            "docker.io/free5gc/amf:v4.2.2"
+          ],
+          "sizeBytes": 18671787
+        },
+        {
+          "names": [
+            "docker.io/free5gc/smf@sha256:55043e366af867fda567156709c1dcf1ddad8827c2a246a64e0d4f6fea23718f",
+            "docker.io/free5gc/smf:v4.2.2"
+          ],
+          "sizeBytes": 18366600
+        },
+        {
+          "names": [
+            "docker.io/free5gc/udr@sha256:955b91fc7b5082e8732b578fb0df729ed730a8ae4c196304e03f946965a1eb85",
+            "docker.io/free5gc/udr:v4.2.2"
+          ],
+          "sizeBytes": 17995088
+        },
+        {
+          "names": [
+            "docker.io/free5gc/udm@sha256:3c0ea07415976e01352a4d6ca65d29dfb253247548e873decb6f45246da75562",
+            "docker.io/free5gc/udm:v4.2.2"
+          ],
+          "sizeBytes": 16852493
+        },
+        {
+          "names": [
+            "docker.io/free5gc/nef@sha256:ad98ab4a9d9aff9733f4dc12a212057abf039f992bdd4736107be28431eb0a90",
+            "docker.io/free5gc/nef:v4.2.2"
+          ],
+          "sizeBytes": 16610222
+        },
+        {
+          "names": [
+            "docker.io/free5gc/ausf@sha256:ec2752692a10c879cbe9c76d27377794bb26774abbb776e5a59df1f7eded3bf7",
+            "docker.io/free5gc/ausf:v4.2.2"
+          ],
+          "sizeBytes": 16552008
+        },
+        {
+          "names": [
+            "docker.io/free5gc/nssf@sha256:beea02cca34919f86b6711cc901a008701b790cfccf3fd64d712590bb646af87",
+            "docker.io/free5gc/nssf:v4.2.2"
+          ],
+          "sizeBytes": 15599888
+        },
+        {
+          "names": [
+            "docker.io/curlimages/curl@sha256:25d29daeb9b14b89e2fa8cc17c70e4b188bca1466086907c2d9a4b56b59d8e21",
+            "docker.io/curlimages/curl:8.7.1"
+          ],
+          "sizeBytes": 7720438
+        },
+        {
+          "names": [
+            "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "docker.io/library/busybox:1.36.1"
+          ],
+          "sizeBytes": 2217006
+        },
+        {
+          "names": [
+            "docker.io/library/busybox@sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678",
+            "docker.io/library/busybox:1.32.0"
+          ],
+          "sizeBytes": 768697
+        },
+        {
+          "names": [
+            "docker.io/rancher/mirrored-pause@sha256:74c4244427b7312c5b901fe0f67cbc53683d06f4f24c6faee65d4182bf0fa893",
+            "docker.io/rancher/mirrored-pause:3.6"
+          ],
+          "sizeBytes": 301463
+        }
+      ],
+      "allocatable": {
+        "cpu": "8",
+        "ephemeral-storage": "49389476211",
+        "hugepages-1Gi": "0",
+        "hugepages-2Mi": "0",
+        "memory": "8083952Ki",
+        "pods": "110"
+      }
+    }
+  },
+  {
+    "name": "worker-upf",
+    "uid": "3bc16f8e-5b0d-4fe4-b14d-5c7c343d02f0",
+    "labels": {
+      "5gc.free5gc.org/gtp5g": "true",
+      "5gc.free5gc.org/plane": "user",
+      "beta.kubernetes.io/arch": "amd64",
+      "beta.kubernetes.io/instance-type": "k3s",
+      "beta.kubernetes.io/os": "linux",
+      "kubernetes.io/arch": "amd64",
+      "kubernetes.io/hostname": "worker-upf",
+      "kubernetes.io/os": "linux",
+      "node.kubernetes.io/instance-type": "k3s",
+      "topology.kubernetes.io/zone": "core"
+    },
+    "spec": {
+      "podCIDR": "10.42.1.0/24",
+      "podCIDRs": [
+        "10.42.1.0/24"
+      ],
+      "taints": null,
+      "unschedulable": null
+    },
+    "status": {
+      "addresses": [
+        {
+          "address": "192.168.244.129",
+          "type": "InternalIP"
+        },
+        {
+          "address": "lhm2-virtual-machine",
+          "type": "Hostname"
+        }
+      ],
+      "conditions": [
+        {
+          "lastHeartbeatTime": "2026-10-21T02:27:46Z",
+          "lastTransitionTime": "2026-10-07T13:55:02Z",
+          "message": "kubelet has sufficient memory available",
+          "reason": "KubeletHasSufficientMemory",
+          "status": "False",
+          "type": "MemoryPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:27:46Z",
+          "lastTransitionTime": "2026-10-07T13:55:02Z",
+          "message": "kubelet has no disk pressure",
+          "reason": "KubeletHasNoDiskPressure",
+          "status": "False",
+          "type": "DiskPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:27:46Z",
+          "lastTransitionTime": "2026-10-07T13:55:02Z",
+          "message": "kubelet has sufficient PID available",
+          "reason": "KubeletHasSufficientPID",
+          "status": "False",
+          "type": "PIDPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-21T02:27:46Z",
+          "lastTransitionTime": "2026-10-07T13:55:02Z",
+          "message": "kubelet is posting ready status",
+          "reason": "KubeletReady",
+          "status": "True",
+          "type": "Ready"
+        }
+      ],
+      "nodeInfo": {
+        "architecture": "amd64",
+        "bootID": "c8c1fd2b-5d6b-4b29-8724-001f370f1fbd",
+        "containerRuntimeVersion": "containerd://1.7.27-k3s1",
+        "kernelVersion": "6.8.0-138-generic",
+        "kubeProxyVersion": "v1.30.14+k3s1",
+        "kubeletVersion": "v1.30.14+k3s1",
+        "machineID": "3e402b81d6a345ebb93618657df64d5f",
+        "operatingSystem": "linux",
+        "osImage": "Ubuntu 22.04.5 LTS",
+        "systemUUID": "8c774d56-c763-ff7f-f803-d2fc32470f2c"
+      },
+      "images": [
+        {
+          "names": [
+            "docker.io/local/free5gc-upf@sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3",
+            "docker.io/local/free5gc-upf:v4.2.2-nilfix-20261008"
+          ],
+          "sizeBytes": 79229830
+        },
+        {
+          "names": [
+            "docker.io/free5gc/upf@sha256:a9fa3ed6683f4390922cef122dd7c67ed6fb8674340abf7df73f7f47d47a7e04",
+            "docker.io/free5gc/upf:v4.2.2"
+          ],
+          "sizeBytes": 75190269
+        },
+        {
+          "names": [
+            "docker.io/free5gc/amf@sha256:8fc343349f7b0d55a257ecae328bff4e2d4b6800004ed932c128b2699a3860e7",
+            "docker.io/free5gc/amf:v4.2.2"
+          ],
+          "sizeBytes": 18671787
+        },
+        {
+          "names": [
+            "docker.io/free5gc/smf@sha256:55043e366af867fda567156709c1dcf1ddad8827c2a246a64e0d4f6fea23718f",
+            "docker.io/free5gc/smf:v4.2.2"
+          ],
+          "sizeBytes": 18366600
+        },
+        {
+          "names": [
+            "docker.io/free5gc/udr@sha256:955b91fc7b5082e8732b578fb0df729ed730a8ae4c196304e03f946965a1eb85",
+            "docker.io/free5gc/udr:v4.2.2"
+          ],
+          "sizeBytes": 17995088
+        },
+        {
+          "names": [
+            "docker.io/free5gc/nrf@sha256:0811f4af5038ad9fc366321cbc104910dfb09503a50d08a9184850980419e0d9",
+            "docker.io/free5gc/nrf:v4.2.2"
+          ],
+          "sizeBytes": 17758048
+        },
+        {
+          "names": [
+            "docker.io/free5gc/ausf@sha256:ec2752692a10c879cbe9c76d27377794bb26774abbb776e5a59df1f7eded3bf7",
+            "docker.io/free5gc/ausf:v4.2.2"
+          ],
+          "sizeBytes": 16552008
+        },
+        {
+          "names": [
+            "docker.io/free5gc/nssf@sha256:beea02cca34919f86b6711cc901a008701b790cfccf3fd64d712590bb646af87",
+            "docker.io/free5gc/nssf:v4.2.2"
+          ],
+          "sizeBytes": 15599888
+        },
+        {
+          "names": [
+            "docker.io/curlimages/curl@sha256:25d29daeb9b14b89e2fa8cc17c70e4b188bca1466086907c2d9a4b56b59d8e21",
+            "docker.io/curlimages/curl:8.7.1"
+          ],
+          "sizeBytes": 7720438
+        },
+        {
+          "names": [
+            "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "docker.io/library/busybox:1.36.1"
+          ],
+          "sizeBytes": 2217006
+        },
+        {
+          "names": [
+            "docker.io/library/busybox@sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678",
+            "docker.io/library/busybox:1.32.0"
+          ],
+          "sizeBytes": 768697
+        },
+        {
+          "names": [
+            "docker.io/rancher/mirrored-pause@sha256:74c4244427b7312c5b901fe0f67cbc53683d06f4f24c6faee65d4182bf0fa893",
+            "docker.io/rancher/mirrored-pause:3.6"
+          ],
+          "sizeBytes": 301463
+        }
+      ],
+      "allocatable": {
+        "cpu": "8",
+        "ephemeral-storage": "49389476211",
+        "hugepages-1Gi": "0",
+        "hugepages-2Mi": "0",
+        "memory": "8083968Ki",
+        "pods": "110"
+      }
+    }
+  }
+]

@@ -1,0 +1,7 @@
+# Single-node lab registry mirrors. The VM's campus DNS cannot reach Docker Hub directly.
+mirrors:
+  docker.io:
+    endpoint:
+      - https://docker.1ms.run
+      - https://docker.m.daocloud.io
+      - https://docker.xuanyuan.me

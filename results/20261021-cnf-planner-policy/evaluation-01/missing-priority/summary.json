@@ -1,0 +1,20 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E3",
+  "outcome": "needs_clarification",
+  "startedAt": "2026-10-21T02:33:22.003862+00:00",
+  "restoration": "not_required_yet",
+  "finalStrictBaselinePassed": true,
+  "requestInput": "caller_supplied_exact_identifiers_and_targets",
+  "mutationAttempted": false,
+  "applyCompleted": false,
+  "original26PodIdentitiesUnchanged": true,
+  "issues": [
+    {
+      "code": "missing_required_targets",
+      "detail": "missing-priority-ue1: priority"
+    }
+  ],
+  "endedAt": "2026-10-21T02:33:51.765412+00:00"
+}

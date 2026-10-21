@@ -1,0 +1,33 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E3",
+  "date": "2026-10-21",
+  "branch": "main",
+  "sourceBasisGitHead": "dd363deb922119189314d83f08378a08528f10fa",
+  "priorE2WorktreeChangesPreserved": true,
+  "agentStagedOrCommitted": false,
+  "scope": [
+    "caller-supplied complete two-user UDP downlink requests",
+    "equal/guarantee-ue1/guarantee-ue2 fixed whitelist",
+    "four successful request variants",
+    "four read-only refusal cases",
+    "legacy E2 normal regression"
+  ],
+  "tests": {
+    "discovered": 301,
+    "passed": 300,
+    "conditionalSkipped": 1,
+    "newE3Tests": 20
+  },
+  "excluded": [
+    "natural-language demand understanding",
+    "automatic identity/session rebinding",
+    "arbitrary queue parameters",
+    "priority-only modes",
+    "uplink",
+    "native 5G QoS",
+    "latency/loss SLA",
+    "dynamic CNF deployment"
+  ]
+}

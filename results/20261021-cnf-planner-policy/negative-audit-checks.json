@@ -1,0 +1,61 @@
+{
+  "scope": "offline_corrupted_evidence_checks",
+  "checks": [
+    {
+      "case": "modified_caller_request",
+      "rejected": true,
+      "reason": "Explicit input request/hash differs from predeclared fixture"
+    },
+    {
+      "case": "changed_expected_role",
+      "rejected": true,
+      "reason": "Engineering expectations differ from frozen source"
+    },
+    {
+      "case": "receiver_cookie",
+      "rejected": true,
+      "reason": "Missing correct server cookie/UPF peer or wrong endpoint hit"
+    },
+    {
+      "case": "wrong_restore_shape",
+      "rejected": true,
+      "reason": "Derived TC state differs from native output"
+    },
+    {
+      "case": "failed_cleanup_hidden",
+      "rejected": true,
+      "reason": "Normal process cleanup failed"
+    },
+    {
+      "case": "rejected_but_written",
+      "rejected": true,
+      "reason": "Rejected/incomplete request caused a write or was reported successful"
+    },
+    {
+      "case": "changed_final_identity",
+      "rejected": true,
+      "reason": "Observation fingerprint differs from expected scenario"
+    },
+    {
+      "case": "wrong_selected_mode",
+      "rejected": true,
+      "reason": "Execution identity/mode/timing differs"
+    },
+    {
+      "case": "forged_expiry",
+      "rejected": true,
+      "reason": "Execution identity/mode/timing differs"
+    },
+    {
+      "case": "rehashed_selection_semantics",
+      "rejected": true,
+      "reason": "Frozen planning replay differs"
+    },
+    {
+      "case": "changed_archived_source",
+      "rejected": true,
+      "reason": "Archived input hash differs: scripts/cnf-planner-policy.py"
+    }
+  ],
+  "allRejected": true
+}

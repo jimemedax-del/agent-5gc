@@ -59,8 +59,8 @@ def result(tool, status, **values):
     return {'toolVersion': 'cnf-planner-live-v1', 'tool': tool, 'status': status, **values}
 
 
-def mode_of(tc):
-    for mode in ['none', 'equal']:
+def mode_of(tc, modes=('none', 'equal')):
+    for mode in modes:
         try:
             check_queue(tc, mode)
             return mode
@@ -70,11 +70,12 @@ def mode_of(tc):
 
 
 def check_queue(tc, mode):
+    need(mode in ['none', 'equal', 'guarantee-ue1', 'guarantee-ue2'], 'unsupported_queue_mode', 'Unsupported live queue shape')
     auditor.check_tc(tc, mode)
     if mode == 'none':
         need(len(tc['qdisc']) == 1 and tc['qdisc'][0]['handle'] == '0:', 'foreign_queue', 'Unexpected extra initial queue')
     else:
-        owned_partial(tc)
+        owned_partial(tc, mode)
         need(len(tc['qdisc']) == 4 and len(tc['class']) == 4 and len(tc['filter']) == 6,
              'foreign_queue', 'Unexpected extra queue components')
 
@@ -165,7 +166,7 @@ def validate_plan(plan, batch, state, observation):
                   checkedAt=now().isoformat(), executionAuthorized=True, authorizationScope='current_locked_run_equal_mode_only')
 
 
-def owned_partial(tc):
+def owned_partial(tc, mode='equal'):
     """Recognize only a prefix of our known additive TC batch after an ordinary apply error."""
     if 'raw' in tc:
         parsed = auditor.parse_tc_native(json.loads(tc['raw']['qdisc']), tc['raw']['class'], tc['raw']['filter'])
@@ -174,8 +175,10 @@ def owned_partial(tc):
     need(len(roots) == 1 and roots[0]['kind'] == 'htb' and roots[0]['handle'] == '1:' and
          roots[0]['options']['default'] == '0x99' and roots[0]['options']['r2q'] == 10,
          'foreign_partial_queue', 'Partial root is not the one just created by this run')
-    expected = {'1:1': (1250000, 1250000, 0), '1:10': (500000, 1000000, 0),
-                '1:20': (500000, 1000000, 0), '1:99': (12500, 1250000, 7)}
+    need(mode in ['equal', 'guarantee-ue1', 'guarantee-ue2'], 'unsupported_queue_mode', 'Unsupported partial queue shape')
+    expected = {'1:1': (1250000, 1250000, 0), '1:99': (12500, 1250000, 7),
+                **{'1:10' if slot == 'ue1' else '1:20': (q['rate'] * 125000, q['ceil'] * 125000, q['prio'])
+                   for slot, q in c.policy(mode).items()}}
     need(len({x['handle'] for x in tc['class']}) == len(tc['class']) and
          len({x['handle'] for x in tc['qdisc']}) == len(tc['qdisc']), 'foreign_partial_queue', 'Duplicate partial handles')
     for cls in tc['class']:
@@ -208,10 +211,13 @@ def owned_partial(tc):
 
 
 class Backend:
+    queue_modes = ('none', 'equal')
+
     def __init__(self):
         self.topology, self.pod = None, None
         self.locked, self.mutation_attempted, self.apply_completed = False, False, False
         self.baseline = None
+        self.applied_mode = 'equal'
 
     def __enter__(self):
         import fcntl
@@ -270,7 +276,7 @@ class Backend:
         uplink = c2.network()
         c2.audit.check_network(uplink, clean=True)
         tc = self.tc()
-        mode = mode_of(tc)
+        mode = mode_of(tc, self.queue_modes)
         qos = c.native_switch()
         need(qos.strip() == 'QoS Enable: 0', 'native_qos_unaccepted', 'Native UPF policer must remain disabled')
         bindings, process_checks = {}, []
@@ -346,11 +352,11 @@ def apply_plan(plan, batch, state, backend, folder):
                   networkChanged=True, queueShapeAfter=auditor.tc_shape(after))
 
 
-def capture(backend, state, folder):
+def capture(backend, state, folder, mode='equal'):
     """Use the original C1 raw format, without its implicit second queue application."""
     folder.mkdir()
     tc = backend.tc()
-    check_queue(tc, 'equal')
+    check_queue(tc, mode)
     save(folder / 'tc-after.json', tc)
     c.m1.assert_steady(state['observation']['pods'], c2.snapshot())
     upf, _ = c.m1.one_pod(state['observation']['pods'], 'free5gc', 'free5gc-helm-free5gc-upf-upf')
@@ -358,7 +364,7 @@ def capture(backend, state, folder):
     save(folder / 'qos-before.txt', c.native_switch())
     jobs, samples = [], []
     token = state['liveStateHash'][:24]
-    summary = {'outcome': 'failed', 'mode': 'equal', 'round': 1, 'startedAt': c.m1.now()}
+    summary = {'outcome': 'failed', 'mode': mode, 'round': 1, 'startedAt': c.m1.now()}
     try:
         for user in c.config()['users']:
             sub = folder / user['name']
@@ -456,7 +462,9 @@ def cleanup_jobs(jobs, token, folder):
 
 def verify_plan(plan, batch, topology, folder):
     observation = auditor.group(folder, topology, c.config())
-    performance = auditor.performance([{'folder': 'measurement', 'mode': 'equal', **observation}], c.config())
+    mode = plan['innerPlan']['mode']
+    need(read(folder / 'summary.json')['mode'] == mode, 'measurement_mode_mismatch', 'Measurement does not match selected plan')
+    performance = auditor.performance([{'folder': 'measurement', 'mode': mode, **observation}], c.config())
     targets = {r['user_id']: r['requirements'] for r in batch['requests']}
     comparisons = {}
     for slot, user in topology['users'].items():
@@ -471,8 +479,10 @@ def verify_plan(plan, batch, topology, folder):
                   historicalFixtureChecks=performance, latencyLossGuaranteesAccepted=False)
 
 
-def restore(state, backend, folder):
+def restore(state, backend, folder, mode='equal'):
     need(backend.locked, 'missing_lock', 'Restore requires the held owner lock')
+    need(mode in ['equal', 'guarantee-ue1', 'guarantee-ue2'] and getattr(backend, 'applied_mode', 'equal') == mode,
+         'restore_mode_mismatch', 'Restoration must match the mode owned by this backend')
     folder.mkdir()
     backend.check_pod()
     before = backend.tc()
@@ -482,9 +492,9 @@ def restore(state, backend, folder):
     except ValueError:
         need(backend.mutation_attempted, 'not_owned', 'No mutation intent from this process')
         if backend.apply_completed:
-            check_queue(before, 'equal')
+            check_queue(before, mode)
         else:
-            owned_partial(before)
+            owned_partial(before, mode)
         backend.write_batch(['qdisc del dev eth0 root handle 1:'], folder)
     after = backend.tc()
     save(folder / 'tc-after.json', after)

@@ -1,0 +1,124 @@
+{
+  "policyPlanVersion": "cnf-policy-live-plan-v1",
+  "liveStateHash": "e10e60dac9938e2609623ac6fc22affabe433f1c75d5602188a4860f0cc1bd3a",
+  "fingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65",
+  "adapterHash": "dae950b2e393d516fdb405698923861a7fa21311e55397d074718e39fc8c5262",
+  "contractHash": "3c037290afdb5e957335add2ad74d7988340952a807075e28a73388695cae3b1",
+  "batchHash": "0e504c8940690f290779c27cd39b7075276de5a317c83ed72f47bcd4bb466669",
+  "innerPlan": {
+    "planVersion": "cnf-policy-plan-v1",
+    "scope": "offline_two_ue_udp_steady_mean_fixture",
+    "createdAt": "2026-10-21T02:32:26.931882+00:00",
+    "validUntil": "2026-10-21T02:32:56.931882+00:00",
+    "stateHash": "e3f96be0afeb39cbd6f3d393877a9bc7a92ef14ef76a6db17674b89f72108aa1",
+    "batchHash": "0e504c8940690f290779c27cd39b7075276de5a317c83ed72f47bcd4bb466669",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "direction": "downlink",
+    "mode": "guarantee-ue2",
+    "allocations": [
+      {
+        "slot": "ue1",
+        "request_id": "guarantee-ue2-ue1",
+        "user_id": "imsi-208930000000001",
+        "session_id": "pdu-19578644df74c0d5d6f87de9",
+        "queue": {
+          "rate": 2,
+          "ceil": 4,
+          "prio": 1
+        },
+        "requestedMinMbps": 1.5,
+        "requestedMaxMbps": 4,
+        "referenceMinMbps": 1.7
+      },
+      {
+        "slot": "ue2",
+        "request_id": "guarantee-ue2-ue2",
+        "user_id": "imsi-208930000000002",
+        "session_id": "pdu-637c491c6cba8a0a73908de0",
+        "queue": {
+          "rate": 6,
+          "ceil": 8,
+          "prio": 0
+        },
+        "requestedMinMbps": 5,
+        "requestedMaxMbps": 8,
+        "referenceMinMbps": 5.5
+      }
+    ],
+    "action": {
+      "kind": "select_existing_fixture_mode",
+      "namespace": "cnf-contention",
+      "deployment": "cnf-c-endpoint",
+      "queueDevice": "eth0",
+      "configVersion": "cnf-contention-v1",
+      "mode": "guarantee-ue2"
+    },
+    "restoreTarget": {
+      "mode": "none",
+      "stateHash": "e3f96be0afeb39cbd6f3d393877a9bc7a92ef14ef76a6db17674b89f72108aa1"
+    },
+    "verificationTarget": {
+      "metric": "receiver_steady_mean_mbps",
+      "steadyStartSeconds": 5,
+      "steadyEndSeconds": 25,
+      "durationSeconds": 30,
+      "offeredMbpsPerUE": 8,
+      "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+    },
+    "liveExecutionSupported": false,
+    "liveGuaranteeClaimed": false,
+    "planHash": "b5cfdc5a71a2fe6f3f4f91bd5eb4c6272ef4e5f7d549058cf50bea3309a0b95a",
+    "planId": "plan-b5cfdc5a71a2fe6f3f4f"
+  },
+  "computationState": {
+    "snapshotVersion": "cnf-planner-state-v1",
+    "source": {
+      "sourceVersion": "cnf-planner-state-input-v1",
+      "mode": "declared_fixture",
+      "direction": "downlink",
+      "declaredAt": "2026-10-21T02:32:26.926989+00:00",
+      "ttlSeconds": 180,
+      "capacityMbps": 10,
+      "unmanagedReservedMbps": 0,
+      "unmanagedTrafficDetected": false,
+      "nativeQosEnabled": false,
+      "activeProfile": "none",
+      "bindings": [
+        {
+          "slot": "ue1",
+          "user_id": "imsi-208930000000001",
+          "session_id": "pdu-19578644df74c0d5d6f87de9"
+        },
+        {
+          "slot": "ue2",
+          "user_id": "imsi-208930000000002",
+          "session_id": "pdu-637c491c6cba8a0a73908de0"
+        }
+      ]
+    },
+    "validUntil": "2026-10-21T02:35:26.926989+00:00",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "sourceHash": "f331d233b74f6b76027eba472024dd9077cb7d44ef8396a16a0571c765839401",
+    "liveBindingsVerified": false,
+    "liveStateObserved": false,
+    "stateHash": "e3f96be0afeb39cbd6f3d393877a9bc7a92ef14ef76a6db17674b89f72108aa1",
+    "stateId": "state-e3f96be0afeb39cbd6f3"
+  },
+  "candidateEvaluations": {
+    "equal": [
+      "ue1:queue_ceiling_exceeds_requested_cap",
+      "ue2:minimum_exceeds_reference_envelope",
+      "relative_priority_not_preserved"
+    ],
+    "guarantee-ue1": [
+      "ue1:queue_ceiling_exceeds_requested_cap",
+      "ue2:minimum_exceeds_reference_envelope",
+      "relative_priority_not_preserved"
+    ],
+    "guarantee-ue2": []
+  },
+  "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist",
+  "validUntil": "2026-10-21T02:32:56.931882+00:00",
+  "policyPlanHash": "59c34446370e105fb54fbd7c342ea16fd6c0c0a29a04ecfbd1c28925a8dbb127",
+  "policyPlanId": "policyPlan-59c34446370e105fb54f"
+}

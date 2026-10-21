@@ -1,0 +1,34 @@
+{
+  "requestVersion": "cnf-planner-requests-v1",
+  "batch_id": "e2-equal-liveState-1bf050af263fa5957828",
+  "assessmentScope": "controlled_receiver_steady_mean",
+  "protocol": "UDP",
+  "requests": [
+    {
+      "request_id": "equal-ue1",
+      "user_id": "imsi-208930000000001",
+      "session_id": "pdu-19578644df74c0d5d6f87de9",
+      "requirements": {
+        "direction": "downlink",
+        "min_bandwidth_mbps": 4,
+        "max_bandwidth_mbps": 8,
+        "priority": "normal",
+        "valid_for_seconds": 30,
+        "measurement_window_seconds": 20
+      }
+    },
+    {
+      "request_id": "equal-ue2",
+      "user_id": "imsi-208930000000002",
+      "session_id": "pdu-637c491c6cba8a0a73908de0",
+      "requirements": {
+        "direction": "downlink",
+        "min_bandwidth_mbps": 4,
+        "max_bandwidth_mbps": 8,
+        "priority": "normal",
+        "valid_for_seconds": 30,
+        "measurement_window_seconds": 20
+      }
+    }
+  ]
+}

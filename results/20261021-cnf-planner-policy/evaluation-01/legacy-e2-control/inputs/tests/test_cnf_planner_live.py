@@ -1,0 +1,381 @@
+"""E2 negative boundaries and restoration; never access a cluster."""
+import copy
+from datetime import timedelta
+import importlib.util
+import io
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import unittest
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
+
+ROOT = Path(__file__).resolve().parent.parent
+spec = importlib.util.spec_from_file_location('live_under_test', ROOT / 'scripts/cnf-planner-live.py')
+live = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(live)
+AT = live.p.instant('2026-10-20T13:30:00Z')
+EQUAL = ROOT / 'results/20261020-cnf-contention/measure-01/01-equal/tc-after.json'
+NONE = {'qdisc': [{'kind': 'noqueue', 'handle': '0:', 'root': True}], 'class': [], 'filter': []}
+
+
+def reseal(value, kind):
+    return live.p.seal({k: v for k, v in value.items() if k not in [kind + 'Id', kind + 'Hash']}, kind)
+
+
+def observation():
+    return {'queueMode': 'none', 'bindings': {slot: {'supi': 'imsi-20893000000000' + str(i),
+            'session_id': 'pdu-session-' + slot} for i, slot in enumerate(['ue1', 'ue2'], 1)}, 'endpoint': {'uid': 'endpoint-uid'}}
+
+
+class FakeBackend:
+    def __init__(self, observed, tc=None):
+        self.locked, self.mutation_attempted, self.apply_completed = True, False, False
+        self.observed, self.current = observed, copy.deepcopy(tc or NONE)
+        self.writes, self.fail_write, self.fail_pod = [], False, False
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.locked = False
+
+    def full(self, folder):
+        folder.mkdir()
+        return self.observed
+
+    def check_pod(self):
+        if self.fail_pod:
+            raise ValueError('endpoint_replaced')
+
+    def observe(self, folder):
+        folder.mkdir()
+        return self.observed
+
+    def tc(self):
+        return self.current
+
+    def write_batch(self, lines, folder):
+        self.writes.append(lines)
+        self.current = copy.deepcopy(NONE if lines[0].startswith('qdisc del') else live.read(EQUAL))
+        if self.fail_write:
+            self.fail_write = False
+            raise ValueError('ordinary TC failure')
+
+
+class LivePlannerTests(unittest.TestCase):
+    def setUp(self):
+        self.clock = patch.object(live, 'now', return_value=AT)
+        self.pclock = patch.object(live.p, 'clock', return_value=AT)
+        self.clock.start()
+        self.pclock.start()
+        self.addCleanup(self.clock.stop)
+        self.addCleanup(self.pclock.stop)
+        self.observed = observation()
+        self.state = live.live_state(self.observed)
+        self.batch = live.requests_for(self.state)
+        self.plan = live.plan_policy(self.state, self.batch)['plan']
+
+    def test_observed_bindings_make_equal_plan_and_live_revalidation(self):
+        self.assertEqual(self.plan['innerPlan']['mode'], 'equal')
+        self.assertFalse(self.plan['computationState']['liveStateObserved'])
+        self.assertEqual(live.validate_plan(self.plan, self.batch, self.state, self.observed)['status'], 'valid_live_preconditions')
+
+    def test_pod_session_resource_and_queue_drift_refused(self):
+        for key in ['bindings', 'pods', 'resources', 'queueMode', 'endpoint']:
+            drift = copy.deepcopy(self.observed)
+            drift[key] = 'changed'
+            with self.subTest(key=key), self.assertRaises(live.p.Rejection):
+                live.validate_plan(self.plan, self.batch, self.state, drift)
+
+    def test_state_timestamp_extension_or_false_live_claim_refused(self):
+        for field, value in [('liveStateObserved', False), ('bindingScope', 'global_5g_uuid'),
+                             ('validUntil', (AT + timedelta(seconds=300)).isoformat()), ('command', 'anything')]:
+            state = copy.deepcopy(self.state)
+            state[field] = value
+            with self.subTest(field=field), self.assertRaises(live.p.Rejection):
+                live.check_state(reseal(state, 'liveState'))
+
+    def test_stale_state_and_expired_plan_refused(self):
+        for seconds in [31, 181]:
+            with patch.object(live, 'now', return_value=AT + timedelta(seconds=seconds)), \
+                 patch.object(live.p, 'clock', return_value=AT + timedelta(seconds=seconds)), self.assertRaises(live.p.Rejection):
+                live.validate_plan(self.plan, self.batch, self.state, self.observed)
+
+    def test_modified_targets_and_tampered_or_resealed_inner_action_refused(self):
+        changed = copy.deepcopy(self.batch)
+        changed['requests'][0]['requirements']['priority'] = 'high'
+        with self.assertRaises(live.p.Rejection):
+            live.plan_policy(self.state, changed)
+        for rehash in [False, True]:
+            plan = copy.deepcopy(self.plan)
+            plan['innerPlan']['action']['namespace'] = 'free5gc'
+            if rehash:
+                plan['innerPlan'] = reseal(plan['innerPlan'], 'plan')
+                plan = reseal(plan, 'livePlan')
+            with self.assertRaises(live.p.Rejection):
+                live.validate_plan(plan, self.batch, self.state, self.observed)
+
+    def test_adapter_change_refused(self):
+        with patch.object(live, 'adapter_hash', return_value='changed'), self.assertRaises(live.p.Rejection):
+            live.validate_plan(self.plan, self.batch, self.state, self.observed)
+
+    def test_session_digest_ignores_only_pending_flag(self):
+        user = {'pod': 'ue', 'podUID': 'uid', 'ip': '10.60.0.3'}
+        listing = 'PDU Session1\n state: PS-ACTIVE\n address: 10.60.0.3\n ambr: up[1000Mb/s] down[1000Mb/s]\n data-pending: false\n'
+        first = live.session_record('supi', user, listing)
+        self.assertEqual(first, live.session_record('supi', user, listing.replace('false', 'true')))
+        for changed in [listing.replace('PS-ACTIVE', 'PS-INACTIVE'), listing.replace('.3', '.4'), listing + 'PDU Session2\n']:
+            with self.assertRaises(live.p.Rejection):
+                live.session_record('supi', user, changed)
+
+    def test_apply_requires_lock_and_fresh_fingerprint(self):
+        for locked, observed in [(False, self.observed), (True, {'changed': True})]:
+            backend = FakeBackend(observed)
+            backend.locked = locked
+            with TemporaryDirectory() as tmp, self.assertRaises(live.p.Rejection):
+                live.apply_plan(self.plan, self.batch, self.state, backend, Path(tmp) / 'apply')
+            self.assertFalse(backend.mutation_attempted)
+            self.assertFalse(backend.writes)
+
+    def test_apply_equal_and_restore_original_noqueue(self):
+        backend = FakeBackend(self.observed)
+        with TemporaryDirectory() as tmp:
+            self.assertEqual(live.apply_plan(self.plan, self.batch, self.state, backend, Path(tmp) / 'apply')['status'], 'applied')
+            self.assertEqual(live.restore(self.state, backend, Path(tmp) / 'restore')['status'], 'restored')
+        self.assertEqual(backend.writes, [live.c.tc_commands('equal'), ['qdisc del dev eth0 root handle 1:']])
+
+    def test_apply_error_preserves_intent_and_allows_owned_cleanup(self):
+        backend = FakeBackend(self.observed)
+        backend.fail_write = True
+        with TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(ValueError, 'ordinary TC failure'):
+                live.apply_plan(self.plan, self.batch, self.state, backend, Path(tmp) / 'apply')
+            self.assertTrue(backend.mutation_attempted)
+            self.assertFalse(backend.apply_completed)
+            self.assertEqual(live.restore(self.state, backend, Path(tmp) / 'restore')['status'], 'restored')
+
+    def test_restore_refuses_foreign_queue_missing_ownership_and_replaced_pod(self):
+        for variant in ['foreign', 'unowned', 'replaced', 'unlocked']:
+            backend = FakeBackend(self.observed, live.read(EQUAL))
+            backend.mutation_attempted = variant != 'unowned'
+            backend.fail_pod = variant == 'replaced'
+            backend.locked = variant != 'unlocked'
+            if variant == 'foreign':
+                backend.current['qdisc'][0]['kind'] = 'foreign'
+            with TemporaryDirectory() as tmp, self.subTest(variant=variant), self.assertRaises((ValueError, live.p.Rejection)):
+                live.restore(self.state, backend, Path(tmp) / 'restore')
+            self.assertFalse(backend.writes)
+
+    def test_restore_noqueue_is_noop_and_expiry_does_not_block_owned_cleanup(self):
+        backend = FakeBackend(self.observed)
+        with TemporaryDirectory() as tmp:
+            live.restore(self.state, backend, Path(tmp) / 'none')
+            self.assertFalse(backend.writes)
+            backend.current = live.read(EQUAL)
+            backend.mutation_attempted, backend.apply_completed = True, True
+            with patch.object(live, 'now', return_value=AT + timedelta(hours=1)):
+                live.restore(self.state, backend, Path(tmp) / 'expired')
+
+    def test_restore_drift_is_failure_even_when_queue_cleared(self):
+        backend = FakeBackend({'changed': True}, live.read(EQUAL))
+        backend.mutation_attempted, backend.apply_completed = True, True
+        with TemporaryDirectory() as tmp, self.assertRaises(live.p.Rejection):
+            live.restore(self.state, backend, Path(tmp) / 'restore')
+        self.assertEqual(backend.current, NONE)
+
+    def test_known_partial_root_and_classes_accepted_but_foreign_parts_refused(self):
+        equal = live.read(EQUAL)
+        self.assertTrue(live.owned_partial(equal))
+        for count in range(1, 5):
+            partial = {**copy.deepcopy(equal), 'qdisc': equal['qdisc'][:1], 'class': equal['class'][:count], 'filter': []}
+            partial.pop('raw')
+            self.assertTrue(live.owned_partial(partial))
+        for field in ['class', 'filter', 'qdisc']:
+            changed = copy.deepcopy(equal)
+            changed.pop('raw')
+            changed[field][0]['kind'] = 'foreign'
+            with self.assertRaises((ValueError, live.p.Rejection)):
+                live.owned_partial(changed)
+
+    def test_verify_reuses_raw_receiver_evidence_and_applies_actual_targets(self):
+        base = ROOT / 'results/20261020-cnf-contention/measure-01'
+        topology = live.read(base / 'initial/topology.json')
+        batch = copy.deepcopy(self.batch)
+        for slot, r in zip(['ue1', 'ue2'], batch['requests']):
+            r['user_id'] = topology['users'][slot]['supi']
+        value = live.verify_plan(self.plan, batch, topology, base / '01-equal')
+        self.assertEqual(value['status'], 'passed_controlled_targets')
+        batch['requests'][0]['requirements']['min_bandwidth_mbps'] = 6
+        self.assertEqual(live.verify_plan(self.plan, batch, topology, base / '01-equal')['status'], 'failed_targets')
+
+    def test_whole_run_capture_failure_always_restores_and_preserves_error(self):
+        backend = FakeBackend(self.observed)
+        with TemporaryDirectory() as tmp, patch.object(live.sys, 'platform', 'linux'), \
+             patch.object(live, 'Backend', return_value=backend), patch.object(live, 'archive_inputs'), \
+             patch.object(live, 'capture', side_effect=ValueError('capture failed')):
+            folder = Path(tmp) / 'run'
+            with self.assertRaisesRegex(ValueError, 'capture failed'):
+                live.run(folder)
+            self.assertEqual(live.read(folder / 'summary.json')['restoration'], 'restored')
+            self.assertEqual(live.read(folder / 'execution-error.json')['error'], 'capture failed')
+            self.assertEqual(backend.current, NONE)
+            self.assertTrue(live.read(folder / 'summary.json')['finalStrictBaselinePassed'])
+
+    def test_whole_run_failed_restore_never_reports_success(self):
+        backend = FakeBackend(self.observed)
+        with TemporaryDirectory() as tmp, patch.object(live.sys, 'platform', 'linux'), \
+             patch.object(live, 'Backend', return_value=backend), patch.object(live, 'archive_inputs'), \
+             patch.object(live, 'capture', side_effect=ValueError('capture failed')), \
+             patch.object(live, 'restore', side_effect=ValueError('foreign queue')):
+            folder = Path(tmp) / 'run'
+            with self.assertRaisesRegex(ValueError, 'foreign queue'):
+                live.run(folder)
+            self.assertEqual(live.read(folder / 'summary.json')['outcome'], 'failed')
+            self.assertEqual(live.read(folder / 'execution-error.json')['error'], 'capture failed')
+            self.assertEqual(live.read(folder / 'restoration.json')['status'], 'failed')
+
+    def test_extra_initial_qdisc_refused(self):
+        tc = copy.deepcopy(NONE)
+        tc['qdisc'].append({'kind': 'ingress', 'handle': 'ffff:'})
+        with self.assertRaises(live.p.Rejection):
+            live.mode_of(tc)
+
+    def test_process_cleanup_requires_exact_pod_command_and_unique_marker(self):
+        token = 'a' * 24
+        command = ['kubectl', '-n', 'free5gc', 'exec', 'ue-pod', '--', 'iperf3', '-c', '10.0.0.1', '--extra-data', token]
+        with patch.object(live.c.m1, 'kube') as kube:
+            live.stop_owned_process('ue-pod', command, token)
+            args = kube.call_args.args
+            self.assertIn('-f', args)
+            self.assertIn('-x', args)
+            self.assertEqual(args[-1], live.re.escape(' '.join(command[6:])))
+        for pod, args in [('other-pod', command), ('ue-pod', command[:-2]),
+                          ('ue-pod', command[:-3] + ['ping', token])]:
+            with self.assertRaises(live.p.Rejection):
+                live.stop_owned_process(pod, args, token)
+
+    def test_expired_rejection_preserves_specific_reason(self):
+        stamp = AT + timedelta(seconds=31)
+        with patch.object(live, 'now', return_value=stamp), patch.object(live.p, 'clock', return_value=stamp):
+            with self.assertRaises(live.p.Rejection) as caught:
+                live.validate_plan(self.plan, self.batch, self.state, self.observed)
+        self.assertEqual(caught.exception.code, 'expired_plan')
+
+    def test_failed_prewrite_run_still_checks_baseline_without_restore(self):
+        backend = FakeBackend(self.observed)
+        with TemporaryDirectory() as tmp, patch.object(live.sys, 'platform', 'linux'), \
+             patch.object(live, 'Backend', return_value=backend), patch.object(live, 'archive_inputs'), \
+             patch.object(live, 'apply_plan', side_effect=live.p.Rejection('expired_plan', 'expired')), patch.object(live, 'restore') as restore:
+            folder = Path(tmp) / 'run'
+            with self.assertRaises(live.p.Rejection):
+                live.run(folder)
+            summary = live.read(folder / 'summary.json')
+            self.assertEqual(summary['outcome'], 'failed')
+            self.assertEqual(summary['errorCode'], 'expired_plan')
+            self.assertFalse(summary['mutationAttempted'])
+            self.assertTrue(summary['finalStrictBaselinePassed'])
+            restore.assert_not_called()
+
+    def test_final_baseline_failure_does_not_hide_initial_measurement_error(self):
+        backend = FakeBackend(self.observed)
+        original = backend.full
+        def full(folder):
+            if folder.name == 'final':
+                raise ValueError('strict check failed')
+            return original(folder)
+        backend.full = full
+        with TemporaryDirectory() as tmp, patch.object(live.sys, 'platform', 'linux'), \
+             patch.object(live, 'Backend', return_value=backend), patch.object(live, 'archive_inputs'), \
+             patch.object(live, 'capture', side_effect=ValueError('capture failed')):
+            folder = Path(tmp) / 'run'
+            with self.assertRaisesRegex(ValueError, 'strict check failed'):
+                live.run(folder)
+            self.assertEqual(live.read(folder / 'execution-error.json')['error'], 'capture failed')
+            self.assertFalse(live.read(folder / 'summary.json')['finalStrictBaselinePassed'])
+
+    @staticmethod
+    def dummy_job(pid):
+        job = Mock(pid=pid, returncode=None)
+        job.poll.return_value = None
+        job.wait.side_effect = lambda timeout: setattr(job, 'returncode', -15)
+        return job
+
+    def test_cleanup_attempts_all_processes_after_one_remote_stop_error(self):
+        jobs = [({'pod': 'ue'}, ['command'], self.dummy_job(i), io.StringIO(), io.StringIO()) for i in [1, 2]]
+        with TemporaryDirectory() as tmp, patch.object(live, 'stop_owned_process', side_effect=[ValueError('stop failed'),
+             SimpleNamespace(returncode=0, stdout='', stderr='')]) as stop:
+            with self.assertRaises(live.p.Rejection):
+                live.cleanup_jobs(jobs, 'a' * 24, Path(tmp))
+            self.assertEqual(stop.call_count, 2)
+            self.assertEqual(len(live.read(Path(tmp) / 'cleanup.json')['processes']), 2)
+            self.assertTrue(all(stdout.closed and stderr.closed for _, _, _, stdout, stderr in jobs))
+
+    def test_cleanup_records_errors_without_masking_active_exception(self):
+        jobs = [({'pod': 'ue'}, ['command'], self.dummy_job(1), io.StringIO(), io.StringIO())]
+        with TemporaryDirectory() as tmp, patch.object(live, 'stop_owned_process', side_effect=ValueError('stop failed')):
+            try:
+                raise RuntimeError('original capture error')
+            except RuntimeError:
+                live.cleanup_jobs(jobs, 'a' * 24, Path(tmp))
+            self.assertEqual(live.read(Path(tmp) / 'cleanup.json')['errors'], ['stop failed'])
+
+    def test_capture_failure_is_detected_before_waiting_for_other_processes(self):
+        backend = FakeBackend(self.observed, live.read(EQUAL))
+        backend.topology = {'target': '192.168.244.128', 'contention': {'ip': '10.42.0.200'},
+                            'users': {slot: {'pod': slot, 'ip': '10.60.0.' + str(i)} for i, slot in enumerate(['ue1', 'ue2'], 1)}}
+        jobs = [self.dummy_job(i) for i in range(4)]
+        jobs[0].poll.return_value = 1
+        state = live.live_state({**self.observed, 'pods': {}})
+        def close_streams(rows, *_):
+            for _, _, _, stdout, stderr in rows:
+                stdout.close()
+                stderr.close()
+        with TemporaryDirectory() as tmp, patch.object(live.c.m1, 'assert_steady'), patch.object(live.c2, 'snapshot'), \
+             patch.object(live.c.m1, 'one_pod', return_value=('upf', {})), \
+             patch.object(live.c.m1, 'upf_observation', return_value={'interfaces': []}), \
+             patch.object(live.c, 'native_switch', return_value='QoS Enable: 0'), \
+             patch.object(live.subprocess, 'Popen', side_effect=jobs), patch.object(live, 'cleanup_jobs', side_effect=close_streams) as cleanup:
+            with self.assertRaises(live.p.Rejection) as caught:
+                live.capture(backend, state, Path(tmp) / 'measurement')
+            self.assertEqual(caught.exception.code, 'acquisition_failed')
+            self.assertEqual(len(cleanup.call_args.args[0]), 4)
+            self.assertEqual(live.read(Path(tmp) / 'measurement/summary.json')['outcome'], 'failed')
+
+
+class FaultExerciseTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tool = live.load('fault_exercise_tests', ROOT / 'scripts/exercise-cnf-planner-live.py')
+
+    def test_partial_write_injection_only_replaces_the_whitelisted_batch(self):
+        with TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            backend = self.tool.FaultBackend('partial-write', folder)
+            backend.tc = Mock(return_value=live.read(EQUAL))
+            target = folder / 'run/execution'
+            target.mkdir(parents=True)
+            with patch.object(self.tool.BASE_BACKEND, 'write_batch', side_effect=ValueError('real command failure')) as write:
+                with self.assertRaisesRegex(ValueError, 'real command failure'):
+                    backend.write_batch(self.tool.live.c.tc_commands('equal'), target)
+                root = self.tool.live.c.tc_commands('equal')[0]
+                self.assertEqual(write.call_args.args[0], [root, root])
+            with patch.object(self.tool.BASE_BACKEND, 'write_batch') as write, self.assertRaises(self.tool.live.p.Rejection):
+                backend.write_batch(['arbitrary command'], target)
+            write.assert_not_called()
+
+    def test_fixture_actor_does_not_remove_foreign_queue(self):
+        with TemporaryDirectory() as tmp:
+            backend = self.tool.FaultBackend('queue-drift', Path(tmp))
+            backend.fixture_attempted = True
+            backend.check_pod = Mock()
+            tc = live.read(EQUAL)
+            tc['qdisc'][0]['kind'] = 'foreign'
+            backend.tc = Mock(return_value=tc)
+            backend.write_batch = Mock()
+            with self.assertRaises(ValueError):
+                backend.clean_fixture_drift()
+            backend.write_batch.assert_not_called()
+
+
+if __name__ == '__main__':
+    unittest.main()

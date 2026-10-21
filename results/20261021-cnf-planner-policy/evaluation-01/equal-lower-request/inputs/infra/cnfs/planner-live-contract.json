@@ -1,0 +1,14 @@
+{
+  "contractVersion": "cnf-planner-live-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E2",
+  "scope": "existing_c1_two_ue_downlink_equal_only",
+  "stateTtlSeconds": 180,
+  "planStartTtlSeconds": 30,
+  "allowedInitialMode": "none",
+  "allowedTargetMode": "equal",
+  "requestTargets": {"direction": "downlink", "min_bandwidth_mbps": 4, "max_bandwidth_mbps": 8, "priority": "normal", "valid_for_seconds": 30, "measurement_window_seconds": 20},
+  "tools": {"inspect_state": "live_read_only", "plan_policy": "observed_state_plus_offline_planner", "validate_plan": "live_recheck", "apply_plan": "inside_exclusive_run_only", "verify_plan": "raw_receiver_evidence", "restore": "owned_queue_inside_exclusive_run_only"},
+  "limitations": ["Explicit fixture user ports, not autonomous flow recognition or identity ACL", "Only adapter runs share the VM1 file lock; unrelated operators are not globally locked", "Observed PDU identity binds SUPI, Pod/container, session listing and TUN IP, not a globally unique 5G session UUID", "Readiness checks do not prove absence of all external traffic", "No native QoS, latency/loss guarantee, uplink, arbitrary policy or hard-kill/power-loss recovery guarantee"]
+}

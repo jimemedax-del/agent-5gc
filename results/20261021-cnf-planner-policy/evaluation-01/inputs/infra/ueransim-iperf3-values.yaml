@@ -1,0 +1,7 @@
+# Apply after baseline and three-node placement Values.
+# Import the locally built image into VM3's k3s containerd before upgrading.
+ue:
+  image:
+    name: local/ueransim-iperf3
+    tag: free5gc-v4.0.1-20261008
+    pullPolicy: Never

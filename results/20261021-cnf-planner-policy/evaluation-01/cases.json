@@ -1,0 +1,86 @@
+[
+  {
+    "name": "equal",
+    "mode": "equal",
+    "minima": [
+      4,
+      4
+    ],
+    "maxima": [
+      8,
+      8
+    ],
+    "priorities": [
+      "normal",
+      "normal"
+    ]
+  },
+  {
+    "name": "equal-lower-request",
+    "mode": "equal",
+    "minima": [
+      3,
+      3
+    ],
+    "maxima": [
+      8,
+      8
+    ],
+    "priorities": [
+      "normal",
+      "normal"
+    ]
+  },
+  {
+    "name": "guarantee-ue1",
+    "mode": "guarantee-ue1",
+    "minima": [
+      5,
+      1.5
+    ],
+    "maxima": [
+      8,
+      4
+    ],
+    "priorities": [
+      "high",
+      "low"
+    ]
+  },
+  {
+    "name": "guarantee-ue2",
+    "mode": "guarantee-ue2",
+    "minima": [
+      1.5,
+      5
+    ],
+    "maxima": [
+      4,
+      8
+    ],
+    "priorities": [
+      "low",
+      "high"
+    ]
+  },
+  {
+    "name": "missing-priority",
+    "status": "needs_clarification",
+    "errorCode": "missing_required_targets"
+  },
+  {
+    "name": "stale-session",
+    "status": "rejected",
+    "errorCode": "session_binding_mismatch"
+  },
+  {
+    "name": "over-capacity",
+    "status": "rejected",
+    "errorCode": "no_compatible_live_profile"
+  },
+  {
+    "name": "unsupported-loss",
+    "status": "rejected",
+    "errorCode": "unsupported_target"
+  }
+]

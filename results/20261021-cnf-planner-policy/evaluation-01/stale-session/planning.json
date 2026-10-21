@@ -1,0 +1,13 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "plan_policy",
+  "status": "rejected",
+  "plan": null,
+  "issues": [
+    {
+      "code": "session_binding_mismatch",
+      "detail": "imsi-208930000000001"
+    }
+  ],
+  "executionAuthorized": false
+}

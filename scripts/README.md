@@ -448,6 +448,31 @@ python3 scripts/audit-cnf-planner-live-faults.py <异常验收目录> --out <审
 正式证据与完整限制见 [E2 模块](../docs/cnf-service-chain-orchestration.md#e2-受控现场与单模式执行闭环)。
 测试：`python -m unittest discover -s tests -p '*planner*.py' -v`；这些本地测试不访问集群，不能当作实机故障注入。
 
+## E3 完整请求与白名单策略选择
+
+`cnf-planner-policy.py` 接收 `cnf-planner-requests-v1` 的完整两用户下行请求，仅开放 `equal`、`guarantee-ue1`、`guarantee-ue2`。
+它按容量、已测参考下界、上限及相对优先级检查后，在可行白名单中依次按总预留速率、总上限、名称选择；不生成任意速率，也不自动绑定未知用户或旧会话。
+E2 固定请求入口继续保留。E3 的 inspect 状态与 E2 一样实际读取会话，但使用独立的 `cnf-planner-policy-v1` 工具合同和 `policyPlan` 标识。
+
+```sh
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-planner-policy.py inspect --out <新的现场目录>
+python3 scripts/cnf-planner-policy.py plan --state <现场目录/state.json> --requests <完整请求JSON> --out <新计划JSON>
+python3 scripts/cnf-planner-policy.py run --state <现场目录/state.json> --plan <计划JSON> --requests <同一请求JSON> --out <新的执行目录>
+python3 scripts/audit-cnf-planner-policy.py <整套评估目录> --out <审计JSON>
+```
+
+调用者必须明确提供实际 SUPI、inspect 返回的 `session_id` 和全部必需目标；不能将历史样例的会话编号直接用于当前执行。
+也可仅以 `run --requests <完整请求JSON> --out <新目录>` 在同一持锁运行内重新观察、规划和执行；仍不修改请求中的身份或目标。
+`validate` 需 `--state/--plan/--requests/--out`，会重新查询现场，但不写队列。计划最多 30 秒内开始，旧计划过期须重新观察/规划，不能改时间戳；实时 CLI 不接受模拟时钟。
+Python 接口为 `inspect_state`、`plan_policy`、`validate_plan`、`apply_plan`、`verify_plan`、`restore`、`run`。
+执行器在同一锁内复查、配置、测量和恢复；同一后端实例不得重复应用已执行的请求，下一次需新运行和新状态。
+`planned` 不表示已执行；`needs_clarification/rejected` 表示没有写入，退出码 0 也不能代替 JSON 状态判断。
+这些目标只指既有 UDP 30 秒实验、5–25 秒候选范围内完整接收区间的稳态均值，不是连续租约或业务 SLA；时延/丢包、原生 5G QoS、上行和独立优先级模式仍未开放。
+
+`evaluate-cnf-planner-policy.py --out <新的评估目录>` 是明确的实机测试入口，会生成预先声明的工程请求，执行四组合法请求、四组拒绝请求及一个 E2 正常对照。
+它对当前实际 SUPI/会话进行显式实验绑定，不属于自然语言需求识别，也不把该绑定能力作为替用户补写信息的生产接口。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

@@ -1,0 +1,9 @@
+{
+  "toolVersion": "cnf-planner-live-v1",
+  "tool": "validate_plan",
+  "status": "valid_live_preconditions",
+  "livePlanHash": "4c86ed745688b43fce8929887063d40b69cfd01d82c3a2cb10edc7814f4b0f60",
+  "checkedAt": "2026-10-21T02:35:38.504085+00:00",
+  "executionAuthorized": true,
+  "authorizationScope": "current_locked_run_equal_mode_only"
+}

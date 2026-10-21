@@ -1,0 +1,13 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "plan_policy",
+  "status": "needs_clarification",
+  "plan": null,
+  "issues": [
+    {
+      "code": "missing_required_targets",
+      "detail": "missing-priority-ue1: priority"
+    }
+  ],
+  "executionAuthorized": false
+}

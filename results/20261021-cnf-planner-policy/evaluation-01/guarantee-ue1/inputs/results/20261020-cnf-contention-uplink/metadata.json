@@ -1,0 +1,671 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "C2",
+  "configVersion": "cnf-contention-uplink-v2",
+  "date": "2026-10-20",
+  "outcome": "accepted-within-declared-scope",
+  "sourceBasisGitHead": "5a79984b23717b8ea828f49e1ddf993d73d085e5",
+  "worktreeChangesCommittedByAgent": false,
+  "scope": "Container-local ingress IFB uplink bandwidth allocation after UPF; explicit fixture endpoints; receiver UDP loss and ICMP RTT availability reported separately; no radio, native 5G QoS or latency/loss SLA acceptance",
+  "formal": {
+    "path": "measure-02",
+    "groups": 20,
+    "sessions": 40,
+    "groupCounts": {
+      "none": 2,
+      "shared": 3,
+      "equal": 3,
+      "guarantee-ue1": 3,
+      "guarantee-ue2": 3,
+      "priority-ue1": 3,
+      "priority-ue2": 3
+    },
+    "uniqueCookies": 40,
+    "evidenceIntegrity": "passed",
+    "networkAcceptancePassed": true,
+    "vm1AndWindowsAuditIdentical": true,
+    "sourceHashes": 27,
+    "currentSourcesDifferFromExecution": [],
+    "minimumOverlapLowerBoundSeconds": 29.000041007995605,
+    "minimumSenderOverlapLowerBoundSeconds": 29.000041007995605,
+    "minimumReceiverOverlapLowerBoundSeconds": 29.040783882141113,
+    "actualSenderSteadyMbpsRange": [
+      8.000298994878454,
+      8.000358727402467
+    ],
+    "upfPeakSampledMemoryBytes": 19243008,
+    "resourceSampleCount": 620,
+    "guaranteeWindows": {
+      "01-guarantee-ue1/ue1": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "01-guarantee-ue1/ue2": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "01-guarantee-ue2/ue1": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "01-guarantee-ue2/ue2": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "02-guarantee-ue1/ue1": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "02-guarantee-ue1/ue2": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "02-guarantee-ue2/ue1": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "02-guarantee-ue2/ue2": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "03-guarantee-ue1/ue1": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "03-guarantee-ue1/ue2": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "03-guarantee-ue2/ue1": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "03-guarantee-ue2/ue2": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      }
+    },
+    "modeSummary": {
+      "none": {
+        "ue1": {
+          "medianMbps": 8.000096658324512,
+          "pooledLossPercent": 0.0,
+          "rttP95MsByRound": [
+            5.56,
+            5.43
+          ]
+        },
+        "ue2": {
+          "medianMbps": 8.000709339040377,
+          "pooledLossPercent": 0.0,
+          "rttP95MsByRound": [
+            5.44,
+            5.12
+          ]
+        }
+      },
+      "shared": {
+        "ue1": {
+          "medianMbps": 4.826783262848948,
+          "pooledLossPercent": 39.87202349732508,
+          "rttP95MsByRound": [
+            5.45,
+            6.26,
+            5.2
+          ]
+        },
+        "ue2": {
+          "medianMbps": 4.827286754653876,
+          "pooledLossPercent": 39.183482929106454,
+          "rttP95MsByRound": [
+            5.73,
+            6.7,
+            4.81
+          ]
+        }
+      },
+      "equal": {
+        "ue1": {
+          "medianMbps": 4.8267901070654675,
+          "pooledLossPercent": 39.586846543001684,
+          "rttP95MsByRound": [
+            6.93,
+            7.43,
+            7.77
+          ]
+        },
+        "ue2": {
+          "medianMbps": 4.827288526458584,
+          "pooledLossPercent": 39.55631471289092,
+          "rttP95MsByRound": [
+            7.46,
+            7.54,
+            7.56
+          ]
+        }
+      },
+      "guarantee-ue1": {
+        "ue1": {
+          "medianMbps": 7.725505844825996,
+          "pooledLossPercent": 3.4376052542943754,
+          "rttP95MsByRound": [
+            6.71,
+            5.55,
+            6.79
+          ]
+        },
+        "ue2": {
+          "medianMbps": 1.928588354406716,
+          "pooledLossPercent": 75.86875434640592,
+          "rttP95MsByRound": [
+            9.58,
+            8.1,
+            9.66
+          ]
+        }
+      },
+      "guarantee-ue2": {
+        "ue1": {
+          "medianMbps": 1.9285896672890983,
+          "pooledLossPercent": 75.87078829255958,
+          "rttP95MsByRound": [
+            8.63,
+            8.71,
+            8.54
+          ]
+        },
+        "ue2": {
+          "medianMbps": 7.725533570545136,
+          "pooledLossPercent": 3.4254073855741294,
+          "rttP95MsByRound": [
+            6.53,
+            6.56,
+            5.8
+          ]
+        }
+      },
+      "priority-ue1": {
+        "ue1": {
+          "medianMbps": 7.725960260636678,
+          "pooledLossPercent": 3.4314344659172247,
+          "rttP95MsByRound": [
+            6.7,
+            5.95,
+            6.53
+          ]
+        },
+        "ue2": {
+          "medianMbps": 1.9285894736842106,
+          "pooledLossPercent": 75.87231352718078,
+          "rttP95MsByRound": [
+            9.11,
+            8.01,
+            9.7
+          ]
+        }
+      },
+      "priority-ue2": {
+        "ue1": {
+          "medianMbps": 1.928585099434141,
+          "pooledLossPercent": 75.86977136234327,
+          "rttP95MsByRound": [
+            8.67,
+            8.59,
+            8.6
+          ]
+        },
+        "ue2": {
+          "medianMbps": 7.72597453622515,
+          "pooledLossPercent": 3.433467359956213,
+          "rttP95MsByRound": [
+            5.97,
+            5.62,
+            5.8
+          ]
+        }
+      }
+    },
+    "rttRangeMs": {
+      "none": {
+        "ue1": {
+          "p50Ms": [
+            3.01,
+            3.32
+          ],
+          "p95Ms": [
+            5.43,
+            5.56
+          ],
+          "p99Ms": [
+            5.95,
+            7.71
+          ]
+        },
+        "ue2": {
+          "p50Ms": [
+            3.03,
+            3.15
+          ],
+          "p95Ms": [
+            5.12,
+            5.44
+          ],
+          "p99Ms": [
+            7.24,
+            7.64
+          ]
+        }
+      },
+      "shared": {
+        "ue1": {
+          "p50Ms": [
+            3.23,
+            3.57
+          ],
+          "p95Ms": [
+            5.2,
+            6.26
+          ],
+          "p99Ms": [
+            6.64,
+            8.55
+          ]
+        },
+        "ue2": {
+          "p50Ms": [
+            3.0,
+            3.72
+          ],
+          "p95Ms": [
+            4.81,
+            6.7
+          ],
+          "p99Ms": [
+            5.92,
+            9.65
+          ]
+        }
+      },
+      "equal": {
+        "ue1": {
+          "p50Ms": [
+            4.16,
+            4.6
+          ],
+          "p95Ms": [
+            6.93,
+            7.77
+          ],
+          "p99Ms": [
+            8.57,
+            9.82
+          ]
+        },
+        "ue2": {
+          "p50Ms": [
+            3.65,
+            4.51
+          ],
+          "p95Ms": [
+            7.46,
+            7.56
+          ],
+          "p99Ms": [
+            8.58,
+            10.0
+          ]
+        }
+      },
+      "guarantee-ue1": {
+        "ue1": {
+          "p50Ms": [
+            3.65,
+            3.95
+          ],
+          "p95Ms": [
+            5.55,
+            6.79
+          ],
+          "p99Ms": [
+            7.24,
+            9.52
+          ]
+        },
+        "ue2": {
+          "p50Ms": [
+            5.15,
+            5.72
+          ],
+          "p95Ms": [
+            8.1,
+            9.66
+          ],
+          "p99Ms": [
+            10.1,
+            10.7
+          ]
+        }
+      },
+      "guarantee-ue2": {
+        "ue1": {
+          "p50Ms": [
+            5.26,
+            5.81
+          ],
+          "p95Ms": [
+            8.54,
+            8.71
+          ],
+          "p99Ms": [
+            9.45,
+            10.1
+          ]
+        },
+        "ue2": {
+          "p50Ms": [
+            3.68,
+            3.83
+          ],
+          "p95Ms": [
+            5.8,
+            6.56
+          ],
+          "p99Ms": [
+            6.82,
+            8.8
+          ]
+        }
+      },
+      "priority-ue1": {
+        "ue1": {
+          "p50Ms": [
+            3.56,
+            3.86
+          ],
+          "p95Ms": [
+            5.95,
+            6.7
+          ],
+          "p99Ms": [
+            7.75,
+            7.97
+          ]
+        },
+        "ue2": {
+          "p50Ms": [
+            5.07,
+            5.68
+          ],
+          "p95Ms": [
+            8.01,
+            9.7
+          ],
+          "p99Ms": [
+            10.8,
+            12.9
+          ]
+        }
+      },
+      "priority-ue2": {
+        "ue1": {
+          "p50Ms": [
+            4.89,
+            5.75
+          ],
+          "p95Ms": [
+            8.59,
+            8.67
+          ],
+          "p99Ms": [
+            9.58,
+            11.3
+          ]
+        },
+        "ue2": {
+          "p50Ms": [
+            3.54,
+            3.82
+          ],
+          "p95Ms": [
+            5.62,
+            5.97
+          ],
+          "p99Ms": [
+            6.98,
+            9.91
+          ]
+        }
+      }
+    },
+    "probeCounts": {
+      "none": {
+        "ue1": {
+          "transmitted": 300,
+          "received": 300,
+          "sufficientSessions": 2,
+          "insufficientSessions": 0
+        },
+        "ue2": {
+          "transmitted": 300,
+          "received": 300,
+          "sufficientSessions": 2,
+          "insufficientSessions": 0
+        }
+      },
+      "shared": {
+        "ue1": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        },
+        "ue2": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        }
+      },
+      "equal": {
+        "ue1": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        },
+        "ue2": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        }
+      },
+      "guarantee-ue1": {
+        "ue1": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        },
+        "ue2": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        }
+      },
+      "guarantee-ue2": {
+        "ue1": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        },
+        "ue2": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        }
+      },
+      "priority-ue1": {
+        "ue1": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        },
+        "ue2": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        }
+      },
+      "priority-ue2": {
+        "ue1": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        },
+        "ue2": {
+          "transmitted": 450,
+          "received": 450,
+          "sufficientSessions": 3,
+          "insufficientSessions": 0
+        }
+      }
+    }
+  },
+  "rttObservationAvailability": {
+    "minimumRequiredSteadyReplies": 30,
+    "sessions": 40,
+    "sufficientSessions": 40,
+    "insufficientSessions": 0,
+    "allSessionsSufficient": true,
+    "transmittedProbes": 6000,
+    "receivedProbes": 6000
+  },
+  "latencyAndLossGuaranteesAccepted": false,
+  "priorIncompleteFormalBatch": {
+    "path": "measure-01",
+    "outcome": "failed-incomplete",
+    "issue": "PS-013",
+    "actualRttCounterexamplePreserved": true,
+    "includedInMeasure02Statistics": false
+  },
+  "pilot": {
+    "path": "pilot-03",
+    "groups": 8,
+    "sessions": 16,
+    "audit": "audit-pilot-03.json",
+    "includedInFormalStatistics": false
+  },
+  "compatibilityAttempts": {
+    "failed": [
+      "pilot-01",
+      "pilot-02"
+    ],
+    "passedRecoveryOrVerification": [
+      "recovery-01",
+      "check-02"
+    ],
+    "issue": "PS-012 C2 alias and old ping count/deadline semantics"
+  },
+  "verification": {
+    "preflight": "preflight-01",
+    "kernelCapabilityProbe": "ifb-probe-01",
+    "unitTestsPerPlatform": {
+      "discovered": 145,
+      "passed": 144,
+      "conditionalHelmSkipped": 1
+    },
+    "platforms": [
+      "Windows",
+      "VM1 Linux"
+    ],
+    "newUplinkUnitTests": 16,
+    "negativeCases": 20,
+    "negativeCasesAllRejected": true,
+    "originalEvidenceUnchanged": true,
+    "c1HistoricalEvidenceReaudit": "c1-preservation-audit.json"
+  },
+  "restored": {
+    "newEndpointEgress": "noqueue",
+    "ingressRedirectAbsent": true,
+    "ifbAbsent": true,
+    "original25PodIdentitiesUnchanged": true,
+    "all26PodIdentitiesUnchanged": true,
+    "restartCounts": 0,
+    "nativeUpfQosEnable": 0,
+    "originalSessionAmbrMbps": {
+      "uplink": 1000,
+      "downlink": 1000
+    },
+    "newEndpointRetained": true
+  },
+  "limitations": [
+    "Independent-direction two-UE direct N6 uplink experiment; no simultaneous UL/DL or mixed real-application acceptance",
+    "IFB bottleneck is after UPF; does not reduce UE radio sending or protect preceding UPF capacity",
+    "Explicit endpoint labels, not autonomous business requirement recognition or identity ACL enforcement",
+    "Class-mapped ICMP RTT and receiver UDP loss are measurements, not application, one-way or radio SLA acceptance",
+    "ICMP and UDP can have distinct FQ-CoDel flow treatment even in the same HTB class",
+    "Ceil configuration and non-exceedance checked; not every ceiling independently saturated",
+    "No PCF/SMF QoS Flow/QFI/5QI integration or native 5G GBR completion",
+    "No long-duration stability or arbitrary forced-exit recovery acceptance"
+  ],
+  "evidence": {
+    "formalWindowsAudit": "audit.json",
+    "formalVm1Audit": "audit-formal-vm1.json",
+    "negativeChecks": "audit-negative-checks.json",
+    "testsWindows": "tests-windows.txt",
+    "testsVm1": "tests-vm1-v2.txt",
+    "formalInputSha256LF": {
+      "infra/cnfs/contention-uplink-experiment.json": "dc9e66879e6b5c45acc5b7605717fb7f7f3f5d9d71af8966fb2e4d183b78023c",
+      "scripts/cnf-contention-uplink.py": "1d0fafd7b2629428e16c3a7f42a2f9c9f033dcf224c1d9c59bd3a8daa9b20988",
+      "scripts/audit-cnf-contention-uplink.py": "2f322a80e8198a12bd3d41dcbe245d1aa02c2e27f7299735fd8cc51d6db775fd",
+      "tests/test_cnf_contention_uplink.py": "c6c3533e1d8fb0ce94667da3a1509d5d3ea90fe71e8abaaf0db138a7e93f1d54",
+      "infra/cnfs/contention-experiment.json": "479eb875254553c966474b323a103b0c759bb40a87def8286101e6b81f9ba2e9",
+      "scripts/cnf-contention.py": "caf5096e016336b9a4587643b8c1e8efe6cfa797b2e4cd5cb44f695c60b35ce8",
+      "scripts/audit-cnf-contention.py": "77367ed519b6e689a75550591aab8200a7172197a6aefd78e879c58cd49b56fa",
+      "infra/cnfs/multi-ue-experiment.json": "dd09ca0eb63da585e5874e7b253227f5e4136216f1e054e35b52f6f9b0bb6c4b",
+      "scripts/cnf-multi-ue.py": "faa479c74e85bffdab8e86d1181ec5c6e8fa0c9cdd79492da6bab7fc6862e394",
+      "scripts/create-test-subscriber.sh": "1877a5b451e7c96c5065bbd7412eed4f90549fbcaca90cd9b6a8981245b6abae",
+      "infra/free5gc-test-subscriber-ue2.json": "d8873d128bbd0bcfbec1b811e1e013a8cd02fc4bd61b3a1a89e56137f5e0b3c3",
+      "infra/cnfs/service-chain-profile.json": "3e7383a5dcd46af74d6973f27de6f41489941701d6bddbb878d116fff31e9e34",
+      "scripts/cnf-profile.py": "773f2d987c71d1f1b68e50b59bffa5bd2e4f38a4cbd243e6759ea4990cd0b7aa",
+      "infra/cnfs/networkpolicy-experiment.json": "cf42776596fc2b8c548041d61d8df42cf0266140549c9c506a1d1c5d690902f1",
+      "infra/cnfs/networkpolicy.yaml": "8f6785cea95ce023a1c8661cb25f4a06b55f6285635278f8a99a0cd9e23e14df",
+      "infra/cnfs/m4-experiment.json": "fc698f1fc8ca960853f4309919c1a578af62776e3506f67947d6ea485c4d1630",
+      "infra/cnfs/m3-experiment.json": "54563a55703918298b4957065e84e0bf009cd99b91f203099409d87385f3e323",
+      "infra/cnfs/m2-experiment.json": "1e4cdfe90da9e70e330a6699789b4f11deae5ea9899bb59093274d15c7eb103d",
+      "infra/cnfs/m1-proxy.yaml": "260c822b06961ccce2a48f7347d963baa37471cd03442035343ba4c2fae84687",
+      "infra/cnfs/m1-images.json": "fa24126b4c27f4aed9bcb9a08fc1878105296bc19817fce21215630a37a32f18",
+      "scripts/cnf-networkpolicy.py": "5712c4f50512a068ac5375e488b7597c01d5d552478bebb94c487865b55584ae",
+      "scripts/cnf-m1.py": "c9d42bd97307f1de7e806ac01bd423f2d81fbe88fc9a0a8c502060a6c47aefc7",
+      "scripts/cnf-m2.py": "54ecc11f19adb70bfdc6b0ce5c1875aae0298e1301432446497260b37c28b391",
+      "scripts/cnf-m3.py": "c97f9739842b625cc3a6a60949ea282665d843e02949d68463ae636ce7ff14a9",
+      "scripts/cnf-m4.py": "0fb07e9efb3ff995acadf830242b16cd92de32bc7dae142da1810cdd557cd5fa",
+      "scripts/free5gc-profile.py": "97c5b0c5fcd334655564f2052d027b421ed4b050e288816854604758a0e95701",
+      "infra/profiles/free5gc-3node-no-multus-v1.json": "1dbb4825e345ebe09a1de2548e41443dfb9cd366363143008d59af05e8e54ef4"
+    }
+  },
+  "rawEvidenceTransfer": {
+    "archiveSha256": "fd8591b76c7874576054414ce5a70b0062c8fe8b6f3d7c15310cb50d52f55d81",
+    "matchedVm1Sha256": true
+  }
+}

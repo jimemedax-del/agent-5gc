@@ -1,0 +1,7 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "restore",
+  "status": "restored",
+  "queueRestored": true,
+  "originalObservedStateMatched": true
+}

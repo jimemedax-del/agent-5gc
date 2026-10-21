@@ -1,0 +1,13 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "plan_policy",
+  "status": "rejected",
+  "plan": null,
+  "issues": [
+    {
+      "code": "unsupported_target",
+      "detail": "loss_max_percent is not an accepted fixture guarantee"
+    }
+  ],
+  "executionAuthorized": false
+}

@@ -1,0 +1,122 @@
+{
+  "policyPlanVersion": "cnf-policy-live-plan-v1",
+  "liveStateHash": "c51cc32f8879618f29b7480dbb97fa257ad822d85f21e5d06f93c3b2edac534e",
+  "fingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65",
+  "adapterHash": "dae950b2e393d516fdb405698923861a7fa21311e55397d074718e39fc8c5262",
+  "contractHash": "3c037290afdb5e957335add2ad74d7988340952a807075e28a73388695cae3b1",
+  "batchHash": "d6cdb38c216443e8871b915ccabfb7abbafe70b266e3c8edf7399aee64602458",
+  "innerPlan": {
+    "planVersion": "cnf-policy-plan-v1",
+    "scope": "offline_two_ue_udp_steady_mean_fixture",
+    "createdAt": "2026-10-21T02:30:07.422946+00:00",
+    "validUntil": "2026-10-21T02:30:37.422946+00:00",
+    "stateHash": "409f9d974c87266f6a23f46cefdd2f042f75735afd4d3f5876ce6b1ea1f90272",
+    "batchHash": "d6cdb38c216443e8871b915ccabfb7abbafe70b266e3c8edf7399aee64602458",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "direction": "downlink",
+    "mode": "equal",
+    "allocations": [
+      {
+        "slot": "ue1",
+        "request_id": "equal-lower-request-ue1",
+        "user_id": "imsi-208930000000001",
+        "session_id": "pdu-19578644df74c0d5d6f87de9",
+        "queue": {
+          "rate": 4,
+          "ceil": 8,
+          "prio": 0
+        },
+        "requestedMinMbps": 3,
+        "requestedMaxMbps": 8,
+        "referenceMinMbps": 4
+      },
+      {
+        "slot": "ue2",
+        "request_id": "equal-lower-request-ue2",
+        "user_id": "imsi-208930000000002",
+        "session_id": "pdu-637c491c6cba8a0a73908de0",
+        "queue": {
+          "rate": 4,
+          "ceil": 8,
+          "prio": 0
+        },
+        "requestedMinMbps": 3,
+        "requestedMaxMbps": 8,
+        "referenceMinMbps": 4
+      }
+    ],
+    "action": {
+      "kind": "select_existing_fixture_mode",
+      "namespace": "cnf-contention",
+      "deployment": "cnf-c-endpoint",
+      "queueDevice": "eth0",
+      "configVersion": "cnf-contention-v1",
+      "mode": "equal"
+    },
+    "restoreTarget": {
+      "mode": "none",
+      "stateHash": "409f9d974c87266f6a23f46cefdd2f042f75735afd4d3f5876ce6b1ea1f90272"
+    },
+    "verificationTarget": {
+      "metric": "receiver_steady_mean_mbps",
+      "steadyStartSeconds": 5,
+      "steadyEndSeconds": 25,
+      "durationSeconds": 30,
+      "offeredMbpsPerUE": 8,
+      "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+    },
+    "liveExecutionSupported": false,
+    "liveGuaranteeClaimed": false,
+    "planHash": "ae2aa49f2e1b91db61c31aae2577f12d24ca640e175c41351e7f90f6e7776e69",
+    "planId": "plan-ae2aa49f2e1b91db61c3"
+  },
+  "computationState": {
+    "snapshotVersion": "cnf-planner-state-v1",
+    "source": {
+      "sourceVersion": "cnf-planner-state-input-v1",
+      "mode": "declared_fixture",
+      "direction": "downlink",
+      "declaredAt": "2026-10-21T02:30:07.418125+00:00",
+      "ttlSeconds": 180,
+      "capacityMbps": 10,
+      "unmanagedReservedMbps": 0,
+      "unmanagedTrafficDetected": false,
+      "nativeQosEnabled": false,
+      "activeProfile": "none",
+      "bindings": [
+        {
+          "slot": "ue1",
+          "user_id": "imsi-208930000000001",
+          "session_id": "pdu-19578644df74c0d5d6f87de9"
+        },
+        {
+          "slot": "ue2",
+          "user_id": "imsi-208930000000002",
+          "session_id": "pdu-637c491c6cba8a0a73908de0"
+        }
+      ]
+    },
+    "validUntil": "2026-10-21T02:33:07.418125+00:00",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "sourceHash": "ecab31fe051dbd5f8b754f7e3f952f6367ae3e69b606c497b1f1e3770c673a7d",
+    "liveBindingsVerified": false,
+    "liveStateObserved": false,
+    "stateHash": "409f9d974c87266f6a23f46cefdd2f042f75735afd4d3f5876ce6b1ea1f90272",
+    "stateId": "state-409f9d974c87266f6a23"
+  },
+  "candidateEvaluations": {
+    "equal": [],
+    "guarantee-ue1": [
+      "ue2:minimum_exceeds_reference_envelope",
+      "relative_priority_not_preserved"
+    ],
+    "guarantee-ue2": [
+      "ue1:minimum_exceeds_reference_envelope",
+      "relative_priority_not_preserved"
+    ]
+  },
+  "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist",
+  "validUntil": "2026-10-21T02:30:37.422946+00:00",
+  "policyPlanHash": "bc1af1dcf612f5a6894f724483ce3ebe1ea4c40ea85c92474f682b8f1257e96c",
+  "policyPlanId": "policyPlan-bc1af1dcf612f5a6894f"
+}

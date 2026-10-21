@@ -1,0 +1,22 @@
+{
+  "contractVersion": "cnf-planner-policy-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E3",
+  "scope": "existing_C1_two_UE_independent_downlink_requests",
+  "requestVersion": "cnf-planner-requests-v1",
+  "requestBinding": "exact_observed_SUPI_and_session_id_no_automatic_rebinding",
+  "allowedInitialMode": "none",
+  "allowedTargetModes": ["equal", "guarantee-ue1", "guarantee-ue2"],
+  "stateTtlSeconds": 180,
+  "planStartTtlSeconds": 30,
+  "selectionRule": "minimum_total_queue_rate_then_ceiling_then_mode_name_within_feasible_whitelist",
+  "execution": "one_locked_apply_measure_restore_run; no standalone_leave_queue_tool",
+  "limitations": [
+    "Explicit complete two-user UDP downlink requests with 30 s experiment and 20 s candidate steady window only",
+    "State contains observed fixture identities and endpoint labels; no autonomous flow recognition or global 5G session UUID",
+    "Fixed whitelisted queue modes, not arbitrary queue rates, UE admission or dynamic CNF creation",
+    "Measured controlled receiver steady mean only; no continuous lease, native 5G QoS, application latency/loss SLA or long-term guarantee",
+    "File lock coordinates this adapter family on VM1 only; ordinary known-queue recovery only"
+  ]
+}

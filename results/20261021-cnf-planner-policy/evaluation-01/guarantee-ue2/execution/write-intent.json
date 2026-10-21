@@ -1,0 +1,11 @@
+{
+  "policyPlanHash": "59c34446370e105fb54fbd7c342ea16fd6c0c0a29a04ecfbd1c28925a8dbb127",
+  "endpoint": {
+    "pod": "cnf-c-endpoint-644d89c877-9m4t6",
+    "uid": "f225311a-48cc-49e6-9af7-1d4280548655",
+    "ip": "10.42.0.200"
+  },
+  "initialQueueMode": "none",
+  "targetMode": "guarantee-ue2",
+  "startedAt": "2026-10-21T02:32:29.846338+00:00"
+}

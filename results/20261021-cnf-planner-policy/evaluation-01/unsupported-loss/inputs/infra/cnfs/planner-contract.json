@@ -1,0 +1,27 @@
+{
+  "contractVersion": "cnf-planner-tools-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E1",
+  "scope": "offline_two_ue_udp_steady_mean_fixture",
+  "requirementsContract": "cnf-requirements-v1",
+  "maxStateTtlSeconds": 300,
+  "maxPlanAgeSeconds": 30,
+  "requiredRequestFields": ["direction", "min_bandwidth_mbps", "max_bandwidth_mbps", "priority", "valid_for_seconds", "measurement_window_seconds"],
+  "candidateModes": ["equal", "guarantee-ue1", "guarantee-ue2", "priority-ue1", "priority-ue2"],
+  "referenceFiles": {
+    "downlink": {"config": "infra/cnfs/contention-experiment.json", "evidence": "results/20261020-cnf-contention/metadata.json"},
+    "uplink": {"config": "infra/cnfs/contention-uplink-experiment.json", "evidence": "results/20261020-cnf-contention-uplink/metadata.json"}
+  },
+  "tools": {
+    "inspect_state": "offline_implemented",
+    "plan_policy": "offline_implemented",
+    "validate_plan": "offline_implemented",
+    "apply_plan": "unsupported_live_adapter_pending",
+    "verify_plan": "unsupported_live_adapter_pending",
+    "restore": "unsupported_live_adapter_pending"
+  },
+  "prioritySemantics": "relative_precedence_within_the_two_request_batch_only",
+  "referenceFloorSemantics": "historical_receiver_steady_mean_acceptance_envelope_not_a_live_guarantee",
+  "unsupported": ["live_state_discovery", "live_identity_binding", "arbitrary_queue_parameters", "simultaneous_bidirectional_policy", "latency_or_loss_guarantee", "native_5g_qos", "deadline_admission", "atomic_live_reservation", "long_term_sla"]
+}

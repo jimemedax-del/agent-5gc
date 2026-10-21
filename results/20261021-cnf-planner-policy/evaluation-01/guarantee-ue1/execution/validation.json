@@ -1,0 +1,9 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "validate_plan",
+  "status": "valid_live_preconditions",
+  "policyPlanHash": "c4bdf155a4bf8a908db0fb12ecd0d95831a51e83edf583ce5a4698b79ff6b4bb",
+  "checkedAt": "2026-10-21T02:31:20.096911+00:00",
+  "executionAuthorized": true,
+  "authorizationScope": "current_locked_single_policy_run_only"
+}

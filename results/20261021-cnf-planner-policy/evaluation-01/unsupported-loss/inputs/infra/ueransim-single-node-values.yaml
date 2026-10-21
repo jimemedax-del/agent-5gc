@@ -1,0 +1,4 @@
+# AMF is already Ready. The optional upstream sctp_test image is not required
+# for this single-node baseline; verify NGAP from gNB logs instead.
+gnb:
+  waitForAmf: false

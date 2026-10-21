@@ -1,0 +1,61 @@
+diff --git a/internal/pfcp/node.go b/internal/pfcp/node.go
+--- a/internal/pfcp/node.go
++++ b/internal/pfcp/node.go
+@@ -706,8 +706,16 @@ func (n *LocalNode) Sess(lSeid uint64) (*Sess, error) {
+ }
+ 
+ func (n *LocalNode) RemoteSess(rSeid uint64, addr net.Addr) (*Sess, error) {
++	addrString := ""
++	if addr != nil {
++		addrString = addr.String()
++	}
++
+ 	for _, s := range n.sess {
+-		if s.RemoteID == rSeid && s.rnode.addr.String() == addr.String() {
++		if s == nil || s.rnode == nil || s.rnode.addr == nil {
++			continue
++		}
++		if s.RemoteID == rSeid && s.rnode.addr.String() == addrString {
+ 			return s, nil
+ 		}
+ 	}
+diff --git a/internal/pfcp/node_test.go b/internal/pfcp/node_test.go
+--- a/internal/pfcp/node_test.go
++++ b/internal/pfcp/node_test.go
+@@ -1,6 +1,7 @@
+ package pfcp
+ 
+ import (
++	"net"
+ 	"testing"
+ 
+ 	"github.com/stretchr/testify/assert"
+@@ -237,4 +238,27 @@ func TestLocalNode(t *testing.T) {
+ 		assert.Equal(t, uint64(recycleLocalID), sess.LocalID)
+ 		assert.Equal(t, uint64(10), sess.RemoteID)
+ 	})
++
++	t.Run("remote sess skips deleted local slots", func(t *testing.T) {
++		addr := &net.UDPAddr{IP: net.IPv4(10, 100, 200, 5), Port: 8805}
++		lnode := &LocalNode{}
++		rnode := NewRemoteNode(
++			"smf1",
++			addr,
++			lnode,
++			forwarder.Empty{},
++			logger.PfcpLog.WithField(logger_util.FieldControlPlaneNodeID, "smf1"),
++		)
++
++		deletedSess := rnode.NewSess(0x1efcd)
++		activeSess := rnode.NewSess(0x1efce)
++		rnode.DeleteSess(deletedSess.LocalID)
++
++		sess, err := lnode.RemoteSess(activeSess.RemoteID, addr)
++		assert.NoError(t, err)
++		assert.Equal(t, activeSess.LocalID, sess.LocalID)
++
++		_, err = lnode.RemoteSess(deletedSess.RemoteID, addr)
++		assert.Error(t, err)
++	})
+ }
+

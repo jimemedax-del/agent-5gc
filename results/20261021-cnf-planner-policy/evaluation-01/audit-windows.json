@@ -1,0 +1,138 @@
+{
+  "outcome": "passed_offline_policy_audit",
+  "scope": "complete_engineered_requests_choose_existing_C1_downlink_mode",
+  "provenanceFilesPerRun": 98,
+  "cases": [
+    {
+      "name": "equal",
+      "outcome": "passed_controlled_targets",
+      "selectedMode": "equal",
+      "targetComparisons": {
+        "ue1": {
+          "receivedSteadyMbps": 4.822736282319639,
+          "minimumMbps": 4,
+          "maximumMbps": 8,
+          "passed": true
+        },
+        "ue2": {
+          "receivedSteadyMbps": 4.82172729899091,
+          "minimumMbps": 4,
+          "maximumMbps": 8,
+          "passed": true
+        }
+      },
+      "overlapLowerBoundSeconds": 29.000075101852417
+    },
+    {
+      "name": "equal-lower-request",
+      "outcome": "passed_controlled_targets",
+      "selectedMode": "equal",
+      "targetComparisons": {
+        "ue1": {
+          "receivedSteadyMbps": 4.826773905079897,
+          "minimumMbps": 3,
+          "maximumMbps": 8,
+          "passed": true
+        },
+        "ue2": {
+          "receivedSteadyMbps": 4.826274168704602,
+          "minimumMbps": 3,
+          "maximumMbps": 8,
+          "passed": true
+        }
+      },
+      "overlapLowerBoundSeconds": 29.000082969665527
+    },
+    {
+      "name": "guarantee-ue1",
+      "outcome": "passed_controlled_targets",
+      "selectedMode": "guarantee-ue1",
+      "targetComparisons": {
+        "ue1": {
+          "receivedSteadyMbps": 7.725469661122988,
+          "minimumMbps": 5,
+          "maximumMbps": 8,
+          "passed": true
+        },
+        "ue2": {
+          "receivedSteadyMbps": 1.9285901876024263,
+          "minimumMbps": 1.5,
+          "maximumMbps": 4,
+          "passed": true
+        }
+      },
+      "overlapLowerBoundSeconds": 29.000075101852417
+    },
+    {
+      "name": "guarantee-ue2",
+      "outcome": "passed_controlled_targets",
+      "selectedMode": "guarantee-ue2",
+      "targetComparisons": {
+        "ue1": {
+          "receivedSteadyMbps": 1.9285888626190388,
+          "minimumMbps": 1.5,
+          "maximumMbps": 4,
+          "passed": true
+        },
+        "ue2": {
+          "receivedSteadyMbps": 7.724968833028863,
+          "minimumMbps": 5,
+          "maximumMbps": 8,
+          "passed": true
+        }
+      },
+      "overlapLowerBoundSeconds": 29.000078916549683
+    },
+    {
+      "name": "missing-priority",
+      "outcome": "needs_clarification",
+      "issueCode": "missing_required_targets",
+      "noNetworkWrite": true
+    },
+    {
+      "name": "stale-session",
+      "outcome": "rejected",
+      "issueCode": "session_binding_mismatch",
+      "noNetworkWrite": true
+    },
+    {
+      "name": "over-capacity",
+      "outcome": "rejected",
+      "issueCode": "no_compatible_live_profile",
+      "noNetworkWrite": true
+    },
+    {
+      "name": "unsupported-loss",
+      "outcome": "rejected",
+      "issueCode": "unsupported_target",
+      "noNetworkWrite": true
+    }
+  ],
+  "legacyE2Control": {
+    "outcome": "passed_offline_raw_audit",
+    "scope": "single_existing_C1_equal_downlink_run",
+    "livePlanId": "livePlan-4c86ed745688b43fce89",
+    "provenanceFiles": 98,
+    "podCount": 26,
+    "targetComparisons": {
+      "ue1": {
+        "receivedSteadyMbps": 4.82728242358118,
+        "minimumMbps": 4,
+        "maximumMbps": 8,
+        "passed": true
+      },
+      "ue2": {
+        "receivedSteadyMbps": 4.826779250208908,
+        "minimumMbps": 4,
+        "maximumMbps": 8,
+        "passed": true
+      }
+    },
+    "overlapLowerBoundSeconds": 29.00008988380432,
+    "latencyLossGuaranteesAccepted": false,
+    "historicalValidationAt": "2026-10-21T02:35:38.504085+00:00"
+  },
+  "podCount": 26,
+  "businessRecognitionAccepted": false,
+  "latencyLossGuaranteesAccepted": false
+}

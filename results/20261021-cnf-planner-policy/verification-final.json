@@ -1,0 +1,31 @@
+{
+  "branch": "main",
+  "stagedFiles": [],
+  "agentCommitted": false,
+  "sourceBasisGitHead": "dd363deb922119189314d83f08378a08528f10fa",
+  "syntaxAndWhitespace": "passed",
+  "modifiedDocumentationLocalLinks": "passed",
+  "tests": {
+    "discovered": 301,
+    "passed": 300,
+    "conditionalSkipped": 1,
+    "newE3Tests": 20
+  },
+  "actualSuccessfulRequests": 4,
+  "actualRefusedOrClarificationRequests": 4,
+  "selectedModes": [
+    "equal",
+    "guarantee-ue1",
+    "guarantee-ue2"
+  ],
+  "allMeasuredTargetsPassed": true,
+  "allRunsStrictFinalPassed": true,
+  "allAppliedQueuesRestored": true,
+  "legacyE2NormalControlPassed": true,
+  "vm1WindowsRawAuditIdentical": true,
+  "negativeEvidenceCasesRejected": 11,
+  "provenanceFilesPerRun": 98,
+  "formal26PodsStable": true,
+  "ueRecoveryOrRecreationThisRound": false,
+  "currentSourcesDifferFromFormal": []
+}

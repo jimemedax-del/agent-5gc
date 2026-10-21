@@ -1,0 +1,16 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E3",
+  "outcome": "passed_controlled_targets",
+  "startedAt": "2026-10-21T02:29:52.554794+00:00",
+  "restoration": "restored",
+  "finalStrictBaselinePassed": true,
+  "requestInput": "caller_supplied_exact_identifiers_and_targets",
+  "mutationAttempted": true,
+  "applyCompleted": true,
+  "original26PodIdentitiesUnchanged": true,
+  "selectedMode": "equal",
+  "policyPlanId": "policyPlan-bc1af1dcf612f5a6894f",
+  "endedAt": "2026-10-21T02:31:02.517364+00:00"
+}

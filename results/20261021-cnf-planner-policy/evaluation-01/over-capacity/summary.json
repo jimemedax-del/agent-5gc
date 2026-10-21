@@ -1,0 +1,20 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E3",
+  "outcome": "rejected",
+  "startedAt": "2026-10-21T02:34:21.620280+00:00",
+  "restoration": "not_required_yet",
+  "finalStrictBaselinePassed": true,
+  "requestInput": "caller_supplied_exact_identifiers_and_targets",
+  "mutationAttempted": false,
+  "applyCompleted": false,
+  "original26PodIdentitiesUnchanged": true,
+  "issues": [
+    {
+      "code": "no_compatible_live_profile",
+      "detail": "{\"equal\": [\"requested_minima_exceed_capacity_with_margin\", \"ue1:minimum_exceeds_reference_envelope\", \"ue2:minimum_exceeds_reference_envelope\"], \"guarantee-ue1\": [\"requested_minima_exceed_capacity_with_margin\", \"ue1:minimum_exceeds_reference_envelope\", \"ue2:minimum_exceeds_reference_envelope\", \"relative_priority_not_preserved\"], \"guarantee-ue2\": [\"requested_minima_exceed_capacity_with_margin\", \"ue1:minimum_exceeds_reference_envelope\", \"ue2:minimum_exceeds_reference_envelope\", \"relative_priority_not_preserved\"]}"
+    }
+  ],
+  "endedAt": "2026-10-21T02:34:51.320223+00:00"
+}

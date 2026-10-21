@@ -1,0 +1,13 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "plan_policy",
+  "status": "rejected",
+  "plan": null,
+  "issues": [
+    {
+      "code": "no_compatible_live_profile",
+      "detail": "{\"equal\": [\"requested_minima_exceed_capacity_with_margin\", \"ue1:minimum_exceeds_reference_envelope\", \"ue2:minimum_exceeds_reference_envelope\"], \"guarantee-ue1\": [\"requested_minima_exceed_capacity_with_margin\", \"ue1:minimum_exceeds_reference_envelope\", \"ue2:minimum_exceeds_reference_envelope\", \"relative_priority_not_preserved\"], \"guarantee-ue2\": [\"requested_minima_exceed_capacity_with_margin\", \"ue1:minimum_exceeds_reference_envelope\", \"ue2:minimum_exceeds_reference_envelope\", \"relative_priority_not_preserved\"]}"
+    }
+  ],
+  "executionAuthorized": false
+}

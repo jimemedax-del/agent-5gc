@@ -1,0 +1,9 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "apply_plan",
+  "status": "applied",
+  "policyPlanHash": "59c34446370e105fb54fbd7c342ea16fd6c0c0a29a04ecfbd1c28925a8dbb127",
+  "mode": "guarantee-ue2",
+  "completedAt": "2026-10-21T02:32:30.373705+00:00",
+  "networkChanged": true
+}

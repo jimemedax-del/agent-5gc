@@ -1,0 +1,133 @@
+{
+  "toolVersion": "cnf-planner-policy-v1",
+  "tool": "verify_plan",
+  "status": "passed_controlled_targets",
+  "evidenceIntegrity": "passed",
+  "targetComparisons": {
+    "ue1": {
+      "receivedSteadyMbps": 4.822736282319639,
+      "minimumMbps": 4,
+      "maximumMbps": 8,
+      "passed": true
+    },
+    "ue2": {
+      "receivedSteadyMbps": 4.82172729899091,
+      "minimumMbps": 4,
+      "maximumMbps": 8,
+      "passed": true
+    }
+  },
+  "observation": {
+    "users": {
+      "ue1": {
+        "steadyMbps": 4.822736282319639,
+        "windowMbps": [
+          4.82870847532182,
+          4.819267503920997,
+          4.828775823332718,
+          4.742390389271185,
+          4.819233608098754,
+          4.838375775267773,
+          4.8289062075132465,
+          4.828684299571011,
+          4.819310879778838,
+          4.838317521547606,
+          4.819180467303289,
+          4.8289062075132465,
+          4.819224128843952,
+          4.819141976864378,
+          4.838216013466322,
+          4.8288676383909594,
+          4.8192626205951745,
+          4.828780428393535,
+          4.8384386447178365
+        ],
+        "steadySeconds": 19.000002205371857,
+        "steadyPackets": 16758,
+        "steadyLostPackets": 7213,
+        "steadyLossPercent": 43.042129132354695,
+        "fullReceivedBytes": 18132000,
+        "fullReceiverMbps": 4.835187886007778,
+        "fullPackets": 24466,
+        "fullLostPackets": 9356,
+        "reportedEndBytesNotUsedAsReceived": 29418000,
+        "receiverBasis": "client receiver intervals; bytes=(packets-lost)*1200; end bytes may be sent bytes in iperf3 3.9",
+        "cookie": "fruntyvi7kdjn45gz4p5mvcjy32t6yxqgrei",
+        "rtt": {
+          "samples": 90,
+          "p50Ms": 2.18,
+          "p95Ms": 4.94,
+          "p99Ms": 44.2,
+          "transmitted": 150,
+          "received": 150,
+          "scope": "class-mapped ICMP RTT; not one-way/application/radio delay guarantee"
+        }
+      },
+      "ue2": {
+        "steadyMbps": 4.82172729899091,
+        "windowMbps": [
+          4.828833675047158,
+          4.8191661051273105,
+          4.828775823332718,
+          4.7424,
+          4.819243374642704,
+          4.838375775267773,
+          4.819214362378009,
+          4.828790214176936,
+          4.828751646907527,
+          4.8289062075132465,
+          4.8287470419016065,
+          4.8192,
+          4.8288,
+          4.8288048929264065,
+          4.8288048929264065,
+          4.828766037607644,
+          4.828814390988323,
+          4.819204883198918,
+          4.819219245606032
+        ],
+        "steadySeconds": 18.99999612569809,
+        "steadyPackets": 16764,
+        "steadyLostPackets": 7221,
+        "steadyLossPercent": 43.07444523979957,
+        "fullReceivedBytes": 18132000,
+        "fullReceiverMbps": 4.835183380501968,
+        "fullPackets": 24469,
+        "fullLostPackets": 9359,
+        "reportedEndBytesNotUsedAsReceived": 29419200,
+        "receiverBasis": "client receiver intervals; bytes=(packets-lost)*1200; end bytes may be sent bytes in iperf3 3.9",
+        "cookie": "hg5yflguhaun53g44sq2ltxihrsba4twu7z3",
+        "rtt": {
+          "samples": 90,
+          "p50Ms": 2.16,
+          "p95Ms": 4.99,
+          "p99Ms": 43.2,
+          "transmitted": 150,
+          "received": 150,
+          "scope": "class-mapped ICMP RTT; not one-way/application/radio delay guarantee"
+        }
+      }
+    },
+    "overlapLowerBoundSeconds": 29.000075101852417,
+    "aggregateSteadyMbps": 9.64446358131055,
+    "upfPeakMemoryBytes": 16646144
+  },
+  "historicalFixtureChecks": {
+    "passed": true,
+    "checks": [
+      {
+        "folder": "measurement",
+        "mode": "equal",
+        "checks": {
+          "activeBottleneckCapacity": true,
+          "receiverCongestionLoss": true,
+          "equalPerUserMinimum": true
+        },
+        "passed": true
+      }
+    ],
+    "rttAndLossAcceptance": "measurements only; no application latency/loss SLA supplied or accepted"
+  },
+  "latencyLossGuaranteesAccepted": false,
+  "policyPlanHash": "f38355e65b2ddf437d29b5bbfa4478050712e13203c618fbcd6f413aa85b4c98"
+}
