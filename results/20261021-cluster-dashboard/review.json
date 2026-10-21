@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root/dashboard_review",
+  "date": "2026-10-21",
+  "independentReview": true,
+  "scope": "当前三节点实验集群的只读可视化首版；不将其等同于 Agent、全量逐流监控或生产级监控平台。",
+  "method": [
+    "完整阅读 AGENTS.md；只读审查采集器、显示模型、HTTP 服务、HTML/CSS/JavaScript、启动脚本及专项测试。",
+    "实际查看桌面总览、真实上下游路径、Pod 放置、服务端点绑定、控制面参考、资源表、节点与 Pod 详情、健康页、系统导览和 390px 移动总览截图。",
+    "独立请求本机运行服务 /api/state，确认 SSH 真实数据源、观测时间推进、3 节点、29 Pod、6 条配置路径和采集轮次；没有发起业务流量或修改集群。",
+    "独立执行 python -m unittest tests.test_cluster_dashboard -q：21 项全部通过。",
+    "核对既有 traffic-smoke.json / animation-smoke.json 与 live-traffic.png，区分归档短测证据、真实代理计数及架构参考。"
+  ],
+  "rubric": [
+    {
+      "dimension": "功能全面性",
+      "weight": 0.25,
+      "score": 97,
+      "reason": "五个页面覆盖节点角色与资源、四种拓扑、五类资源、可点击详情、健康检查、筛选、缩放、动态采集与导出；核心需求均有入口。"
+    },
+    {
+      "dimension": "数据真实性与边界",
+      "weight": 0.25,
+      "score": 97,
+      "reason": "Kubernetes/EndpointSlice、挂载声明、Envoy cluster 差分计数与架构参考分开标记；缺失、旧值、身份变化和计数复位不伪装成零；说明 Ready、隧道与策略对象的证明范围。"
+    },
+    {
+      "dimension": "美观与清晰",
+      "weight": 0.25,
+      "score": 95,
+      "reason": "深蓝导航、白色卡片、节制的青紫配色和清晰层级统一；关键字段对比度已加深；跨节点线路绕开无关 Pod，移动布局合理。大量 Pod 仍需滚动，细小图例还有改善空间。"
+    },
+    {
+      "dimension": "交互与可访问性",
+      "weight": 0.15,
+      "score": 95,
+      "reason": "支持资源点击、键盘 Enter/Space、Esc 关闭、抽屉焦点圈定与返回、跳转主要内容、减少动画偏好；健康刷新等目标采集轮次完成再确认。窄屏提供局部画布滚动；部分小图标触控尺寸可后续增大。"
+    },
+    {
+      "dimension": "工程可靠性",
+      "weight": 0.1,
+      "score": 96,
+      "reason": "标准库服务、固定只读采集、回环监听及 Host/Origin 检查、SSH 总超时、采集互斥、失败保留旧证据、可辨识回放和有针对性的 21 项测试构成可用首版；不扩大为生产可用性承诺。"
+    }
+  ],
+  "weightedScore": 96.1,
+  "threshold": 95,
+  "passesThreshold": true,
+  "requirements": [
+    {
+      "requirement": "节点信息描述清楚",
+      "status": "verified",
+      "evidence": [
+        "overview.jpg",
+        "node-detail.jpg",
+        "services/cluster_dashboard/model.py",
+        "final-observation.json"
+      ],
+      "finding": "VM1/VM2/VM3 角色、真实节点名/IP、CPU/内存、Pod 数和版本可见；详情包含 OS、内核、运行时、Pod CIDR、Conditions、标签及承载 Pod。"
+    },
+    {
+      "requirement": "直观看出业务流向并动态展示",
+      "status": "verified_with_declared_scope",
+      "evidence": [
+        "topology.jpg",
+        "live-traffic.jpg",
+        "traffic-smoke.json",
+        "animation-smoke.json",
+        "services/cluster_dashboard/web/app.js"
+      ],
+      "finding": "UE→gNB→UPF→Envoy→core/edge 的参考路径清楚；代理段显示真实 cluster 速率、连接数和方向动画。截图中的下行约 1.003 Mbps 有真实短测支持；其他段未伪装成逐流抓包。"
+    },
+    {
+      "requirement": "多个 Pod 之间的连接关系",
+      "status": "verified_with_declared_scope",
+      "evidence": [
+        "pod-topology.jpg",
+        "service-bindings.jpg",
+        "control-reference.jpg",
+        "services/cluster_dashboard/model.py"
+      ],
+      "finding": "实际 Pod 放置、Envoy 声明经 Service 解析到 Pod 的关系、EndpointSlice 端点绑定和控制面参考均可查看；不宣称自动发现全部运行时连接。"
+    },
+    {
+      "requirement": "点击按钮查看资源健康",
+      "status": "verified",
+      "evidence": [
+        "health.jpg",
+        "services/cluster_dashboard/server.py",
+        "services/cluster_dashboard/model.py",
+        "services/cluster_dashboard/web/app.js",
+        "tests/test_cluster_dashboard.py"
+      ],
+      "finding": "固定采集检查 API、节点、Pod、副本、端点、PVC、隧道、计数和资源指标；支持通过/异常/未知，刷新目标轮次完成后才报告完成。"
+    },
+    {
+      "requirement": "真实集群动态刷新",
+      "status": "verified",
+      "evidence": [
+        "collector-observation.json",
+        "final-observation.json",
+        "services/cluster_dashboard/server.py",
+        "services/cluster_dashboard/collect.py"
+      ],
+      "finding": "独立访问运行 API 观察到 SSH 数据源、递增的采集轮次和更新时间；默认 15 秒采集，页面轮询；失联/过期/回放均有明确提示。"
+    },
+    {
+      "requirement": "美观、清晰、可理解",
+      "status": "verified",
+      "evidence": [
+        "overview.jpg",
+        "node-detail.jpg",
+        "pod-detail.jpg",
+        "pod-topology.jpg",
+        "resources.jpg",
+        "health.jpg",
+        "guide.jpg",
+        "mobile-overview.jpg"
+      ],
+      "finding": "已实际查看渲染画面；总览、图形、详情与导览形成连贯入口，390px 下卡片重排且没有整体横向溢出。"
+    }
+  ],
+  "resolvedFindings": [
+    "原 eth0 检查未判断独立采样时间：现超过 120 秒为 unknown，并有回归测试。",
+    "原品牌链接仅改 hash 不切页：已接入 data-go 导航。",
+    "原刷新完成提示有竞态：已按后端 attemptId/completedAttempt 确认完成。",
+    "原次级事实文字偏浅：关键图形字段和详情文字已加深，详情字号提高。",
+    "原截图操作前帧导致文件名错位：对应总览/详情/移动/Pod/服务/资源/健康/导览截图已重新核对。",
+    "原跨节点代理线穿过无关 UPF 卡片：已改走顶部通道，复看截图确认歧义消除。"
+  ],
+  "blockingFindings": [],
+  "nonBlockingImprovements": [
+    "小图标按钮的触控面积、细小图例字号以及大量资源的滚动浏览仍可继续优化；当前不影响首版核心操作。",
+    "未来若扩展为任意集群、多副本后端或生产部署，应重新验收身份解析、cluster 统计聚合、图布局和权限设计，不能直接沿用本轮评分。"
+  ],
+  "limitations": [
+    "这是实验观测台验收，不是端到端业务、QoS、实时注册或 Agent 能力验收。",
+    "代理路径来自 Pod 挂载的 ConfigMap 声明，尚未逐项核对运行时 config_dump；cluster 计数不等于每个 UE 或每条 TCP 连接的吞吐。",
+    "控制面与前段业务路径是明确标注的架构参考，未提供全量逐流抓包。",
+    "只读由固定采集代码约束，当前复用已有 SSH/kubeconfig 权限，尚未配置专用只读 RBAC。",
+    "视觉评分属于基于实际截图的独立人工判断，不是可推广的客观美学测量。"
+  ],
+  "decision": "通过当前三节点实验集群只读可视化首版验收，加权 96.1/100；全部五个维度均不低于 95，无剩余阻断问题。",
+  "sourceHashes": {
+    "services/cluster_dashboard/server.py": "3f8336a63784b8db57d4c4724dd843172b98ee3ba2d8f971999c204e78b70d37",
+    "services/cluster_dashboard/web/style.css": "0871cb35c96a3d4f670314b520bc3f5ceb8d018453f97e8432a606b51ca8f52c",
+    "services/cluster_dashboard/model.py": "00fd1410f85c0caf7ca28f5b2b9da9f7f27f54c28cda9b7e74cc885f95d62501",
+    "services/cluster_dashboard/web/app.js": "ec00c361735484a54e7250b6e45f28c867ac70f85b46d1cdf67967f0565f0f4c",
+    "tests/test_cluster_dashboard.py": "66326ba4b4a7764dcf597848caff1f7971ff7c6ed28507bb75e709419d50da21",
+    "services/cluster_dashboard/collect.py": "9cdaeb54349e1c645817e1295310b98f5b72fa5d9c2289924f8e601d44f4df66",
+    "services/cluster_dashboard/web/index.html": "1458a113180f2e1fdc0b951de7102894c5646671bd5d747c9aec88ed7d3c5a9b",
+    "scripts/cluster-dashboard.py": "89eea984869ccbb3c1c5fcc2fde896dd9e9b1b0983d34b33ef0e8fc42981c7a1"
+  },
+  "imageFormatNote": "浏览器截图实际为 JPEG 字节，归档后缀已由 .png 更正为 .jpg；仅更正格式标识，原截图内容、独立评审结论、评分及源码哈希均不变。"
+}

@@ -1,0 +1,16 @@
+{
+  "rc": 0,
+  "stdout": "Thu Oct 22 12:39:25 UTC 2026\n 20:39:25 up 14 days,  1:12,  1 user,  load average: 0.45, 1.08, 1.10\nactive\nactive\nactive\n",
+  "stderr": "",
+  "time": "2026-10-22T20:39:25.369560+08:00",
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "free5gc-vm-1",
+    "LC_ALL=C date -u; uptime; systemctl is-active tailscaled ssh k3s"
+  ],
+  "elapsed": 14.72
+}

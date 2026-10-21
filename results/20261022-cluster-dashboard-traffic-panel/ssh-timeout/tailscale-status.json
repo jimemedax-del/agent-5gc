@@ -1,0 +1,54 @@
+{
+  "time": "2026-10-22T20:38:07.766608+08:00",
+  "BackendState": "Running",
+  "Health": [],
+  "self": {
+    "HostName": "DESKTOP-DL0VM77",
+    "Relay": "nue",
+    "TailscaleIPs": [
+      "100.93.137.26",
+      "fd7a:115c:a1e0::472e:891b"
+    ]
+  },
+  "peers": [
+    {
+      "HostName": "lhm2-virtual-machine",
+      "TailscaleIPs": [
+        "100.111.54.35",
+        "fd7a:115c:a1e0::472e:3624"
+      ],
+      "Online": true,
+      "LastHandshake": "2026-10-22T20:37:44.2347616+08:00",
+      "Relay": "hkg",
+      "CurAddr": "",
+      "RxBytes": 7584,
+      "TxBytes": 4624
+    },
+    {
+      "HostName": "lhm-virtual-machine",
+      "TailscaleIPs": [
+        "100.118.123.44",
+        "fd7a:115c:a1e0::ff2e:7b2d"
+      ],
+      "Online": true,
+      "LastHandshake": "2026-10-22T20:36:44.0782974+08:00",
+      "Relay": "tok",
+      "CurAddr": "82.26.72.132:35446",
+      "RxBytes": 67816020,
+      "TxBytes": 23120240
+    },
+    {
+      "HostName": "lhm3-virtual-machine",
+      "TailscaleIPs": [
+        "100.112.197.4",
+        "fd7a:115c:a1e0::f52e:c505"
+      ],
+      "Online": true,
+      "LastHandshake": "2026-10-22T20:37:58.5257187+08:00",
+      "Relay": "tok",
+      "CurAddr": "",
+      "RxBytes": 25736,
+      "TxBytes": 17976
+    }
+  ]
+}

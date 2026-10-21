@@ -1,0 +1,144 @@
+{
+  "id": "ef8b11f65ae04a6f944ffc65030231ea",
+  "config": {
+    "environment": "cnf-multi-ue",
+    "durationSeconds": 90,
+    "flows": [
+      {
+        "ue": "ue1",
+        "target": "core",
+        "direction": "ul",
+        "rateMbps": 1
+      },
+      {
+        "ue": "ue2",
+        "target": "edge",
+        "direction": "dl",
+        "rateMbps": 1
+      },
+      {
+        "ue": "ue1",
+        "target": "edge",
+        "direction": "dl",
+        "rateMbps": 1
+      },
+      {
+        "ue": "ue2",
+        "target": "core",
+        "direction": "ul",
+        "rateMbps": 1
+      }
+    ]
+  },
+  "status": "running",
+  "createdAt": "2026-10-22T11:10:38.516485+00:00",
+  "updatedAt": "2026-10-22T11:11:57.387772+00:00",
+  "startedAt": "2026-10-22T11:10:39.224077+00:00",
+  "finishedAt": null,
+  "elapsedSeconds": 78.2,
+  "progress": 86,
+  "segment": 2,
+  "completedSeconds": 45,
+  "results": [
+    {
+      "flowIndex": 0,
+      "segment": 1,
+      "status": "completed",
+      "receiverMbps": 1.0010993076795052,
+      "senderMbps": 1.0019695717815258,
+      "receivedBytes": 5636096,
+      "seconds": 45.039256,
+      "error": null
+    },
+    {
+      "flowIndex": 1,
+      "segment": 1,
+      "status": "completed",
+      "receiverMbps": 1.0048834575508792,
+      "senderMbps": 1.0027553028025713,
+      "receivedBytes": 5652480,
+      "seconds": 45.000084,
+      "error": null
+    },
+    {
+      "flowIndex": 2,
+      "segment": 1,
+      "status": "completed",
+      "receiverMbps": 1.0019701284299025,
+      "senderMbps": 1.00118262238765,
+      "receivedBytes": 5636096,
+      "seconds": 45.000112,
+      "error": null
+    },
+    {
+      "flowIndex": 3,
+      "segment": 1,
+      "status": "completed",
+      "receiverMbps": 0.9998676120482172,
+      "senderMbps": 1.0019709968026052,
+      "receivedBytes": 5636096,
+      "seconds": 45.094738,
+      "error": null
+    }
+  ],
+  "resolved": [
+    {
+      "ue": "ue1",
+      "target": "core",
+      "direction": "ul",
+      "rateMbps": 1,
+      "pod": "ueransim-ue-565bfd8bfc-ncgnv",
+      "podUid": "512376d8-4a4e-433a-bc80-b55f2f2962d8",
+      "ip": "10.60.0.16",
+      "host": "192.168.244.128",
+      "port": 31301,
+      "listener": 15301,
+      "service": "cnf-a-core-ue1",
+      "backendIP": "10.42.0.197"
+    },
+    {
+      "ue": "ue2",
+      "target": "edge",
+      "direction": "dl",
+      "rateMbps": 1,
+      "pod": "cnf-a-ue2-5dbc97f69c-vw869",
+      "podUid": "38ab1076-933a-4323-9e7d-2c93e4cf00b0",
+      "ip": "10.60.0.17",
+      "host": "192.168.244.128",
+      "port": 31304,
+      "listener": 15304,
+      "service": "cnf-a-edge-ue2",
+      "backendIP": "10.42.2.84"
+    },
+    {
+      "ue": "ue1",
+      "target": "edge",
+      "direction": "dl",
+      "rateMbps": 1,
+      "pod": "ueransim-ue-565bfd8bfc-ncgnv",
+      "podUid": "512376d8-4a4e-433a-bc80-b55f2f2962d8",
+      "ip": "10.60.0.16",
+      "host": "192.168.244.128",
+      "port": 31303,
+      "listener": 15303,
+      "service": "cnf-a-edge-ue1",
+      "backendIP": "10.42.2.83"
+    },
+    {
+      "ue": "ue2",
+      "target": "core",
+      "direction": "ul",
+      "rateMbps": 1,
+      "pod": "cnf-a-ue2-5dbc97f69c-vw869",
+      "podUid": "38ab1076-933a-4323-9e7d-2c93e4cf00b0",
+      "ip": "10.60.0.17",
+      "host": "192.168.244.128",
+      "port": 31302,
+      "listener": 15302,
+      "service": "cnf-a-core-ue2",
+      "backendIP": "10.42.0.198"
+    }
+  ],
+  "message": "当前分段完成，准备重连。",
+  "segmentSeconds": 45
+}

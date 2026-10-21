@@ -1,0 +1,16 @@
+{
+  "rc": 0,
+  "stdout": "[{\"host\": \"192.168.244.128\", \"banner\": \"SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.17\\r\\n\", \"elapsed\": 0.00673112110234797}, {\"host\": \"192.168.244.129\", \"banner\": \"SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.17\\r\\n\", \"elapsed\": 0.007228223839774728}, {\"host\": \"100.118.123.44\", \"banner\": \"SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.17\\r\\n\", \"elapsed\": 0.29071069485507905}]\n",
+  "stderr": "",
+  "time": "2026-10-22T20:39:20.939573+08:00",
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "free5gc-vm-3",
+    "python3 -c \"import socket,json,time; result=[];\nfor h in ['192.168.244.128','192.168.244.129','100.118.123.44']:\n s=socket.socket();s.settimeout(3);t=time.monotonic();\n try:s.connect((h,22));result.append({'host':h,'banner':s.recv(128).decode(errors='replace'),'elapsed':time.monotonic()-t})\n except Exception as e:result.append({'host':h,'error':str(e),'elapsed':time.monotonic()-t})\n finally:s.close()\nprint(json.dumps(result))\""
+  ],
+  "elapsed": 10.29
+}

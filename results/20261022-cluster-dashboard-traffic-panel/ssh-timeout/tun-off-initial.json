@@ -1,0 +1,34 @@
+[
+  {
+    "rc": 255,
+    "stdout": "",
+    "stderr": "ssh: connect to host 100.118.123.44 port 22: Connection timed out\n",
+    "name": "vm1",
+    "elapsed": 8.067,
+    "at": "2026-10-22T21:04:51.915204+08:00"
+  },
+  {
+    "timeout": true,
+    "stdout": "",
+    "stderr": "",
+    "name": "vm2",
+    "elapsed": 16.029,
+    "at": "2026-10-22T21:04:59.877579+08:00"
+  },
+  {
+    "timeout": true,
+    "stdout": "",
+    "stderr": "",
+    "name": "vm3",
+    "elapsed": 16.029,
+    "at": "2026-10-22T21:04:59.877854+08:00"
+  },
+  {
+    "rc": 0,
+    "stdout": "\nReport:\n\t* Time: 2026-10-22 21:04:49.3562033+08:00\n\t* UDP: true\n\t* IPv4: yes, 82.26.72.131:39584\n\t* IPv6: no, but OS has support\n\t* MappingVariesByDestIP: false\n\t* PortMapping: \n\t* CaptivePortal: false\n\t* Nearest DERP: Tokyo\n\t* DERP latency:\n\t\t- tok: 211.5ms (Tokyo)\n\t\t- hkg: 264ms   (Hong Kong)\n\t\t- sin: 274.8ms (Singapore)\n\t\t- sfo: 309.7ms (San Francisco)\n\t\t- lax: 327.1ms (Los Angeles)\n\t\t- sea: 327.1ms (Seattle)\n\t\t- blr: 327.1ms (Bengaluru)\n\t\t- dfw: 351.9ms (Dallas)\n\t\t- den: 351.9ms (Denver)\n\t\t- ord: 351.9ms (Chicago)\n\t\t- hnl: 352.9ms (Honolulu)\n\t\t- dbi: 357.5ms (Dubai)\n\t\t- tor: 369.7ms (Toronto)\n\t\t- nyc: 369.7ms (New York City)\n\t\t- mia: 369.7ms (Miami)\n\t\t- iad: 373.9ms (Ashburn)\n\t\t- par: 418.5ms (Paris)\n\t\t- fra: 436ms   (Frankfurt)\n\t\t- lhr: 438.4ms (London)\n\t\t- waw: 439.4ms (Warsaw)\n\t\t- mad: 440.5ms (Madrid)\n\t\t- nue: 440.5ms (Nuremberg)\n\t\t- ams: 442ms   (Amsterdam)\n\t\t- hel: 452.6ms (Helsinki)\n\t\t- sao: 475.3ms (São Paulo)\n\t\t- nai: 485.8ms (Nairobi)\n\t\t- syd: 560.1ms (Sydney)\n\t\t- jnb: 590.5ms (Johannesburg)\n",
+    "stderr": "",
+    "name": "netcheck",
+    "elapsed": 5.563,
+    "at": "2026-10-22T21:04:49.411973+08:00"
+  }
+]

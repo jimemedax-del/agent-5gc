@@ -1,0 +1,42 @@
+{
+  "route": "R2",
+  "stage": "R2.S4 platform observation support",
+  "configurationVersion": "dashboard-endpoint-activity-v1",
+  "evidenceDirectory": "results/20261021-cluster-dashboard/endpoint-activity",
+  "proxyNamespace": "cnf-lab",
+  "ueTunnelIP": "10.60.0.14",
+  "offeredMbps": 1,
+  "durationSecondsPerDirection": 30,
+  "protocol": "TCP",
+  "backendNodePort": 31201,
+  "lock": "~/.work/cnf-planner-live.lock",
+  "testsPassed": 27,
+  "javascriptSyntaxPassed": true,
+  "ul": {
+    "direction": "ul",
+    "passed": true,
+    "activeSamples": 3,
+    "receiverMbps": 0.9992278289963645,
+    "senderMbps": 1.0005133985282577
+  },
+  "dl": {
+    "direction": "dl",
+    "passed": true,
+    "activeSamples": 3,
+    "receiverMbps": 1.0048819837267209,
+    "senderMbps": 1.0035836184745972
+  },
+  "ue2StayedIdle": true,
+  "allFrontLinksIdleAfterTraffic": true,
+  "podIdentitiesAndRestartsUnchanged": 29,
+  "correlationIsPerFlowTrace": false,
+  "configurationMutations": false,
+  "sourceSHA256": {
+    "services/cluster_dashboard/collect.py": "3619012e95a87e3041c845a4d0c7e7a3b2b4e5d61533c995bebe04969b60755a",
+    "services/cluster_dashboard/model.py": "24e3c19ee7edecabc80396fb37879661c02a84cbeea22795eda843f96c18fffe",
+    "services/cluster_dashboard/web/app.js": "9e2e6b57fc53a4b8ea8cc92f248c3c552926473d401f8859fd213f3479d98b97",
+    "services/cluster_dashboard/web/index.html": "fdc0f76ebfdc33ace03da395707c60d214dd0b0f9e48c6c842a6577ed84caf53",
+    "services/cluster_dashboard/web/style.css": "ff2d90887316acba1e1c87373d8c7163e90b2360909863b43c7a0de4a82f1f8a",
+    "tests/test_cluster_dashboard.py": "bb641a2e120586add1cc6a07c25631e992d28166883ec55de1cba11797df5b6f"
+  }
+}

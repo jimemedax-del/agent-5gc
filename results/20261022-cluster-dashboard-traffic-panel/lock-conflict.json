@@ -1,0 +1,7 @@
+{
+  "uiError": "RuntimeError: 实验锁被其他任务占用，请等待其完成。",
+  "remoteLockHoldSeconds": 60,
+  "jobCountAfterRequest": 4,
+  "activeJobsAfterRequest": [],
+  "source": "GUI observed rejection while remote verification flock was held"
+}

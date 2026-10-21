@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "flows": [
+    {
+      "phase": "A",
+      "user": "ue1",
+      "backend": "core",
+      "direction": "ul",
+      "receiverMbps": 1.0013118454097492
+    },
+    {
+      "phase": "A",
+      "user": "ue2",
+      "backend": "edge",
+      "direction": "dl",
+      "receiverMbps": 1.0019701952277493
+    },
+    {
+      "phase": "B",
+      "user": "ue1",
+      "backend": "core",
+      "direction": "ul",
+      "receiverMbps": 1.0012934782323866
+    },
+    {
+      "phase": "B",
+      "user": "ue2",
+      "backend": "edge",
+      "direction": "dl",
+      "receiverMbps": 1.0019701952277493
+    },
+    {
+      "phase": "B",
+      "user": "ue1",
+      "backend": "edge",
+      "direction": "dl",
+      "receiverMbps": 1.0019699280364158
+    },
+    {
+      "phase": "B",
+      "user": "ue2",
+      "backend": "core",
+      "direction": "ul",
+      "receiverMbps": 1.0011376734026045
+    },
+    {
+      "phase": "C",
+      "user": "ue2",
+      "backend": "core",
+      "direction": "dl",
+      "receiverMbps": 1.0019684362207553
+    },
+    {
+      "phase": "C",
+      "user": "ue2",
+      "backend": "edge",
+      "direction": "ul",
+      "receiverMbps": 1.0011449423269025
+    }
+  ],
+  "observationSamples": 12,
+  "stableWindowsPerPhase": {
+    "A": 2,
+    "B": 1,
+    "C": 2
+  },
+  "podsUnchanged": true,
+  "idleAfterTraffic": true
+}

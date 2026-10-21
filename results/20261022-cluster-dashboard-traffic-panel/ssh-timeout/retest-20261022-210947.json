@@ -1,0 +1,122 @@
+[
+  {
+    "round": 1,
+    "at": "2026-10-22T21:09:59.781538+08:00",
+    "ssh": [
+      {
+        "host": "free5gc-vm-1",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 12.671
+      },
+      {
+        "host": "free5gc-vm-2",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 9.133
+      },
+      {
+        "host": "free5gc-vm-3",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 12.299
+      }
+    ],
+    "dashboard": {
+      "error": null,
+      "lastAttempt": "2026-10-22T13:09:19.893346+00:00",
+      "observedAt": "2026-10-22T13:08:39.079714+00:00",
+      "busy": true,
+      "attemptId": 190,
+      "completedAttempt": 189,
+      "nodeReadyCount": 3,
+      "nodeCount": 3,
+      "podReadyCount": 29,
+      "podCount": 29,
+      "collectionErrors": {},
+      "trafficAvailable": true,
+      "trafficError": null
+    }
+  },
+  {
+    "round": 2,
+    "at": "2026-10-22T21:10:19.701079+08:00",
+    "ssh": [
+      {
+        "host": "free5gc-vm-1",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 9.913
+      },
+      {
+        "host": "free5gc-vm-2",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 8.383
+      },
+      {
+        "host": "free5gc-vm-3",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 8.383
+      }
+    ],
+    "dashboard": {
+      "error": null,
+      "lastAttempt": "2026-10-22T13:10:19.091896+00:00",
+      "observedAt": "2026-10-22T13:09:30.386481+00:00",
+      "busy": true,
+      "attemptId": 191,
+      "completedAttempt": 190,
+      "nodeReadyCount": 3,
+      "nodeCount": 3,
+      "podReadyCount": 29,
+      "podCount": 29,
+      "collectionErrors": {},
+      "trafficAvailable": true,
+      "trafficError": null
+    }
+  },
+  {
+    "round": 3,
+    "at": "2026-10-22T21:10:43.750123+08:00",
+    "ssh": [
+      {
+        "host": "free5gc-vm-1",
+        "timeout": true,
+        "elapsed": 14.02
+      },
+      {
+        "host": "free5gc-vm-2",
+        "timeout": true,
+        "elapsed": 14.019
+      },
+      {
+        "host": "free5gc-vm-3",
+        "timeout": true,
+        "elapsed": 14.019
+      }
+    ],
+    "dashboard": {
+      "error": null,
+      "lastAttempt": "2026-10-22T13:10:19.091896+00:00",
+      "observedAt": "2026-10-22T13:09:30.386481+00:00",
+      "busy": true,
+      "attemptId": 191,
+      "completedAttempt": 190,
+      "nodeReadyCount": 3,
+      "nodeCount": 3,
+      "podReadyCount": 29,
+      "podCount": 29,
+      "collectionErrors": {},
+      "trafficAvailable": true,
+      "trafficError": null
+    }
+  }
+]

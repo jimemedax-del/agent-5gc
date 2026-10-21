@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-22T20:45:20.486892+08:00",
+  "route": "R2 platform observability support",
+  "status": "intermittent; not permanently repaired",
+  "healthz": {
+    "status": "ok",
+    "meaning": "页面服务存活；集群状态请查询 /api/state"
+  },
+  "state": {
+    "error": "ssh: connect to host 100.118.123.44 port 22: Connection timed out",
+    "lastAttempt": "2026-10-22T12:45:20.146802+00:00",
+    "busy": true,
+    "attemptId": 147,
+    "completedAttempt": 146
+  },
+  "observedAt": "2026-10-22T12:43:23.855123+00:00",
+  "nodes": [
+    {
+      "name": "lhm-virtual-machine",
+      "ready": true,
+      "pressure": []
+    },
+    {
+      "name": "worker-upf",
+      "ready": true,
+      "pressure": []
+    },
+    {
+      "name": "ran-test",
+      "ready": true,
+      "pressure": []
+    }
+  ],
+  "podCount": 29,
+  "podReadyCount": 29,
+  "collectionErrors": {},
+  "traffic": {
+    "available": false,
+    "error": "ssh: connect to host 100.118.123.44 port 22: Connection timed out",
+    "observedAt": 1792673028.1270206
+  },
+  "action": "one local tailscale debug rebind; no persistent config changes or service restarts",
+  "causeBoundary": "Management transport instability supported; VPN/NAT specific trigger unproven; no user-plane traffic retest"
+}

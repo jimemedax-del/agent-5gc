@@ -1,0 +1,12 @@
+[
+  {
+    "InterfaceAlias": "FlyingBird",
+    "NextHop": "198.18.0.2",
+    "RouteMetric": 0
+  },
+  {
+    "InterfaceAlias": "WLAN",
+    "NextHop": "10.175.255.254",
+    "RouteMetric": 0
+  }
+]

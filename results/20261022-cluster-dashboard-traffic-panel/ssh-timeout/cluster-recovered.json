@@ -1,0 +1,15 @@
+{
+  "time": "2026-10-22T20:41:24.813226+08:00",
+  "rc": 255,
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "free5gc-vm-1",
+    "kubectl --kubeconfig /home/lhm/.kube/config get nodes; kubectl --kubeconfig /home/lhm/.kube/config get pods -A --no-headers"
+  ],
+  "stdout": "",
+  "stderr": "ssh: connect to host 100.118.123.44 port 22: Connection timed out\n"
+}

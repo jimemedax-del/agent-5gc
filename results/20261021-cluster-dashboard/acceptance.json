@@ -1,0 +1,98 @@
+{
+  "checkedAt": "2026-10-21T13:27:51.203000+00:00",
+  "route": "R2",
+  "scope": "visual-observability support; R2.S5 Agent remains unimplemented",
+  "source": "ssh",
+  "host": "free5gc-vm-1",
+  "resourceCounts": {
+    "nodes": 3,
+    "pods": 29,
+    "services": 30,
+    "workloads": 29,
+    "policies": 7,
+    "pvcs": 1,
+    "routes": 6
+  },
+  "healthChecks": [
+    {
+      "key": "api",
+      "title": "Kubernetes API",
+      "status": "pass",
+      "detail": "/readyz 返回 ok",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "nodes",
+      "title": "节点就绪与压力",
+      "status": "pass",
+      "detail": "3 个节点 Ready，无 Memory/Disk/PID 压力",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "pods",
+      "title": "Pod 就绪状态",
+      "status": "pass",
+      "detail": "29 个非完成 Pod 全部 Ready；不代表业务链路已通过",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "workloads",
+      "title": "工作负载副本",
+      "status": "pass",
+      "detail": "29 个工作负载达到期望副本数",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "endpoints",
+      "title": "Service 可用端点",
+      "status": "pass",
+      "detail": "29 个带 selector 的 Service 均有 Ready 端点",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "storage",
+      "title": "持久卷绑定",
+      "status": "pass",
+      "detail": "1 个 PVC 已绑定",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "tunnels",
+      "title": "UE 隧道接口",
+      "status": "pass",
+      "detail": "2 个 UE 均观测到隧道接口；注册、会话和端到端连通需另验",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "telemetry",
+      "title": "流量计数采集",
+      "status": "pass",
+      "detail": "Running Pod 的 eth0 计数读取成功且未超过 120 秒；接口总量不可当作逐流证据",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "proxy",
+      "title": "代理观测",
+      "status": "pass",
+      "detail": "6 条配置路径，Envoy cluster 计数可读",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    },
+    {
+      "key": "metrics",
+      "title": "CPU / 内存采集",
+      "status": "pass",
+      "detail": "metrics-server 指标可读，采样未超过 120 秒",
+      "at": "2026-10-21T13:27:51.121386+00:00"
+    }
+  ],
+  "refreshProof": {
+    "targetAttempt": 32,
+    "completedAttempt": 32,
+    "beforeObservedAt": "2026-10-21T13:27:36.376354+00:00",
+    "afterObservedAt": "2026-10-21T13:27:51.121386+00:00"
+  },
+  "exportVerified": true,
+  "initialFinalPodIdentityAndRestartCountsEqual": true,
+  "native5GQosClaim": false,
+  "fullPacketDependencyDiscoveryClaim": false
+}

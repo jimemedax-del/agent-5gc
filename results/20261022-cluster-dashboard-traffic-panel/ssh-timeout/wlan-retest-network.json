@@ -1,0 +1,36 @@
+{
+  "netcheck": {
+    "rc": 0,
+    "stdout": "\nReport:\n\t* Time: 2026-10-22 21:10:19.7070223+08:00\n\t* UDP: true\n\t* IPv4: yes, 61.150.43.122:23272\n\t* IPv6: no, but OS has support\n\t* MappingVariesByDestIP: true\n\t* PortMapping: \n\t* CaptivePortal: false\n\t* Nearest DERP: Nuremberg\n\t* DERP latency:\n\t\t- nue: 166.8ms (Nuremberg)\n\t\t- sfo: 176ms   (San Francisco)\n\t\t- sea: 182.4ms (Seattle)\n\t\t- lax: 183.3ms (Los Angeles)\n\t\t- hel: 188ms   (Helsinki)\n\t\t- hkg: 192.6ms (Hong Kong)\n\t\t- den: 199.2ms (Denver)\n\t\t- dfw: 219.9ms (Dallas)\n\t\t- hnl: 219.9ms (Honolulu)\n\t\t- iad: 230.7ms (Ashburn)\n\t\t- fra: 230.7ms (Frankfurt)\n\t\t- par: 236.7ms (Paris)\n\t\t- nyc: 239.9ms (New York City)\n\t\t- mia: 241.1ms (Miami)\n\t\t- ord: 248.5ms (Chicago)\n\t\t- tor: 248.5ms (Toronto)\n\t\t- mad: 248.6ms (Madrid)\n\t\t- lhr: 254.3ms (London)\n\t\t- waw: 270.4ms (Warsaw)\n\t\t- tok: 271.7ms (Tokyo)\n\t\t- ams: 273.6ms (Amsterdam)\n\t\t- sin: 280.8ms (Singapore)\n\t\t- jnb: 319.2ms (Johannesburg)\n\t\t- syd: 323.2ms (Sydney)\n\t\t- nai: 329.5ms (Nairobi)\n\t\t- blr: 354.9ms (Bengaluru)\n\t\t- sao: 372ms   (São Paulo)\n\t\t- dbi: 376ms   (Dubai)\n",
+    "stderr": "2026/10/22 21:10:14 portmap: monitor: gateway and self IP changed: gw=10.175.255.254 self=10.175.19.134\n"
+  },
+  "status": {
+    "BackendState": "Running",
+    "Health": [],
+    "selfRelay": "nue",
+    "peers": [
+      {
+        "HostName": "lhm2-virtual-machine",
+        "Online": true,
+        "Relay": "tok",
+        "CurAddr": "",
+        "LastHandshake": "2026-10-22T21:09:18.8460833+08:00"
+      },
+      {
+        "HostName": "lhm-virtual-machine",
+        "Online": true,
+        "Relay": "tok",
+        "CurAddr": "",
+        "LastHandshake": "2026-10-22T21:10:05.3421412+08:00"
+      },
+      {
+        "HostName": "lhm3-virtual-machine",
+        "Online": true,
+        "Relay": "tok",
+        "CurAddr": "",
+        "LastHandshake": "2026-10-22T21:09:49.1161155+08:00"
+      }
+    ]
+  },
+  "at": "2026-10-22T21:10:19.785648+08:00"
+}

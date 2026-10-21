@@ -1,0 +1,93 @@
+[
+  {
+    "round": 1,
+    "at": "2026-10-22T21:05:45.888194+08:00",
+    "ssh": [
+      {
+        "host": "free5gc-vm-1",
+        "timeout": true,
+        "elapsed": 14.021
+      },
+      {
+        "host": "free5gc-vm-2",
+        "timeout": true,
+        "elapsed": 14.021
+      },
+      {
+        "host": "free5gc-vm-3",
+        "timeout": true,
+        "elapsed": 14.021
+      }
+    ],
+    "dashboard": {
+      "error": "Connection timed out during banner exchange\nConnection to 100.118.123.44 port 22 timed out",
+      "lastAttempt": "2026-10-22T13:05:31.876116+00:00",
+      "observedAt": "2026-10-22T13:03:53.262175+00:00",
+      "busy": false
+    }
+  },
+  {
+    "round": 2,
+    "at": "2026-10-22T21:06:02.949283+08:00",
+    "ssh": [
+      {
+        "host": "free5gc-vm-1",
+        "rc": 255,
+        "stdout": "",
+        "stderr": "ssh: connect to host 100.118.123.44 port 22: Connection timed out\n",
+        "elapsed": 8.047
+      },
+      {
+        "host": "free5gc-vm-2",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 7.188
+      },
+      {
+        "host": "free5gc-vm-3",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 12.054
+      }
+    ],
+    "dashboard": {
+      "error": "Connection timed out during banner exchange\nConnection to 100.118.123.44 port 22 timed out",
+      "lastAttempt": "2026-10-22T13:05:54.941882+00:00",
+      "observedAt": "2026-10-22T13:03:53.262175+00:00",
+      "busy": true
+    }
+  },
+  {
+    "round": 3,
+    "at": "2026-10-22T21:06:21.974702+08:00",
+    "ssh": [
+      {
+        "host": "free5gc-vm-1",
+        "rc": 255,
+        "stdout": "",
+        "stderr": "ssh: connect to host 100.118.123.44 port 22: Connection timed out\n",
+        "elapsed": 8.051
+      },
+      {
+        "host": "free5gc-vm-2",
+        "timeout": true,
+        "elapsed": 14.02
+      },
+      {
+        "host": "free5gc-vm-3",
+        "rc": 0,
+        "stdout": "SSH_OK",
+        "stderr": "",
+        "elapsed": 11.552
+      }
+    ],
+    "dashboard": {
+      "error": "Connection to 100.118.123.44 port 22 timed out",
+      "lastAttempt": "2026-10-22T13:05:54.941882+00:00",
+      "observedAt": "2026-10-22T13:03:53.262175+00:00",
+      "busy": false
+    }
+  }
+]

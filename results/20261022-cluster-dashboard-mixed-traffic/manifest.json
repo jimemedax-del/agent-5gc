@@ -1,0 +1,88 @@
+{
+  "phases": [
+    {
+      "id": "A",
+      "flows": [
+        [
+          "ue1",
+          "core",
+          "ul"
+        ],
+        [
+          "ue2",
+          "edge",
+          "dl"
+        ]
+      ]
+    },
+    {
+      "id": "B",
+      "flows": [
+        [
+          "ue1",
+          "core",
+          "ul"
+        ],
+        [
+          "ue2",
+          "edge",
+          "dl"
+        ],
+        [
+          "ue1",
+          "edge",
+          "dl"
+        ],
+        [
+          "ue2",
+          "core",
+          "ul"
+        ]
+      ]
+    },
+    {
+      "id": "C",
+      "flows": [
+        [
+          "ue2",
+          "core",
+          "dl"
+        ],
+        [
+          "ue2",
+          "edge",
+          "ul"
+        ]
+      ]
+    }
+  ],
+  "ports": {
+    "ue1/core": [
+      31301,
+      15301
+    ],
+    "ue2/core": [
+      31302,
+      15302
+    ],
+    "ue1/edge": [
+      31303,
+      15303
+    ],
+    "ue2/edge": [
+      31304,
+      15304
+    ]
+  },
+  "route": "R2",
+  "stage": "R2.S4 platform observation support",
+  "configurationVersion": "dashboard-mixed-traffic-v1",
+  "offeredMbpsPerFlow": 1,
+  "secondsPerPhase": 45,
+  "protocol": "TCP",
+  "lock": "~/.work/cnf-planner-live.lock",
+  "sourceSHA256": "94d95162ec55079e6306a2f5963aec1597c276dc151a818633dc700a7119814a",
+  "evidenceDirectory": "E:\\GPT-project\\postgraduate-analyse\\results\\20261022-cluster-dashboard-mixed-traffic",
+  "networkConfigurationMutations": false,
+  "validationSourceSHA256": "b5678229dde078367e1b8e6c23086fb9658d96d3e1e6db9c1145ebb2b2deb7ae"
+}

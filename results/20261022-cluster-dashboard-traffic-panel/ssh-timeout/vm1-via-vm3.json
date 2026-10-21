@@ -1,0 +1,22 @@
+{
+  "time": "2026-10-22T20:38:05.486705+08:00",
+  "command": [
+    "ssh",
+    "-J",
+    "free5gc-vm-3",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "-o",
+    "HostName=192.168.244.128",
+    "-o",
+    "HostKeyAlias=100.118.123.44",
+    "free5gc-vm-1",
+    "LC_ALL=C; date -u; uptime; systemctl is-active tailscaled ssh k3s; free -m; journalctl -u tailscaled --since '2026-10-22 20:27:00' --no-pager -n 45"
+  ],
+  "elapsed": 12.06,
+  "rc": 255,
+  "stdout": "",
+  "stderr": "Connection timed out during banner exchange\nConnection to UNKNOWN port 65535 timed out\n"
+}

@@ -1,0 +1,79 @@
+{
+  "route": "R2",
+  "stage": "R2.S4 platform observation support",
+  "configurationVersion": "dashboard-traffic-panel-v1",
+  "passed": true,
+  "regressionTestsPassed": 45,
+  "requirements": {
+    "singleAndConcurrentTraffic": [
+      "single.json",
+      "four-completed.json"
+    ],
+    "configurationValidationPresetsAndEditing": [
+      "gui-validation.json",
+      "gui-editing.json",
+      "unit-tests.txt"
+    ],
+    "segmentedExecutionAndRestartRecovery": [
+      "four-running-before-restart.json",
+      "four-after-restart.json",
+      "four-completed.json"
+    ],
+    "realStop": [
+      "early-stop.json",
+      "stop-process-verification.json"
+    ],
+    "sharedExperimentLock": [
+      "lock-conflict.json",
+      "lock-conflict.jpg"
+    ],
+    "baseAndMultiEnvironmentMapping": [
+      "base-edge-downlink.json",
+      "four-completed.json"
+    ],
+    "topologyLinkage": [
+      "gui-validation.json"
+    ],
+    "historyAndExport": [
+      "downloaded-report.json",
+      "cached-report-online.json",
+      "completed-final.jpg"
+    ],
+    "responsiveDesignAndStates": [
+      "four-running.jpg",
+      "stopped-desktop.jpg",
+      "mobile-stopped.jpg",
+      "desktop-final.jpg",
+      "completed-final.jpg",
+      "disconnected-desktop.jpg"
+    ],
+    "functionalScoreAtLeast95": [
+      "review.json"
+    ],
+    "visualScoreAtLeast95": [
+      "review.json"
+    ],
+    "formalPodStability": [
+      "formal-before.json",
+      "formal-after.json"
+    ],
+    "documentedAccessRecovery": [
+      "access-recovery.jsonl"
+    ]
+  },
+  "sourceSHA256": {
+    "services/cluster_dashboard/traffic.py": "0f672c9315f5d1f469d7546ed5d401daad636538d54120d017c680f2aa6b6f47",
+    "services/cluster_dashboard/traffic_remote.py": "6543f2f39f65847e7d2601540948d7f5fc36e04d494ac39118142c770711a947",
+    "services/cluster_dashboard/server.py": "541d2287a5ccb2ac494dcd676daaf876497333709c8396fc0dd6a8de6d507b6d",
+    "services/cluster_dashboard/web/traffic.js": "4bd562bafeeb861635ce0b95b9b58bc9f02f333563bff22402b2599eff8906d2",
+    "services/cluster_dashboard/web/traffic.css": "ea34ad62ab2f396e3422fe2ca68c11901700563703fe8010b9785e4f0409dd99",
+    "services/cluster_dashboard/web/index.html": "aae1da67966d2add609a058edb61a53b8e1e892969e3ead014f762f80da22c10",
+    "services/cluster_dashboard/web/app.js": "cdc7e9ae83097ef27ef29a44e099d2c9fe96d695985089d95d28f795f8d2433f",
+    "tests/test_cluster_traffic.py": "8dba32289896f857dff6812aa1d93b0a81f515ac1b13968e1c6495dc0141e2da"
+  },
+  "formalPodIdentityAndRestartUnchanged": 29,
+  "preTestAccessRecovery": true,
+  "allTrafficFinished": true,
+  "readinessCaveat": "Tailscale SSH intermittent timeouts occurred; unknown state blocks new traffic, existing cached results remain exportable",
+  "noCommitsOrStagingByAgent": true
+}

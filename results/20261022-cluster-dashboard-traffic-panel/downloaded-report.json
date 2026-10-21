@@ -1,0 +1,56 @@
+{
+  "job": {
+    "id": "e7743c0f052543eb829a6ba4b876a4cd",
+    "config": {
+      "environment": "cnf-lab",
+      "durationSeconds": 10,
+      "flows": [
+        {
+          "ue": "ue1",
+          "target": "edge",
+          "direction": "dl",
+          "rateMbps": 1
+        }
+      ]
+    },
+    "status": "completed",
+    "createdAt": "2026-10-22T11:25:28.488535+00:00",
+    "updatedAt": "2026-10-22T11:25:39.591926+00:00",
+    "startedAt": "2026-10-22T11:25:28.901823+00:00",
+    "finishedAt": "2026-10-22T11:25:39.591893+00:00",
+    "elapsedSeconds": 10.7,
+    "progress": 100,
+    "segment": 1,
+    "completedSeconds": 10,
+    "results": [
+      {
+        "flowIndex": 0,
+        "segment": 1,
+        "status": "completed",
+        "receiverMbps": 1.0092415826319003,
+        "senderMbps": 1.005533323383487,
+        "receivedBytes": 1261568,
+        "seconds": 10.000127,
+        "error": null
+      }
+    ],
+    "resolved": [
+      {
+        "ue": "ue1",
+        "target": "edge",
+        "direction": "dl",
+        "rateMbps": 1,
+        "pod": "ueransim-ue-565bfd8bfc-ncgnv",
+        "podUid": "512376d8-4a4e-433a-bc80-b55f2f2962d8",
+        "ip": "10.60.0.16",
+        "host": "192.168.244.128",
+        "port": 31202,
+        "listener": 15202,
+        "service": "cnf-m2-edge",
+        "backendIP": "10.42.2.89"
+      }
+    ],
+    "message": "所有分段均成功，客户端已退出。",
+    "segmentSeconds": 10
+  }
+}

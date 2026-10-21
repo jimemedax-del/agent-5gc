@@ -1,0 +1,31 @@
+test_arbitrary_command_parameters_are_rejected (test_cluster_dashboard.HttpTests.test_arbitrary_command_parameters_are_rejected) ... 127.0.0.1 - - [21/Oct/2026 21:27:51] "POST /api/refresh HTTP/1.1" 400 -
+ok
+test_cross_origin_and_unexpected_host_cannot_use_local_access (test_cluster_dashboard.HttpTests.test_cross_origin_and_unexpected_host_cannot_use_local_access) ... 127.0.0.1 - - [21/Oct/2026 21:27:51] "POST /api/refresh HTTP/1.1" 403 -
+127.0.0.1 - - [21/Oct/2026 21:27:51] "POST /api/refresh HTTP/1.1" 403 -
+ok
+test_path_traversal_and_mutation_endpoint_are_unavailable (test_cluster_dashboard.HttpTests.test_path_traversal_and_mutation_endpoint_are_unavailable) ... 127.0.0.1 - - [21/Oct/2026 21:27:52] "GET /../collect.py HTTP/1.1" 404 -
+127.0.0.1 - - [21/Oct/2026 21:27:52] "GET /api/execute HTTP/1.1" 404 -
+ok
+test_refresh_enqueues_only_fixed_collection (test_cluster_dashboard.HttpTests.test_refresh_enqueues_only_fixed_collection) ... ok
+test_snapshot_and_assets_have_no_external_dependencies (test_cluster_dashboard.HttpTests.test_snapshot_and_assets_have_no_external_dependencies) ... ok
+test_endpoints_are_bound_by_namespace_and_slice_labels (test_cluster_dashboard.ModelTests.test_endpoints_are_bound_by_namespace_and_slice_labels) ... ok
+test_missing_or_reset_metrics_are_not_zero (test_cluster_dashboard.ModelTests.test_missing_or_reset_metrics_are_not_zero) ... ok
+test_missing_ready_endpoints_fail_health_check (test_cluster_dashboard.ModelTests.test_missing_ready_endpoints_fail_health_check) ... ok
+test_network_policy_objects_do_not_claim_effective_enforcement (test_cluster_dashboard.ModelTests.test_network_policy_objects_do_not_claim_effective_enforcement) ... ok
+test_old_interface_counters_are_reported_as_unknown (test_cluster_dashboard.ModelTests.test_old_interface_counters_are_reported_as_unknown) ... ok
+test_only_mounted_proxy_configs_form_routes (test_cluster_dashboard.ModelTests.test_only_mounted_proxy_configs_form_routes) ... ok
+test_proxy_rates_use_admin_sample_clock_and_preserve_zero (test_cluster_dashboard.ModelTests.test_proxy_rates_use_admin_sample_clock_and_preserve_zero) ... ok
+test_quantity_understands_real_metric_units (test_cluster_dashboard.ModelTests.test_quantity_understands_real_metric_units) ... ok
+test_rate_requires_same_identity_and_monotonic_counter (test_cluster_dashboard.ModelTests.test_rate_requires_same_identity_and_monotonic_counter) ... ok
+test_replaced_pod_is_not_bound_to_an_old_endpoint_uid (test_cluster_dashboard.ModelTests.test_replaced_pod_is_not_bound_to_an_old_endpoint_uid) ... ok
+test_route_identity_does_not_depend_on_list_position (test_cluster_dashboard.ModelTests.test_route_identity_does_not_depend_on_list_position) ... ok
+test_sanitize_does_not_return_environment_secret_refs_or_annotations (test_cluster_dashboard.ModelTests.test_sanitize_does_not_return_environment_secret_refs_or_annotations) ... ok
+test_collection_failure_retains_previous_evidence_and_marks_error (test_cluster_dashboard.StoreTests.test_collection_failure_retains_previous_evidence_and_marks_error) ... ok
+test_duplicate_collection_does_not_start_parallel_remote_operations (test_cluster_dashboard.StoreTests.test_duplicate_collection_does_not_start_parallel_remote_operations) ... ok
+test_refresh_completion_requires_a_new_collection_attempt (test_cluster_dashboard.StoreTests.test_refresh_completion_requires_a_new_collection_attempt) ... ok
+test_replay_does_not_fabricate_rate_or_new_timestamp (test_cluster_dashboard.StoreTests.test_replay_does_not_fabricate_rate_or_new_timestamp) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 2.596s
+
+OK

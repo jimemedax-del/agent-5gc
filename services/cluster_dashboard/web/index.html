@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101c33" />
+    <title>网络观测台 · CNF Observatory</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/traffic.css" />
+    <script src="/app.js" defer></script>
+    <script src="/traffic.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">跳转至主要内容</a>
+    <aside class="sidebar" aria-label="主导航">
+      <a class="brand" href="#overview" data-go="overview"
+        ><span class="brand-mark">n<span>·</span></span
+        ><span>NETWORK<span class="brand-sub">OBSERVATORY</span></span></a
+      >
+      <div class="workspace">
+        <span class="workspace-icon" data-icon="layers"></span>
+        <div>5GC 实验环境<small>free5GC × Kubernetes</small></div>
+        <span class="workspace-dot"></span>
+      </div>
+      <p class="nav-caption">WORKSPACE <span>工作空间</span></p>
+      <nav>
+        <button class="nav-item active" data-view="overview">
+          <span data-icon="grid"></span>运行总览<span
+            class="nav-indicator"
+          ></span>
+        </button>
+        <button class="nav-item" data-view="topology">
+          <span data-icon="network"></span>网络拓扑
+        </button>
+        <button class="nav-item" data-view="traffic">
+          <span data-icon="activity"></span>流量实验<span class="nav-live-dot" id="traffic-nav-dot" hidden></span>
+        </button>
+        <button class="nav-item" data-view="resources">
+          <span data-icon="box"></span>资源清单<span
+            class="nav-count"
+            id="nav-pods"
+            >—</span
+          >
+        </button>
+        <button class="nav-item" data-view="health">
+          <span data-icon="pulse"></span>健康检查
+        </button>
+        <button class="nav-item" data-view="guide">
+          <span data-icon="book"></span>系统导览
+        </button>
+      </nav>
+      <div class="sidebar-foot">
+        <span class="tiny-label">LAB WORKSPACE</span>
+        <div><span class="dot mint"></span>观测 · 受控实验</div>
+        <p>连接真实集群<br />让每一条路径都有据可查</p>
+        <div class="sidebar-version">CNF LAB <span>v1.0</span></div>
+      </div>
+    </aside>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span data-icon="layers"></span><span>实验平台</span
+          ><span class="slash">/</span
+          ><strong id="breadcrumb-current">运行总览</strong>
+        </div>
+        <div class="top-actions">
+          <span class="connection" id="connection"
+            ><span class="dot amber"></span>正在连接</span
+          ><span class="top-separator"></span
+          ><button
+            class="icon-button"
+            id="help-button"
+            aria-label="打开系统导览"
+            data-icon="help"
+          ></button
+          ><span class="avatar">LAB</span>
+        </div>
+      </header>
+      <main id="main" tabindex="-1">
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow">YOUR NETWORK, IN VIEW <span></span></div>
+            <h1 id="page-title">
+              把网络，看清楚<span class="title-dot">。</span>
+            </h1>
+            <p id="page-description">
+              从终端接入到核心与边缘，每一个节点、每一段连接，尽在此处。
+            </p>
+          </div>
+          <div class="heading-actions">
+            <div class="observed-time">
+              <span class="dot mint" id="time-dot"></span
+              ><span id="observed-time">等待首轮真实观测</span>
+            </div>
+            <button class="button primary" id="refresh-button">
+              <span data-icon="refresh"></span><span>刷新状态</span>
+            </button>
+          </div>
+        </section>
+        <div
+          id="status-banner"
+          role="status"
+          class="status-banner hidden"
+        ></div>
+        <section id="overview-view" class="view active" aria-label="运行总览">
+          <div class="stat-grid" id="stats">
+            <div class="skeleton stat-placeholder"></div>
+            <div class="skeleton stat-placeholder"></div>
+            <div class="skeleton stat-placeholder"></div>
+            <div class="skeleton stat-placeholder"></div>
+          </div>
+          <div class="section-heading">
+            <h2><span class="section-number">01</span>节点全景</h2>
+            <span class="section-hint">实际放置 · 实时资源用量</span>
+          </div>
+          <div class="node-grid" id="nodes">
+            <div class="skeleton node-placeholder"></div>
+            <div class="skeleton node-placeholder"></div>
+            <div class="skeleton node-placeholder"></div>
+          </div>
+          <div class="overview-middle">
+            <section class="panel topology-panel">
+              <div class="panel-header">
+                <div>
+                  <h2><span class="section-number">02</span>业务流向</h2>
+                  <p>终端 → 接入 → 用户面 → 代理 → 业务后端</p>
+                </div>
+                <button class="text-button" id="expand-topology">
+                  展开拓扑 <span data-icon="arrow-up-right"></span>
+                </button>
+              </div>
+              <div id="overview-topology" class="overview-map">
+                <div class="empty-state">正在读取真实拓扑…</div>
+              </div>
+              <div class="map-legend">
+                <span><i class="legend-line reference"></i>参考 / 空闲 / 缺测</span
+                ><span><i class="legend-line correlated"></i>端点活动关联</span><span><i class="legend-line config"></i>当前代理配置</span
+                ><span><i class="legend-line traffic"></i>代理实测流量</span
+                ><span class="legend-note">点击任意功能查看详情</span>
+              </div>
+            </section>
+            <section class="panel health-preview">
+              <div class="panel-header">
+                <div>
+                  <h2><span class="section-number">03</span>健康概况</h2>
+                  <p>按证据逐项检查运行状态</p>
+                </div>
+                <span data-icon="shield" class="muted-icon"></span>
+              </div>
+              <div id="health-preview"></div>
+              <button class="button subtle full" id="run-checks">
+                <span data-icon="pulse"></span>运行健康检查
+              </button>
+              <p class="micro-copy">
+                读取 API、资源就绪状态与接口；不发起业务压测。
+              </p>
+            </section>
+          </div>
+          <div class="overview-bottom">
+            <section class="panel traffic-panel">
+              <div class="panel-header">
+                <div>
+                  <h2>
+                    代理流量观测 <span class="label quiet">采样均值</span>
+                  </h2>
+                  <p>Envoy upstream cluster 计数器差分 · 最近 30 个采样</p>
+                </div>
+                <div class="chart-legend">
+                  <span><i class="swatch cyan"></i>后端 → 代理</span
+                  ><span><i class="swatch violet"></i>代理 → 后端</span>
+                </div>
+              </div>
+              <div id="traffic-chart"></div>
+            </section>
+            <section class="panel events-panel">
+              <div class="panel-header">
+                <div>
+                  <h2>集群事件</h2>
+                  <p>Kubernetes 最近保留的事件</p>
+                </div>
+                <span class="label quiet" id="event-count">—</span>
+              </div>
+              <div id="recent-events"></div>
+            </section>
+          </div>
+        </section>
+        <section id="topology-view" class="view" aria-label="网络拓扑">
+          <div class="topology-toolbar panel">
+            <div class="segmented topology-tabs">
+              <button class="active" data-topology="business">业务路径</button
+              ><button data-topology="pods">Pod 放置</button
+              ><button data-topology="services">服务绑定</button
+              ><button data-topology="control">控制面参考</button>
+            </div>
+            <div class="toolbar-right">
+              <label class="select-label" id="path-space-label"
+                >业务环境<select id="path-space">
+                  <option value="cnf-lab">基础服务链 · cnf-lab</option>
+                  <option value="cnf-multi-ue">
+                    双用户实验 · cnf-multi-ue
+                  </option>
+                </select></label
+              ><label class="hidden" id="topology-namespace-label"
+                ><span class="sr-only">拓扑命名空间</span
+                ><select id="topology-namespace">
+                  <option value="">全部命名空间</option>
+                </select></label
+              >
+              <div class="zoom-controls">
+                <button class="icon-button" id="zoom-out" aria-label="缩小画布">
+                  −</button
+                ><span id="zoom-label">100%</span
+                ><button class="icon-button" id="zoom-in" aria-label="放大画布">
+                  ＋</button
+                ><button
+                  class="icon-button"
+                  id="topology-fit"
+                  aria-label="重置画布缩放与位置"
+                  data-icon="maximize"
+                ></button>
+              </div>
+            </div>
+          </div>
+          <div class="panel full-topology-panel">
+            <div class="panel-header">
+              <div>
+                <h2 id="topology-heading">业务路径与功能关系</h2>
+                <p id="topology-note">
+                  橙色为前段端点活动关联，绿色为代理实测；点击连线查看依据与采样范围。
+                </p>
+              </div>
+              <span class="label quiet">可点击查看证据</span>
+            </div>
+            <div id="full-topology" class="full-map"></div>
+            <div class="map-legend">
+              <span
+                ><i class="legend-line reference"></i>参考 / 空闲 / 缺测</span
+              ><span><i class="legend-line correlated"></i>端点活动关联</span><span><i class="legend-line config"></i>配置 / 端点关系</span
+              ><span
+                ><i class="legend-line traffic"></i>代理计数差分 &gt; 0</span
+              >
+            </div>
+          </div>
+          <section class="panel route-panel">
+            <div class="panel-header">
+              <div>
+                <h2>代理监听与转发</h2>
+                <p>
+                  仅解析当前 Pod 挂载配置；排除闲置历史配置。尚未逐项核对进程已加载的配置。
+                </p>
+              </div>
+            </div>
+            <div class="table-scroll" id="route-table"></div>
+          </section>
+        </section>
+        <section id="resources-view" class="view" aria-label="资源清单">
+          <div class="resource-summary" id="resource-summary"></div>
+          <section class="panel">
+            <div class="resource-toolbar">
+              <div class="segmented" id="resource-tabs">
+                <button class="active" data-resource="pods">Pods</button
+                ><button data-resource="services">Services</button
+                ><button data-resource="workloads">工作负载</button
+                ><button data-resource="policies">网络策略</button
+                ><button data-resource="pvcs">存储卷</button>
+              </div>
+              <div class="filters">
+                <label
+                  ><span class="sr-only">命名空间筛选</span
+                  ><select id="namespace-filter">
+                    <option value="">全部命名空间</option>
+                  </select></label
+                ><label class="search-box"
+                  ><span data-icon="search"></span
+                  ><input
+                    id="resource-search"
+                    type="search"
+                    placeholder="搜索名称、节点或功能"
+                    aria-label="搜索资源"
+                /></label>
+              </div>
+            </div>
+            <div class="table-scroll" id="resource-table"></div>
+            <div class="table-footer" id="resource-footer"></div>
+          </section>
+          <p class="footnote">
+            CPU / 内存来自 metrics-server，具有独立采样时间。Pod 网络为 eth0
+            总量，包含信令与探测，不能直接等同业务吞吐。
+          </p>
+        </section>
+        <section id="health-view" class="view" aria-label="健康检查">
+          <div class="health-heading panel">
+            <div id="health-summary"></div>
+            <button class="button primary" id="health-refresh">
+              <span data-icon="pulse"></span>重新检查
+            </button>
+          </div>
+          <div id="health-cards" class="health-grid"></div>
+          <div class="notice">
+            <span data-icon="info"></span>
+            <div>
+              <strong>健康检查的范围</strong>
+              <p>
+                此页检查资源与观测接口。Ready、隧道存在和策略对象存在，分别不等于端到端业务成功、实时注册成功或策略实际拦截生效；后者仍需专门业务实验。
+              </p>
+            </div>
+          </div>
+          <section class="panel health-events">
+            <div class="panel-header">
+              <div>
+                <h2>事件与采集诊断</h2>
+                <p>最近 40 条 Kubernetes 事件；采集错误单独保留。</p>
+              </div>
+            </div>
+            <div id="health-events"></div>
+          </section>
+        </section>
+        <section id="traffic-view" class="view" aria-label="流量实验">
+          <div class="traffic-intro">
+            <span class="traffic-chip"><span class="dot mint"></span>TCP · 绑定 UE 隧道</span>
+            <span>从一个明确的请求，开始一次可重复的实验。</span>
+          </div>
+          <div id="traffic-error" class="traffic-error" role="alert" hidden></div>
+          <div class="traffic-layout">
+            <section class="panel traffic-composer" aria-labelledby="traffic-config-title">
+              <header class="panel-header"><div><h2 id="traffic-config-title"><span class="section-number">01</span>配置流量</h2><p>选择用户、目的地和方向，端口与隧道地址自动解析。</p></div><span class="traffic-step">CONFIGURE</span></header>
+              <form id="traffic-form">
+                <fieldset id="traffic-config-fields">
+                  <div class="traffic-basics">
+                    <label for="traffic-environment">业务环境<select id="traffic-environment" aria-describedby="traffic-environment-note traffic-validation"><option value="cnf-multi-ue">双用户实验 · 独立后端</option><option value="cnf-lab">基础服务链 · 共享后端</option></select><small id="traffic-environment-note">每个用户拥有独立 Core / Edge 测试实例。</small></label>
+                    <label for="traffic-duration">持续时间 <span class="traffic-unit">秒</span><input id="traffic-duration" type="number" min="10" max="300" step="1" value="30" required aria-describedby="traffic-duration-note traffic-validation"/><small id="traffic-duration-note">10–300 秒；超过 45 秒自动分段重连。</small></label>
+                  </div>
+                  <div class="traffic-label-row"><span>快速预设</span><span>点击填入，可继续编辑</span></div>
+                  <div class="traffic-presets" role="group" aria-label="流量预设">
+                    <button type="button" data-traffic-preset="single"><span class="preset-glyph">↗</span><strong>单流验证</strong><small>UE1 → Core</small></button>
+                    <button type="button" data-traffic-preset="mixed"><span class="preset-glyph">⇄</span><strong>双向混合</strong><small>两用户 · 两后端</small></button>
+                    <button type="button" data-traffic-preset="four"><span class="preset-glyph">⤨</span><strong>四流并发</strong><small>上下行同时运行</small></button>
+                  </div>
+                  <div class="traffic-label-row"><span>并发流列表</span><button type="button" id="traffic-add" class="traffic-text-button">＋ 添加一条</button></div>
+                  <div id="traffic-flows"></div>
+                  <div class="traffic-budget"><div><span>目标发送速率合计</span><strong id="traffic-total">1.0 <small> / 4 Mbps</small></strong></div><div class="traffic-budget-track"><span id="traffic-budget-fill"></span></div><p>这是发送负载上限，实际吞吐以测试结果为准。</p></div>
+                </fieldset>
+                <div id="traffic-validation" class="traffic-validation" role="status"></div>
+                <div class="traffic-form-footer"><p><span data-icon="shield"></span>复用实验锁 · 同一时刻一个任务</p><button type="submit" class="button primary" id="traffic-start"><span data-icon="arrow"></span>启动实验</button></div>
+              </form>
+            </section>
+            <aside class="panel traffic-task" aria-labelledby="traffic-task-title">
+              <header class="panel-header"><div><h2 id="traffic-task-title"><span class="section-number">02</span>任务状态</h2><p>任务在 VM1 运行，关闭页面后仍会继续。</p></div><span class="traffic-service-label"><i id="traffic-service-dot" class="dot amber"></i><span id="traffic-service-text">连接中</span></span></header>
+              <div id="traffic-task-content"></div>
+            </aside>
+          </div>
+          <section class="panel traffic-results" aria-labelledby="traffic-results-title">
+            <header class="panel-header"><div><h2 id="traffic-results-title"><span class="section-number">03</span>实验记录</h2><p>保留最近 20 个已结束任务，可查看分段结果与下载报告。</p></div><span class="traffic-step">EVIDENCE</span></header>
+            <div id="traffic-history" class="traffic-history"></div>
+            <div id="traffic-result-content"></div>
+          </section>
+          <div class="traffic-footnote"><span data-icon="info"></span><p>本面板执行固定 TCP 测试，不修改部署、队列或策略。拓扑约每 15 秒更新；橙色为端点活动关联，绿色为代理计数实测。分段重连有短暂空档，结果不等同于连续连接稳定性或 QoS 保障。</p></div>
+        </section>
+        <section id="guide-view" class="view" aria-label="系统导览">
+          <div class="guide-hero panel">
+            <span class="eyebrow">HOW THE SYSTEM WORKS</span>
+            <h2>一条业务，如何穿过这张网？</h2>
+            <p>
+              UE 发起业务，经模拟基站进入 5G 用户面，再由 Envoy
+              送往中心或边缘服务。控制面负责接入、鉴权、会话与策略管理。
+            </p>
+            <div id="guide-flow"></div>
+          </div>
+          <div id="guide-cards" class="guide-grid"></div>
+          <div class="notice">
+            <span data-icon="info"></span>
+            <div>
+              <strong>当前能力边界</strong>
+              <p>
+                端口分类、代理转发、受控引导和容器 tc
+                带宽实验已有验证；自主业务识别、原生 5G QoS、动态编排与 Agent
+                尚未完成。此页面提供观测和解释，不能据此推导已具备这些能力。
+              </p>
+            </div>
+          </div>
+        </section>
+        <footer class="page-footer">
+          <span
+            ><span class="dot muted-dot"></span>CNF Observatory
+            <span class="footer-divider">/</span>让网络状态有迹可循</span
+          ><span id="footer-source">数据源连接中</span>
+        </footer>
+      </main>
+    </div>
+    <div id="drawer-backdrop" class="drawer-backdrop hidden"></div>
+    <aside
+      id="detail-drawer"
+      class="detail-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="资源详情"
+      tabindex="-1"
+      hidden
+    >
+      <header>
+        <span class="eyebrow">RESOURCE INSPECTOR</span
+        ><button
+          class="icon-button"
+          id="close-drawer"
+          aria-label="关闭详情"
+          data-icon="close"
+        ></button>
+      </header>
+      <div id="drawer-content"></div>
+    </aside>
+    <div id="toast" class="toast hidden" role="status"></div>
+  </body>
+</html>

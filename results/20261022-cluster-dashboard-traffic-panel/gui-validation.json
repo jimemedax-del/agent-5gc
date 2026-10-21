@@ -1,0 +1,7 @@
+{
+  "environment": "cnf-multi-ue",
+  "startDisabled": true,
+  "error": "目标发送速率之和超过 4 Mbps，请降低速率或删除流量。",
+  "invalid": "true",
+  "topologyEnvironment": "cnf-lab"
+}

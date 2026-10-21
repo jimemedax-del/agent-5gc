@@ -3,6 +3,8 @@
 > 最后更新：2026-10-21
 > 文档状态：固定配置联合功能检查通过；R2.S4 的 E1/E2/E3 限定结论保持，完整编排与 Agent 尚未完成
 
+**集群可视化入口：** 在仓库根目录运行 `python scripts/start-cluster-dashboard.py`，独立后台启动后打开 <http://127.0.0.1:8765>。本地页面通过现有 SSH 读取 VM1，展示真实节点/Pod、业务路径、服务绑定、资源与健康检查；“流量实验”面板提供受控 TCP 参数配置、并发发流、停止与分段结果。运行方式和观测边界见[可视化观测台](docs/07-three-node-topology-and-acceptance.md#集群可视化观测台)。这是 Agent 开发前的观测支撑，Agent 本身仍待开发。
+
 ## 当前路线与阶段
 
 **固定配置的小实验已补齐联合验收。** 同一跨节点路径、Envoy 预设端口分类/代理/引导及保护策略下，22 次 TCP 下行业务全部通过：无整形两类约 20.054 Mbps，5/15 Mbps 整形后约 4.823/14.377 Mbps，撤销后恢复约 20.052/20.053 Mbps。44 条代理连接均正确，正式期 26 个 Pod 稳定，准备/恢复只受控重建两侧后端，其他 24 个 Pod 全程不变。原保护配置与严格基线已恢复；自主识别、原生 5G QoS 和 Agent 仍未完成，见 [联合检查](docs/cnf-service-chain-orchestration.md#固定配置联合功能检查)。
@@ -99,6 +101,7 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 | `docs/` | 业务心智模型、实验基线、研究路线、三节点计划和 CNF 服务链设计 |
 | `infra/` | 受控Values、测试订阅、镜像源配置和Chart补丁 |
 | `services/cnf_agent/` | Agent 应用代码目录；当前仅包入口，开发设计见 Agent 模块文档 |
+| `services/cluster_dashboard/` | 本地集群观测台：Python 采集/API 与原生 HTML/CSS/JavaScript 页面 |
 | `scripts/` | 固定 Profile 渲染/检查/重部署/验收入口；初始化脚本待实机验证 |
 | `problem solve.md` | 按问题编号维护的故障、根因、修复和证据 |
 

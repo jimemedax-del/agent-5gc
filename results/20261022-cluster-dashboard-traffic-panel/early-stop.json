@@ -1,0 +1,84 @@
+{
+  "id": "42faf9e792434753bfa8628a1d75e699",
+  "config": {
+    "environment": "cnf-multi-ue",
+    "durationSeconds": 300,
+    "flows": [
+      {
+        "ue": "ue1",
+        "target": "core",
+        "direction": "ul",
+        "rateMbps": 1
+      },
+      {
+        "ue": "ue2",
+        "target": "edge",
+        "direction": "dl",
+        "rateMbps": 1
+      }
+    ]
+  },
+  "status": "stopped",
+  "createdAt": "2026-10-22T11:13:06.409016+00:00",
+  "updatedAt": "2026-10-22T11:13:42.826402+00:00",
+  "startedAt": "2026-10-22T11:13:06.919193+00:00",
+  "finishedAt": "2026-10-22T11:13:42.826392+00:00",
+  "elapsedSeconds": 35.1,
+  "progress": 11,
+  "segment": 1,
+  "completedSeconds": 0,
+  "results": [
+    {
+      "flowIndex": 0,
+      "segment": 1,
+      "status": "stopped",
+      "receiverMbps": null,
+      "senderMbps": null,
+      "receivedBytes": null,
+      "seconds": null,
+      "error": "interrupt - the client has terminated"
+    },
+    {
+      "flowIndex": 1,
+      "segment": 1,
+      "status": "stopped",
+      "receiverMbps": null,
+      "senderMbps": null,
+      "receivedBytes": null,
+      "seconds": null,
+      "error": "interrupt - the client has terminated"
+    }
+  ],
+  "resolved": [
+    {
+      "ue": "ue1",
+      "target": "core",
+      "direction": "ul",
+      "rateMbps": 1,
+      "pod": "ueransim-ue-565bfd8bfc-ncgnv",
+      "podUid": "512376d8-4a4e-433a-bc80-b55f2f2962d8",
+      "ip": "10.60.0.16",
+      "host": "192.168.244.128",
+      "port": 31301,
+      "listener": 15301,
+      "service": "cnf-a-core-ue1",
+      "backendIP": "10.42.0.197"
+    },
+    {
+      "ue": "ue2",
+      "target": "edge",
+      "direction": "dl",
+      "rateMbps": 1,
+      "pod": "cnf-a-ue2-5dbc97f69c-vw869",
+      "podUid": "38ab1076-933a-4323-9e7d-2c93e4cf00b0",
+      "ip": "10.60.0.17",
+      "host": "192.168.244.128",
+      "port": 31304,
+      "listener": 15304,
+      "service": "cnf-a-edge-ue2",
+      "backendIP": "10.42.2.84"
+    }
+  ],
+  "message": "已确认本任务 UE 客户端退出；部分分段没有完整吞吐结果。",
+  "segmentSeconds": 45
+}

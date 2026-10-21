@@ -1,0 +1,64 @@
+test_access_binding_excludes_authentication_fields (tests.test_cluster_dashboard.ActivityTests.test_access_binding_excludes_authentication_fields) ... ok
+test_backend_alone_does_not_light_front_links (tests.test_cluster_dashboard.ActivityTests.test_backend_alone_does_not_light_front_links) ... ok
+test_direction_and_ue_isolation (tests.test_cluster_dashboard.ActivityTests.test_direction_and_ue_isolation) ... ok
+test_first_missing_reset_replaced_or_stale_sample_is_unknown (tests.test_cluster_dashboard.ActivityTests.test_first_missing_reset_replaced_or_stale_sample_is_unknown) ... ok
+test_unresolved_or_ambiguous_gnb_is_not_assumed (tests.test_cluster_dashboard.ActivityTests.test_unresolved_or_ambiguous_gnb_is_not_assumed) ... ok
+test_arbitrary_command_parameters_are_rejected (tests.test_cluster_dashboard.HttpTests.test_arbitrary_command_parameters_are_rejected) ... 127.0.0.1 - - [22/Oct/2026 19:34:33] "POST /api/refresh HTTP/1.1" 400 -
+ok
+test_cross_origin_and_unexpected_host_cannot_use_local_access (tests.test_cluster_dashboard.HttpTests.test_cross_origin_and_unexpected_host_cannot_use_local_access) ... 127.0.0.1 - - [22/Oct/2026 19:34:33] "POST /api/refresh HTTP/1.1" 403 -
+127.0.0.1 - - [22/Oct/2026 19:34:33] "POST /api/refresh HTTP/1.1" 403 -
+ok
+test_path_traversal_and_mutation_endpoint_are_unavailable (tests.test_cluster_dashboard.HttpTests.test_path_traversal_and_mutation_endpoint_are_unavailable) ... 127.0.0.1 - - [22/Oct/2026 19:34:34] "GET /../collect.py HTTP/1.1" 404 -
+127.0.0.1 - - [22/Oct/2026 19:34:34] "GET /api/execute HTTP/1.1" 404 -
+ok
+test_refresh_enqueues_only_fixed_collection (tests.test_cluster_dashboard.HttpTests.test_refresh_enqueues_only_fixed_collection) ... ok
+test_snapshot_and_assets_have_no_external_dependencies (tests.test_cluster_dashboard.HttpTests.test_snapshot_and_assets_have_no_external_dependencies) ... ok
+test_endpoints_are_bound_by_namespace_and_slice_labels (tests.test_cluster_dashboard.ModelTests.test_endpoints_are_bound_by_namespace_and_slice_labels) ... ok
+test_missing_or_reset_metrics_are_not_zero (tests.test_cluster_dashboard.ModelTests.test_missing_or_reset_metrics_are_not_zero) ... ok
+test_missing_ready_endpoints_fail_health_check (tests.test_cluster_dashboard.ModelTests.test_missing_ready_endpoints_fail_health_check) ... ok
+test_network_policy_objects_do_not_claim_effective_enforcement (tests.test_cluster_dashboard.ModelTests.test_network_policy_objects_do_not_claim_effective_enforcement) ... ok
+test_old_interface_counters_are_reported_as_unknown (tests.test_cluster_dashboard.ModelTests.test_old_interface_counters_are_reported_as_unknown) ... ok
+test_only_mounted_proxy_configs_form_routes (tests.test_cluster_dashboard.ModelTests.test_only_mounted_proxy_configs_form_routes) ... ok
+test_proxy_rates_use_admin_sample_clock_and_preserve_zero (tests.test_cluster_dashboard.ModelTests.test_proxy_rates_use_admin_sample_clock_and_preserve_zero) ... ok
+test_quantity_understands_real_metric_units (tests.test_cluster_dashboard.ModelTests.test_quantity_understands_real_metric_units) ... ok
+test_rate_requires_same_identity_and_monotonic_counter (tests.test_cluster_dashboard.ModelTests.test_rate_requires_same_identity_and_monotonic_counter) ... ok
+test_replaced_pod_is_not_bound_to_an_old_endpoint_uid (tests.test_cluster_dashboard.ModelTests.test_replaced_pod_is_not_bound_to_an_old_endpoint_uid) ... ok
+test_route_identity_does_not_depend_on_list_position (tests.test_cluster_dashboard.ModelTests.test_route_identity_does_not_depend_on_list_position) ... ok
+test_sanitize_does_not_return_environment_secret_refs_or_annotations (tests.test_cluster_dashboard.ModelTests.test_sanitize_does_not_return_environment_secret_refs_or_annotations) ... ok
+test_collection_failure_retains_previous_evidence_and_marks_error (tests.test_cluster_dashboard.StoreTests.test_collection_failure_retains_previous_evidence_and_marks_error) ... ok
+test_duplicate_collection_does_not_start_parallel_remote_operations (tests.test_cluster_dashboard.StoreTests.test_duplicate_collection_does_not_start_parallel_remote_operations) ... ok
+test_refresh_completion_requires_a_new_collection_attempt (tests.test_cluster_dashboard.StoreTests.test_refresh_completion_requires_a_new_collection_attempt) ... ok
+test_replay_does_not_fabricate_rate_or_new_timestamp (tests.test_cluster_dashboard.StoreTests.test_replay_does_not_fabricate_rate_or_new_timestamp) ... ok
+test_windows_collection_does_not_create_console_windows (tests.test_cluster_dashboard.StoreTests.test_windows_collection_does_not_create_console_windows) ... ok
+test_limits_and_exact_schema (tests.test_cluster_traffic.ConfigTests.test_limits_and_exact_schema) ... ok
+test_nonfinite_boolean_huge_and_out_of_range_speeds_rejected (tests.test_cluster_traffic.ConfigTests.test_nonfinite_boolean_huge_and_out_of_range_speeds_rejected) ... ok
+test_port_and_protocol_injection_are_rejected (tests.test_cluster_traffic.ConfigTests.test_port_and_protocol_injection_are_rejected) ... ok
+test_route_drift_is_rejected_before_any_flow (tests.test_cluster_traffic.ConfigTests.test_route_drift_is_rejected_before_any_flow) ... ok
+test_shared_targets_and_total_limit (tests.test_cluster_traffic.ConfigTests.test_shared_targets_and_total_limit) ... ok
+test_cache_reads_do_not_wait_for_remote_operation (tests.test_cluster_traffic.FacadeTests.test_cache_reads_do_not_wait_for_remote_operation) ... ok
+test_failed_refresh_preserves_active_task (tests.test_cluster_traffic.FacadeTests.test_failed_refresh_preserves_active_task) ... ok
+test_replay_and_stale_snapshots_block_start (tests.test_cluster_traffic.FacadeTests.test_replay_and_stale_snapshots_block_start) ... ok
+test_report_exports_displayed_evidence_even_when_ssh_is_down (tests.test_cluster_traffic.FacadeTests.test_report_exports_displayed_evidence_even_when_ssh_is_down) ... ok
+test_mutations_require_token_origin_and_same_site (tests.test_cluster_traffic.HttpTrafficTests.test_mutations_require_token_origin_and_same_site) ... 127.0.0.1 - - [22/Oct/2026 19:34:35] "POST /api/traffic/start HTTP/1.1" 403 -
+127.0.0.1 - - [22/Oct/2026 19:34:35] "POST /api/traffic/start HTTP/1.1" 403 -
+127.0.0.1 - - [22/Oct/2026 19:34:35] "POST /api/traffic/start HTTP/1.1" 403 -
+ok
+test_oversize_wrong_type_and_unknown_keys_rejected (tests.test_cluster_traffic.HttpTrafficTests.test_oversize_wrong_type_and_unknown_keys_rejected) ... 127.0.0.1 - - [22/Oct/2026 19:34:36] "POST /api/traffic/start HTTP/1.1" 400 -
+127.0.0.1 - - [22/Oct/2026 19:34:36] "POST /api/traffic/start HTTP/1.1" 400 -
+127.0.0.1 - - [22/Oct/2026 19:34:36] "POST /api/traffic/start HTTP/1.1" 400 -
+ok
+test_replay_never_invokes_remote_mutation (tests.test_cluster_traffic.HttpTrafficTests.test_replay_never_invokes_remote_mutation) ... 127.0.0.1 - - [22/Oct/2026 19:34:36] "POST /api/traffic/start HTTP/1.1" 400 -
+ok
+test_start_and_duplicate_are_serialized (tests.test_cluster_traffic.HttpTrafficTests.test_start_and_duplicate_are_serialized) ... 127.0.0.1 - - [22/Oct/2026 19:34:37] "POST /api/traffic/start HTTP/1.1" 409 -
+ok
+test_stop_accepts_only_job_id (tests.test_cluster_traffic.HttpTrafficTests.test_stop_accepts_only_job_id) ... 127.0.0.1 - - [22/Oct/2026 19:34:37] "POST /api/traffic/stop HTTP/1.1" 400 -
+ok
+test_exception_cleanup_keeps_experiment_lock_open_and_retries (tests.test_cluster_traffic.WorkerTests.test_exception_cleanup_keeps_experiment_lock_open_and_retries) ... ok
+test_replaced_pod_does_not_count_as_confirmed_cleanup (tests.test_cluster_traffic.WorkerTests.test_replaced_pod_does_not_count_as_confirmed_cleanup) ... ok
+test_results_require_complete_metrics_and_correct_direction (tests.test_cluster_traffic.WorkerTests.test_results_require_complete_metrics_and_correct_direction) ... ok
+test_unknown_recovery_is_never_marked_completed (tests.test_cluster_traffic.WorkerTests.test_unknown_recovery_is_never_marked_completed) ... ok
+
+----------------------------------------------------------------------
+Ran 45 tests in 5.138s
+
+OK
