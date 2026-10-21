@@ -1,0 +1,120 @@
+[2026-10-20 03:51:07.690] [nas] [debug] Selected integrity[2] ciphering[0]
+[2026-10-20 03:51:07.742] [nas] [debug] Registration accept received
+[2026-10-20 03:51:07.742] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-10-20 03:51:07.742] [nas] [debug] Sending Registration Complete
+[2026-10-20 03:51:07.742] [nas] [info] Initial Registration is successful
+[2026-10-20 03:51:07.742] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 03:51:07.742] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 03:51:07.951] [nas] [debug] Configuration Update Command received
+[2026-10-20 03:51:08.056] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 03:51:08.056] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 03:51:08.068] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.4] is up.
+[2026-10-20 04:19:56.564] [nas] [debug] Sending PDU Session Release Request for PSI[1]
+[2026-10-20 04:19:56.596] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:19:56.596] [nas] [debug] Performing local release of PDU session[1]
+[2026-10-20 04:19:56.788] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:19:56.889] [nas] [error] No response from RRC from UAC checks, considering access attempt is barred
+[2026-10-20 04:20:13.375] [nas] [warning] Retransmitting PDU Session Establishment Request due to T3580 expiry
+[2026-10-20 04:20:13.375] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:20:13.407] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:20:13.407] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 04:20:13.416] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.5] is up.
+[2026-10-20 04:20:44.993] [nas] [debug] Sending PDU Session Release Request for PSI[1]
+[2026-10-20 04:20:45.013] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:20:45.013] [nas] [debug] Performing local release of PDU session[1]
+[2026-10-20 04:20:45.226] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:20:45.343] [nas] [error] No response from RRC from UAC checks, considering access attempt is barred
+[2026-10-20 04:21:01.423] [nas] [warning] Retransmitting PDU Session Establishment Request due to T3580 expiry
+[2026-10-20 04:21:01.423] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:21:01.452] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:21:01.452] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 04:21:01.462] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.6] is up.
+[2026-10-20 04:26:46.671] [nas] [debug] Sending PDU Session Release Request for PSI[1]
+[2026-10-20 04:26:46.692] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:26:46.692] [nas] [debug] Performing local release of PDU session[1]
+[2026-10-20 04:26:46.874] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:26:46.874] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:26:46.892] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:26:46.993] [nas] [error] No response from RRC from UAC checks, considering access attempt is barred
+[2026-10-20 04:27:03.794] [nas] [warning] Retransmitting PDU Session Establishment Request due to T3580 expiry
+[2026-10-20 04:27:03.794] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:27:03.794] [nas] [warning] Retransmitting PDU Session Establishment Request due to T3580 expiry
+[2026-10-20 04:27:03.794] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:27:03.816] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:27:03.816] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 04:27:03.824] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.7] is up.
+[2026-10-20 04:27:03.842] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:27:03.842] [nas] [info] PDU Session establishment is successful PSI[2]
+[2026-10-20 04:27:03.849] [app] [info] Connection setup for PDU session[2] is successful, TUN interface[uesimtun1, 10.60.0.8] is up.
+[2026-10-20 04:29:00.357] [nas] [debug] Sending PDU Session Release Request for PSI[1]
+[2026-10-20 04:29:00.357] [nas] [debug] Sending PDU Session Release Request for PSI[2]
+[2026-10-20 04:29:00.378] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:29:00.378] [nas] [debug] Performing local release of PDU session[1]
+[2026-10-20 04:29:00.387] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:29:00.387] [nas] [debug] Performing local release of PDU session[2]
+[2026-10-20 04:29:00.951] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:29:00.951] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:29:00.976] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:29:00.976] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 04:29:00.984] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.9] is up.
+[2026-10-20 04:30:37.150] [nas] [debug] Sending PDU Session Release Request for PSI[1]
+[2026-10-20 04:30:37.174] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:30:37.174] [nas] [debug] Performing local release of PDU session[1]
+[2026-10-20 04:30:38.084] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:30:38.084] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:30:38.110] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:30:38.110] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 04:30:38.118] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.10] is up.
+[2026-10-20 04:31:30.251] [nas] [debug] Sending PDU Session Release Request for PSI[1]
+[2026-10-20 04:31:30.271] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:31:30.271] [nas] [debug] Performing local release of PDU session[1]
+[2026-10-20 04:31:30.932] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:31:30.932] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:31:30.954] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:31:30.954] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 04:31:30.963] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.11] is up.
+[2026-10-20 04:35:06.428] [nas] [debug] Sending PDU Session Release Request for PSI[1]
+[2026-10-20 04:35:06.448] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:35:06.448] [nas] [debug] Performing local release of PDU session[1]
+[2026-10-20 04:35:06.728] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:35:06.728] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:35:06.881] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:35:06.881] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 04:35:06.890] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.12] is up.
+[2026-10-20 04:42:31.515] [nas] [debug] Sending PDU Session Release Request for PSI[1]
+[2026-10-20 04:42:31.534] [nas] [debug] PDU Session Release Command received
+[2026-10-20 04:42:31.534] [nas] [debug] Performing local release of PDU session[1]
+[2026-10-20 04:42:32.633] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 04:42:32.633] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 04:42:32.655] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 04:42:32.655] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 04:42:32.664] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.13] is up.
+[2026-10-20 18:07:55.339] [rrc] [debug] Signal lost for cell[1], total [0] cells in coverage
+[2026-10-20 18:07:55.339] [nas] [error] Radio link failure detected
+[2026-10-20 18:07:55.339] [nas] [info] UE switches to state [CM-IDLE]
+[2026-10-20 18:07:55.339] [nas] [info] UE switches to state [MM-REGISTERED/PS]
+[2026-10-20 18:07:55.339] [nas] [info] UE switches to state [MM-REGISTERED/PLMN-SEARCH]
+[2026-10-20 18:07:55.339] [nas] [error] PLMN selection failure, no cells in coverage
+[2026-10-20 18:07:55.345] [rrc] [debug] New signal detected for cell[2], total [1] cells in coverage
+[2026-10-20 18:07:55.864] [nas] [info] Selected plmn[208/93]
+[2026-10-20 18:07:55.864] [rrc] [info] Selected cell plmn[208/93] tac[1] category[SUITABLE]
+[2026-10-20 18:07:55.864] [nas] [info] UE switches to state [MM-REGISTERED/PS]
+[2026-10-20 18:07:55.864] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-10-20 18:30:21.257] [nas] [debug] Uplink data status changed PSI[1] pending[true]
+[2026-10-20 18:30:21.257] [nas] [debug] Service request required due to [IDLE-UPLINK-DATA-PENDING]
+[2026-10-20 18:30:21.257] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_data]
+[2026-10-20 18:30:21.257] [nas] [debug] Sending Service Request due to [IDLE-UPLINK-DATA-PENDING]
+[2026-10-20 18:30:21.260] [nas] [info] UE switches to state [MM-SERVICE-REQUEST-INITIATED]
+[2026-10-20 18:30:21.261] [rrc] [debug] Sending RRC Setup Request
+[2026-10-20 18:30:36.505] [nas] [debug] NAS timer[3517] expired [1]
+[2026-10-20 18:30:36.505] [nas] [info] UE switches to state [MM-REGISTERED/PS]
+[2026-10-20 18:30:36.505] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-10-20 19:07:55.742] [nas] [debug] NAS timer[3512] expired [1]
+[2026-10-20 19:07:55.742] [nas] [debug] Mobility registration updating required due to [T3512-EXPIRY]
+[2026-10-20 19:07:55.742] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_data]
+[2026-10-20 19:07:55.742] [nas] [debug] Sending Periodic Registration with update cause [T3512-EXPIRY]
+[2026-10-20 19:07:55.742] [nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[2026-10-20 19:07:55.742] [rrc] [debug] Sending RRC Setup Request
+[2026-10-20 19:08:10.757] [nas] [debug] NAS timer[3510] expired [1]
+[2026-10-20 19:08:10.757] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-10-20 19:08:10.757] [rrc] [info] UE switches to state [RRC-IDLE]

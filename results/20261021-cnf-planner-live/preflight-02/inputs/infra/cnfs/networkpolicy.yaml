@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cnf-backends-from-envoy
+  namespace: cnf-lab
+  labels: {app.kubernetes.io/part-of: cnf-netpol}
+spec:
+  podSelector:
+    matchExpressions:
+    - key: app
+      operator: In
+      values: [cnf-m1-backend, cnf-m2-edge]
+  policyTypes: [Ingress]
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels: {app: cnf-m1-envoy}
+    ports:
+    - {protocol: TCP, port: 5201}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cnf-envoy-chain-and-dns
+  namespace: cnf-lab
+  labels: {app.kubernetes.io/part-of: cnf-netpol}
+spec:
+  podSelector:
+    matchLabels: {app: cnf-m1-envoy}
+  policyTypes: [Ingress, Egress]
+  ingress:
+  - ports:
+    - {protocol: TCP, port: 15201}
+    - {protocol: TCP, port: 15202}
+  egress:
+  - to:
+    - podSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values: [cnf-m1-backend, cnf-m2-edge]
+    ports:
+    - {protocol: TCP, port: 5201}
+  - to:
+    - namespaceSelector:
+        matchLabels: {kubernetes.io/metadata.name: kube-system}
+      podSelector:
+        matchLabels: {k8s-app: kube-dns}
+    ports:
+    - {protocol: UDP, port: 53}
+    - {protocol: TCP, port: 53}

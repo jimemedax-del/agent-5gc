@@ -1,0 +1,17 @@
+{
+  "outcome": "failed",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E2",
+  "startedAt": "2026-10-21T02:03:39.605969+00:00",
+  "scope": "single_existing_C1_equal_downlink_run",
+  "restoration": "restored",
+  "finalStrictBaselinePassed": true,
+  "original26PodIdentitiesUnchanged": true,
+  "mutationAttempted": true,
+  "applyCompleted": false,
+  "livePlanId": "livePlan-80afdaedec91f2ee951a",
+  "error": "See saved TC command result",
+  "errorCode": "tc_apply_failed",
+  "endedAt": "2026-10-21T02:04:16.665925+00:00"
+}

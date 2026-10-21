@@ -2,10 +2,12 @@
 import copy
 from datetime import timedelta
 import importlib.util
+import io
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
-from unittest.mock import patch
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parent.parent
 spec = importlib.util.spec_from_file_location('live_under_test', ROOT / 'scripts/cnf-planner-live.py')
@@ -217,6 +219,7 @@ class LivePlannerTests(unittest.TestCase):
             self.assertEqual(live.read(folder / 'summary.json')['restoration'], 'restored')
             self.assertEqual(live.read(folder / 'execution-error.json')['error'], 'capture failed')
             self.assertEqual(backend.current, NONE)
+            self.assertTrue(live.read(folder / 'summary.json')['finalStrictBaselinePassed'])
 
     def test_whole_run_failed_restore_never_reports_success(self):
         backend = FakeBackend(self.observed)
@@ -250,6 +253,128 @@ class LivePlannerTests(unittest.TestCase):
                           ('ue-pod', command[:-3] + ['ping', token])]:
             with self.assertRaises(live.p.Rejection):
                 live.stop_owned_process(pod, args, token)
+
+    def test_expired_rejection_preserves_specific_reason(self):
+        stamp = AT + timedelta(seconds=31)
+        with patch.object(live, 'now', return_value=stamp), patch.object(live.p, 'clock', return_value=stamp):
+            with self.assertRaises(live.p.Rejection) as caught:
+                live.validate_plan(self.plan, self.batch, self.state, self.observed)
+        self.assertEqual(caught.exception.code, 'expired_plan')
+
+    def test_failed_prewrite_run_still_checks_baseline_without_restore(self):
+        backend = FakeBackend(self.observed)
+        with TemporaryDirectory() as tmp, patch.object(live.sys, 'platform', 'linux'), \
+             patch.object(live, 'Backend', return_value=backend), patch.object(live, 'archive_inputs'), \
+             patch.object(live, 'apply_plan', side_effect=live.p.Rejection('expired_plan', 'expired')), patch.object(live, 'restore') as restore:
+            folder = Path(tmp) / 'run'
+            with self.assertRaises(live.p.Rejection):
+                live.run(folder)
+            summary = live.read(folder / 'summary.json')
+            self.assertEqual(summary['outcome'], 'failed')
+            self.assertEqual(summary['errorCode'], 'expired_plan')
+            self.assertFalse(summary['mutationAttempted'])
+            self.assertTrue(summary['finalStrictBaselinePassed'])
+            restore.assert_not_called()
+
+    def test_final_baseline_failure_does_not_hide_initial_measurement_error(self):
+        backend = FakeBackend(self.observed)
+        original = backend.full
+        def full(folder):
+            if folder.name == 'final':
+                raise ValueError('strict check failed')
+            return original(folder)
+        backend.full = full
+        with TemporaryDirectory() as tmp, patch.object(live.sys, 'platform', 'linux'), \
+             patch.object(live, 'Backend', return_value=backend), patch.object(live, 'archive_inputs'), \
+             patch.object(live, 'capture', side_effect=ValueError('capture failed')):
+            folder = Path(tmp) / 'run'
+            with self.assertRaisesRegex(ValueError, 'strict check failed'):
+                live.run(folder)
+            self.assertEqual(live.read(folder / 'execution-error.json')['error'], 'capture failed')
+            self.assertFalse(live.read(folder / 'summary.json')['finalStrictBaselinePassed'])
+
+    @staticmethod
+    def dummy_job(pid):
+        job = Mock(pid=pid, returncode=None)
+        job.poll.return_value = None
+        job.wait.side_effect = lambda timeout: setattr(job, 'returncode', -15)
+        return job
+
+    def test_cleanup_attempts_all_processes_after_one_remote_stop_error(self):
+        jobs = [({'pod': 'ue'}, ['command'], self.dummy_job(i), io.StringIO(), io.StringIO()) for i in [1, 2]]
+        with TemporaryDirectory() as tmp, patch.object(live, 'stop_owned_process', side_effect=[ValueError('stop failed'),
+             SimpleNamespace(returncode=0, stdout='', stderr='')]) as stop:
+            with self.assertRaises(live.p.Rejection):
+                live.cleanup_jobs(jobs, 'a' * 24, Path(tmp))
+            self.assertEqual(stop.call_count, 2)
+            self.assertEqual(len(live.read(Path(tmp) / 'cleanup.json')['processes']), 2)
+            self.assertTrue(all(stdout.closed and stderr.closed for _, _, _, stdout, stderr in jobs))
+
+    def test_cleanup_records_errors_without_masking_active_exception(self):
+        jobs = [({'pod': 'ue'}, ['command'], self.dummy_job(1), io.StringIO(), io.StringIO())]
+        with TemporaryDirectory() as tmp, patch.object(live, 'stop_owned_process', side_effect=ValueError('stop failed')):
+            try:
+                raise RuntimeError('original capture error')
+            except RuntimeError:
+                live.cleanup_jobs(jobs, 'a' * 24, Path(tmp))
+            self.assertEqual(live.read(Path(tmp) / 'cleanup.json')['errors'], ['stop failed'])
+
+    def test_capture_failure_is_detected_before_waiting_for_other_processes(self):
+        backend = FakeBackend(self.observed, live.read(EQUAL))
+        backend.topology = {'target': '192.168.244.128', 'contention': {'ip': '10.42.0.200'},
+                            'users': {slot: {'pod': slot, 'ip': '10.60.0.' + str(i)} for i, slot in enumerate(['ue1', 'ue2'], 1)}}
+        jobs = [self.dummy_job(i) for i in range(4)]
+        jobs[0].poll.return_value = 1
+        state = live.live_state({**self.observed, 'pods': {}})
+        def close_streams(rows, *_):
+            for _, _, _, stdout, stderr in rows:
+                stdout.close()
+                stderr.close()
+        with TemporaryDirectory() as tmp, patch.object(live.c.m1, 'assert_steady'), patch.object(live.c2, 'snapshot'), \
+             patch.object(live.c.m1, 'one_pod', return_value=('upf', {})), \
+             patch.object(live.c.m1, 'upf_observation', return_value={'interfaces': []}), \
+             patch.object(live.c, 'native_switch', return_value='QoS Enable: 0'), \
+             patch.object(live.subprocess, 'Popen', side_effect=jobs), patch.object(live, 'cleanup_jobs', side_effect=close_streams) as cleanup:
+            with self.assertRaises(live.p.Rejection) as caught:
+                live.capture(backend, state, Path(tmp) / 'measurement')
+            self.assertEqual(caught.exception.code, 'acquisition_failed')
+            self.assertEqual(len(cleanup.call_args.args[0]), 4)
+            self.assertEqual(live.read(Path(tmp) / 'measurement/summary.json')['outcome'], 'failed')
+
+
+class FaultExerciseTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tool = live.load('fault_exercise_tests', ROOT / 'scripts/exercise-cnf-planner-live.py')
+
+    def test_partial_write_injection_only_replaces_the_whitelisted_batch(self):
+        with TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            backend = self.tool.FaultBackend('partial-write', folder)
+            backend.tc = Mock(return_value=live.read(EQUAL))
+            target = folder / 'run/execution'
+            target.mkdir(parents=True)
+            with patch.object(self.tool.BASE_BACKEND, 'write_batch', side_effect=ValueError('real command failure')) as write:
+                with self.assertRaisesRegex(ValueError, 'real command failure'):
+                    backend.write_batch(self.tool.live.c.tc_commands('equal'), target)
+                root = self.tool.live.c.tc_commands('equal')[0]
+                self.assertEqual(write.call_args.args[0], [root, root])
+            with patch.object(self.tool.BASE_BACKEND, 'write_batch') as write, self.assertRaises(self.tool.live.p.Rejection):
+                backend.write_batch(['arbitrary command'], target)
+            write.assert_not_called()
+
+    def test_fixture_actor_does_not_remove_foreign_queue(self):
+        with TemporaryDirectory() as tmp:
+            backend = self.tool.FaultBackend('queue-drift', Path(tmp))
+            backend.fixture_attempted = True
+            backend.check_pod = Mock()
+            tc = live.read(EQUAL)
+            tc['qdisc'][0]['kind'] = 'foreign'
+            backend.tc = Mock(return_value=tc)
+            backend.write_batch = Mock()
+            with self.assertRaises(ValueError):
+                backend.clean_fixture_drift()
+            backend.write_batch.assert_not_called()
 
 
 if __name__ == '__main__':

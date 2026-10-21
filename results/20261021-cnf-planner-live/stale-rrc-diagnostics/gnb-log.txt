@@ -1,0 +1,70 @@
+[gNB wrapper] Pod IP detected: 10.42.2.71
+[gNB wrapper] Configuration prepared:
+linkIp: 10.42.2.71   # gNB's local IP address for Radio Link Simulation
+ngapIp: 10.42.2.71   # gNB's local IP address for N2 Interface
+gtpIp: 10.42.2.71    # gNB's local IP address for N3 Interface
+UERANSIM v3.2.7
+[2026-10-08 12:00:43.274] [sctp] [info] Trying to establish SCTP connection... (10.43.144.221:38412)
+[2026-10-08 12:00:43.276] [sctp] [info] SCTP connection established (10.43.144.221:38412)
+[2026-10-08 12:00:43.277] [sctp] [debug] SCTP association setup ascId[5]
+[2026-10-08 12:00:43.277] [ngap] [debug] Sending NG Setup Request
+[2026-10-08 12:00:43.278] [ngap] [debug] NG Setup Response received
+[2026-10-08 12:00:43.278] [ngap] [info] NG Setup procedure is successful
+[2026-10-08 12:00:45.333] [rrc] [debug] UE[1] new signal detected
+[2026-10-08 12:00:45.334] [rrc] [info] RRC Setup for UE[1]
+[2026-10-08 12:00:45.334] [ngap] [debug] Initial NAS message received from UE[1]
+[2026-10-08 12:00:45.379] [ngap] [debug] Initial Context Setup Request received
+[2026-10-08 12:00:45.687] [ngap] [info] PDU session resource(s) setup for UE[1] count[1]
+[2026-10-16 06:35:44.764] [rrc] [debug] UE[2] new signal detected
+[2026-10-16 06:35:44.783] [rrc] [info] RRC Setup for UE[2]
+[2026-10-16 06:35:44.796] [ngap] [debug] Initial NAS message received from UE[2]
+[2026-10-16 06:35:49.786] [ngap] [debug] UE Context Release Command received
+[2026-10-16 06:35:49.786] [rrc] [info] Releasing RRC connection for UE[1]
+[2026-10-16 06:35:50.520] [ngap] [debug] Initial Context Setup Request received
+[2026-10-16 06:35:53.682] [ngap] [info] PDU session resource(s) setup for UE[2] count[1]
+[2026-10-16 06:36:15.898] [rls] [debug] UE[1] signal lost
+[2026-10-19 11:55:17.289] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2026-10-19 12:03:15.274] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2026-10-19 12:03:31.247] [rrc] [debug] UE[3] new signal detected
+[2026-10-19 12:03:32.248] [rls] [debug] UE[2] signal lost
+[2026-10-20 03:43:01.706] [rrc] [debug] UE[4] new signal detected
+[2026-10-20 03:43:01.710] [rrc] [info] RRC Setup for UE[4]
+[2026-10-20 03:43:01.724] [ngap] [debug] Initial NAS message received from UE[4]
+[2026-10-20 03:43:05.021] [ngap] [debug] UE Context Release Command received
+[2026-10-20 03:43:05.021] [rrc] [info] Releasing RRC connection for UE[2]
+[2026-10-20 03:43:05.545] [ngap] [debug] Initial Context Setup Request received
+[2026-10-20 03:43:07.886] [ngap] [info] PDU session resource(s) setup for UE[4] count[1]
+[2026-10-20 03:43:34.082] [rls] [debug] UE[3] signal lost
+[2026-10-20 03:51:07.631] [rrc] [debug] UE[5] new signal detected
+[2026-10-20 03:51:07.632] [rrc] [info] RRC Setup for UE[5]
+[2026-10-20 03:51:07.633] [ngap] [debug] Initial NAS message received from UE[5]
+[2026-10-20 03:51:07.741] [ngap] [debug] Initial Context Setup Request received
+[2026-10-20 03:51:08.056] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:19:56.597] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:20:13.407] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:20:45.013] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:21:01.452] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:26:46.692] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:27:03.816] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:27:03.842] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:29:00.381] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:29:00.387] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:29:00.976] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:30:37.174] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:30:38.109] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:31:30.271] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:31:30.954] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:35:06.448] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:35:06.881] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 04:42:31.534] [ngap] [info] PDU session resource(s) released for UE[5] count[1]
+[2026-10-20 04:42:32.654] [ngap] [info] PDU session resource(s) setup for UE[5] count[1]
+[2026-10-20 18:07:55.339] [rls] [debug] UE[4] signal lost
+[2026-10-20 18:07:55.340] [rls] [debug] UE[5] signal lost
+[2026-10-20 18:30:21.267] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2026-10-20 18:39:05.545] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2026-10-20 19:07:55.739] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2026-10-20 19:07:55.742] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2026-10-20 19:08:11.032] [rrc] [debug] UE[6] new signal detected
+[2026-10-20 19:08:11.232] [rrc] [debug] UE[7] new signal detected
+[2026-10-20 19:08:12.033] [rls] [debug] UE[5] signal lost
+[2026-10-20 19:08:13.035] [rls] [debug] UE[4] signal lost

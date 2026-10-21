@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout": "cm-state: CM-IDLE\nrm-state: RM-REGISTERED\nmm-state: MM-REGISTERED/NORMAL-SERVICE\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 2\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: PLMN[208/93] TAC[1]\nstored-suci: no-identity\nstored-guti: \n plmn: 208/93\n amf-region-id: 0xca\n amf-set-id: 1016\n amf-pointer: 0\n tmsi: 0x00000004\nhas-emergency: false\n",
+  "stderr": ""
+}

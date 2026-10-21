@@ -1,0 +1,8 @@
+{
+  "outcome": "failed",
+  "mode": "equal",
+  "round": 1,
+  "startedAt": "2026-10-21T02:04:36.285673Z",
+  "error": "A measurement process failed; stop the remaining owned processes",
+  "endedAt": "2026-10-21T02:04:38.506253Z"
+}

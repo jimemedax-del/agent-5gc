@@ -1,0 +1,1306 @@
+{
+  "liveStateVersion": "cnf-live-state-v1",
+  "observedAt": "2026-10-21T02:03:19.739326+00:00",
+  "validUntil": "2026-10-21T02:06:19.739326+00:00",
+  "adapterHash": "20c6358375b4a5c8bfc07f81c1e2f2b1fb881101de9667a9aa0c54fe9fcb23e3",
+  "fingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65",
+  "observation": {
+    "pods": {
+      "free5gc": {
+        "cnf-a-ue2-8875f5fbc-v2l26": {
+          "uid": "8353e3b0-141a-4e78-97c7-1d974ec00670",
+          "node": "ran-test",
+          "ip": "10.42.2.87",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "ue",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://eaa3c7ac48e4947b9f9ecf32726247c4f58e631bd5ca755a40fa834c08173bfc",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-21T02:00:20Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-amf-amf-5944cf5cdf-dcqw5": {
+          "uid": "033d6215-dd8c-46fa-b0fe-73af420070c7",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.173",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "amf",
+              "image": "docker.io/free5gc/amf:v4.2.2",
+              "imageID": "docker.io/free5gc/amf@sha256:8fc343349f7b0d55a257ecae328bff4e2d4b6800004ed932c128b2699a3860e7",
+              "containerID": "containerd://7cde9ffe2deb69c39e1bc1b4cb4c692f03fdf1e0034ea0e931db1458369ea024",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T12:00:32Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/amf@sha256:8fc343349f7b0d55a257ecae328bff4e2d4b6800004ed932c128b2699a3860e7"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-ausf-ausf-6b5bd7556c-vqf6x": {
+          "uid": "b9bf9931-f5fe-49b2-a3d8-47d53c5a6b74",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.165",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "ausf",
+              "image": "docker.io/free5gc/ausf:v4.2.2",
+              "imageID": "docker.io/free5gc/ausf@sha256:ec2752692a10c879cbe9c76d27377794bb26774abbb776e5a59df1f7eded3bf7",
+              "containerID": "containerd://4587fa61bb7708f85414fb5b775e6e21c256f291dea488240dffa9ed55beb4ad",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:59:03Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/ausf@sha256:ec2752692a10c879cbe9c76d27377794bb26774abbb776e5a59df1f7eded3bf7"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-chf-chf-df69dccd4-fsf99": {
+          "uid": "f35bee1a-73e0-4bcd-b2f1-feeb7b512276",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.171",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "chf",
+              "image": "docker.io/free5gc/chf:v4.2.2",
+              "imageID": "docker.io/free5gc/chf@sha256:22705af4e06ddb8e29d8103cb5b05e637059dbfb397df27f5f0a44843335d846",
+              "containerID": "containerd://854cdef56739e32658f55dc03f9f94be9393a25aa9b6a81315c5547af4fafcae",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T12:00:09Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/chf@sha256:22705af4e06ddb8e29d8103cb5b05e637059dbfb397df27f5f0a44843335d846"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-nef-nef-9d8f4dd4d-blz4h": {
+          "uid": "6acbe1d5-1c71-4d56-ba06-ef4b613c009c",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.170",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "nef",
+              "image": "docker.io/free5gc/nef:v4.2.2",
+              "imageID": "docker.io/free5gc/nef@sha256:ad98ab4a9d9aff9733f4dc12a212057abf039f992bdd4736107be28431eb0a90",
+              "containerID": "containerd://c39ff7072faca22ffc20284f7c387dc6e77fb8eb0de665920a78b7811c540a0a",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:59:58Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/nef@sha256:ad98ab4a9d9aff9733f4dc12a212057abf039f992bdd4736107be28431eb0a90"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-nrf-nrf-5798fdf864-jcbvx": {
+          "uid": "8209861f-534e-4219-8a14-126af535cc44",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.154",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "nrf",
+              "image": "docker.io/free5gc/nrf:v4.2.2",
+              "imageID": "docker.io/free5gc/nrf@sha256:0811f4af5038ad9fc366321cbc104910dfb09503a50d08a9184850980419e0d9",
+              "containerID": "containerd://0516e175d154278c9e2aa0ae5f9d2c0397d18aeb445d60c60e78b34e0bbc981d",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:43:26Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/nrf@sha256:0811f4af5038ad9fc366321cbc104910dfb09503a50d08a9184850980419e0d9"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-nssf-nssf-56ff4d54f7-zb2vf": {
+          "uid": "1a6290a0-210c-46d7-84a0-036dfbeac7e1",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.169",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "nssf",
+              "image": "docker.io/free5gc/nssf:v4.2.2",
+              "imageID": "docker.io/free5gc/nssf@sha256:beea02cca34919f86b6711cc901a008701b790cfccf3fd64d712590bb646af87",
+              "containerID": "containerd://fb23081b72cd1d6f5e44f3b97ce0224c5e6ece518f3faf0145433ac7e4b70516",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:59:47Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/nssf@sha256:beea02cca34919f86b6711cc901a008701b790cfccf3fd64d712590bb646af87"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-pcf-pcf-5f759fcd89-zdt9l": {
+          "uid": "7a9d54bb-3c31-4083-b4d7-1d9e465c02d2",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.168",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "pcf",
+              "image": "docker.io/free5gc/pcf:v4.2.2",
+              "imageID": "docker.io/free5gc/pcf@sha256:b6208c82a02917cb6d620336d1245c00d875254e2c9bd28416c2e250a43453a4",
+              "containerID": "containerd://2f4bc53c535d2840667cda719dcc12fa6aa99a2b23d11f1a00258f3c825d00a7",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:59:36Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/pcf@sha256:b6208c82a02917cb6d620336d1245c00d875254e2c9bd28416c2e250a43453a4"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-smf-smf-7cd84fc946-mgq8b": {
+          "uid": "628236c6-d6df-4ec1-9966-fe5cdfdbb6ce",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.172",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "smf",
+              "image": "docker.io/free5gc/smf:v4.2.2",
+              "imageID": "docker.io/free5gc/smf@sha256:55043e366af867fda567156709c1dcf1ddad8827c2a246a64e0d4f6fea23718f",
+              "containerID": "containerd://b987e415d5fc0f2af46f2ceccc4fc817afa0492c20665bc95f567c5320dd36d9",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T12:00:21Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/smf@sha256:55043e366af867fda567156709c1dcf1ddad8827c2a246a64e0d4f6fea23718f"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-udm-udm-79fb64ccf-8vr8c": {
+          "uid": "72ccab4d-3e11-45df-8ee5-ef12edc64799",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.167",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "udm",
+              "image": "docker.io/free5gc/udm:v4.2.2",
+              "imageID": "docker.io/free5gc/udm@sha256:3c0ea07415976e01352a4d6ca65d29dfb253247548e873decb6f45246da75562",
+              "containerID": "containerd://109ed4e048c6689cb1a9b40e36d5c61cd2d0a091af9005a0a14d96f9b6222c01",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:59:25Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/udm@sha256:3c0ea07415976e01352a4d6ca65d29dfb253247548e873decb6f45246da75562"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-udr-udr-6b6846cc77-p5mnt": {
+          "uid": "b0779c13-857a-4a1e-a3df-895a9f52d8d7",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.166",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "udr",
+              "image": "docker.io/free5gc/udr:v4.2.2",
+              "imageID": "docker.io/free5gc/udr@sha256:955b91fc7b5082e8732b578fb0df729ed730a8ae4c196304e03f946965a1eb85",
+              "containerID": "containerd://79ff83360a68cfc6a55fa8f5c6cf3499237ec892dc642ebfaa964176e098f854",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:59:14Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/udr@sha256:955b91fc7b5082e8732b578fb0df729ed730a8ae4c196304e03f946965a1eb85"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-upf-upf-5988cd4f56-s5vwz": {
+          "uid": "41b23b57-fa75-4cb5-af33-3e8aaed7c5d9",
+          "node": "worker-upf",
+          "ip": "10.42.1.24",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "upf",
+              "image": "docker.io/local/free5gc-upf:v4.2.2-nilfix-20261008",
+              "imageID": "docker.io/local/free5gc-upf@sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3",
+              "containerID": "containerd://9bb56f04100e654e05b92aabf65e79dcb920398d6cb4a56e2848ae7eb4de1318",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:58:29Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/free5gc-upf@sha256:944074caece3b340988b8f5112702948099ebe672a45d8881dc4c9d7fe7e2ed3"
+            }
+          ]
+        },
+        "free5gc-helm-free5gc-webui-webui-66d65bfb86-td2fz": {
+          "uid": "92370ec2-531d-49f3-b1c0-f03c6ff6514a",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.162",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "webui",
+              "image": "docker.io/free5gc/webui:v4.2.2",
+              "imageID": "docker.io/free5gc/webui@sha256:170842263d72bcc7a8caa88ac31ebd8c6c5b2828f2159a9198d7c83066b7497d",
+              "containerID": "containerd://0668314464890ca655bb1640666e0341e520afa265a407303a77ef9542440b09",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:43:28Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/webui@sha256:170842263d72bcc7a8caa88ac31ebd8c6c5b2828f2159a9198d7c83066b7497d"
+            }
+          ]
+        },
+        "mongodb-0": {
+          "uid": "99c77079-dec5-45ff-a2e4-eaf59298e3f7",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.161",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "mongodb",
+              "image": "docker.io/bitnamilegacy/mongodb:7.0.9-debian-12-r4",
+              "imageID": "docker.io/bitnamilegacy/mongodb@sha256:62fb92d0111f8dc0565b7daf8a57279fd09520020b79fd3bc550deb3ae5aee70",
+              "containerID": "containerd://3f5405636fb6fb38b7c3300358490228155d5a11555783d6d1f24c4ac31c9641",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T11:43:14Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/bitnamilegacy/mongodb@sha256:62fb92d0111f8dc0565b7daf8a57279fd09520020b79fd3bc550deb3ae5aee70"
+            }
+          ]
+        },
+        "ueransim-gnb-7645695b4d-dv277": {
+          "uid": "d4398fa9-3ad0-4336-a486-ecfe6429c414",
+          "node": "ran-test",
+          "ip": "10.42.2.71",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "gnb",
+              "image": "docker.io/free5gc/ueransim:v4.0.1",
+              "imageID": "docker.io/free5gc/ueransim@sha256:4a6745b0c9f0c60173833f8bef89816324e84636e220917bdc682555a299e8ba",
+              "containerID": "containerd://e60dba592c5037f0ec2e8981ff6f6bb919e46459a2a10c870cf8fb93188088a8",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-08T12:00:43Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/free5gc/ueransim@sha256:4a6745b0c9f0c60173833f8bef89816324e84636e220917bdc682555a299e8ba"
+            }
+          ]
+        },
+        "ueransim-ue-7964f847f8-4r92z": {
+          "uid": "a81ee9d5-3e0e-42e4-9c5e-779950537349",
+          "node": "ran-test",
+          "ip": "10.42.2.86",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "ue",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://c1d87e6e19a554d0a1901ba5038411356538b6d70cb1b1ef5f04366d396a4fa7",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-21T02:00:06Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+            }
+          ]
+        }
+      },
+      "cnf-lab": {
+        "cnf-m1-backend-6d74dd5f94-dgtnn": {
+          "uid": "e6568e41-7faa-493c-aedd-66f5199d98ab",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.194",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "iperf3",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://0ef048b5d917def008f389fe9c571dc9c69262dc6bc0e7769e15886720810052",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-15T16:12:20Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+            }
+          ]
+        },
+        "cnf-m1-envoy-856978b666-8zsfw": {
+          "uid": "dd83bb25-17a6-4a22-8db0-0450a38637f2",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.190",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "envoy",
+              "image": "sha256:d4800f30429fc946d03932a6055a2d52c70183aa60487f9da38899f1543dfe6a",
+              "imageID": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac",
+              "containerID": "containerd://f6810109f7c6852ae36bebbe7a054316359890c4bda7646cd77ea8f1133eded0",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-15T16:06:48Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac"
+            }
+          ]
+        },
+        "cnf-m2-edge-cc965dd8b-p59md": {
+          "uid": "bc9e73ff-eaf1-4b64-a576-9ef42b44ee5a",
+          "node": "ran-test",
+          "ip": "10.42.2.78",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "iperf3",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://2cfa715414a435afdd01360a2974cd5f9a7e3568aa89d8b1a77ffd0ca2455e67",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-15T16:12:23Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+            }
+          ]
+        }
+      },
+      "cnf-multi-ue": {
+        "cnf-a-core-ue1-796f6455d4-qssr4": {
+          "uid": "758e3bc6-3dd2-4100-b4e7-cac8a1dcdade",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.197",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "iperf3",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://2795205c96411edcd781faa5c7f4ad144d24fde3ed653462f354666157e2e96a",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T03:51:07Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+            }
+          ]
+        },
+        "cnf-a-core-ue2-85b8497c57-xjgw5": {
+          "uid": "c5e777b6-57b5-4348-89a0-1e5b17f62702",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.198",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "iperf3",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://3925ae596d7824b79e17290de6e5dca5fc87bdcdf4a4200b98c6fbd811a85521",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T03:51:07Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+            }
+          ]
+        },
+        "cnf-a-edge-ue1-7486d6f6df-lpkx7": {
+          "uid": "13364f0d-adfe-4576-913a-34d0bc9d1573",
+          "node": "ran-test",
+          "ip": "10.42.2.83",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "iperf3",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://d3e0e5a246e9dd51ca988c4b7cd94286218c8acf0001fe1122c2e77fc6f3cc27",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T03:51:07Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+            }
+          ]
+        },
+        "cnf-a-edge-ue2-677f77dd48-fjj7w": {
+          "uid": "3f20d8ef-f3e5-40ec-a188-8867b0cdf1e9",
+          "node": "ran-test",
+          "ip": "10.42.2.84",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "iperf3",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://f7988a090eff9b9fc7f00e6ce04a3a9b06e37f69ecd14a78039f46a2d54d8579",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T03:51:07Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b"
+            }
+          ]
+        },
+        "cnf-a-envoy-858f68b746-g8t64": {
+          "uid": "c4d84652-62c2-4fe9-ba5a-78f4ff1ebb45",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.199",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "envoy",
+              "image": "sha256:d4800f30429fc946d03932a6055a2d52c70183aa60487f9da38899f1543dfe6a",
+              "imageID": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac",
+              "containerID": "containerd://bd69bd2f4f7a821109f6e61dd8bb898cf27bf8dcff2393bb0390a921b464f2ca",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T03:51:07Z"
+                }
+              },
+              "lastState": {},
+              "specImage": "docker.io/envoyproxy/envoy@sha256:63dd445d23d7d419d1bba8b2b9b1b8fdb80f38ae1516fb5d2dcd8856713b7eac"
+            }
+          ]
+        }
+      },
+      "cnf-contention": {
+        "cnf-c-endpoint-644d89c877-9m4t6": {
+          "uid": "f225311a-48cc-49e6-9af7-1d4280548655",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.200",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "queue",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://c05625b3059376942373977614a0d74d7b5d68b0423b4ba63cea6874b617a605",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T06:46:01Z"
+                }
+              }
+            },
+            {
+              "name": "ue1",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://894bc6a0e2e25d5ec089f68d044079e684327a3ffef68bc792a1f12670c7499e",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T06:46:01Z"
+                }
+              }
+            },
+            {
+              "name": "ue2",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://5dd8475f9c8b015b08b34d947fc916afd71376aac17e149a16f1a555e42735ab",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T06:46:01Z"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "cnf-contention-uplink": {
+        "cnf-c2-endpoint-7c749fd5b5-2kc9b": {
+          "uid": "2d71960f-9153-4d8f-9c54-c3d7af59d058",
+          "node": "lhm-virtual-machine",
+          "ip": "10.42.0.201",
+          "phase": "Running",
+          "containers": [
+            {
+              "name": "queue",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://f9028ade93c1a35c99cbd0acd2102a8d040cafb6a856b9cf174a83338987806f",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T07:38:12Z"
+                }
+              }
+            },
+            {
+              "name": "ue1",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://652bb2154c3a23c0b9e593d7faecf41b54587db64ca5fef14ea59cc0f9af7c7e",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T07:38:12Z"
+                }
+              }
+            },
+            {
+              "name": "ue2",
+              "image": "docker.io/local/ueransim-iperf3:free5gc-v4.0.1-20261008",
+              "imageID": "docker.io/local/ueransim-iperf3@sha256:2c464fbf9eccafe187e2a2565e6ee3cdb4c3e256f76d223bf520103dc30e803b",
+              "containerID": "containerd://49205e912886f0e1b70e31e352907c5437bce8035a1c8fe214958d461cab925e",
+              "ready": true,
+              "restartCount": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-20T07:38:12Z"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "resources": [
+      {
+        "namespace": "cnf-contention",
+        "kind": "ConfigMap",
+        "name": "kube-root-ca.crt",
+        "uid": "97e872b0-f6f2-43b4-a30b-c80713586312",
+        "bodyHash": "a26c78dd07e936ddddd29e01251c27727afe03cb5e99f1fadef27e6245fd72b5"
+      },
+      {
+        "namespace": "cnf-contention",
+        "kind": "Deployment",
+        "name": "cnf-c-endpoint",
+        "uid": "7158dafe-d2a6-4fff-b07a-dc616a6ecf01",
+        "bodyHash": "7bf6589fd547e04dd4e1a91dc3cbf92b9c6d79ed8d5bda4437f208e608225f87"
+      },
+      {
+        "namespace": "cnf-contention",
+        "kind": "NetworkPolicy",
+        "name": "cnf-c-endpoint",
+        "uid": "1fbbee21-e9fe-4bfd-9de4-93a98944bc3e",
+        "bodyHash": "b3c1024cfab41bdbb0ef45ef6e23a70060dcf9c922352647101d325064727d34"
+      },
+      {
+        "namespace": "cnf-contention",
+        "kind": "Service",
+        "name": "cnf-c-endpoint",
+        "uid": "44f55b0d-cae6-4ab6-a075-4fc4d5438f51",
+        "bodyHash": "61599281f47ea3a8e45f886a44cfe0928015bbe66ab4e111f9be1fe61db817c0"
+      },
+      {
+        "namespace": "cnf-contention-uplink",
+        "kind": "ConfigMap",
+        "name": "kube-root-ca.crt",
+        "uid": "63760d7f-4c95-4d90-be2c-4f6855f9952b",
+        "bodyHash": "a26c78dd07e936ddddd29e01251c27727afe03cb5e99f1fadef27e6245fd72b5"
+      },
+      {
+        "namespace": "cnf-contention-uplink",
+        "kind": "Deployment",
+        "name": "cnf-c2-endpoint",
+        "uid": "f360fc29-fda6-4e07-b837-810602f3c20c",
+        "bodyHash": "178426da837d0ab5e6bab9fcb39001fcb6b873d55bf872e79374809e9e2cf953"
+      },
+      {
+        "namespace": "cnf-contention-uplink",
+        "kind": "NetworkPolicy",
+        "name": "cnf-c2-endpoint",
+        "uid": "ce53e4f2-0c18-4007-97d8-9eb6d1f09f4b",
+        "bodyHash": "b8c790daf3b776a4c43cabbfd3ce8b2e599eeedd8bdb9306c0f89eaa6b1dba35"
+      },
+      {
+        "namespace": "cnf-contention-uplink",
+        "kind": "Service",
+        "name": "cnf-c2-endpoint",
+        "uid": "90862a59-7411-42ee-8466-8c6eb840ec00",
+        "bodyHash": "84f82874f48dc6d3b25b84dcf22966556867309263f4816ef2e5c39d9374b5c4"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "ConfigMap",
+        "name": "cnf-m1-envoy",
+        "uid": "e3ff358e-9f76-4fb3-a2ce-fb97771f5d77",
+        "bodyHash": "ee638a509fec7dd8755d5909fbe9d8410f0b82330d40ab60f6de7080e0f217ed"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "ConfigMap",
+        "name": "cnf-m2-envoy",
+        "uid": "a14f2e7f-4b2d-447f-838a-350b53e18eed",
+        "bodyHash": "d5dfeebe8c7c21adb5219c1f6b4237fa9fa303f90f9cc59739d87dfa7784fb46"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "ConfigMap",
+        "name": "kube-root-ca.crt",
+        "uid": "c949e9fd-9801-4612-8e13-de4a798057e6",
+        "bodyHash": "a26c78dd07e936ddddd29e01251c27727afe03cb5e99f1fadef27e6245fd72b5"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "Deployment",
+        "name": "cnf-m1-backend",
+        "uid": "897a4688-434e-4341-adf4-d0469c7a9d3a",
+        "bodyHash": "6fc212d5a0e817c41eb3707206d6a491f2002956004b11f5ccb7b159d271641d"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "Deployment",
+        "name": "cnf-m1-envoy",
+        "uid": "399a58da-733e-43d7-bfcd-4434cae880cd",
+        "bodyHash": "94b21a87931c1182fe8e2b56f64559e15923aa10b4866013bc4ebe0aaa14d649"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "Deployment",
+        "name": "cnf-m2-edge",
+        "uid": "fea1eb6d-2085-4278-a62e-a53632c2bccb",
+        "bodyHash": "efbe79a7ba607237a85e5ad35441151cb70b5f08648e6bd2e188d29861a4e841"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "NetworkPolicy",
+        "name": "cnf-backends-from-envoy",
+        "uid": "1def0c91-9852-4977-8690-bf4b1bcb053d",
+        "bodyHash": "76c2e8b9838b3c0f8e9f73f290b437f5e3fe8913097925e49f387ca6b871001c"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "NetworkPolicy",
+        "name": "cnf-envoy-chain-and-dns",
+        "uid": "8351600f-b003-460e-bffa-2e28b9712e5d",
+        "bodyHash": "d3977f0184d52a442133313655f607c1df673fe7084988794ea0ce9f5f8ceb89"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "Service",
+        "name": "cnf-m1-backend",
+        "uid": "bdebc423-967a-4e83-a5a7-5e50295a8bdc",
+        "bodyHash": "ecedff3f2448881804ffbbb94dded6375eb0af2b342f02397e1643e93c8ca71e"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "Service",
+        "name": "cnf-m1-envoy",
+        "uid": "a1ce7f99-c966-4438-8ce2-d6f14cecb349",
+        "bodyHash": "24546f29a1a7943694ff680d4343776bb64c460747fdb40faa87f261cfbfdfb3"
+      },
+      {
+        "namespace": "cnf-lab",
+        "kind": "Service",
+        "name": "cnf-m2-edge",
+        "uid": "42fd815f-a110-4db5-bcc0-1aa0fdde791d",
+        "bodyHash": "32031cf19b5e9bbc9511a18945fed000499409db700d51d92dcbd98bdbfb2b4d"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "ConfigMap",
+        "name": "cnf-a-envoy",
+        "uid": "db61aed6-0f9e-441e-a390-9e055f2c3239",
+        "bodyHash": "83908010526de7378dea359274a41a48863cb5710077a662dfeea59213a92e39"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "ConfigMap",
+        "name": "kube-root-ca.crt",
+        "uid": "c3117ac3-24e0-414a-951d-56b8c0b9b618",
+        "bodyHash": "a26c78dd07e936ddddd29e01251c27727afe03cb5e99f1fadef27e6245fd72b5"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Deployment",
+        "name": "cnf-a-core-ue1",
+        "uid": "e8ac2190-80f2-44ef-9857-8a3c2a1abc89",
+        "bodyHash": "36fcd4afaa4d7fcbf14c5edf2a05e10e47e9ed119a610ae1e1bbed572dc9b66c"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Deployment",
+        "name": "cnf-a-core-ue2",
+        "uid": "c4105b3d-aa6a-411c-ba29-d03b00edfda5",
+        "bodyHash": "7aed23815cf0712044c219117473e46599e1a22a6c6377387b494929f8569987"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Deployment",
+        "name": "cnf-a-edge-ue1",
+        "uid": "720d61d7-b6e6-49dc-a96b-b7038605f551",
+        "bodyHash": "1bd4fb397190b88bd69daace44e976351aabf5014d45c9f47b90583ed16256cd"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Deployment",
+        "name": "cnf-a-edge-ue2",
+        "uid": "9ee5ea75-c4f6-4b3d-9c67-0232f8fe35e6",
+        "bodyHash": "68ffd38c7f4a780629c9a022dfb7a9e5f8c67dc36a436b3bc7ef571fe117e98d"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Deployment",
+        "name": "cnf-a-envoy",
+        "uid": "4ab0b84a-2424-4b3a-856c-2b77469aab8e",
+        "bodyHash": "f3248f65c188e2601c49031beaa8f89efc646a484f3f9c216ee9184dd90b6559"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "NetworkPolicy",
+        "name": "cnf-a-backends",
+        "uid": "abb009ec-037c-439b-8425-4e800c2b0d36",
+        "bodyHash": "857733d9c01dc58e282428e243eb6ad3af398af3ca5d86a8d2964616b9cc3fde"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "NetworkPolicy",
+        "name": "cnf-a-envoy",
+        "uid": "317bea92-c0fa-41ae-b18d-54be4d1320c3",
+        "bodyHash": "e789a0313bd98c34bd78f85bac9ff9d1a83fd7c180d8932b419b15c0dc2f4607"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Service",
+        "name": "cnf-a-core-ue1",
+        "uid": "08759ae5-3e0d-4128-b8b4-5bf1e69defc4",
+        "bodyHash": "bddb77025da118587536c3d481167fbb16a3ad266a2687db0e4035440c30a3fb"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Service",
+        "name": "cnf-a-core-ue2",
+        "uid": "1f11bd73-b636-4965-870d-31d9582e0a89",
+        "bodyHash": "a97fc3da9a0b6675b9f7dad54b6ee1891d5af6eec2486cc5adecc4098929e329"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Service",
+        "name": "cnf-a-edge-ue1",
+        "uid": "e2939650-4d46-45c0-ba4e-1cf1b0dc4f96",
+        "bodyHash": "a3cc3b89ac1349821eaa24cd88e2c19fca7f722cece4cf564de32ad3be3de71d"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Service",
+        "name": "cnf-a-edge-ue2",
+        "uid": "9c027469-8de5-4f50-9ed0-61d4e9bdc39a",
+        "bodyHash": "da3f0de31d5ad239dcb9acc8e9499e8f476e98c776c2eb23004c17be0b98adce"
+      },
+      {
+        "namespace": "cnf-multi-ue",
+        "kind": "Service",
+        "name": "cnf-a-envoy",
+        "uid": "c434538c-7d61-42a8-85c4-b62ba256cb04",
+        "bodyHash": "15d26684452e2b2b713dc21aca8702a036cf2bba70603f00560e587f1af40833"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "cnf-a-ue2",
+        "uid": "24f47ea2-8879-4110-a794-c6ca2c838144",
+        "bodyHash": "abe0272a56d45937269b433cfd1164e6455e1d294872646a8fe5db9bc226fdba"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-amf-configmap",
+        "uid": "19459a4f-efd7-4ba3-91f2-c67b96238202",
+        "bodyHash": "a149e847a98cd2225abd5d7c109bbb10bbe9187085e6cb8a6df25717fd59843e"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-ausf-configmap",
+        "uid": "663e05f8-1221-4c4e-a232-6816b716499a",
+        "bodyHash": "4ae466c3642733a1436b22e0fcbccccc49089cbda02cdde6e1a062140d99db37"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-chf-configmap",
+        "uid": "a45ba083-bfe2-43a5-8301-dcc23b0c0f15",
+        "bodyHash": "41b92194ff6a7af6a8c247850970e2d27895f9966628197c3381fe7ef67e7380"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-nef-configmap",
+        "uid": "db13f1dd-14a5-432b-9846-3a47fa50d284",
+        "bodyHash": "7041a8f17ad33d8872887ac3dce35b73254463929e7bd4dfc42a375899cdcad0"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-nrf-configmap",
+        "uid": "ef1a7564-61b7-4949-a6d2-c64274033406",
+        "bodyHash": "689b083d7887ceacc81c2acb9337962c0e8ab198730fa7b7a452f488cb95366d"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-nssf-configmap",
+        "uid": "f24302ba-3e95-4f41-869a-e86f50906c64",
+        "bodyHash": "3e52f54e1c8cb6f0307b197e1115d077512329059db7a692ab98f153e912532e"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-pcf-configmap",
+        "uid": "0ade6cd6-8875-4ec7-a2ee-5cd7336a5aab",
+        "bodyHash": "3c9e0e1fc3d3bec0b4d8ea7c7ad13539e3262c509a61e757bca64454f8bc97fe"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-smf-configmap",
+        "uid": "ce6a7738-46f8-451f-965f-b827e6ce2bed",
+        "bodyHash": "f2cdb520c0d00eeadfbfaf914b8230733bbfa8906c8284a23314240dae84e1e7"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-udm-configmap",
+        "uid": "f572e420-d06f-4e8a-b8a7-3e9b521c9273",
+        "bodyHash": "ee03af67717b2b38d9eaf01fc7169f6399a9aa45cdd6ec9ed8fce2b6c0304b22"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-udr-configmap",
+        "uid": "40015937-60e2-48bd-933f-89bc846409dd",
+        "bodyHash": "6f50f676a52e15d7124551f390da59852f314c16340a1800abd4ca1a0c078b15"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-helm-free5gc-upf-upf-configmap",
+        "uid": "f618b3ef-da41-4431-838d-1df200d64c74",
+        "bodyHash": "9cbad7f1c5751055e7fdcf633320fafcf95643f260d23228c0f90dcac78e97bd"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "free5gc-public-certs",
+        "uid": "0a1c6478-17ec-4413-87d3-5388cb2acd0c",
+        "bodyHash": "f6fdce8aa531bd1ee1d8137bedb28a03c7c54bf81cbfa1a35788530472342bdd"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "gnb-configmap",
+        "uid": "132a7c20-5f12-49dd-bd45-058bb8ac5ffb",
+        "bodyHash": "c3e61622f381662cc3d1b336d81e3fa069d8bd07cbff0d0e77cffd6618919889"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "kube-root-ca.crt",
+        "uid": "ca7bbf95-bb84-4e34-bf95-f7ca50d67499",
+        "bodyHash": "a26c78dd07e936ddddd29e01251c27727afe03cb5e99f1fadef27e6245fd72b5"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "mongodb-common-scripts",
+        "uid": "be3385f6-241a-41ca-a8d6-00ab424629fd",
+        "bodyHash": "56e84f1ce1e03037fb05c8a3ce4eea08d19f295c61b479b65727eb813199401a"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "ue-configmap",
+        "uid": "b14777d8-9798-4e53-a7b1-d0ce6191068c",
+        "bodyHash": "d0e068d7b8ef99809e224f7e399352f74d6a569a41af28607e1f112b03d46f5d"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "ConfigMap",
+        "name": "webui-configmap",
+        "uid": "1222fb43-2b37-4d05-a3d4-d84a5513aa7b",
+        "bodyHash": "561dfcc5281f233f5d28d0763c252dc1ce52f922c717bbbc89aa4a3bc5271884"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "cnf-a-ue2",
+        "uid": "231386ef-7f3d-48cb-bbc8-451f7100aaa5",
+        "bodyHash": "5110dd53ac578d03d63c7f12dc40b4f552b6b4082f79db060d46429597a75113"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-amf-amf",
+        "uid": "b9d8bd31-ebd9-4379-8ffd-21f3fa38deb6",
+        "bodyHash": "980be2092749d5a0ccf6771e1b50b774e46f7fa63817fe7590d9552d79aca892"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-ausf-ausf",
+        "uid": "01073144-4b82-435b-933a-111ff2eddde9",
+        "bodyHash": "83013e6a43853130840cd76ba83cfeae86e4859b097a460502963112636c2e7c"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-chf-chf",
+        "uid": "692b770b-9628-4328-8ccd-5500fa0bc0e5",
+        "bodyHash": "2f33f676ff9238669c0e6c88ca2ff45daccf493d021eb09079aec5278465009a"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-nef-nef",
+        "uid": "2cabb83a-628f-4b05-aaa4-5dfcd13c8c63",
+        "bodyHash": "4b96f316a9a8420609a3b4093f9e8a375d29c49fe0bbd144a404f1ec2c3644fe"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-nrf-nrf",
+        "uid": "97cab4bd-806f-4fb3-9d84-90014d07bd0a",
+        "bodyHash": "b00f73ea5d7ff0dd428ac62f4174489d12463803f638e86446f9b5fda2fd67a4"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-nssf-nssf",
+        "uid": "24500e3c-b27e-4501-a673-febb51d6794f",
+        "bodyHash": "4e5e7bdae1c6132b44d1a5c9670f804e92eef7459790e80877abc450f74efdbd"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-pcf-pcf",
+        "uid": "a8c3dc14-293f-48d1-846c-e48db9e64009",
+        "bodyHash": "f6231a8c6e351cdaa9a62da376ec07de2ec03785787fc2889570249368043a71"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-smf-smf",
+        "uid": "fb08452d-1dff-457b-8643-2b93571e5d17",
+        "bodyHash": "1e10a0670dfb5397b236349247d1021cf14ba06013c87bbd67d323997cbc7e14"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-udm-udm",
+        "uid": "4335f328-0a48-4244-acfc-44eaba321453",
+        "bodyHash": "92c9820b6287daf17617cda0aa375b1a0f6bfc04509daddfe008fc7dbfd39f04"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-udr-udr",
+        "uid": "80645806-dff3-41e5-951e-dd2a6ab25da1",
+        "bodyHash": "4214a3095cff8f0eac55013cd0d7cfd6fed861b0c80a17156d5c29ffef1777c4"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-upf-upf",
+        "uid": "34213460-b513-42eb-b994-dc2528f2b25e",
+        "bodyHash": "997b93d1720509d122ca3f0c8174c842643eb4f0f68a7e7d93ed34a6daeb507e"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "free5gc-helm-free5gc-webui-webui",
+        "uid": "0b4a431f-65b7-471a-83c9-2acab94e6a78",
+        "bodyHash": "e2cb2cb5d2240c73934ee8967d16f3f0058126c55b18a64e51c62db589fc5dee"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "ueransim-gnb",
+        "uid": "fe0d680e-33fd-49c7-b9c6-526fb6bd9b98",
+        "bodyHash": "717d41cd53d0321a1b99e64fd6cb869a3396ed5c5771736092d1d06f0661729e"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Deployment",
+        "name": "ueransim-ue",
+        "uid": "d9b91d7b-4a44-4a84-87f3-6effa8aafa6c",
+        "bodyHash": "391ecc46a29c2eefe510ebb60fbd4c7d49cfcbd1337577f5487abab36fede5dd"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "NetworkPolicy",
+        "name": "mongodb",
+        "uid": "4523e139-f69f-4dd3-a03f-41fa9df89792",
+        "bodyHash": "db8f6c1d7c9a07a11e0856accd7f677e30d4e31dfbee2c1e759f0dd4f4199cbf"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-amf-amf-n2",
+        "uid": "06ec58de-ce3b-4d69-b9b6-ff233cc567a4",
+        "bodyHash": "d3111ce9f3910f577cbadbf318133b947237099f24e29b886c168ea9413e894d"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-amf-service",
+        "uid": "5b1e1999-fa6c-4176-80e9-859a60971412",
+        "bodyHash": "fe5a57544646880a760ca5b668ba5471f2929a35043347fbf5162c9cd89411ba"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-ausf-service",
+        "uid": "62f5d8fe-5f4b-4c39-b1c3-7e72d6c1577d",
+        "bodyHash": "e6375613da9ba1ae5b484de667a32ba23d8671351191c59044eac5af4b5a58cf"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-chf-service",
+        "uid": "89bdb6a3-7e53-4c42-bcc2-524b4717fea9",
+        "bodyHash": "e0bbe3caa04b309171f3a370ada27f0b394c545b42caef1ee9c99598461999f3"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-nef-service",
+        "uid": "afa4a5c9-a0f0-45fb-b337-8c0555d7d73e",
+        "bodyHash": "1e0e4db9d8916fe78614359c7153be4c57c8a1b8f6663b76fbc21c26d3aee94d"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-nssf-service",
+        "uid": "75fa70f6-e2a3-4b69-be98-0ff9952fa470",
+        "bodyHash": "1e7ea0e6607166a2ee34b79e86378cc8d6594885322d7ae6529a9cdd406d62e8"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-pcf-service",
+        "uid": "928de0ea-6888-4e8a-8c6d-1c1544fd46bc",
+        "bodyHash": "48d3c485faeca0ce47bed7d7e73f9e043e0026e270de5f9c8a0ca1c0f4238d1c"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-smf-service",
+        "uid": "6094ae98-4818-41fe-ab2e-1bd6e79f8827",
+        "bodyHash": "902f339a5bb59dafda7d69230176cca90a93dfe87ac8e6363aa6dd405153ee5b"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-udm-service",
+        "uid": "cbb89b16-1a87-43d3-b4cc-553bf3450b32",
+        "bodyHash": "ad56520f0e22d1ea56bfc2d30555bffff702494c1a08984787863cd6c1909150"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-udr-service",
+        "uid": "5fb4b942-8fdc-4a30-8201-d1d4e2795006",
+        "bodyHash": "10b7e052d442422d17258295589a79b5c40f1e5e8b8f5cacca8aad43257fcc57"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "free5gc-helm-free5gc-upf-upf-service",
+        "uid": "c0580abc-50b2-4fe2-a4d0-628173eabec1",
+        "bodyHash": "5bef27389c913a4aa3b2ef3da94b86c088d76cc88b233e4378d7ea82a1ae1714"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "gnb-service",
+        "uid": "0b55a493-0e1c-4ed4-9ace-795aaefd7b85",
+        "bodyHash": "44f72c10c95de9c39b3272e3d809b6b1291538d3dd0ffeb27b406aa9201e0f18"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "mongodb",
+        "uid": "ea04680a-17f6-4a2c-91ad-b7b5cca80ce5",
+        "bodyHash": "2754162cdc310c8128134a5482ee6a1939e278bc387bdb4b2772bf98a767fa03"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "nrf-nnrf",
+        "uid": "aaa1199e-3c16-4976-884e-c839b168cae3",
+        "bodyHash": "6164ab03b534a89acb326194509732fc345d71f9ad38010bac8681e427ec4940"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "webui-nbiling",
+        "uid": "41210a9f-8672-481e-a67a-41e586cef6e3",
+        "bodyHash": "3ab3650a90d1733de1d75dca4c450cd24d29bf3708f2069db00ab375f7a41063"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "webui-ncgf",
+        "uid": "351bf23e-d734-4e0d-9d74-43480b9e69c4",
+        "bodyHash": "2bcf97950cdefd2d1a4809ffb59e7e60ea957032ee1fcb85c2a5ba9e8e25d66c"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "Service",
+        "name": "webui-service",
+        "uid": "ab71545e-15fd-4195-9020-a66783e168b8",
+        "bodyHash": "2312e6ba96f6bd0833e3a76d98602d03ae1ff53b3d7abce0b885243157cd6dc6"
+      },
+      {
+        "namespace": "free5gc",
+        "kind": "StatefulSet",
+        "name": "mongodb",
+        "uid": "61eaa186-47a9-47aa-93ec-1cc1baab90be",
+        "bodyHash": "0ec601425fb64db16ef896d688c4528537bac90437cf386e1a3bfb9570fef35c"
+      }
+    ],
+    "bindings": {
+      "ue1": {
+        "supi": "imsi-208930000000001",
+        "pod": "ueransim-ue-7964f847f8-4r92z",
+        "podUID": "a81ee9d5-3e0e-42e4-9c5e-779950537349",
+        "ip": "10.60.0.14",
+        "sessionListing": "PDU Session1:\nstate: PS-ACTIVE\nsession-type: IPv4\napn: internet\ns-nssai:\nsst: 0x01\nsd: 0x010203\nemergency: false\naddress: 10.60.0.14\nambr: up[1000Mb/s] down[1000Mb/s]",
+        "session_id": "pdu-19578644df74c0d5d6f87de9"
+      },
+      "ue2": {
+        "supi": "imsi-208930000000002",
+        "pod": "cnf-a-ue2-8875f5fbc-v2l26",
+        "podUID": "8353e3b0-141a-4e78-97c7-1d974ec00670",
+        "ip": "10.60.0.15",
+        "sessionListing": "PDU Session1:\nstate: PS-ACTIVE\nsession-type: IPv4\napn: internet\ns-nssai:\nsst: 0x01\nsd: 0x010203\nemergency: false\naddress: 10.60.0.15\nambr: up[1000Mb/s] down[1000Mb/s]",
+        "session_id": "pdu-637c491c6cba8a0a73908de0"
+      }
+    },
+    "queueMode": "none",
+    "queueShape": {
+      "qdisc": [
+        {
+          "kind": "noqueue",
+          "handle": "0:",
+          "root": true,
+          "options": {}
+        }
+      ],
+      "class": [],
+      "filter": []
+    },
+    "uplinkClean": true,
+    "nativeQos": "QoS Enable: 0",
+    "endpoint": {
+      "pod": "cnf-c-endpoint-644d89c877-9m4t6",
+      "uid": "f225311a-48cc-49e6-9af7-1d4280548655",
+      "ip": "10.42.0.200"
+    }
+  },
+  "liveStateObserved": true,
+  "bindingScope": "observed_fixture_SUPI_Pod_container_PDU_listing_TUN_IP",
+  "liveStateHash": "054e757139fe7246b7d99dbea6370815ee29a05da5a61494ffc7eceb8c4a3bc6",
+  "liveStateId": "liveState-054e757139fe7246b7d9"
+}

@@ -1,0 +1,847 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "C1",
+  "configVersion": "cnf-contention-v1",
+  "date": "2026-10-20",
+  "outcome": "accepted-within-declared-scope",
+  "sourceBasisGitHead": "4f74956c5387fb98368f0ce469a591a8fc95ed83",
+  "worktreeChangesCommittedByAgent": false,
+  "scope": "Container-local shared downlink bottleneck; explicit per-user fixture endpoints; measured UDP loss and class-mapped probe RTT; no PCF/QFI integration or radio/end-to-end SLA acceptance",
+  "formal": {
+    "path": "measure-01",
+    "groups": 20,
+    "sessions": 40,
+    "uniqueCookies": 40,
+    "groupCounts": {
+      "none": 2,
+      "shared": 3,
+      "equal": 3,
+      "guarantee-ue1": 3,
+      "guarantee-ue2": 3,
+      "priority-ue1": 3,
+      "priority-ue2": 3
+    },
+    "evidenceIntegrity": "passed",
+    "networkAcceptancePassed": true,
+    "vm1AndWindowsAuditIdentical": true,
+    "sourceHashes": 24,
+    "currentSourcesDifferFromExecution": [],
+    "minimumOverlapLowerBoundSeconds": 28.000091075897217,
+    "upfPeakSampledMemoryBytes": 16080896,
+    "resourceSampleCount": 677,
+    "guaranteeWindows": {
+      "01-guarantee-ue1/ue1": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "01-guarantee-ue1/ue2": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "01-guarantee-ue2/ue1": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "01-guarantee-ue2/ue2": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "02-guarantee-ue1/ue1": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "02-guarantee-ue1/ue2": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "02-guarantee-ue2/ue1": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "02-guarantee-ue2/ue2": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "03-guarantee-ue1/ue1": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "03-guarantee-ue1/ue2": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "03-guarantee-ue2/ue1": {
+        "minimumMbps": 1.7,
+        "windows": 19,
+        "belowMinimum": 0
+      },
+      "03-guarantee-ue2/ue2": {
+        "minimumMbps": 5.5,
+        "windows": 19,
+        "belowMinimum": 0
+      }
+    },
+    "modeSummary": {
+      "none": {
+        "ue1": {
+          "medianMbps": 8.000590515403058,
+          "pooledLossPercent": 0.0,
+          "rttP95MsByRound": [
+            5.96,
+            5.76
+          ]
+        },
+        "ue2": {
+          "medianMbps": 8.000843611223774,
+          "pooledLossPercent": 0.0,
+          "rttP95MsByRound": [
+            5.75,
+            5.1
+          ]
+        }
+      },
+      "shared": {
+        "ue1": {
+          "medianMbps": 4.827789928040058,
+          "pooledLossPercent": 42.907222244353264,
+          "rttP95MsByRound": [
+            3.56,
+            2.57,
+            2.97
+          ]
+        },
+        "ue2": {
+          "medianMbps": 4.827282953607141,
+          "pooledLossPercent": 42.969418412622616,
+          "rttP95MsByRound": [
+            3.16,
+            2.86,
+            3.8
+          ]
+        }
+      },
+      "equal": {
+        "ue1": {
+          "medianMbps": 4.827280424627172,
+          "pooledLossPercent": 42.98247359102393,
+          "rttP95MsByRound": [
+            3.33,
+            4.0,
+            4.21
+          ]
+        },
+        "ue2": {
+          "medianMbps": 4.826780991542446,
+          "pooledLossPercent": 42.99580324999503,
+          "rttP95MsByRound": [
+            4.14,
+            3.92,
+            3.35
+          ]
+        }
+      },
+      "guarantee-ue1": {
+        "ue1": {
+          "medianMbps": 7.7259822193735515,
+          "pooledLossPercent": 3.4374605313013094,
+          "rttP95MsByRound": [
+            2.83,
+            3.22,
+            2.92
+          ]
+        },
+        "ue2": {
+          "medianMbps": 1.928589183276952,
+          "pooledLossPercent": 78.39459581855235,
+          "rttP95MsByRound": [
+            6.43,
+            6.73,
+            6.11
+          ]
+        }
+      },
+      "guarantee-ue2": {
+        "ue1": {
+          "medianMbps": 1.929094549238271,
+          "pooledLossPercent": 78.38460086808831,
+          "rttP95MsByRound": [
+            6.33,
+            6.08,
+            6.14
+          ]
+        },
+        "ue2": {
+          "medianMbps": 7.725978874657228,
+          "pooledLossPercent": 3.425191048609503,
+          "rttP95MsByRound": [
+            3.16,
+            3.0,
+            2.93
+          ]
+        }
+      },
+      "priority-ue1": {
+        "ue1": {
+          "medianMbps": 7.7254724724367305,
+          "pooledLossPercent": 3.435500168406871,
+          "rttP95MsByRound": [
+            3.78,
+            4.25,
+            3.72
+          ]
+        },
+        "ue2": {
+          "medianMbps": 1.9285898911447978,
+          "pooledLossPercent": 78.38985449810338,
+          "rttP95MsByRound": [
+            6.21,
+            6.85,
+            6.35
+          ]
+        }
+      },
+      "priority-ue2": {
+        "ue1": {
+          "medianMbps": 1.9285908954710096,
+          "pooledLossPercent": 78.39449108574662,
+          "rttP95MsByRound": [
+            6.17,
+            5.91,
+            6.27
+          ]
+        },
+        "ue2": {
+          "medianMbps": 7.725978995842551,
+          "pooledLossPercent": 3.4375328912746026,
+          "rttP95MsByRound": [
+            3.68,
+            3.76,
+            3.76
+          ]
+        }
+      }
+    },
+    "rttRangeMs": {
+      "none": {
+        "ue1": {
+          "p50Ms": {
+            "minimum": 3.46,
+            "maximum": 3.53
+          },
+          "p95Ms": {
+            "minimum": 5.76,
+            "maximum": 5.96
+          },
+          "p99Ms": {
+            "minimum": 6.23,
+            "maximum": 7.62
+          },
+          "lostProbes": 0
+        },
+        "ue2": {
+          "p50Ms": {
+            "minimum": 3.32,
+            "maximum": 3.48
+          },
+          "p95Ms": {
+            "minimum": 5.1,
+            "maximum": 5.75
+          },
+          "p99Ms": {
+            "minimum": 6.01,
+            "maximum": 7.05
+          },
+          "lostProbes": 0
+        }
+      },
+      "shared": {
+        "ue1": {
+          "p50Ms": {
+            "minimum": 1.59,
+            "maximum": 1.66
+          },
+          "p95Ms": {
+            "minimum": 2.57,
+            "maximum": 3.56
+          },
+          "p99Ms": {
+            "minimum": 3.76,
+            "maximum": 6.35
+          },
+          "lostProbes": 0
+        },
+        "ue2": {
+          "p50Ms": {
+            "minimum": 1.61,
+            "maximum": 1.68
+          },
+          "p95Ms": {
+            "minimum": 2.86,
+            "maximum": 3.8
+          },
+          "p99Ms": {
+            "minimum": 4.76,
+            "maximum": 5.76
+          },
+          "lostProbes": 0
+        }
+      },
+      "equal": {
+        "ue1": {
+          "p50Ms": {
+            "minimum": 2.18,
+            "maximum": 2.21
+          },
+          "p95Ms": {
+            "minimum": 3.33,
+            "maximum": 4.21
+          },
+          "p99Ms": {
+            "minimum": 5.49,
+            "maximum": 6.06
+          },
+          "lostProbes": 0
+        },
+        "ue2": {
+          "p50Ms": {
+            "minimum": 2.11,
+            "maximum": 2.25
+          },
+          "p95Ms": {
+            "minimum": 3.35,
+            "maximum": 4.14
+          },
+          "p99Ms": {
+            "minimum": 5.41,
+            "maximum": 6.73
+          },
+          "lostProbes": 0
+        }
+      },
+      "guarantee-ue1": {
+        "ue1": {
+          "p50Ms": {
+            "minimum": 1.41,
+            "maximum": 1.82
+          },
+          "p95Ms": {
+            "minimum": 2.83,
+            "maximum": 3.22
+          },
+          "p99Ms": {
+            "minimum": 3.85,
+            "maximum": 4.72
+          },
+          "lostProbes": 0
+        },
+        "ue2": {
+          "p50Ms": {
+            "minimum": 3.92,
+            "maximum": 4.08
+          },
+          "p95Ms": {
+            "minimum": 6.11,
+            "maximum": 6.73
+          },
+          "p99Ms": {
+            "minimum": 6.4,
+            "maximum": 8.38
+          },
+          "lostProbes": 0
+        }
+      },
+      "guarantee-ue2": {
+        "ue1": {
+          "p50Ms": {
+            "minimum": 3.85,
+            "maximum": 4.06
+          },
+          "p95Ms": {
+            "minimum": 6.08,
+            "maximum": 6.33
+          },
+          "p99Ms": {
+            "minimum": 6.34,
+            "maximum": 8.17
+          },
+          "lostProbes": 0
+        },
+        "ue2": {
+          "p50Ms": {
+            "minimum": 1.48,
+            "maximum": 1.96
+          },
+          "p95Ms": {
+            "minimum": 2.93,
+            "maximum": 3.16
+          },
+          "p99Ms": {
+            "minimum": 4.76,
+            "maximum": 5.73
+          },
+          "lostProbes": 0
+        }
+      },
+      "priority-ue1": {
+        "ue1": {
+          "p50Ms": {
+            "minimum": 1.63,
+            "maximum": 1.83
+          },
+          "p95Ms": {
+            "minimum": 3.72,
+            "maximum": 4.25
+          },
+          "p99Ms": {
+            "minimum": 5.6,
+            "maximum": 6.9
+          },
+          "lostProbes": 0
+        },
+        "ue2": {
+          "p50Ms": {
+            "minimum": 3.85,
+            "maximum": 3.93
+          },
+          "p95Ms": {
+            "minimum": 6.21,
+            "maximum": 6.85
+          },
+          "p99Ms": {
+            "minimum": 6.79,
+            "maximum": 8.55
+          },
+          "lostProbes": 0
+        }
+      },
+      "priority-ue2": {
+        "ue1": {
+          "p50Ms": {
+            "minimum": 3.84,
+            "maximum": 3.9
+          },
+          "p95Ms": {
+            "minimum": 5.91,
+            "maximum": 6.27
+          },
+          "p99Ms": {
+            "minimum": 7.71,
+            "maximum": 9.1
+          },
+          "lostProbes": 0
+        },
+        "ue2": {
+          "p50Ms": {
+            "minimum": 1.65,
+            "maximum": 1.8
+          },
+          "p95Ms": {
+            "minimum": 3.68,
+            "maximum": 3.76
+          },
+          "p99Ms": {
+            "minimum": 4.32,
+            "maximum": 5.84
+          },
+          "lostProbes": 0
+        }
+      }
+    },
+    "senderObservations": {
+      "none": {
+        "ue1": [
+          {
+            "folder": "unshaped-before",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25039
+          },
+          {
+            "folder": "unshaped-after",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25038
+          }
+        ],
+        "ue2": [
+          {
+            "folder": "unshaped-before",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25038
+          },
+          {
+            "folder": "unshaped-after",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25038
+          }
+        ]
+      },
+      "shared": {
+        "ue1": [
+          {
+            "folder": "01-shared",
+            "reportedFullSessionMbps": 7.83,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 24521
+          },
+          {
+            "folder": "02-shared",
+            "reportedFullSessionMbps": 7.84,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 24529
+          },
+          {
+            "folder": "03-shared",
+            "reportedFullSessionMbps": 7.84,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 24520
+          }
+        ],
+        "ue2": [
+          {
+            "folder": "01-shared",
+            "reportedFullSessionMbps": 7.84,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 24526
+          },
+          {
+            "folder": "02-shared",
+            "reportedFullSessionMbps": 7.83,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 24517
+          },
+          {
+            "folder": "03-shared",
+            "reportedFullSessionMbps": 7.83,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 24521
+          }
+        ]
+      },
+      "equal": {
+        "ue1": [
+          {
+            "folder": "01-equal",
+            "reportedFullSessionMbps": 7.83,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 24520
+          },
+          {
+            "folder": "02-equal",
+            "reportedFullSessionMbps": 7.83,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 24508
+          },
+          {
+            "folder": "03-equal",
+            "reportedFullSessionMbps": 7.83,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 24520
+          }
+        ],
+        "ue2": [
+          {
+            "folder": "01-equal",
+            "reportedFullSessionMbps": 7.84,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 24525
+          },
+          {
+            "folder": "02-equal",
+            "reportedFullSessionMbps": 7.83,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 24516
+          },
+          {
+            "folder": "03-equal",
+            "reportedFullSessionMbps": 7.83,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 24505
+          }
+        ]
+      },
+      "guarantee-ue1": {
+        "ue1": [
+          {
+            "folder": "01-guarantee-ue1",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 25036
+          },
+          {
+            "folder": "02-guarantee-ue1",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25038
+          },
+          {
+            "folder": "03-guarantee-ue1",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 25036
+          }
+        ],
+        "ue2": [
+          {
+            "folder": "01-guarantee-ue1",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 23202
+          },
+          {
+            "folder": "02-guarantee-ue1",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 23195
+          },
+          {
+            "folder": "03-guarantee-ue1",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 23198
+          }
+        ]
+      },
+      "guarantee-ue2": {
+        "ue1": [
+          {
+            "folder": "01-guarantee-ue2",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 23195
+          },
+          {
+            "folder": "02-guarantee-ue2",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 23195
+          },
+          {
+            "folder": "03-guarantee-ue2",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 23202
+          }
+        ],
+        "ue2": [
+          {
+            "folder": "01-guarantee-ue2",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25038
+          },
+          {
+            "folder": "02-guarantee-ue2",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 25036
+          },
+          {
+            "folder": "03-guarantee-ue2",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25039
+          }
+        ]
+      },
+      "priority-ue1": {
+        "ue1": [
+          {
+            "folder": "01-priority-ue1",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25040
+          },
+          {
+            "folder": "02-priority-ue1",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25042
+          },
+          {
+            "folder": "03-priority-ue1",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 25038
+          }
+        ],
+        "ue2": [
+          {
+            "folder": "01-priority-ue1",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 23203
+          },
+          {
+            "folder": "02-priority-ue1",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 23198
+          },
+          {
+            "folder": "03-priority-ue1",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 23198
+          }
+        ]
+      },
+      "priority-ue2": {
+        "ue1": [
+          {
+            "folder": "01-priority-ue2",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 23198
+          },
+          {
+            "folder": "02-priority-ue2",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.05,
+            "sentDatagrams": 23198
+          },
+          {
+            "folder": "03-priority-ue2",
+            "reportedFullSessionMbps": 7.41,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 23198
+          }
+        ],
+        "ue2": [
+          {
+            "folder": "01-priority-ue2",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 25036
+          },
+          {
+            "folder": "02-priority-ue2",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 25037
+          },
+          {
+            "folder": "03-priority-ue2",
+            "reportedFullSessionMbps": 8.0,
+            "reportedSeconds": 30.04,
+            "sentDatagrams": 25037
+          }
+        ]
+      }
+    }
+  },
+  "pilot": {
+    "path": "pilot-05",
+    "groups": 8,
+    "sessions": 16,
+    "audit": "audit-pilot-05.json",
+    "includedInFormalStatistics": false,
+    "differentAuditSourceDisclosed": true
+  },
+  "compatibilityAttempts": {
+    "failed": [
+      "deploy-01",
+      "pilot-01",
+      "recovery-01",
+      "pilot-02",
+      "pilot-03",
+      "pilot-04"
+    ],
+    "passedVerificationOrRecovery": [
+      "check-01",
+      "recovery-02"
+    ],
+    "issue": "PS-012; failed setup/capture attempts are not formal network rejections"
+  },
+  "verification": {
+    "preflight": "c-preflight-01",
+    "unitTestsPerPlatform": {
+      "discovered": 129,
+      "passed": 128,
+      "conditionalHelmSkipped": 1
+    },
+    "platforms": [
+      "Windows",
+      "VM1 Linux"
+    ],
+    "newContentionUnitTests": 16,
+    "negativeCases": 16,
+    "negativeCasesAllRejected": true,
+    "originalRawEvidenceUnchanged": true
+  },
+  "restored": {
+    "newEndpointQueue": "noqueue",
+    "original24PodIdentitiesUnchanged": true,
+    "all25PodIdentitiesUnchanged": true,
+    "restartCounts": 0,
+    "nativeUpfQosEnable": 0,
+    "originalSessionAmbrMbps": {
+      "uplink": 1000,
+      "downlink": 1000
+    },
+    "newEndpointRetained": true
+  },
+  "limitations": [
+    "Downlink UDP in this two-UE direct-N6 fixture only; C broader scope is not fully complete",
+    "Explicit endpoint/user labels; no autonomous business requirement recognition",
+    "8 Mbps is requested target, not proof of flat actual sender rate; server interval pacing varies under congestion",
+    "Pooled loss uses receiver sequence/datagram counts in selected windows, not 1-goodput/targetRate; finite-window sender/receiver timing differs",
+    "ICMP class-mapped RTT and UDP loss are observations; no application, one-way or radio SLA acceptance",
+    "Shared FQ-CoDel may give small ICMP flows different treatment from UDP even in the same HTB class",
+    "No PCF/QFI/5QI integration; no native 5G GBR/QoS Flow completion",
+    "No uplink competition, mixed real applications, long-term stability or arbitrary forced-exit recovery acceptance",
+    "Ceiling configuration and non-exceedance checked in tested competition; not every user ceiling independently saturated"
+  ],
+  "evidence": {
+    "windowsAudit": "audit.json",
+    "vm1Audit": "audit-formal-vm1.json",
+    "negativeChecks": "audit-negative-checks.json",
+    "negativeCheckScript": "audit-negative-checks.py",
+    "testsWindows": "tests-windows.txt",
+    "testsVm1": "tests-vm1.txt",
+    "formalInputSha256LF": {
+      "infra/cnfs/contention-experiment.json": "479eb875254553c966474b323a103b0c759bb40a87def8286101e6b81f9ba2e9",
+      "scripts/cnf-contention.py": "caf5096e016336b9a4587643b8c1e8efe6cfa797b2e4cd5cb44f695c60b35ce8",
+      "scripts/audit-cnf-contention.py": "77367ed519b6e689a75550591aab8200a7172197a6aefd78e879c58cd49b56fa",
+      "tests/test_cnf_contention.py": "6142e068e72f0d21602aa8744bc5f8e0d3d9614f7106b1113f9364ed4128a500",
+      "infra/cnfs/multi-ue-experiment.json": "dd09ca0eb63da585e5874e7b253227f5e4136216f1e054e35b52f6f9b0bb6c4b",
+      "scripts/cnf-multi-ue.py": "faa479c74e85bffdab8e86d1181ec5c6e8fa0c9cdd79492da6bab7fc6862e394",
+      "scripts/create-test-subscriber.sh": "1877a5b451e7c96c5065bbd7412eed4f90549fbcaca90cd9b6a8981245b6abae",
+      "infra/free5gc-test-subscriber-ue2.json": "d8873d128bbd0bcfbec1b811e1e013a8cd02fc4bd61b3a1a89e56137f5e0b3c3",
+      "infra/cnfs/service-chain-profile.json": "3e7383a5dcd46af74d6973f27de6f41489941701d6bddbb878d116fff31e9e34",
+      "scripts/cnf-profile.py": "773f2d987c71d1f1b68e50b59bffa5bd2e4f38a4cbd243e6759ea4990cd0b7aa",
+      "infra/cnfs/networkpolicy-experiment.json": "cf42776596fc2b8c548041d61d8df42cf0266140549c9c506a1d1c5d690902f1",
+      "infra/cnfs/networkpolicy.yaml": "8f6785cea95ce023a1c8661cb25f4a06b55f6285635278f8a99a0cd9e23e14df",
+      "infra/cnfs/m4-experiment.json": "fc698f1fc8ca960853f4309919c1a578af62776e3506f67947d6ea485c4d1630",
+      "infra/cnfs/m3-experiment.json": "54563a55703918298b4957065e84e0bf009cd99b91f203099409d87385f3e323",
+      "infra/cnfs/m2-experiment.json": "1e4cdfe90da9e70e330a6699789b4f11deae5ea9899bb59093274d15c7eb103d",
+      "infra/cnfs/m1-proxy.yaml": "260c822b06961ccce2a48f7347d963baa37471cd03442035343ba4c2fae84687",
+      "infra/cnfs/m1-images.json": "fa24126b4c27f4aed9bcb9a08fc1878105296bc19817fce21215630a37a32f18",
+      "scripts/cnf-networkpolicy.py": "5712c4f50512a068ac5375e488b7597c01d5d552478bebb94c487865b55584ae",
+      "scripts/cnf-m1.py": "c9d42bd97307f1de7e806ac01bd423f2d81fbe88fc9a0a8c502060a6c47aefc7",
+      "scripts/cnf-m2.py": "54ecc11f19adb70bfdc6b0ce5c1875aae0298e1301432446497260b37c28b391",
+      "scripts/cnf-m3.py": "c97f9739842b625cc3a6a60949ea282665d843e02949d68463ae636ce7ff14a9",
+      "scripts/cnf-m4.py": "0fb07e9efb3ff995acadf830242b16cd92de32bc7dae142da1810cdd557cd5fa",
+      "scripts/free5gc-profile.py": "97c5b0c5fcd334655564f2052d027b421ed4b050e288816854604758a0e95701",
+      "infra/profiles/free5gc-3node-no-multus-v1.json": "1dbb4825e345ebe09a1de2548e41443dfb9cd366363143008d59af05e8e54ef4"
+    }
+  },
+  "rawEvidenceTransfer": {
+    "archiveSha256": "e5eca290567f0445b924446c654ed0a9b2ee07a3709a9746e633813871a359e6",
+    "matchedVm1Sha256": true,
+    "archiveStoredInIgnoredWorkDirectory": true
+  }
+}

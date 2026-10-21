@@ -1,0 +1,6 @@
+{
+  "error": "A measurement process failed; stop the remaining owned processes",
+  "errorCode": "acquisition_failed",
+  "mutationAttempted": true,
+  "applyCompleted": true
+}

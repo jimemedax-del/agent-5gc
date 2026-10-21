@@ -1,0 +1,15 @@
+PATTERN: 0x8e09297f2aa9fd6ccbb0cb62
+PING 10.42.0.200 (10.42.0.200) from 10.60.0.15 uesimtun0: 56(84) bytes of data.
+[1792548276.684766] 64 bytes from 10.42.0.200: icmp_seq=1 ttl=61 time=2.11 ms
+[1792548276.885248] 64 bytes from 10.42.0.200: icmp_seq=2 ttl=61 time=2.19 ms
+[1792548277.088577] 64 bytes from 10.42.0.200: icmp_seq=3 ttl=61 time=5.07 ms
+[1792548277.285615] 64 bytes from 10.42.0.200: icmp_seq=4 ttl=61 time=1.90 ms
+[1792548277.487159] 64 bytes from 10.42.0.200: icmp_seq=5 ttl=61 time=2.43 ms
+[1792548277.688057] 64 bytes from 10.42.0.200: icmp_seq=6 ttl=61 time=2.63 ms
+[1792548277.890030] 64 bytes from 10.42.0.200: icmp_seq=7 ttl=61 time=3.71 ms
+[1792548278.088585] 64 bytes from 10.42.0.200: icmp_seq=8 ttl=61 time=1.29 ms
+[1792548278.290640] 64 bytes from 10.42.0.200: icmp_seq=9 ttl=61 time=2.91 ms
+[1792548278.490582] 64 bytes from 10.42.0.200: icmp_seq=10 ttl=61 time=1.69 ms
+[1792548278.690915] 64 bytes from 10.42.0.200: icmp_seq=11 ttl=61 time=1.20 ms
+[1792548278.892260] 64 bytes from 10.42.0.200: icmp_seq=12 ttl=61 time=2.06 ms
+[1792548279.092436] 64 bytes from 10.42.0.200: icmp_seq=13 ttl=61 time=1.91 ms

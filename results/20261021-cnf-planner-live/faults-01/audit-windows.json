@@ -1,0 +1,65 @@
+{
+  "outcome": "passed_offline_fault_audit",
+  "scope": "controlled_C1_equal_faults_and_normal_regression",
+  "provenanceFilesPerRun": 93,
+  "cases": [
+    {
+      "case": "expired-plan",
+      "expectedErrorCode": "expired_plan",
+      "actualRunOutcome": "failed",
+      "finalBaselineMatched": true,
+      "podCount": 26,
+      "initialFingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65"
+    },
+    {
+      "case": "queue-drift",
+      "expectedErrorCode": "live_state_drift",
+      "actualRunOutcome": "failed",
+      "finalBaselineMatched": true,
+      "podCount": 26,
+      "initialFingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65"
+    },
+    {
+      "case": "partial-write",
+      "expectedErrorCode": "tc_apply_failed",
+      "actualRunOutcome": "failed",
+      "finalBaselineMatched": true,
+      "podCount": 26,
+      "initialFingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65"
+    },
+    {
+      "case": "measurement-interrupted",
+      "expectedErrorCode": "acquisition_failed",
+      "actualRunOutcome": "failed",
+      "finalBaselineMatched": true,
+      "podCount": 26,
+      "initialFingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65"
+    }
+  ],
+  "normalControl": {
+    "outcome": "passed_offline_raw_audit",
+    "scope": "single_existing_C1_equal_downlink_run",
+    "livePlanId": "livePlan-82110b77dfe39a94bac1",
+    "provenanceFiles": 93,
+    "podCount": 26,
+    "targetComparisons": {
+      "ue1": {
+        "receivedSteadyMbps": 4.823747141433367,
+        "minimumMbps": 4,
+        "maximumMbps": 8,
+        "passed": true
+      },
+      "ue2": {
+        "receivedSteadyMbps": 4.824253418552178,
+        "minimumMbps": 4,
+        "maximumMbps": 8,
+        "passed": true
+      }
+    },
+    "overlapLowerBoundSeconds": 29.00005292892456,
+    "latencyLossGuaranteesAccepted": false,
+    "historicalValidationAt": "2026-10-21T02:05:15.238683+00:00"
+  },
+  "podCount": 26,
+  "limitations": "Only controlled queue drift, duplicate-root TC failure and tagged receiver interruption; no Pod replacement, network partition, hard kill or power-loss acceptance"
+}

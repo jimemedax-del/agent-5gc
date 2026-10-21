@@ -1,0 +1,61 @@
+{
+  "scope": "offline_corrupted_evidence_checks",
+  "checks": [
+    {
+      "case": "hidden_failed_run",
+      "rejected": true,
+      "reason": "Expected failure was hidden, changed, or final baseline failed"
+    },
+    {
+      "case": "missing_expiration",
+      "rejected": true,
+      "reason": "No evidence of actual wall-time expiration"
+    },
+    {
+      "case": "wrong_rejection",
+      "rejected": true,
+      "reason": "Rejected plan/observation binding differs"
+    },
+    {
+      "case": "erased_other_actor_queue",
+      "rejected": true,
+      "reason": "Derived TC state differs from native output"
+    },
+    {
+      "case": "incomplete_partial_write",
+      "rejected": true,
+      "reason": "Unexpected actor/adapter writes"
+    },
+    {
+      "case": "false_final_baseline",
+      "rejected": true,
+      "reason": "Observation fingerprint differs from expected scenario"
+    },
+    {
+      "case": "unowned_interrupted_process",
+      "rejected": true,
+      "reason": "Interrupted process was not the actual tagged receiver"
+    },
+    {
+      "case": "failed_cleanup_hidden",
+      "rejected": true,
+      "reason": "Incomplete/failed owned process cleanup"
+    },
+    {
+      "case": "residual_process",
+      "rejected": true,
+      "reason": "Owned/unmanaged test processes remain or checks are incomplete"
+    },
+    {
+      "case": "normal_receiver_cookie",
+      "rejected": true,
+      "reason": "Missing correct server cookie/UPF peer or wrong endpoint hit"
+    },
+    {
+      "case": "changed_source",
+      "rejected": true,
+      "reason": "Archived input hash differs: scripts/cnf-planner-live.py"
+    }
+  ],
+  "allRejected": true
+}

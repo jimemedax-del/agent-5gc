@@ -1,0 +1,103 @@
+{
+  "endpoints": {
+    "apiVersion": "v1",
+    "kind": "Endpoints",
+    "metadata": {
+      "annotations": {
+        "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-20T03:51:09Z"
+      },
+      "creationTimestamp": "2026-10-20T03:51:06Z",
+      "labels": {
+        "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+      },
+      "name": "cnf-a-core-ue1",
+      "namespace": "cnf-multi-ue",
+      "resourceVersion": "607773",
+      "uid": "3256949e-de76-458a-adaa-8f37ae086994"
+    },
+    "subsets": [
+      {
+        "addresses": [
+          {
+            "ip": "10.42.0.197",
+            "nodeName": "lhm-virtual-machine",
+            "targetRef": {
+              "kind": "Pod",
+              "name": "cnf-a-core-ue1-796f6455d4-qssr4",
+              "namespace": "cnf-multi-ue",
+              "uid": "758e3bc6-3dd2-4100-b4e7-cac8a1dcdade"
+            }
+          }
+        ],
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP"
+          }
+        ]
+      }
+    ]
+  },
+  "slices": [
+    {
+      "addressType": "IPv4",
+      "apiVersion": "discovery.k8s.io/v1",
+      "endpoints": [
+        {
+          "addresses": [
+            "10.42.0.197"
+          ],
+          "conditions": {
+            "ready": true,
+            "serving": true,
+            "terminating": false
+          },
+          "nodeName": "lhm-virtual-machine",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "cnf-a-core-ue1-796f6455d4-qssr4",
+            "namespace": "cnf-multi-ue",
+            "uid": "758e3bc6-3dd2-4100-b4e7-cac8a1dcdade"
+          },
+          "zone": "core"
+        }
+      ],
+      "kind": "EndpointSlice",
+      "metadata": {
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-20T03:51:09Z"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "generateName": "cnf-a-core-ue1-",
+        "generation": 3,
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1",
+          "endpointslice.kubernetes.io/managed-by": "endpointslice-controller.k8s.io",
+          "kubernetes.io/service-name": "cnf-a-core-ue1"
+        },
+        "name": "cnf-a-core-ue1-9qqjh",
+        "namespace": "cnf-multi-ue",
+        "ownerReferences": [
+          {
+            "apiVersion": "v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Service",
+            "name": "cnf-a-core-ue1",
+            "uid": "08759ae5-3e0d-4128-b8b4-5bf1e69defc4"
+          }
+        ],
+        "resourceVersion": "607775",
+        "uid": "dc2c3899-3978-441a-9a5f-22274cfe13a9"
+      },
+      "ports": [
+        {
+          "name": "iperf",
+          "port": 5201,
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ]
+}

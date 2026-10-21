@@ -1,0 +1,61 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "A",
+  "configVersion": "cnf-multi-ue-v1",
+  "namespace": "cnf-multi-ue",
+  "baseProfile": "cnf-service-chain-v1",
+  "baseState": "protected",
+  "durationSeconds": 10,
+  "offeredMbpsPerUE": 1,
+  "roundsPerClassPerDirection": 5,
+  "blockBytes": 16384,
+  "minimumOverlapSeconds": 8,
+  "maximumUpfMemoryBytes": 536870912,
+  "users": [
+    {
+      "name": "ue1",
+      "supi": "imsi-208930000000001",
+      "deployment": "ueransim-ue"
+    },
+    {
+      "name": "ue2",
+      "supi": "imsi-208930000000002",
+      "deployment": "cnf-a-ue2"
+    }
+  ],
+  "routes": [
+    {
+      "user": "ue1",
+      "businessClass": "core",
+      "listenPort": 15301,
+      "nodePort": 31301
+    },
+    {
+      "user": "ue2",
+      "businessClass": "core",
+      "listenPort": 15302,
+      "nodePort": 31302
+    },
+    {
+      "user": "ue1",
+      "businessClass": "edge",
+      "listenPort": 15303,
+      "nodePort": 31303
+    },
+    {
+      "user": "ue2",
+      "businessClass": "edge",
+      "listenPort": 15304,
+      "nodePort": 31304
+    }
+  ],
+  "ue2Subscriber": "infra/free5gc-test-subscriber-ue2.json",
+  "limitations": [
+    "Explicit per-user test entry ports; not autonomous demand classification or identity-based access control",
+    "Dedicated Envoy and per-user backend processes in cnf-multi-ue; original cnf-lab unchanged",
+    "Only low-load TCP concurrency, no bandwidth guarantee, QoS policy or radio SLA claim",
+    "One-second client timestamp resolution; overlap proof uses conservative positive-byte intervals",
+    "UPF counters are aggregate; source binding and cookies correlate flows without per-packet capture"
+  ]
+}

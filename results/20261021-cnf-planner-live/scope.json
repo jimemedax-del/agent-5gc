@@ -1,0 +1,33 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E2-fault-acceptance",
+  "date": "2026-10-21",
+  "branchAtStart": "main",
+  "worktreeAtStart": "clean; main ahead origin/main by 10 existing commits",
+  "agentStagedOrCommitted": false,
+  "scope": [
+    "real wall-time expiration",
+    "controlled known equal queue drift",
+    "duplicate-root partial TC failure",
+    "exactly tagged UE receiver SIGTERM",
+    "normal equal downlink regression"
+  ],
+  "excluded": [
+    "Pod replacement fault injection",
+    "control-plane or UPF fault injection",
+    "network partition",
+    "hard kill of executor",
+    "power loss",
+    "native 5G QoS",
+    "autonomous demand recognition",
+    "other queue policies"
+  ],
+  "preflightRecovery": "Pre-existing stale RRC symptoms on both UEs; original preflight rejected before injection; only two affected UEs restarted; formal comparisons start after recovery",
+  "tests": {
+    "discovered": 281,
+    "passed": 280,
+    "conditionalSkipped": 1,
+    "newTestsThisRound": 8
+  }
+}

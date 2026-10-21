@@ -1,0 +1,72 @@
+[
+  {
+    "at": "2026-10-21T02:00:07.068863+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-DEREGISTERED\nmm-state: MM-REGISTER-INITIATED\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: null\nstored-suci: \n plmn: 208/93\n routing-indicator: 0000\n protection-schema: 0\n hnp-key-id: 0x00\n scheme-output: 0000000001\nstored-guti: no-identity\nhas-emergency: false\n",
+    "sessions": "\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:08.387180+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-DEREGISTERED\nmm-state: MM-REGISTER-INITIATED\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: null\nstored-suci: \n plmn: 208/93\n routing-indicator: 0000\n protection-schema: 0\n hnp-key-id: 0x00\n scheme-output: 0000000001\nstored-guti: no-identity\nhas-emergency: false\n",
+    "sessions": "\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:09.704856+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-DEREGISTERED\nmm-state: MM-REGISTER-INITIATED\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: null\nstored-suci: \n plmn: 208/93\n routing-indicator: 0000\n protection-schema: 0\n hnp-key-id: 0x00\n scheme-output: 0000000001\nstored-guti: no-identity\nhas-emergency: false\n",
+    "sessions": "\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:11.017169+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-DEREGISTERED\nmm-state: MM-REGISTER-INITIATED\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: null\nstored-suci: \n plmn: 208/93\n routing-indicator: 0000\n protection-schema: 0\n hnp-key-id: 0x00\n scheme-output: 0000000001\nstored-guti: no-identity\nhas-emergency: false\n",
+    "sessions": "\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:12.323896+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-DEREGISTERED\nmm-state: MM-REGISTER-INITIATED\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: null\nstored-suci: \n plmn: 208/93\n routing-indicator: 0000\n protection-schema: 0\n hnp-key-id: 0x00\n scheme-output: 0000000001\nstored-guti: no-identity\nhas-emergency: false\n",
+    "sessions": "\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:13.643276+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-DEREGISTERED\nmm-state: MM-REGISTER-INITIATED\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: null\nstored-suci: \n plmn: 208/93\n routing-indicator: 0000\n protection-schema: 0\n hnp-key-id: 0x00\n scheme-output: 0000000001\nstored-guti: no-identity\nhas-emergency: false\n",
+    "sessions": "\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:14.951168+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-DEREGISTERED\nmm-state: MM-REGISTER-INITIATED\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: null\nstored-suci: \n plmn: 208/93\n routing-indicator: 0000\n protection-schema: 0\n hnp-key-id: 0x00\n scheme-output: 0000000001\nstored-guti: no-identity\nhas-emergency: false\n",
+    "sessions": "\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:16.269209+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-REGISTERED\nmm-state: MM-REGISTERED/NORMAL-SERVICE\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: PLMN[208/93] TAC[1]\nstored-suci: no-identity\nstored-guti: \n plmn: 208/93\n amf-region-id: 0xca\n amf-set-id: 1016\n amf-pointer: 0\n tmsi: 0x00000005\nhas-emergency: false\n",
+    "sessions": "PDU Session1: \n state: PS-ACTIVE-PENDING\n session-type: IPv4\n apn: internet\n s-nssai: \n  sst: 0x01\n  sd: 0x010203\n emergency: false\n address: null\n ambr: null\n data-pending: false\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:17.593871+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-REGISTERED\nmm-state: MM-REGISTERED/NORMAL-SERVICE\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: PLMN[208/93] TAC[1]\nstored-suci: no-identity\nstored-guti: \n plmn: 208/93\n amf-region-id: 0xca\n amf-set-id: 1016\n amf-pointer: 0\n tmsi: 0x00000005\nhas-emergency: false\n",
+    "sessions": "PDU Session1: \n state: PS-ACTIVE-PENDING\n session-type: IPv4\n apn: internet\n s-nssai: \n  sst: 0x01\n  sd: 0x010203\n emergency: false\n address: null\n ambr: null\n data-pending: false\n",
+    "pingReturncode": 2,
+    "ping": ""
+  },
+  {
+    "at": "2026-10-21T02:00:18.909865+00:00",
+    "status": "cm-state: CM-CONNECTED\nrm-state: RM-REGISTERED\nmm-state: MM-REGISTERED/NORMAL-SERVICE\n5u-state: 5U1-UPDATED\nsim-inserted: true\nselected-plmn: 208/93\ncurrent-cell: 1\ncurrent-plmn: 208/93\ncurrent-tac: 1\nlast-tai: PLMN[208/93] TAC[1]\nstored-suci: no-identity\nstored-guti: \n plmn: 208/93\n amf-region-id: 0xca\n amf-set-id: 1016\n amf-pointer: 0\n tmsi: 0x00000005\nhas-emergency: false\n",
+    "sessions": "PDU Session1: \n state: PS-ACTIVE\n session-type: IPv4\n apn: internet\n s-nssai: \n  sst: 0x01\n  sd: 0x010203\n emergency: false\n address: 10.60.0.14\n ambr: up[1000Mb/s] down[1000Mb/s]\n data-pending: false\n",
+    "pingReturncode": 0,
+    "ping": "PING 192.168.244.128 (192.168.244.128) from 10.60.0.14 uesimtun0: 56(84) bytes of data.\n64 bytes from 192.168.244.128: icmp_seq=1 ttl=62 time=1.63 ms\n64 bytes from 192.168.244.128: icmp_seq=2 ttl=62 time=1.08 ms\n64 bytes from 192.168.244.128: icmp_seq=3 ttl=62 time=1.00 ms\n\n--- 192.168.244.128 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 401ms\nrtt min/avg/max/mdev = 1.003/1.237/1.626/0.276 ms\n"
+  }
+]

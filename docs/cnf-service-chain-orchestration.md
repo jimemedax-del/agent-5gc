@@ -1,6 +1,6 @@
 # 面向业务需求的 CNF 服务链编排
 
-> 最后更新：2026-10-20
+> 最后更新：2026-10-21
 > 当前恢复配置：`cnf-service-chain-v1/protected` 加 `cnf-multi-ue-v1` 双 UE 夹具、原 Session-AMBR、UPF QoS 开关为 0；A 与 B 的观测及能力边界见下文。
 > 适用路线/阶段：R2.S1—R2.S3 的历史能力与证据，以及 R2.S4—R2.S5 的任务设计和 Agent 接入契约。阶段状态统一见 [研究路线](03-research-roadmap.md#r2-当前阶段顺序)。
 
@@ -1335,9 +1335,38 @@ E1 原接口仍是离线计算；E2 将其声明投影作为计算输入，再�
 稳态沿用 C1 的 5–25 秒候选范围，只纳入完整的接收端区间；本轮各 19 个约一秒的有效区间，实际累计约 19 秒。速率以接收字节重算，没有把发送速率或 iperf3 末尾可能包含发送字节的字段当作收到的吞吐。
 离线审计使用归档源码/配置、原始流量和队列数据，并在记录的历史校验时刻重放；不会用当前时间将旧计划重新授权。实时入口不提供模拟时钟参数。
 
-**结论与后续。** 本轮证明确定性工具能以真实绑定和显式输入完成单模式带宽控制闭环；现场正常执行、恢复和锁冲突已测，异常/漂移路径主要由模拟测试和损坏证据审计覆盖，尚未实机注入这些故障。
-下一步先补充受控现场失败/漂移验证，再逐项开放下行保障/优先级和上行；不同模式各自保留真实接收效果与恢复证据。
+**首版结论。** 2026-10-20 的结果证明确定性工具能以真实绑定和显式输入完成单模式带宽控制闭环；该首版现场只测正常执行、恢复和锁冲突，之后的异常实测见下节。
 任意策略、自动创建/放置 CNF、同时双向竞争、原生 PCF/SMF/QFI/5QI 控制、需求识别泛化和 S5 Agent 均未由此验收。
+
+#### E2 的现场异常验收与恢复
+
+2026-10-21 在原 E2 范围内增加 [`exercise-cnf-planner-live.py`](../scripts/exercise-cnf-planner-live.py) 与
+[`audit-cnf-planner-live-faults.py`](../scripts/audit-cnf-planner-live-faults.py)。故障入口属于专用验收工具，不向后续 Agent 暴露。
+原执行器同步补齐：透传具体拒绝原因、测量进程失败时尽早停止其余本轮进程、逐项保存清理结果，以及普通失败恢复后的严格收尾。
+单项清理错误不会阻止其他进程的清理尝试；原执行错误单独保留，恢复或最终复查失败不能伪装为成功。
+
+原始证据为 [`results/20261021-cnf-planner-live/faults-01/`](../results/20261021-cnf-planner-live/faults-01/)，
+范围和汇总见 [`metadata.json`](../results/20261021-cnf-planner-live/metadata.json)。五个批次使用同一恢复后现场指纹：
+
+| 场景 | 真实触发与验收结果 |
+|---|---|
+| [`expired-plan`](../results/20261021-cnf-planner-live/faults-01/expired-plan/acceptance.json) | 保持真实时钟，等待 30 秒计划期限过去；拒绝为 `expired_plan`，没有队列写入或测量进程，严格收尾通过 |
+| [`queue-drift`](../results/20261021-cnf-planner-live/faults-01/queue-drift/acceptance.json) | 单独的夹具注入者在规划后安装已知 equal 队列；执行器拒绝为 `live_state_drift`，未写入、未删除注入者配置。注入者确认队列仍存在后自行清理，严格收尾通过 |
+| [`partial-write`](../results/20261021-cnf-planner-live/faults-01/partial-write/acceptance.json) | 注入的两条重复 root 命令中，第一条真实生效、第二条真实报错；保留 `tc_apply_failed`，恢复器识别并撤销已知 root 半成品，严格收尾通过 |
+| [`measurement-interrupted`](../results/20261021-cnf-planner-live/faults-01/measurement-interrupted/acceptance.json) | 核对实际 PID 与带本轮唯一标记的完整命令后，向 UE1 接收进程发送 TERM；产生真实 `acquisition_failed`，其余本轮进程清理和 equal 队列撤销通过，严格收尾通过 |
+| [`normal-control`](../results/20261021-cnf-planner-live/faults-01/normal-control/summary.json) | 最后再做正常 UDP 下行：UE1/UE2 接收稳态均值 **4.823747 / 4.824253 Mbps**，满足各 4–8 Mbps；有效并发重叠下界 **29.000053 秒**，恢复与严格复查通过 |
+
+四个异常运行均保留 `outcome=failed`；测试工具另以 `passed_expected_failure` 表示错误类型和收尾符合预期，不能把它解释为失败请求被成功执行。
+队列变化的注入与清理由同一测试夹具持锁完成，夹具写入与适配器写入分别归档；该受控测试不模拟全局互斥，也不证明任意外部操作者的队列都能自动清理。
+部分写入只测 root 已添加而后续重复添加失败；接收进程中断只测普通 TERM，不覆盖任意半成品、执行器强杀、网络分区、Pod 替换或断电。
+
+每批次归档 93 项输入；[`VM1 审计`](../results/20261021-cnf-planner-live/faults-01/audit-vm1.json) 和
+[`Windows 复算`](../results/20261021-cnf-planner-live/faults-01/audit-windows.json) 对源码哈希、计划历史时刻、原生 TC 输出、被中断进程、清理记录及最终快照的结果一致。
+新增 8 项回归测试，全套 **280 通过、1 项条件跳过**；另有 [`11 类损坏证据检查`](../results/20261021-cnf-planner-live/negative-audit-checks.json) 全部拒绝，涵盖隐藏失败、伪造过期、错误进程、清理失败和残留进程等。旧 E2 正式证据仍可按原归档源码重放。
+
+本轮正式起点后 26 个 Pod UID/容器标识不变、重启为 0，初末会话和配置指纹一致，C2 入口保持清理、原生 UPF QoS 保持关闭。
+预检曾发现两个 UE 的既有隧道故障，恢复后才开始上述批次；失败预检与恢复证据保留，详情统一见 [PS-010](../problem%20solve.md#ps-010ue-保留会话与-ip但旧-rrc-上下文导致业务不通)。这不构成跨日或长期稳定性验收。
+下一步接收不同的完整结构化请求，并先开放下行等额与保障用户的策略选择；各新模式仍需真实接收效果与恢复证据，再推进 Agent 接入。
 
 ### Agent 接入与最终交付
 

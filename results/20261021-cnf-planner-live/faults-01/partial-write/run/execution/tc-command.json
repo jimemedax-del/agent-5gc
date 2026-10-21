@@ -1,0 +1,5 @@
+{
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Exclusivity flag on, cannot modify.\nCommand failed -:2\ncommand terminated with exit code 1\n"
+}

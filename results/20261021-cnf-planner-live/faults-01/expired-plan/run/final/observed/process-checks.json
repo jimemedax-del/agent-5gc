@@ -1,0 +1,34 @@
+[
+  {
+    "slot": "ue1",
+    "pod": "ueransim-ue-7964f847f8-4r92z",
+    "process": "iperf3",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "command terminated with exit code 1\n"
+  },
+  {
+    "slot": "ue1",
+    "pod": "ueransim-ue-7964f847f8-4r92z",
+    "process": "ping",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "command terminated with exit code 1\n"
+  },
+  {
+    "slot": "ue2",
+    "pod": "cnf-a-ue2-8875f5fbc-v2l26",
+    "process": "iperf3",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "command terminated with exit code 1\n"
+  },
+  {
+    "slot": "ue2",
+    "pod": "cnf-a-ue2-8875f5fbc-v2l26",
+    "process": "ping",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "command terminated with exit code 1\n"
+  }
+]

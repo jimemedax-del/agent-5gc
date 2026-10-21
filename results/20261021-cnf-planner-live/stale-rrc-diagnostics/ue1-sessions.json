@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout": "PDU Session1: \n state: PS-ACTIVE\n session-type: IPv4\n apn: internet\n s-nssai: \n  sst: 0x01\n  sd: 0x010203\n emergency: false\n address: 10.60.0.3\n ambr: up[1000Mb/s] down[1000Mb/s]\n data-pending: true\n",
+  "stderr": ""
+}

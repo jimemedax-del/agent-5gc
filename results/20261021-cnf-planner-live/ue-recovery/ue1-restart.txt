@@ -1,0 +1,1 @@
+deployment.apps/ueransim-ue restarted

@@ -1,0 +1,16 @@
+{
+  "observedAt": "2026-10-21T01:58:48.526889+00:00",
+  "probes": [
+    {
+      "slot": "ue1",
+      "pingReturncode": 1,
+      "stdout": "PING 192.168.244.128 (192.168.244.128) from 10.60.0.3 uesimtun0: 56(84) bytes of data.\n\n--- 192.168.244.128 ping statistics ---\n3 packets transmitted, 0 received, 100% packet loss, time 415ms\n\n"
+    },
+    {
+      "slot": "ue2",
+      "pingReturncode": 1,
+      "stdout": "PING 192.168.244.128 (192.168.244.128) from 10.60.0.13 uesimtun0: 56(84) bytes of data.\n\n--- 192.168.244.128 ping statistics ---\n3 packets transmitted, 0 received, 100% packet loss, time 412ms\n\n"
+    }
+  ],
+  "faultInjectionStarted": false
+}

@@ -1,0 +1,55 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E2-fault-acceptance",
+  "outcome": "passed_fault_acceptance",
+  "startedAt": "2026-10-21T02:02:01.416479+00:00",
+  "cases": [
+    {
+      "case": "expired-plan",
+      "outcome": "passed_expected_failure",
+      "expectedErrorCode": "expired_plan",
+      "actualRunOutcome": "failed",
+      "adapterMutationAttempted": false,
+      "adapterApplyCompleted": false,
+      "fixtureActorMutationAttempted": false,
+      "fixtureActorCleaned": false,
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "case": "queue-drift",
+      "outcome": "passed_expected_failure",
+      "expectedErrorCode": "live_state_drift",
+      "actualRunOutcome": "failed",
+      "adapterMutationAttempted": false,
+      "adapterApplyCompleted": false,
+      "fixtureActorMutationAttempted": true,
+      "fixtureActorCleaned": true,
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "case": "partial-write",
+      "outcome": "passed_expected_failure",
+      "expectedErrorCode": "tc_apply_failed",
+      "actualRunOutcome": "failed",
+      "adapterMutationAttempted": true,
+      "adapterApplyCompleted": false,
+      "fixtureActorMutationAttempted": false,
+      "fixtureActorCleaned": false,
+      "finalStrictBaselinePassed": true
+    },
+    {
+      "case": "measurement-interrupted",
+      "outcome": "passed_expected_failure",
+      "expectedErrorCode": "acquisition_failed",
+      "actualRunOutcome": "failed",
+      "adapterMutationAttempted": true,
+      "adapterApplyCompleted": true,
+      "fixtureActorMutationAttempted": false,
+      "fixtureActorCleaned": false,
+      "finalStrictBaselinePassed": true
+    }
+  ],
+  "scope": "controlled_C1_equal_faults_and_normal_regression",
+  "endedAt": "2026-10-21T02:06:07.310541+00:00"
+}

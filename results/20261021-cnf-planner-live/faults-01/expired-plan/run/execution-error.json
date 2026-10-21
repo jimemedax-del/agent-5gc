@@ -1,0 +1,6 @@
+{
+  "error": "Plan is expired or future-dated",
+  "errorCode": "expired_plan",
+  "mutationAttempted": false,
+  "applyCompleted": false
+}

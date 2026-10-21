@@ -1,0 +1,11 @@
+# Three-node placement overlay for the fixed UERANSIM chart baseline.
+# Apply this file AFTER ueransim-single-node-values.yaml.
+# VM3 / ran-test is intentionally not labelled gtp5g=true in this phase.
+
+gnb:
+  nodeSelector:
+    5gc.free5gc.org/role: ran-test
+
+ue:
+  nodeSelector:
+    5gc.free5gc.org/role: ran-test

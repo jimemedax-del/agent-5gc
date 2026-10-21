@@ -1,0 +1,2 @@
+10.42.0.200 from 10.60.0.15 dev uesimtun0 table rt_uesimtun0 uid 0 
+    cache 

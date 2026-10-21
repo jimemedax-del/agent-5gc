@@ -156,7 +156,10 @@ def validate_plan(plan, batch, state, observation):
     need(batch == requests_for(state), 'unsupported_live_request', 'Live request targets changed')
     need(plan['computationState'] == computation_state(state), 'projection_drift', 'Offline projection is not derived from observed bindings')
     validation = p.validate_plan(plan['innerPlan'], batch, plan['computationState'])
-    need(validation['status'] == 'valid_offline' and plan['innerPlan']['mode'] == 'equal' and
+    if validation['status'] != 'valid_offline':
+        issue = validation['issues'][0]
+        raise p.Rejection(issue['code'], issue['detail'])
+    need(plan['innerPlan']['mode'] == 'equal' and
          plan['validUntil'] == plan['innerPlan']['validUntil'], 'invalid_inner_plan', 'E1 validation or live scope failed')
     return result('validate_plan', 'valid_live_preconditions', livePlanHash=plan['livePlanHash'],
                   checkedAt=now().isoformat(), executionAuthorized=True, authorizationScope='current_locked_run_equal_mode_only')
@@ -270,7 +273,7 @@ class Backend:
         mode = mode_of(tc)
         qos = c.native_switch()
         need(qos.strip() == 'QoS Enable: 0', 'native_qos_unaccepted', 'Native UPF policer must remain disabled')
-        bindings = {}
+        bindings, process_checks = {}, []
         for slot, user in sorted(self.topology['users'].items()):
             actual_pod = pods['free5gc'][user['pod']]
             need(actual_pod['uid'] == user['podUID'], 'ue_replaced', slot)
@@ -281,7 +284,11 @@ class Backend:
             ips = [a['local'] for dev in address for a in dev['addr_info'] if a['family'] == 'inet']
             need(ids == [user['supi']] and 'rm-state: RM-REGISTERED' in status and ips == [user['ip']], 'ue_binding_drift', slot)
             for process in ['iperf3', 'ping']:
-                need(c.m1.kube('-n', 'free5gc', 'exec', user['pod'], '--', 'pgrep', '-x', process, required=False).returncode == 1,
+                check = c.m1.kube('-n', 'free5gc', 'exec', user['pod'], '--', 'pgrep', '-x', process, required=False)
+                process_checks.append({'slot': slot, 'pod': user['pod'], 'process': process, 'returncode': check.returncode,
+                                       'stdout': check.stdout, 'stderr': check.stderr})
+                save(folder / 'process-checks.json', process_checks)
+                need(check.returncode == 1,
                      'unmanaged_test_process', slot + ': ' + process)
             bindings[slot] = session_record(user['supi'], user, sessions)
             save(folder / (slot + '-sessions.txt'), sessions)
@@ -314,7 +321,13 @@ def apply_plan(plan, batch, state, backend, folder):
     need(backend.locked, 'missing_lock', 'Hold the adapter lock across apply/measure/restore')
     folder.mkdir()
     observation = backend.observe(folder / 'recheck')
-    validation = validate_plan(plan, batch, state, observation)
+    try:
+        validation = validate_plan(plan, batch, state, observation)
+    except Exception as error:
+        save(folder / 'rejection.json', {'error': str(error), 'errorCode': getattr(error, 'code', type(error).__name__),
+                                       'checkedAt': now().isoformat(), 'livePlanHash': plan['livePlanHash'],
+                                       'observedFingerprint': digest(observation)})
+        raise
     save(folder / 'validation.json', validation)
     before = backend.tc()
     check_queue(before, 'none')
@@ -365,6 +378,8 @@ def capture(backend, state, folder):
                 jobs.append((live, command, job, stdout, stderr))
         deadline = time.monotonic() + 60
         while any(job.poll() is None for _, _, job, _, _ in jobs):
+            need(all(job.poll() in [None, 0] for _, _, job, _, _ in jobs),
+                 'acquisition_failed', 'A measurement process failed; stop the remaining owned processes')
             current = c2.snapshot()
             save(folder / 'guard-pods.json', current)
             c.m1.assert_steady(state['observation']['pods'], current)
@@ -391,14 +406,10 @@ def capture(backend, state, folder):
         summary.update(outcome='failed', error=str(error), endedAt=c.m1.now())
         raise
     finally:
-        for live, command, job, stdout, stderr in jobs:
-            if job.poll() is None:
-                job.terminate()
-                stop_owned_process(live['pod'], command, token)
-                job.wait(timeout=10)
-            stdout.close()
-            stderr.close()
-        save(folder / 'summary.json', summary)
+        try:
+            cleanup_jobs(jobs, token, folder)
+        finally:
+            save(folder / 'summary.json', summary)
     return summary
 
 
@@ -406,12 +417,41 @@ def stop_owned_process(pod, command, token):
     """GNU pkill exact full-argv match, including this acquisition's unique marker."""
     remote = command[6:]
     need(command[:6] == ['kubectl', '-n', 'free5gc', 'exec', pod, '--'] and
-         remote[0] in ['iperf3', 'ping'] and re.fullmatch('[0-9a-f]{24}', token) and token in remote and
+         remote and remote[0] in ['iperf3', 'ping'] and re.fullmatch('[0-9a-f]{24}', token) and token in remote and
          (('--extra-data' in remote and remote[remote.index('--extra-data') + 1] == token) if remote[0] == 'iperf3'
           else ('-p' in remote and remote[remote.index('-p') + 1] == token)),
          'not_owned_process', 'Refuse process cleanup without the acquisition marker')
     pattern = re.escape(' '.join(remote))
     return c.m1.kube('-n', 'free5gc', 'exec', pod, '--', 'pkill', '-TERM', '-f', '-x', '--', pattern, required=False)
+
+
+def cleanup_jobs(jobs, token, folder):
+    original_error = sys.exc_info()[0] is not None
+    records, errors = [], []
+    for user, command, job, stdout, stderr in jobs:
+        record = {'pod': user['pod'], 'command': command, 'localPID': job.pid}
+        try:
+            stopped = stop_owned_process(user['pod'], command, token)
+            record['remoteStop'] = {'returncode': stopped.returncode, 'stdout': stopped.stdout, 'stderr': stopped.stderr}
+            need(stopped.returncode in [0, 1], 'process_cleanup_failed', 'Owned process termination failed')
+        except Exception as error:
+            record['error'] = str(error)
+            errors.append(str(error))
+        finally:
+            try:
+                if job.poll() is None:
+                    job.terminate()
+                job.wait(timeout=10)
+                record['localReturncode'] = job.returncode
+            except Exception as error:
+                record['localError'] = str(error)
+                errors.append(str(error))
+            stdout.close()
+            stderr.close()
+            records.append(record)
+    save(folder / 'cleanup.json', {'processes': records, 'errors': errors})
+    if errors and not original_error:
+        raise p.Rejection('process_cleanup_failed', '; '.join(errors))
 
 
 def verify_plan(plan, batch, topology, folder):
@@ -480,7 +520,8 @@ def run(folder):
     contract()
     archive_inputs(folder)
     overall = {'outcome': 'failed', 'route': 'R2', 'stage': 'R2.S4', 'task': 'E2', 'startedAt': now().isoformat(),
-               'scope': 'single_existing_C1_equal_downlink_run', 'restoration': 'not_required_yet'}
+               'scope': 'single_existing_C1_equal_downlink_run', 'restoration': 'not_required_yet',
+               'finalStrictBaselinePassed': False, 'original26PodIdentitiesUnchanged': False}
     try:
         with Backend() as backend:
             state = inspect_state(backend, folder / 'initial')['state']
@@ -489,6 +530,7 @@ def run(folder):
             save(folder / 'requests.json', batch)
             plan = plan_policy(state, batch)['plan']
             save(folder / 'plan.json', plan)
+            execution_error = None
             try:
                 execution = apply_plan(plan, batch, state, backend, folder / 'execution')
                 save(folder / 'execution.json', execution)
@@ -497,10 +539,12 @@ def run(folder):
                 save(folder / 'verification.json', verified)
                 need(verified['status'] == 'passed_controlled_targets', 'target_failure', 'Measured targets failed')
             except Exception as error:
-                save(folder / 'execution-error.json', {'error': str(error), 'mutationAttempted': backend.mutation_attempted,
+                execution_error = error
+                save(folder / 'execution-error.json', {'error': str(error), 'errorCode': getattr(error, 'code', type(error).__name__),
+                                                       'mutationAttempted': backend.mutation_attempted,
                                                        'applyCompleted': backend.apply_completed})
-                raise
             finally:
+                overall.update(mutationAttempted=backend.mutation_attempted, applyCompleted=backend.apply_completed)
                 if backend.mutation_attempted:
                     try:
                         restoration = restore(state, backend, folder / 'restore')
@@ -512,10 +556,13 @@ def run(folder):
                         raise
             final = backend.full(folder / 'final')
             need(digest(final) == state['fingerprint'], 'final_state_drift', 'Final strict baseline does not match initial observed state')
-            overall.update(outcome='passed_controlled_scope', livePlanId=plan['livePlanId'],
-                           original26PodIdentitiesUnchanged=True, finalStrictBaselinePassed=True)
+            overall.update(livePlanId=plan['livePlanId'], original26PodIdentitiesUnchanged=True, finalStrictBaselinePassed=True)
+            if execution_error is not None:
+                raise execution_error
+            overall['outcome'] = 'passed_controlled_scope'
     except Exception as error:
         overall['error'] = str(error)
+        overall['errorCode'] = getattr(error, 'code', type(error).__name__)
         raise
     finally:
         overall['endedAt'] = now().isoformat()

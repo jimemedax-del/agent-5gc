@@ -1,0 +1,20 @@
+{
+  "configVersion": "cnf-m3-v1",
+  "route": "R2",
+  "stage": "R2.S2",
+  "milestone": "M3",
+  "roundsPerClass": 5,
+  "durationSeconds": 15,
+  "offeredMbps": 20,
+  "blockBytes": 16384,
+  "ratesMbps": {"core": 5, "edge": 15},
+  "qdisc": {"kind": "tbf", "interface": "eth0", "handle": "1:", "burst": "32kb", "latency": "100ms"},
+  "minimumMedianRatio": 2,
+  "maximumMedianExcessFraction": 0.15,
+  "inheritedRouting": "cnf-m2-v4",
+  "limitations": [
+    "Sequential TCP downlink in the current virtual service chain, not radio QoS or concurrent isolation",
+    "Both logical classes remain on VM1; only backend Pod egress rates differ",
+    "Fixed 20 Mbps sender pacing bounds offered load above both tc caps; it is not the shaping result"
+  ]
+}

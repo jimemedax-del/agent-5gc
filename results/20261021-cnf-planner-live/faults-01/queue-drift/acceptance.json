@@ -1,0 +1,11 @@
+{
+  "case": "queue-drift",
+  "outcome": "passed_expected_failure",
+  "expectedErrorCode": "live_state_drift",
+  "actualRunOutcome": "failed",
+  "adapterMutationAttempted": false,
+  "adapterApplyCompleted": false,
+  "fixtureActorMutationAttempted": true,
+  "fixtureActorCleaned": true,
+  "finalStrictBaselinePassed": true
+}

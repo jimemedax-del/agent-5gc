@@ -1,0 +1,11 @@
+{
+  "case": "partial-write",
+  "outcome": "passed_expected_failure",
+  "expectedErrorCode": "tc_apply_failed",
+  "actualRunOutcome": "failed",
+  "adapterMutationAttempted": true,
+  "adapterApplyCompleted": false,
+  "fixtureActorMutationAttempted": false,
+  "fixtureActorCleaned": false,
+  "finalStrictBaselinePassed": true
+}

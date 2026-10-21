@@ -1,0 +1,1 @@
+deployment.apps/cnf-a-ue2 restarted

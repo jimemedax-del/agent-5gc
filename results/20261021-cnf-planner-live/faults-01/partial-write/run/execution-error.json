@@ -1,0 +1,6 @@
+{
+  "error": "See saved TC command result",
+  "errorCode": "tc_apply_failed",
+  "mutationAttempted": true,
+  "applyCompleted": false
+}

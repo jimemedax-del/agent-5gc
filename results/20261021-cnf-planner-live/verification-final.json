@@ -1,0 +1,23 @@
+{
+  "branch": "main",
+  "stagedFiles": [],
+  "agentCommitted": false,
+  "sourceBasisGitHead": "44c3bbbc638001bd4dbe340cc6260076ba1a6ca7",
+  "syntaxAndDiffWhitespace": "passed",
+  "modifiedDocumentationLocalLinks": "passed",
+  "tests": {
+    "discovered": 281,
+    "passed": 280,
+    "conditionalSkipped": 1,
+    "newThisRound": 8
+  },
+  "formal": "faults-01",
+  "vm1WindowsRawAuditIdentical": true,
+  "actualExpectedFailureCases": 4,
+  "allFailedRunsRemainFailed": true,
+  "normalControlPassedAndRestored": true,
+  "negativeEvidenceCasesRejected": 11,
+  "formal26PodsStable": true,
+  "currentSourcesDifferFromFormal": [],
+  "preflightRecoveryScope": "Two affected UE Pods restarted before formal comparison; other24 unchanged; not a long-term stability acceptance"
+}

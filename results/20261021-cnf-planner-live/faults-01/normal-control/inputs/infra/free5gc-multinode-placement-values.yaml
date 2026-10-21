@@ -1,0 +1,69 @@
+# Three-node placement overlay for the fixed free5gc-helm baseline.
+#
+# Apply this file AFTER free5gc-single-upf-values.yaml. It changes only
+# Kubernetes placement; it does not change the validated Single-UPF topology,
+# image tags, subscriber data, Multus setting, or 5GC interface addresses.
+#
+# Current cluster labels:
+#   VM1 / lhm-virtual-machine: 5gc.free5gc.org/plane=control
+#   VM2 / worker-upf:          5gc.free5gc.org/plane=user,
+#                              5gc.free5gc.org/gtp5g=true
+
+controlPlaneSelector: &controlPlaneSelector
+  5gc.free5gc.org/plane: control
+
+userPlaneSelector: &userPlaneSelector
+  5gc.free5gc.org/plane: user
+  5gc.free5gc.org/gtp5g: "true"
+
+# All required control-plane NFs, optional API NFs enabled by the current
+# release, WebUI, and MongoDB remain on VM1. Keeping MongoDB there preserves
+# its existing local-path PV rather than attempting cross-node volume moves.
+free5gc-amf:
+  amf:
+    nodeSelector: *controlPlaneSelector
+free5gc-ausf:
+  ausf:
+    nodeSelector: *controlPlaneSelector
+free5gc-chf:
+  chf:
+    nodeSelector: *controlPlaneSelector
+free5gc-nef:
+  nef:
+    nodeSelector: *controlPlaneSelector
+free5gc-nrf:
+  nrf:
+    nodeSelector: *controlPlaneSelector
+free5gc-nssf:
+  nssf:
+    nodeSelector: *controlPlaneSelector
+free5gc-pcf:
+  pcf:
+    nodeSelector: *controlPlaneSelector
+free5gc-smf:
+  smf:
+    nodeSelector: *controlPlaneSelector
+free5gc-udm:
+  udm:
+    nodeSelector: *controlPlaneSelector
+free5gc-udr:
+  udr:
+    nodeSelector: *controlPlaneSelector
+free5gc-webui:
+  webui:
+    nodeSelector: *controlPlaneSelector
+mongodb:
+  nodeSelector: *controlPlaneSelector
+
+# The active profile is Single UPF. The extra UPF selectors are deliberately
+# constrained as well, so a later profile change cannot accidentally place a
+# user-plane component on a node without gtp5g.
+free5gc-upf:
+  iupf1:
+    nodeSelector: *userPlaneSelector
+  psaupf1:
+    nodeSelector: *userPlaneSelector
+  psaupf2:
+    nodeSelector: *userPlaneSelector
+  upf:
+    nodeSelector: *userPlaneSelector

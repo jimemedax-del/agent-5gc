@@ -1,0 +1,6 @@
+{
+  "error": "Plan, requests, sessions, resources or queues differ from the observed snapshot",
+  "errorCode": "live_state_drift",
+  "mutationAttempted": false,
+  "applyCompleted": false
+}

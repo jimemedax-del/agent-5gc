@@ -1,0 +1,17 @@
+{
+  "outcome": "failed",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E2",
+  "startedAt": "2026-10-21T02:02:01.428733+00:00",
+  "scope": "single_existing_C1_equal_downlink_run",
+  "restoration": "not_required_yet",
+  "finalStrictBaselinePassed": true,
+  "original26PodIdentitiesUnchanged": true,
+  "mutationAttempted": false,
+  "applyCompleted": false,
+  "livePlanId": "livePlan-90bfdd302ed39819506b",
+  "error": "Plan is expired or future-dated",
+  "errorCode": "expired_plan",
+  "endedAt": "2026-10-21T02:03:04.821654+00:00"
+}

@@ -1,0 +1,103 @@
+{
+  "endpoints": {
+    "apiVersion": "v1",
+    "kind": "Endpoints",
+    "metadata": {
+      "annotations": {
+        "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-20T03:51:12Z"
+      },
+      "creationTimestamp": "2026-10-20T03:51:06Z",
+      "labels": {
+        "app.kubernetes.io/part-of": "cnf-multi-ue-v1"
+      },
+      "name": "cnf-a-edge-ue1",
+      "namespace": "cnf-multi-ue",
+      "resourceVersion": "607786",
+      "uid": "9ebbf701-9523-4472-898d-a7f65d2efa6f"
+    },
+    "subsets": [
+      {
+        "addresses": [
+          {
+            "ip": "10.42.2.83",
+            "nodeName": "ran-test",
+            "targetRef": {
+              "kind": "Pod",
+              "name": "cnf-a-edge-ue1-7486d6f6df-lpkx7",
+              "namespace": "cnf-multi-ue",
+              "uid": "13364f0d-adfe-4576-913a-34d0bc9d1573"
+            }
+          }
+        ],
+        "ports": [
+          {
+            "name": "iperf",
+            "port": 5201,
+            "protocol": "TCP"
+          }
+        ]
+      }
+    ]
+  },
+  "slices": [
+    {
+      "addressType": "IPv4",
+      "apiVersion": "discovery.k8s.io/v1",
+      "endpoints": [
+        {
+          "addresses": [
+            "10.42.2.83"
+          ],
+          "conditions": {
+            "ready": true,
+            "serving": true,
+            "terminating": false
+          },
+          "nodeName": "ran-test",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "cnf-a-edge-ue1-7486d6f6df-lpkx7",
+            "namespace": "cnf-multi-ue",
+            "uid": "13364f0d-adfe-4576-913a-34d0bc9d1573"
+          },
+          "zone": "edge"
+        }
+      ],
+      "kind": "EndpointSlice",
+      "metadata": {
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-20T03:51:12Z"
+        },
+        "creationTimestamp": "2026-10-20T03:51:06Z",
+        "generateName": "cnf-a-edge-ue1-",
+        "generation": 3,
+        "labels": {
+          "app.kubernetes.io/part-of": "cnf-multi-ue-v1",
+          "endpointslice.kubernetes.io/managed-by": "endpointslice-controller.k8s.io",
+          "kubernetes.io/service-name": "cnf-a-edge-ue1"
+        },
+        "name": "cnf-a-edge-ue1-9ngbq",
+        "namespace": "cnf-multi-ue",
+        "ownerReferences": [
+          {
+            "apiVersion": "v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Service",
+            "name": "cnf-a-edge-ue1",
+            "uid": "e2939650-4d46-45c0-ba4e-1cf1b0dc4f96"
+          }
+        ],
+        "resourceVersion": "607785",
+        "uid": "c626a6d0-1a40-4643-9518-5a90f2fa897d"
+      },
+      "ports": [
+        {
+          "name": "iperf",
+          "port": 5201,
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ]
+}

@@ -432,6 +432,19 @@ Python 工具有 `inspect_state`、`plan_policy`、`validate_plan`、`apply_plan
 失败时检查 `summary.json`、`execution-error.json`、`restoration.json` 和原始证据，不能只凭命令完成或 Pod Ready 判断成功。
 审计从归档源码重算，并使用记录的历史时间验证旧计划；它不产生现场执行授权。
 
+现场异常验收使用独立的 `exercise-cnf-planner-live.py`，不向 Agent 开放故障注入入口：
+
+```sh
+python3 scripts/exercise-cnf-planner-live.py --out <新的异常验收目录>
+python3 scripts/audit-cnf-planner-live-faults.py <异常验收目录> --out <审计JSON>
+```
+
+它在现有专用 C1 夹具中依次测试真实等待计划过期、队列变化拒绝、重复 root 命令导致的真实部分写入失败、带唯一标记的接收进程中断，并运行一次正常业务对照。
+注入队列由测试夹具单独持锁、记录并清理；执行器不能把拒绝前的他方写入当成本轮策略删除。
+各异常批次的运行结果必须保留 `failed`；只有错误类型、清理和严格收尾均符合预期，测试验收才返回 `passed_expected_failure`。
+普通失败恢复后仍会保存严格复查结果；进程清理逐项记录，单项清理错误不能阻止其他进程的清理尝试。
+本验收不覆盖 Pod 替换、网络分区、强制杀进程或断电。
+
 正式证据与完整限制见 [E2 模块](../docs/cnf-service-chain-orchestration.md#e2-受控现场与单模式执行闭环)。
 测试：`python -m unittest discover -s tests -p '*planner*.py' -v`；这些本地测试不访问集群，不能当作实机故障注入。
 

@@ -1,0 +1,11 @@
+{
+  "case": "expired-plan",
+  "outcome": "passed_expected_failure",
+  "expectedErrorCode": "expired_plan",
+  "actualRunOutcome": "failed",
+  "adapterMutationAttempted": false,
+  "adapterApplyCompleted": false,
+  "fixtureActorMutationAttempted": false,
+  "fixtureActorCleaned": false,
+  "finalStrictBaselinePassed": true
+}

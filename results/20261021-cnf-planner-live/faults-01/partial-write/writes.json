@@ -1,0 +1,76 @@
+[
+  {
+    "folder": "run/execution",
+    "commands": [
+      "qdisc add dev eth0 root handle 1: htb default 99",
+      "qdisc add dev eth0 root handle 1: htb default 99"
+    ],
+    "startedAt": "2026-10-21T02:03:57.483774+00:00",
+    "error": "See saved TC command result",
+    "errorCode": "tc_apply_failed",
+    "tcAfter": {
+      "qdisc": [
+        {
+          "kind": "htb",
+          "handle": "1:",
+          "root": true,
+          "refcnt": 129,
+          "options": {
+            "r2q": 10,
+            "default": "0x99",
+            "direct_packets_stat": 0,
+            "direct_qlen": 1000
+          },
+          "bytes": 0,
+          "packets": 0,
+          "drops": 0,
+          "overlimits": 0,
+          "requeues": 0,
+          "backlog": 0,
+          "qlen": 0
+        }
+      ],
+      "class": [],
+      "filter": [],
+      "raw": {
+        "qdisc": "[{\"kind\":\"htb\",\"handle\":\"1:\",\"root\":true,\"refcnt\":129,\"options\":{\"r2q\":10,\"default\":\"0x99\",\"direct_packets_stat\":0,\"direct_qlen\":1000},\"bytes\":0,\"packets\":0,\"drops\":0,\"overlimits\":0,\"requeues\":0,\"backlog\":0,\"qlen\":0}]\n",
+        "class": "",
+        "filter": ""
+      }
+    },
+    "endedAt": "2026-10-21T02:03:57.937525+00:00"
+  },
+  {
+    "folder": "run/restore",
+    "commands": [
+      "qdisc del dev eth0 root handle 1:"
+    ],
+    "startedAt": "2026-10-21T02:03:58.306086+00:00",
+    "tcAfter": {
+      "qdisc": [
+        {
+          "kind": "noqueue",
+          "handle": "0:",
+          "root": true,
+          "refcnt": 2,
+          "options": {},
+          "bytes": 0,
+          "packets": 0,
+          "drops": 0,
+          "overlimits": 0,
+          "requeues": 0,
+          "backlog": 0,
+          "qlen": 0
+        }
+      ],
+      "class": [],
+      "filter": [],
+      "raw": {
+        "qdisc": "[{\"kind\":\"noqueue\",\"handle\":\"0:\",\"root\":true,\"refcnt\":2,\"options\":{},\"bytes\":0,\"packets\":0,\"drops\":0,\"overlimits\":0,\"requeues\":0,\"backlog\":0,\"qlen\":0}]\n",
+        "class": "",
+        "filter": ""
+      }
+    },
+    "endedAt": "2026-10-21T02:03:58.813837+00:00"
+  }
+]

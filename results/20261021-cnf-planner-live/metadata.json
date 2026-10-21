@@ -1,0 +1,123 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E2-fault-acceptance",
+  "date": "2026-10-21",
+  "configVersion": "cnf-planner-live-v1",
+  "outcome": "accepted-within-declared-scope",
+  "formal": "faults-01",
+  "scope": "controlled_C1_equal_faults_and_normal_regression",
+  "tests": {
+    "discovered": 281,
+    "passed": 280,
+    "conditionalSkipped": 1,
+    "newThisRound": 8
+  },
+  "realFaultCases": [
+    {
+      "case": "expired-plan",
+      "expectedErrorCode": "expired_plan",
+      "actualRunOutcome": "failed",
+      "finalBaselineMatched": true,
+      "podCount": 26,
+      "initialFingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65"
+    },
+    {
+      "case": "queue-drift",
+      "expectedErrorCode": "live_state_drift",
+      "actualRunOutcome": "failed",
+      "finalBaselineMatched": true,
+      "podCount": 26,
+      "initialFingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65"
+    },
+    {
+      "case": "partial-write",
+      "expectedErrorCode": "tc_apply_failed",
+      "actualRunOutcome": "failed",
+      "finalBaselineMatched": true,
+      "podCount": 26,
+      "initialFingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65"
+    },
+    {
+      "case": "measurement-interrupted",
+      "expectedErrorCode": "acquisition_failed",
+      "actualRunOutcome": "failed",
+      "finalBaselineMatched": true,
+      "podCount": 26,
+      "initialFingerprint": "65fd07272fddafe891363cb2034a79d1c2976544f7a173615f6b4fe20ec23e65"
+    }
+  ],
+  "normalControl": {
+    "outcome": "passed_offline_raw_audit",
+    "scope": "single_existing_C1_equal_downlink_run",
+    "livePlanId": "livePlan-82110b77dfe39a94bac1",
+    "provenanceFiles": 93,
+    "podCount": 26,
+    "targetComparisons": {
+      "ue1": {
+        "receivedSteadyMbps": 4.823747141433367,
+        "minimumMbps": 4,
+        "maximumMbps": 8,
+        "passed": true
+      },
+      "ue2": {
+        "receivedSteadyMbps": 4.824253418552178,
+        "minimumMbps": 4,
+        "maximumMbps": 8,
+        "passed": true
+      }
+    },
+    "overlapLowerBoundSeconds": 29.00005292892456,
+    "latencyLossGuaranteesAccepted": false,
+    "historicalValidationAt": "2026-10-21T02:05:15.238683+00:00"
+  },
+  "vm1AndWindowsAuditIdentical": true,
+  "provenanceFilesPerRun": 93,
+  "currentSourcesDifferFromFormal": [],
+  "negativeEvidenceCases": 11,
+  "allNegativeEvidenceRejected": true,
+  "formal26PodsStable": true,
+  "formalInitialAndFinalObservationIdentical": true,
+  "preflight": {
+    "initial": "preflight-01 rejected before any fault injection",
+    "diagnostics": "stale-rrc-diagnostics",
+    "recovery": {
+      "outcome": "recovered_before_formal_tests",
+      "changedOriginalPodNames": [
+        "cnf-a-ue2-6998f7d65b-2szgn",
+        "ueransim-ue-8f555b79b-rdjdb"
+      ],
+      "other24PodsUnchanged": true,
+      "initialRecoveryPostSnapshot": "temporarily blocked by terminating old UE Pod; no additional restart",
+      "completedAt": "2026-10-21T02:01:13.084743+00:00"
+    },
+    "strictAfterRecovery": "preflight-02 passed",
+    "formalBindings": {
+      "ue1": {
+        "supi": "imsi-208930000000001",
+        "pod": "ueransim-ue-7964f847f8-4r92z",
+        "podUID": "a81ee9d5-3e0e-42e4-9c5e-779950537349",
+        "ip": "10.60.0.14",
+        "session_id": "pdu-19578644df74c0d5d6f87de9"
+      },
+      "ue2": {
+        "supi": "imsi-208930000000002",
+        "pod": "cnf-a-ue2-8875f5fbc-v2l26",
+        "podUID": "8353e3b0-141a-4e78-97c7-1d974ec00670",
+        "ip": "10.60.0.15",
+        "session_id": "pdu-637c491c6cba8a0a73908de0"
+      }
+    },
+    "scopeLimit": "Formal stable identities begin after UE recovery; no cross-day stability or root-cause fix claim"
+  },
+  "allFaultRunsRetainFailedOutcome": true,
+  "agentStagedOrCommitted": false,
+  "limitations": [
+    "Only actual wall-time expiry and known equal queue drift; no UE session or Pod replacement fault injection",
+    "Partial TC failure only after adding a root then attempting duplicate root creation; arbitrary partial states not covered",
+    "Measurement failure uses TERM on one exactly tagged receiver; executor hard kill, power loss and network partition not covered",
+    "Fixture actor owns and cleans injected drift; no claim of global exclusion of unrelated tools/operators",
+    "No additional queue modes, variable requests, native 5G QoS, autonomous recognition or Agent acceptance"
+  ],
+  "sourceBasisGitHead": "44c3bbbc638001bd4dbe340cc6260076ba1a6ca7"
+}
