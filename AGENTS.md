@@ -20,6 +20,7 @@
 - 三节点集群、节点角色与 NF 放置：优先更新 `docs/07-three-node-topology-and-acceptance.md`。
 - 受控数据面测试、UPF 压测结果和后续稳定性工作：优先更新 `docs/10-controlled-data-plane-baseline.md`，不因每次复测再建 11、12 等文档。
 - 已有安装记录和功能基线保留作历史依据；后续模块文档引用它们，不重复扩写同一事实。
+- Agent 的设计、开发和验收统一维护 `docs/agent-development.md`，应用代码放在 `services/cnf_agent/`；底层 CNF 实验与规划/执行接口仍归原 CNF 模块，不重复维护两套开发说明。
 
 ## 约束 002：路线版本、阶段顺序与模块文档分层维护
 

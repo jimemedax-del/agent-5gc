@@ -98,6 +98,7 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 |---|---|
 | `docs/` | 业务心智模型、实验基线、研究路线、三节点计划和 CNF 服务链设计 |
 | `infra/` | 受控Values、测试订阅、镜像源配置和Chart补丁 |
+| `services/cnf_agent/` | Agent 应用代码目录；当前仅包入口，开发设计见 Agent 模块文档 |
 | `scripts/` | 固定 Profile 渲染/检查/重部署/验收入口；初始化脚本待实机验证 |
 | `problem solve.md` | 按问题编号维护的故障、根因、修复和证据 |
 
@@ -108,7 +109,8 @@ commit 0d0b4b392bbb1b099acb9a1b37c39e0647ff6d4c
 | 文档 | 用途 |
 |---|---|
 | [03-research-roadmap.md](docs/03-research-roadmap.md) | 路线版本、纠偏依据、历史里程碑和当前阶段顺序的主记录 |
-| [cnf-service-chain-orchestration.md](docs/cnf-service-chain-orchestration.md) | 已验证 CNF 能力与证据；双 UE/QoS/需求识别的后续任务、验收标准和 Agent 工具契约 |
+| [cnf-service-chain-orchestration.md](docs/cnf-service-chain-orchestration.md) | 已验证 CNF 能力、实验与底层规划/执行接口 |
+| [agent-development.md](docs/agent-development.md) | Agent 开发主文档：目标、选型、代码分工、工具/记忆边界、开发顺序与验收 |
 | [04-project-notes-method.md](docs/04-project-notes-method.md) | 路线、阶段、模块和实验记录的维护方法 |
 | [01-5gc-single-upf-baseline.md](docs/01-5gc-single-upf-baseline.md) | 单机 Docker Compose 实验环境、版本、验证结果与常用命令 |
 | [02-5gc-end-to-end-flow.md](docs/02-5gc-end-to-end-flow.md) | 注册、鉴权、PDU Session 和用户数据流的心智模型 |
