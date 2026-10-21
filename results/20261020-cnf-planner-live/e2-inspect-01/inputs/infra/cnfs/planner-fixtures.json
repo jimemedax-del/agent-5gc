@@ -1,0 +1,1916 @@
+{
+  "fixtureVersion": "cnf-planner-fixtures-v1",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E1",
+  "provenance": "Agent-authored explicit engineering scenarios, expected statuses specified independently of planner outputs; not observed network sessions",
+  "timeScope": "Fixed offline simulation clock; no current live-state claim",
+  "cases": [
+    {
+      "id": "equal-downlink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "equal",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "guarantee-ue1-downlink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 5,
+              "max_bandwidth_mbps": 8,
+              "priority": "high",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 1.5,
+              "max_bandwidth_mbps": 4,
+              "priority": "low",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "guarantee-ue1",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "guarantee-ue2-downlink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 1.5,
+              "max_bandwidth_mbps": 4,
+              "priority": "low",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 5,
+              "max_bandwidth_mbps": 8,
+              "priority": "high",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "guarantee-ue2",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "priority-ue1-downlink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 10,
+              "priority": "high",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 10,
+              "priority": "low",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "priority-ue1",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "priority-ue2-downlink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 10,
+              "priority": "low",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 10,
+              "priority": "high",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "priority-ue2",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "equal-uplink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "uplink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "equal",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "guarantee-ue1-uplink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "uplink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 5,
+              "max_bandwidth_mbps": 8,
+              "priority": "high",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 1.5,
+              "max_bandwidth_mbps": 4,
+              "priority": "low",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "guarantee-ue1",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "guarantee-ue2-uplink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "uplink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 1.5,
+              "max_bandwidth_mbps": 4,
+              "priority": "low",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 5,
+              "max_bandwidth_mbps": 8,
+              "priority": "high",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "guarantee-ue2",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "priority-ue1-uplink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "uplink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 10,
+              "priority": "high",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 10,
+              "priority": "low",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "priority-ue1",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "priority-ue2-uplink",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "uplink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 10,
+              "priority": "low",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "uplink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 10,
+              "priority": "high",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "planned",
+        "mode": "priority-ue2",
+        "validationStatus": "valid_offline"
+      }
+    },
+    {
+      "id": "overloaded-6-plus-6",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 6,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 6,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "no-compatible-fixed-mode",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4.5,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4.5,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "ceiling-cannot-fit",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 2,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 1,
+              "max_bandwidth_mbps": 2,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "missing-priority",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "needs_clarification",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "missing-measurement-window",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "needs_clarification",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "rtt-unaccepted",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20,
+              "rtt_p95_max_ms": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "loss-unaccepted",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20,
+              "loss_max_percent": 0
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "deadline-unaccepted",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20,
+              "deadline_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "bidirectional-unaccepted",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "bidirectional",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "long-duration-unaccepted",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 1800,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "different-window-unaccepted",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 10
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "unknown-target-command",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20,
+              "command": "untrusted command"
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "tcp-unaccepted",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "TCP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "stale-session",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "expired-session",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "ok",
+        "planningStatus": "rejected",
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "unmanaged-traffic",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": true,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "rejected",
+        "planningStatus": null,
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "native-qos-on",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": true,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "rejected",
+        "planningStatus": null,
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "unknown-current-policy",
+      "at": "2026-10-20T12:00:00+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "unmanaged",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "rejected",
+        "planningStatus": null,
+        "mode": null,
+        "validationStatus": null
+      }
+    },
+    {
+      "id": "expired-declaration",
+      "at": "2026-10-20T12:03:01+08:00",
+      "stateSource": {
+        "sourceVersion": "cnf-planner-state-input-v1",
+        "mode": "declared_fixture",
+        "direction": "downlink",
+        "declaredAt": "2026-10-20T12:00:00+08:00",
+        "ttlSeconds": 180,
+        "capacityMbps": 10,
+        "unmanagedReservedMbps": 0,
+        "unmanagedTrafficDetected": false,
+        "nativeQosEnabled": false,
+        "activeProfile": "none",
+        "bindings": [
+          {
+            "slot": "ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1"
+          },
+          {
+            "slot": "ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2"
+          }
+        ]
+      },
+      "batch": {
+        "requestVersion": "cnf-planner-requests-v1",
+        "batch_id": "fixture-batch",
+        "assessmentScope": "controlled_receiver_steady_mean",
+        "protocol": "UDP",
+        "requests": [
+          {
+            "request_id": "request-ue1",
+            "user_id": "ue1",
+            "session_id": "declared-session-ue1",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          },
+          {
+            "request_id": "request-ue2",
+            "user_id": "ue2",
+            "session_id": "declared-session-ue2",
+            "requirements": {
+              "direction": "downlink",
+              "min_bandwidth_mbps": 4,
+              "max_bandwidth_mbps": 8,
+              "priority": "normal",
+              "valid_for_seconds": 30,
+              "measurement_window_seconds": 20
+            }
+          }
+        ]
+      },
+      "expected": {
+        "inspectStatus": "rejected",
+        "planningStatus": null,
+        "mode": null,
+        "validationStatus": null
+      }
+    }
+  ]
+}

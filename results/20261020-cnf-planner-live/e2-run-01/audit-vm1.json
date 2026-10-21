@@ -1,0 +1,24 @@
+{
+  "outcome": "passed_offline_raw_audit",
+  "scope": "single_existing_C1_equal_downlink_run",
+  "livePlanId": "livePlan-5d0ba075966746a5c1b1",
+  "provenanceFiles": 91,
+  "podCount": 26,
+  "targetComparisons": {
+    "ue1": {
+      "receivedSteadyMbps": 4.827284952563244,
+      "minimumMbps": 4,
+      "maximumMbps": 8,
+      "passed": true
+    },
+    "ue2": {
+      "receivedSteadyMbps": 4.827284210526315,
+      "minimumMbps": 4,
+      "maximumMbps": 8,
+      "passed": true
+    }
+  },
+  "overlapLowerBoundSeconds": 29.000076055526733,
+  "latencyLossGuaranteesAccepted": false,
+  "historicalValidationAt": "2026-10-20T13:42:31.842048+00:00"
+}

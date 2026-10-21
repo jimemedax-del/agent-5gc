@@ -1,0 +1,13 @@
+{
+  "outcome": "passed_controlled_scope",
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E2",
+  "startedAt": "2026-10-20T13:42:14.425796+00:00",
+  "scope": "single_existing_C1_equal_downlink_run",
+  "restoration": "restored",
+  "livePlanId": "livePlan-5d0ba075966746a5c1b1",
+  "original26PodIdentitiesUnchanged": true,
+  "finalStrictBaselinePassed": true,
+  "endedAt": "2026-10-20T13:43:23.952071+00:00"
+}

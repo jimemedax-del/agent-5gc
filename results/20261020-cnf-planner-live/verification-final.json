@@ -1,0 +1,22 @@
+{
+  "branch": "main",
+  "stagedFiles": [],
+  "agentCommitted": false,
+  "diffWhitespaceCheck": "passed",
+  "newCodeSyntaxAndWhitespace": "passed",
+  "modifiedDocumentationLocalLinks": "passed",
+  "tests": {
+    "discovered": 273,
+    "passed": 272,
+    "conditionalSkipped": 1,
+    "newE2Tests": 19
+  },
+  "vm1WindowsRawAuditIdentical": true,
+  "negativeEvidenceCasesRejected": 11,
+  "currentInputDifferencesFromFormal": [
+    "scripts/README.md"
+  ],
+  "currentExecutableInputsDifferFromFormal": [],
+  "formalEvidence": "e2-run-02",
+  "allRunsRestored": true
+}

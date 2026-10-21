@@ -1,0 +1,61 @@
+{
+  "route": "R2",
+  "stage": "R2.S4",
+  "task": "E2",
+  "configVersion": "cnf-planner-live-v1",
+  "date": "2026-10-20",
+  "outcome": "accepted-within-declared-scope",
+  "formal": "e2-run-02",
+  "priorRun": "e2-run-01",
+  "scope": "existing C1 two-UE equal downlink; observed-state planning, apply, receiver verification and owned queue restoration",
+  "inputs": "explicit engineered 4..8 Mbps per UE, normal priority, UDP30s/steady20s; not original six D requests or autonomous recognition",
+  "formalEvidence": {
+    "outcome": "passed_offline_raw_audit",
+    "scope": "single_existing_C1_equal_downlink_run",
+    "livePlanId": "livePlan-efb543cb5633ace796d2",
+    "provenanceFiles": 91,
+    "podCount": 26,
+    "targetComparisons": {
+      "ue1": {
+        "receivedSteadyMbps": 4.827284513398504,
+        "minimumMbps": 4,
+        "maximumMbps": 8,
+        "passed": true
+      },
+      "ue2": {
+        "receivedSteadyMbps": 4.82677843253968,
+        "minimumMbps": 4,
+        "maximumMbps": 8,
+        "passed": true
+      }
+    },
+    "overlapLowerBoundSeconds": 29.000077962875366,
+    "latencyLossGuaranteesAccepted": false,
+    "historicalValidationAt": "2026-10-20T13:46:05.474776+00:00"
+  },
+  "vm1AndWindowsAuditIdentical": true,
+  "currentSourcesDifferFromFormal": [
+    "scripts/README.md"
+  ],
+  "tests": {
+    "discovered": 273,
+    "passed": 272,
+    "conditionalSkipped": 1,
+    "newE2Tests": 19
+  },
+  "negativeEvidenceCases": 11,
+  "allNegativeEvidenceRejected": true,
+  "liveFailureInjectionPerformed": false,
+  "liveLockConflictRejected": true,
+  "syntheticExactProcessCleanupPassed": true,
+  "agentCommitted": false,
+  "limitations": [
+    "Only downlink equal in a dedicated controlled fixture; no arbitrary policy or dynamic service-chain deployment",
+    "Lock coordinates E2 processes on VM1 only; unrelated operators and all external traffic are not globally locked/proven absent",
+    "PDU identity is a fingerprint of observed SUPI/Pod/container/session listing/TUN address, not a global session UUID",
+    "Known owned configurations only for ordinary-error cleanup; unknown queue drift refused; no hard-kill/power-loss recovery guarantee",
+    "No native 5G QoS, autonomous business demand recognition, uplink execution, latency/loss SLA or long-term reliability acceptance"
+  ],
+  "currentExecutableInputsDifferFromFormal": [],
+  "postRunDocumentationChange": "scripts/README.md was updated after run-02; archived source/contract replay uses the frozen input snapshot, not current documentation"
+}

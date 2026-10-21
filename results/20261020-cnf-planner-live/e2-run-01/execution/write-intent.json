@@ -1,0 +1,12 @@
+{
+  "livePlanHash": "5d0ba075966746a5c1b199bafe7ab662f568b2596590aaa71ac7cb86905a8f4a",
+  "endpoint": {
+    "pod": "cnf-c-endpoint-644d89c877-9m4t6",
+    "uid": "f225311a-48cc-49e6-9af7-1d4280548655",
+    "ip": "10.42.0.200"
+  },
+  "initialQueueMode": "none",
+  "allowedTargetMode": "equal",
+  "ordinaryFailureCleanupOnly": true,
+  "startedAt": "2026-10-20T13:42:32.138018+00:00"
+}

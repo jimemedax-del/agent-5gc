@@ -1,0 +1,30 @@
+UERANSIM v3.2.7
+[2026-10-20 03:43:01.706] [nas] [info] UE switches to state [MM-DEREGISTERED/PLMN-SEARCH]
+[2026-10-20 03:43:01.707] [rrc] [debug] New signal detected for cell[1], total [1] cells in coverage
+[2026-10-20 03:43:01.707] [nas] [info] Selected plmn[208/93]
+[2026-10-20 03:43:01.707] [rrc] [info] Selected cell plmn[208/93] tac[1] category[SUITABLE]
+[2026-10-20 03:43:01.707] [nas] [info] UE switches to state [MM-DEREGISTERED/PS]
+[2026-10-20 03:43:01.708] [nas] [info] UE switches to state [MM-DEREGISTERED/NORMAL-SERVICE]
+[2026-10-20 03:43:01.708] [nas] [debug] Initial registration required due to [MM-DEREG-NORMAL-SERVICE]
+[2026-10-20 03:43:01.708] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 03:43:01.708] [nas] [debug] Sending Initial Registration
+[2026-10-20 03:43:01.709] [nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[2026-10-20 03:43:01.709] [rrc] [debug] Sending RRC Setup Request
+[2026-10-20 03:43:01.711] [rrc] [info] RRC connection established
+[2026-10-20 03:43:01.711] [rrc] [info] UE switches to state [RRC-CONNECTED]
+[2026-10-20 03:43:01.711] [nas] [info] UE switches to state [CM-CONNECTED]
+[2026-10-20 03:43:04.971] [nas] [debug] Authentication Request received
+[2026-10-20 03:43:04.971] [nas] [debug] Received SQN [000000000048]
+[2026-10-20 03:43:04.971] [nas] [debug] SQN-MS [000000000000]
+[2026-10-20 03:43:05.014] [nas] [debug] Security Mode Command received
+[2026-10-20 03:43:05.014] [nas] [debug] Selected integrity[2] ciphering[0]
+[2026-10-20 03:43:05.545] [nas] [debug] Registration accept received
+[2026-10-20 03:43:05.546] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-10-20 03:43:05.546] [nas] [debug] Sending Registration Complete
+[2026-10-20 03:43:05.546] [nas] [info] Initial Registration is successful
+[2026-10-20 03:43:05.546] [nas] [debug] Sending PDU Session Establishment Request
+[2026-10-20 03:43:05.546] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-10-20 03:43:05.751] [nas] [debug] Configuration Update Command received
+[2026-10-20 03:43:07.885] [nas] [debug] PDU Session Establishment Accept received
+[2026-10-20 03:43:07.885] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-10-20 03:43:07.918] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.60.0.3] is up.

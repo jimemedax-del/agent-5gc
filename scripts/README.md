@@ -411,6 +411,30 @@ Python 接口为 `inspect_state`、`plan_policy`、`validate_plan`、`import_req
 测试：`python -m unittest discover -s tests -p '*planner*.py' -v`。
 工程评估归档 14 份输入及哈希；可用归档 `inputs/scripts/evaluate-cnf-planner.py` 的 `evaluate` 函数重算报告和场景，用原固定模拟时钟复验。
 
+## E2 受控现场执行适配器
+
+`cnf-planner-live.py` 在 Linux VM1 运行，需 Python 3.10+、PyYAML、kubectl、既有 C1/C2 夹具及历史元数据。
+从项目根目录使用，输出必须是新目录；源代码、配置和输入哈希随批次归档。
+
+```sh
+export KUBECONFIG=/home/lhm/.kube/config
+python3 scripts/cnf-planner-live.py inspect --out <新的只读预检目录>
+python3 scripts/cnf-planner-live.py run --out <新的执行批次目录>
+python3 scripts/audit-cnf-planner-live.py <执行批次目录> --out <审计JSON>
+```
+
+`inspect` 只读但会发送严格基线所需探测；`run` 持有文件锁完成查询、规划、复查、执行、测量与恢复。
+仅允许既有双 UE 下行 `none→equal→none`，显式实验目标各 4–8 Mbps，UDP 30 秒。没有模拟时钟或独立留置队列的 CLI。
+E1 的旧执行入口仍返回 `unsupported`，E2 不将它改成隐式访问集群。
+Python 工具有 `inspect_state`、`plan_policy`、`validate_plan`、`apply_plan`、`verify_plan`、`restore`，修改现场只用于当前持锁工作流。
+写入前再次校验现场和计划期限，并固定原 Pod UID；正常结束或普通异常尝试撤销本轮已知队列，未知配置拒绝删除。
+本锁不排斥其他管理工具；不承诺强杀/断电恢复、全局无竞争流量、业务 SLA 或原生 5G QoS。
+失败时检查 `summary.json`、`execution-error.json`、`restoration.json` 和原始证据，不能只凭命令完成或 Pod Ready 判断成功。
+审计从归档源码重算，并使用记录的历史时间验证旧计划；它不产生现场执行授权。
+
+正式证据与完整限制见 [E2 模块](../docs/cnf-service-chain-orchestration.md#e2-受控现场与单模式执行闭环)。
+测试：`python -m unittest discover -s tests -p '*planner*.py' -v`；这些本地测试不访问集群，不能当作实机故障注入。
+
 ## UPF 判空修复构建与部署前检查
 
 `build-patched-upf.sh <绝对构建目录>` 只构建，不修改部署。目录需包含固定源码归档

@@ -1,0 +1,109 @@
+{
+  "livePlanVersion": "cnf-live-plan-v1",
+  "liveStateHash": "ae065228aa106c6e58ffa1db7bc3af65ddf63c5f8000f0e69ed0465c770f7f3f",
+  "fingerprint": "97704e167d8680a0db60e0ea900ce866bf040f4ab6b9959f823e084522988a8a",
+  "adapterHash": "1fdf2ddd9e17e7d9a15e3360b945339af99d34c6ede186f2789e692427164019",
+  "batchHash": "18ac3a340742229d83d9bfdbeb7ad9b5e8253154378e9f0c0f00c90ac80e61aa",
+  "innerPlan": {
+    "planVersion": "cnf-policy-plan-v1",
+    "scope": "offline_two_ue_udp_steady_mean_fixture",
+    "createdAt": "2026-10-20T13:42:29.248833+00:00",
+    "validUntil": "2026-10-20T13:42:59.248833+00:00",
+    "stateHash": "6237b02d2cfb81fbbb358a1a86c686ca724b7ce124dc9cc0827191ea602d02dd",
+    "batchHash": "18ac3a340742229d83d9bfdbeb7ad9b5e8253154378e9f0c0f00c90ac80e61aa",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "direction": "downlink",
+    "mode": "equal",
+    "allocations": [
+      {
+        "slot": "ue1",
+        "request_id": "equal-ue1",
+        "user_id": "imsi-208930000000001",
+        "session_id": "pdu-15884200c4f4823204854a58",
+        "queue": {
+          "rate": 4,
+          "ceil": 8,
+          "prio": 0
+        },
+        "requestedMinMbps": 4,
+        "requestedMaxMbps": 8,
+        "referenceMinMbps": 4
+      },
+      {
+        "slot": "ue2",
+        "request_id": "equal-ue2",
+        "user_id": "imsi-208930000000002",
+        "session_id": "pdu-aaaad262fa9d4884e9816251",
+        "queue": {
+          "rate": 4,
+          "ceil": 8,
+          "prio": 0
+        },
+        "requestedMinMbps": 4,
+        "requestedMaxMbps": 8,
+        "referenceMinMbps": 4
+      }
+    ],
+    "action": {
+      "kind": "select_existing_fixture_mode",
+      "namespace": "cnf-contention",
+      "deployment": "cnf-c-endpoint",
+      "queueDevice": "eth0",
+      "configVersion": "cnf-contention-v1",
+      "mode": "equal"
+    },
+    "restoreTarget": {
+      "mode": "none",
+      "stateHash": "6237b02d2cfb81fbbb358a1a86c686ca724b7ce124dc9cc0827191ea602d02dd"
+    },
+    "verificationTarget": {
+      "metric": "receiver_steady_mean_mbps",
+      "steadyStartSeconds": 5,
+      "steadyEndSeconds": 25,
+      "durationSeconds": 30,
+      "offeredMbpsPerUE": 8,
+      "evidenceRef": "results/20261020-cnf-contention/metadata.json"
+    },
+    "liveExecutionSupported": false,
+    "liveGuaranteeClaimed": false,
+    "planHash": "925d87bb6748a25a0c7dd8be3a06aa21a2493709d1d1db49750d0e6c43adaaf2",
+    "planId": "plan-925d87bb6748a25a0c7d"
+  },
+  "computationState": {
+    "snapshotVersion": "cnf-planner-state-v1",
+    "source": {
+      "sourceVersion": "cnf-planner-state-input-v1",
+      "mode": "declared_fixture",
+      "direction": "downlink",
+      "declaredAt": "2026-10-20T13:42:29.235944+00:00",
+      "ttlSeconds": 180,
+      "capacityMbps": 10,
+      "unmanagedReservedMbps": 0,
+      "unmanagedTrafficDetected": false,
+      "nativeQosEnabled": false,
+      "activeProfile": "none",
+      "bindings": [
+        {
+          "slot": "ue1",
+          "user_id": "imsi-208930000000001",
+          "session_id": "pdu-15884200c4f4823204854a58"
+        },
+        {
+          "slot": "ue2",
+          "user_id": "imsi-208930000000002",
+          "session_id": "pdu-aaaad262fa9d4884e9816251"
+        }
+      ]
+    },
+    "validUntil": "2026-10-20T13:45:29.235944+00:00",
+    "catalogHash": "93fe468739c751e9123179f3573bab24bad3cd2295f14d83c22f7544362a64ec",
+    "sourceHash": "c9dec9246b007bbb589ee0aabdb848619ae55aea2b6323cb48819ef6a4a016b4",
+    "liveBindingsVerified": false,
+    "liveStateObserved": false,
+    "stateHash": "6237b02d2cfb81fbbb358a1a86c686ca724b7ce124dc9cc0827191ea602d02dd",
+    "stateId": "state-6237b02d2cfb81fbbb35"
+  },
+  "validUntil": "2026-10-20T13:42:59.248833+00:00",
+  "livePlanHash": "5d0ba075966746a5c1b199bafe7ab662f568b2596590aaa71ac7cb86905a8f4a",
+  "livePlanId": "livePlan-5d0ba075966746a5c1b1"
+}

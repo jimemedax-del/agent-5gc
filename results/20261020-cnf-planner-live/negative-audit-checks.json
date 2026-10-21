@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "case": "changed_request",
+      "rejected": true,
+      "reason": "Plan, requests, sessions, resources or queues differ from the observed snapshot"
+    },
+    {
+      "case": "rehashed_foreign_action",
+      "rejected": true,
+      "reason": "E1 validation or live scope failed"
+    },
+    {
+      "case": "rehashed_extended_freshness",
+      "rejected": true,
+      "reason": "Observed flag, binding scope or freshness horizon differs"
+    },
+    {
+      "case": "expired_validation",
+      "rejected": true,
+      "reason": "E1 validation or live scope failed"
+    },
+    {
+      "case": "wrong_write_endpoint",
+      "rejected": true,
+      "reason": "Execution binding/timing differs"
+    },
+    {
+      "case": "receiver_cookie",
+      "rejected": true,
+      "reason": "Missing correct server cookie/UPF peer or wrong endpoint hit"
+    },
+    {
+      "case": "missing_restore_success",
+      "rejected": true,
+      "reason": "Run or final restoration incomplete"
+    },
+    {
+      "case": "changed_final_resources",
+      "rejected": true,
+      "reason": "Initial/recheck/restoration/final observation drift"
+    },
+    {
+      "case": "changed_measurement_pods",
+      "rejected": true,
+      "reason": "Unexpected Pod set"
+    },
+    {
+      "case": "changed_restored_tc",
+      "rejected": true,
+      "reason": "Derived TC state differs from native output"
+    },
+    {
+      "case": "changed_archived_source",
+      "rejected": true,
+      "reason": "Archived source hash mismatch: scripts/cnf-planner-live.py"
+    }
+  ],
+  "allRejected": true,
+  "scope": "offline_corrupted_evidence_checks; not live failure injection"
+}

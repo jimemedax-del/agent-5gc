@@ -1,0 +1,7 @@
+{
+  "syntheticHostProcessTest": true,
+  "scope": "GNU exact-command matching only; no UE processes or network mutation",
+  "ownedTerminated": true,
+  "unrelatedAlive": true,
+  "pkillReturncode": 0
+}
