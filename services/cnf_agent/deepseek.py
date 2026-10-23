@@ -132,6 +132,16 @@ class DeepSeekProvider:
         extraction, tokens, metadata = self._json_reply(context, max_tokens, Extraction)
         return ModelReply(extraction=extraction, tokens=tokens, metadata=metadata)
 
+    def extract_policy(self, messages: tuple[Message, ...], max_tokens: int):
+        from .live_contracts import PolicyExtraction, PolicyReply
+
+        prompt = (PROMPTS / 'policy_extract.txt').read_text(encoding='utf-8')
+        context = [{'role': 'system', 'content': prompt + '\nJSON Schema:\n' +
+                    json.dumps(PolicyExtraction.model_json_schema(), ensure_ascii=False)},
+                   {'role': 'user', 'content': json.dumps([m.model_dump() for m in messages], ensure_ascii=False)}]
+        extraction, tokens, metadata = self._json_reply(context, max_tokens, PolicyExtraction)
+        return PolicyReply(extraction=extraction, tokens=tokens, metadata=metadata)
+
     def request_read(self, requirement: Requirement, max_tokens: int) -> ReadRequest:
         context = [{'role': 'system', 'content': (PROMPTS / 'request_read.txt').read_text(encoding='utf-8')},
                    {'role': 'user', 'content': requirement.model_dump_json()}]

@@ -1,7 +1,7 @@
 # Agent 开发：设计、实现与验收
 
 > 更新：2026-10-23。适用 R2.S5；阶段状态以[总路线](03-research-roadmap.md#r2-当前阶段顺序)为准。
-> 当前产物：设计草案和代码包目录。模型、工作流、记忆与工具适配尚未实现，F1 运行骨架是下一项开发任务。
+> 当前产物：F1 离线骨架、F2 DeepSeek 只读分析与 F3a 受控实网工具适配。F3a 三模式的真实测量、恢复和离线证据复核通过；组合编排及反馈对照仍待实现。
 
 本文是 Agent 模块的维护入口，集中记录方案、代码职责、运行方式、验收结果和下一步。后续直接更新对应章节，不按轮次另建说明文档。
 底层部署、网络能力和历史实验保留在 [CNF 模块](cnf-service-chain-orchestration.md)，故障详情写入 [problem solve.md](../problem%20solve.md)。
@@ -29,37 +29,40 @@
 
 ## 2. 技术选型
 
-以下沿用 F0 设计草案；创建文档和目录不等于全部选型已验收。
+首版已采用以下实现；F3b/F4 的扩展仍按专项验收推进。
 
 | 部分 | 首版建议 | 作用 |
 |---|---|---|
-| 语言与运行 | Python 3.10+；实网进程在 VM1 独立虚拟环境运行 | Windows 主工作区开发、测试和审核；VM1 复用现有 kubectl 条件，部署时核对源码哈希 |
+| 语言与运行 | Python 3.10+；模型/记忆在 Windows，固定实网 worker 在 VM1 | Windows 隔离虚拟环境运行 SDK；VM1 使用标准库与既有 E3 依赖、用户 kubeconfig；固定源码快照按 SHA256 部署 |
 | 工作流 | 显式 Python 状态机 | 每个分支、预算与停止条件可读可测；首版不依赖 LangGraph、LangChain 或 Agents SDK |
-| 模型 | `ModelProvider` 接口；首个候选为 OpenAI 官方 SDK + Responses API | 其他供应商分别验证适配器，不假定通用兼容；模型 ID 和费用预算待落实 |
+| 模型 | 供应商适配器；OpenAI Python SDK 的 Chat Completions 接入 DeepSeek | 用户指定 `https://api.deepseek.com`、`deepseek-flash`，`reasoning_effort=high`、thinking enabled；已实际调用，不使用 Responses API |
 | 数据合同 | Pydantic v2 + JSON Schema | 校验需求、动作和返回值；语义来源、容量、会话和权限另行检查 |
 | 记忆 | SQLite | 保存会话、需求版本、观测索引和操作记录；首版不引入向量库 |
-| 提示词 | 独立文本，职责分为理解、动作选择、结果解释 | 与模型、工具和依赖版本一起归档 |
+| 提示词 | 独立文本：需求提取、只读工具请求、只读解释、双用户目标提取 | F3a 的规划、执行和结果判定由确定性代码负责；没有把实网写入或成功判定交给模型 |
 | 用户入口 | CLI + 中文步骤摘要 | 可查看、继续会话与重放任务；HTTP、MCP、Web 界面及容器部署后续按需评估 |
 | 证据 | JSONL 事件 + 原始工具输出 | 可追踪输入、动作、简短决策依据、错误、时间和 token 用量 |
 
-模型接口依据：[Function calling](https://developers.openai.com/api/docs/guides/function-calling)、[Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs)。结构化输出仍可能语义错误，不能替代本地校验。密钥只放进程环境或受保护的本地配置，不进入源码、记忆与轨迹；依赖版本在兼容检查后锁定。
+供应商调用参数按用户提供的 DeepSeek 官方示例适配；JSON Schema 在本地强校验，不假定兼容端点提供原生严格结构化输出。结构正确仍可能语义错误，不能替代来源和现场校验。依赖锁定在 [`requirements.txt`](../services/cnf_agent/requirements.txt)：Pydantic 2.11.7、OpenAI SDK 3.37.0。密钥只放环境或受保护本地配置，不进入源码、记忆、VM1 或轨迹；模型思考内容仅在只读工具对话中临时保留，关闭后清除。
 
 ## 3. 代码位置与职责
 
-代码统一放在 [`services/cnf_agent/`](../services/cnf_agent/)。当前仅有包入口；下表其余文件为开发规划，不是已实现能力。
+代码统一放在 [`services/cnf_agent/`](../services/cnf_agent/)，以下文件均已实现。
 
 | 文件 | 职责 |
 |---|---|
 | `__init__.py` | 包入口，现已创建；导入不触发模型或网络操作 |
 | `schemas.py` | 需求、事实、动作、结果及其版本关联 |
-| `provider.py` | 模型调用、响应解析、用量统计和错误转换 |
+| `provider.py`、`deepseek.py` | 回放协议、供应商调用、响应解析、用量统计和错误转换 |
 | `workflow.py` | 状态转换、动作白名单、预算和停止条件 |
-| `tools.py` | 适配已验收能力，先接 E1/E2/E3，随后接组合编排接口；不复制底层实现，不把三模式硬编码成整个 Agent 的任务空间 |
+| `tools.py`、`readonly.py` | F1 工具模拟器、F2 来源/语义检查与聚合只读适配 |
+| `live_contracts.py`、`live_requirements.py` | F3a 双用户目标、来源检查、范围限制、绑定方案与操作快照 |
+| `live_workflow.py`、`live_tools.py` | F3a 状态协调与 E3 薄适配；检查目标、会话、版本、测量与恢复 |
+| `live_transport.py`、`live_worker.py` | 固定 SSH/RPC、源码快照、VM1 去重与脱离本地进程的事务；不导入模型 SDK |
 | `memory.py` | SQLite 中的会话、需求、观测和任务记录 |
 | `trace.py` | 事件记录、中文摘要和重放 |
-| `prompts/` | 三类职责提示词，开始实现时创建 |
+| `cli.py`、`prompts/` | 命令入口与独立提示词 |
 
-拟用 `scripts/cnf-agent.py` 作为轻量启动入口；测试继续放 `tests/`，原始运行证据放 `results/<日期>-cnf-agent-<实验名>/`，本地数据库与密钥留在忽略目录。上述未实现文件按任务创建，不预建占位模块。
+[`scripts/cnf-agent.py`](../scripts/cnf-agent.py) 是轻量启动入口；测试放 `tests/test_cnf_agent*.py`，原始运行证据放 `results/<日期>-cnf-agent-<实验名>/`，本地数据库与密钥留在忽略目录。
 
 依赖方向：`CLI → workflow → provider / memory / tools / trace`，统一使用 `schemas`。不复制底层实验脚本；执行工具不反向调用模型，普通收尾不依赖模型在线。
 
@@ -73,14 +76,14 @@
 状态变化 → 重新查询和规划；执行失败 → 先核对恢复，再决定继续或停止
 ```
 
-| 模型工具（待实现） | 输入 | 返回与权限 |
+| 工具端口（F2/F3a 已实现） | 输入 | 返回与权限 |
 |---|---|---|
 | `inspect_network` | 允许的查询范围 | 带时间、来源和引用的现场事实及能力边界；配置只读 |
 | `preview_policy` | 已校验的需求版本、观测引用 | F3a 返回三模式预览；F3b 才开放经独立验收的组合方案。方案注明能力/适配器版本与执行范围，不授予执行权限 |
 | `execute_experiment` | 需求版本、方案引用、运行时操作标识 | 内部完成复验、执行、测量、恢复和严格收尾；不向模型拆开暴露写入与恢复 |
 | `get_operation_result` | 已有操作标识 | 操作阶段、目标比较、恢复状态和证据；不能再次启动实验 |
 
-模型理解需求、选择允许的查询并解释反馈；规划器计算容量和模式，状态机裁定动作是否允许，执行器负责现场操作。模型不能直接调用任意命令、kubectl 或 SSH。
+F2 的模型可请求只读查询并解释反馈；F3a 的模型只提取目标，工作流依序调用四项工具，规划器计算容量和模式，执行器负责现场操作，结果摘要由实际证据生成。模型不能直接调用任意命令、kubectl 或 SSH，也未实现实网结果的模型反馈重规划。
 
 功能目录与组合规划/执行接口由 [CNF 模块](cnf-service-chain-orchestration.md#agent-接入与最终交付)维护，至少描述功能职责、镜像、资源、接口、依赖、允许节点、状态及参数范围。iperf3 后端是测试终点；Envoy 同时承担端口分类/代理/静态引导，不能计为三个独立 CNF；当前 tc 依附测试端点，不能声明为任意流量可经过的通用 QoS CNF。
 
@@ -110,8 +113,68 @@ F1/F2 不下发网络配置，F3 使用明确实验模式。首批场景还须�
 
 推进顺序为 **F1 → F2 → F3a → F3b → F4**。F1/F2 期间可设计和离线验证 F3b 的接口，不必等完整 S4 验收再启动 Agent；任何新增现场写入能力仍须先通过底层专项验收。SSH/集群不可达阻止实网写入，不阻止本地骨架开发；实网执行前重新核对现场，不能把 Dashboard 缓存当作执行依据。
 
-## 6. 验证记录与下一步
+## 6. F1 离线骨架与回放
 
-当前只完成模块文档与包目录整理，没有新的 Agent 功能或网络实验结果。2026-10-23 明确了开发起点、三模式的过渡定位与 F3b 组合编排验收，本次说明不改变已验证能力或阶段完成状态。可复用的底层证据见 [E3](cnf-service-chain-orchestration.md#e3-完整请求与受控策略选择) 与[固定配置联合检查](cnf-service-chain-orchestration.md#固定配置联合功能检查)。
+合同、状态机、SQLite 会话/版本与事件、并发更新检查、写入前操作认领、预算、CLI 和回放模拟器已实现。正常、缺项、冲突、超额、工具失败、回复丢失、目标未满足与恢复失败可重复验证。模拟标记贯穿会话和输出，不把回放当作真实模型或网络证据。
 
-下一项是 F1：从数据合同和状态转换表开始，再实现可重放的离线骨架。真实模型接入前落实供应商/API、模型 ID、凭据配置和调用预算；不影响先审阅和实现离线骨架。开发进展更新本文件对应章节，失败与运行证据单独归档后链接。
+```powershell
+python scripts/cnf-agent.py demo --replay tests/fixtures/cnf-agent-replay.json --scenario normal
+```
+
+证据见 [F1 验收](../results/20261023-cnf-agent-f1/acceptance.json)；输入合同/错误分支由 `tests/test_cnf_agent.py` 覆盖。
+
+## 7. F2 真实模型与只读查询
+
+已接入用户指定的 DeepSeek 模型，支持需求提取、原话/数值单位校验、多轮补充与修改、聚合资源只读工具和受约束解释。Dashboard 来源错误或过期时不报告现场成功；工具数据只包含聚合资源，不发送真实 SUPI、IP 或 PDU 会话。
+
+在仓库根目录创建隔离环境并安装模块依赖；不要继承系统 site-packages，以免旧版 Brotli 破坏 SDK 响应解压：
+
+```powershell
+python -m venv .work/cnf-agent/venv
+.work/cnf-agent/venv/Scripts/python.exe -m pip install -r services/cnf_agent/requirements.txt
+.work/cnf-agent/venv/Scripts/python.exe scripts/cnf-agent.py chat --message 'UE1 的视频业务访问边缘服务，下行带宽上限 5 Mbps'
+```
+
+配置入口为环境变量 `DEEPSEEK_API_KEY`，或 Git 忽略且限制本机访问的 `.work/cnf-agent/deepseek.local.json`；字段为 `api_key`、`base_url`、`model`，后两项默认就是用户指定值。现有私有配置已设置，无须把密钥粘贴进命令或文档。超时 45 秒，单次输出最多 4096 tokens，SDK 自动重试关闭；会话另设调用/token 预算。
+
+12 条开发场景初次 5/12、修正后 12/12，未据以调参的八条工程留出样例 8/8；均由 Agent 编写，不能当独立人工标注准确率。聚合资源现场只读联调通过，网络写入为 0。证据和哈希见 [F2 元数据](../results/20261023-cnf-agent-f2/metadata.json)，保留失败和成功批次。
+
+## 8. F3a 受控实网工具接入
+
+### 输入与运行
+
+本阶段仅接入 E3 双 UE 的 C1 UDP 下行事务。每名用户都须给出 UE1/UE2、方向、协议、带宽下/上界、优先级、30 秒实验与 20 秒候选测量窗口，并明确这是受控实验。带宽/优先级引用须落在对应 UE 的原话片段，实验时长与测量窗口不能交换角色；方向/协议/时长来自共同前置说明或对应 UE，不以公共值覆盖用户专属设置。归属不清先澄清；容量不满足或目标不支持就拒绝。业务类别不自动补 SLA，模型不选择三模式，不指定 SUPI 或会话。
+
+下面命令会实际改写专用实验队列并发流，完成后恢复；应在三台 VM、Tailscale 和现有实验夹具可用时运行：
+
+```powershell
+.work/cnf-agent/venv/Scripts/python.exe scripts/cnf-agent.py live --message '这是 C1受控下行竞争实验，双方使用UDP下行，实验30秒，测量窗口20秒。UE1为普通优先级，带宽最低4 Mbps，上限8 Mbps；UE2为普通优先级，带宽最低4 Mbps，上限8 Mbps。' --wait
+```
+
+默认数据库为 `.work/cnf-agent/f3a.sqlite`，与 F1/F2 分开。输出保留会话编号，续查方式为 `live --session <会话编号> --wait`；查询不加载模型或密钥。需指定其他数据库时，将 `--db <路径>` 放在 `live` 前。`show`/`export --output <新文件>` 可用同一数据库查看/导出，`schema --scope live` 输出合同。
+
+### 事务与异常边界
+
+- 本地模型提取后，本机校验范围与来源；VM1 严格检查并取得真实绑定，E3 确定性规划。本机检查需求版本、状态引用、会话、源码版本和有效期；状态 TTL 180 秒、计划起始期限 30 秒，写入前仍在 E3 独占锁内复验。
+- VM1 固定 worker 接收 JSON 参数，不接收模型生成的命令。代码包仅包含实验依赖、固定 worker 和历史元数据，不包含私有配置；内容寻址的不可变快照位于 `~/.work/cnf-agent-f3a/releases/<sha256>/`。
+- 操作编号在 SQLite 写入前认领；VM1 以目录/收据哈希和独占运行标记防重复。worker 自主完成检查、执行、测量、恢复和严格收尾；本地关闭、模型断开或响应丢失后只查询原操作，不再次下发。PID 加启动标识避免把复用 PID 当作原工作进程。
+- 成功必须满足两 UE 的原请求区间、原计划/操作、原始测量证据、历史夹具检查和严格恢复。返回值自称成功不足以通过；失败、恢复失败和状态不明分别保留。状态不明时禁止修改请求或重放，先查原编号/现场；不承诺强杀、断电、网络分区后的自动恢复。
+- 默认每会话最多 4 次模型调用、32 次查询、1 次实验、40 步、65536 tokens、900 秒累计工具调用耗时；`--wait` 每次最多轮询 180 秒。等待间隔不计入累计调用耗时。预算耗尽不会重放写入，远端事务仍负责自身收尾；必要时由维护者核对操作目录。
+
+### 验证与证据
+
+八条场景和提示词在实际调用前冻结。三条合法请求均使用真实 DeepSeek 并执行一次；随后关闭模型连接，通过原编号查询到结果。五条拒绝/澄清没有启动实验；其中超额请求经过现场与规划器检查，其余在本机停止。
+
+| 请求 | UE1 实收 Mbps | UE2 实收 Mbps | 请求区间 Mbps |
+|---|---:|---:|---|
+| 同等优先 | 4.806569 | 4.807591 | 双方 4–8 |
+| UE1 高、UE2 低 | 7.717896 | 1.937180 | UE1 5–8；UE2 1.5–4 |
+| UE1 低、UE2 高 | 1.929096 | 7.726994 | UE1 1.5–4；UE2 5–8 |
+
+三次恢复、严格基线和原 26 个 Pod 身份检查均通过；独立进程续查未重复启动。缺优先级、超容量、时延目标、UE3、TCP 请求分别按预期澄清/拒绝。23 项 F3a 自动测试覆盖异常格式、错绑定/过期计划、旧会话、重复操作、回复丢失、无模型续查及恢复/测量失败；全仓 419 项中 418 通过、1 项 Helm 条件跳过。
+
+证据入口：[冻结清单](../results/20261023-cnf-agent-f3a/frozen-cases.json)、[离线审计](../results/20261023-cnf-agent-f3a/offline-audit.json)。原始 E3 操作、会话、JSONL 和摘要位于同目录；每次 E3 的 117 项归档输入哈希、规划复算、锁内校验、实际队列命令、原始接收数据和恢复均通过离线复核。复核命令为 `python scripts/audit-cnf-agent-live.py results/20261023-cnf-agent-f3a`，不调用模型或网络。全仓测试使用已有含 PyYAML 的开发 Python；模型运行使用上述隔离环境，VM1 不需要 SDK。
+
+独立子 Agent 评审为 [PASS](../results/20261023-cnf-agent-f3a/review.json)：初审发现跨用户目标引用、时长角色混用及借用其他用户设置的缺口，修复后对抗复测、63 项 Agent 测试、全仓回归和离线审计均通过。结论仅覆盖本节范围；源码哈希、配置版本和限制见 [元数据](../results/20261023-cnf-agent-f3a/metadata.json)。改动保留在 main 工作区，由用户审核和自行提交。
+
+这批是 Agent 编写的工程验收，三条正常请求各一次，不是独立语言准确率、统计性保障、长期稳定性或时延/丢包验收。E3 使用 UDP 测试端点，绕过 Envoy；尚未完成 core/edge 与带宽组合编排、自主报文识别或原生 5G QoS。下一项 F3b：固定组合合同、功能目录和允许参数，先验收同一 Envoy 业务路径上的绑定/限速/测量/恢复，再接 Agent；F4 继续补反馈重规划与同工具对照。

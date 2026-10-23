@@ -203,19 +203,20 @@ class Check(Contract):
 
 class OperationResult(Contract):
     operation_id: str
-    mode: Literal['simulated'] = 'simulated'
+    mode: Literal['simulated', 'live'] = 'simulated'
     plan_ref: str
     outcome: Literal['succeeded', 'target_unmet', 'failed', 'unknown']
     restoration: Literal['restored', 'failed', 'unknown']
     checks: tuple[Check, ...] = ()
     detail: str
+    evidence: str | None = None
 
     @model_validator(mode='after')
     def success_needs_evidence(self):
         if self.outcome == 'succeeded' and (
             self.restoration != 'restored' or not self.checks or not all(c.passed for c in self.checks)
         ):
-            raise ValueError('Simulated success requires checks and confirmed restoration')
+            raise ValueError('Success requires checks and confirmed restoration')
         return self
 
 

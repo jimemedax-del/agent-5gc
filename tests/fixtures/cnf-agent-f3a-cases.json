@@ -1,0 +1,46 @@
+{
+  "version": "cnf-agent-f3a-cases-v1",
+  "scope": "Agent-authored engineering acceptance, not independent language accuracy",
+  "cases": [
+    {
+      "id": "equal",
+      "message": "这是 C1受控下行竞争实验，双方使用UDP下行，实验30秒，测量窗口20秒。UE1为普通优先级，带宽最低4 Mbps，上限8 Mbps；UE2为普通优先级，带宽最低4 Mbps，上限8 Mbps。",
+      "expected": "equal"
+    },
+    {
+      "id": "guarantee_ue1",
+      "message": "这是 C1受控下行竞争实验，双方使用UDP下行，实验30秒，测量窗口20秒。UE1为高优先级，带宽最低5 Mbps，上限8 Mbps；UE2为低优先级，带宽最低1.5 Mbps，上限4 Mbps。",
+      "expected": "guarantee-ue1"
+    },
+    {
+      "id": "guarantee_ue2",
+      "message": "这是 C1受控下行竞争实验，双方使用UDP下行，实验30秒，测量窗口20秒。UE1为低优先级，带宽最低1.5 Mbps，上限4 Mbps；UE2为高优先级，带宽最低5 Mbps，上限8 Mbps。",
+      "expected": "guarantee-ue2"
+    },
+    {
+      "id": "missing_priority",
+      "message": "这是 C1受控下行竞争实验，双方使用UDP下行，实验30秒，测量窗口20秒。UE1带宽最低4 Mbps，上限8 Mbps；UE2带宽最低4 Mbps，上限8 Mbps。",
+      "expected": "waiting_input"
+    },
+    {
+      "id": "over_capacity",
+      "message": "这是 C1受控下行竞争实验，双方使用UDP下行，实验30秒，测量窗口20秒。UE1为普通优先级，带宽最低6 Mbps，上限8 Mbps；UE2为普通优先级，带宽最低6 Mbps，上限8 Mbps。",
+      "expected": "rejected"
+    },
+    {
+      "id": "unsupported_latency",
+      "message": "这是 C1受控下行竞争实验，双方使用UDP下行，实验30秒，测量窗口20秒。UE1为普通优先级，带宽最低4 Mbps，上限8 Mbps，并要求时延不超过10 ms；UE2为普通优先级，带宽最低4 Mbps，上限8 Mbps。",
+      "expected": "rejected"
+    },
+    {
+      "id": "unsupported_user",
+      "message": "这是 C1受控下行竞争实验，双方使用UDP下行，实验30秒，测量窗口20秒。UE1为普通优先级，带宽最低4 Mbps，上限8 Mbps；UE3为普通优先级，带宽最低4 Mbps，上限8 Mbps。",
+      "expected": "rejected"
+    },
+    {
+      "id": "unsupported_protocol",
+      "message": "这是 C1受控下行竞争实验，双方使用TCP下行，实验30秒，测量窗口20秒。UE1为普通优先级，带宽最低4 Mbps，上限8 Mbps；UE2为普通优先级，带宽最低4 Mbps，上限8 Mbps。",
+      "expected": "rejected"
+    }
+  ]
+}

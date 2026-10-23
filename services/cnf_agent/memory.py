@@ -48,6 +48,9 @@ class Memory:
         row = self.db.execute('SELECT payload FROM sessions WHERE id=?', (session_id,)).fetchone()
         if row is None:
             raise KeyError('Session does not exist')
+        if json.loads(row['payload']).get('mode') == 'real_model_live':
+            from .live_contracts import LiveSession
+            return LiveSession.model_validate_json(row['payload'])
         return Session.model_validate_json(row['payload'])
 
     def save(self, session: Session, kind: str, payload: dict | None = None,
