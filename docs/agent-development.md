@@ -1,7 +1,7 @@
 # Agent 开发：设计、实现与验收
 
 > 更新：2026-10-23。适用 R2.S5；阶段状态以[总路线](03-research-roadmap.md#r2-当前阶段顺序)为准。
-> 当前产物：设计草案和代码包目录。模型、工作流、记忆与工具适配尚未实现，F1 运行骨架是下一项开发任务。
+> 当前产物：F1 离线运行骨架、回放模型、工具模拟器与 CLI；真实模型和实网适配尚未接入。阶段状态以总路线为准，模拟通过不计实网或真实模型成功。
 
 本文是 Agent 模块的维护入口，集中记录方案、代码职责、运行方式、验收结果和下一步。后续直接更新对应章节，不按轮次另建说明文档。
 底层部署、网络能力和历史实验保留在 [CNF 模块](cnf-service-chain-orchestration.md)，故障详情写入 [problem solve.md](../problem%20solve.md)。
@@ -29,7 +29,7 @@
 
 ## 2. 技术选型
 
-以下沿用 F0 设计草案；创建文档和目录不等于全部选型已验收。
+F1 已采用 Python 显式状态机、Pydantic v2、SQLite 与 JSONL 导出；模型 SDK 及实网进程部署仍是后续设计，不属于 F1 已实现能力。
 
 | 部分 | 首版建议 | 作用 |
 |---|---|---|
@@ -46,20 +46,21 @@
 
 ## 3. 代码位置与职责
 
-代码统一放在 [`services/cnf_agent/`](../services/cnf_agent/)。当前仅有包入口；下表其余文件为开发规划，不是已实现能力。
+代码统一放在 [`services/cnf_agent/`](../services/cnf_agent/)。下表模块已实现 F1 的离线部分；真实适配与提示词留到后续阶段。
 
 | 文件 | 职责 |
 |---|---|
-| `__init__.py` | 包入口，现已创建；导入不触发模型或网络操作 |
+| `__init__.py` | 包入口；导入不触发模型或网络操作 |
 | `schemas.py` | 需求、事实、动作、结果及其版本关联 |
-| `provider.py` | 模型调用、响应解析、用量统计和错误转换 |
+| `provider.py` | `ModelProvider` 协议与严格匹配消息序列的 `ReplayProvider`；尚无真实模型调用 |
 | `workflow.py` | 状态转换、动作白名单、预算和停止条件 |
-| `tools.py` | 适配已验收能力，先接 E1/E2/E3，随后接组合编排接口；不复制底层实现，不把三模式硬编码成整个 Agent 的任务空间 |
+| `tools.py` | 四项工具协议及 `SimulatedTools`；F1 只返回声明的模拟能力和结果，尚未加载 E1/E2/E3 脚本 |
 | `memory.py` | SQLite 中的会话、需求、观测和任务记录 |
-| `trace.py` | 事件记录、中文摘要和重放 |
-| `prompts/` | 三类职责提示词，开始实现时创建 |
+| `trace.py` | 中文模拟标识、结果摘要、JSONL 导出；SQLite 事件为原始记录 |
+| `cli.py` | 离线运行、继续会话、展示、导出与开发回放入口 |
+| `prompts/`（未创建） | F2 再加入理解、动作选择、解释提示词 |
 
-拟用 `scripts/cnf-agent.py` 作为轻量启动入口；测试继续放 `tests/`，原始运行证据放 `results/<日期>-cnf-agent-<实验名>/`，本地数据库与密钥留在忽略目录。上述未实现文件按任务创建，不预建占位模块。
+启动入口为 [`scripts/cnf-agent.py`](../scripts/cnf-agent.py)；测试在 [`tests/test_cnf_agent.py`](../tests/test_cnf_agent.py)，固定开发回放在 [`tests/fixtures/cnf-agent-replay.json`](../tests/fixtures/cnf-agent-replay.json)。原始运行证据放 `results/<日期>-cnf-agent-<实验名>/`，本地数据库默认放忽略目录 `.work/cnf-agent/`。不预建未实现模块。
 
 依赖方向：`CLI → workflow → provider / memory / tools / trace`，统一使用 `schemas`。不复制底层实验脚本；执行工具不反向调用模型，普通收尾不依赖模型在线。
 
@@ -73,7 +74,7 @@
 状态变化 → 重新查询和规划；执行失败 → 先核对恢复，再决定继续或停止
 ```
 
-| 模型工具（待实现） | 输入 | 返回与权限 |
+| 工具协议（F1 为模拟实现） | 输入 | 返回与权限 |
 |---|---|---|
 | `inspect_network` | 允许的查询范围 | 带时间、来源和引用的现场事实及能力边界；配置只读 |
 | `preview_policy` | 已校验的需求版本、观测引用 | F3a 返回三模式预览；F3b 才开放经独立验收的组合方案。方案注明能力/适配器版本与执行范围，不授予执行权限 |
@@ -110,8 +111,59 @@ F1/F2 不下发网络配置，F3 使用明确实验模式。首批场景还须�
 
 推进顺序为 **F1 → F2 → F3a → F3b → F4**。F1/F2 期间可设计和离线验证 F3b 的接口，不必等完整 S4 验收再启动 Agent；任何新增现场写入能力仍须先通过底层专项验收。SSH/集群不可达阻止实网写入，不阻止本地骨架开发；实网执行前重新核对现场，不能把 Dashboard 缓存当作执行依据。
 
-## 6. 验证记录与下一步
+## 6. F1 使用与验证
 
-当前只完成模块文档与包目录整理，没有新的 Agent 功能或网络实验结果。2026-10-23 明确了开发起点、三模式的过渡定位与 F3b 组合编排验收，本次说明不改变已验证能力或阶段完成状态。可复用的底层证据见 [E3](cnf-service-chain-orchestration.md#e3-完整请求与受控策略选择) 与[固定配置联合检查](cnf-service-chain-orchestration.md#固定配置联合功能检查)。
+### 运行与回放
 
-下一项是 F1：从数据合同和状态转换表开始，再实现可重放的离线骨架。真实模型接入前落实供应商/API、模型 ID、凭据配置和调用预算；不影响先审阅和实现离线骨架。开发进展更新本文件对应章节，失败与运行证据单独归档后链接。
+在仓库根目录、Python 3.10+ 环境运行；依赖锁定于 [`requirements.txt`](../services/cnf_agent/requirements.txt)，F1 不需要模型密钥、SSH 或集群连接：
+
+```powershell
+python -m pip install -r services/cnf_agent/requirements.txt
+python scripts/cnf-agent.py demo --replay tests/fixtures/cnf-agent-replay.json --scenario normal
+python scripts/cnf-agent.py demo --replay tests/fixtures/cnf-agent-replay.json --scenario missing
+python scripts/cnf-agent.py schema
+```
+
+全部输出、观测、方案和结果均标为模拟。`demo` 按固定消息及提取结果回放，不是自主自然语言理解；`normal` 也不是实网编排验收。11 个开发场景覆盖正常、多轮补充、冲突、超额、不支持 SLA、查询失败、执行失败、目标未满足、恢复失败、执行回复丢失和结果不明。`demo` 的退出码 0 表示符合该场景的预期状态，可能是预期拒绝/失败，必须同时读取状态。
+
+分开进程继续同一会话（替换打印出的会话 ID，消息须与固定回放一致）：
+
+```powershell
+python scripts/cnf-agent.py run --replay tests/fixtures/cnf-agent-replay.json --scenario missing --message "用户 ue1。"
+python scripts/cnf-agent.py run --replay tests/fixtures/cnf-agent-replay.json --scenario missing --session <会话ID> --message "补充：video 业务，downlink 方向，访问 edge，上限 5.0 Mbps。"
+python scripts/cnf-agent.py show <会话ID>
+python scripts/cnf-agent.py export <会话ID> --output results/<新文件名>.jsonl
+```
+
+已有操作结果不明或执行阶段中断时，省略消息只查询原操作，不能用新消息触发重跑：`python scripts/cnf-agent.py run --replay tests/fixtures/cnf-agent-replay.json --scenario result_unknown --session <会话ID>`。恢复失败不自动重试；预算耗尽也不绕过限制，须人工核对。`show` 只展示数据库中的已知状态，不查询工具。
+
+全局参数 `--db <SQLite路径>` 放在子命令前，可隔离实验。JSONL 导出拒绝覆盖已有文件。事件保留消息、每版需求、工具输入引用、返回结果及用量；没有模型密钥或环境变量采集。`schema` 输出包括需求、能力、方案和结果的 JSON Schema。
+
+### 状态与停止规则
+
+| 触发与步骤 | 后续状态/行为 |
+|---|---|
+| 收到消息 → 回放提取 | 字段须有可核对的消息 ID 和原话引用；缺项、冲突或歧义进入 `waiting_input`，不查询或执行 |
+| 查询模拟现场 → 预览 | 不支持、超额、过期或绑定不一致进入 `rejected`；不执行 |
+| 方案通过 → 调用模拟执行 | 先原子记录操作标识与需求版本的唯一执行占位；并发更新通过 SQLite 版本比较拒绝 |
+| 已返回操作结果 | 分别记录 `succeeded`、`failed`、`restore_failed`、`result_unknown`；成功要求模拟检查通过且模拟恢复确认 |
+| 超时或执行阶段进程中断 | 继续时只查询原操作；不自动重新执行；结果不明/恢复失败时拒绝新写入需求 |
+| 预算耗尽 | `budget_exceeded`，保留已有操作标识和事件；不启动下一次调用，未确认操作须人工核对 |
+
+F1 默认会话累计预算为 4 次模型调用、6 次查询/预览/结果查询、1 次模拟实验、20 次外部调用步骤、4096 个回放 token、60 秒调用累计耗时。用户补充消息不重置预算；人工等待不计入耗时。时间预算在调用前后协作检查，不能中断挂起的真实 I/O；F2/F3 的适配器仍须配置实际超时。恢复责任留在事务工具，不能依赖下一次模型调用。
+
+原话引用检查仅证明来源字符串存在，不证明模型语义理解正确；回放 token 是固定测试用量，不是实际计费。模拟器操作结果只保留在当前进程内，跨进程查不到已发起操作时保持结果不明；SQLite 保存的已确认结果可正常重读。这不是已实现真实崩溃恢复或 exactly-once。
+
+### 验证与下一步
+
+F1 专项测试覆盖正常与拒绝路径、多轮/跨进程会话、累计预算、伪造方案/来源/结果、重复执行防护、进程中断、并发版本冲突、轨迹与 CLI。运行：
+
+```powershell
+python -m unittest discover -s tests -p test_cnf_agent.py -v
+```
+
+本轮 24 项 F1 专项测试通过；全仓库发现 380 项测试，379 通过、1 项既有 Helm 集成按环境条件跳过。11 个固定开发回放全部达到各自预期状态，见 [回放验收](../results/20261023-cnf-agent-f1/acceptance.json)、[专项日志](../results/20261023-cnf-agent-f1/agent-tests.txt)与[回归日志](../results/20261023-cnf-agent-f1/tests.txt)。这些回放用于开发，不是独立识别评估。本轮不访问集群，不增加任何网络能力验收结论。
+
+独立子 Agent 代码风格复审 **PASS**：职责划分、依赖方向、简洁性和可读性通过；初审发现 CLI 无消息续查入口缺失，已修复并增加跨进程测试。子 Agent 独立重跑 24 项专项全部通过，结论与源码哈希见 [审查记录](../results/20261023-cnf-agent-f1/review.json)。改动留在 main 工作区供用户审核，不暂存或提交。
+
+下一项为 F2：真实模型适配、提示词、澄清与只读工具。接入前落实供应商/API、模型 ID、凭据配置和调用预算。F3a/F3b 仍须分别完成真实工具接入与组合编排验收，不能以 F1 模拟结果替代。

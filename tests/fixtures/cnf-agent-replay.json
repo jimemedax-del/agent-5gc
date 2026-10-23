@@ -1,0 +1,539 @@
+{
+  "version": "cnf-agent-replay-v1",
+  "mode": "simulated",
+  "scenarios": {
+    "normal": {
+      "frames": [
+        {
+          "message": "用户 ue1 的 video 业务使用 downlink 方向，访问 edge，下行上限 5.0 Mbps。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "expected_phase": "succeeded"
+    },
+    "missing": {
+      "frames": [
+        {
+          "message": "用户 ue1。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": null,
+              "direction": null,
+              "destination": null,
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": null,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        },
+        {
+          "message": "补充：video 业务，downlink 方向，访问 edge，上限 5.0 Mbps。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m2",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m2",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m2",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m2",
+                  "quote": "5.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "expected_phase": "succeeded"
+    },
+    "conflict": {
+      "frames": [
+        {
+          "message": "user_id=ue1 service_id=video direction=downlink destination=edge max_bandwidth_mbps=5.0 min_bandwidth_mbps=6.0",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": 6.0,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                },
+                "min_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "6.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "expected_phase": "waiting_input"
+    },
+    "over_capacity": {
+      "frames": [
+        {
+          "message": "user_id=ue1 service_id=video direction=downlink destination=edge max_bandwidth_mbps=12.0",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 12.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "12.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "expected_phase": "rejected"
+    },
+    "unsupported_sla": {
+      "frames": [
+        {
+          "message": "user_id=ue1 service_id=video direction=downlink destination=edge max_bandwidth_mbps=5.0 max_latency_ms=10.0",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": 10.0,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                },
+                "max_latency_ms": {
+                  "message_id": "m1",
+                  "quote": "10.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "expected_phase": "rejected"
+    },
+    "inspect_error": {
+      "frames": [
+        {
+          "message": "用户 ue1 的 video 业务使用 downlink 方向，访问 edge，下行上限 5.0 Mbps。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "fault": "inspect_error",
+      "expected_phase": "failed"
+    },
+    "execute_error": {
+      "frames": [
+        {
+          "message": "用户 ue1 的 video 业务使用 downlink 方向，访问 edge，下行上限 5.0 Mbps。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "fault": "execute_error",
+      "expected_phase": "failed"
+    },
+    "target_unmet": {
+      "frames": [
+        {
+          "message": "用户 ue1 的 video 业务使用 downlink 方向，访问 edge，下行上限 5.0 Mbps。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "fault": "target_unmet",
+      "expected_phase": "failed"
+    },
+    "restore_failed": {
+      "frames": [
+        {
+          "message": "用户 ue1 的 video 业务使用 downlink 方向，访问 edge，下行上限 5.0 Mbps。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "fault": "restore_failed",
+      "expected_phase": "restore_failed"
+    },
+    "response_lost": {
+      "frames": [
+        {
+          "message": "用户 ue1 的 video 业务使用 downlink 方向，访问 edge，下行上限 5.0 Mbps。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "fault": "response_lost",
+      "expected_phase": "succeeded"
+    },
+    "result_unknown": {
+      "frames": [
+        {
+          "message": "用户 ue1 的 video 业务使用 downlink 方向，访问 edge，下行上限 5.0 Mbps。",
+          "extraction": {
+            "requirement": {
+              "version": "cnf-agent-requirement-v1",
+              "user_id": "ue1",
+              "service_id": "video",
+              "direction": "downlink",
+              "destination": "edge",
+              "min_bandwidth_mbps": null,
+              "max_bandwidth_mbps": 5.0,
+              "max_latency_ms": null,
+              "max_loss_percent": null,
+              "sources": {
+                "user_id": {
+                  "message_id": "m1",
+                  "quote": "ue1"
+                },
+                "service_id": {
+                  "message_id": "m1",
+                  "quote": "video"
+                },
+                "direction": {
+                  "message_id": "m1",
+                  "quote": "downlink"
+                },
+                "destination": {
+                  "message_id": "m1",
+                  "quote": "edge"
+                },
+                "max_bandwidth_mbps": {
+                  "message_id": "m1",
+                  "quote": "5.0"
+                }
+              }
+            },
+            "ambiguities": []
+          },
+          "tokens": 64
+        }
+      ],
+      "fault": "result_unknown",
+      "expected_phase": "result_unknown"
+    }
+  }
+}
