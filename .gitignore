@@ -3,6 +3,7 @@
 .work/
 tmp/
 tools/
+results/
 *.log
 *.tar
 *.tar.gz
