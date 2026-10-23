@@ -1,0 +1,121 @@
+{
+  "version": "cnf-agent-f2-cases-v1",
+  "label_source": "agent_authored_frozen_holdout_no_tuning",
+  "cases": [
+    {
+      "id": "interactive_uplink",
+      "messages": [
+        "UE2 的视频会议向边缘服务发送数据，上行最高 2.5 Mbps。"
+      ],
+      "expected": {
+        "user_id": "ue2",
+        "service_id": "video_conference",
+        "business_type": "realtime_interaction",
+        "direction": "uplink",
+        "destination": "edge",
+        "max_bandwidth_mbps": 2.5
+      },
+      "state": "read_only_complete"
+    },
+    {
+      "id": "gigabit_units",
+      "messages": [
+        "UE1 的文件传输从中心服务下载，带宽最多 0.004 Gbps。"
+      ],
+      "expected": {
+        "user_id": "ue1",
+        "business_type": "background_transfer",
+        "direction": "downlink",
+        "destination": "core",
+        "max_bandwidth_mbps": 4.0
+      },
+      "state": "read_only_complete"
+    },
+    {
+      "id": "partial_background",
+      "messages": [
+        "UE2 有后台文件传输业务，其他参数稍后再说。"
+      ],
+      "expected": {
+        "user_id": "ue2",
+        "business_type": "background_transfer",
+        "direction": null,
+        "destination": null,
+        "max_bandwidth_mbps": null
+      },
+      "state": "waiting_input"
+    },
+    {
+      "id": "changed_owner",
+      "messages": [
+        "UE2 的文件备份上传到中心服务，最高 1.5 Mbps。",
+        "服务位置保持中心，只把用户换为 UE1，带宽上限改为 6 Mbps。"
+      ],
+      "expected": {
+        "user_id": "ue1",
+        "service_id": "backup",
+        "direction": "uplink",
+        "destination": "core",
+        "max_bandwidth_mbps": 6.0
+      },
+      "state": "read_only_complete"
+    },
+    {
+      "id": "no_invented_sla",
+      "messages": [
+        "请保证视频会议更流畅，优先安排。"
+      ],
+      "expected": {
+        "user_id": null,
+        "business_type": "realtime_interaction",
+        "direction": null,
+        "destination": null,
+        "min_bandwidth_mbps": null,
+        "max_bandwidth_mbps": null,
+        "max_latency_ms": null
+      },
+      "state": "waiting_input"
+    },
+    {
+      "id": "byte_rate",
+      "messages": [
+        "UE1 视频点播从边缘服务下载，带宽上限 2 MB/s。"
+      ],
+      "expected": {
+        "user_id": "ue1",
+        "direction": "downlink",
+        "destination": "edge",
+        "max_bandwidth_mbps": 16.0
+      },
+      "state": "read_only_complete"
+    },
+    {
+      "id": "explicit_loss",
+      "messages": [
+        "UE2 的视频点播从边缘服务下载，上限 4 Mbps，丢包率不超过 0.5%。"
+      ],
+      "expected": {
+        "user_id": "ue2",
+        "direction": "downlink",
+        "destination": "edge",
+        "max_bandwidth_mbps": 4.0,
+        "max_loss_percent": 0.5
+      },
+      "state": "read_only_complete"
+    },
+    {
+      "id": "isolated_backup",
+      "messages": [
+        "UE2 的备份业务向中心服务上传数据，带宽上限 1.5 Mbps。"
+      ],
+      "expected": {
+        "user_id": "ue2",
+        "business_type": "background_transfer",
+        "direction": "uplink",
+        "destination": "core",
+        "max_bandwidth_mbps": 1.5
+      },
+      "state": "read_only_complete"
+    }
+  ]
+}

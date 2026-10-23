@@ -4,12 +4,18 @@ import time
 from uuid import uuid4
 
 from .memory import Memory
-from .provider import ModelProvider
+from .provider import ModelProvider, ProviderCallError
 from .schemas import (
-    BindService, Budget, Extraction, LimitBandwidth, Message, ModelReply, Observation,
+    BindService, Budget, Extraction, LimitBandwidth, Message, ModelReply, ModelUsage, Observation,
     OperationResult, Phase, Plan, Preview, Session, Usage, fingerprint,
 )
 from .tools import NetworkTools
+
+
+FIELD_LABELS = {
+    'user_id': '用户对象', 'service_id': '业务服务', 'direction': '传输方向',
+    'destination': '中心或边缘目的地', 'max_bandwidth_mbps': '明确的带宽上限',
+}
 
 
 class StopRun(Exception):
@@ -57,14 +63,19 @@ class Workflow:
             result = function()
         except Exception as error:
             elapsed = max(0, self.monotonic() - started)
+            tokens = error.tokens if isinstance(error, ProviderCallError) else 0
             session = self._save(
                 session, name + '_error',
-                usage=session.usage.model_copy(update={'elapsed_seconds': session.usage.elapsed_seconds + elapsed}),
-                notes=(f'{name} 调用失败：{type(error).__name__}',))
+                usage=session.usage.model_copy(update={'elapsed_seconds': session.usage.elapsed_seconds + elapsed,
+                                                       'tokens': session.usage.tokens + tokens}),
+                notes=(f'{name} 调用失败：{str(error) if isinstance(error, ProviderCallError) else type(error).__name__}',))
+            if isinstance(error, ProviderCallError):
+                session = self.memory.save(session, 'provider_error_usage',
+                                           {'tokens': tokens, 'metadata': error.metadata})
             raise CallFailed(session) from error
         elapsed = max(0, self.monotonic() - started)
         usage = session.usage.model_copy(update={'elapsed_seconds': session.usage.elapsed_seconds + elapsed})
-        if isinstance(result, ModelReply):
+        if isinstance(result, ModelUsage):
             usage = usage.model_copy(update={'tokens': usage.tokens + result.tokens})
         session = self.memory.save(session.model_copy(update={'usage': usage}), name + '_returned',
                                    result.model_dump(mode='json') if result is not None else {'result': None})
@@ -83,13 +94,15 @@ class Workflow:
             session = self._save(
                 session, 'user_message', phase=Phase.READY,
                 messages=(*session.messages, message), requirement_version=session.requirement_version + 1,
-                requirement=None, observation=None, plan=None, operation_id=None, result=None, notes=())
+                requirement=None, observation=None, plan=None, operation_id=None, result=None, notes=(),
+                read_facts=None, interpretation=None)
         try:
             if session.operation_id and session.phase in (
                 Phase.EXECUTING, Phase.RECONCILING, Phase.UNKNOWN,
             ):
                 return self._reconcile(session)
-            if session.phase not in (Phase.READY, Phase.EXTRACTING, Phase.INSPECTING, Phase.PLANNING):
+            if session.phase not in (Phase.READY, Phase.EXTRACTING, Phase.INSPECTING, Phase.PLANNING,
+                                     Phase.REQUESTING_READ, Phase.INTERPRETING):
                 return session
             return self._run(session)
         except StopRun as stopped:
@@ -97,7 +110,7 @@ class Workflow:
         except CallFailed as failed:
             return self._save(failed.session, 'workflow_failed', phase=Phase.FAILED)
 
-    def _run(self, session: Session) -> Session:
+    def _extract(self, session: Session) -> Session:
         session, reply = self._call(
             session, Phase.EXTRACTING, 'model_extract', 'model_calls',
             lambda: ModelReply.model_validate(self.provider.extract(
@@ -111,7 +124,14 @@ class Workflow:
         session = self._save(session, 'requirement_extracted', requirement=requirement)
         issues = (*extraction.ambiguities, *requirement.conflicts(), *requirement.missing())
         if issues:
-            self._stop(session, Phase.WAITING, '请补充或澄清：' + '、'.join(issues))
+            self._stop(session, Phase.WAITING, '请补充或澄清：' + '、'.join(FIELD_LABELS.get(i, i) for i in issues))
+        return session
+
+    def _run(self, session: Session) -> Session:
+        if session.mode != 'simulated':
+            self._stop(session, Phase.FAILED, '会话模式不匹配；不会执行模拟实验')
+        session = self._extract(session)
+        requirement = session.requirement
         session, observation = self._call(
             session, Phase.INSPECTING, 'inspect_network', 'queries',
             lambda: Observation.model_validate(self.tools.inspect_network(self.now())))

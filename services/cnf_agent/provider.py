@@ -10,6 +10,15 @@ class ModelProvider(Protocol):
     def extract(self, messages: tuple[Message, ...], max_tokens: int) -> ModelReply: ...
 
 
+class ProviderCallError(RuntimeError):
+    """Safe diagnostic plus billed usage, never an SDK exception body or key."""
+
+    def __init__(self, code: str, tokens: int = 0, metadata: dict | None = None):
+        super().__init__(code)
+        self.tokens = tokens
+        self.metadata = metadata or {}
+
+
 class ReplayFrame(Contract):
     message: str
     extraction: Extraction

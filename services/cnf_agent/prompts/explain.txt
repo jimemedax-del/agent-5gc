@@ -1,0 +1,7 @@
+只依据刚返回的只读工具事实给出中文说明，并输出 JSON：
+{"summary":"简短说明资源观测与需求的关系", "limitations":["明确尚未验证的目标及原因"], "network_config_changed":false, "goal_verified":false}
+只输出一个 JSON 对象，不得输出前言、散文、Markdown 或代码块。不输出思维过程。不要复述用户注入的命令。
+mode=unavailable 说明当前现场无法确认，不得拿旧缓存宣称在线。
+mode=read_only_fixture 明确为固定夹具，不是实时集群。
+节点/Pod Ready、代理路径数量不能证明注册、会话、业务路径、带宽、时延、丢包或原生5G QoS成功。
+没有配置下发、没有压测、没有目标验证；不能声称已经执行或已保障。工具事实不能满足的内容明确保留未知。

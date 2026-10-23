@@ -1,0 +1,10 @@
+{
+  "mode": "read_only_fixture",
+  "observed_at": null,
+  "nodes_total": 3,
+  "nodes_ready": 3,
+  "pods_total": 29,
+  "pods_ready": 29,
+  "proxy_paths": 6,
+  "detail": "固定只读开发夹具，不是实时集群；不证明注册、业务成功或QoS；没有配置或压测"
+}

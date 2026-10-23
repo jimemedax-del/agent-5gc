@@ -71,7 +71,7 @@ class Memory:
                          json.dumps(payload, ensure_ascii=False, allow_nan=False)))
 
     def events(self, session_id: str) -> list[dict]:
-        self.load(session_id)
+        session = self.load(session_id)
         rows = self.db.execute('SELECT * FROM events WHERE session_id=? ORDER BY sequence', (session_id,))
         return [dict(sequence=row['sequence'], session_id=row['session_id'], at=row['at'],
-                     kind=row['kind'], mode='simulated', payload=json.loads(row['payload'])) for row in rows]
+                     kind=row['kind'], mode=session.mode, payload=json.loads(row['payload'])) for row in rows]

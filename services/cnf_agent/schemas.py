@@ -32,6 +32,9 @@ class Phase(str, Enum):
     UNKNOWN = 'result_unknown'
     RESTORE_FAILED = 'restore_failed'
     BUDGET = 'budget_exceeded'
+    REQUESTING_READ = 'requesting_read'
+    INTERPRETING = 'interpreting'
+    READ_ONLY_COMPLETE = 'read_only_complete'
 
 
 class Message(Contract):
@@ -49,6 +52,7 @@ class Requirement(Contract):
     version: Literal['cnf-agent-requirement-v1'] = 'cnf-agent-requirement-v1'
     user_id: str | None = Field(default=None, min_length=1)
     service_id: str | None = Field(default=None, min_length=1)
+    business_type: Literal['realtime_interaction', 'continuous_media', 'background_transfer'] | None = None
     direction: Literal['downlink', 'uplink'] | None = None
     destination: Literal['core', 'edge'] | None = None
     min_bandwidth_mbps: float | None = Field(default=None, ge=0)
@@ -80,9 +84,41 @@ class Extraction(Contract):
     ambiguities: tuple[str, ...] = ()
 
 
-class ModelReply(Contract):
-    extraction: Extraction
+class ModelUsage(Contract):
     tokens: int = Field(ge=0)
+    metadata: dict = Field(default_factory=dict)
+
+
+class ModelReply(ModelUsage):
+    extraction: Extraction
+
+
+class ReadRequest(ModelUsage):
+    tool_call_id: str
+    tool_name: Literal['inspect_network'] = 'inspect_network'
+    scope: Literal['overview'] = 'overview'
+
+
+class ReadFacts(Contract):
+    mode: Literal['read_only_observed', 'read_only_fixture', 'unavailable']
+    observed_at: str | None = None
+    nodes_total: int | None = Field(default=None, ge=0)
+    nodes_ready: int | None = Field(default=None, ge=0)
+    pods_total: int | None = Field(default=None, ge=0)
+    pods_ready: int | None = Field(default=None, ge=0)
+    proxy_paths: int | None = Field(default=None, ge=0)
+    detail: str
+
+
+class Interpretation(Contract):
+    summary: str = Field(min_length=1, max_length=2000)
+    limitations: tuple[str, ...] = Field(min_length=1)
+    network_config_changed: Literal[False] = False
+    goal_verified: Literal[False] = False
+
+
+class InterpretationReply(ModelUsage):
+    interpretation: Interpretation
 
 
 class TimedContract(Contract):
@@ -204,7 +240,7 @@ class Usage(Contract):
 class Session(Contract):
     schema_version: Literal['cnf-agent-session-v1'] = 'cnf-agent-session-v1'
     id: str
-    mode: Literal['simulated'] = 'simulated'
+    mode: Literal['simulated', 'real_model_readonly'] = 'simulated'
     revision: int = 0
     phase: Phase = Phase.WAITING
     requirement_version: int = 0
@@ -217,3 +253,5 @@ class Session(Contract):
     budget: Budget = Field(default_factory=Budget)
     usage: Usage = Field(default_factory=Usage)
     notes: tuple[str, ...] = ()
+    read_facts: ReadFacts | None = None
+    interpretation: Interpretation | None = None
